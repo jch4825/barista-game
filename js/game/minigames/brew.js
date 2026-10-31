@@ -1083,7 +1083,7 @@ export async function brew(opts = {}) {
     const [suf, temp] = SHOT_CUP[made?.cup] || [null, null];
     const cupOk = suf !== null && made?.temp === temp;
     const esp = soFar.has('espresso') || soFar.has('decaf');
-    const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x));
+    const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || made?.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
     let ids = [id];
     if (id === 'pour') ids = cupOk ? [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`] : [];
     else if (id === 'water') ids = cupOk && esp ? [`water${suf}`] : [];
