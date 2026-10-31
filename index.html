@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'">
+  <title>직업 ε바리스타3</title>
+  <!-- 글꼴은 CSS 를 다 읽기 전에 바로 받기 시작(웹판에서 글자가 늦게 바뀌지 않게, 2026-10-26) -->
+  <link rel="preload" href="./assets/fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/HahmletVariable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/ui.css">
+  <link rel="stylesheet" href="./css/screens.css">
+  <link rel="stylesheet" href="./css/minigames.css">
+  <link rel="stylesheet" href="./css/brew.css">
+  <!-- 디자인 언어 '바닷가 밤'(2026-10-28 사용자 결정): body 의 skin-sea 로 켜짐. 옛 모양 위에 덮어씀 -->
+  <link rel="stylesheet" href="./css/skin-sea.css">
+</head>
+<body class="ts-normal theme-pop skin-sea">
+  <div id="boot">게임을 준비하고 있어요…</div>
+  <div id="viewport">
+    <div id="screen">
+      <div id="layer-bg"></div>
+      <div id="layer-stage" aria-hidden="true"></div>
+      <div id="layer-work"></div>
+      <div id="layer-memo"></div>
+      <div id="layer-task"></div>
+      <div id="layer-dock"></div>
+      <div id="layer-hud"></div>
+      <div id="layer-overlay"></div>
+      <div id="layer-screen"></div>
+      <div id="layer-modal"></div>
+      <div id="layer-tut" aria-hidden="true"></div>
+      <div id="sr-live" class="sr-only" aria-live="polite"></div>
+    </div>
+  </div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

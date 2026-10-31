@@ -1,0 +1,3 @@
+[submodule "assets/audio"]
+	path = assets/audio
+	url = https://github.com/jch4825/barista-game-audio.git

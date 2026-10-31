@@ -1,0 +1,1982 @@
+[
+ {
+  "key": "8dc02bfe",
+  "voice": "sys",
+  "text": "봄   첫 컵. 시험판",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "44f87d79",
+  "voice": "owner",
+  "text": "오늘부터 같이 일하죠.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "39f197df",
+  "voice": "owner",
+  "text": "서두르지 않아도 돼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c827f702",
+  "voice": "think",
+  "text": "천천히, 정확하게 하자.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "d4ecffd3",
+  "voice": "narr",
+  "text": "문 위의 종이 울렸다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "af73ba7e",
+  "voice": "haesun",
+  "text": "따뜻한 우유 두 잔 줘요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "5275a896",
+  "voice": "sys",
+  "text": "따뜻한 우유 두 잔. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "559f14f9",
+  "voice": "sys",
+  "text": "주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "8c4b9594",
+  "voice": "sys",
+  "text": "카운터에서 알맞은 컵을 찾아 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "33e9db2a",
+  "voice": "sys",
+  "text": "컵에 넣을 재료를 찾아 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "08a0bdcb",
+  "voice": "sys",
+  "text": "더 넣을 재료가 있으면 눌러요. 다 넣었으면 [만들기 시작]을 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "999e0431",
+  "voice": "sys",
+  "text": "차갑게 만들려면 얼음을 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "acdb732d",
+  "voice": "sys",
+  "text": "레시피를 다 골랐어요. 이대로 만들까요?",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "411384cf",
+  "voice": "sys",
+  "text": "다 만들었어요. 손님에게 드려요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7c733f90",
+  "voice": "sys",
+  "text": "다시 만들어도 되고, 그대로 드려도 돼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "78fc3e0d",
+  "voice": "sys",
+  "text": "컵을 다시 봐요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7781d58a",
+  "voice": "sys",
+  "text": "컵에 넣은 재료를 다시 봐요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c051cc4c",
+  "voice": "sys",
+  "text": "온도를 다시 봐요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "9dc8ca6c",
+  "voice": "sys",
+  "text": "레시피 수첩을 봐도 좋아요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "af7f9bfd",
+  "voice": "sys",
+  "text": "레시피 수첩이에요. 메뉴를 누르면 읽어 줘요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "6923e311",
+  "voice": "sys",
+  "text": "잘 봐요. 알맞아요 칸에서 멈춰요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "85ec4ea0",
+  "voice": "sys",
+  "text": "[한 칸]을 누르면 띠가 한 칸 움직여요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "ae3c9c77",
+  "voice": "sys",
+  "text": "재료는 세 가지까지 넣을 수 있어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "f29cbc7a",
+  "voice": "sys",
+  "text": "하트가 생겼어요!",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "fd2a52da",
+  "voice": "sys",
+  "text": "주문을 모두 만들었어요!",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7da5c0e8",
+  "voice": "sys",
+  "text": "조금 더 꾹 누르고 있어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7e60892d",
+  "voice": "sys",
+  "text": "딱 좋아요!",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "31793180",
+  "voice": "sys",
+  "text": "머그컵",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "b993df04",
+  "voice": "sys",
+  "text": "종이컵",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "0a8d3f7b",
+  "voice": "sys",
+  "text": "유리컵",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "a9ac12c1",
+  "voice": "sys",
+  "text": "에스프레소",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "33a0d64c",
+  "voice": "sys",
+  "text": "우유",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "8cd85e9f",
+  "voice": "sys",
+  "text": "물",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "d00f3b2a",
+  "voice": "sys",
+  "text": "시럽",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "2583ee5b",
+  "voice": "sys",
+  "text": "따뜻하게",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "6d286fd1",
+  "voice": "sys",
+  "text": "차갑게",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "cd3f49ba",
+  "voice": "sys",
+  "text": "아메리카노. 머그컵, 에스프레소, 물, 따뜻하게.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "a3c4af4e",
+  "voice": "sys",
+  "text": "따뜻한 우유. 머그컵, 우유, 따뜻하게.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "ee0162de",
+  "voice": "sys",
+  "text": "라테. 머그컵, 에스프레소, 우유, 따뜻하게.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "541cbab3",
+  "voice": "sys",
+  "text": "샷 내리기. [누르고 있기]를 꾹 누르면 샷이 나와요. 알맞아요 칸에서 손을 떼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "311d1f19",
+  "voice": "sys",
+  "text": "샷 내리기. 띠가 알맞아요 칸에 오면 [멈추기]를 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "8daf1c2d",
+  "voice": "sys",
+  "text": "연해요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c01277dc",
+  "voice": "sys",
+  "text": "알맞아요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "24ffad9b",
+  "voice": "sys",
+  "text": "써요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c6e174bc",
+  "voice": "sys",
+  "text": "거품 내기. [누르고 있기]를 꾹 누르면 거품이 생겨요. 알맞아요 칸에서 손을 떼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "d18cfbc1",
+  "voice": "sys",
+  "text": "거품 내기. 거품이 알맞아요 칸에 오면 [멈추기]를 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "4ce654b4",
+  "voice": "sys",
+  "text": "거품이 적어요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "1f346f12",
+  "voice": "sys",
+  "text": "거품이 많아요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "b4fd42b7",
+  "voice": "sys",
+  "text": "우유 데우기. [누르고 있기]를 꾹 누르면 우유가 데워져요. 알맞아요 칸에서 손을 떼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "1a4ee9f7",
+  "voice": "sys",
+  "text": "우유 데우기. 온도가 알맞아요 칸에 오면 [멈추기]를 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7b69322a",
+  "voice": "sys",
+  "text": "스팀은 아주 뜨거워요. 손은 손잡이만 잡아요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "510665e0",
+  "voice": "sys",
+  "text": "미지근해요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "92ac7db5",
+  "voice": "sys",
+  "text": "뜨거워요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "9c8cbf69",
+  "voice": "sys",
+  "text": "붓기. [누르고 있기]를 꾹 누르면 우유를 부어요. 알맞아요 칸에서 손을 떼요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "84e1e0bd",
+  "voice": "sys",
+  "text": "붓기. 컵이 알맞아요 칸까지 차면 [멈추기]를 눌러요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "73eca03d",
+  "voice": "sys",
+  "text": "적어요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "d7537798",
+  "voice": "sys",
+  "text": "넘쳐요",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c608d170",
+  "voice": "sys",
+  "text": "시럽을 넣었어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "388871c2",
+  "voice": "sys",
+  "text": "뜨거운 물을 부었어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "071f0a1c",
+  "voice": "sys",
+  "text": "찬물을 부었어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "a04f508d",
+  "voice": "sys",
+  "text": "얼음을 넣었어요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "4bbabb65",
+  "voice": "haesun",
+  "text": "따뜻한 우유 한 잔이요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "5cdc0bb3",
+  "voice": "haesun",
+  "text": "따뜻하네요. 고마워요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "29cff347",
+  "voice": "haesun",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "19831f11",
+  "voice": "haesun",
+  "text": "네, 기다릴게요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "62049e35",
+  "voice": "haesun",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "869e8713",
+  "voice": "haesun",
+  "text": "조금 미지근하네요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "6e2b423f",
+  "voice": "haesun",
+  "text": "조금 뜨겁네요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "0ce655f2",
+  "voice": "haesun",
+  "text": "양이 조금 적네요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "ee13cba3",
+  "voice": "haesun",
+  "text": "조금 넘쳤네요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "10a97c55",
+  "voice": "haesun",
+  "text": "한 잔 더요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "77497fec",
+  "voice": "narr",
+  "text": "우유 두 잔을 쟁반에 담았다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "5763b443",
+  "voice": "haesun",
+  "text": "한 잔은 저기. 저기에 놓아 주세요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "b3104a34",
+  "voice": "narr",
+  "text": "할머니의 눈이 빈 의자로 간다. 손으로 의자 등을 한 번 쓸어 준다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "9486910f",
+  "voice": "think",
+  "text": "두 잔을 어디에 놓을까?",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "0f0a4eb7",
+  "voice": "sys",
+  "text": "두 번째 잔을 빈 의자 앞에 놓는다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "e8f86d19",
+  "voice": "narr",
+  "text": "할머니가 의자 앞의 잔을 오래 바라본다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "1fd1d75b",
+  "voice": "haesun",
+  "text": "…고마워요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "db5f1e49",
+  "voice": "sys",
+  "text": "두 잔 모두 할머니 앞에 놓는다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "8ecce379",
+  "voice": "haesun",
+  "text": "고마워요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "53af8df4",
+  "voice": "narr",
+  "text": "할머니가 잔 하나를 빈 의자 앞으로 옮긴다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "dc9e43f3",
+  "voice": "sys",
+  "text": "\"일행이 오세요?\" 하고 묻는다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "e5680ff8",
+  "voice": "haesun",
+  "text": "아니에요. 괜찮아요.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "7035fe4c",
+  "voice": "narr",
+  "text": "마감 뒤, 사장님이 혼자 따뜻한 우유를 마신다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "8a71b491",
+  "voice": "jieun",
+  "text": "오늘 처음으로 우유를 데웠다. 할머니는 두 잔을 시켰다. 한 잔은 빈 의자 앞에 놓였다.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "791e1cd7",
+  "voice": "sys",
+  "text": "우유 두 잔: 저장된 곳부터 이어서 할까요?",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "c457bdfa",
+  "voice": "sys",
+  "text": "우유 두 잔. 오늘의 마일스톤.",
+  "ep": "m1_spring"
+ },
+ {
+  "key": "a00acc6a",
+  "voice": "sys",
+  "text": "여름   줄. 시험판",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "c54372e5",
+  "voice": "narr",
+  "text": "휴가철이라 관광객이 많다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "7fb9e081",
+  "voice": "customer_f",
+  "text": "라테 한 잔이랑 아메리카노 한 잔 주세요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "fcb144d3",
+  "voice": "sys",
+  "text": "관광객 주문. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "3f409027",
+  "voice": "customer_f",
+  "text": "라테 한 잔이요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "9b08e76a",
+  "voice": "customer_f",
+  "text": "부드러워요. 고마워요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "3796d0fa",
+  "voice": "customer_f",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "a740e0fc",
+  "voice": "customer_f",
+  "text": "네, 기다릴게요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "0dcc1cd0",
+  "voice": "customer_f",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "c5b72711",
+  "voice": "customer_f",
+  "text": "조금 연하네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "2b66a7cf",
+  "voice": "customer_f",
+  "text": "조금 쓰네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "83616728",
+  "voice": "customer_f",
+  "text": "조금 미지근하네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "698307b8",
+  "voice": "customer_f",
+  "text": "조금 뜨겁네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "6ab9045d",
+  "voice": "customer_f",
+  "text": "양이 조금 적네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "f9872824",
+  "voice": "customer_f",
+  "text": "조금 넘쳤네요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "429c14d6",
+  "voice": "customer_f",
+  "text": "아메리카노도 한 잔이요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "80d7b865",
+  "voice": "customer_f",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "0db8918a",
+  "voice": "narr",
+  "text": "여름 오후. 가게에 관광객이 많다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "df79ab03",
+  "voice": "narr",
+  "text": "해순 할머니 앞에 우유 두 잔이 놓여 있다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "b2799d3b",
+  "voice": "customer_f",
+  "text": "여기 비었죠? 앉을게요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "fe093882",
+  "voice": "narr",
+  "text": "관광객이 빈 의자에 앉는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "f322628e",
+  "voice": "haesun",
+  "text": "아, 거기는…",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "6a2976ae",
+  "voice": "narr",
+  "text": "할머니가 의자 앞의 잔을 두 손으로 감싼다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "d9b165e5",
+  "voice": "think",
+  "text": "어떻게 할까?",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "769d693d",
+  "voice": "sys",
+  "text": "선풍기 앞의 다른 자리를 관광객에게 조용히 권한다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "ffce3054",
+  "voice": "jieun",
+  "text": "선풍기 앞자리가 비었어요. 거기가 더 시원해요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "a3a6ca00",
+  "voice": "customer_f",
+  "text": "오, 좋네요. 고마워요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "67a7d677",
+  "voice": "narr",
+  "text": "할머니가 지은을 오래 바라본다. 그리고 작게 고개를 숙인다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "4b1bd940",
+  "voice": "sys",
+  "text": "아무것도 하지 않는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "681602f6",
+  "voice": "haesun",
+  "text": "괜찮아요. 잠깐인데요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "0f5165d6",
+  "voice": "narr",
+  "text": "할머니가 잔을 자기 앞으로 당긴다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "66b93b60",
+  "voice": "sys",
+  "text": "관광객에게 \"거기 앉으시면 안 돼요!\" 하고 크게 말한다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "fed7b79b",
+  "voice": "customer_f",
+  "text": "앗, 죄송해요!",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "81a73abe",
+  "voice": "haesun",
+  "text": "아이고, 괜찮아요. 앉아요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "77e142b9",
+  "voice": "narr",
+  "text": "요즘 자주 오는 손님이 계산대 앞에 선다. 품에 스케치북을 안고 있다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "4024c799",
+  "voice": "jieun",
+  "text": "어서 오세요. 뭐 드릴까요?",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "735a787d",
+  "voice": "jian",
+  "text": "아무거나요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "c13fcb98",
+  "voice": "jian",
+  "text": "오늘은 무슨 색을 마실지 모르겠어요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "dddf1e77",
+  "voice": "narr",
+  "text": "지안이 빈 스케치북을 닫는다. 메뉴판의 색 동그라미를 하나씩 본다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "3697f446",
+  "voice": "sys",
+  "text": "\"오늘은 어떤 색이에요?\" 하고 묻는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "9f05bbe1",
+  "voice": "narr",
+  "text": "지안이 메뉴판을 오래 바라본다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "2ccf1608",
+  "voice": "jian",
+  "text": "…노란색이요. 유자차 주세요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "fb58d1d1",
+  "voice": "sys",
+  "text": "\"제일 많이 팔리는 걸로 드릴게요.\" 하고 고른다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "712f534e",
+  "voice": "jian",
+  "text": "네, 그거 좋아요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "9516e3e7",
+  "voice": "sys",
+  "text": "지안이 고를 때까지 말없이 기다린다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "7a2104f7",
+  "voice": "narr",
+  "text": "지안이 한참 서 있다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "3a170dbe",
+  "voice": "jian",
+  "text": "그냥 물 주세요. 괜찮아요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "0fc79aa8",
+  "voice": "narr",
+  "text": "지안의 눈이 메뉴판의 색으로 한 번 더 간다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "87ca32d4",
+  "voice": "narr",
+  "text": "며칠 뒤.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "cc068408",
+  "voice": "narr",
+  "text": "관광객으로 가게가 붐빈다. 지안은 구석에서 스케치북을 펴 놓고 연필만 쥐고 있다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "7dac0d9d",
+  "voice": "narr",
+  "text": "지안이 계산대로 온다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "b0fc27c8",
+  "voice": "jian",
+  "text": "시원한 거 아무거나요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "9866da85",
+  "voice": "jian",
+  "text": "더워서 그런가, 색이 다 똑같아 보여요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "4f9b7167",
+  "voice": "narr",
+  "text": "지안이 스케치북을 가슴에 꼭 안는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "494a6524",
+  "voice": "sys",
+  "text": "\"시원한 것 중에, 오늘은 어떤 색이 좋아요?\" 하고 묻는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "c5d44cfc",
+  "voice": "narr",
+  "text": "지안이 냉장고 속 음료를 오래 바라본다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "3a023a66",
+  "voice": "jian",
+  "text": "음… 초록색이요. 녹차라테, 차갑게요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "b06382c4",
+  "voice": "sys",
+  "text": "\"아이스티가 제일 시원해요.\" 하고 아이스티를 준비한다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "1b7f0106",
+  "voice": "jian",
+  "text": "네, 좋아요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "695ecde5",
+  "voice": "sys",
+  "text": "\"그림 그리세요? 뭐 그렸는지 보여 주세요.\" 하고 묻는다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "adce2a3c",
+  "voice": "narr",
+  "text": "지안이 스케치북을 등 뒤로 돌린다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "f218883a",
+  "voice": "jian",
+  "text": "아… 괜찮아요. 아무거나 주세요.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "8a167edc",
+  "voice": "jieun",
+  "text": "여름에는 줄이 길었다. 할머니 의자에 손님이 앉았다. 지안이라는 손님은 늘 아무거나 달라고 한다.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "0f922306",
+  "voice": "sys",
+  "text": "그 의자의 손님: 저장된 곳부터 이어서 할까요?",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "4a8a0ca5",
+  "voice": "sys",
+  "text": "그 의자의 손님. 오늘의 마일스톤.",
+  "ep": "m1_summer"
+ },
+ {
+  "key": "fcad199f",
+  "voice": "sys",
+  "text": "가을   손. 시험판",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "4c7b8aa2",
+  "voice": "narr",
+  "text": "가을 아침. 해순 할머니가 들어온다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "0988c834",
+  "voice": "haesun",
+  "text": "우유 두 잔이요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "c1b0fddc",
+  "voice": "narr",
+  "text": "우유병이 가볍다. 한 잔만 나오겠다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "f6d60f75",
+  "voice": "jieun",
+  "text": "할머니, 오늘은 우유가 한 잔뿐이에요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "e8ace852",
+  "voice": "narr",
+  "text": "할머니가 우유병을 보고 천천히 고개를 끄덕인다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "95bcdaff",
+  "voice": "narr",
+  "text": "할머니가 창가에 앉아 두 손을 무릎에 모은다. 창밖을 본다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "29e2e3af",
+  "voice": "sys",
+  "text": "한 잔만 데워 놓고, 할머니 말을 기다린다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "fc4b156f",
+  "voice": "narr",
+  "text": "할머니가 잔을 두 손으로 감싸고 빈 의자를 오래 바라본다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "ce01d7da",
+  "voice": "haesun",
+  "text": "오늘은 내가 마실게요. 기다려 줘서 고마워요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "3af097d3",
+  "voice": "sys",
+  "text": "우유를 반씩 나눠 두 잔을 데운다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "a44e277b",
+  "voice": "haesun",
+  "text": "반씩 했네요. 고마워요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "ea1a0a93",
+  "voice": "sys",
+  "text": "\"제가 우유 새로 사 올게요!\" 하고 말한다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "8530cc37",
+  "voice": "haesun",
+  "text": "아니에요, 가지 마요. 괜찮아요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "c5af746c",
+  "voice": "narr",
+  "text": "가을 아침. 창밖 은행나무가 노랗다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "5a092cf0",
+  "voice": "narr",
+  "text": "지안이 들어와 계산대 앞에 선다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "5b47667a",
+  "voice": "jian",
+  "text": "음…",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "9bbcd0c4",
+  "voice": "narr",
+  "text": "지안이 창밖의 노란 잎을 본다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "e801d415",
+  "voice": "narr",
+  "text": "지안이 손가락으로 메뉴판의 색 동그라미를 천천히 짚는다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "1756f0a6",
+  "voice": "narr",
+  "text": "지안이 창밖을 오래 바라본다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "fca5cc50",
+  "voice": "jian",
+  "text": "창밖이랑 같은 색이요. 노란색.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "d287131b",
+  "voice": "narr",
+  "text": "지안이 자리에 앉아 스케치북을 편다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "23225251",
+  "voice": "sys",
+  "text": "가을 메뉴 고구마라테를 권한다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "cad724d2",
+  "voice": "jian",
+  "text": "네, 그걸로요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "a2f563d5",
+  "voice": "jian",
+  "text": "…아메리카노요. 괜찮아요.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "2d3502cc",
+  "voice": "jieun",
+  "text": "가을이다. 우유가 한 잔뿐인 날, 할머니는 서두르지 않았다. 지안은 창밖의 노란 잎을 봤다.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "f1f237f1",
+  "voice": "sys",
+  "text": "한 잔 남은 우유: 저장된 곳부터 이어서 할까요?",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "4425f3e0",
+  "voice": "sys",
+  "text": "한 잔 남은 우유. 오늘의 마일스톤.",
+  "ep": "m1_autumn"
+ },
+ {
+  "key": "09d71987",
+  "voice": "sys",
+  "text": "겨울   불. 시험판",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "89469ecc",
+  "voice": "narr",
+  "text": "눈이 많이 와서 마을의 불이 모두 꺼졌다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "d1eb2e9b",
+  "voice": "narr",
+  "text": "불이 켜진 곳은 우리 카페뿐이다. 촛불을 켰다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "e7a90d02",
+  "voice": "narr",
+  "text": "담요를 나눠 드린다. 해순 할머니 차례다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "271d38c4",
+  "voice": "narr",
+  "text": "할머니의 눈이 옆의 빈 의자로 간다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "f035cd2e",
+  "voice": "narr",
+  "text": "할머니가 내 손의 담요를 보고, 다시 빈 의자를 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "058238c9",
+  "voice": "think",
+  "text": "담요를 어떻게 할까?",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "0bc339c6",
+  "voice": "sys",
+  "text": "담요 한 장을 빈 의자 위에 덮어 둔다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "d4034b5b",
+  "voice": "narr",
+  "text": "할머니가 의자 위의 담요를 손으로 펴고, 오래 바라본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "888f11c3",
+  "voice": "haesun",
+  "text": "이 의자도 따뜻하네요. 고마워요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "61433885",
+  "voice": "sys",
+  "text": "담요를 할머니에게 드린다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "9c5d4017",
+  "voice": "narr",
+  "text": "할머니가 담요 끝을 빈 의자에도 걸쳐 둔다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "59f456ae",
+  "voice": "narr",
+  "text": "지안은 구석에 앉아 있다. 무릎 위에 스케치북이 펴져 있고, 손에는 연필이 있다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "d2a308d1",
+  "voice": "narr",
+  "text": "지안이 촛불을 오래 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "29b25399",
+  "voice": "narr",
+  "text": "지안이 빈 종이를 내려다본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "229dbfc4",
+  "voice": "sys",
+  "text": "다가가 \"지금은 어떤 색이에요?\" 하고 묻는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "65a7c538",
+  "voice": "narr",
+  "text": "지안이 촛불을 오래 바라본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "ee654d2e",
+  "voice": "jian",
+  "text": "주황색이요. 촛불 색.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "943d8f3e",
+  "voice": "narr",
+  "text": "지안이 종이에 첫 선을 긋는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "358c94ca",
+  "voice": "sys",
+  "text": "말없이 따뜻한 코코아를 옆에 놓아 둔다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "92675047",
+  "voice": "jian",
+  "text": "고마워요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "b130b20d",
+  "voice": "narr",
+  "text": "지안이 컵을 두 손으로 감싼다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "7a8b7f08",
+  "voice": "sys",
+  "text": "\"다 같이 있는 거, 그림으로 그려 주세요!\" 하고 조른다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "dc50b1fc",
+  "voice": "narr",
+  "text": "지안이 스케치북을 덮는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "57fcb4ef",
+  "voice": "jian",
+  "text": "아… 오늘은 괜찮아요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "17ec19a3",
+  "voice": "narr",
+  "text": "며칠 뒤, 다시 눈이 온다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "b339f5f4",
+  "voice": "narr",
+  "text": "눈 오는 아침. 지안이 들어온다. 스케치북이 전보다 두툼하다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "fe20b3e6",
+  "voice": "jieun",
+  "text": "어서 오세요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "4ae7c0d8",
+  "voice": "narr",
+  "text": "지안은 인사만 하고, 스케치북을 두 손으로 꼭 쥐고 서 있다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "b1146895",
+  "voice": "narr",
+  "text": "지안이 나를 봤다가, 스케치북을 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "972dbfae",
+  "voice": "narr",
+  "text": "지안이 창밖의 하얀 눈을 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "b50866b3",
+  "voice": "narr",
+  "text": "지안이 나를 오래 바라보다가 웃는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "1c3bc50b",
+  "voice": "jian",
+  "text": "오늘은 여러 색이요. 따뜻한 우유 주세요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "442ae6b2",
+  "voice": "sys",
+  "text": "늘 마시던 유자차를 준비한다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "0ac16ac1",
+  "voice": "jian",
+  "text": "네. 기억해 줘서 고마워요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "a0d56c03",
+  "voice": "sys",
+  "text": "\"그림 생겼어요? 스케치북 보여 주세요!\" 하고 묻는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "080c1a2b",
+  "voice": "narr",
+  "text": "지안이 스케치북을 가방에 넣는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "717f7c5d",
+  "voice": "jian",
+  "text": "아… 다음에요. 괜찮아요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "4c3d9fbf",
+  "voice": "narr",
+  "text": "눈 오는 오후. 해순 할머니가 손녀와 함께 들어온다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "ef0833ac",
+  "voice": "haesun",
+  "text": "우리 손녀예요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "f7878ebf",
+  "voice": "customer_f",
+  "text": "안녕하세요!",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "9e3b2e24",
+  "voice": "narr",
+  "text": "두 사람이 창가에 앉는다. 할머니가 나를 보고 고개를 끄덕인다. 늘 먹던 것이라는 뜻이다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "c197823d",
+  "voice": "narr",
+  "text": "할머니가 손녀를 보고, 빈 의자를 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "02343cad",
+  "voice": "narr",
+  "text": "손녀도 할머니를 따라 빈 의자를 본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "b588786b",
+  "voice": "think",
+  "text": "우유를 몇 잔 준비할까?",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "845614c5",
+  "voice": "sys",
+  "text": "우유 세 잔을 준비한다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "41ccb6f2",
+  "voice": "narr",
+  "text": "할머니가 세 번째 잔을 오래 바라본다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "018407b8",
+  "voice": "customer_f",
+  "text": "할아버지 것도 있네!",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "92970397",
+  "voice": "haesun",
+  "text": "여기서는 할아버지 자리도 있어.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "1d37e8c6",
+  "voice": "narr",
+  "text": "할머니가 손녀의 손을 꼭 잡는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "c4a7e18d",
+  "voice": "sys",
+  "text": "우유 두 잔을 준비한다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "3d90e4a1",
+  "voice": "customer_f",
+  "text": "한 잔 더 주세요. 할아버지 거요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "1152902a",
+  "voice": "sys",
+  "text": "주문을 기다리며 아무것도 하지 않는다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "8e84f1ce",
+  "voice": "haesun",
+  "text": "늘 먹던 거요. 괜찮아요.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "9c2f01d2",
+  "voice": "jieun",
+  "text": "정전 밤, 카페에만 불이 켜져 있었다. 할머니는 의자에도 담요를 덮었다. 지안은 다시 그림을 그린다.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "65d5e273",
+  "voice": "sys",
+  "text": "정전 밤: 저장된 곳부터 이어서 할까요?",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "f7fe4c5e",
+  "voice": "sys",
+  "text": "정전 밤. 오늘의 마일스톤.",
+  "ep": "m1_winter"
+ },
+ {
+  "key": "aee111c4",
+  "voice": "sys",
+  "text": "엔딩. 준비 중",
+  "ep": "ending"
+ },
+ {
+  "key": "e750fc60",
+  "voice": "sys",
+  "text": "엔딩 앨범과 사장의 눈은 아직 만들고 있어요.",
+  "ep": "ending"
+ },
+ {
+  "key": "345dc116",
+  "voice": "sys",
+  "text": "마지막 이야기까지 해냈어요. 엔딩을 볼까요?",
+  "ep": "ending"
+ },
+ {
+  "key": "1c3d6112",
+  "voice": "sys",
+  "text": "시험 엔딩을 봤어요. 엔딩 앨범과 사장의 눈은 아직 만들고 있어요.",
+  "ep": "ending"
+ },
+ {
+  "key": "ed868263",
+  "voice": "sys",
+  "text": "미니게임을 그만할까요? 남은 일은 지은이 알아서 해요.",
+  "ep": "mini"
+ },
+ {
+  "key": "d528af02",
+  "voice": "sys",
+  "text": "저장할 칸을 골라요.",
+  "ep": "saves"
+ },
+ {
+  "key": "9f62c39e",
+  "voice": "sys",
+  "text": "불러올 칸을 골라요.",
+  "ep": "saves"
+ },
+ {
+  "key": "d7cc10f9",
+  "voice": "sys",
+  "text": "이 장면부터 다시 할까요? 지금 하던 곳은 자동 저장만 남아요.",
+  "ep": "saves"
+ },
+ {
+  "key": "b207bc32",
+  "voice": "sys",
+  "text": "이 장면부터 할까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "3bc433ea",
+  "voice": "sys",
+  "text": "이야기를 하는 중에만 저장할 수 있어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "5f74a606",
+  "voice": "sys",
+  "text": "저장 공간이 모자라 저장하지 못했어요. 선생님께 알려 주세요.",
+  "ep": "saves"
+ },
+ {
+  "key": "d0e1a4b1",
+  "voice": "sys",
+  "text": "일번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "5ba72682",
+  "voice": "sys",
+  "text": "일번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "61d9fa2d",
+  "voice": "sys",
+  "text": "일번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "11957299",
+  "voice": "sys",
+  "text": "이번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "97b0f88a",
+  "voice": "sys",
+  "text": "이번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "392fe545",
+  "voice": "sys",
+  "text": "이번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "287f3f94",
+  "voice": "sys",
+  "text": "삼번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "db96bff7",
+  "voice": "sys",
+  "text": "삼번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "d80133ae",
+  "voice": "sys",
+  "text": "삼번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "0b8a2964",
+  "voice": "sys",
+  "text": "사번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "ca059027",
+  "voice": "sys",
+  "text": "사번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "d85b4e1e",
+  "voice": "sys",
+  "text": "사번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "5f3afb7e",
+  "voice": "sys",
+  "text": "오번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "2398641d",
+  "voice": "sys",
+  "text": "오번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "6edf6894",
+  "voice": "sys",
+  "text": "오번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "082e171f",
+  "voice": "sys",
+  "text": "육번 칸에 덮어쓸까요? 전에 저장한 것은 지워져요.",
+  "ep": "saves"
+ },
+ {
+  "key": "9933bc1c",
+  "voice": "sys",
+  "text": "육번 칸에 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "31a449b7",
+  "voice": "sys",
+  "text": "육번 칸을 지울까요?",
+  "ep": "saves"
+ },
+ {
+  "key": "31969eb4",
+  "voice": "sys",
+  "text": "판단 장면마다 자동으로 저장돼요. [저장하기]로 원하는 장면을 육칸에 따로 저장할 수 있어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "a4385719",
+  "voice": "sys",
+  "text": "기록 파일로 저장했어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "61e18c57",
+  "voice": "sys",
+  "text": "이 기록 파일을 불러올까요? 지워지는 기록은 없어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "b7a9e8f2",
+  "voice": "sys",
+  "text": "기록을 불러왔어요.",
+  "ep": "saves"
+ },
+ {
+  "key": "27ca3135",
+  "voice": "sys",
+  "text": "기록 파일을 읽지 못했어요. 이 게임의 기록 파일인지 확인해요.",
+  "ep": "saves"
+ },
+ {
+  "key": "f3dba4b2",
+  "voice": "sys",
+  "text": "저장 공간이 모자라 불러오지 못했어요. 선생님께 알려 주세요.",
+  "ep": "saves"
+ },
+ {
+  "key": "e978d380",
+  "voice": "sys",
+  "text": "이 컴퓨터는 기록을 남기지 못해요. 끝날 때 기록 파일로 저장해요.",
+  "ep": "saves"
+ },
+ {
+  "key": "452828e3",
+  "voice": "sys",
+  "text": "지은. 새 바리스타. 스물한 살, 바닷가 마을 카페의 새 직원이에요. 천천히, 정확하게 하는 일을 잘해요. 서두르면 가끔 쏟을 때가 있어요.",
+  "ep": "crew"
+ },
+ {
+  "key": "f699e325",
+  "voice": "sys",
+  "text": "사장님. 카페 주인. 이 카페를 삼십년 동안 지켜 왔어요. 말이 적고, 커피를 천천히 내려요. 마감 뒤에는 따뜻한 우유를 마셔요.",
+  "ep": "crew"
+ },
+ {
+  "key": "39c9ea5b",
+  "voice": "sys",
+  "text": "안녕하세요! 게임에서 쓸 별명을 알려 주세요.",
+  "ep": "common"
+ },
+ {
+  "key": "17393a22",
+  "voice": "sys",
+  "text": "진짜 이름은 쓰지 말고, 나만의 별명을 써요.",
+  "ep": "common"
+ },
+ {
+  "key": "81f9d4b5",
+  "voice": "sys",
+  "text": "보기 편하게 맞춰요.",
+  "ep": "common"
+ },
+ {
+  "key": "564b561b",
+  "voice": "sys",
+  "text": "이 빠르기로 읽어 줄게요.",
+  "ep": "common"
+ },
+ {
+  "key": "91cc0233",
+  "voice": "sys",
+  "text": "지은은 오늘 처음으로 바리스타 앞치마를 매요.",
+  "ep": "common"
+ },
+ {
+  "key": "4737ccad",
+  "voice": "sys",
+  "text": "근무표로 나갈까요? 지금까지 한 것은 저장돼요.",
+  "ep": "common"
+ },
+ {
+  "key": "b87509fb",
+  "voice": "sys",
+  "text": "처음 화면으로 갈까요? 지금까지 한 것은 저장돼요.",
+  "ep": "common"
+ },
+ {
+  "key": "0765a7a1",
+  "voice": "sys",
+  "text": "나는 오늘 어땠나요?",
+  "ep": "common"
+ },
+ {
+  "key": "d0fa1ecc",
+  "voice": "sys",
+  "text": "들이쉬기",
+  "ep": "common"
+ },
+ {
+  "key": "c0684358",
+  "voice": "sys",
+  "text": "내쉬기",
+  "ep": "common"
+ },
+ {
+  "key": "0a692afc",
+  "voice": "sys",
+  "text": "잘했어요. 마음이 조금 편해졌나요?",
+  "ep": "common"
+ },
+ {
+  "key": "3c3a73e8",
+  "voice": "sys",
+  "text": "직업 바리스타",
+  "ep": "common"
+ },
+ {
+  "key": "6a24faba",
+  "voice": "sys",
+  "text": "한 잔의 작은 친절이 사람을 바꾸고, 마을을 바꿔요. 바닷가 마을 카페에서 바리스타가 되어 가는 사계절.",
+  "ep": "common"
+ },
+ {
+  "key": "b9c571b4",
+  "voice": "sys",
+  "text": "시간이 다 됐어요!",
+  "ep": "common"
+ },
+ {
+  "key": "42d7fc58",
+  "voice": "sys",
+  "text": "기뻐요",
+  "ep": "common"
+ },
+ {
+  "key": "4245421f",
+  "voice": "sys",
+  "text": "뿌듯해요",
+  "ep": "common"
+ },
+ {
+  "key": "1b2b2083",
+  "voice": "sys",
+  "text": "괜찮아요",
+  "ep": "common"
+ },
+ {
+  "key": "0dcc742d",
+  "voice": "sys",
+  "text": "걱정돼요",
+  "ep": "common"
+ },
+ {
+  "key": "0ba41cd7",
+  "voice": "sys",
+  "text": "힘들어요",
+  "ep": "common"
+ },
+ {
+  "key": "96c69899",
+  "voice": "sys",
+  "text": "시간 약속, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "5420e09d",
+  "voice": "sys",
+  "text": "시간 약속, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "bc0df86e",
+  "voice": "sys",
+  "text": "시간 약속, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "250f8c1f",
+  "voice": "sys",
+  "text": "위생, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "901649cf",
+  "voice": "sys",
+  "text": "위생, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "74e50c24",
+  "voice": "sys",
+  "text": "위생, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "6dd3ff20",
+  "voice": "sys",
+  "text": "준비와 순서, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "2d97cc4a",
+  "voice": "sys",
+  "text": "준비와 순서, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "62dda295",
+  "voice": "sys",
+  "text": "준비와 순서, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "732f476e",
+  "voice": "sys",
+  "text": "손님 맞이, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "a440c0ec",
+  "voice": "sys",
+  "text": "손님 맞이, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "39aec02b",
+  "voice": "sys",
+  "text": "손님 맞이, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "a5b353cb",
+  "voice": "sys",
+  "text": "청소와 정리, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "8a60ed3b",
+  "voice": "sys",
+  "text": "청소와 정리, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "b7fbdbf0",
+  "voice": "sys",
+  "text": "청소와 정리, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "2d3f367c",
+  "voice": "sys",
+  "text": "솔직한 보고, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "74d8ba46",
+  "voice": "sys",
+  "text": "솔직한 보고, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "366e18b1",
+  "voice": "sys",
+  "text": "솔직한 보고, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "e21151e5",
+  "voice": "sys",
+  "text": "확인 질문, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "47758b19",
+  "voice": "sys",
+  "text": "확인 질문, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "1c57839a",
+  "voice": "sys",
+  "text": "확인 질문, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "85cac69f",
+  "voice": "sys",
+  "text": "도움 요청, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "c392fd4f",
+  "voice": "sys",
+  "text": "도움 요청, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "4537f0a4",
+  "voice": "sys",
+  "text": "도움 요청, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "de5d5e66",
+  "voice": "sys",
+  "text": "마음 돌보기, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "aa8c9e14",
+  "voice": "sys",
+  "text": "마음 돌보기, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "f3680ea3",
+  "voice": "sys",
+  "text": "마음 돌보기, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "79f7d949",
+  "voice": "sys",
+  "text": "함께 일하기, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "5eb960cd",
+  "voice": "sys",
+  "text": "함께 일하기, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "d912313e",
+  "voice": "sys",
+  "text": "함께 일하기, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "902186a0",
+  "voice": "sys",
+  "text": "안전, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "c71768ca",
+  "voice": "sys",
+  "text": "안전, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "9b2af215",
+  "voice": "sys",
+  "text": "안전, 스스로 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "f5286db8",
+  "voice": "sys",
+  "text": "나의 권리, 함께 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "d11aabf2",
+  "voice": "sys",
+  "text": "나의 권리, 조금 도움받아 해냈어요.",
+  "ep": "result"
+ },
+ {
+  "key": "0d49d62d",
+  "voice": "sys",
+  "text": "나의 권리, 스스로 해냈어요.",
+  "ep": "result"
+ }
+]

@@ -1,0 +1,16 @@
+# 받아서 다시 만드는 것
+node_modules/
+dist/
+*.log
+
+# 블렌더 자동 백업 · 확인용 출력(tools 가 다시 만듦)
+*.blend1
+assets/_src/_check/
+
+# 시스템 파일
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 다른 게임 화면 등 남의 그림(참고용, 이 컴퓨터에만)
+docs/design/ref_*

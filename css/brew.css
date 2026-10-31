@@ -1,0 +1,434 @@
+/* ==========================================================================
+   미니게임: 커피 만들기 (바리스타 작업대) — js/game/minigames/brew.js · PRD.md 6장
+   왼쪽 손님 창 + 오른쪽 작업대(레시피 줄 · 물건 · 할 일). 대화창은 미니게임이 열려 있는 동안 가림(body.brew-open)
+   색만으로 알리지 않음: 띠의 칸마다 글자, 고른 칸은 체크 표시, 다시 볼 칸은 '다시 봐요' 글자
+   빨강(--red)은 다시 볼 칸(틀린 칸)에만. 번쩍임·흔들림 없음
+   ========================================================================== */
+
+body .mg.mg-brew, body.ts-large .mg.mg-brew, body.ts-xlarge .mg.mg-brew { left: 30px; right: 30px; top: 108px; bottom: 24px; gap: 12px; padding: 16px 22px 18px; }
+.mg-brew .mg-head h2 { font-size: 32px; }
+.mg-brew .mg-head p { font-size: 22px; }
+.mg-brew .mg-ico { width: 62px; height: 62px; }
+.mg-brew .mg-ico svg { width: 42px; height: 42px; }
+.mg-brew .mg-body { grid-template-columns: 330px minmax(0, 1fr); gap: 16px; }
+body.brew-open #layer-dock .dlg { display: none !important; }
+body.brew-open .memo { opacity: 0; pointer-events: none; }
+
+/* 작은 [다시 듣기] */
+.bw-ico-btn { display: grid; place-items: center; flex: none; width: 52px; height: 52px; padding: 7px; border-radius: 50%; border: 3px solid var(--ink-3); background: var(--cream); color: var(--ink-2); }
+.bw-ico-btn svg { width: 30px; height: 30px; }
+
+/* ---------- 손님 창 ---------- */
+.bw-guest { display: flex; flex-direction: column; align-items: stretch; gap: 12px; min-height: 0; padding: 16px; border-radius: 20px; border: 4px solid var(--ink); background: var(--cream); }
+.bw-face { position: relative; align-self: center; flex: none; width: 168px; height: 168px; border-radius: 50%; overflow: hidden; background: #fff; border: 6px solid var(--ink); box-shadow: 0 0 0 6px var(--accent, var(--main)); }
+.bw-face .face-img, .bw-face .face-svg { position: absolute; inset: 0; border-radius: 50%; }
+.bw-face-blank { display: grid; place-items: center; width: 100%; height: 100%; color: var(--gray); }
+.bw-face-blank svg { width: 96px; height: 96px; }
+.bw-name { margin: 2px 0 0; text-align: center; font-size: 30px; font-weight: 900; }
+.bw-order { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 12px; border-radius: 16px; border: 4px solid var(--ink); background: #fff; }
+.bw-order::before { content: ''; position: absolute; top: -16px; left: 50%; margin-left: -12px; border: 12px solid transparent; border-top: 0; border-bottom: 14px solid var(--ink); }
+.bw-order-k { align-self: flex-start; padding: 2px 12px; border-radius: 999px; background: var(--main); color: #fff; font-size: 20px; font-weight: 900; }
+.bw-order-text { margin: 0; font-size: 29px; font-weight: 800; line-height: 1.4; }
+.bw-relisten { align-self: flex-start; min-height: 52px; padding: 6px 16px; font-size: 22px; }
+.bw-relisten i, .bw-relisten i svg { width: 28px; height: 28px; }
+.bw-react { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 16px; border: 4px dashed var(--ink-3); background: #FFF9E3; }
+.bw-react-text { flex: 1; margin: 0; font-size: 27px; font-weight: 800; line-height: 1.4; }
+.bw-queue { display: flex; flex-direction: column; gap: 6px; }
+.bw-progress-text { margin: 0; font-size: 22px; font-weight: 800; color: var(--ink-3); }
+.bw-progress { display: flex; flex-wrap: wrap; gap: 6px; }
+.bw-progress i { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; border: 3px solid var(--ink-3); background: #fff; color: var(--ink-3); }
+.bw-progress i svg { width: 26px; height: 26px; }
+.bw-progress i.now { border-color: var(--ink); background: var(--yellow); color: var(--ink); }
+.bw-progress i.done { border-color: var(--main); background: var(--main); color: #fff; }
+.bw-book-btn { margin-top: auto; width: 100%; }
+
+/* ---------- 작업대 ---------- */
+.bw-bench { position: relative; display: grid; grid-template-rows: auto minmax(200px, 1fr) auto; gap: 12px; min-width: 0; min-height: 0; }
+
+/* 레시피 줄: 컵 · 바탕 · 더하기 · 온도 (누르면 그 단계로) */
+.bw-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.bw-slot { position: relative; display: flex; align-items: center; gap: 10px; min-height: 92px; padding: 8px 12px; text-align: left; border-radius: 16px; border: 4px solid var(--ink); background: var(--paper); box-shadow: 4px 4px 0 var(--ink); }
+.bw-slot:disabled { cursor: default; box-shadow: none; }
+.bw-slot-k { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: none; width: 70px; font-size: 20px; font-weight: 900; color: var(--ink-3); }
+.bw-slot-k b { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink-3); color: #fff; font-size: 20px; }
+.bw-slot-v { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; min-width: 0; }
+.bw-slot-item { display: inline-flex; align-items: center; gap: 4px; }
+.bw-slot-item em { font-style: normal; font-size: 22px; font-weight: 800; line-height: 1.15; }
+.bw-slot-none { font-style: normal; font-size: 30px; font-weight: 900; color: var(--gray); }
+.bw-slot.is-now { background: #FFF6CC; box-shadow: 0 0 0 5px var(--yellow), 4px 4px 0 var(--ink); }
+.bw-slot.is-now .bw-slot-k b { background: var(--main); }
+.bw-slot.is-hint { border-style: dashed; border-color: var(--red); background: #FFF1F0; }
+.bw-slot-hint { position: absolute; top: -14px; right: 10px; padding: 2px 10px; border-radius: 999px; border: 3px solid var(--ink); background: var(--red); color: #fff; font-size: 18px; font-weight: 900; }
+
+/* 물건이 놓인 곳: 벽(타일) + 나무 작업대. 배경 그림(workbench_morning)이 있으면 그 그림 */
+.bw-scene { position: relative; min-height: 0; overflow: hidden; border-radius: 18px; border: 4px solid var(--ink);
+  background:
+    linear-gradient(180deg, transparent 0 56%, #D9A56C 56% 58.5%, #C38A55 58.5% 100%),
+    repeating-linear-gradient(90deg, transparent 0 96px, rgba(150, 128, 100, .22) 96px 99px),
+    repeating-linear-gradient(0deg, #F6EFE3 0 44px, #E5D9C7 44px 47px);
+}
+.bw-scene::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 41.5%; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(90, 52, 20, .06) 0 3px, transparent 3px 70px), linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(60, 30, 10, .12)); }
+.bw-scene.has-bg { background-size: cover; background-position: center 72%; background-repeat: no-repeat; }
+.bw-scene.has-bg::after { display: none; }
+/* 손 기술의 한 컷(블렌더 장면 + 단계 프레임, Q-R9): 칸을 빈틈 없이 덮음(크기는 brew.js 의 shotView 가 맞춤). 물건 칸과 눈금 통은 숨김 */
+.bw-shot { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.bw-shot-box { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.bw-shot-box img { position: absolute; display: block; max-width: none; user-select: none; }
+.bw-shot-plate { left: 0; top: 0; width: 100%; height: 100%; }
+.bw-scene.is-shot .bw-spot, .bw-scene.is-shot .bw-tube { display: none; }
+.bw-spot { position: absolute; z-index: 1; top: 6%; bottom: 7%; display: flex; align-items: flex-end; justify-content: center; gap: 12px; }
+.bw-spot.s-left { left: 2%; width: 31%; }
+.bw-spot.s-center { left: 35%; width: 30%; }
+.bw-spot.s-right { right: 2%; width: 30%; }
+
+/* 물건 그림(그림 파일 또는 임시 SVG) */
+.bw-art { position: relative; display: inline-flex; align-items: flex-end; justify-content: center; flex: none; width: 118px; height: 118px; }
+.bw-art svg { width: 100%; height: 100%; overflow: visible; }
+.bw-art.is-img img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.bw-art.small { width: 46px; height: 46px; }
+.bw-spot .bw-art { width: auto; height: 74%; aspect-ratio: 1; max-width: 100%; flex-shrink: 1; }
+.bw-spot .bw-art.big { height: 96%; }
+.bw-spot .bw-art.mid { height: 70%; }
+.bw-spot .bw-art.machine { height: 92%; aspect-ratio: 4 / 3; }
+.bw-art.is-on { filter: drop-shadow(0 0 10px rgba(255, 220, 120, .95)) drop-shadow(0 0 4px rgba(255, 255, 255, .9)); }
+.bw-art.tilt { transform: rotate(-24deg); transform-origin: 70% 90%; }
+.bw-cup-slot { align-items: center; border-radius: 50%; border: 5px dashed rgba(23, 20, 28, .35); color: rgba(23, 20, 28, .45); font-size: 34px; font-weight: 900; }
+.bw-spot .bw-art.bw-cup-slot { height: 62%; }
+.bw-pict { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ink-3); }
+.bw-pict svg { width: 70%; height: 70%; }
+/* 그림 파일 위에 얹는 결과 표시(넘침·김): 임시 그림은 SVG 안에 그림 */
+.bw-spill { position: absolute; left: -8%; right: -8%; bottom: -4%; height: 12%; border-radius: 50%; background: rgba(199, 154, 107, .6); }
+.bw-wisp { position: absolute; left: 30%; right: 30%; top: -14%; height: 22%; background: repeating-linear-gradient(90deg, transparent 0 18%, rgba(169, 160, 150, .55) 18% 24%, transparent 24% 42%); border-radius: 40%; }
+.bw-wisp.n3 { left: 22%; right: 22%; }
+.bw-served { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.bw-served .bw-art.big { height: 78%; margin-bottom: -6%; z-index: 1; }
+.bw-served .bw-art.tray { width: 92%; height: auto; aspect-ratio: 160 / 60; }
+
+/* 눈금 통: 띠와 같이 참(꾸밈, 읽지 않음) */
+.bw-tube { position: absolute; z-index: 2; left: calc(65% + 4px); top: 10%; bottom: 10%; width: 52px; border-radius: 26px; border: 4px solid var(--ink); background: rgba(255, 255, 255, .85); overflow: hidden; }
+.bw-tube-fill { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--p, 0) * 100%); background: #8A5A35; }
+.bw-tube-zone { position: absolute; z-index: 1; left: 0; right: 0; bottom: calc(var(--z0, .4) * 100%); height: calc((var(--z1, .6) - var(--z0, .4)) * 100%); border-top: 4px dashed var(--main); border-bottom: 4px dashed var(--main); background: rgba(37, 132, 74, .12); }
+.bw-tube.t-extract .bw-tube-fill { background: linear-gradient(0deg, #2E1A0E, #9C6A3E); }
+.bw-tube.t-foam .bw-tube-fill { background: repeating-radial-gradient(circle at 50% 50%, #FFFFFF 0 4px, #EDE4D6 4px 7px); }
+.bw-tube.t-steam .bw-tube-fill { background: linear-gradient(0deg, #F2C0A0, #E07B45); }
+.bw-tube.t-pour .bw-tube-fill { background: linear-gradient(0deg, #C79A6B, #F4E7D3); }
+
+/* ---------- 할 일 판 ---------- */
+.bw-panel { display: flex; flex-direction: column; gap: 12px; min-height: 330px; padding: 14px 18px; border-radius: 18px; border: 4px solid var(--ink); background: var(--paper); }
+.bw-ask { display: flex; align-items: center; gap: 12px; }
+.bw-ask-n { display: grid; place-items: center; flex: none; min-width: 48px; height: 48px; padding: 0 10px; border-radius: 24px; background: var(--main); color: #fff; font-size: 24px; font-weight: 900; }
+.bw-ask-t { flex: 1; margin: 0; font-size: 28px; font-weight: 800; line-height: 1.35; }
+.bw-row { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 14px; margin-top: auto; }
+.bw-note { margin: 0 auto 0 0; font-size: 22px; font-weight: 800; color: var(--ink-3); }
+.bw-tip { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 24px; font-weight: 700; color: var(--ink-3); }
+.bw-tip i svg { width: 30px; height: 30px; }
+
+/* 고르기: 그림 + 글자 */
+.bw-choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.bw-choice { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 184px; min-height: 196px; padding: 12px 8px 10px; border-radius: 18px; border: 4px solid var(--ink); background: #fff; box-shadow: 4px 4px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
+.bw-choice:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.bw-choice-pic { display: grid; place-items: end center; width: 124px; height: 124px; }
+.bw-choice-pic .bw-art { width: 124px; height: 124px; }
+.bw-choice-name { font-size: 26px; font-weight: 900; line-height: 1.2; }
+.bw-choice-note { font-size: 18px; font-weight: 800; color: var(--ink-3); }
+.bw-choice.is-on { border-color: var(--main); background: #E9F6EE; box-shadow: 0 0 0 4px var(--main), 4px 4px 0 var(--ink); }
+.bw-choice-on { position: absolute; top: -14px; right: -14px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 4px solid var(--ink); background: var(--main); color: #fff; }
+.bw-choice-on svg { width: 28px; height: 28px; }
+.bw-choice.is-armed { box-shadow: 0 0 0 6px var(--yellow), 4px 4px 0 var(--ink); }
+.bw-choice:disabled { opacity: .45; box-shadow: none; }
+
+/* 손 기술의 띠: 글자 칸 셋 + 바늘 */
+.bw-gauge { position: relative; display: flex; height: 92px; border-radius: 16px; border: 4px solid var(--ink); background: #fff; }
+.bw-seg { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; height: 100%; padding: 0 6px; overflow: hidden; font-size: 24px; font-weight: 900; line-height: 1.1; text-align: center; color: var(--ink-2); }
+.bw-seg.low { border-radius: 12px 0 0 12px; background: radial-gradient(circle, rgba(23, 20, 28, .16) 2px, transparent 2.5px) 0 0 / 14px 14px, #FFF5E0; }
+.bw-seg.good { border-left: 4px solid var(--ink); border-right: 4px solid var(--ink); background: #D7F0DF; color: #11431F; }
+.bw-seg.good i svg { width: 30px; height: 30px; }
+.bw-seg.high { border-radius: 0 12px 12px 0; background: repeating-linear-gradient(135deg, rgba(23, 20, 28, .1) 0 6px, transparent 6px 14px), #FFE0CC; }
+.bw-gauge[data-zone="good"] .bw-seg.good { box-shadow: inset 0 0 0 5px var(--main); }
+.bw-gauge-fill { position: absolute; z-index: 1; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); border-radius: 12px 0 0 12px; background: rgba(23, 20, 28, .1); pointer-events: none; }
+.bw-ticks i { position: absolute; z-index: 1; bottom: 0; width: 3px; height: 16px; margin-left: -1.5px; background: rgba(23, 20, 28, .45); }
+.bw-needle { position: absolute; z-index: 2; top: -16px; bottom: -8px; left: calc(var(--p, 0) * 100%); width: 10px; margin-left: -5px; border-radius: 5px; background: var(--ink); box-shadow: 0 0 0 3px #fff; }
+.bw-needle::before { content: ''; position: absolute; top: -12px; left: 50%; margin-left: -13px; border: 13px solid transparent; border-top: 14px solid var(--ink); border-bottom: 0; }
+.bw-status { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; min-height: 48px; margin: 0; font-size: 26px; font-weight: 800; }
+.bw-verdict { display: inline-flex; align-items: center; gap: 8px; padding: 4px 18px; border-radius: 999px; border: 3px solid var(--ink); background: #EEEAF2; font-size: 28px; font-weight: 900; }
+.bw-verdict i svg { width: 30px; height: 30px; }
+.bw-verdict.z-good { background: var(--main); color: #fff; }
+.bw-verdict.z-art { background: #FCE4EE; }
+.bw-watched { font-style: normal; font-size: 22px; font-weight: 800; color: var(--ink-3); }
+.bw-ctrl { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: auto; }
+.bw-ctrl .bw-stop { min-width: 320px; }
+/* 실시간 손 기술: 누르고 있는 동안 차오르고, 떼면 정함(동작 A). 길게 눌러도 메뉴·글자 고르기·화면 끌기가 생기지 않게 */
+.bw-ctrl .bw-hold { min-width: 360px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.btn.bw-hold.is-holding:not(:disabled) { transform: translateY(3px) scale(.97); background: var(--main-d); box-shadow: inset 0 4px 10px rgba(0, 0, 0, .35); } /* 마우스를 올린 채 눌러도(:hover) 눌린 모양 */
+/* '딱 좋아요' 칸: 알맞아요 칸 가운데 36%에 위·아래 금 테(글자를 가리지 않게 가운데는 비움) */
+.bw-sweet { position: absolute; z-index: 0; top: 0; bottom: 0; left: 32%; right: 32%; border: 0 solid rgba(17, 67, 31, .42); border-top-width: 9px; border-bottom-width: 9px; pointer-events: none; }
+/* 칸 글자는 바늘 위에(가운데에서 멈추면 바늘이 글자를 가리지 않게), 흰 테두리로 읽기 쉽게 */
+.bw-seg > :not(.bw-sweet) { position: relative; z-index: 3; }
+.bw-seg > span { text-shadow: 0 0 3px #fff, 0 0 6px #fff, 0 0 10px rgba(255, 255, 255, .8); }
+.bw-gauge.is-perfect .bw-sweet { border-color: #E2B64E; }
+.bw-verdict.is-perfect { position: relative; overflow: hidden; background: linear-gradient(135deg, #2E9E5B, var(--main-d)); color: #fff; box-shadow: 0 0 0 4px #F0D9A2; }
+.bw-verdict.is-perfect::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); translate: -120% 0; animation: bw-glint .9s .1s ease-out forwards; pointer-events: none; }
+@keyframes bw-glint { to { translate: 120% 0; } }
+.bw-ctrl .btn i, .bw-ctrl .btn i svg { width: 40px; height: 40px; }
+
+/* [시작!] / [보기] 창 (작업대 위) */
+.bw-gate { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; border-radius: 18px; background: rgba(23, 20, 28, .38); transition: opacity .2s; }
+.bw-gate.is-out { opacity: 0; }
+.bw-gate-card { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 900px; padding: 26px 36px; border-radius: 22px; border: 5px solid var(--ink); background: var(--paper); box-shadow: 8px 8px 0 var(--ink); text-align: center; }
+.bw-gate-card h3 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 36px; font-weight: 900; }
+.bw-gate-card h3 i svg { width: 46px; height: 46px; color: var(--main); }
+.bw-gate-card p { margin: 0; font-size: 26px; font-weight: 700; line-height: 1.4; }
+.bw-safety { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 12px; border: 3px solid var(--yellow-d); background: #FFF6D6; }
+.bw-safety i svg { width: 34px; height: 34px; }
+.bw-turn-note { color: var(--ink-3); }
+.bw-gate-card .bw-row { margin-top: 6px; justify-content: center; }
+.bw-gate-card .mg-go { min-width: 280px; font-size: 36px; }
+
+/* 만든 것 · 손 기술 결과 */
+.bw-result { display: flex; flex-direction: column; gap: 8px; }
+.bw-made { display: flex; align-items: baseline; gap: 12px; margin: 0; font-size: 22px; font-weight: 800; color: var(--ink-3); }
+.bw-made b { font-size: 30px; font-weight: 900; color: var(--ink); }
+.bw-checks { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.bw-checks li { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 14px; border: 3px solid var(--ink-3); background: #F4F1F6; font-size: 22px; font-weight: 800; }
+.bw-checks li i svg { width: 28px; height: 28px; }
+.bw-checks li b { font-weight: 900; }
+.bw-checks li.z-good { border-color: var(--main); background: #E9F6EE; }
+.bw-checks li.z-low, .bw-checks li.z-high { border-style: dashed; }
+.bw-checks li em { font-style: normal; padding: 0 8px; border-radius: 999px; background: var(--ink-3); color: #fff; font-size: 18px; }
+
+/* ---------- 레시피 수첩(오픈북) ---------- */
+.ov-brew-book .bk-card { display: flex; flex-direction: column; gap: 16px; width: 1560px; max-height: 920px; padding: 26px 32px 30px; border-radius: 24px; border: 6px solid var(--ink); box-shadow: 12px 12px 0 var(--main);
+  background: linear-gradient(90deg, #FFFBF1 0 49.6%, #E9DFCB 49.6% 50.4%, #FFFBF1 50.4%); }
+.bk-head { display: flex; align-items: center; gap: 16px; }
+.bk-head h2 { margin: 0; font-size: 44px; font-weight: 900; }
+.bk-head p { margin: 2px 0 0; font-size: 24px; font-weight: 700; color: var(--ink-3); }
+.bk-ico { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 16px; border: 4px solid var(--ink); background: var(--main); color: #fff; }
+.bk-ico svg { width: 48px; height: 48px; }
+.bk-close { margin-left: auto; }
+.bk-pages { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 46px; min-height: 0; overflow: auto; padding: 6px; }
+.bk-row { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 16px; padding: 12px 16px; text-align: left; border-radius: 18px; border: 4px solid var(--ink); background: #fff; box-shadow: 4px 4px 0 var(--ink); }
+.bk-pic .bw-art { width: 146px; height: 146px; }
+.bk-main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bk-name { font-size: 34px; font-weight: 900; }
+.bk-parts { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 14px; }
+.bk-part { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 70px; }
+.bk-part small { font-size: 17px; font-weight: 900; color: var(--ink-3); }
+.bk-part .bw-art.small { width: 56px; height: 56px; }
+.bk-part em { font-style: normal; font-size: 20px; font-weight: 800; }
+.bk-none { align-items: center; font-size: 34px; font-weight: 900; color: var(--gray); }
+.bk-skills { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.bk-skills small { font-size: 18px; font-weight: 900; color: var(--ink-3); }
+.bk-skills em { font-style: normal; padding: 2px 12px; border-radius: 999px; border: 2px solid var(--ink-3); background: var(--cream); font-size: 19px; font-weight: 800; }
+
+/* ---------- 차분 모드 · 고대비 · 움직임 줄이기 ---------- */
+body.theme-calm .bw-seg.high { background: repeating-linear-gradient(135deg, rgba(23, 20, 28, .08) 0 6px, transparent 6px 14px), #F6E6DA; }
+body.theme-calm .bw-seg.low { background: radial-gradient(circle, rgba(23, 20, 28, .12) 2px, transparent 2.5px) 0 0 / 14px 14px, #FAF3E6; }
+body.theme-calm .bw-art.is-on { filter: drop-shadow(0 0 6px rgba(255, 230, 160, .8)); }
+body.contrast .bw-slot, body.contrast .bw-choice, body.contrast .bw-gauge, body.contrast .bw-panel, body.contrast .bw-guest, body.contrast .bk-row { border-color: #000; }
+body.contrast .bw-seg { color: #000; }
+body.contrast .bw-ask-t, body.contrast .bw-order-text, body.contrast .bw-react-text { color: #000; }
+body.reduce-motion .bw-choice, body.reduce-motion .bw-gate { transition: none; }
+body.reduce-motion .bw-choice:hover:not(:disabled) { transform: none; }
+body.reduce-motion .btn.bw-hold.is-holding:not(:disabled) { transform: none; }
+body:is(.reduce-motion, .theme-calm) .bw-verdict.is-perfect::after { animation: none; display: none; }
+body.contrast .bw-sweet { border-color: #000; }
+body.contrast .bw-gauge.is-perfect .bw-sweet { border-color: #000; border-top-style: double; border-bottom-style: double; }
+
+/* ==========================================================================
+   작업대 v2: 카운터 한 장면(포인트 앤 클릭, 2026-10-31 사용자 의견 "카페 가판대에서 알맞은 컵과 도구를 찾는 느낌")
+   틀을 화면 가득 펼치고(위쪽 띠 아래), 카운터 그림(16:9) 위에 물건 단추 · 가운데 받침 · 왼쪽 위 손님 말풍선 · 아래 손 띠.
+   선택자는 .mg.mg-brew 로 시작해 옛 판 모양(body.skin-sea .bw-…)보다 먼저 먹음. 움직임 줄이기 · 차분 모드는 떠오름 없음
+   ========================================================================== */
+html body .mg.mg-brew { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap: 0; border: 0; border-radius: 0; outline: 0; box-shadow: none; background: #0B1C20; }
+.mg.mg-brew .mg-head { position: absolute; z-index: 6; top: 14px; left: 50%; transform: translateX(-50%); gap: 12px; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(4, 18, 23, .74); border: 1px solid rgba(212, 174, 98, .5); color: #FFF4D6; }
+.mg.mg-brew .mg-head h2 { font-size: 28px; color: #FFF4D6; white-space: nowrap; }
+.mg.mg-brew .mg-head p { display: none; }
+.mg.mg-brew .mg-ico { width: 48px; height: 48px; border-radius: 50%; }
+.mg.mg-brew .mg-ico svg { width: 30px; height: 30px; }
+.mg.mg-brew .mg-say { width: 48px; height: 48px; padding: 6px; border-radius: 50%; }
+.mg.mg-brew .mg-quit { min-height: 48px; padding: 4px 14px; font-size: 20px; }
+.mg.mg-brew .mg-body { position: absolute; inset: 0; display: block; }
+.mg.mg-brew .bw-bench { position: absolute; inset: 0; display: block; }
+
+/* 장면: 카운터 그림을 칸에 꽉 채우는 16:9 판(물건 자리가 그림과 같이 움직임) */
+.mg.mg-brew .bw-scene { position: absolute; inset: 0; border: 0; border-radius: 0; overflow: hidden; container-type: size; background: #0B1C20; }
+.mg.mg-brew .bw-scene::after { display: none; }
+.mg.mg-brew .bw-set {
+  --w: max(100cqw, calc(100cqh * 16 / 9));
+  position: absolute; width: var(--w); height: calc(var(--w) * 9 / 16);
+  left: calc((100cqw - var(--w)) / 2); top: calc((100cqh - var(--w) * 9 / 16) / 2);
+  background: #3A2A1C center / 100% 100% no-repeat;
+}
+.mg.mg-brew .bw-hots { position: absolute; inset: 0; pointer-events: none; }
+.mg.mg-brew .bw-scene:not([data-mode="recipe"]) .bw-hots, .mg.mg-brew .bw-scene:not([data-mode="recipe"]) .bw-mat { display: none; }
+
+/* 물건 단추: 그림 + 늘 보이는 이름. 올리거나 초점이면 살짝 떠오르며 빛남 */
+.mg.mg-brew .bw-hot { position: absolute; z-index: 2; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; }
+.mg.mg-brew .bw-hot .bw-art { display: block; width: 100%; height: auto; transition: transform .18s, filter .18s, opacity .18s; filter: drop-shadow(0 8px 8px rgba(30, 18, 8, .35)); }
+.mg.mg-brew .bw-hot .bw-art svg { display: block; width: 100%; height: auto; aspect-ratio: 1; }
+.mg.mg-brew .bw-hot .bw-art.is-img img { display: block; width: 100%; height: auto; }
+.mg.mg-brew .bw-hot-name { padding: 2px 12px; border-radius: 999px; background: rgba(4, 18, 23, .66); color: #FFF4D6; font-size: 19px; font-weight: 700; line-height: 1.35; white-space: nowrap; transition: background .18s, color .18s; }
+.mg.mg-brew .bw-hot:hover .bw-art, .mg.mg-brew .bw-hot:focus-visible .bw-art { transform: translateY(-8px); filter: drop-shadow(0 0 10px rgba(255, 230, 160, .95)) drop-shadow(0 10px 10px rgba(30, 18, 8, .35)); }
+.mg.mg-brew .bw-hot:hover .bw-hot-name, .mg.mg-brew .bw-hot:focus-visible .bw-hot-name { background: #F0D9A2; color: #0A2630; }
+.mg.mg-brew .bw-hot:focus-visible { outline: 4px solid #FFE6A0; outline-offset: 8px; border-radius: 14px; }
+.mg.mg-brew .bw-hot.is-on .bw-art { filter: drop-shadow(0 0 8px rgba(111, 207, 154, .95)) drop-shadow(0 8px 8px rgba(30, 18, 8, .35)); }
+.mg.mg-brew .bw-hot.is-on .bw-hot-name { background: var(--main); color: #fff; }
+.mg.mg-brew .bw-hot-on { position: absolute; top: -12px; right: -10px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #F0D9A2; background: var(--main); color: #fff; }
+.mg.mg-brew .bw-hot-on svg { width: 24px; height: 24px; }
+.mg.mg-brew .bw-hot.is-away .bw-art { opacity: .28; } /* 받침으로 옮긴 컵: 원래 자리는 흐리게 */
+.mg.mg-brew .bw-hot.is-armed .bw-hot-name { background: #FFE6A0; color: #0A2630; box-shadow: 0 0 0 3px #0A2630; }
+.mg.mg-brew .bw-book-btn { z-index: 4; }
+.mg.mg-brew .bw-scene.is-shot .bw-book-btn .bw-hot-name { background: rgba(4, 18, 23, .8); }
+
+/* 가운데 받침: 고른 컵 + 넣을 재료(작게) */
+.mg.mg-brew .bw-mat { position: absolute; z-index: 1; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; aspect-ratio: 1 / 1.1; pointer-events: none; }
+.mg.mg-brew .bw-mat::before { content: ''; position: absolute; left: 4%; right: 4%; bottom: -5%; height: 22%; border-radius: 50%; border: 2px dashed rgba(240, 217, 162, .7); background: radial-gradient(ellipse at center, rgba(240, 217, 162, .32), rgba(240, 217, 162, .06) 70%, transparent 72%); }
+.mg.mg-brew .bw-mat-cup { position: relative; width: 72%; height: auto; filter: drop-shadow(0 10px 10px rgba(30, 18, 8, .4)); }
+.mg.mg-brew .bw-mat-cup svg, .mg.mg-brew .bw-mat-cup img { display: block; width: 100%; height: auto; }
+.mg.mg-brew .bw-mat-empty { position: relative; margin-bottom: 4%; padding: 2px 12px; border-radius: 999px; background: rgba(4, 18, 23, .55); color: #F0D9A2; font-size: 19px; font-weight: 700; }
+.mg.mg-brew .bw-mat-ings { position: relative; order: -1; display: flex; gap: 6px; margin-bottom: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(4, 18, 23, .6); }
+.mg.mg-brew .bw-mat-ings .bw-art.small { width: 42px; height: 42px; }
+
+/* 손님: 왼쪽 위 얼굴 + 말풍선 */
+.mg.mg-brew .bw-guest { position: absolute; z-index: 5; left: 24px; top: 18px; width: 600px; display: flex; flex-direction: row; align-items: flex-start; gap: 14px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.mg.mg-brew .bw-face { width: 124px; height: 124px; border-width: 4px; }
+.mg.mg-brew .bw-talk { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.mg.mg-brew .bw-name { margin: 0; padding: 2px 14px; border-radius: 999px; background: rgba(4, 18, 23, .74); color: #F0D9A2; font-family: var(--font-title); font-size: 24px; font-weight: 700; }
+.mg.mg-brew .bw-order { position: relative; flex-direction: row; align-items: center; gap: 10px; padding: 10px 10px 10px 18px; border-radius: 16px; border: 2px solid var(--gold-d); background: #FFFDF7; box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
+.mg.mg-brew .bw-order::before { top: 22px; left: -14px; margin: 0; border: 9px solid transparent; border-right: 14px solid var(--gold-d); border-left: 0; }
+.mg.mg-brew .bw-order-text { font-size: 27px; }
+.mg.mg-brew .bw-relisten { min-height: 48px; padding: 0 12px; }
+.mg.mg-brew .bw-relisten span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.mg.mg-brew .bw-react { max-width: 100%; box-shadow: 0 8px 18px rgba(0, 0, 0, .3); }
+.mg.mg-brew .bw-queue { flex-direction: row; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px; background: rgba(4, 18, 23, .6); }
+.mg.mg-brew .bw-progress-text { color: #F0D9A2; font-size: 18px; }
+.mg.mg-brew .bw-progress i { width: 32px; height: 32px; }
+.mg.mg-brew .bw-progress i svg { width: 20px; height: 20px; }
+
+/* 아래 띠: 손 기술 · 드리기 · 손님 반응 때는 밝은 쟁반, 레시피를 고를 때는 짙은 손 칸(넣은 것) */
+.mg.mg-brew .bw-panel { position: absolute; z-index: 5; left: 50%; bottom: 14px; transform: translateX(-50%); width: min(1560px, calc(100% - 48px)); min-height: 0; max-height: 48%; overflow: auto; gap: 10px; padding: 12px 18px; border-radius: 16px; border: 2px solid var(--gold-d); background: rgba(255, 253, 247, .96); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.mg.mg-brew .bw-panel .bw-row { margin-top: 0; }
+.mg.mg-brew .bw-panel[data-kind="hand"] { display: grid; grid-template-columns: minmax(0, 470px) minmax(0, 1fr) auto; align-items: center; gap: 18px; background: rgba(4, 18, 23, .8); border: 1px solid rgba(212, 174, 98, .55); }
+.mg.mg-brew .bw-panel[data-kind="hand"] .bw-ask-t { color: #FFF4D6; font-size: 24px; }
+.mg.mg-brew .bw-panel[data-kind="hand"] .bw-row { flex-wrap: nowrap; }
+.mg.mg-brew .bw-hand { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.mg.mg-brew .bw-chip { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 104px; height: 104px; padding: 4px; border-radius: 12px; border: 2px solid rgba(212, 174, 98, .6); background: rgba(23, 65, 77, .62); color: #FFF4D6; font-size: 18px; font-weight: 700; }
+.mg.mg-brew .bw-chip em { font-style: normal; white-space: nowrap; }
+.mg.mg-brew .bw-chip .bw-art.small { width: 58px; height: 58px; }
+.mg.mg-brew .bw-chip > i svg { width: 40px; height: 40px; color: rgba(240, 217, 162, .7); }
+.mg.mg-brew button.bw-chip:not(:disabled):hover, .mg.mg-brew button.bw-chip:focus-visible { border-color: #F0D9A2; background: rgba(36, 92, 108, .8); }
+.mg.mg-brew .bw-chip.is-empty { border-style: dashed; background: rgba(23, 65, 77, .3); color: rgba(255, 244, 214, .75); }
+.mg.mg-brew .bw-chip.is-temp { background: rgba(23, 65, 77, .3); }
+.mg.mg-brew .bw-chip.is-hint { border: 3px dashed var(--red); }
+.mg.mg-brew .bw-chip-hint { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 0 8px; border-radius: 999px; background: var(--red); color: #fff; font-size: 15px; white-space: nowrap; }
+
+/* 손 기술 · 물 넣기 · 드리기: 물건 자리와 한 컷은 아래 띠 위쪽에 */
+.mg.mg-brew .bw-spot { top: 16%; bottom: 33%; }
+.mg.mg-brew .bw-tube { top: 16%; bottom: 33%; }
+.mg.mg-brew .bw-shot { bottom: 31%; }
+.mg.mg-brew .bw-scene.is-shot::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 31%; background: #0B1C20; }
+.mg.mg-brew .bw-gate { border-radius: 0; }
+
+body.theme-calm .mg.mg-brew .bw-hot .bw-art, body.reduce-motion .mg.mg-brew .bw-hot .bw-art { transform: none !important; transition: none; }
+body.contrast .mg.mg-brew .bw-hot-name { background: #000; color: #FFF; border: 2px solid #FFE14D; }
+body.contrast .mg.mg-brew .bw-panel[data-kind="hand"] { background: #000; border: 3px solid #FFE14D; }
+
+/* 드리기 · 손님 반응: 잔과 쟁반은 카운터 위 왼쪽에, 설명 칸은 오른쪽(잔을 가리지 않게) · 물 넣기 같은 자동 단계는 카운터 위에 */
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-spot.s-center { left: 17%; width: 25%; top: 36%; bottom: 9%; }
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-served .bw-art.big { height: 64%; margin-bottom: -15%; }
+.mg.mg-brew .bw-scene[data-mode="serve"] ~ .bw-panel { left: auto; right: 24px; transform: none; width: min(980px, 50%); max-height: 72%; }
+.mg.mg-brew .bw-scene[data-mode="auto"] .bw-spot { top: 24%; bottom: 13%; }
+
+/* ---------- 작업대 v2-2 (2026-10-31 사용자 의견 "게이지 bar 가 따로 떨어져 어색 · 물건 크기가 중구난방") ----------
+   나무판: 컵 줄 · 병 줄 아래(물건이 한 줄에 정돈되어 보이게) */
+.mg.mg-brew .bw-boards { position: absolute; inset: 0; pointer-events: none; }
+.mg.mg-brew .bw-board { position: absolute; height: 2.4%; border-radius: 6px; background: linear-gradient(180deg, #8A5A34, #5E3B20 70%, #4A2E18); box-shadow: 0 6px 10px rgba(30, 18, 8, .35), inset 0 2px 0 rgba(255, 220, 170, .35); }
+.mg.mg-brew .bw-panel:empty { display: none; }
+
+/* 손 기술의 확대 창: 카운터 위에 뜨는 액자. 위 = 이름 띠(번호 · 이름 · 하는 법 · 다시 듣기 · 수첩), 가운데 = 장면 + 오른쪽 세로 띠, 아래 = 지금 칸 · 단추 */
+.mg.mg-brew .bw-bench.is-close .bw-scene { filter: brightness(.5) saturate(.8); }
+.mg.mg-brew .bw-bench.is-close .bw-guest { opacity: 0; pointer-events: none; }
+.mg.mg-brew .bw-close {
+  position: absolute; z-index: 8; left: 50%; top: 54%; transform: translate(-50%, -50%);
+  width: min(1480px, 84%); height: 84%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 12px;
+  border-radius: 18px; border: 3px solid #8E6C33; background: linear-gradient(180deg, #FFFDF7, #F6EEDC);
+  box-shadow: 0 0 0 2px rgba(240, 217, 162, .55), 0 24px 60px rgba(0, 0, 0, .6);
+}
+.mg.mg-brew .bw-close-head { display: flex; align-items: center; gap: 14px; padding: 8px 10px 8px 14px; border-radius: 12px; background: linear-gradient(180deg, #4A3220, #33220F); color: #FFF4D6; }
+.mg.mg-brew .bw-close-n { display: grid; place-items: center; flex: none; min-width: 52px; height: 44px; padding: 0 10px; border-radius: 22px; background: var(--main); color: #fff; font-size: 22px; font-weight: 900; }
+.mg.mg-brew .bw-close-head h3 { flex: none; margin: 0; font-family: var(--font-title); font-size: 32px; font-weight: 800; color: #F0D9A2; }
+.mg.mg-brew .bw-close-head p { flex: 1; margin: 0; font-size: 22px; font-weight: 700; line-height: 1.35; color: #FFF4D6; }
+.mg.mg-brew .bw-close-head .bw-ico-btn { width: 48px; height: 48px; background: rgba(255, 244, 214, .12); border: 2px solid #D4AE62; color: #F0D9A2; }
+.mg.mg-brew .bw-close-body { display: grid; grid-template-columns: minmax(0, 1fr) 132px; gap: 14px; min-height: 0; }
+.mg.mg-brew .bw-close-view { position: relative; min-height: 0; overflow: hidden; border-radius: 12px; border: 2px solid #8E6C33; background: #1B1410; }
+.mg.mg-brew .bw-close-view .bw-shot { inset: 0; bottom: 0; }
+.mg.mg-brew .bw-close-objs { position: absolute; inset: 6% 8%; display: flex; align-items: flex-end; justify-content: center; gap: 4%; }
+.mg.mg-brew .bw-close-objs .bw-art { width: auto; height: 80%; aspect-ratio: 1; }
+.mg.mg-brew .bw-close-objs .bw-art.machine { aspect-ratio: 4 / 3; }
+.mg.mg-brew .bw-close-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 92px; padding: 0 6px; }
+.mg.mg-brew .bw-close-foot .bw-status { flex: 1; min-height: 0; font-size: 26px; }
+.mg.mg-brew .bw-close-foot .bw-ctrl { margin: 0; flex: none; }
+.mg.mg-brew .bw-close .bw-gate { border-radius: 16px; background: rgba(23, 20, 28, .45); }
+.mg.mg-brew .bw-close .bw-verdict { font-size: 32px; padding: 6px 22px; }
+
+/* 세로 띠: 아래부터 낮음 · 알맞아요 · 높음. 바늘은 왼쪽에서 가리키는 세모 + 가로 줄, 차오름은 손 기술의 색 */
+.mg.mg-brew .bw-close .bw-gauge { flex-direction: column-reverse; width: 132px; height: 100%; border-radius: 16px; border: 3px solid #8E6C33; background: #FFFDF7; }
+.mg.mg-brew .bw-close .bw-seg { width: 100%; flex-direction: column; gap: 4px; padding: 4px 2px; font-size: 21px; border-left: 0; border-right: 0; }
+.mg.mg-brew .bw-close .bw-seg.low { border-radius: 0 0 13px 13px; }
+.mg.mg-brew .bw-close .bw-seg.high { border-radius: 13px 13px 0 0; }
+.mg.mg-brew .bw-close .bw-seg.good { border-top: 3px solid #8E6C33; border-bottom: 3px solid #8E6C33; }
+.mg.mg-brew .bw-close .bw-sweet { left: 0; right: 0; border-width: 0 9px; }
+.mg.mg-brew .bw-close .bw-gauge-fill { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: calc(var(--p, 0) * 100%); border-radius: 0 0 13px 13px; background: rgba(23, 20, 28, .12); }
+.mg.mg-brew .bw-close .g-extract .bw-gauge-fill { background: linear-gradient(0deg, rgba(58, 34, 20, .55), rgba(156, 106, 62, .45)); }
+.mg.mg-brew .bw-close .g-steam .bw-gauge-fill { background: linear-gradient(0deg, rgba(242, 192, 160, .55), rgba(224, 123, 69, .45)); }
+.mg.mg-brew .bw-close .g-pour .bw-gauge-fill { background: linear-gradient(0deg, rgba(199, 154, 107, .45), rgba(244, 231, 211, .6)); }
+.mg.mg-brew .bw-close .g-foam .bw-gauge-fill { background: repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .8) 0 4px, rgba(237, 228, 214, .7) 4px 7px); }
+.mg.mg-brew .bw-close .bw-ticks i { left: 0; right: auto; width: 18px; height: 3px; margin: 0 0 -1.5px; }
+.mg.mg-brew .bw-close .bw-needle { top: auto; left: -20px; right: -6px; bottom: calc(var(--p, 0) * 100%); width: auto; height: 6px; margin: 0 0 -3px; border-radius: 3px; background: #2A1D12; box-shadow: 0 0 0 2px #fff; }
+.mg.mg-brew .bw-close .bw-needle::before { top: 50%; left: -16px; margin: -12px 0 0; border: 12px solid transparent; border-left: 16px solid #2A1D12; border-right: 0; }
+body.contrast .mg.mg-brew .bw-close { background: #000; border: 3px solid #FFE14D; }
+body.contrast .mg.mg-brew .bw-close-head { background: #000; border: 2px solid #FFE14D; }
+
+/* ---------- 드리기: 쟁반을 두 배 넘게(2026-10-31 사용자) · 잔은 쟁반 가운데에 ---------- */
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-spot.s-center { left: 5%; width: 47%; top: 30%; bottom: 5%; }
+.mg.mg-brew .bw-scene[data-mode="serve"] ~ .bw-panel { width: min(880px, 45%); }
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-served { position: relative; display: block; width: 100%; height: 100%; }
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-served .bw-art.tray { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; aspect-ratio: auto; }
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-served .bw-art.tray svg, .mg.mg-brew .bw-scene[data-mode="serve"] .bw-served .bw-art.tray img { display: block; width: 100%; height: auto; }
+.mg.mg-brew .bw-scene[data-mode="serve"] .bw-served .bw-art.big { position: absolute; z-index: 1; left: 50%; bottom: 27%; transform: translateX(-50%); height: 62%; width: auto; aspect-ratio: 1; margin: 0; filter: drop-shadow(0 12px 10px rgba(30, 18, 8, .4)); }
+
+/* ---------- 손 기술이 모자라거나 넘쳤을 때: 흔들림 · 큰 글자 도장 · 시무룩한 지은 · 칸 깜빡임 ---------- */
+.mg.mg-brew .bw-close.is-miss { animation: bw-wobble .6s ease-in-out; }
+@keyframes bw-wobble { 0% { rotate: 0deg; } 18% { rotate: -1.6deg; } 40% { rotate: 1.3deg; } 62% { rotate: -.7deg; } 80% { rotate: .3deg; } 100% { rotate: 0deg; } }
+.mg.mg-brew .bw-close.m-high .bw-seg.high, .mg.mg-brew .bw-close.m-low .bw-seg.low { box-shadow: inset 0 0 0 5px #E07B45; animation: bw-blink .32s 4 steps(1); }
+.mg.mg-brew .bw-close.m-low .bw-seg.low { box-shadow: inset 0 0 0 5px #5E7E99; }
+@keyframes bw-blink { 50% { box-shadow: none; } }
+.mg.mg-brew .bw-miss-stamp {
+  position: absolute; z-index: 6; left: 50%; top: 9%; display: flex; align-items: center; gap: 12px; padding: 10px 30px 10px 22px;
+  transform: translateX(-50%) rotate(-3deg); border-radius: 16px; border: 4px solid #F0D9A2; color: #fff;
+  font-family: var(--font-title); font-size: 56px; font-weight: 800; white-space: nowrap; text-shadow: 0 3px 0 rgba(0, 0, 0, .35);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, .25), 0 18px 34px rgba(0, 0, 0, .45);
+  animation: bw-stamp .5s cubic-bezier(.2, 1.5, .4, 1) both;
+}
+.mg.mg-brew .bw-miss-stamp i svg { width: 54px; height: 54px; }
+.mg.mg-brew .bw-miss-stamp.m-high { background: linear-gradient(180deg, #F08A4E, #B4532A); }
+.mg.mg-brew .bw-miss-stamp.m-low { background: linear-gradient(180deg, #7D9CB5, #3F5D75); }
+@keyframes bw-stamp { 0% { opacity: 0; transform: translateX(-50%) rotate(-10deg) scale(1.9); } 60% { opacity: 1; } 100% { opacity: 1; transform: translateX(-50%) rotate(-3deg) scale(1); } }
+.mg.mg-brew .bw-miss-face { position: absolute; z-index: 6; left: 3%; bottom: 5%; width: 190px; height: 190px; animation: bw-face-pop .55s .18s cubic-bezier(.2, 1.6, .4, 1) both; }
+.mg.mg-brew .bw-miss-pic { position: absolute; inset: 0; overflow: hidden; border-radius: 50%; border: 5px solid #F0D9A2; background: #FFF8EC; box-shadow: 0 0 0 3px #3F2A16, 0 12px 26px rgba(0, 0, 0, .5); }
+.mg.mg-brew .bw-miss-pic .face-img, .mg.mg-brew .bw-miss-pic .face-svg { position: absolute; inset: 0; border-radius: 50%; }
+@keyframes bw-face-pop { 0% { opacity: 0; transform: translateY(70px) scale(.5); } 100% { opacity: 1; transform: none; } }
+/* 넘침: 식은땀 한 방울이 미끄러짐 · 모자람: 이마 위 그늘 줄(만화 표현) */
+.mg.mg-brew .bw-miss-face.m-high .bw-miss-mark { position: absolute; z-index: 1; right: 6px; top: 26px; width: 34px; height: 34px; border-radius: 0 50% 50% 50%; rotate: 45deg; background: linear-gradient(135deg, #DFF4FF, #7EC8EE); border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, .3); animation: bw-sweat 1.4s .55s ease-in infinite; }
+@keyframes bw-sweat { 0% { translate: 0 0; opacity: 0; } 15% { opacity: 1; } 80% { translate: 0 38px; opacity: 1; } 100% { translate: 0 46px; opacity: 0; } }
+.mg.mg-brew .bw-miss-face.m-low .bw-miss-mark { position: absolute; z-index: 1; left: 22%; right: 22%; top: 8%; height: 34%; border-radius: 50% 50% 0 0; background: repeating-linear-gradient(90deg, rgba(52, 64, 120, .78) 0 5px, transparent 5px 17px); -webkit-mask: linear-gradient(180deg, #000 30%, transparent); mask: linear-gradient(180deg, #000 30%, transparent); animation: bw-gloom .7s .45s ease-out both; }
+@keyframes bw-gloom { 0% { opacity: 0; translate: 0 -18px; } 100% { opacity: 1; translate: 0 0; } }
+body.reduce-motion .mg.mg-brew :is(.bw-close.is-miss, .bw-miss-stamp, .bw-miss-face, .bw-miss-mark, .bw-seg),
+body.theme-calm .mg.mg-brew :is(.bw-close.is-miss, .bw-miss-stamp, .bw-miss-face, .bw-miss-mark, .bw-seg) { animation: none !important; }
+body.contrast .mg.mg-brew .bw-miss-stamp { background: #000; border-color: #FFE14D; }
+
+/* 모자라거나 넘쳤을 때 스스로 고르기(2026-10-31 사용자): 지금 칸 옆에 묻는 글 · 단추는 [다시 하기](주) · [이대로 하기] */
+.mg.mg-brew .bw-close-foot .bw-retry-q { font-size: 25px; font-weight: 800; line-height: 1.3; color: #4A3220; }
+.mg.mg-brew .bw-close-foot .bw-ctrl .bw-again { min-width: 300px; }
+body.contrast .mg.mg-brew .bw-close-foot .bw-retry-q { color: #FFE14D; }

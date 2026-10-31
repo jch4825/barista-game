@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "barista-web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.mjs", "5175"],
+      "port": 5175
+    },
+    {
+      "name": "job-milestone-original",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/AI/game/tools/serve.mjs", "5173"],
+      "port": 5173
+    },
+    {
+      "name": "dream-dice",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:/AI/game2/tools/serve.mjs", "5174"],
+      "port": 5174
+    }
+  ]
+}

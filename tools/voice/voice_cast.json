@@ -1,0 +1,102 @@
+{
+  "_comment": "인물별 Supertonic 3 목소리 배정. voice: M1~M5 / F1~F5, speed: 0.7~2.0. 목소리가 10개뿐이라 새 인물(지은·사장님·해순·지안)은 직업 마1스톤 인물과 목소리를 나눠 쓰고 빠르기로 구별합니다(2026-10-28, 들어 보고 바꿈). 속마음·나레이션은 지은의 목소리. 바꾼 뒤 npm run voices(--force 로 전체 재생성).",
+  "_model": "supertonic-3",
+  "_lang": "ko",
+  "_total_step": 8,
+  "jieun": {
+    "voice": "F3",
+    "speed": 1
+  },
+  "owner": {
+    "voice": "M3",
+    "speed": 0.85
+  },
+  "haesun": {
+    "voice": "F4",
+    "speed": 0.82
+  },
+  "jian": {
+    "voice": "F5",
+    "speed": 0.95
+  },
+  "yeonwoo": {
+    "voice": "F2",
+    "speed": 1
+  },
+  "think": {
+    "voice": "F3",
+    "speed": 0.95
+  },
+  "narr": {
+    "voice": "F3",
+    "speed": 0.95
+  },
+  "dohyun": {
+    "voice": "M2",
+    "speed": 1
+  },
+  "manager": {
+    "voice": "M4",
+    "speed": 0.95
+  },
+  "sora": {
+    "voice": "F3",
+    "speed": 1.25
+  },
+  "minjae": {
+    "voice": "M3",
+    "speed": 0.92
+  },
+  "mom": {
+    "voice": "F4",
+    "speed": 0.95
+  },
+  "teacher": {
+    "voice": "F5",
+    "speed": 1
+  },
+  "jiho": {
+    "voice": "M1",
+    "speed": 1
+  },
+  "grandma": {
+    "voice": "F1",
+    "speed": 0.85
+  },
+  "student": {
+    "voice": "M1",
+    "speed": 1.05
+  },
+  "seojin": {
+    "voice": "F5",
+    "speed": 1
+  },
+  "daeri": {
+    "voice": "M5",
+    "speed": 1.08
+  },
+  "luna": {
+    "voice": "F3",
+    "speed": 1.12
+  },
+  "auntie": {
+    "voice": "F4",
+    "speed": 1.1
+  },
+  "hiker": {
+    "voice": "M5",
+    "speed": 1
+  },
+  "customer": {
+    "voice": "M1",
+    "speed": 1
+  },
+  "customer_f": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "sys": {
+    "voice": "F1",
+    "speed": 1
+  }
+}

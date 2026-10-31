@@ -1,0 +1,185 @@
+/* ==========================================================================
+   새 바리스타 게임 - 기본 토큰 · 화면 비율 · 테마 (엔진은 직업 마1스톤 v2에서 옴)
+   디자인 언어 '바닷가 밤'(가칭, 2026-10-28 사용자 결정): css/skin-sea.css 가 이 파일과 ui·screens 의 옛 '마일스톤 팝' 모양 위에 덮어씀
+   메인 색은 초록(--main, 2026-10-28 사용자 결정). 빨강(--red)은 경고·틀림 표시에만 씁니다
+   1920x1080 고정 캔버스 기준 px 단위
+   ========================================================================== */
+
+/* 글꼴: 게임에 넣은 OFL 글꼴(assets/fonts/, 라이선스 OFL-*.txt)만 써서 어느 PC에서나 똑같이 보이게 합니다.
+   PC에 같은 이름의 글꼴이 설치되어 있어도 아래 @font-face 가 먼저입니다. */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+}
+/* 제목 글꼴: 함렛 Hahmlet(OFL, 가변 굵기 100~900, OFL-Hahmlet.txt, 2026-10-28 사용자 결정).
+   한글은 2,788자(KS X 1001 2,350자 모두)뿐이라, 없는 글자는 뒤의 글꼴(Pretendard)로 나옵니다 */
+@font-face {
+  font-family: 'Hahmlet';
+  src: url('../assets/fonts/HahmletVariable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* --font-display 용: 굵기를 800 하나로 묶어 옛 제목 규칙(font-weight 400·900)도 늘 같은 굵기로 나옵니다
+   (가변 글꼴은 요청 굵기를 이 범위에 맞춤. 파일은 위와 같아서 한 번만 받음) */
+@font-face {
+  font-family: 'Hahmlet Display';
+  src: url('../assets/fonts/HahmletVariable.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+/* 제목 글꼴에 없는 글자가 나올 때 대신 쓰는 것: Pretendard 의 가장 굵은 쪽만.
+   굵기 범위를 900 하나로 묶어 두어 font-weight: 400 으로 써도 900 으로 나옵니다(가변 글꼴은 요청 굵기를 이 범위에 맞춤) */
+@font-face {
+  font-family: 'Display Fallback';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --main: #25844A; /* 메인 색(버튼·제목·카드·로고). 흰 글자 대비 4.69:1 */
+  --main-d: #1B5E35;
+  --red: #E3262E; /* 경고·틀림(시간 막대 경고, 틀린 칸, 주의 상자) */
+  --red-d: #B5121B;
+  --ink: #17141C;
+  --ink-2: #2A2630;
+  --ink-3: #4A4552;
+  --cream: #FFF7E8;
+  --paper: #FFFDF8;
+  --paper-line: #E9DFCB;
+  --yellow: #FFD43B;
+  --yellow-d: #E0B100;
+  --brown: #8A5A35;
+  --mint: #16A99A;
+  --sky: #3D8BD9;
+  --gray: #8C8794;
+  --white: #FFFFFF;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --hard: 8px 8px 0 var(--ink);
+  --font: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', system-ui, sans-serif;
+  --font-display: 'Hahmlet Display', 'Display Fallback', 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-title: 'Hahmlet', 'Pretendard', 'Malgun Gothic', 'Apple SD Gothic Neo', serif;
+  --fs-body: 36px;
+  --fs-small: 26px;
+  --fs-label: 30px;
+  --fs-card: 32px;
+  --lh: 1.55;
+  --focus: 0 0 0 5px var(--yellow), 0 0 0 9px var(--ink);
+}
+
+body.ts-large { --fs-body: 42px; --fs-small: 29px; --fs-label: 34px; --fs-card: 36px; }
+body.ts-xlarge { --fs-body: 48px; --fs-small: 32px; --fs-label: 38px; --fs-card: 40px; }
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0E0C12;
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+button { font-family: inherit; color: inherit; cursor: pointer; }
+button:disabled { cursor: default; }
+:focus { outline: none; }
+:focus-visible { box-shadow: var(--focus) !important; }
+.scan-on { box-shadow: 0 0 0 6px var(--mint), 0 0 0 11px var(--ink) !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.is-hidden { display: none !important; }
+svg { display: block; }
+
+/* ---------- 고정 캔버스 ---------- */
+#viewport { position: fixed; inset: 0; overflow: hidden; background: #0E0C12; }
+#screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center center;
+  overflow: hidden;
+  background: var(--ink);
+}
+#screen > div { position: absolute; inset: 0; }
+#layer-bg { z-index: 1; }
+#layer-stage { z-index: 2; }
+#layer-memo { z-index: 4; pointer-events: none; }
+#layer-memo > * { pointer-events: auto; }
+#layer-task { z-index: 5; pointer-events: none; }
+#layer-task > * { pointer-events: auto; }
+#layer-dock { z-index: 6; pointer-events: none; }
+#layer-dock > * { pointer-events: auto; }
+#layer-hud { z-index: 7; pointer-events: none; }
+#layer-hud > * { pointer-events: auto; }
+#layer-overlay { z-index: 20; pointer-events: none; }
+#layer-overlay > * { pointer-events: auto; }
+#layer-screen { z-index: 30; pointer-events: none; }
+#layer-screen > * { pointer-events: auto; }
+/* 확인 창(예/아니요)·글자 입력 창: 전체 화면 창(불러오기·교사 모드 등) 위에서 물어봄 */
+#layer-modal { z-index: 35; pointer-events: none; }
+#layer-modal > * { pointer-events: auto; }
+
+#boot {
+  position: fixed; inset: 0; display: grid; place-items: center; z-index: 99;
+  color: #fff; font: 700 28px var(--font); background: #0E0C12;
+}
+
+/* ---------- 움직임 줄이기 ---------- */
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  body:not(.motion-ok) .bg-fx, body:not(.motion-ok) .tt-shade { animation: none !important; }
+}
+
+/* ---------- 차분 모드: 낮은 채도·부드러운 대비·패턴 끄기 ---------- */
+body.theme-calm {
+  --main: #4E8061;
+  --main-d: #3D6A4F;
+  --red: #C8575B;
+  --red-d: #A9464A;
+  --yellow: #F4DC86;
+  --yellow-d: #D9BE5E;
+  --hard: 6px 6px 0 rgba(23, 20, 28, .55);
+}
+body.theme-calm .bg-fx { opacity: 0 !important; }
+body.theme-calm #layer-bg .bg-layer { filter: saturate(.7) brightness(1.02); }
+
+/* ---------- 고대비 ---------- */
+body.contrast {
+  --ink: #000000;
+  --paper: #FFFFFF;
+  --cream: #FFFFFF;
+  --gray: #333333;
+  --main: #16653A;
+  --red: #C8000A;
+}
+body.contrast .dlg, body.contrast .card, body.contrast .memo { border-color: #000 !important; }
+body.contrast .dlg-text { color: #000; }
+body.contrast #layer-bg .bg-layer { filter: brightness(.55) contrast(1.1); }
+
+/* ---------- 인쇄(교사 보고서) ---------- */
+.print-area { display: none; }
+@media print {
+  body.printing #viewport { display: none !important; }
+  body.printing .print-area { display: block !important; color: #000; background: #fff; font: 14px/1.5 var(--font); padding: 12mm; }
+  body.printing { overflow: visible; background: #fff; }
+  html, body { height: auto; overflow: visible; }
+  .print-area table { border-collapse: collapse; width: 100%; margin: 6px 0 14px; }
+  .print-area th, .print-area td { border: 1px solid #888; padding: 4px 6px; text-align: left; font-size: 12px; }
+  .print-area h2 { font-size: 20px; margin: 0 0 6px; }
+  .print-area h3 { font-size: 15px; margin: 14px 0 4px; }
+}
