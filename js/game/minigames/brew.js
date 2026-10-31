@@ -24,7 +24,12 @@
  * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], cups: [{ who, menu, temp }], watched, skills, art, level, turn, asked(물어본 수) }
  *  - 도중에 정리되면(되감기·나가기) { ok: false, aborted: true, … } · [그만하기]면 { ok: false, quit: true, … }
  * 그림: 물건 그림(assets/objects)이 있으면 쓰고, 없으면 아래 임시 그림(SVG, 대체 요망: docs/requests_full.md). 작업대 배경은 bg/workbench_morning
- *  - 손 동작의 한 컷(Q-R9): assets/shots/ 에 배경판·프레임이 있으면(샷 내리기 · 우유 데우기 · 거품 내기 · 붓기) 그 장면, 없으면 임시 그림
+ *  - 손 동작의 한 컷(Q-R9): assets/shots/ 에 그 손 동작의 배경판·프레임이 있으면 작업대 칸을 그 장면으로 채우고(shotView),
+ *    띠 값에 맞는 단계의 프레임(줄기·김 있음/없음)을 겹침. 지금은 샷 내리기(extract: 잔이 참)·우유 데우기(steam: 피처 속 우유 + 온도계 바늘 + 김)·
+ *    붓기(pour_milk 빈 머그에 우유 · pour_latte 에스프레소에 우유, 바리스타 단계에서 알맞으면 하트)·거품 내기(foam: 피처 속 우유가 부풀어 오름)·
+ *    물 붓기(water: 에스프레소가 든 머그에 드립 주전자로 뜨거운 물, 크레마가 흩어짐). 물 붓기는 이 브랜치에서 손 동작(누르고 떼기)이라
+ *    띠와 함께 차오르고, 저절로 붓는 경우(autoStep)에는 띠 · 단추 없는 확대 창에서 저절로 차오름(autoShot). 컷이 없으면 임시 그림
+ *    만드는 법은 tools/blender/scene_bench.py(shots) → shots_post.py
  * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 동작을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기])
  *  · window.__mgBad(레시피를 한 번 틀리게: 바탕 재료를 바꿈)
  * 데이터(메뉴·재료·손 동작·손님 반응)는 js/data/menu.js
@@ -1062,6 +1067,9 @@ export async function brew(opts = {}) {
     };
   }
 
+  /** 물 붓기 컷(water)이 맞는 잔: 받침 위 머그 · 따뜻하게 · 에스프레소가 먼저 든 때(아메리카노). 유리컵 · 종이컵 · 믹스커피는 임시 그림 */
+  const waterShotOk = (soFar) => made?.cup === 'mug' && made?.temp === 'hot' && soFar.has('espresso');
+
   /* ---- 작업대 물건 ---- */
   let curShot = null;
   let closeEl = null; // 손 기술의 확대 창(그 손 기술이 끝나도 다음 단계까지 남음)
@@ -1503,7 +1511,9 @@ export async function brew(opts = {}) {
     bench.classList.add('is-close');
 
     // 장면: 블렌더 한 컷이 있으면 그것(샷 · 데우기 · 거품 · 붓기), 없으면 동작에 맞는 임시 그림(움직임은 set 으로)
-    const shotId = id === 'pour' ? (made.cup === 'mug' ? (soFar.has('espresso') ? 'pour_latte' : 'pour_milk') : null) : ['extract', 'steam', 'foam'].includes(id) ? id : null;
+    const shotId = id === 'pour' ? (made.cup === 'mug' ? (soFar.has('espresso') ? 'pour_latte' : 'pour_milk') : null)
+      : id === 'water' ? (waterShotOk(soFar) ? 'water' : null) // 물 붓기: 에스프레소가 든 따뜻한 머그(아메리카노)일 때 블렌더 컷
+        : ['extract', 'steam', 'foam'].includes(id) ? id : null;
     const shot = shotId ? shotView(shotId) : null;
     const art = shot ? null : actView(id, act, soFar, res);
     if (shot) setScene({ mode: id, shot, host: view, keep: true });
@@ -1901,15 +1911,43 @@ export async function brew(opts = {}) {
     };
   }
 
-  /** 손 동작 없이 넣는 것(얼음 · 믹스 가루 등) */
+  /** 손 동작 없이 넣는 것(얼음 · 믹스 가루 등). 에스프레소가 든 머그에 뜨거운 물을 저절로 부을 때는 블렌더 한 컷(물 붓기)이 있으면 그것으로 */
   async function autoStep(id, soFar, res) {
     const text = id === 'ice' ? TEMPS.iced.auto : INGREDIENTS[id]?.auto?.[made.temp] || INGREDIENTS[id]?.auto?.hot || `${INGREDIENTS[id]?.name || ''}을 넣었어요.`;
+    const shot = id === 'water' && waterShotOk(soFar) ? shotView('water') : null;
     soFar.add(id);
+    if (shot) {
+      await autoShot(shot, `${INGREDIENTS[id].name} 붓기`, text);
+      return;
+    }
     setPanel(askRow('', text));
     setScene({ center: drinkArt(made, res, soFar, 'big'), right: id === 'ice' ? objArt('iced', 'mid is-on') : objArt(INGREDIENTS[id]?.obj, 'mid is-on'), mode: 'auto' });
     audio.sfx(id === 'ice' ? 'ice' : id === 'syrup' ? 'stack' : 'pour');
     talkAfter(sysV(text));
     await w(pauseMs(1300));
+  }
+
+  /** 저절로 하는 일의 한 컷: 손 기술처럼 확대 창에 띄우되 띠 · 단추 없이 잔이 차오름(붓기와 같은 단계 수라 알맞아요 칸 가운데까지) */
+  async function autoShot(shot, name, text) {
+    setPanel();
+    const view = h('div', { class: 'bw-close-view' });
+    const card = h('section', { class: 'bw-close is-auto', role: 'group', 'aria-label': name },
+      h('header', { class: 'bw-close-head' }, h('h3', { text: name }), h('p', { text })),
+      h('div', { class: 'bw-close-body' }, view));
+    closeUpOff();
+    closeEl = card;
+    bench.append(card);
+    bench.classList.add('is-close');
+    setScene({ mode: 'water', shot, host: view, keep: true });
+    audio.sfx('pour');
+    talkAfter(sysV(text));
+    const end = 0.8125;
+    for (let i = 0; i <= 12; i++) {
+      shot.set((end * i) / 12, true);
+      await w(pauseMs(110));
+    }
+    shot.set(end, false);
+    await w(pauseMs(900));
   }
 
   /** 고른 레시피대로 만들기(틀린 레시피도 고른 대로) */

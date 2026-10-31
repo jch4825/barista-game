@@ -172,9 +172,9 @@ export const HAND_SKILLS = {
   },
   water: {
     name: '물 붓기', act: 'hold', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'pour',
-    howto: '[누르고 있기]를 꾹 누르면 물을 부어요. 알맞아요 칸에서 손을 떼요.',
-    howtoTurn: '물이 알맞아요 칸에 오면 [멈추기]를 눌러요.',
-    zone: [0.56, 0.81],
+    howto: '[누르고 있기]를 꾹 누르면 주전자로 물을 부어요. 잔이 알맞아요 칸까지 차면 손을 떼요.',
+    howtoTurn: '물이 알맞아요 칸까지 차면 [멈추기]를 눌러요.',
+    zone: [0.69, 0.94], // 블렌더 물 붓기 컷(water)과 같은 칸: 0.69~0.94 = 거의 가득, 1 = 받침에 넘침(docs/recipes.md 6.6)
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '조금 진하네요.', high: '조금 싱겁네요.' },
   },

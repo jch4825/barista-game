@@ -364,6 +364,9 @@ body.contrast .mg.mg-brew .bw-panel[data-kind="hand"] { background: #000; border
 .mg.mg-brew .bw-close-head p { flex: 1; margin: 0; font-size: 22px; font-weight: 700; line-height: 1.35; color: #FFF4D6; }
 .mg.mg-brew .bw-close-head .bw-ico-btn { width: 48px; height: 48px; background: rgba(255, 244, 214, .12); border: 2px solid #D4AE62; color: #F0D9A2; }
 .mg.mg-brew .bw-close-body { display: grid; grid-template-columns: minmax(0, 1fr) 132px; gap: 14px; min-height: 0; }
+/* 저절로 하는 일의 한 컷(물 붓기): 띠 · 단추 없이 장면만 */
+.mg.mg-brew .bw-close.is-auto { grid-template-rows: auto minmax(0, 1fr); }
+.mg.mg-brew .bw-close.is-auto .bw-close-body { grid-template-columns: minmax(0, 1fr); }
 .mg.mg-brew .bw-close-view { position: relative; min-height: 0; overflow: hidden; border-radius: 12px; border: 2px solid #8E6C33; background: #1B1410; }
 .mg.mg-brew .bw-close-view .bw-shot { inset: 0; bottom: 0; }
 .mg.mg-brew .bw-close-objs { position: absolute; inset: 6% 8%; display: flex; align-items: flex-end; justify-content: center; gap: 4%; }
