@@ -21,6 +21,7 @@ import { CONFIG } from '../config.js';
 import { hasSaves } from './saves.js';
 import { loadRecordFiles } from './records.js';
 import { AI_NOTICE } from '../data/credits.js';
+import { ov } from '../ui/overlays.js';
 
 let titleEl = null;
 // 표지 영상(assets/movies/title_intro): 앱을 켜고 처음 본 표지에서만 끝까지 틀고, 그 뒤로는 마지막 장면. 영상이 없으면 그림만
@@ -103,6 +104,8 @@ export function showTitle() {
   const menu = h('nav', { class: 'tt-menu', 'aria-label': '처음 화면 메뉴' });
   if (p && cpEp) {
     menu.append(menuBtn('play', '이어하기', `${cpEp.label} · ${cpEp.title}`, () => nav.go('play', cpEp.id, { resume: true }), 'primary'));
+    // 이어 하기가 있을 때만: 봄 1일부터 다시(2026-11-01 사용자). 묻고 나서 이번 해를 처음부터(store.restartYear)
+    menu.append(menuBtn('repeat', '처음부터', `${EPISODES[0].label} · ${EPISODES[0].title}부터 다시`, restartFromTop));
   } else if (p && firstUndone) {
     const done = EPISODES.some((e) => store.isDone(e.id));
     menu.append(menuBtn('play', done ? '다음 이야기' : '시작하기', `${firstUndone.label} · ${firstUndone.title}`, () => nav.go('play', firstUndone.id), 'primary'));
@@ -153,6 +156,18 @@ export function showTitle() {
   input.pushScope(titleEl);
   setTimeout(() => input.focusFirst(menu), 80);
   tts.speakSeq(TITLE_SAY(), 'sys');
+}
+
+/** 처음부터: 묻고 나서 이번 해를 봄 1일부터(마친 날 · 단골과의 관계는 다시 쌓고, 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
+async function restartFromTop() {
+  const ok = await ov.confirm({
+    text: '처음부터 다시 할까요?',
+    detail: `${EPISODES[0].label}부터 다시 시작해요. 마친 날과 단골과의 관계는 처음부터 다시 쌓아요. 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
+    yes: '처음부터', no: '아니요',
+  });
+  if (!ok) return;
+  store.restartYear();
+  nav.go('play', EPISODES[0].id);
 }
 
 /** 기록 파일 불러오기 → 한 학생이면 그 학생으로, 여럿이면 '누가 할까요?' (records.js) */

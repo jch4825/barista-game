@@ -199,6 +199,17 @@ function mergeProfiles(a, b) {
   };
 }
 
+/** 새 해 · 처음부터: 마친 이야기 · 이어 하기 · 선택 기억(신뢰 · 본 숨은 장면)을 비움. 단골의 평소 주문 · 메뉴 도감 표시는 남음 */
+function restartRun(p) {
+  const keep = { usuals: p.flags.usuals, menuBook: p.flags.menuBook };
+  p.progress.done = {};
+  p.progress.checkpoint = null;
+  p.flags = Object.fromEntries(Object.entries(keep).filter(([, v]) => v !== undefined));
+  touch(p);
+  saveNow();
+  bus.emit('profile', p);
+}
+
 export const store = {
   get storageOK() { return storageOK; },
   saveNow,
@@ -311,14 +322,17 @@ export const store = {
   newYear() {
     const p = active();
     if (!p) return;
-    const keep = { usuals: p.flags.usuals, menuBook: p.flags.menuBook };
     p.progress.year = Math.max(1, p.progress.year || 1) + 1;
-    p.progress.done = {};
-    p.progress.checkpoint = null;
-    p.flags = Object.fromEntries(Object.entries(keep).filter(([, v]) => v !== undefined));
-    touch(p);
-    saveNow();
-    bus.emit('profile', p);
+    restartRun(p);
+  },
+  /**
+   * 처음부터(처음 화면, 2026-11-01 사용자): 이번 해를 봄 1일부터 다시. newYear 와 같이 마친 이야기 · 이어 하기 · 선택 기억은 처음부터,
+   * 몇 번째 해 · 앨범 · 메뉴 도감 · 단골 수첩 · 저장한 장면 · 기록(log)은 남음
+   */
+  restartYear() {
+    const p = active();
+    if (!p) return;
+    restartRun(p);
   },
   album() { return { ...(active()?.album || {}) }; },
   /** 액자 열기(3단계 비밀 장면을 본 단골). 처음이면 true */
