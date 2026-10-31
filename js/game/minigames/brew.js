@@ -10,7 +10,7 @@
  *  - 손 동작이 칸을 벗어나면 그 자리에서 학생이 고름: [다시 하기](그 동작만 다시) / [이대로 하기]
  *  - 감점·실패 화면·무서운 소리 없음. [레시피 수첩](오픈북: 컵 고르기 규칙 · 메뉴 · 단골의 평소 주문)은 언제든 열 수 있고, 열려 있는 동안 멈춤
  * 손 동작(menu.js 의 HAND_SKILLS.act, docs/recipes.md 2장):
- *  - hold(A): [누르고 있기]를 누르는 동안만 띠가 차오르고, 손을 떼면 그 칸으로 정함. 아주 짧게 누르면 처음부터
+ *  - hold(A): [누르고 있기](또는 장면 그림)를 누르는 동안만 띠가 차오르고, 손을 떼면 그 칸으로 정함. 아주 짧게 누르면 처음부터
  *  - wait(G): 띠가 저절로 차오름. [지금!]을 누르면 정함(일찍 = 낮은 칸 · 늦게 = 높은 칸). 끝까지 기다리면 높은 칸
  *  - circle(B): [누르고 있기](저절로 돎) 또는 장면 위에 손가락으로 원을 그리면 바퀴가 돎. 알맞은 바퀴(laps)에서 떼면 알맞아요
  *  - beats(D): 동그라미가 줄어들어 가운데 원과 겹칠 때 누르기를 n 번. 빠르면 높은 칸 · 늦으면 낮은 칸
@@ -18,8 +18,9 @@
  *  - 빠르기는 설정 '시간 제한'(arcade.pace): 보통 · 넉넉히(2배 천천히) · 두 번 눌러 고르기(1.5배). 끄기·자동 스캔은 턴 방식([한 칸] · [기다리기] + [멈추기] · [지금!])
  *  - [시작!]을 눌러야 움직임. 언제든 [보기]: 저절로 알맞게 해 줌(보기로 기록, 실수 아님)
  *  - 단계(opts.level): easy = 손 동작을 모두 보기로 · normal = 직접 · barista = 거품까지 직접 + 라테아트(하트) + 알맞아요 칸이 조금 좁음
- * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry? }
+ * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, count?, more?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry? }
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
+ *  - count: 손님이 말한 잔 수(주문 확인이 '두 잔'으로) · more: 앞 주문의 다음 잔(주문 확인이 '한 잔 더'로). 잔은 한 주문에 하나씩 만듦
  *  - miss: 손 동작이 벗어난 잔을 받을 때 그 손님만의 말
  * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], cups: [{ who, menu, temp }], watched, skills, art, level, turn, asked(물어본 수) }
  *  - 도중에 정리되면(되감기·나가기) { ok: false, aborted: true, … } · [그만하기]면 { ok: false, quit: true, … }
@@ -1639,6 +1640,19 @@ export async function brew(opts = {}) {
         stopB.addEventListener('click', (e) => e.stopPropagation());
         stopB.addEventListener('contextmenu', (e) => e.preventDefault());
       }
+      // 장면 그림을 꾹 눌러도 [누르고 있기]와 같음(2026-10-31 사용자 "버튼 말고 화면의 그림을 터치해도"). 원 그리기는 아래에서 장면 위 원으로
+      if (act === 'hold' && !turn) {
+        view.onpointerdown = (e) => {
+          if (mode !== 'play' || finished) return;
+          e.preventDefault();
+          view.setPointerCapture?.(e.pointerId);
+          press();
+        };
+        view.onpointerup = () => release();
+        view.onpointercancel = pauseHold;
+        view.onlostpointercapture = pauseHold;
+        view.oncontextmenu = (e) => e.preventDefault();
+      }
       // 원 그리기: 장면 위에서 손가락 · 마우스로 원을 그리면 그만큼 돎. 손을 떼면 정함
       if (act === 'circle' && !turn) {
         const angleAt = (e) => {
@@ -1806,6 +1820,7 @@ export async function brew(opts = {}) {
         watchB.disabled = mode !== 'play';
       };
       onTap(stopB, () => { if (mode === 'play') judge(q); });
+      view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); judge(q); }; // 장면 그림을 톡 눌러도 그 단추와 같음
       onTap(stepB, () => {
         if (mode !== 'play' || finished) return;
         q = Math.min(1, q + 1 / STEPS);
@@ -2042,7 +2057,7 @@ export async function brew(opts = {}) {
     R.attempts += 1;
   }
 
-  /** 손님 반응 → 'next'(다음 손님) · 'fresh'(처음부터 다시) · 'keep'(같은 레시피로 다시) */
+  /** 손님 반응 → 'next'(다음 주문) · 'fresh'(처음부터 다시) · 'keep'(같은 레시피로 다시) */
   async function react(target, res) {
     const diff = compareRecipe(made, target);
     const last = curIndex === orders.length - 1;
@@ -2106,7 +2121,7 @@ export async function brew(opts = {}) {
     showGuest('smile');
     setReact(words);
     audio.sfx(miss ? 'good' : 'great');
-    const next = btn(last ? 'check' : 'arrow_right', last ? '다 했어요' : '다음 손님', 'btn-big btn-main bw-next');
+    const next = btn(last ? 'check' : 'arrow_right', last ? '다 했어요' : '다음 주문', 'btn-big btn-main bw-next'); // 같은 손님의 다음 잔일 때도 있어 '주문'(2026-10-31 사용자)
     ui.next = next;
     setPanel(last ? askRow('', SYS.done, { say: null }) : null, resultBox(res), h('div', { class: 'bw-row' }, next));
     phase = 'good';

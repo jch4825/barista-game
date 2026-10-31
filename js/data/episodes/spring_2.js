@@ -52,8 +52,8 @@ export default {
       id: 'spring_2_haesun', title: '해순 할머니의 우유', level: 'normal',
       book: ['warm_milk', 'americano'],
       orders: [
-        { who: 'haesun', say: '따뜻한 우유 두 잔 줘요.', menu: 'warm_milk', temp: 'hot', togo: false, ask: ['togo'], reply: { togo: '여기서 마셔요. 늘 앉는 창가에서.' } },
-        { who: 'haesun', say: '한 잔 더, 똑같이요.', menu: 'warm_milk', temp: 'hot', togo: false },
+        { who: 'haesun', say: '따뜻한 우유 두 잔 줘요.', menu: 'warm_milk', temp: 'hot', togo: false, count: 2, ask: ['togo'], reply: { togo: '여기서 마셔요. 늘 앉는 창가에서.' } },
+        { who: 'haesun', say: '한 잔 더, 똑같이요.', menu: 'warm_milk', temp: 'hot', togo: false, more: true },
       ],
     }),
     show({ left: 'jieun:normal', right: 'owner:normal' }),

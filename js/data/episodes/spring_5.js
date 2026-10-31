@@ -95,7 +95,7 @@ export default {
       id: 'spring_5_haesun', title: '늘 먹던 거요', level: 'normal',
       orders: [
         { who: 'haesun', say: '늘 먹던 거요.', menu: 'warm_milk', temp: 'hot', togo: false, usual: true },
-        { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false },
+        { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false, more: true },
       ],
     }),
 

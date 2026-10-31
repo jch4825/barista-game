@@ -221,7 +221,8 @@ for (const who of ['yeonwoo', 'dohyun', 'manager']) {
 }
 // 손 기술의 한 컷(블렌더 3D 렌더, 생성 AI 아님): 배경판 + 단계 프레임 묶음을 한 줄로(tools/blender/scene_bench.py → shots_post.py)
 const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)', ice: '얼음 담기', water_glass: '찬물 붓기(아이스 아메리카노)', pour_glass_milk: '붓기(유리컵 · 찬 우유)', pour_glass_latte: '붓기(유리컵 · 아이스 라테)',
-  pour_matcha: '붓기(머그 · 녹차라테)', pour_cocoa: '붓기(머그 · 코코아)', pour_glass_strawberry: '붓기(유리컵 · 딸기우유)', pour_glass_matcha: '붓기(유리컵 · 아이스 녹차라테)', pour_glass_cocoa: '붓기(유리컵 · 아이스 코코아)', water_paper: '물 붓기(종이컵 · 아메리카노)', pour_paper_milk: '붓기(종이컵 · 따뜻한 우유)', pour_paper_latte: '붓기(종이컵 · 라테 · 하트)', pour_paper_matcha: '붓기(종이컵 · 녹차라테)', pour_paper_cocoa: '붓기(종이컵 · 코코아)', ice_plastic: '얼음 담기(플라스틱 컵)', water_plastic: '찬물 붓기(플라스틱 컵 · 아이스 아메리카노)', pour_plastic_milk: '붓기(플라스틱 컵 · 찬 우유)', pour_plastic_latte: '붓기(플라스틱 컵 · 아이스 라테)', pour_plastic_strawberry: '붓기(플라스틱 컵 · 딸기우유)', pour_plastic_matcha: '붓기(플라스틱 컵 · 아이스 녹차라테)', pour_plastic_cocoa: '붓기(플라스틱 컵 · 아이스 코코아)' };
+  pour_matcha: '붓기(머그 · 녹차라테)', pour_cocoa: '붓기(머그 · 코코아)', pour_glass_strawberry: '붓기(유리컵 · 딸기우유)', pour_glass_matcha: '붓기(유리컵 · 아이스 녹차라테)', pour_glass_cocoa: '붓기(유리컵 · 아이스 코코아)', water_paper: '물 붓기(종이컵 · 아메리카노)', pour_paper_milk: '붓기(종이컵 · 따뜻한 우유)', pour_paper_latte: '붓기(종이컵 · 라테 · 하트)', pour_paper_matcha: '붓기(종이컵 · 녹차라테)', pour_paper_cocoa: '붓기(종이컵 · 코코아)', ice_plastic: '얼음 담기(플라스틱 컵)', water_plastic: '찬물 붓기(플라스틱 컵 · 아이스 아메리카노)', pour_plastic_milk: '붓기(플라스틱 컵 · 찬 우유)', pour_plastic_latte: '붓기(플라스틱 컵 · 아이스 라테)', pour_plastic_strawberry: '붓기(플라스틱 컵 · 딸기우유)', pour_plastic_matcha: '붓기(플라스틱 컵 · 아이스 녹차라테)', pour_plastic_cocoa: '붓기(플라스틱 컵 · 아이스 코코아)',
+  milk_in: '피처에 우유 붓기', tap: '피처 톡톡' };
 const SHOT_NOTES = {
   extract: '오래된 2그룹 머신(스테인리스 + 초록 법랑), 왼쪽 그룹 아래 샷 잔, 왼쪽 앞에서 비스듬히 본 2944×800 장면. 잔이 차오르는 13단계 × 줄기 있음/없음(docs/recipes.md 6.2)',
   steam: '물받이 위 우유 담은 스팀 피처에 노즐을 넣고 집게 온도계를 꽂은 2944×800 장면. 바늘 25단계 × 김 있음/옅음, 다이얼의 초록 칸 = 알맞아요, 스팀을 켜면 우유가 돎(docs/recipes.md 6.3)',
@@ -250,6 +251,8 @@ const SHOT_NOTES = {
   pour_plastic_strawberry: '같은 컵(얼음 + 딸기청)에 찬 우유: 분홍(딸기우유). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
   pour_plastic_matcha: '같은 컵(얼음 + 푼 말차)에 찬 우유: 연두색(아이스 녹차라테). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
   pour_plastic_cocoa: '같은 컵(얼음 + 코코아)에 찬 우유: 밀크 초콜릿 색(아이스 코코아). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  milk_in: '작업대 위 빈 스팀 피처에 왼쪽에서 기운 유리 우유병으로 우유를 붓는 2944×800 장면. 피처 안쪽 눈금 선(알맞아요 칸 가운데)까지 차오르는 17단계 × 줄기 있음/없음, 끝까지 부으면 넘침(docs/recipes.md 6.9)',
+  tap: '데운 우유가 든 스팀 피처를 위에서 내려다본 2944×800 장면. 톡 칠 때마다 겉면의 굵은 거품이 터져 사라지는 5단계(30 → 0개) × 톡 치는 순간(잔물결) 있음/없음(docs/recipes.md 6.9)',
 };
 const SHOT_RUN = { pour_milk: 'pour', pour_latte: 'pour', pour_glass_milk: 'pour_glass', pour_glass_latte: 'pour_glass', pour_matcha: 'pour_tint', pour_cocoa: 'pour_tint' }; // 한 번에 렌더하는 묶음(scene_bench.py 의 SHOTS)
 const shotRun = (sid) => SHOT_RUN[sid] || (/^pour_glass_(strawberry|matcha|cocoa)$/.test(sid) ? 'pour_glass_tint' : sid.replace(/^(pour_(paper|plastic))_.*$/, '$1'));

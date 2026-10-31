@@ -192,6 +192,7 @@ body.reduce-motion .hw-soap.use, body.reduce-motion .hw-towels.use { animation: 
    장면 미니게임(2026-10-31 풀 버전): 순서대로 · 둘러보기 · 쟁반 나르기
    카페 그림을 화면 가득 깔고(위쪽 띠 아래) 그 위에 단추. 머리글은 가운데 위의 알약(커피 만들기와 같은 모양)
    ========================================================================== */
+body.mg-scene-open #layer-dock .dlg { display: none !important; } /* 장면 미니게임 동안 앞 대사 창 숨김(아래 단추를 가림) */
 html body .mg.mg-scene { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap: 0; border: 0; border-radius: 0; outline: 0; box-shadow: none; background: #0B1C20; }
 .mg.mg-scene .mg-head { position: absolute; z-index: 6; top: 14px; left: 50%; transform: translateX(-50%); gap: 12px; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(4, 18, 23, .78); border: 1px solid rgba(212, 174, 98, .5); color: #FFF4D6; }
 .mg.mg-scene .mg-head h2 { font-size: 28px; color: #FFF4D6; white-space: nowrap; }

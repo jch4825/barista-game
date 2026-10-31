@@ -37,8 +37,8 @@ export default {
     mini('brew', {
       id: 'autumn_4_rush', title: '축제 손님', level: 'normal', quit: true, book: AUTUMN_BOOK,
       orders: [
-        { who: 'customer', say: '아아 두 잔이요! 가져갈게요.', menu: 'americano', temp: 'iced', togo: true },
-        { who: 'customer', say: '아아 하나 더요.', menu: 'americano', temp: 'iced', togo: true },
+        { who: 'customer', say: '아아 두 잔이요! 가져갈게요.', menu: 'americano', temp: 'iced', togo: true, count: 2 },
+        { who: 'customer', say: '아아 하나 더요.', menu: 'americano', temp: 'iced', togo: true, more: true },
         { who: 'customer', say: '따뜻한 유자차요. 가져갈게요.', menu: 'yuja_tea', temp: 'hot', togo: true },
       ],
     }),
@@ -88,7 +88,7 @@ export default {
       id: 'autumn_4_haesun', title: '머신 없이: 늘 먹던 거', level: 'normal', book: AUTUMN_BOOK,
       orders: [
         { who: 'haesun', say: '늘 먹던 거요.', menu: 'warm_milk', temp: 'hot', togo: false, usual: true },
-        { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false },
+        { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false, more: true },
       ],
     }),
     show({ left: 'jieun:normal', right: 'kang:normal' }),

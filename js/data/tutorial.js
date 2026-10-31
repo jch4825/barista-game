@@ -52,6 +52,15 @@ export const TUT = [
   { key: 'mg-snake-again', sel: '.mg .sn-again', max: 2, hand: 'on', tip: '한 판 더 할 수 있어요' },
   { key: 'mg-snake-alarm', sel: '.mg .sn-alarm-btns .btn', need: true, hand: 'group', tip: '하나를 골라 눌러요' },
   { key: 'mg-snake-pocket', sel: '.mg .sn-pocket', after: 'mg-snake', max: 2, tip: '언제든 그만둘 수 있어요' },
+  // 작업대(커피 만들기): 처음 만드는 한 잔에서 다음에 누를 것을 차례로(2026-10-31 사용자 "첫 우유 만들기 장면에서 설명이 필요하다"). 컵 · 재료는 정답을 가리키지 않게 group
+  { key: 'bw-ask', sel: '.mg-brew .bw-askq', need: true, hand: 'group', tip: '모르는 것은 눌러서 물어봐요' },
+  { key: 'bw-confirm', sel: '.mg-brew .bw-confirm', need: true, hand: 'on', tip: '눌러서 주문을 한 번 더 말해요' },
+  { key: 'bw-cup', sel: '.mg-brew .bw-hot[data-hot^="cup:"]', when: '.mg-brew .bw-make', need: true, hand: 'group', tip: '손님에게 맞는 컵을 눌러요' },
+  { key: 'bw-ing', sel: '.mg-brew .bw-hot[data-hot^="ing:"]', when: '.mg-brew .bw-make', after: 'bw-cup', need: true, hand: 'group', tip: '수첩을 보고 재료를 눌러 넣어요' },
+  { key: 'bw-make', sel: '.mg-brew .bw-make', after: 'bw-ing', need: true, hand: 'on', tip: '다 넣으면 눌러요' },
+  { key: 'bw-hold', sel: '.mg-brew .bw-hold:not(:disabled)', need: true, hand: 'on', tip: '꾹 누르고, 알맞아요 칸에서 떼요' },
+  { key: 'bw-beat', sel: '.mg-brew .bw-now:not(:disabled)', need: true, hand: 'on', tip: '동그라미가 겹칠 때 눌러요' },
+  { key: 'bw-serve', sel: '.mg-brew .bw-serve', need: true, hand: 'on', tip: '다 만들면 손님께 드려요' },
   { key: 'wk-mag', sel: '.wk-board .wk-pool .wk-mag', need: true, hand: 'group', tip: '붙일 자석을 눌러요' },
   { key: 'wk-slot', sel: '.wk-board .wk-slot', after: 'wk-mag', max: 2, tip: '칸을 누르면 고르거나 뗄 수 있어요' },
   { key: 'wk-ok', sel: '.wk-board .wk-ok', after: 'wk-slot', need: true, hand: 'on', tip: '다 짜면 눌러요' },
@@ -71,7 +80,10 @@ export const TUT = [
   { key: 'iv-tab', sel: '.iv .iv-tab', after: 'iv-chip', max: 2, tip: '대답하는 방법을 바꿀 수 있어요' },
   { key: 'iv-help', sel: '.iv .iv-help .btn', after: 'iv-chip', max: 2, tip: '못 들었으면 눌러요' },
   { key: 'wk-auto', sel: '.wk-auto', after: 'wk-next', max: 2, tip: '누르면 저절로 흘러가요' },
-  { key: 'mg-order-out', sel: '.mg .od-in', after: 'mg-order', max: 2, hand: 'on', tip: '누르면 하나 빼요' }, // 주문서 확인: 트레이 물건 빼기(터치에서 찾기 어려웠음)
+  { key: 'mg-order-out', sel: '.mg .od-in', after: 'mg-order', max: 2, hand: 'on', tip: '누르면 하나 빼요' },
+  { key: 'bw-watch', sel: '.mg-brew .bw-watch:not(:disabled)', after: 'bw-hold', max: 2, hand: 'on', tip: '먼저 보고 싶으면 눌러요' },
+  { key: 'bw-book', sel: '.mg-brew .bw-book-btn', after: 'bw-cup', max: 2, hand: 'on', tip: '레시피가 궁금하면 눌러요' },
+  { key: 'bw-again', sel: '.mg-brew .bw-again', max: 2, hand: 'on', tip: '다시 해 볼 수 있어요' }, // 주문서 확인: 트레이 물건 빼기(터치에서 찾기 어려웠음)
 
   /* ---------- 늘 있는 버튼: 프롤로그 guide() 로 소개 ---------- */
   { key: 'hud-memo', sel: '.hud .hud-btn[aria-label="메모"]', guide: true, hand: 'on', tip: '메모: 할 일 칠판을 접고 펴요' },

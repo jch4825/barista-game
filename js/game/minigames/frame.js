@@ -68,6 +68,8 @@ export function frame({ title, instruction, icon = 'star', cls = '', speech = ''
     body);
   $('#layer-task').replaceChildren(el);
   document.body.classList.add('tasking', 'mg-open');
+  // 화면 가득한 장면 미니게임(쟁반 · 둘러보기 · 순서대로): 앞 대사의 대화창이 아래 단추를 가리고 누름을 가로채지 않게 숨김(2026-10-31 사용자: [누르고 걷기]가 대화창 뒤)
+  document.body.classList.toggle('mg-scene-open', cls.split(/\s+/).includes('mg-scene'));
   requestAnimationFrame(() => el.classList.add('is-in'));
   input.pushScope(el);
   tts.speak(speech || `${title}. ${instruction}`, 'sys');
@@ -84,7 +86,7 @@ export function frame({ title, instruction, icon = 'star', cls = '', speech = ''
       if (active === api) active = null;
       tts.stop();
       input.popScope(el);
-      document.body.classList.remove('tasking', 'mg-open');
+      document.body.classList.remove('tasking', 'mg-open', 'mg-scene-open');
       el.classList.add('is-out');
       setTimeout(() => el.remove(), dur(220));
     },
