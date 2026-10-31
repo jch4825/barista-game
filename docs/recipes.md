@@ -221,8 +221,13 @@
   - `water_glass`(찬물 붓기, 아이스 아메리카노): 얼음 + 에스프레소가 든 컵에 왼쪽 피처로 찬물. 짙은 갈색이 차오름. 17단계 × 물줄기 있음/없음.
   - `pour_glass_milk`(얼음만 든 컵에 찬 우유) · `pour_glass_latte`(얼음 + 에스프레소에 찬 우유: 섞이며 밝은 갈색, 아이스 라테). 17단계 × 줄기 있음/없음, 배경판은 하나 `pour_glass_plate`.
   - 17단계는 붓기와 같아 띠 칸(0.69~0.94 = 거의 가득, 1 = 작업대에 넘침)을 그대로 씁니다.
-- **게임 연결은 아직**: 클라우드 가지 `claude/vibrant-ritchie-e5b3p7`가 얼음 담기를 박자 맞춰 누르기(3번), 물 붓기를 누르고 떼기 손 동작으로 바꾸고 컵을 매장/포장 × 따뜻함/아이스(머그 · 유리컵 · 종이컵 · 플라스틱 컵)로 나눕니다. 그 가지를 합친 뒤 연결합니다.
-  - 🙋 연결 방법: 얼음 담기는 누른 박자 수만큼 `ice` 단계(3번이면 0 → 3 → 6 → 8개), 물 붓기는 머그면 `water` · 유리컵이면 `water_glass`, 붓기는 유리컵이면 `pour_glass_latte`/`pour_glass_milk`. 플라스틱 컵(포장 아이스) · 종이컵(포장 따뜻함)은 같은 틀로 컵만 바꿔 더 그리면 됩니다.
+- **게임 연결**(✅ 2026-10-31, 클라우드 가지 `claude/vibrant-ritchie-e5b3p7`에 합친 뒤): 컷은 `brew.js`의 `shotIdFor`가 잔 · 온도 · 안에 든 것으로 고릅니다.
+  - **얼음 담기**(박자 맞춰 누르기 3번): 누를 때마다 얼음이 떨어져 쌓입니다(떨어지는 프레임 → 0.36초 뒤 멈춘 프레임). 모두 맞으면 0 → 3 → 5 → 8개. 늦게 누르면(놓치면) 한 개만 담기고, 가운데 박자까지는 5개에서 멈춥니다. 끝에 알맞아요 · 많아요면 가득(8개), 적어요면 그대로(5개 이하). 그래서 판정 글과 그림이 어긋나지 않고, 쌓인 얼음이 줄어드는 일도 없습니다.
+  - **물 붓기**: 에스프레소가 든 잔(아메리카노)만. 머그 · 따뜻하게 → `water`, 유리컵 · 아이스 → `water_glass`. 손 동작의 띠 값만큼 차오릅니다(알맞아요 0.69~0.94).
+  - **붓기**: 머그 · 따뜻하게 → `pour_latte`/`pour_milk`, 유리컵 · 아이스 → `pour_glass_latte`/`pour_glass_milk`. 컵 안에 에스프레소나 디카페인이 있으면 라테.
+  - 잔과 온도가 어긋나면(따뜻한 음료를 유리컵에 담는 등) 컷 대신 임시 그림입니다. 포장 컵(종이컵 · 플라스틱 컵)도 아직 임시 그림입니다(검수 I-28).
+  - **이름 규칙**: `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`. {잔}은 머그 = 없음, 유리컵 = `_glass`, 종이컵 = `_paper`, 플라스틱 컵 = `_plastic`(얼음 담기의 유리컵만 `ice`). {색}은 `strawberry` · `matcha` · `cocoa`. 그 밖의 손 동작(갈기 · 누르기 등)은 손 동작 id 와 같은 이름. 이 이름으로 렌더해 `shots.json`에 넣으면 코드를 고치지 않아도 게임이 씁니다.
+  - 🙋 다음 렌더 후보: 포장 컵(`ice_plastic` · `water_plastic` · `pour_plastic_latte` · `pour_plastic_milk`, 종이컵은 속이 안 보여 `water_paper` · `pour_paper_*` 구도를 먼저 정하기, I-28), 색 있는 우유 음료(`pour_glass_strawberry` · `pour_glass_matcha` · `pour_glass_cocoa` · `pour_matcha` · `pour_cocoa`: 같은 컷에서 음료 색만 바꿈, I-29).
 - **다시 만들기**: `… scene_bench.py -- C:/AI/game3/assets/_src/blender shots ice,water_glass,pour_glass` → `shots_post.py … ice,water_glass,pour_glass_milk,pour_glass_latte` → `npm run assets` → `npm run credits`.
 
 ## 7. 학생에게 보이는 말 (쉬운 한국어)

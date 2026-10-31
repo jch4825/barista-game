@@ -12,7 +12,7 @@
 | 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 104장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
-| 블렌더 한 컷(손 동작) | 16가지 + 유리컵 붓기 2가지(I-27) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
+| 블렌더 한 컷(손 동작) | 15가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 7 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 9곡(새로 만듦, 3장 규칙) | `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
@@ -1628,14 +1628,13 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 4. 블렌더 한 컷 (손 동작)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water`. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
-게임은 `shots.json`에 그 id 가 있으면 저절로 컷을 씁니다(`brew.js`의 `shotId`). 손 동작 id 가 컷 id 와 같으면 코드를 고치지 않아도 됩니다.
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass`. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7). 이름만 맞으면 코드를 고치지 않아도 됩니다.
 
 | 손 동작 id | 이름 | 동작 | 쓰는 메뉴 | 알맞아요 칸 | 제안 장면 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `grind` | 원두 갈기 | G 기다렸다 누르기 | 아메리카노 | 0.56~0.8 | 그라인더 호퍼의 원두가 줄고, 아래 통에 가루가 쌓임(13단계) |
 | `tamp` | 꾹 누르기 | A 누르고 떼기 | 아메리카노 · 라테 · 바닐라 라테 · 디카페인 라테 | 0.44~0.69 | 포터필터 위에서 탬퍼를 누름: 가루가 평평해지는 정도(13단계) |
-| `ice` | 얼음 담기 | D 박자 | 아메리카노 · 라테 · 바닐라 라테 · 디카페인 라테 · 보리차 · 유자차 · 녹차라테 · 딸기우유 · 코코아 | 3번 | 유리컵에 얼음 스쿱으로 얼음을 세 번 담음(박자마다 한 컷: 0 · 1 · 2 · 3번) |
 | `syrup` | 시럽 넣기 | D 박자 | 바닐라 라테 | 2번 | 시럽 펌프를 눌러 컵에 시럽이 들어감(두 번) |
 | `jam` | 청 떠 넣기 | D 박자 | 유자차 · 딸기우유 | 2번 | 청 병에서 숟가락으로 떠서 컵에 넣음(두 번) |
 | `powder` | 가루 떠 넣기 | D 박자 | 녹차라테 · 코코아 | 2번 | 가루 통에서 숟가락으로 떠서 컵에 넣음(두 번) |
@@ -1650,11 +1649,16 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `spiral` | 나선 붓기 | B 원 그리기 | 핸드드립 | 3바퀴 | 드리퍼 위로 주전자 물을 나선으로 세 바퀴 |
 | `stir` | 젓기 | B 원 그리기 | 믹스커피 · 유자차 · 딸기우유 · 코코아 | 3바퀴 | 컵 속을 숟가락으로 젓기: 가루가 풀리는 정도 |
 
-**I-27 유리컵 붓기(아이스, 가장 많이 팔리는 잔)** 🙋
+**I-28 포장 컵(종이컵 · 플라스틱 컵)** 🙋
 
-- `water_glass`: 얼음이 든 유리컵(에스프레소가 먼저 든)에 찬물을 부음. 물줄기 있음/없음 × 17단계, 알맞아요 0.69~0.94(지금 `water`와 같게). 게임은 `waterShotOk`를 유리컵 · 아이스까지 넓히면 바로 씀.
-- `pour_milk_glass` · `pour_latte_glass`: 얼음이 든 유리컵에 찬 우유를 부음(라테는 에스프레소 위로 갈색 층이 퍼짐). 지금 `pour_*`와 같은 단계 수.
-- 종이컵(포장 · 따뜻하게)은 위에서 본 컵 입구가 머그와 거의 같아, 머그 컷을 그대로 써도 되는지 먼저 봐 주세요(🙋 I-28).
+- 지금 컷은 매장 잔(머그 · 유리컵)만 있습니다. 포장 주문의 얼음 담기 · 물 붓기 · 붓기는 임시 그림입니다(아이스 아메리카노 포장이 가장 많음).
+- 플라스틱 컵(아이스 포장): 유리컵 컷(`docs/recipes.md` 6.7)과 같은 카메라 · 같은 빛에서 컵만 바꿈 → `ice_plastic` · `water_plastic` · `pour_plastic_latte` · `pour_plastic_milk`.
+- 종이컵(따뜻한 포장): 속이 안 보이므로 위에서 조금 더 내려다본 구도(입구 속 음료 높이)를 먼저 정함 → `water_paper` · `pour_paper_latte` · `pour_paper_milk`.
+
+**I-29 색 있는 우유 음료** 🙋
+
+- 딸기우유(분홍) · 녹차라테(초록) · 코코아(갈색)는 지금 하얀 우유 컷(`pour_milk` · `pour_glass_milk`)이 나옵니다.
+- 같은 컷에서 음료 색만 바꿈 → 유리컵(아이스) `pour_glass_strawberry` · `pour_glass_matcha` · `pour_glass_cocoa`, 머그(따뜻하게) `pour_matcha` · `pour_cocoa`(딸기우유는 아이스만).
 
 ## 5. 소리
 

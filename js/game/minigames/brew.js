@@ -29,6 +29,8 @@
  *    붓기(pour_milk 빈 머그에 우유 · pour_latte 에스프레소에 우유, 바리스타 단계에서 알맞으면 하트)·거품 내기(foam: 피처 속 우유가 부풀어 오름)·
  *    물 붓기(water: 에스프레소가 든 머그에 드립 주전자로 뜨거운 물, 크레마가 흩어짐). 물 붓기는 이 브랜치에서 손 동작(누르고 떼기)이라
  *    띠와 함께 차오르고, 저절로 붓는 경우(autoStep)에는 띠 · 단추 없는 확대 창에서 저절로 차오름(autoShot). 컷이 없으면 임시 그림
+ *    유리컵(매장 · 아이스)은 얼음 담기(ice: 박자마다 얼음이 쌓임) · 찬물 붓기(water_glass) · 찬 우유 붓기(pour_glass_milk · pour_glass_latte).
+ *    어떤 컷을 쓸지는 shotIdFor(잔 · 온도 · 안에 든 것, 이름 규칙은 그 함수의 주석과 docs/recipes.md 6.7)
  *    만드는 법은 tools/blender/scene_bench.py(shots) → shots_post.py
  * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 동작을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기])
  *  · window.__mgBad(레시피를 한 번 틀리게: 바탕 재료를 바꿈)
@@ -1067,8 +1069,27 @@ export async function brew(opts = {}) {
     };
   }
 
-  /** 물 붓기 컷(water)이 맞는 잔: 받침 위 머그 · 따뜻하게 · 에스프레소가 먼저 든 때(아메리카노). 유리컵 · 종이컵 · 믹스커피는 임시 그림 */
-  const waterShotOk = (soFar) => made?.cup === 'mug' && made?.temp === 'hot' && soFar.has('espresso');
+  /**
+   * 손 동작 → 블렌더 한 컷 id(잔 · 온도 · 안에 든 것으로 고름, docs/recipes.md 6.6 · 6.7). 맞는 컷이 없으면 null(임시 그림)
+   *  - 컷 이름: 붓기 pour{잔}_{latte|milk|색}, 물 붓기 water{잔}(에스프레소가 든 때 = 아메리카노), 얼음 담기 ice(유리컵) · ice{잔}.
+   *    {잔}은 머그 = 없음, 유리컵 = _glass, 종이컵 = _paper, 플라스틱 컵 = _plastic. 잔과 온도가 맞을 때만(머그 · 종이컵 = 따뜻하게, 유리컵 · 플라스틱 컵 = 아이스)
+   *  - 지금 있는 것: 머그 pour_latte · pour_milk · water, 유리컵 ice · pour_glass_latte · pour_glass_milk · water_glass. 포장 컵은 아직(검수 I-28)
+   *  - 커피는 에스프레소와 디카페인(디카페인 라테도 라테 컷). 딸기청 · 말차 · 코코아가 든 잔은 그 색의 컷(pour_glass_strawberry 등)이 있으면 그것, 없으면 우유 컷(검수 I-29)
+   *  - 그 밖의 손 동작(샷 내리기 · 데우기 · 거품 · 갈기 · 누르기 …)은 손 동작 id 와 같은 이름의 컷이 있으면 그것
+   *  shots.json 에 이 이름의 컷이 생기면 코드를 고치지 않아도 씁니다.
+   */
+  const SHOT_CUP = { mug: ['', 'hot'], glass: ['_glass', 'iced'], paper: ['_paper', 'hot'], plastic: ['_plastic', 'iced'] };
+  function shotIdFor(id, soFar) {
+    const [suf, temp] = SHOT_CUP[made?.cup] || [null, null];
+    const cupOk = suf !== null && made?.temp === temp;
+    const esp = soFar.has('espresso') || soFar.has('decaf');
+    const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x));
+    let ids = [id];
+    if (id === 'pour') ids = cupOk ? [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`] : [];
+    else if (id === 'water') ids = cupOk && esp ? [`water${suf}`] : [];
+    else if (id === 'ice') ids = cupOk ? [made.cup === 'glass' ? 'ice' : `ice${suf}`] : [];
+    return ids.find((x) => x && shots[x]) || null;
+  }
 
   /* ---- 작업대 물건 ---- */
   let curShot = null;
@@ -1510,10 +1531,8 @@ export async function brew(opts = {}) {
     bench.append(card);
     bench.classList.add('is-close');
 
-    // 장면: 블렌더 한 컷이 있으면 그것(샷 · 데우기 · 거품 · 붓기), 없으면 동작에 맞는 임시 그림(움직임은 set 으로)
-    const shotId = id === 'pour' ? (made.cup === 'mug' ? (soFar.has('espresso') ? 'pour_latte' : 'pour_milk') : null)
-      : id === 'water' ? (waterShotOk(soFar) ? 'water' : null) // 물 붓기: 에스프레소가 든 따뜻한 머그(아메리카노)일 때 블렌더 컷
-        : ['extract', 'steam', 'foam'].includes(id) ? id : null;
+    // 장면: 블렌더 한 컷이 있으면 그것(샷 · 데우기 · 거품 · 붓기 · 물 붓기 · 얼음 담기), 없으면 동작에 맞는 임시 그림(움직임은 set 으로)
+    const shotId = shotIdFor(id, soFar);
     const shot = shotId ? shotView(shotId) : null;
     const art = shot ? null : actView(id, act, soFar, res);
     if (shot) setScene({ mode: id, shot, host: view, keep: true });
@@ -1534,7 +1553,7 @@ export async function brew(opts = {}) {
       const v = p.toFixed(4);
       gauge.style.setProperty('--p', v);
       tube.style.setProperty('--p', v);
-      shot?.set(p, flow);
+      if (act !== 'beats') shot?.set(p, flow); // 박자(얼음 담기)는 누른 수만큼 쌓임(attemptBeats)
       art?.set(p, { flow, laps: p * lapsMax });
       if (lapEl) lapEl.textContent = `${Math.floor(p * lapsMax + 1e-6)} / ${laps}바퀴`;
       gauge.setAttribute('aria-valuenow', String(Math.round(p * 100)));
@@ -1710,6 +1729,7 @@ export async function brew(opts = {}) {
     const dotsEl = act === 'beats' ? h('span', { class: 'bw-beat-dots', 'aria-hidden': 'true' }) : null;
     const beatWord = act === 'beats' ? h('b', { class: 'bw-beat-word', 'aria-hidden': 'true' }) : null;
     if (act === 'beats') view.append(h('div', { class: 'bw-beat', 'aria-hidden': 'true' }, h('i', { class: 'bw-target' }), ringEl), dotsEl, beatWord);
+    let iceTimer = 0; // 얼음 담기 컷: 떨어지는 프레임 → 멈춘 프레임(다시 하기를 빨리 눌러도 앞 시도의 프레임이 늦게 덮지 않게 시도마다 지움)
     const attemptBeats = (how) => new Promise((resolve) => {
       phase = 'skill';
       const N = sk.n || 2;
@@ -1731,6 +1751,30 @@ export async function brew(opts = {}) {
         art?.set(beat / N, { flow: false });
       };
       const say = (w) => { beatWord.textContent = w; beatWord.classList.remove('is-pop'); void beatWord.offsetWidth; beatWord.classList.add('is-pop'); };
+      // 판정: 모두 맞으면 알맞아요, 빠른 것이 늦은 것보다 많으면 높은 칸(많아요), 아니면 낮은 칸(적어요)
+      const beatZone = () => {
+        const good = marks.filter((x) => x === 'good' || x === 'perfect').length;
+        const early = marks.filter((x) => x === 'early').length;
+        const late = marks.filter((x) => x === 'late').length;
+        return good === N ? 'good' : early > late ? 'high' : 'low';
+      };
+      // 한 컷(얼음 담기): 누를 때마다 얼음이 떨어져 쌓임. 늦게 누르면(놓치면) 한 개만.
+      //  가운데 박자까지는 절반쯤(few)에서 멈추고, 끝에 알맞아요 · 많아요면 가득, 적어요면 절반쯤 그대로(9단계 · 3번이면 0 → 3 → 5 → 8개).
+      //  그래서 판정과 그림이 어긋나지 않고, 쌓인 얼음이 줄어드는 일도 없음
+      const top = Math.max(1, ((shotId && shots[shotId]?.levels) || 0) - 1);
+      const few = Math.max(1, Math.round(top * 0.6));
+      let got = 0;
+      const shotBeat = (m) => {
+        if (!shot || top < 2) return;
+        got += m === 'late' ? 1 : top / N;
+        let n = Math.min(few, Math.ceil(got - 1e-6));
+        if (beat >= N && beatZone() !== 'low') n = top;
+        shot.set(n / top, true); // 떨어지는 얼음
+        clearTimeout(iceTimer);
+        iceTimer = later(dur(360), () => shot.set(n / top, false));
+      };
+      clearTimeout(iceTimer);
+      shot?.set(0, false); // 빈 컵부터
       const judge = (qq) => {
         if (finished || gap > 0) return;
         const d = qq - (turn ? hitStep : BEAT_HIT);
@@ -1741,15 +1785,13 @@ export async function brew(opts = {}) {
         if (turn) talk(sysV(m === 'early' ? SYS.early : m === 'late' ? SYS.late : SYS.beatGood));
         beat += 1;
         q = 0;
+        shotBeat(m);
         if (beat >= N) {
           finished = true;
           curLoop?.stop();
           curLoop = null;
           drawBeat();
-          const good = marks.filter((x) => x === 'good' || x === 'perfect').length;
-          const early = marks.filter((x) => x === 'early').length;
-          const late = marks.filter((x) => x === 'late').length;
-          const zone = good === N ? 'good' : early > late ? 'high' : 'low';
+          const zone = beatZone();
           p = zone === 'good' ? center : zone === 'high' ? 1 : 0;
           draw();
           resolve({ zone, watched: mode === 'watch', perfect: mode !== 'watch' && !turn && marks.every((x) => x === 'perfect') });
@@ -1911,10 +1953,11 @@ export async function brew(opts = {}) {
     };
   }
 
-  /** 손 동작 없이 넣는 것(얼음 · 믹스 가루 등). 에스프레소가 든 머그에 뜨거운 물을 저절로 부을 때는 블렌더 한 컷(물 붓기)이 있으면 그것으로 */
+  /** 손 동작 없이 넣는 것(얼음 · 믹스 가루 등). 에스프레소가 든 잔에 물을 저절로 부을 때는 블렌더 한 컷(물 붓기 water · water_glass)이 있으면 그것으로 */
   async function autoStep(id, soFar, res) {
     const text = id === 'ice' ? TEMPS.iced.auto : INGREDIENTS[id]?.auto?.[made.temp] || INGREDIENTS[id]?.auto?.hot || `${INGREDIENTS[id]?.name || ''}을 넣었어요.`;
-    const shot = id === 'water' && waterShotOk(soFar) ? shotView('water') : null;
+    const autoSid = id === 'water' ? shotIdFor('water', soFar) : null;
+    const shot = autoSid ? shotView(autoSid) : null;
     soFar.add(id);
     if (shot) {
       await autoShot(shot, `${INGREDIENTS[id].name} 붓기`, text);
