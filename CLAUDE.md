@@ -35,6 +35,14 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 - **브라우저 패널이 숨겨져 있으면 `requestAnimationFrame`이 멈춥니다.** 카드가 `is-in`을 못 받아 자동 플레이가 멈춘 것처럼 보입니다. 시험할 때만 콘솔에서 `window.requestAnimationFrame = (cb) => setTimeout(() => cb(performance.now()), 16)`로 바꿔 끼우고, 시간 막대가 멈추지 않게 `document.hidden`도 false로 둡니다.
 - 대사·데이터를 고친 뒤에는 **`npm run validate` → 자동 플레이 → `npm run export` → `npm run voices`** 순서로 진행합니다.
 
+### 저장소(깃허브, 사용자 결정 2026-10-31)
+
+- **공개** `jch4825/barista-game`(main): 게임 전체. 클라우드 세션은 이 저장소로 엽니다.
+- **비공개** `jch4825/barista-game-audio`: 효과음 · 환경음 · 배경음악(사서 쓰는 팩에서 잘라 만든 것이라 공개하지 않음). 공개 저장소의 `assets/audio` 자리에 **서브모듈**로 연결. 받을 때 `git clone --recurse-submodules`(권한이 없으면 `assets/audio`가 비고 게임은 소리 없이 돎, `audio.js`가 목록 없음을 그냥 넘어감).
+- 소리를 바꾸면(`npm run audio` · `npm run assets`가 `assets/audio/manifest.json`을 다시 씀): `assets/audio` 안에서 커밋 · 푸시 → 바깥에서 `git add assets/audio`로 가리키는 커밋을 바꿔 커밋 · 푸시.
+- 공개에 넣지 않는 것(`.gitignore`): 다른 게임 화면 같은 남의 참고 그림(`docs/design/ref_*`), 사서 쓰는 소리(위 서브모듈만), 블렌더 자동 백업 `*.blend1`, 확인용 출력 `assets/_src/_check/`. 새 참고 그림은 `ref_`로 시작하는 이름으로 둡니다. 선생님 화면 '작업 기록'의 `assets/credits/credits.json`에는 사용자의 요청 글이 들어 있어 함께 공개됩니다.
+- 이 컴퓨터에만 있는 것: 블렌더(한 컷 렌더) · Supertonic(음성) · 원본 소리 팩(`SOUND_SRC`) · 원본 직업 마1스톤(`C:\AI\game`). 그래서 `npm run voices` · `npm run audio` · 블렌더 렌더는 이 컴퓨터에서 합니다. 클라우드 세션에서 고친 것은 이 폴더에서 `git pull`(소리까지 `git pull --recurse-submodules`)로 받습니다.
+
 ## 2. 절대 원칙 (PRD 2장)
 
 1. **변수는 숨기고, 힌트는 보이게.** 단골 신뢰 점수는 학생 화면에 나오지 않습니다. 대응 직후 짧은 반응 연출(작은 끄덕임 / 미소 / 오래 바라봄)만 나옵니다.
@@ -140,4 +148,4 @@ assets/               stand/(61, 지은 6·사장님 4·해순 3·지안 3 + 이
 - 큰 단계를 마칠 때마다 무엇을 했는지 중간 보고합니다. 결정이 필요한 것(설정·인물·감정 장면·그림)은 PRD의 Q 번호나 검수 문서의 '검수 포인트'로 묻습니다. 검수 문서는 `docs/review.md`로 만듭니다(`npm run credits`가 이 파일을 '작업 기록' 탭으로 읽음).
 - 사용자는 설계를 붙여 넣어 지시할 때가 많습니다. 설계에 없는 것은 🙋 제안으로 표시하고, 사용자가 정한 것(✅)과 섞지 않습니다.
 - 그림·음악은 사용자가 만들거나 사서 넣습니다. 필요하면 요청서(프롬프트·규격)를 만듭니다. 생성 그림은 필요한 모습을 **한 장에 모두** 요청합니다(따로 만들면 얼굴·크기가 흔들림).
-- 공개 배포(웹판 정식 배포, 공개 주소)는 사용자 허락 뒤에만 합니다.
+- 공개 배포(웹판 정식 배포, 공개 주소)는 사용자 허락 뒤에만 합니다. 소스 저장소는 공개로 두기로 함(2026-10-31, 1장 '저장소').
