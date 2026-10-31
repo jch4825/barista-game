@@ -1079,6 +1079,7 @@ export async function brew(opts = {}) {
    *    {잔}은 머그 = 없음, 유리컵 = _glass, 종이컵 = _paper, 플라스틱 컵 = _plastic. 잔과 온도가 맞을 때만(머그 · 종이컵 = 따뜻하게, 유리컵 · 플라스틱 컵 = 아이스)
    *  - 지금 있는 것: 머그 pour_latte · pour_milk · water, 유리컵 ice · pour_glass_latte · pour_glass_milk · water_glass. 포장 컵은 아직(검수 I-28)
    *  - 커피는 에스프레소와 디카페인(디카페인 라테도 라테 컷). 딸기청 · 말차 · 코코아가 든 잔은 그 색의 컷(pour_glass_strawberry 등)이 있으면 그것, 없으면 우유 컷(검수 I-29)
+   *  - 잔과 온도가 어긋나거나 레시피에 없는 잔이어도 그 잔(없으면 머그)의 같은 손 동작 컷으로(SHOT_FALLBACK). 임시 그림은 컷이 하나도 없을 때만
    *  - 컵에 넣기 · 젓기 · 우리기(시럽 · 청 · 가루 · 말차 풀기 · 젓기 · 우리기): {동작}{잔}_{바탕} → {동작}[_iced]_{바탕} → {동작}[_iced]
    *    (따뜻한 잔 = 위에서 본 머그, 아이스 = 앞에서 본 유리컵. 종이컵 · 플라스틱 컵은 그 컷이 없으면 같은 온도의 머그 · 유리컵 컷, docs/recipes.md 6.10)
    *  - 그 밖의 손 동작(샷 내리기 · 데우기 · 거품 · 갈기 · 누르기 …)은 손 동작 id 와 같은 이름의 컷이 있으면 그것
@@ -1086,18 +1087,23 @@ export async function brew(opts = {}) {
    */
   const CUP_ACTS = new Set(['syrup', 'jam', 'powder', 'whisk', 'stir', 'steep']);
   const SHOT_CUP = { mug: ['', 'hot'], glass: ['_glass', 'iced'], paper: ['_paper', 'hot'], plastic: ['_plastic', 'iced'] };
+  // 맞는 이름의 컷이 없을 때 같은 손 동작의 컷(레시피에 없는 잔 · 잔과 온도가 어긋난 잔에서도 옛 임시 그림이 나오지 않게, 2026-11-01 사용자)
+  const SHOT_FALLBACK = { jam: 'yuja', powder: 'cocoa', stir: 'cocoa' };
   function shotIdFor(id, soFar) {
-    const [suf, temp] = SHOT_CUP[made?.cup] || [null, null];
-    const cupOk = suf !== null && made?.temp === temp;
+    const [suf0] = SHOT_CUP[made?.cup] || [null];
+    const suf = suf0 ?? '';
     const esp = soFar.has('espresso') || soFar.has('decaf');
     const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || made?.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
     let ids = [id];
-    if (id === 'pour') ids = cupOk ? [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`] : [];
-    else if (id === 'water') ids = cupOk ? [esp ? `water${suf}` : `water${suf}_${made?.base}`] : []; // 에스프레소가 없는 잔(보리차 · 유자차 · 믹스커피)은 바탕 이름을 붙여
-    else if (id === 'ice') ids = cupOk ? [made.cup === 'glass' ? 'ice' : `ice${suf}`] : [];
+    if (id === 'pour') ids = [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`, `pour_${esp ? 'latte' : 'milk'}`];
+    else if (id === 'water') ids = [esp ? `water${suf}` : `water${suf}_${made?.base}`, `water${suf}`, 'water']; // 에스프레소가 없는 잔(보리차 · 유자차 · 믹스커피)은 바탕 이름을 붙여, 없으면 그 잔의 물 붓기
+    else if (id === 'ice') ids = [made?.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'];
     else if (CUP_ACTS.has(id)) {
       const fam = made?.temp === 'iced' ? '_iced' : '';
-      ids = [suf !== null && `${id}${suf}_${made?.base}`, `${id}${fam}_${made?.base}`, `${id}${fam}`];
+      const other = fam ? '' : '_iced';
+      const base = made?.base;
+      const fb = SHOT_FALLBACK[id];
+      ids = [suf0 !== null && `${id}${suf}_${base}`, `${id}${fam}_${base}`, `${id}${fam}`, `${id}${other}_${base}`, `${id}${other}`, fb && `${id}${fam}_${fb}`, fb && `${id}${other}_${fb}`];
     }
     return ids.find((x) => x && shots[x]) || null;
   }
