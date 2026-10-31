@@ -151,10 +151,11 @@ export async function routine(opts = {}) {
     next += 1;
     say.textContent = steps[i].done;
     paint();
-    tts.speak(steps[i].done, 'sys');
+    const spoken = tts.speak(steps[i].done, 'sys');
     if (next >= steps.length) {
       over = true;
-      await sleep(dur(700));
+      // 마지막 한 일의 말(간판 돌리기 · 불 끄기 …)은 끝까지 듣고 '다 했어요'(2026-10-31 사용자: 말이 다 끝나기 전에 넘어가 버그 같음)
+      await Promise.all([spoken, sleep(dur(700))]);
       if (stopped()) return;
       say.textContent = SYS.done;
       audio.sfx('great');
