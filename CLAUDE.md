@@ -41,7 +41,7 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 - **공개** `jch4825/barista-game`(main): 게임 전체. 클라우드 세션은 이 저장소로 엽니다.
 - **비공개** `jch4825/barista-game-audio`: 효과음 · 환경음 · 배경음악(사서 쓰는 팩에서 잘라 만든 것이라 공개하지 않음). 공개 저장소의 `assets/audio` 자리에 **서브모듈**로 연결. 받을 때 `git clone --recurse-submodules`(권한이 없으면 `assets/audio`가 비고 게임은 소리 없이 돎, `audio.js`가 목록 없음을 그냥 넘어감).
 - 소리를 바꾸면(`npm run audio` · `npm run assets`가 `assets/audio/manifest.json`을 다시 씀): `assets/audio` 안에서 커밋 · 푸시 → 바깥에서 `git add assets/audio`로 가리키는 커밋을 바꿔 커밋 · 푸시.
-- 공개에 넣지 않는 것(`.gitignore`): 다른 게임 화면 같은 남의 참고 그림(`docs/design/ref_*`), 사서 쓰는 소리(위 서브모듈만), 블렌더 자동 백업 `*.blend1`, 확인용 출력 `assets/_src/_check/`. 새 참고 그림은 `ref_`로 시작하는 이름으로 둡니다. 선생님 화면 '작업 기록'의 `assets/credits/credits.json`에는 사용자의 요청 글이 들어 있어 함께 공개됩니다.
+- 공개에 넣지 않는 것(`.gitignore`): 다른 게임 화면 같은 남의 참고 그림(`docs/design/ref_*`), 사서 쓰는 소리(위 서브모듈만), 블렌더 자동 백업 `*.blend1`, 확인용 출력 `assets/_src/_check/`, 블렌더 렌더 원본 프레임 `assets/_src/blender/shots/*.png`(컷마다 수백 MB라 이 PC에만, 사용자 결정 2026-11-01: 게임 그림 `assets/shots/*.webp` · 자리 정보 json · 미리 보기 jpg만 올림. 다시 만들 때는 이 PC에서 렌더 → `shots_post.py`). 새 참고 그림은 `ref_`로 시작하는 이름으로 둡니다. 선생님 화면 '작업 기록'의 `assets/credits/credits.json`에는 사용자의 요청 글이 들어 있어 함께 공개됩니다.
 - 이 컴퓨터에만 있는 것: 블렌더(한 컷 렌더) · Supertonic(음성) · 원본 소리 팩(`SOUND_SRC`) · 원본 직업 마1스톤(`C:\AI\game`). 그래서 `npm run voices` · `npm run audio` · 블렌더 렌더는 이 컴퓨터에서 합니다. 클라우드 세션에서 고친 것은 이 폴더에서 `git pull`(소리까지 `git pull --recurse-submodules`)로 받습니다.
 
 ## 2. 절대 원칙 (PRD 2장)

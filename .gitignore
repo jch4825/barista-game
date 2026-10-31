@@ -6,6 +6,8 @@ dist/
 # 블렌더 자동 백업 · 확인용 출력(tools 가 다시 만듦)
 *.blend1
 assets/_src/_check/
+# 블렌더 렌더 원본 프레임(컷마다 수백 MB, 이 PC에만: 사용자 결정 2026-11-01). 게임 그림은 assets/shots/*.webp
+assets/_src/blender/shots/*.png
 
 # 시스템 파일
 Thumbs.db
