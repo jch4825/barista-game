@@ -92,6 +92,10 @@ function checkText(ep, text) {
   const plain = text.replace(/\{\{([^}|]+)(\|[^}]+)?\}\}/g, '$1').replace(/\*\*/g, '');
   totals.chars += plain.length;
   if (plain.length > LONG) warn(ep, `긴 대사(${plain.length}자): ${plain.slice(0, 40)}…`);
+  // 한 칸 두 문장 이내(원칙 9): 따옴표 안의 인용은 한 덩어리로 셈
+  const bare = plain.replace(/"[^"]*"|“[^”]*”|'[^']*'/g, 'Q');
+  const n = (bare.match(/[.!?](?!\d)(?=[)」]*(\s|$))/g) || []).length;
+  if (n > 2) warn(ep, `한 칸에 ${n}문장: ${plain.slice(0, 40)}…`);
 }
 
 function checkOops(ep, o, where) {
