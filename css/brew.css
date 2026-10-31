@@ -285,7 +285,7 @@ html body .mg.mg-brew { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap
 /* 가운데 받침: 고른 컵 + 넣을 재료(작게) */
 .mg.mg-brew .bw-mat { position: absolute; z-index: 1; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; aspect-ratio: 1 / 1.1; pointer-events: none; }
 .mg.mg-brew .bw-mat::before { content: ''; position: absolute; left: 4%; right: 4%; bottom: -5%; height: 22%; border-radius: 50%; border: 3px dashed rgba(240, 217, 162, .85); background: radial-gradient(ellipse at center, rgba(240, 217, 162, .4), rgba(240, 217, 162, .1) 70%, transparent 72%); }
-/* 머신은 그림 아래 빈칸 때문에 1.5% 내려 둠(HOT_POS) → 이름표는 다른 물건과 같은 줄에 오게 그만큼 올림 */
+/* 머신은 뒷줄보다 앞에 둠(HOT_POS) · 그림 아래 빈칸이 커서 이름표는 띄우지 않고 바로 아래에 */
 .mg.mg-brew .bw-hot.is-machine .bw-hot-name { margin-top: 0; }
 .mg.mg-brew .bw-mat-cup { position: relative; width: 72%; height: auto; filter: drop-shadow(0 10px 10px rgba(30, 18, 8, .4)); }
 .mg.mg-brew .bw-mat-cup svg, .mg.mg-brew .bw-mat-cup img { display: block; width: 100%; height: auto; }
