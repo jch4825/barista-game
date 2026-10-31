@@ -300,6 +300,8 @@ M = {
     'pet': basic('pet', (1, 1, 1, 1), rough=0.03, trans=1.0, ior=1.45),
     'paper': basic('paper', lin('#F4F1EA'), rough=0.62),
     'kraft': basic('kraft', lin('#94653A'), rough=0.85),
+    'etch': basic('etch', lin('#26292D'), rough=0.5, metal=0.3),
+    'bubble': basic('bubble', lin('#FFFDF8'), rough=0.04, trans=0.5, ior=1.2, spec=0.7),
 }
 
 if 'Subsurface Scale' in M['milk'].node_tree.nodes['Principled BSDF'].inputs:
@@ -1436,13 +1438,15 @@ def mat_foam(name):
 FOAM = None
 
 
-def build_foam_surface(center, z, r, flow, tip, mat, c):
-    """피처 안 우유 겉면(극좌표 격자). flow 면 노즐 둘레가 오목하게 돌고(소용돌이) 결이 짐"""
+def build_foam_surface(center, z, r, flow, tip, mat, c, dzf=None):
+    """피처 안 우유 겉면(극좌표 격자). flow 면 노즐 둘레가 오목하게 돌고(소용돌이) 결이 짐. dzf(x, y, rr, a): 다른 높낮이(톡톡의 물결)"""
     rings, secs = 22, 96
     cx, cy = center
     verts, faces = [], []
 
     def dz(x, y, rr, a):
+        if dzf:
+            return dzf(x, y, rr, a)
         if not flow:
             return 0.0
         dt = math.hypot(x - tip[0], y - tip[1])
@@ -1468,8 +1472,8 @@ def build_foam_surface(center, z, r, flow, tip, mat, c):
     return obj('FOAM_surface', me, mat, (0, 0, 0), c)
 
 
-def build_pitcher_milk(at, h, flow, tip, mat, c='shot_dyn'):
-    """피처 안 우유: 바닥부터 겉면 높이 h(피처 바닥에서 잼)까지 + 겉면(mat, flow 면 노즐 둘레가 돎). at = 피처 바닥 가운데"""
+def build_pitcher_milk(at, h, flow, tip, mat, c='shot_dyn', dzf=None):
+    """피처 안 우유: 바닥부터 겉면 높이 h(피처 바닥에서 잼)까지 + 겉면(mat, flow 면 노즐 둘레가 돎, dzf 는 다른 높낮이). at = 피처 바닥 가운데"""
     r = pitcher_inner_r(h) - 0.0006
     prof = [(0.0, 0.003), (pitcher_inner_r(0.003) - 0.0006, 0.003)]
     for hh in (0.0065, 0.018, 0.035, 0.055, 0.075, 0.088):
@@ -1477,7 +1481,7 @@ def build_pitcher_milk(at, h, flow, tip, mat, c='shot_dyn'):
             prof.append((pitcher_inner_r(hh) - 0.0006, hh))
     prof += [(r, h - 0.0012), (0.0, h - 0.0012)]
     lathe('PIT_milk', prof, M['milk'], at, c, segs=96)
-    build_foam_surface(at[:2], at[2] + h, r, flow, tip, mat, c)
+    build_foam_surface(at[:2], at[2] + h, r, flow, tip, mat, c, dzf)
 
 
 def shot_foam(sdir, preview):
@@ -2343,12 +2347,170 @@ def shot_pour_tint(sdir, preview):
         render_frames(sdir, f'pour_{key}', rect, 17, tint(key), plate='pour_plate')
 
 
+# ------------------------------------------------------------------ 피처에 우유 붓기 · 피처 톡톡 (2026-10-31 사용자 "우유 붇는 에니메이션이 없네", "거품도 에니메이션이 없네")
+# 첫 우유 만들기(따뜻한 우유: 피처에 우유 붓기 → 우유 데우기 → 피처 톡톡 → 붓기)에서 두 손 동작만 물건 그림이던 것
+MILK_BOTTLE = [(0.0, 0.0), (0.030, 0.0), (0.0335, 0.002), (0.0345, 0.008), (0.0345, 0.095), (0.033, 0.115), (0.026, 0.140), (0.019, 0.160),
+               (0.0165, 0.172), (0.0165, 0.180), (0.0185, 0.182), (0.0185, 0.188), (0.0160, 0.190), (0.0140, 0.190), (0.0138, 0.180),
+               (0.0145, 0.170), (0.0172, 0.158), (0.0242, 0.140), (0.0310, 0.115), (0.0322, 0.095), (0.0322, 0.010), (0.028, 0.006),
+               (0.0, 0.006)]  # 유리 우유병(약 500mL, 카운터의 obj_milk_bottle 과 같은 꼴, 뚜껑은 연 채)
+MILK_BOTTLE_IN = [(0.0, 0.0064), (0.0319, 0.0064), (0.0319, 0.095), (0.0307, 0.115), (0.0239, 0.140), (0.0169, 0.158), (0.0142, 0.170),
+                  (0.0135, 0.183), (0.0, 0.183)]
+PITCHER_AT = (0.10, -0.20, 0.0)  # 작업대 위 피처(붓기의 머그와 같은 곳), 주둥이는 왼쪽
+LINE_H = 0.069  # 피처 안쪽의 눈금 선(띠 0.625 = 알맞아요 칸 가운데에서 우유가 닿음)
+
+
+def milk_in_level(p):
+    return 0.004 + min(p, 0.97) * 0.104  # 피처 바닥에서 잰 우유 높이(1 = 테두리까지 차서 넘침)
+
+
+def build_pour_bottle(lip, theta, c):
+    """기운 우유병: 병 입구 아래쪽 끝이 lip 에 오게 오른쪽(+X)으로 theta° 기울임 + 병 속 우유(수평면 아래만)"""
+    t = math.radians(theta)
+    sx, sz = 0.0175, 0.190
+    ox = lip[0] - (sx * math.cos(t) + sz * math.sin(t))
+    oz = lip[2] - (-sx * math.sin(t) + sz * math.cos(t))
+    o = (ox, lip[1], oz)
+    lathe('BOT_glass', MILK_BOTTLE, M['glass'], o, c).rotation_euler = (0, t, 0)
+    milk = lathe('BOT_milk', MILK_BOTTLE_IN, M['milk'], o, c)
+    milk.rotation_euler = (0, t, 0)
+    cut = box('BOT_cut', (0.5, 0.5, 0.5), (ox, lip[1], lip[2] + 0.04 - 0.25), M['milk'], 'rig', bev=0.0)  # 병 입구에서 4cm 위까지 우유
+    cut.hide_render = True
+    md = milk.modifiers.new('Cut', 'BOOLEAN')
+    md.operation = 'INTERSECT'
+    md.object = cut
+
+
+def build_pitcher_line(at, c):
+    """피처 안쪽 벽의 눈금 선(가는 띠, 벽에 반쯤 묻힘)"""
+    r = pitcher_inner_r(LINE_H)
+    lathe('PITM_line', [(r - 0.0003, LINE_H - 0.001), (r + 0.0002, LINE_H - 0.001), (r + 0.0002, LINE_H + 0.001), (r - 0.0003, LINE_H + 0.001),
+                        (r - 0.0003, LINE_H - 0.001)], M['etch'], at, c)
+
+
+def pitcher_counter_scene(c, d=1.0, tgt_dx=-0.05, tgt_z=0.088):
+    """작업대 위 스팀 피처(주둥이 왼쪽 · 손잡이 오른쪽) + 오른쪽 앞 위에서(약 56°) 피처 속을 내려다보는 카메라"""
+    for ob in list(coll(c).objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
+    clear_dyn()
+    px, py, pz = PITCHER_AT
+    turn = 180.0
+    lathe('PITM_body', PITCHER, M['steel'], PITCHER_AT, c, warp=spout, rotz=math.radians(turn))
+    ha = math.radians(turn + 180)
+
+    def hp(q, zz):
+        return (px + q * math.cos(ha), py + q * math.sin(ha), pz + zz)
+    tube('PITM_handle', [hp(0.034, 0.093), hp(0.058, 0.090), hp(0.066, 0.062), hp(0.058, 0.032), hp(0.037, 0.024)], 0.0048, M['steel'], c)
+    build_pitcher_line(PITCHER_AT, c)
+    show_only((c, 'shot_dyn'))
+    cam.data.lens = 50
+    tgt = Vector((px + tgt_dx, py + 0.004, pz + tgt_z))
+    az, el = math.radians(38), math.radians(56)
+    cam.location = tgt + d * Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
+    look(cam, tgt)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_object = None
+    cam.data.dof.focus_distance = (Vector((px, py, pz + 0.07)) - cam.location).length
+    cam.data.dof.aperture_fstop = 5.6
+    cy.seed = 11
+
+
+def pitcher_rect(extra=()):
+    px, py, pz = PITCHER_AT
+    pts = [Vector((px + dx, py + dy, pz + zz)) for dx in (-0.045, 0.045) for dy in (-0.045, 0.045) for zz in (0.0, 0.108)]
+    pts += [Vector((px + 0.055 + dx, py - 0.035 + dy, 0.002)) for dx in (-0.035, 0.035) for dy in (-0.022, 0.022)]  # 넘친 자국
+    pts += [Vector(q) for q in extra]
+    return frame_rect(pts)
+
+
+def shot_milk_in(sdir, preview):
+    """피처에 우유 붓기: 작업대 위 빈 스팀 피처에 왼쪽에서 기운 우유병으로 우유를 부음. 피처 안쪽 눈금 선(알맞아요 칸 가운데)까지 차면 손을 뗌.
+    17단계 × 줄기 있음/없음, 끝(1)은 테두리까지 차서 작업대에 넘침"""
+    pitcher_counter_scene('milk_in_static')
+    px, py, pz = PITCHER_AT
+    lip = (px - 0.010, py, pz + 0.1062 + 0.03)  # 병 입구: 피처 가운데 조금 왼쪽, 테두리 위 3cm
+    build_pour_bottle(lip, 112.0, 'milk_in_static')
+
+    def build(k, p, flow):
+        surf = pz + 0.003
+        if k > 0:
+            h = milk_in_level(p)
+            build_pitcher_milk(PITCHER_AT, h, False, (px, py), M['milk'])
+            surf = pz + h
+        if p >= 0.999:
+            ball('MILKIN_spill', 0.02, (px + 0.055, py - 0.035, 0.002), M['milk'], 'shot_dyn', scale=(1.7, 1.1, 0.06))
+        if flow:  # 병 입구에서 조금 휘어 떨어지는 굵은 줄기
+            tube('MILKIN_stream', [lip, (lip[0] + 0.0035, lip[1], (lip[2] + surf) / 2 + 0.004), (lip[0] + 0.006, lip[1], surf)], 0.0032, M['milk'], 'shot_dyn')
+    if preview:
+        for name, k, p, flow in (('preview_milk_in.jpg', 6, 0.375, True), ('preview_milk_in_line.jpg', 10, 0.625, False)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    render(os.path.join(sdir, 'milk_in_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, 'milk_in', pitcher_rect((lip, (lip[0] - 0.012, lip[1], lip[2] + 0.012))), 17, build)
+
+
+TAP_BUBBLES = None
+
+
+def tap_bubbles(r_max):
+    """톡톡 컷의 굵은 거품: (x, y, 반지름) 목록. 앞에서부터 남고 뒤에서부터 터짐(단계마다 앞의 일부)"""
+    rnd = random.Random(5)
+    out = []
+    while len(out) < 30:
+        rr = 0.0017 + 0.0030 * rnd.random() ** 1.6
+        q = (r_max - rr - 0.002) * math.sqrt(rnd.random())
+        a = rnd.uniform(0, 2 * math.pi)
+        x, y = q * math.cos(a), q * math.sin(a)
+        if all(math.hypot(x - x2, y - y2) > rr + r2 + 0.0004 for x2, y2, r2 in out):
+            out.append((x, y, rr))
+    return out
+
+
+def shot_tap(sdir, preview):
+    """피처 톡톡: 데운 우유 겉면의 굵은 거품이 톡 칠 때마다 터져 사라짐. 5단계(거품 30 → 21 → 13 → 6 → 0개) × 톡 치는 순간(겉면에 물결) 있음/없음"""
+    global FOAM, TAP_BUBBLES
+    pitcher_counter_scene('tap_static', d=0.62, tgt_dx=-0.004, tgt_z=0.07)
+    px, py, pz = PITCHER_AT
+    h = 0.094  # 우유 데우기 뒤의 높이
+    r_s = pitcher_inner_r(h) - 0.0006
+    if FOAM is None:
+        FOAM = mat_foam('foam_top')
+    fm, C, Rn = FOAM
+    if TAP_BUBBLES is None:
+        TAP_BUBBLES = tap_bubbles(r_s)
+
+    def ripple(x, y, rr, a):  # 톡 치는 순간: 가운데에서 퍼지는 잔물결
+        return 0.0009 * math.sin(2 * math.pi * rr / 0.011) * math.exp(-rr / 0.03)
+
+    def build(k, p, flow):
+        C.outputs[0].default_value = 0.12
+        Rn.outputs[0].default_value = 0.3
+        build_pitcher_milk(PITCHER_AT, h, False, (px, py), fm, dzf=ripple if flow else None)
+        n = round(len(TAP_BUBBLES) * (1 - p) ** 1.2)
+        for i, (x, y, rr) in enumerate(TAP_BUBBLES[:n]):
+            ball(f'TAP_bubble{i}', rr, (px + x, py + y, pz + h + rr * 0.2), M['bubble'], 'shot_dyn', scale=(1, 1, 0.8))
+    if preview:
+        for name, k, p, flow in (('preview_tap0.jpg', 0, 0.0, False), ('preview_tap2.jpg', 2, 0.5, True)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)  # 배경판: 거품이 가득한 우유
+    render(os.path.join(sdir, 'tap_plate.png'), SHOT_RES, 384)
+    pts = [Vector((px + dx, py + dy, pz + zz)) for dx in (-0.042, 0.042) for dy in (-0.042, 0.042) for zz in (h - 0.01, h + 0.01)]
+    render_frames(sdir, 'tap', frame_rect(pts), 5, build)
+
+
 SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam': shot_foam, 'water': shot_water,
          'ice': shot_ice, 'water_glass': shot_water_glass, 'pour_glass': shot_pour_glass,
          'pour_latte': lambda sdir, preview: shot_pour(sdir, preview, only='latte'),  # 라테 프레임만(배경판·우유는 그대로)
          'pour_tint': shot_pour_tint, 'pour_glass_tint': shot_pour_glass_tint,  # 음료 색(녹차라테 · 코코아 · 딸기우유)
          'water_paper': shot_water_paper, 'pour_paper': shot_pour_paper,  # 종이컵
-         'ice_plastic': shot_ice_plastic, 'water_plastic': shot_water_plastic, 'pour_plastic': shot_pour_plastic}  # 플라스틱 컵
+         'ice_plastic': shot_ice_plastic, 'water_plastic': shot_water_plastic, 'pour_plastic': shot_pour_plastic,  # 플라스틱 컵
+         'milk_in': shot_milk_in, 'tap': shot_tap}  # 피처에 우유 붓기 · 피처 톡톡
 
 
 ALL = ('machine', 'mug', 'pitcher', 'tamper', 'shot')

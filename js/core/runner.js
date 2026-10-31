@@ -73,7 +73,7 @@ function clearTask() {
   abortMinigame(); // 미니게임 도중 되감기·나가기: 실시간 고리·방향키까지 정리
   cards.close();
   $('#layer-task').replaceChildren();
-  document.body.classList.remove('tasking', 'mg-open');
+  document.body.classList.remove('tasking', 'mg-open', 'mg-scene-open');
 }
 
 function restore(s, snap) {

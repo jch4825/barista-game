@@ -425,12 +425,15 @@ export function drinkName(menu, temp) {
   return `${TEMPS[temp]?.say || ''} ${r.name}`.trim();
 }
 
-/** 주문 확인(지은이 되풀이): '아이스 아메리카노 한 잔, 가져가시는 거죠?' · usual 이면 '늘 드시던 걸로 준비할게요.' */
+const CUP_COUNT = ['', '한', '두', '세', '네'];
+/** 주문 확인(지은이 되풀이): '아이스 아메리카노 한 잔, 가져가시는 거죠?' · usual 이면 '늘 드시던 걸로 준비할게요.'
+ *  count: 손님이 말한 잔 수('두 잔'. 한 잔씩 만드니 나머지는 다음 주문으로 따로) · more: 앞 주문의 다음 잔('한 잔 더')(2026-10-31 사용자: 두 잔인데 한 잔이라고 함) */
 export function repeatBack(order = {}) {
   if (order.usual) return '늘 드시던 걸로 준비할게요.';
   const cupFixed = order.cup || RECIPES[order.menu]?.cup;
   const tail = cupFixed ? '맞으시죠?' : order.togo ? '가져가시는 거죠?' : '드시고 가시는 거죠?';
-  return `${drinkName(order.menu, orderTemp(order))} 한 잔, ${tail}`;
+  const n = order.more ? '한 잔 더' : `${CUP_COUNT[order.count || 1]} 잔`;
+  return `${drinkName(order.menu, orderTemp(order))} ${n}, ${tail}`;
 }
 
 /** 고른 재료·온도와 같은 메뉴(컵은 보지 않음). 없으면 null */
@@ -539,6 +542,8 @@ export function orderProblems(order = {}) {
   if (r.temps.length > 1 && !order.temp) errs.push(`${order.menu}: 온도(temp)를 정해야 함(${r.temps.join('·')})`);
   for (const k of asList(order.ask)) if (!['temp', 'togo'].includes(k)) errs.push(`ask 는 temp · togo 만: ${k}`);
   if (order.togo !== undefined && typeof order.togo !== 'boolean') errs.push('togo 는 true · false');
+  if (order.count !== undefined && !(Number.isInteger(order.count) && order.count >= 1 && order.count < CUP_COUNT.length)) errs.push(`count 는 1~${CUP_COUNT.length - 1}`);
+  if (order.count > 1 && order.more) errs.push('count 와 more 는 함께 쓰지 않음');
   return errs;
 }
 

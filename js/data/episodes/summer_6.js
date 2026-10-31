@@ -39,8 +39,8 @@ export default {
     mini('brew', {
       id: 'summer_6_rush', title: '골목 끝까지 선 줄', level: 'normal', quit: true, book: SUMMER_BOOK,
       orders: [
-        { who: 'customer', say: '아아 두 잔이요! 가져갈게요.', menu: 'americano', temp: 'iced', togo: true },
-        { who: 'customer', say: '아아 하나 더요.', menu: 'americano', temp: 'iced', togo: true },
+        { who: 'customer', say: '아아 두 잔이요! 가져갈게요.', menu: 'americano', temp: 'iced', togo: true, count: 2 },
+        { who: 'customer', say: '아아 하나 더요.', menu: 'americano', temp: 'iced', togo: true, more: true },
         { who: 'customer', say: '라테 하나요. 사진 찍고 마실 거예요.', menu: 'latte', temp: 'iced', togo: false, ask: ['temp'], reply: { temp: '당연히 아이스죠.' } },
         { who: 'customer', say: '딸기우유요. 가져갈게요.', menu: 'strawberry_milk', temp: 'iced', togo: true },
       ],

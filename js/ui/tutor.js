@@ -206,10 +206,15 @@ function placeTip(rects, hand) {
   const th = tipEl.offsetHeight;
   let x;
   let y;
-  if (hand && (hand.side === 'sr' || hand.side === 'sl')) {
+  const sideX = hand?.side === 'sr' ? hand.x + 170 : hand?.side === 'sl' ? hand.x - 170 - tw : null;
+  if (sideX !== null && sideX >= 16 && sideX + tw <= W - 16) {
     // 옆에서 짚는 손가락 바깥쪽, 같은 높이
     y = hand.y - th / 2;
-    x = hand.side === 'sr' ? hand.x + 170 : hand.x - 170 - tw;
+    x = sideX;
+  } else if (sideX !== null) {
+    // 옆에 자리가 없으면(화면 가장자리 · 작업대의 [누르고 있기]) 버튼 위에: 쪽지가 손가락에 가리지 않게
+    x = (u.x1 + u.x2) / 2 - tw / 2;
+    y = u.y1 - th - 26;
   } else {
     // 위가 비어 있으면 위에, 아니면(위쪽 줄 버튼) 손가락 아래에
     x = (cur.k.hand === 'on' && hand ? hand.x : (u.x1 + u.x2) / 2) - tw / 2;

@@ -82,7 +82,7 @@ function regularOrders(who, season) {
   if (who === 'sumin') return [{ who, say: '…늘 먹던 거요.', menu: 'barley_tea', temp: season === 'summer' ? 'iced' : 'hot', togo: false, usual: true }];
   const one = { who, say: '늘 먹던 거요.', menu: u.menu, togo: Boolean(u.togo), usual: true };
   if (RECIPES[u.menu].temps.length > 1) one.temp = u.temp;
-  if (who === 'haesun') return [one, { who, say: '한 잔 더, 똑같이.', menu: 'warm_milk', togo: false }];
+  if (who === 'haesun') return [one, { who, say: '한 잔 더, 똑같이.', menu: 'warm_milk', togo: false, more: true }];
   return [one];
 }
 

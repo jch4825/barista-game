@@ -33,7 +33,7 @@ export default {
         orders: [
           { who: 'haesun', say: '늘 먹던 거요.', menu: 'warm_milk', temp: 'hot', togo: false, usual: true },
           { who: 'granddaughter', say: '저도 따뜻한 우유요!', menu: 'warm_milk', temp: 'hot', togo: false, thanks: '할머니 거랑 똑같다!' },
-          { who: 'haesun', say: '한 잔 더요. 그 자리 거.', menu: 'warm_milk', temp: 'hot', togo: false, thanks: '고마워요.' },
+          { who: 'haesun', say: '한 잔 더요. 그 자리 거.', menu: 'warm_milk', temp: 'hot', togo: false, more: true, thanks: '고마워요.' },
         ],
       }),
     ),
@@ -42,7 +42,7 @@ export default {
         id: 'winter_6_two', title: '늘 먹던 거', level: 'normal', book: WINTER_BOOK,
         orders: [
           { who: 'haesun', say: '늘 먹던 거요.', menu: 'warm_milk', temp: 'hot', togo: false, usual: true },
-          { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false },
+          { who: 'haesun', say: '한 잔 더, 똑같이.', menu: 'warm_milk', temp: 'hot', togo: false, more: true },
         ],
       }),
     ),
