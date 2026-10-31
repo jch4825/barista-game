@@ -294,6 +294,7 @@ M = {
     'espresso': mat_coffee('espresso', '#1E0E05', '#3A1D0B', scale=12.0, rough=0.06),
     'crema': mat_coffee('crema', '#8A5428', '#C18A4D', scale=70.0, rough=0.3),
     'stream': basic('stream', lin('#4A2410'), rough=0.08, spec=0.7),
+    'water': basic('water', lin('#F4F8FA'), rough=0.02, trans=1.0, ior=1.33),
 }
 
 if 'Subsurface Scale' in M['milk'].node_tree.nodes['Principled BSDF'].inputs:
@@ -919,7 +920,9 @@ def build_thermo(center, cam_pos, zone, c='steam_static'):
     emp = bpy.data.objects.new('THERMO', None)
     coll(c).objects.link(emp)
     emp.location = center
-    emp.rotation_euler = (Vector(cam_pos) - Vector(center)).normalized().to_track_quat('-Y', 'Z').to_euler()
+    face = Vector(cam_pos) - Vector(center)
+    face.z = 0.0  # 다이얼은 똑바로 서서 카메라 쪽으로만 돎(뒤로 기울면 줄기가 피처 벽 밖으로 나옴)
+    emp.rotation_euler = face.normalized().to_track_quat('-Y', 'Z').to_euler()
     r = THERMO_R
     parts = [
         cyl('TH_bezel', r, 0.008, (0, 0, 0), M['chrome'], c, rot=(math.radians(90), 0, 0), bev=0.0015),
@@ -1031,7 +1034,8 @@ def build_vapor(at, base_z, amount, seed, c='shot_dyn'):
 
 
 def shot_steam(sdir, preview):
-    """우유 데우기: 물받이 위 스팀 피처에 노즐을 넣고, 피처 왼쪽 뒤 가장자리에 집게 온도계. 바늘 25단계 × 김 있음(스팀 켬)/옅음"""
+    """우유 데우기: 물받이 위 우유 담은 스팀 피처에 노즐을 넣고, 피처 왼쪽 뒤 가장자리에 집게 온도계. 바늘 25단계 × 김 있음(스팀 켬)/옅음.
+    우유는 데울수록 조금 부풀고, 스팀을 켜면 노즐 둘레가 돎(2026-10-31 사용자: 빈 피처가 물처럼 보임)"""
     X = GX[0] + 0.155
     px, py, pz = X + 0.235, FY - 0.08, 0.0635
     rim = pz + 0.1062
@@ -1051,8 +1055,12 @@ def shot_steam(sdir, preview):
         return (px + q * math.cos(ha), py + q * math.sin(ha), pz + zz)
     tube('PITS_handle', [hp(0.034, 0.093), hp(0.058, 0.090), hp(0.066, 0.062), hp(0.058, 0.032), hp(0.037, 0.024)], 0.0048, M['steel'], 'steam_static')
     cam.data.lens = 50
-    cam.location = (px + 0.40, py - 0.80, 0.28)
+    cam.location = (px + 0.40, py - 0.80, 0.54)  # 피처 속 우유 겉면이 보이게 조금 위에서(약 23°)
     look(cam, (px - 0.02, py + 0.01, 0.15))
+    tip = (px + 0.0078, py)  # 노즐 끝(우유 속)
+
+    def milk(p, flow):
+        build_pitcher_milk((px, py, pz), 0.090 + 0.006 * p, flow, tip, M['milk'])
     ta = math.radians(228)  # 피처 왼쪽 앞 가장자리(노즐에 가리지 않게)
     tcen = (px + 0.031 * math.cos(ta), py + 0.031 * math.sin(ta), rim + THERMO_R + 0.006)
     emp = build_thermo(tcen, cam.location, (0.56, 0.81))
@@ -1065,14 +1073,19 @@ def shot_steam(sdir, preview):
     if preview:
         build_needle(emp, 0.68)
         build_vapor(vat, rim, 0.8, 1.0)
+        milk(0.68, True)
         render(os.path.join(sdir, 'preview_steam.jpg'), (1472, 400), 64, fmt='JPEG')
         return
+    clear_dyn()
+    milk(0.0, False)  # 배경판에도 우유(프레임 자리 밖으로 겉면이 나가도 비어 보이지 않게)
     render(os.path.join(sdir, 'steam_plate.png'), SHOT_RES, 384)
     pts = [Vector(tcen) + Vector((dx, dy, dz)) for dx in (-0.032, 0.032) for dy in (-0.032, 0.032) for dz in (-0.032, 0.032)]
     pts += [Vector((vat[0] + dx, vat[1] + dy, zz)) for dx in (-0.045, 0.045) for dy in (-0.045, 0.045) for zz in (rim - 0.004, rim + 0.14)]
+    pts += [Vector((px + dx, py + dy, pz + 0.085)) for dx in (-0.04, 0.04) for dy in (-0.04, 0.04)]  # 우유 겉면
 
     def build(k, p, flow):
         build_needle(emp, p)
+        milk(p, flow)
         amount = (0.55 + 0.45 * p) if flow else (0.35 * p if p > 0.15 else 0.0)  # 스팀을 끄면 뜨거운 만큼만 옅게
         build_vapor(vat, rim, amount, k * 0.37 + (0.13 if flow else 0.0))
     render_frames(sdir, 'steam', frame_rect(pts), 25, build)
@@ -1272,6 +1285,17 @@ def build_mug_liquid(at, z0, h, mat, c):
     return z0 + h
 
 
+def build_saucer_mug(mx, my, z0, c):
+    """받침 위 머그(손잡이는 오른쪽 뒤로 35°): 붓기 · 물 붓기 컷"""
+    lathe('POURM_saucer', SAUCER, M['ceramic'], (mx, my, 0.0), c)
+    lathe('POURM_body', MUG, M['ceramic'], (mx, my, z0), c)
+    a = math.radians(-35.0)
+
+    def mr(px, pz):
+        return (mx + px * math.cos(a), my + px * math.sin(a), z0 + pz)
+    tube('POURM_handle', [mr(0.0405, 0.074), mr(0.064, 0.079), mr(0.0755, 0.058), mr(0.068, 0.031), mr(0.0400, 0.025)], 0.0066, M['ceramic'], c)
+
+
 LATTE = None
 
 
@@ -1283,13 +1307,7 @@ def shot_pour(sdir, preview, only=None):
     for ob in list(coll('pour_static').objects):
         bpy.data.objects.remove(ob, do_unlink=True)
     clear_dyn()
-    lathe('POURM_saucer', SAUCER, M['ceramic'], (mx, my, 0.0), 'pour_static')
-    lathe('POURM_body', MUG, M['ceramic'], (mx, my, z0), 'pour_static')
-    a = math.radians(-35.0)
-
-    def mr(px, pz):
-        return (mx + px * math.cos(a), my + px * math.sin(a), z0 + pz)
-    tube('POURM_handle', [mr(0.0405, 0.074), mr(0.064, 0.079), mr(0.0755, 0.058), mr(0.068, 0.031), mr(0.0400, 0.025)], 0.0066, M['ceramic'], 'pour_static')
+    build_saucer_mug(mx, my, z0, 'pour_static')
     lip = (mx - 0.026, my, z0 + 0.0913 + 0.02)  # 주둥이 끝: 머그 왼쪽 가장자리 쪽, 테두리 위 2cm(표면을 덜 가리게)
     build_pour_pitcher(lip, 58.0, 'pour_static')
     show_only(('pour_static', 'shot_dyn'))  # 작업대 위만(머신·다른 물건은 이 컷 밖)
@@ -1440,6 +1458,18 @@ def build_foam_surface(center, z, r, flow, tip, mat, c):
     return obj('FOAM_surface', me, mat, (0, 0, 0), c)
 
 
+def build_pitcher_milk(at, h, flow, tip, mat, c='shot_dyn'):
+    """피처 안 우유: 바닥부터 겉면 높이 h(피처 바닥에서 잼)까지 + 겉면(mat, flow 면 노즐 둘레가 돎). at = 피처 바닥 가운데"""
+    r = pitcher_inner_r(h) - 0.0006
+    prof = [(0.0, 0.003), (pitcher_inner_r(0.003) - 0.0006, 0.003)]
+    for hh in (0.0065, 0.018, 0.035, 0.055, 0.075, 0.088):
+        if hh < h - 0.002:
+            prof.append((pitcher_inner_r(hh) - 0.0006, hh))
+    prof += [(r, h - 0.0012), (0.0, h - 0.0012)]
+    lathe('PIT_milk', prof, M['milk'], at, c, segs=96)
+    build_foam_surface(at[:2], at[2] + h, r, flow, tip, mat, c)
+
+
 def shot_foam(sdir, preview):
     """거품 내기: 물받이 위 스팀 피처를 오른쪽 앞 위에서(약 58°) 내려다봄. 띠 값만큼 우유가 부풀어 겉면이 테두리 쪽으로 오르고,
     적어요 = 매끈한 우유 · 알맞아요 = 고운 거품(실크 결) · 많아요 = 굵은 방울. 13단계 × 스팀 켬(소용돌이)/끔"""
@@ -1482,14 +1512,7 @@ def shot_foam(sdir, preview):
         h = 0.052 + p * (0.098 - 0.052)  # 피처 바닥에서 잰 겉면 높이: 부풀수록 테두리(0.106) 쪽으로
         C.outputs[0].default_value = sstep((p - 0.5) / 0.4)  # 많아요 쪽일수록 굵은 방울
         Rn.outputs[0].default_value = 0.14 + 0.45 * sstep(p / 0.9)  # 매끈(윤기) → 고운 거품 → 거친 거품
-        r = pitcher_inner_r(h) - 0.0006
-        prof = [(0.0, 0.003), (pitcher_inner_r(0.003) - 0.0006, 0.003)]
-        for hh in (0.0065, 0.018, 0.035, 0.055, 0.075, 0.088):
-            if hh < h - 0.002:
-                prof.append((pitcher_inner_r(hh) - 0.0006, hh))
-        prof += [(r, h - 0.0012), (0.0, h - 0.0012)]
-        lathe('FOAM_milk', prof, M['milk'], (px, py, pz), 'shot_dyn', segs=96)
-        build_foam_surface((px, py), pz + h, r, flow, tip, fm, 'shot_dyn')
+        build_pitcher_milk((px, py, pz), h, flow, tip, fm)
     if preview:
         for k, p, flow in ((0, 0.12, True), (1, 0.44, True), (2, 0.9, False)):
             clear_dyn()
@@ -1502,7 +1525,137 @@ def shot_foam(sdir, preview):
     render_frames(sdir, 'foam', frame_rect(pts), 13, build)
 
 
-SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam': shot_foam,
+KETTLE = [(0.0, 0.0), (0.056, 0.0), (0.0605, 0.0025), (0.0625, 0.009), (0.0585, 0.04), (0.051, 0.072), (0.0445, 0.094), (0.0425, 0.1),
+          (0.04, 0.1035), (0.033, 0.108), (0.018, 0.1115), (0.0, 0.1125)]  # 드립 주전자: 아래가 넓은 원뿔 몸 + 낮은 뚜껑(닫힌 몸)
+KETTLE_TIP = (0.158, 0.118)  # 거위목 주둥이 끝(주전자 좌표: 가운데에서 x, 바닥에서 z)
+
+
+def build_pour_kettle(tip, theta, c):
+    """기운 드립 주전자(진열대 obj_kettle 과 같은 모양: 스테인리스 원뿔 몸 · 가는 거위목 주둥이 · 나무 손잡이와 꼭지).
+    주둥이 끝이 tip 에 오게, 오른쪽(+X)으로 theta° 기울임"""
+    t = math.radians(theta)
+    sx, sz = KETTLE_TIP
+    ox = tip[0] - (sx * math.cos(t) + sz * math.sin(t))
+    oz = tip[2] - (-sx * math.sin(t) + sz * math.cos(t))
+
+    def tp(px, pz):
+        return (ox + px * math.cos(t) + pz * math.sin(t), tip[1], oz - px * math.sin(t) + pz * math.cos(t))
+    lathe('KET_body', KETTLE, M['steel'], (ox, tip[1], oz), c).rotation_euler = (0, t, 0)
+    cyl('KET_knob', 0.0072, 0.016, tp(0.0, 0.12), M['oak_handle'], c, r2=0.0098, rot=(0, t, 0))
+    tube('KET_spout', [tp(0.05, 0.02), tp(0.077, 0.028), tp(0.096, 0.058), tp(0.111, 0.098), tp(0.128, 0.123), tp(0.146, 0.127), tp(sx, sz)], 0.0042, M['steel'], c)
+    tube('KET_bracket', [tp(-0.036, 0.104), tp(-0.06, 0.113), tp(-0.08, 0.11)], 0.0038, M['steel'], c)
+    tube('KET_grip', [tp(-0.082, 0.107), tp(-0.088, 0.082), tp(-0.082, 0.052), tp(-0.07, 0.032)], 0.0085, M['oak_handle'], c)
+    tube('KET_foot', [tp(-0.071, 0.034), tp(-0.064, 0.028), tp(-0.058, 0.026)], 0.0036, M['steel'], c)
+
+
+def mat_americano_top(name):
+    """아메리카노 겉면: 처음엔 에스프레소 크레마, 뜨거운 물이 들수록 크레마가 흩어져 짙은 커피 사이에 옅은 얼룩만 남음.
+    돌려줌: (재질, 흩어진 정도 값 노드 0~1)"""
+    m, nt, b = new_mat(name)
+    N, L = nt.nodes, nt.links
+    tc = N.new('ShaderNodeTexCoord')
+
+    def noise(scale, detail):
+        nz = N.new('ShaderNodeTexNoise')
+        nz.inputs['Scale'].default_value = scale
+        nz.inputs['Detail'].default_value = detail
+        L.new(tc.outputs['Object'], nz.inputs['Vector'])
+        return nz
+
+    def math_node(op, a, b):
+        n = N.new('ShaderNodeMath')
+        n.operation = op
+        for idx, v in ((0, a), (1, b)):
+            if isinstance(v, (int, float)):
+                n.inputs[idx].default_value = v
+            else:
+                L.new(v, n.inputs[idx])
+        return n
+    crema = ramp2(N, lin('#8A5428'), lin('#C18A4D'), 0.35, 0.7)
+    L.new(noise(70.0, 6.0).outputs['Fac'], crema.inputs['Fac'])
+    coffee = ramp2(N, lin('#2A1206'), lin('#47210B'), 0.35, 0.7)  # 위에서 본 아메리카노: 붉은 기 도는 짙은 갈색(너무 검으면 비침만 보여 회색)
+    L.new(noise(26.0, 6.0).outputs['Fac'], coffee.inputs['Fac'])
+    K = N.new('ShaderNodeValue')
+    K.outputs[0].default_value = 0.0
+    # 크레마가 남는 곳: 얼룩 노이즈가 (0.2 + 0.45K) 보다 큰 곳(가장자리 0.06 에 걸쳐 번짐). K = 0 이면 온통 크레마
+    lo = math_node('MULTIPLY', K.outputs[0], 0.45)
+    lo = math_node('ADD', lo.outputs['Value'], 0.2)
+    hi = math_node('ADD', lo.outputs['Value'], 0.06)
+    keep = map_range(N, 0.0, 1.0, 0.0, 1.0)
+    keep.clamp = True
+    L.new(noise(16.0, 3.0).outputs['Fac'], keep.inputs['Value'])
+    L.new(lo.outputs['Value'], keep.inputs['From Min'])
+    L.new(hi.outputs['Value'], keep.inputs['From Max'])
+    d = N.new('ShaderNodeVectorMath')  # 색 = 커피 + (크레마 - 커피) × 남은 크레마
+    d.operation = 'SUBTRACT'
+    L.new(crema.outputs['Color'], d.inputs[0])
+    L.new(coffee.outputs['Color'], d.inputs[1])
+    sc = N.new('ShaderNodeVectorMath')
+    sc.operation = 'SCALE'
+    L.new(d.outputs['Vector'], sc.inputs[0])
+    L.new(keep.outputs['Result'], sc.inputs['Scale'])
+    add = N.new('ShaderNodeVectorMath')
+    add.operation = 'ADD'
+    L.new(coffee.outputs['Color'], add.inputs[0])
+    L.new(sc.outputs['Vector'], add.inputs[1])
+    L.new(add.outputs['Vector'], b.inputs['Base Color'])
+    S(b, rough=0.26, spec=0.3)
+    return m, K
+
+
+AMERICANO = None
+
+
+def shot_water(sdir, preview):
+    """물 붓기(아메리카노): 붓기와 같은 받침 위 머그(에스프레소가 든)를 위에서(약 62°) 내려다보고, 왼쪽에서 기운 드립 주전자로 뜨거운 물을 부음.
+    물이 들수록 크레마가 흩어져 아메리카노 색이 됨. 17단계 × 물줄기 있음/없음(붓기와 같은 단계 수)"""
+    global AMERICANO
+    mx, my, z0 = 0.10, -0.20, 0.0072
+    for ob in list(coll('water_static').objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
+    clear_dyn()
+    build_saucer_mug(mx, my, z0, 'water_static')
+    tip = (mx - 0.024, my, z0 + 0.0913 + 0.035)  # 주둥이 끝: 머그 왼쪽 가장자리 쪽, 테두리 위 3.5cm
+    build_pour_kettle(tip, 24.0, 'water_static')
+    show_only(('water_static', 'shot_dyn'))
+    cam.data.lens = 50
+    el, d = math.radians(62), 0.78
+    tgt = Vector((mx - 0.075, my + 0.005, 0.06))
+    cam.location = tgt + Vector((0.0, -math.cos(el) * d, math.sin(el) * d))
+    look(cam, tgt)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_object = None
+    cam.data.dof.focus_distance = (Vector((mx, my, z0 + 0.07)) - cam.location).length
+    cam.data.dof.aperture_fstop = 5.6
+    cy.seed = 11
+    if AMERICANO is None:
+        AMERICANO = mat_americano_top('americano_top')
+    am, K = AMERICANO
+
+    def build(k, p, flow):
+        K.outputs[0].default_value = 0.8 * sstep(p / 0.75)  # 다 차도 크레마 얼룩이 조금 남음
+        surf = build_mug_liquid((mx, my), z0, 0.026 + p * (0.0895 - 0.026), am, 'shot_dyn')
+        if p >= 0.999:  # 넘쳐요: 받침에 흘러넘침
+            ball('WATER_spill', 0.02, (mx + 0.05, my - 0.028, 0.011), M['americano'], 'shot_dyn', scale=(1.5, 0.9, 0.07))
+        if flow:  # 거위목 끝에서 거의 곧게 떨어지는 가는 물줄기
+            end = (tip[0] + 0.007, tip[1], surf)
+            tube('WATER_stream', [tip, (tip[0] + 0.0045, tip[1], (tip[2] + surf) / 2), end], 0.0019, M['water'], 'shot_dyn')
+    if preview:
+        for name, k, p, flow in (('preview_water.jpg', 13, 0.8125, True), ('preview_water0.jpg', 1, 0.0625, True)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)  # 배경판: 에스프레소만 든 머그
+    render(os.path.join(sdir, 'water_plate.png'), SHOT_RES, 384)
+    pts = [Vector((mx + dx, my + dy, zz)) for dx in (-0.046, 0.046) for dy in (-0.046, 0.046) for zz in (z0 + 0.01, z0 + 0.095)]
+    pts += [Vector(tip), Vector((tip[0] - 0.012, tip[1], tip[2] + 0.012))]
+    pts += [Vector((mx + 0.05 + dx, my - 0.028 + dy, 0.011)) for dx in (-0.032, 0.032) for dy in (-0.02, 0.02)]
+    render_frames(sdir, 'water', frame_rect(pts), 17, build)
+
+
+SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam': shot_foam, 'water': shot_water,
          'pour_latte': lambda sdir, preview: shot_pour(sdir, preview, only='latte')}  # 라테 프레임만(배경판·우유는 그대로)
 
 

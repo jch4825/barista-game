@@ -24,6 +24,7 @@
  *  - 손 기술의 한 컷(Q-R9): assets/shots/ 에 그 손 기술의 배경판·프레임이 있으면 작업대 칸을 그 장면으로 채우고(shotView),
  *    띠 값에 맞는 단계의 프레임(줄기·김 있음/없음)을 겹침. 지금은 샷 내리기(extract: 잔이 참)·우유 데우기(steam: 온도계 바늘 + 김)·
  *    붓기(pour_milk 빈 머그에 우유 · pour_latte 에스프레소에 우유, 바리스타 단계에서 알맞으면 하트)·거품 내기(foam: 피처 속 우유가 부풀어 오름).
+ *    손 기술이 아닌 물 붓기(water: 에스프레소가 든 머그에 드립 주전자로 뜨거운 물)는 같은 확대 창에서 저절로 차오름(autoShot).
  *    만드는 법은 tools/blender/scene_bench.py(shots) → shots_post.py
  * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 기술을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기])
  *  · window.__mgBad(레시피를 한 번 틀리게: 바탕 재료를 바꿈)
@@ -1456,15 +1457,43 @@ export async function brew(opts = {}) {
     }
   }
 
-  /** 손 기술 없이 넣는 것(물·시럽·얼음) */
+  /** 손 기술 없이 넣는 것(물·시럽·얼음). 에스프레소가 든 머그에 뜨거운 물은 블렌더 한 컷(물 붓기)이 있으면 그것으로 */
   async function autoStep(id, soFar, res) {
     const text = id === 'ice' ? TEMPS.iced.auto : INGREDIENTS[id]?.auto?.[made.temp] || INGREDIENTS[id]?.auto?.hot || '';
+    const shot = id === 'water' && made.cup === 'mug' && made.temp === 'hot' && soFar.has('espresso') ? shotView('water') : null;
     soFar.add(id);
+    if (shot) {
+      await autoShot(shot, `${INGREDIENTS[id].name} 붓기`, text);
+      return;
+    }
     setPanel(askRow('', text));
     setScene({ left: objArt('obj_machine', 'machine'), center: drinkArt(made, res, soFar, 'big'), right: id === 'ice' ? objArt('iced', 'mid is-on') : objArt(INGREDIENTS[id]?.obj, 'mid is-on'), mode: 'auto' });
     audio.sfx(id === 'ice' ? 'ice' : id === 'syrup' ? 'stack' : 'pour');
     talkAfter(sysV(text));
     await w(pauseMs(1300));
+  }
+
+  /** 저절로 하는 일의 한 컷: 손 기술처럼 확대 창에 띄우되 띠 · 단추 없이 잔이 차오름(붓기와 같은 단계 수라 알맞아요 칸 가운데까지) */
+  async function autoShot(shot, name, text) {
+    setPanel();
+    const view = h('div', { class: 'bw-close-view' });
+    const card = h('section', { class: 'bw-close is-auto', role: 'group', 'aria-label': name },
+      h('header', { class: 'bw-close-head' }, h('h3', { text: name }), h('p', { text })),
+      h('div', { class: 'bw-close-body' }, view));
+    closeUpOff();
+    closeEl = card;
+    bench.append(card);
+    bench.classList.add('is-close');
+    setScene({ mode: 'water', shot, host: view, keep: true });
+    audio.sfx('pour');
+    talkAfter(sysV(text));
+    const end = 0.8125;
+    for (let i = 0; i <= 12; i++) {
+      shot.set((end * i) / 12, true);
+      await w(pauseMs(110));
+    }
+    shot.set(end, false);
+    await w(pauseMs(900));
   }
 
   /** 고른 레시피대로 만들기(틀린 레시피도 고른 대로) */
