@@ -1,5 +1,5 @@
 {
-  "_comment": "인물별 Supertonic 3 목소리 배정. voice: M1~M5 / F1~F5, speed: 0.7~2.0. 목소리가 10개뿐이라 새 인물(지은·사장님·해순·지안)은 직업 마1스톤 인물과 목소리를 나눠 쓰고 빠르기로 구별합니다(2026-10-28, 들어 보고 바꿈). 속마음·나레이션은 지은의 목소리. 바꾼 뒤 npm run voices(--force 로 전체 재생성).",
+  "_comment": "인물별 Supertonic 3 목소리 배정. voice: M1~M5 / F1~F5, speed: 0.7~2.0. 목소리가 10개뿐이라 새 인물(지은·사장님·해순·지안)은 직업 마1스톤 인물과 목소리를 나눠 쓰고 빠르기로 구별합니다(2026-10-28, 들어 보고 바꿈). 속마음·나레이션은 지은의 목소리. 바꾼 뒤 npm run voices(--force 로 전체 재생성). 2026-10-31 풀 버전: 단골 여섯 명(도 씨 M4 · 강 씨 M5 · 한 씨 M2 · 은주 F1 · 수민 F2 · 노 씨 M1)과 금 씨 · 조연을 임시로 배정(들어 보고 정함, docs/requests_full.md).",
   "_model": "supertonic-3",
   "_lang": "ko",
   "_total_step": 8,
@@ -98,5 +98,53 @@
   "sys": {
     "voice": "F1",
     "speed": 1
+  },
+  "do": {
+    "voice": "M4",
+    "speed": 0.9
+  },
+  "kang": {
+    "voice": "M5",
+    "speed": 0.85
+  },
+  "han": {
+    "voice": "M2",
+    "speed": 0.95
+  },
+  "eunju": {
+    "voice": "F1",
+    "speed": 1.0
+  },
+  "sumin": {
+    "voice": "F2",
+    "speed": 1.05
+  },
+  "noh": {
+    "voice": "M1",
+    "speed": 0.85
+  },
+  "geum": {
+    "voice": "M2",
+    "speed": 1.2
+  },
+  "actor": {
+    "voice": "F1",
+    "speed": 0.95
+  },
+  "agent": {
+    "voice": "M1",
+    "speed": 1.15
+  },
+  "mom2": {
+    "voice": "F4",
+    "speed": 1.05
+  },
+  "young_fisher": {
+    "voice": "M1",
+    "speed": 1.05
+  },
+  "han_daughter": {
+    "voice": "F2",
+    "speed": 1.15
   }
 }

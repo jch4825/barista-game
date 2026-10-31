@@ -10,16 +10,19 @@ import { img } from '../core/assets.js';
 import { renderBg } from '../data/backgrounds.js';
 import { CHARS, portraitHTML, resolveFace, hasStand, standURL, standFace } from '../data/characters.js';
 import { popEmote, FACE_EMOTE } from './emote.js';
+import { cgPlaceholder } from './cg-placeholder.js';
+import { CGS } from '../data/cg.js';
 
 const SLOTS = ['left', 'center', 'right'];
 const WANT_LOOK = { left: 'right', right: 'left' }; // 자리별로 인물이 바라봐야 하는 쪽(무대 가운데)
-const state = { bg: null, variant: null, cast: { left: null, center: null, right: null }, camera: 'normal', fx: {}, cg: null };
+const state = { bg: null, variant: null, cast: { left: null, center: null, right: null }, camera: 'normal', fx: {}, cg: null, chalk: null };
 let bgA;
 let bgB;
 let showingA = true;
 let stageEl;
 let fxEl;
 let cgEl;
+let chalkEl;
 let blinkTimer = null;
 let talkTimer = null;
 let talkWho = null;
@@ -92,7 +95,8 @@ export const stage = {
     bgB = h('div', { class: 'bg-layer' });
     fxEl = h('div', { class: 'bg-fx' });
     cgEl = h('div', { class: 'bg-cg', 'aria-hidden': 'true' });
-    layer.replaceChildren(bgA, bgB, fxEl, cgEl);
+    chalkEl = h('div', { class: 'bg-chalk', 'aria-hidden': 'true' });
+    layer.replaceChildren(bgA, bgB, fxEl, cgEl, chalkEl);
     stageEl = $('#layer-stage');
     clearInterval(blinkTimer);
     blinkTimer = setInterval(tickBlink, 250);
@@ -100,6 +104,7 @@ export const stage = {
 
   async setBg(id, variant) {
     if (state.cg) stage.setCg(null);
+    if (state.chalk) stage.chalk(null);
     if (state.bg === id && state.variant === variant) return;
     state.bg = id;
     state.variant = variant || null;
@@ -114,20 +119,47 @@ export const stage = {
     if (!prev.classList.contains('is-on')) prev.innerHTML = '';
   },
 
-  /** 이벤트 CG (assets/cg/cg_{id}.jpg). 그림이 없으면 아무것도 하지 않고 false(보이던 CG 와 상태는 그대로: 그림이 오기 전에는 앞 CG 가 이어짐) */
+  /**
+   * 이벤트 CG (assets/cg/cg_{id}.jpg). 그림이 없으면 임시 그림(cg-placeholder.js, 대체 요망)을 띄움.
+   * js/data/cg.js 에 없는 id 면 아무것도 하지 않고 false. 바뀌면 칠판 글씨(chalk)는 지움
+   */
   setCg(id) {
     const u = id ? img.url('cg', `cg_${id}`) : null;
-    if (id && !u) return false;
-    state.cg = u ? id : null;
-    if (u) {
-      cgEl.replaceChildren(h('img', { src: u, alt: '' }));
+    const ph = id && !u ? cgPlaceholder(id) : null;
+    if (id && !u && !ph) return false;
+    if (state.cg !== (id || null)) stage.chalk(null);
+    state.cg = id || null;
+    if (id) {
+      cgEl.replaceChildren(u ? h('img', { src: u, alt: '' }) : ph);
       requestAnimationFrame(() => cgEl.classList.add('is-on'));
     } else {
       cgEl.classList.remove('is-on');
       setTimeout(() => { if (!state.cg) cgEl.replaceChildren(); }, dur(500));
     }
-    stageEl.classList.toggle('cg-on', Boolean(u));
-    return Boolean(u);
+    stageEl.classList.toggle('cg-on', Boolean(id));
+    return Boolean(id);
+  },
+
+  /**
+   * 칠판 글씨(분필): 지금 CG 의 칠판 자리(cg.js 의 chalk: { x, y, w, rot } %)에 글자를 한 자씩 삐뚤게 씀. null 이면 지움.
+   * 사장님이 쓰는 글씨는 shaky: true(글자마다 조금씩 기울고 오르내림, PRD 5.5 '글씨가 삐뚤다')
+   */
+  chalk(text, { shaky = false, instant = false } = {}) {
+    state.chalk = text ? { text, shaky } : null;
+    if (!chalkEl) return;
+    if (!text) { chalkEl.replaceChildren(); chalkEl.classList.remove('is-on'); return; }
+    const spot = CGS[state.cg]?.chalk || { x: 50, y: 34, w: 46, rot: 0 };
+    const lines = String(text).split('\n');
+    let n = 0;
+    const box = h('div', { class: `chalk-text ${shaky ? 'is-shaky' : ''}`.trim(), style: { left: `${spot.x}%`, top: `${spot.y}%`, width: `${spot.w}%`, '--rot': `${spot.rot || 0}deg` } },
+      ...lines.map((ln) => h('span', { class: 'chalk-line' }, ...[...ln].map((ch) => {
+        n += 1;
+        const r = shaky ? ((n * 37) % 11) - 5 : 0; // 같은 글씨는 늘 같은 모양(무작위 아님)
+        const dy = shaky ? ((n * 53) % 9) - 4 : 0;
+        return h('i', { text: ch, style: { '--r': `${r}deg`, '--dy': `${dy}px`, '--d': instant ? '0s' : `${(n * 0.12).toFixed(2)}s` } });
+      }))));
+    chalkEl.replaceChildren(box);
+    chalkEl.classList.add('is-on');
   },
 
   /** 출연진 전체 교체: { left:'jieun:smile', right:'owner' } (빠진 칸은 비움) */
@@ -260,7 +292,7 @@ export const stage = {
   hideCast(hidden) { stageEl.classList.toggle('is-hidden', Boolean(hidden)); },
 
   getState() {
-    return JSON.parse(JSON.stringify({ bg: state.bg, variant: state.variant, cast: state.cast, camera: state.camera, fx: state.fx, cg: state.cg }));
+    return JSON.parse(JSON.stringify({ bg: state.bg, variant: state.variant, cast: state.cast, camera: state.camera, fx: state.fx, cg: state.cg, chalk: state.chalk }));
   },
 
   restore(st) {
@@ -272,6 +304,7 @@ export const stage = {
       stage.setBg(st.bg, st.variant);
     }
     stage.setCg(st.cg || null);
+    if (st.chalk) stage.chalk(st.chalk.text, { shaky: st.chalk.shaky, instant: true });
     stage.setCast(Object.fromEntries(SLOTS.map((s) => [s, st.cast?.[s] ? `${st.cast[s].id}:${st.cast[s].face}` : null])));
     stage.camera(st.camera || 'normal');
     const root = $('#screen');
@@ -284,6 +317,7 @@ export const stage = {
     stageEl.replaceChildren();
     state.cast = { left: null, center: null, right: null };
     stage.setCg(null);
+    stage.chalk(null);
     stage.camera('normal');
     const root = $('#screen');
     [...root.classList].filter((c) => c.startsWith('fx-')).forEach((c) => root.classList.remove(c));

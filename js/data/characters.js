@@ -50,6 +50,68 @@ export const CHARS = {
     svg: { skin: '#F6D5C0', hair: '#2E2420', style: 'ponytail', outfit: '#E8A9B8', acc: [], bg: '#FCE8EE' },
   },
 
+  /* ---------- 단골 여섯 명 + 금 씨 + 조연(2026-10-31 풀 버전). 그림이 오기 전에는 임시 초상(svg, 대체 요망: docs/requests_full.md) ---------- */
+  do: {
+    name: '도 씨', role: '우체부', color: '#B0413E', voice: 'do', // 우체국 빨강(경고 빨강 --red 와 다른 짙은 벽돌색)
+    standScale: 0.85,
+    svg: { skin: '#E6BE98', hair: '#6E6A66', style: 'cap', outfit: '#2F5D8A', acc: ['wrinkles', 'mailbag'], bg: '#E4ECF4' },
+  },
+  kang: {
+    name: '강 씨', role: '어부', color: '#3B5E6B', voice: 'kang',
+    standScale: 0.85,
+    svg: { skin: '#D2A07A', hair: '#3A3A3A', style: 'short', outfit: '#5E7154', acc: ['wrinkles', 'beanie', 'stubble'], bg: '#E2ECEE' },
+  },
+  han: {
+    name: '한 씨', role: '버스 기사', color: '#4A5D8A', voice: 'han',
+    standScale: 0.85,
+    svg: { skin: '#EBC6A6', hair: '#2B2320', style: 'short', outfit: '#4A5D8A', acc: ['driver_cap', 'tie_loose'], bg: '#E6EAF4' },
+  },
+  eunju: {
+    name: '은주', role: '아기 엄마', color: '#C2708A', voice: 'eunju',
+    standScale: 0.85,
+    svg: { skin: '#F2CDB1', hair: '#3A2A22', style: 'bun', outfit: '#E8B4C4', acc: ['baby_sling'], bg: '#FBE8EE' },
+  },
+  sumin: {
+    name: '수민', role: '고3 학생', color: '#5B6BB0', voice: 'sumin',
+    standScale: 0.85,
+    svg: { skin: '#F4D2B8', hair: '#1E1A18', style: 'bob', outfit: '#3E4A7A', acc: ['earphones'], bg: '#E8EAF6' },
+  },
+  noh: {
+    name: '노 씨', role: '철물점 주인', color: '#8A5A2B', voice: 'noh',
+    standScale: 0.85,
+    svg: { skin: '#E3B892', hair: '#A6A39E', style: 'short', outfit: '#7A6A55', acc: ['wrinkles', 'pencil_ear'], bg: '#F2E8DA' },
+  },
+  geum: {
+    name: '금 씨', role: '늘 바쁜 손님', color: '#9A7A2A', voice: 'geum',
+    standScale: 0.85,
+    svg: { skin: '#EBC6A6', hair: '#2B2320', style: 'short', outfit: '#3A3A40', acc: ['tie_loose', 'phone'], bg: '#F2EEE2' },
+  },
+  actor: {
+    name: '배우', role: '유명 배우', color: '#7A4AA0', voice: 'actor',
+    standScale: 0.85,
+    svg: { skin: '#F4D6C4', hair: '#3A2A22', style: 'long', outfit: '#EDE6F2', acc: ['sunglasses'], bg: '#EFE6F6' },
+  },
+  agent: {
+    name: '매니저', role: '배우의 매니저', color: '#5A5F6A', voice: 'agent',
+    standScale: 0.85,
+    svg: { skin: '#EBC6A6', hair: '#1E1A18', style: 'messy', outfit: '#2F3A55', acc: ['headset'], bg: '#E6E8EE' },
+  },
+  mom2: {
+    name: '처음 온 엄마', role: '손님', color: '#B08A5A', voice: 'mom2',
+    standScale: 0.85,
+    svg: { skin: '#F0C9A6', hair: '#4A3528', style: 'long', outfit: '#C9B79A', acc: ['baby_sling'], bg: '#F4EEE2' },
+  },
+  young_fisher: {
+    name: '젊은 어부', role: '어부', color: '#4A7A8A', voice: 'young_fisher',
+    standScale: 0.85,
+    svg: { skin: '#DDAE86', hair: '#1E1A18', style: 'messy', outfit: '#E0A040', acc: ['beanie'], bg: '#E2EEF0' },
+  },
+  han_daughter: {
+    name: '한 씨의 딸', role: '중학생', color: '#C77D8E', voice: 'han_daughter',
+    standScale: 0.85,
+    svg: { skin: '#F6D5C0', hair: '#2E2420', style: 'long', outfit: '#8FA7C9', acc: ['scarf'], bg: '#FCE8EE' },
+  },
+
   /* ---------- 직업 마1스톤 인물: 새 게임에서는 손님으로만 나옴 ---------- */
   yeonwoo: {
     name: '연우', full: '정연우', role: '신입 크루', color: '#E3262E', voice: 'yeonwoo',

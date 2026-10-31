@@ -2017,6 +2017,7 @@ export async function brew(opts = {}) {
     }
     // 손님이 받음(알맞게 만들었거나 그대로 드림). 단골의 평소 주문이면 수첩의 단골 쪽에 남음(PRD 6.3)
     R.made.push(cur.menu);
+    store.addBook([cur.menu]); // 메뉴 도감(해가 바뀌어도 남음)
     if (REGULARS[cur.who]?.usual?.menu === cur.menu) store.setFlag('usuals', { ...(store.flag('usuals') || {}), [cur.who]: true });
     showGuest('smile');
     setReact(words);
