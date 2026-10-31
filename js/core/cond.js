@@ -5,6 +5,7 @@
  *  - { trust: { haesun: '>=4' } } 단골 신뢰(선택 기억 'touch' 의 그 사람 점수 합, js/data/regulars.js)의 비교
  *  - { warmth: '>=16' } 마을 온기 = 단골 8명의 단계(1~3) 합(8~24, PRD 8.1). 금 씨의 말투 · 겨울 끝 장면의 깊이
  *  - { album: 'haesun' } 엔딩 앨범에 그 단골의 액자가 열렸는지(두 번째 해에도 남음)
+ *  - { pick: 'jian.summer_anything=ask_color' } 그 대응 기회에서 고른 선택지(선택 기억 'picks'). '|' 로 여럿: 'a.b=x|y'
  *  - 배열이면 하나라도 맞으면 참
  */
 
@@ -57,6 +58,11 @@ export function checkCond(cond, flag, opts = {}) {
       if (!(opts.album || {})[v]) return false;
       continue;
     }
+    if (k === 'pick') {
+      const [key, want = ''] = String(v).split('=');
+      if (!want.split('|').includes(String((flag('picks') || {})[key] ?? ''))) return false;
+      continue;
+    }
     if (!compare(Number(flag(k) ?? 0), v)) return false;
   }
   return true;
@@ -70,6 +76,7 @@ export function condErrors(cond, regulars = null) {
     for (const [k, v] of Object.entries(c)) {
       if (k === 'flag' || k === 'notFlag') { if (!String(v)) errs.push(`${k} 값이 비었음`); continue; }
       if (k === 'album') { if (regulars && !regulars.includes(v)) errs.push(`album: 없는 단골 ${v}`); continue; }
+      if (k === 'pick') { if (!/^[a-z_]+\.[a-z0-9_]+=[a-z0-9_|]+$/.test(String(v))) errs.push(`pick 은 '사람.기회=선택지' 꼴: ${v}`); continue; }
       if (k === 'trust') {
         if (!v || typeof v !== 'object') { errs.push('trust 는 { 사람: \'>=4\' } 꼴이어야 함'); continue; }
         for (const [who, rule] of Object.entries(v)) {

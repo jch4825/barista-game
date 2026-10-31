@@ -56,7 +56,9 @@ let curSchedule = [];
 let checks = [];
 
 /** 조건(onlyIf)이 보는 선택 기억 이름: flag·notFlag 는 '=' 앞, 숫자 비교({ 이름: '>=4' })는 그 이름, 단골 신뢰(trust)는 'touch' (js/core/cond.js) */
-const condFlags = (c) => (Array.isArray(c) ? c.flatMap(condFlags) : Object.entries(c || {}).filter(([k]) => k !== 'album').map(([k, v]) => (k === 'flag' || k === 'notFlag' ? String(v).split('=')[0] : k === 'trust' || k === 'warmth' ? 'touch' : k)));
+const condFlags = (c) => (Array.isArray(c) ? c.flatMap(condFlags) : Object.entries(c || {}).filter(([k]) => k !== 'album').map(([k, v]) => (k === 'flag' || k === 'notFlag' ? String(v).split('=')[0] : k === 'trust' || k === 'warmth' ? 'touch' : k === 'pick' ? 'picks' : k)));
+// pick 조건이 가리키는 선택지가 실제로 있는지(대응 기회 · 선택지 id)
+const pickUsed = [];
 const REGULAR_IDS = Object.keys(REGULARS);
 // 대본에서 부른 대응 기회: '사람.기회' → 에피소드 (한 기회는 이야기에서 한 번만)
 const touchUsed = new Map();
@@ -124,6 +126,7 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
       if (b.ifFirst !== false) {
         for (const e of condErrors(b.if, REGULAR_IDS)) err(ep, `조건(if) ${e}: ${b.t}`);
         for (const f of condFlags(b.if)) flagsUsed.push([ep, f]);
+        for (const c of [b.if].flat()) if (c?.pick) pickUsed.push([ep, c.pick]);
       }
     }
     switch (b.t) {
@@ -199,6 +202,7 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
         break;
       case 'respond': { // 한 잔의 마음: 기회의 내용(장면·힌트·선택지)은 아래 단골 검사에서 한 번만 봄
         flagsSet.add('touch');
+        flagsSet.add('picks');
         if (!REGULARS[b.who]) { err(ep, `단골 없음: respond('${b.who}') (js/data/regulars.js)`); break; }
         if (!REGULARS[b.who].touches[b.touch]) { err(ep, `대응 기회 없음: respond('${b.who}', '${b.touch}')`); break; }
         const key = `${b.who}.${b.touch}`;
@@ -353,6 +357,15 @@ for (const ep of [...EPISODES, ENDING].filter(Boolean)) {
       if (!touchUsed.has(where)) warn(where, '대본 어디에서도 부르지 않는 대응 기회');
     }
   }
+}
+
+// pick 조건: '사람.기회=선택지' 가 실제로 있는지
+for (const [ep, v] of pickUsed) {
+  const [key, want = ''] = String(v).split('=');
+  const [who, tid] = key.split('.');
+  const t = REGULARS[who]?.touches?.[tid];
+  if (!t) { err(ep, `pick: 없는 대응 기회 ${key}`); continue; }
+  for (const w of want.split('|')) if (!t.choices.some((c) => c.id === w)) err(ep, `pick: ${key} 에 없는 선택지 ${w}`);
 }
 
 // 사장의 숨은 장면 11(PRD 5.6): 이야기 어딘가에 seen(n) 이 한 번씩

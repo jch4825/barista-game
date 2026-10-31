@@ -431,6 +431,8 @@ async function respondBeat(s, b, index, w) {
     const c = t.choices[order[res.index]];
     // 신뢰 = 기회마다 마지막 대응의 점수(선택 기억 'touch'). 되감기·저장과 함께 돌아감
     store.setFlag('touch', { ...(store.flag('touch') || {}), [id]: c.score });
+    // 고른 대응(선택지 id): 그 뒤 장면이 고른 것에 따라 달라질 때 onlyIf({ pick: '사람.기회=선택지' }) 가 봄(예: 지안이 고른 색의 음료)
+    store.setFlag('picks', { ...(store.flag('picks') || {}), [id]: c.id });
     store.log({
       type: 'respond', ep: s.ep.id, id, who: b.who, touch: b.touch, season: t.season, nth: t.nth,
       choice: c.id, kind: c.kind, score: c.score, chosen: plain(fill(c.label)), replays, ms: Math.round(performance.now() - t0),

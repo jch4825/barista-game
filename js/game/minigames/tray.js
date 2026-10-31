@@ -132,8 +132,16 @@ export async function tray(opts = {}) {
   };
 
   draw();
-  await startGate(path, { note: '천천히 해도 괜찮아요.' });
-  if (stopped()) return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 };
+  // 자동 플레이(?debug): 시작 창보다 먼저 열어 둠(시작 창이 있으면 [시작!]부터 누름)
+  const pressGate = () => path.querySelector('.mg-gate .mg-go')?.click();
+  if (isDebug()) {
+    window.__mgAuto = async () => { robot = 'auto'; pressGate(); await doneP; };
+    window.__mgBad = async () => { robot = 'bad'; pressGate(); while (!spills && !over && !stopped()) await sleep(60); robot = 'auto'; };
+  }
+  let earlyAbort = false;
+  f.onAbort(() => { earlyAbort = true; doneRes('abort'); });
+  await Promise.race([startGate(path, { note: '천천히 해도 괜찮아요.' }), doneP]);
+  if (earlyAbort || stopped()) { if (isDebug()) { delete window.__mgAuto; delete window.__mgBad; } f.close(); return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; }
   [goB, restB, watchB].forEach((b) => { if (b) b.disabled = false; });
   setTimeout(() => goB.focus({ preventScroll: true }), 40);
 
@@ -208,10 +216,6 @@ export async function tray(opts = {}) {
     }
   }, () => (robot ? 3 : 1));
 
-  if (isDebug()) {
-    window.__mgAuto = async () => { robot = 'auto'; await doneP; };
-    window.__mgBad = async () => { robot = 'bad'; while (!spills && !over && !stopped()) await sleep(60); robot = 'auto'; };
-  }
   f.onAbort(() => { over = true; curLoop.stop(); doneRes('abort'); });
 
   const how = await doneP;
