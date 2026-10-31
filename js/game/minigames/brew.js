@@ -58,6 +58,7 @@ import {
   orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
 } from '../../data/menu.js';
 import { REGULARS } from '../../data/regulars.js';
+import { josa } from '../../core/text.js';
 
 const TITLE = '커피 만들기';
 const HOWTO = '주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.';
@@ -1198,11 +1199,13 @@ export async function brew(opts = {}) {
     ].filter(Boolean));
   }
 
-  /** 아래 '손' 띠: 할 일 · 넣은 것(누르면 뺌) · [처음부터 다시] · [만들기 시작]. hint: 손님이 다시 보라고 한 곳 · lock: 보기만 */
-  function handRow({ hint = [], lock = false } = {}) {
-    const chip = (label, art, onClick, isHint) => {
-      const b = h('button', { class: `bw-chip ${isHint ? 'is-hint' : ''}`.trim(), disabled: lock, 'aria-label': `${label}${lock ? '' : ', 누르면 빼요'}` },
-        art, h('em', { text: label }), isHint ? h('span', { class: 'bw-chip-hint', text: '다시 봐요' }) : null);
+  /** 아래 '손' 띠: 할 일 · 넣은 것(누르면 뺌) · [처음부터 다시] · [만들기 시작]. hint: 손님이 다시 보라고 한 곳 · lock: 보기만
+   *  miss: 레시피가 틀렸을 때 재료 { missing: 빠진 것(빈 칸을 더해 그 이름 + '빠진 재료'), extra: 넘치는 것('빼요') }. 맞게 넣은 재료에는 표시 없음
+   *  (2026-11-01 사용자: 물이 빠졌는데 원두가 잘못되었다고 표시됨 → 원두가 아니라 빈 칸이 더해지며 빠진 재료로) */
+  function handRow({ hint = [], lock = false, miss = null } = {}) {
+    const chip = (label, art, onClick, isHint, tag = '다시 봐요') => {
+      const b = h('button', { class: `bw-chip ${isHint ? 'is-hint' : ''}`.trim(), disabled: lock, 'aria-label': `${label}${isHint ? `, ${tag}` : ''}${lock ? '' : ', 누르면 빼요'}` },
+        art, h('em', { text: label }), isHint ? h('span', { class: 'bw-chip-hint', text: tag }) : null);
       if (!lock) onTap(b, onClick);
       return b;
     };
@@ -1210,8 +1213,15 @@ export async function brew(opts = {}) {
     slots.push(made.cup ? chip(CUPS[made.cup].name, objArt(cupArtId(made.cup), 'small'), () => pickCup(made.cup), hint.includes('cup'))
       : h('span', { class: `bw-chip is-empty ${hint.includes('cup') ? 'is-hint' : ''}`.trim() }, h('i', { html: ICON('cup') }), h('em', { text: '컵' })));
     const ingHint = hint.includes('base') || hint.includes('adds');
-    for (const id of ings) slots.push(chip(INGREDIENTS[id].name, objArt(INGREDIENTS[id].obj, 'small'), () => pickIng(id), ingHint));
-    if (!ings.length) slots.push(h('span', { class: `bw-chip is-empty ${ingHint ? 'is-hint' : ''}`.trim() }, h('i', { html: ICON('milk') }), h('em', { text: '재료' })));
+    for (const id of ings) {
+      slots.push(miss ? chip(INGREDIENTS[id].name, objArt(INGREDIENTS[id].obj, 'small'), () => pickIng(id), miss.extra.includes(id), '빼요')
+        : chip(INGREDIENTS[id].name, objArt(INGREDIENTS[id].obj, 'small'), () => pickIng(id), ingHint));
+    }
+    for (const id of miss?.missing || []) { // 빠진 재료: 빈 칸에 그 이름
+      slots.push(h('span', { class: 'bw-chip is-empty is-hint is-missing', role: 'note', 'aria-label': `빠진 재료: ${INGREDIENTS[id].name}` },
+        objArt(INGREDIENTS[id].obj, 'small'), h('em', { text: INGREDIENTS[id].name }), h('span', { class: 'bw-chip-hint', text: '빠진 재료' })));
+    }
+    if (!ings.length && !miss?.missing.length) slots.push(h('span', { class: `bw-chip is-empty ${ingHint ? 'is-hint' : ''}`.trim() }, h('i', { html: ICON('milk') }), h('em', { text: '재료' })));
     ui.tempChip = null;
     if (pantry.temps.length > 1) {
       // 온도: 누르면 따뜻하게 · 차갑게를 고르는 작은 창(openTemp)
@@ -2088,11 +2098,18 @@ export async function brew(opts = {}) {
       showGuest('surprised');
       const wrongSay = cur.usual ? SAY.usualWrong : SAY.wrong;
       setReact(wrongSay);
-      const hint = diff[0] === 'cup' ? cupHintOf(cur) : diff[0] === 'temp' ? TEMP_HINT[orderTemp(cur)] : HINT[diff[0]];
+      // 재료가 다르면 무엇이 빠졌고 무엇이 넘치는지 이름으로(손 띠에도 빈 칸 · '빼요')
+      const want = [target.base, ...(target.adds || [])].filter(Boolean);
+      const have = [made.base, ...(made.adds || [])].filter(Boolean);
+      const miss = { missing: want.filter((x) => !have.includes(x)), extra: have.filter((x) => !want.includes(x)) };
+      const names = (ids) => ids.map((x) => INGREDIENTS[x]?.name || x).join(' · ');
+      const ingSay = [miss.missing.length ? `${josa(names(miss.missing), '이/가')} 빠졌어요.` : '', miss.extra.length ? `${josa(names(miss.extra), '은/는')} 빼요.` : ''].filter(Boolean).join(' ');
+      const hintOf = (d) => (d === 'cup' ? cupHintOf(cur) : d === 'temp' ? TEMP_HINT[orderTemp(cur)] : ingSay || HINT[d]);
+      const hint = [...new Set(diff.map(hintOf))].slice(0, 2).join(' '); // 다른 곳이 여럿이면 앞의 둘(컵 · 재료 · 온도 차례)
       const hint2 = cur.usual && diff.some((d) => d === 'base' || d === 'adds') ? HINT.usual : HINT.book;
       const again = btn('repeat', '다시 만들기', 'btn-big btn-main bw-remake');
       ui.remake = again;
-      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true }), resultBox(res), h('div', { class: 'bw-row' }, again));
+      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss: miss.missing.length || miss.extra.length ? miss : null }), resultBox(res), h('div', { class: 'bw-row' }, again));
       phase = 'wrong';
       talk(guestV(wrongSay), sysV(hint), sysV(hint2));
       focusLater(again);
