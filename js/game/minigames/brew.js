@@ -72,6 +72,8 @@ const BEAT_WIN = 0.1;
 const WATCH_MS = 2000;  // [보기]: 띠가 처음부터 끝까지 가는 빠르기(알맞아요 칸 가운데에서 멈춤)
 const HOLD_MIN = 0.06;  // 실시간: 이보다 짧게 누르고 떼면 실수로 톡 누른 것으로 봄(보통 약 0.3초)
 const NARROW = 0.8;     // 바리스타 단계: 알맞아요 칸을 가운데로 80%(docs/recipes.md '판정 칸 좁게')
+/** 재료를 컵에 넣는 손 동작(그 뒤부터 컵에 있음): 샷 내리기 · 붓기 · 물 붓기 · 청 떠 넣기 · 가루 떠 넣기 · 시럽. 데우기 · 젓기 같은 것은 넣지 않음 */
+const PUT_IN = new Set(['extract', 'pour', 'water', 'jam', 'powder', 'syrup']);
 
 /** 단계마다 읽어 주는 말 */
 const PROMPT = {
@@ -708,7 +710,8 @@ function drinkArt(made, res = {}, soFar = null, cls = '') {
   const spec = drinkSpec(made, res, soFar);
   const menu = soFar ? null : findMenu(made);
   const r = menu ? RECIPES[menu] : null;
-  const look = r ? (res.art && r.art?.[res.art]) || r.look?.[made.cup] : null;
+  // 라테아트 그림(cup_mug_heart 등)은 머그 그림이라 머그일 때만(종이컵에 하트를 그려도 드릴 때는 종이컵)
+  const look = r ? (made.cup === 'mug' && res.art && r.art?.[res.art]) || r.look?.[made.cup] : null;
   if (look && img.has('objects', look)) {
     const el = objArt(look, `bw-drink ${cls}`);
     if (spec.spill) el.append(h('i', { class: 'bw-spill', 'aria-hidden': 'true' }));
@@ -2026,7 +2029,9 @@ export async function brew(opts = {}) {
     const menu = findMenu(made);
     const steps = prepSteps(made, level);
     const res = { checks: [], art: null };
-    const soFar = new Set(); // 컵에 이미 든 것(그 재료의 마지막 손 동작이 끝나면 들어감: 우유는 붓기 뒤)
+    // 컵에 이미 든 것: 그 재료를 컵에 넣는 손 동작(PUT_IN) 뒤, 아니면 그 재료의 마지막 손 동작 뒤(우유는 데우기가 아니라 붓기 뒤).
+    //  딸기청 · 코코아는 떠 넣은 뒤부터 컵에 있음(젓기는 섞기만): 붓기 컷이 그 색(pour_glass_strawberry 등)을 고르고, 임시 그림도 그 색
+    const soFar = new Set();
     const skillSteps = steps.filter((x) => x.skill);
     let n = 0;
     for (let i = 0; i < steps.length; i++) {
@@ -2036,7 +2041,7 @@ export async function brew(opts = {}) {
       const c = await runSkill(st.skill, n, skillSteps.length, soFar, res, menu);
       res.checks.push(c);
       if (c.art) res.art = c.art;
-      if (!steps.slice(i + 1).some((x) => x.ing === st.ing)) soFar.add(st.ing);
+      if (PUT_IN.has(st.skill) || !steps.slice(i + 1).some((x) => x.ing === st.ing)) soFar.add(st.ing);
       await w(pauseMs(c.zone === 'good' ? 1100 : 400));
     }
     return res;
