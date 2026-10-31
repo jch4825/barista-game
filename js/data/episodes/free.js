@@ -142,6 +142,7 @@ export function freeDay(n = 1, { album = {} } = {}) {
 
   return {
     id: 'free',
+    season, // 손맛 단계(frame.js TIMING)도 그 날의 계절
     label: '자유 영업',
     title: `${day}번째 날`,
     when: `${sName} · 하루`,

@@ -49,7 +49,7 @@ import { bus } from '../../core/bus.js';
 import { store } from '../../core/store.js';
 import { CHARS, faceHTML, voiceOf } from '../../data/characters.js';
 import { vfx, centerOf } from '../../ui/vfx.js';
-import { frame, line, abortGeneration, abortMinigame } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
 import { pace, loop, isDebug } from './arcade.js';
 import {
   LEVELS, CUPS, INGREDIENTS, TEMPS, HAND_SKILLS, RECIPES, LATTE_ART, STARTER_BOOK, PANTRY, STEP_NAMES, MAX_ADDS,
@@ -1471,6 +1471,7 @@ export async function brew(opts = {}) {
   async function runSkill(id, n, total, soFar, res, menu) {
     const base = skillFor(id, menu);
     const act = base.act || 'hold';
+    const tm = timingOf(opts); // 계절 손맛 단계: 봄 · 여름은 박자 띠 2배, 가을 · 겨울은 띠가 1.5 · 2배 빠르게
     const st = (R.skills[id] ||= { tries: 0, good: 0, low: 0, high: 0, watched: 0 });
     st.tries += 1;
     const { turn, k } = pace();
@@ -1598,7 +1599,7 @@ export async function brew(opts = {}) {
       let dragging = null; // circle: 손가락으로 원 그리기 { a: 지난 각도 }
       playing = mode === 'play';
       if (act === 'wait' && !turn && mode === 'play') flow = true; // 기다리는 동안 한 컷이 움직임(갈리는 가루 · 끓는 김 …), 정하면 멈춘 프레임
-      const runMs = (act === 'circle' ? lapsMax * LAP_MS : act === 'wait' ? sk.ms || WAIT_MS : sk.ms || RUN_MS) * k;
+      const runMs = ((act === 'circle' ? lapsMax * LAP_MS : act === 'wait' ? sk.ms || WAIT_MS : sk.ms || RUN_MS) * k) / tm.speed;
       const end = (zone, watched) => {
         if (finished) return;
         finished = true;
@@ -1762,12 +1763,12 @@ export async function brew(opts = {}) {
     const ringEl = act === 'beats' ? h('i', { class: 'bw-ring' }) : null;
     const dotsEl = act === 'beats' ? h('span', { class: 'bw-beat-dots', 'aria-hidden': 'true' }) : null;
     const beatWord = act === 'beats' ? h('b', { class: 'bw-beat-word', 'aria-hidden': 'true' }) : null;
-    if (act === 'beats') view.append(h('div', { class: 'bw-beat', 'aria-hidden': 'true' }, h('i', { class: 'bw-target' }), ringEl), dotsEl, beatWord);
+    if (act === 'beats') view.append(h('div', { class: 'bw-beat', 'aria-hidden': 'true', style: { '--band': `${8 * tm.beatWin}px` } }, h('i', { class: 'bw-target' }), ringEl), dotsEl, beatWord); // 판정 띠 굵기 = 판정 칸 배율
     let iceTimer = 0; // 얼음 담기 컷: 떨어지는 프레임 → 멈춘 프레임(다시 하기를 빨리 눌러도 앞 시도의 프레임이 늦게 덮지 않게 시도마다 지움)
     const attemptBeats = (how) => new Promise((resolve) => {
       phase = 'skill';
       const N = sk.n || 2;
-      const win = BEAT_WIN * (turn ? 1 : narrow);
+      const win = BEAT_WIN * tm.beatWin * (turn ? 1 : narrow);
       const hitStep = Math.round(BEAT_HIT * STEPS) / STEPS;
       const marks = [];
       let beat = 0;

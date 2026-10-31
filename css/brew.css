@@ -507,7 +507,7 @@ body.contrast .ov-brew-temp .bw-temp-opt.is-on { border-color: #FFE14D; }
 .mg.mg-brew .bw-close.a-beats .bw-gauge { display: none; }
 .mg.mg-brew .bw-beat { position: absolute; z-index: 3; left: 50%; top: 46%; width: 0; height: 0; pointer-events: none; }
 .mg.mg-brew .bw-target, .mg.mg-brew .bw-ring { position: absolute; left: 0; top: 0; width: 170px; height: 170px; border-radius: 50%; transform: translate(-50%, -50%); }
-.mg.mg-brew .bw-target { border: 8px solid rgba(240, 217, 162, .95); background: rgba(240, 217, 162, .14); box-shadow: 0 0 0 4px rgba(4, 18, 23, .55); }
+.mg.mg-brew .bw-target { border: var(--band, 8px) solid rgba(240, 217, 162, .95); background: rgba(240, 217, 162, .14); box-shadow: 0 0 0 4px rgba(4, 18, 23, .55); }
 .mg.mg-brew .bw-ring { border: 7px solid #FFFFFF; box-shadow: 0 0 0 3px rgba(4, 18, 23, .6); }
 .mg.mg-brew .bw-ring.is-near { border-color: #6FCF9A; }
 .mg.mg-brew .bw-beat-dots { position: absolute; z-index: 3; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 14px; padding: 6px 14px; border-radius: 999px; background: rgba(4, 18, 23, .7); }

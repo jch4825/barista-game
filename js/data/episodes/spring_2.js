@@ -110,7 +110,7 @@ export default {
     mini('lookaround', {
       id: 'spring_2_look', title: '닫을 때 둘러보기', bg: ['hall', 'evening'],
       spots: [
-        { name: '창가 자리', icon: 'chair', x: 24, y: 60, lines: ['의자 두 개가 창가에 나란히 놓여 있다. 하나는 할머니 자리이고, 하나는 오늘 내내 비어 있었다.', { t: 'think', text: '할머니는 빈 의자 앞에도 잔을 두셨다. 누구를 위한 잔이었을까.' }] },
+        { name: '창가 자리', icon: 'chair', x: 24, y: 60, lines: ['오늘 할머니가 앉아 계시던 창가 자리다. 할머니는 빈 자리에 우유를 한 잔 놓아 두셨다.', { t: 'think', text: '빈 자리에 우유를 두신 까닭이 무엇일까.' }] },
         { name: '문 위의 종', icon: 'bell_call', x: 75, y: 21, lines: ['손님이 문을 열면 딸랑 울리는 종이다. 오래되어서 소리가 부드럽다.', { t: 'think', text: '종소리가 나면 고개를 들고 먼저 인사하자.' }] },
         { name: '칠판', icon: 'memo', x: 83, y: 32, lines: ['오늘의 메뉴가 반듯한 글씨로 적혀 있다.', { t: 'think', text: '사장님 글씨는 자로 잰 것처럼 곧다.' }] },
         { name: '빗자루', icon: 'mop', x: 62, y: 70, lines: ['아침에 깨진 컵을 쓸었던 빗자루다. 손잡이가 반질반질하게 닳아 있다.', { t: 'think', text: '사장님도 처음에는 컵을 많이 깨 보셨을까.' }] },

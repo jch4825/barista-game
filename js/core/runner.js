@@ -457,7 +457,7 @@ async function miniBeat(s, b, index, w) {
   save(s, index, id, snap);
   const fn = MINIGAMES[b.name];
   if (!fn) { console.warn('[runner] 없는 미니게임', b.name); return undefined; }
-  const r = await w(fn(b));
+  const r = await w(fn({ ...b, season: b.season || s.ep.season || null })); // 그 날의 계절 = 손맛 단계(frame.js TIMING)
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
   // 미니게임이 돌려준 자세한 기록(커피 만들기: 만든 메뉴·다시 만들기·보기·손 기술마다 알맞음 수·라테아트·단계·턴 방식)
   const detail = {};

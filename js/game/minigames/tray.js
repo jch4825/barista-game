@@ -16,7 +16,7 @@ import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { renderBg } from '../../data/backgrounds.js';
 import { faceHTML } from '../../data/characters.js';
-import { frame, line, abortGeneration } from './frame.js';
+import { frame, line, abortGeneration, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate } from './arcade.js';
 
 const HOWTO = '[누르고 걷기]를 누르는 동안 걸어요. 쟁반이 흔들리면 손을 떼고 멈춰요.';
@@ -208,7 +208,7 @@ export async function tray(opts = {}) {
     if (!turn) {
       if (holding) {
         d = Math.min(1, d + dt / (WALK_MS * k));
-        wob = Math.min(1, wob + dt / (WOBBLE_UP * k));
+        wob = Math.min(1, wob + dt / ((WOBBLE_UP * k) / timingOf(opts).tray)); // 가을부터 조금 빨리 흔들림(frame.js TIMING)
         if (wob >= 1) spill();
       } else wob = Math.max(0, wob - dt / (WOBBLE_DOWN * k));
       draw();

@@ -30,6 +30,20 @@ let active = null; // 지금 열린 미니게임 틀
 let generation = 0; // 정리할 때마다 1씩 늘어남
 
 /**
+ * 계절에 따른 손맛 단계(2026-11-01 사용자: 충분히 연습한 뒤에 다시 빡빡한 타이밍을 주는 레벨 디자인).
+ * 봄 · 여름 = 연습(박자 판정 띠 2배 굵게) · 가을 = 박자 띠는 원래대로, 띠가 차는 손 동작 1.5배 빠르게 · 겨울 = 2배.
+ *  beatWin: 박자 판정 칸 배율(띠 굵기도 같은 배율) · speed: 띠가 차는 빠르기(누르고 떼기 · 기다렸다 누르기 · 원 그리기 꾹) · tray: 쟁반 흔들림이 차는 빠르기
+ * 미니게임 옵션의 season(runner 가 그 날의 계절을 넣음, 자유 영업은 그 날의 계절). 없으면 연습 단계
+ */
+export const TIMING = {
+  spring: { beatWin: 2, speed: 1, tray: 1 },
+  summer: { beatWin: 2, speed: 1, tray: 1 },
+  autumn: { beatWin: 1, speed: 1.5, tray: 1.3 },
+  winter: { beatWin: 1, speed: 2, tray: 1.5 },
+};
+export function timingOf(opts = {}) { return TIMING[opts.season] || TIMING.spring; }
+
+/**
  * 지금의 정리 번호. 미니게임이 시작할 때 받아 두고, 대사·잠깐 쉬기를 기다린 뒤 번호가 달라졌으면 그만둠
  * (정리된 뒤 늦게 끝난 기다림이 다음 장면에 손님 말·아차 카드를 띄우지 않게)
  */
