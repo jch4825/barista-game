@@ -1078,9 +1078,12 @@ export async function brew(opts = {}) {
    *    {잔}은 머그 = 없음, 유리컵 = _glass, 종이컵 = _paper, 플라스틱 컵 = _plastic. 잔과 온도가 맞을 때만(머그 · 종이컵 = 따뜻하게, 유리컵 · 플라스틱 컵 = 아이스)
    *  - 지금 있는 것: 머그 pour_latte · pour_milk · water, 유리컵 ice · pour_glass_latte · pour_glass_milk · water_glass. 포장 컵은 아직(검수 I-28)
    *  - 커피는 에스프레소와 디카페인(디카페인 라테도 라테 컷). 딸기청 · 말차 · 코코아가 든 잔은 그 색의 컷(pour_glass_strawberry 등)이 있으면 그것, 없으면 우유 컷(검수 I-29)
+   *  - 컵에 넣기 · 젓기 · 우리기(시럽 · 청 · 가루 · 말차 풀기 · 젓기 · 우리기): {동작}{잔}_{바탕} → {동작}[_iced]_{바탕} → {동작}[_iced]
+   *    (따뜻한 잔 = 위에서 본 머그, 아이스 = 앞에서 본 유리컵. 종이컵 · 플라스틱 컵은 그 컷이 없으면 같은 온도의 머그 · 유리컵 컷, docs/recipes.md 6.10)
    *  - 그 밖의 손 동작(샷 내리기 · 데우기 · 거품 · 갈기 · 누르기 …)은 손 동작 id 와 같은 이름의 컷이 있으면 그것
    *  shots.json 에 이 이름의 컷이 생기면 코드를 고치지 않아도 씁니다.
    */
+  const CUP_ACTS = new Set(['syrup', 'jam', 'powder', 'whisk', 'stir', 'steep']);
   const SHOT_CUP = { mug: ['', 'hot'], glass: ['_glass', 'iced'], paper: ['_paper', 'hot'], plastic: ['_plastic', 'iced'] };
   function shotIdFor(id, soFar) {
     const [suf, temp] = SHOT_CUP[made?.cup] || [null, null];
@@ -1089,8 +1092,12 @@ export async function brew(opts = {}) {
     const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || made?.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
     let ids = [id];
     if (id === 'pour') ids = cupOk ? [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`] : [];
-    else if (id === 'water') ids = cupOk && esp ? [`water${suf}`] : [];
+    else if (id === 'water') ids = cupOk ? [esp ? `water${suf}` : `water${suf}_${made?.base}`] : []; // 에스프레소가 없는 잔(보리차 · 유자차 · 믹스커피)은 바탕 이름을 붙여
     else if (id === 'ice') ids = cupOk ? [made.cup === 'glass' ? 'ice' : `ice${suf}`] : [];
+    else if (CUP_ACTS.has(id)) {
+      const fam = made?.temp === 'iced' ? '_iced' : '';
+      ids = [suf !== null && `${id}${suf}_${made?.base}`, `${id}${fam}_${made?.base}`, `${id}${fam}`];
+    }
     return ids.find((x) => x && shots[x]) || null;
   }
 
@@ -1590,6 +1597,7 @@ export async function brew(opts = {}) {
       let holding = false; // hold · circle: 누르고 있는 동안만 차오름
       let dragging = null; // circle: 손가락으로 원 그리기 { a: 지난 각도 }
       playing = mode === 'play';
+      if (act === 'wait' && !turn && mode === 'play') flow = true; // 기다리는 동안 한 컷이 움직임(갈리는 가루 · 끓는 김 …), 정하면 멈춘 프레임
       const runMs = (act === 'circle' ? lapsMax * LAP_MS : act === 'wait' ? sk.ms || WAIT_MS : sk.ms || RUN_MS) * k;
       const end = (zone, watched) => {
         if (finished) return;

@@ -222,7 +222,9 @@ for (const who of ['yeonwoo', 'dohyun', 'manager']) {
 // 손 기술의 한 컷(블렌더 3D 렌더, 생성 AI 아님): 배경판 + 단계 프레임 묶음을 한 줄로(tools/blender/scene_bench.py → shots_post.py)
 const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)', ice: '얼음 담기', water_glass: '찬물 붓기(아이스 아메리카노)', pour_glass_milk: '붓기(유리컵 · 찬 우유)', pour_glass_latte: '붓기(유리컵 · 아이스 라테)',
   pour_matcha: '붓기(머그 · 녹차라테)', pour_cocoa: '붓기(머그 · 코코아)', pour_glass_strawberry: '붓기(유리컵 · 딸기우유)', pour_glass_matcha: '붓기(유리컵 · 아이스 녹차라테)', pour_glass_cocoa: '붓기(유리컵 · 아이스 코코아)', water_paper: '물 붓기(종이컵 · 아메리카노)', pour_paper_milk: '붓기(종이컵 · 따뜻한 우유)', pour_paper_latte: '붓기(종이컵 · 라테 · 하트)', pour_paper_matcha: '붓기(종이컵 · 녹차라테)', pour_paper_cocoa: '붓기(종이컵 · 코코아)', ice_plastic: '얼음 담기(플라스틱 컵)', water_plastic: '찬물 붓기(플라스틱 컵 · 아이스 아메리카노)', pour_plastic_milk: '붓기(플라스틱 컵 · 찬 우유)', pour_plastic_latte: '붓기(플라스틱 컵 · 아이스 라테)', pour_plastic_strawberry: '붓기(플라스틱 컵 · 딸기우유)', pour_plastic_matcha: '붓기(플라스틱 컵 · 아이스 녹차라테)', pour_plastic_cocoa: '붓기(플라스틱 컵 · 아이스 코코아)',
-  milk_in: '피처에 우유 붓기', tap: '피처 톡톡' };
+  milk_in: '피처에 우유 붓기', tap: '피처 톡톡',
+  grind: '원두 갈기', tamp: '꾹 누르기', boil: '물 끓이기', hand_grind: '손으로 원두 갈기', bloom: '뜸 붓기', bloom_wait: '뜸 들이기', spiral: '나선 붓기', syrup: '시럽 넣기(머그)', syrup_iced: '시럽 넣기(유리컵)', jam_yuja: '청 떠 넣기(머그 · 유자)', jam_iced_yuja: '청 떠 넣기(유리컵 · 유자)', jam_iced_strawberry: '청 떠 넣기(유리컵 · 딸기)', powder_cocoa: '가루 떠 넣기(머그 · 코코아)', powder_iced_cocoa: '가루 떠 넣기(유리컵 · 코코아)', powder_matcha: '가루 떠 넣기(머그 · 말차)', powder_iced_matcha: '가루 떠 넣기(유리컵 · 말차)', whisk: '말차 풀기(머그)', whisk_iced: '말차 풀기(유리컵)', stir_yuja: '젓기(머그 · 유자차)', stir_iced_yuja: '젓기(유리컵 · 유자차)', stir_iced_strawberry: '젓기(유리컵 · 딸기우유)', stir_cocoa: '젓기(머그 · 코코아)', stir_iced_cocoa: '젓기(유리컵 · 코코아)', stir_paper_mix: '젓기(종이컵 · 믹스커피)', steep: '우리기(머그 · 보리차)', steep_iced: '우리기(유리컵 · 보리차)',
+  water_barley: '물 붓기(머그 · 보리차)', water_glass_barley: '물 붓기(유리컵 · 보리차)', water_yuja: '물 붓기(머그 · 유자차)', water_glass_yuja: '물 붓기(유리컵 · 유자차)', water_paper_mix: '물 붓기(종이컵 · 믹스커피)' };
 const SHOT_NOTES = {
   extract: '오래된 2그룹 머신(스테인리스 + 초록 법랑), 왼쪽 그룹 아래 샷 잔, 왼쪽 앞에서 비스듬히 본 2944×800 장면. 잔이 차오르는 13단계 × 줄기 있음/없음(docs/recipes.md 6.2)',
   steam: '물받이 위 우유 담은 스팀 피처에 노즐을 넣고 집게 온도계를 꽂은 2944×800 장면. 바늘 25단계 × 김 있음/옅음, 다이얼의 초록 칸 = 알맞아요, 스팀을 켜면 우유가 돎(docs/recipes.md 6.3)',
@@ -253,6 +255,37 @@ const SHOT_NOTES = {
   pour_plastic_cocoa: '같은 컵(얼음 + 코코아)에 찬 우유: 밀크 초콜릿 색(아이스 코코아). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
   milk_in: '작업대 위 빈 스팀 피처에 왼쪽에서 기운 유리 우유병으로 우유를 붓는 2944×800 장면. 피처 안쪽 눈금 선(알맞아요 칸 가운데)까지 차오르는 17단계 × 줄기 있음/없음, 끝까지 부으면 넘침(docs/recipes.md 6.9)',
   tap: '데운 우유가 든 스팀 피처를 위에서 내려다본 2944×800 장면. 톡 칠 때마다 겉면의 굵은 거품이 터져 사라지는 5단계(30 → 0개) × 톡 치는 순간(잔물결) 있음/없음(docs/recipes.md 6.9)',
+  grind: '그라인더 주둥이 아래 포터필터 바스켓에 간 가루가 쏟아져 쌓이는 17단계 × 가루 줄기 있음/없음(docs/recipes.md 6.10)',
+  tamp: '탬퍼가 내려가며 바스켓의 수북한 가루를 평평하게 다지는 17단계(docs/recipes.md 6.10)',
+  boil: '인덕션 위 드립 주전자, 뚜껑 온도계 바늘(초록 칸 = 알맞아요)과 주둥이의 김 17단계(docs/recipes.md 6.10)',
+  hand_grind: '나무 상자 그라인더의 손잡이가 돌고 서랍에 가루가 쌓이는 17단계(docs/recipes.md 6.10)',
+  bloom: '유리 서버 위 도자기 드리퍼의 가루가 가운데부터 젖어 짙어지는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
+  bloom_wait: '젖은 가루가 둥글게 부풀고 거품이 올라오는 17단계(docs/recipes.md 6.10)',
+  spiral: '주전자가 나선으로 돌며 붓고 서버에 커피가 모이는 17단계 × 붓는 중 있음/없음(docs/recipes.md 6.10)',
+  syrup: '펌프가 눌려 시럽이 떨어지고 바닥에 고이는 5단계 × 누르는 순간 있음/없음(docs/recipes.md 6.10)',
+  syrup_iced: '펌프가 눌려 시럽이 떨어지고 바닥에 고이는 5단계 × 누르는 순간 있음/없음(docs/recipes.md 6.10)',
+  jam_yuja: '찻숟가락이 기울며 청이 떨어져 바닥에 고이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  jam_iced_yuja: '찻숟가락이 기울며 청이 떨어져 바닥에 고이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  jam_iced_strawberry: '찻숟가락이 기울며 청이 떨어져 바닥에 고이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  powder_cocoa: '숟가락에서 가루가 알갱이로 흩날려 바닥에 쌓이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  powder_iced_cocoa: '숟가락에서 가루가 알갱이로 흩날려 바닥에 쌓이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  powder_matcha: '숟가락에서 가루가 알갱이로 흩날려 바닥에 쌓이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  powder_iced_matcha: '숟가락에서 가루가 알갱이로 흩날려 바닥에 쌓이는 5단계 × 떠 넣는 순간 있음/없음(docs/recipes.md 6.10)',
+  whisk: '대나무 차선으로 짙은 초록 반죽이 연두 거품이 되는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  whisk_iced: '대나무 차선으로 짙은 초록 반죽이 연두 거품이 되는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_yuja: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_iced_yuja: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_iced_strawberry: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_cocoa: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_iced_cocoa: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  stir_paper_mix: '바 스푼이 돌며 두 색이 고르게 섞이는 17단계 × 젓는 중 있음/없음(docs/recipes.md 6.10)',
+  steep: '보리차 티백, 물빛이 옅은 호박색에서 짙은 갈색으로 17단계(docs/recipes.md 6.10)',
+  steep_iced: '보리차 티백, 물빛이 옅은 호박색에서 짙은 갈색으로 17단계(docs/recipes.md 6.10)',
+  water_barley: '받침 위 머그의 보리차 티백이 물에 떠오르며 옅은 호박색이 되는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
+  water_glass_barley: '얼음 전 유리컵(보리차 티백)에 뜨거운 물을 붓는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
+  water_yuja: '머그 바닥의 유자청이 풀리며 노랗게 되는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
+  water_glass_yuja: '얼음과 유자청이 든 유리컵에 뜨거운 물을 붓는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
+  water_paper_mix: '종이컵의 믹스 가루가 녹아 캐러멜 빛이 되는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.10)',
 };
 const SHOT_RUN = { pour_milk: 'pour', pour_latte: 'pour', pour_glass_milk: 'pour_glass', pour_glass_latte: 'pour_glass', pour_matcha: 'pour_tint', pour_cocoa: 'pour_tint' }; // 한 번에 렌더하는 묶음(scene_bench.py 의 SHOTS)
 const shotRun = (sid) => SHOT_RUN[sid] || (/^pour_glass_(strawberry|matcha|cocoa)$/.test(sid) ? 'pour_glass_tint' : sid.replace(/^(pour_(paper|plastic))_.*$/, '$1'));
