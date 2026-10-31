@@ -174,7 +174,8 @@ body.brew-open .memo { opacity: 0; pointer-events: none; }
 
 /* [시작!] / [보기] 창 (작업대 위) */
 .bw-gate { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; border-radius: 18px; background: rgba(23, 20, 28, .38); transition: opacity .2s; }
-.bw-gate.is-out { opacity: 0; }
+.bw-gate.is-out { opacity: 0; pointer-events: none; } /* 사라지는 동안 장면 누름을 가로채지 않게 */
+.bw-gate { cursor: pointer; } .bw-gate-card { cursor: default; } /* 카드 밖 장면을 눌러도 [시작!] */
 .bw-gate-card { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 900px; padding: 26px 36px; border-radius: 22px; border: 5px solid var(--ink); background: var(--paper); box-shadow: 8px 8px 0 var(--ink); text-align: center; }
 .bw-gate-card h3 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 36px; font-weight: 900; }
 .bw-gate-card h3 i svg { width: 46px; height: 46px; color: var(--main); }
@@ -495,7 +496,7 @@ body.contrast .ov-brew-temp .bw-temp-opt.is-on { border-color: #FFE14D; }
 /* 기다렸다 누르기: [지금!] 단추 · 원 그리기: 장면 위에서 손가락으로 원(누름 통과 안 함) */
 .mg.mg-brew .bw-ctrl .bw-now { min-width: 320px; }
 .mg.mg-brew .bw-close.a-circle .bw-close-view { cursor: grab; touch-action: none; }
-.mg.mg-brew .bw-close:is(.a-hold, .a-beats) .bw-close-view { cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; } /* 장면 그림 = 누르는 단추 */
+.mg.mg-brew .bw-close:is(.a-hold, .a-beats, .a-wait) .bw-close-view { cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; } /* 장면 그림 = 누르는 단추 */
 .mg.mg-brew .bw-close.a-circle .bw-close-view:active { cursor: grabbing; }
 .mg.mg-brew .bw-laps { position: absolute; z-index: 3; right: 16px; top: 14px; padding: 4px 16px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 30px; font-weight: 900; }
 .mg.mg-brew .bw-close-objs .bw-live { height: 90%; }

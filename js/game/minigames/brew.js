@@ -11,6 +11,7 @@
  *  - 감점·실패 화면·무서운 소리 없음. [레시피 수첩](오픈북: 컵 고르기 규칙 · 메뉴 · 단골의 평소 주문)은 언제든 열 수 있고, 열려 있는 동안 멈춤
  * 손 동작(menu.js 의 HAND_SKILLS.act, docs/recipes.md 2장):
  *  - hold(A): [누르고 있기](또는 장면 그림)를 누르는 동안만 띠가 차오르고, 손을 떼면 그 칸으로 정함. 아주 짧게 누르면 처음부터
+ *  - 모든 손 동작에서 장면 그림 = 단추: 꾹 = [누르고 있기] · 톡 = [지금!] · [톡] · [담기] … · 턴 방식은 톡 = [한 칸] · [기다리기]. [시작!] 창은 카드 밖을 눌러도 시작
  *  - wait(G): 띠가 저절로 차오름. [지금!]을 누르면 정함(일찍 = 낮은 칸 · 늦게 = 높은 칸). 끝까지 기다리면 높은 칸
  *  - circle(B): [누르고 있기](저절로 돎) 또는 장면 위에 손가락으로 원을 그리면 바퀴가 돎. 알맞은 바퀴(laps)에서 떼면 알맞아요
  *  - beats(D): 동그라미가 줄어들어 가운데 원과 겹칠 때 누르기를 n 번. 빠르면 높은 칸 · 늦으면 낮은 칸
@@ -64,6 +65,7 @@ const STEPS = 8;        // 턴 방식: 띠 한 칸 = 1/8 (알맞아요 칸에 �
 const RUN_MS = 4800;    // 실시간: 띠가 끝까지 가는 시간(보통). 알맞아요 칸(1/4)을 지나는 데 약 1.2초 · 넉넉히는 2배
 const WAIT_MS = 4400;   // 기다렸다 누르기(wait): 띠가 저절로 끝까지 가는 시간(손 동작마다 ms)
 const LAP_MS = 640;     // 원 그리기(circle): 누르고 있을 때 한 바퀴 시간
+const DRAW_START = 0.5; // 원 그리기: 장면을 누른 손가락이 이만큼(라디안) 돌면 그리기, 그 전에는 꾹 누르기(저절로 돎)
 const BEAT_MS = 1500;   // 박자(beats): 동그라미 하나가 줄어드는 시간(가운데 원과 겹치는 때 = BEAT_HIT)
 const BEAT_HIT = 0.72;  // 박자: 겹치는 때(0~1) · 판정 칸은 ±BEAT_WIN
 const BEAT_WIN = 0.1;
@@ -1438,7 +1440,10 @@ export async function brew(opts = {}) {
     if (sk.safety) safetySaid = true;
     focusLater(go);
     return new Promise((resolve) => {
+      let gone = false;
       const done = (how) => {
+        if (gone) return;
+        gone = true;
         audio.sfx('tap');
         tts.stop();
         phase = 'busy';
@@ -1448,6 +1453,7 @@ export async function brew(opts = {}) {
       };
       onTap(go, () => done('play'));
       onTap(see, () => done('watch'));
+      wrap.addEventListener('click', (e) => { if (e.target === wrap) done('play'); }); // 카드 밖 장면을 눌러도 [시작!](2026-10-31 사용자 "화면을 눌러도")
     });
   }
 
@@ -1640,8 +1646,15 @@ export async function brew(opts = {}) {
         stopB.addEventListener('click', (e) => e.stopPropagation());
         stopB.addEventListener('contextmenu', (e) => e.preventDefault());
       }
-      // 장면 그림을 꾹 눌러도 [누르고 있기]와 같음(2026-10-31 사용자 "버튼 말고 화면의 그림을 터치해도"). 원 그리기는 아래에서 장면 위 원으로
-      if (act === 'hold' && !turn) {
+      // 장면 그림 = 단추(2026-10-31 사용자 "버튼 말고 화면의 그림을 터치해도", "화면을 눌러도 되도록 모두"). 단추는 그대로(키보드 · 스캔)
+      //  턴 방식: 그림을 톡 = [한 칸] · [기다리기](정하는 [멈추기] · [지금!]은 단추만: 잘못 톡 해서 끝나지 않게)
+      //  실시간: 누르고 떼기 = 그림을 꾹 · 기다렸다 누르기 = 그림을 톡 = [지금!] · 원 그리기 = 그림을 꾹(저절로 돎) 또는 그림 위에 원을 그림
+      view.oncontextmenu = (e) => e.preventDefault();
+      if (turn) {
+        view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); stepB?.click(); };
+      } else if (act === 'wait') {
+        view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); end(zoneOf(p), false); };
+      } else if (act === 'hold') {
         view.onpointerdown = (e) => {
           if (mode !== 'play' || finished) return;
           e.preventDefault();
@@ -1651,10 +1664,8 @@ export async function brew(opts = {}) {
         view.onpointerup = () => release();
         view.onpointercancel = pauseHold;
         view.onlostpointercapture = pauseHold;
-        view.oncontextmenu = (e) => e.preventDefault();
-      }
-      // 원 그리기: 장면 위에서 손가락 · 마우스로 원을 그리면 그만큼 돎. 손을 떼면 정함
-      if (act === 'circle' && !turn) {
+      } else if (act === 'circle') {
+        // 원 그리기: 장면 위에서 손가락 · 마우스로 원을 그리면 그만큼 돎. 손가락이 거의 그대로면 [누르고 있기]처럼 저절로 돎. 손을 떼면 정함
         const angleAt = (e) => {
           const r = view.getBoundingClientRect();
           return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2));
@@ -1663,7 +1674,7 @@ export async function brew(opts = {}) {
           if (mode !== 'play' || finished) return;
           e.preventDefault();
           view.setPointerCapture?.(e.pointerId);
-          dragging = { a: angleAt(e) };
+          dragging = { a: angleAt(e), moved: 0 };
           holding = true;
           flow = true;
           stopB.classList.add('is-holding');
@@ -1676,6 +1687,7 @@ export async function brew(opts = {}) {
           if (d > Math.PI) d -= 2 * Math.PI;
           if (d < -Math.PI) d += 2 * Math.PI;
           dragging.a = a2;
+          if (dragging.moved < DRAW_START) { dragging.moved += Math.abs(d); return; } // 아직 꾹 누르기(저절로 돎)
           p = Math.min(1, p + Math.abs(d) / (2 * Math.PI) / lapsMax);
           draw();
           if (p >= 1) end('high', false);
@@ -1717,7 +1729,7 @@ export async function brew(opts = {}) {
           if (p >= center - 1e-6) end('good', true);
           return;
         }
-        if (!turn && (act === 'wait' || (holding && !dragging))) {
+        if (!turn && (act === 'wait' || (holding && !(dragging && dragging.moved >= DRAW_START)))) { // 원을 그리기 시작하면 손가락만큼만
           p = Math.min(1, p + dt / runMs);
           draw();
           if (p >= 1) { end('high', false); return; } // 끝까지: 쓴 샷 · 뜨거운 우유 · 넘친 잔 · 늦음 · 너무 저음
@@ -1820,7 +1832,7 @@ export async function brew(opts = {}) {
         watchB.disabled = mode !== 'play';
       };
       onTap(stopB, () => { if (mode === 'play') judge(q); });
-      view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); judge(q); }; // 장면 그림을 톡 눌러도 그 단추와 같음
+      view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); if (turn) stepB?.click(); else judge(q); }; // 장면 그림을 톡 = 그 단추(턴 방식은 [한 칸])
       onTap(stepB, () => {
         if (mode !== 'play' || finished) return;
         q = Math.min(1, q + 1 / STEPS);
