@@ -1,7 +1,8 @@
 /**
- * 근무표: 막마다 에피소드 + 엔딩 고르기 (새 게임에서는 계절 달력으로 바꿀 예정, PRD.md 10장)
- * 카드마다 썸네일: 마친 에피소드는 그날 받은 사진, 아직이면 그날의 첫 장소 배경
- * 엔딩을 본 학생은 모든 이야기가 늘 열리고, 엔딩 칸 옆에 그 안내가 보입니다(듣기 버튼으로 읽어 줌).
+ * 달력(옛 근무표): 계절마다 한 줄, 하루가 한 칸(봄 · 여름 · 가을 · 겨울 × 7일) + 이야기 뒤(엔딩 · 자유 영업 · 새 해)
+ *  - 칸마다 그날의 첫 장소 그림, 날 번호와 제목, 상태(마침 · 오늘 · 이어 하기 · 잠김). 다음에 할 날은 '오늘'로 빛남
+ *  - 이번 해의 엔딩을 본 뒤에는 모든 날이 열림. 자유 영업은 엔딩을 한 번 보면 열림(js/data/episodes/free.js)
+ *  - 새 해(PRD 5.9 · Q-14): 단골과의 관계와 마친 날은 처음부터, 앨범 · 메뉴 도감 · 자유 영업은 남음(store.newYear)
  */
 
 import { h } from '../core/dom.js';
@@ -16,8 +17,13 @@ import { audio } from '../av/audio.js';
 import { tts } from '../av/tts.js';
 import { openScreen } from './screen.js';
 
+const YEAR_NAME = ['', '첫 번째 해', '두 번째 해', '세 번째 해', '네 번째 해', '다섯 번째 해'];
+export const yearName = (n) => YEAR_NAME[n] || `${n}번째 해`;
+
 export function isUnlocked(id) {
-  if (store.unlockedAll() || store.ending()) return true; // 엔딩을 본 뒤에는 언제든 원하는 이야기로
+  if (store.unlockedAll()) return true;
+  const end = store.ending();
+  if (end && (end.year || 1) === store.year()) return true; // 이번 해의 엔딩을 본 뒤에는 언제든 원하는 날로
   if (id === ENDING.id) return store.isDone(FINALE);
   const i = EPISODES.findIndex((e) => e.id === id);
   if (i <= 0) return true;
@@ -25,7 +31,7 @@ export function isUnlocked(id) {
 }
 
 function firstBg(ep) {
-  const b = ep.script.find((x) => x.t === 'bg');
+  const b = ep.script.find((x) => x.t === 'bg' && x.id !== 'black'); // 기억 장면의 검은 화면은 건너뜀
   return b ? renderBg(b.id, b.variant) : '';
 }
 
@@ -35,7 +41,7 @@ function thumb(ep, open) {
   return h('span', { class: `hub-thumb ${open ? '' : 'is-locked'}`, html: firstBg(ep) }, open ? null : h('i', { class: 'hub-lock', html: ICON('lock') }));
 }
 
-function epCard(ep) {
+function epCard(ep, today = false) {
   const done = store.isDone(ep.id);
   const open = isUnlocked(ep.id);
   const cp = store.checkpoint();
@@ -44,9 +50,9 @@ function epCard(ep) {
   const oops = ALL_OOPS.filter((o) => o.ep === ep.id);
   const oopsFound = oops.filter((o) => got.has(o.id)).length;
   return h('button', {
-    class: `hub-ep ${done ? 'done' : ''} ${open ? '' : 'locked'} ${resumable ? 'resume' : ''}`,
+    class: `hub-ep ${done ? 'done' : ''} ${open ? '' : 'locked'} ${resumable ? 'resume' : ''} ${today ? 'is-today' : ''}`,
     disabled: !open,
-    'aria-label': `${ep.label} ${ep.title}${done ? ', 완료' : ''}${open ? '' : ', 아직 잠김'}`,
+    'aria-label': `${ep.label} ${ep.title}${done ? ', 마쳤어요' : today ? ', 오늘 할 날' : ''}${open ? '' : ', 아직 잠김'}`,
     onclick: async (e) => {
       e.stopPropagation();
       if (resumable) {
@@ -62,7 +68,7 @@ function epCard(ep) {
   h('b', { class: 'hub-title', text: ep.title }),
   h('span', { class: 'hub-sched' }, ...(ep.schedule || []).map(([icon]) => h('i', { html: ICON(icon) }))),
   h('span', { class: 'hub-state' },
-    open ? (done ? '✓ 완료' : resumable ? '▶ 이어하기' : '▶ 시작') : '🔒 앞 이야기를 먼저 해요',
+    open ? (done ? '✓ 마침' : resumable ? '▶ 이어 하기' : today ? '▶ 오늘' : '▶ 시작') : '🔒 앞날을 먼저 해요',
     oops.length ? h('small', { text: ` · 아차 ${oopsFound}/${oops.length}` }) : null));
 }
 
@@ -95,16 +101,70 @@ function clearNote() {
     listen);
 }
 
+/** 자유 영업 칸: 엔딩을 한 번 보면 열림. 다음 날 번호를 보여 줌 */
+function freeCard() {
+  const open = Boolean(store.ending());
+  const f = store.free();
+  const cp = store.checkpoint();
+  const resumable = open && cp && cp.ep === 'free';
+  return h('button', {
+    class: `hub-ep hub-free ${open ? '' : 'locked'} ${resumable ? 'resume' : ''}`,
+    disabled: !open,
+    'aria-label': `자유 영업 ${f.day + 1}번째 날${open ? '' : ', 엔딩을 보면 열려요'}`,
+    onclick: async (e) => {
+      e.stopPropagation();
+      if (resumable) {
+        const r = await ov.confirm({ text: '자유 영업: 저장된 곳부터 이어서 할까요?', yes: '이어하기', no: '처음부터' });
+        nav.go('play', 'free', { resume: r });
+      } else nav.go('play', 'free');
+    },
+  },
+  h('span', { class: `hub-thumb ${open ? '' : 'is-locked'}`, html: renderBg('hall', 'morning') }, open ? null : h('i', { class: 'hub-lock', html: ICON('lock') })),
+  h('span', { class: 'hub-label', text: '자유 영업' }),
+  h('b', { class: 'hub-title', text: `${f.day + 1}번째 날` }),
+  h('span', { class: 'hub-state', text: open ? (resumable ? '▶ 이어 하기' : f.served ? `▶ 문 열기 · 지금까지 ${f.served}잔` : '▶ 문 열기') : '🔒 엔딩을 보면 열려요' }));
+}
+
+/** 새 해 칸: 이번 해의 엔딩을 본 뒤에 보임 */
+function yearCard() {
+  const next = store.year() + 1;
+  return h('button', {
+    class: 'hub-ep hub-year',
+    'aria-label': `${yearName(next)} 시작하기`,
+    onclick: async (e) => {
+      e.stopPropagation();
+      const ok = await ov.confirm({
+        text: `${yearName(next)}를 시작할까요?`,
+        detail: '같은 마을에서 봄부터 다시 일해요. 단골과의 관계와 마친 날은 처음부터 다시 쌓아요. 앨범 · 메뉴 도감 · 자유 영업은 그대로 남아요.',
+        yes: '시작하기', no: '아니요',
+      });
+      if (!ok) return;
+      store.newYear();
+      audio.sfx('page');
+      nav.go('title');
+      nav.go('hub');
+    },
+  },
+  h('span', { class: 'hub-thumb', html: renderBg('cafe_front', 'morning') }),
+  h('span', { class: 'hub-label', text: yearName(next) }),
+  h('b', { class: 'hub-title', text: '같은 마을에서 다시' }),
+  h('span', { class: 'hub-state', text: '▶ 봄부터 다시' }));
+}
+
 export function showHub() {
-  const scr = openScreen({ cls: 'scr-hub', title: '근무표', icon: 'calendar' });
-  const seen = Boolean(store.ending());
-  const actEl = (a) => h('section', { class: `hub-act act-${a.n}` },
-    h('h2', { text: a.title }), h('p', { text: a.sub }),
-    h('div', { class: 'hub-eps' }, ...a.ids.map((id) => epCard(getEpisode(id)))));
-  scr.body.append(h('div', { class: 'hub-acts' },
+  const scr = openScreen({ cls: 'scr-hub scr-cal', title: '달력', icon: 'calendar' });
+  const end = store.ending();
+  const seenThisYear = Boolean(end && (end.year || 1) === store.year());
+  const today = EPISODES.find((e) => !store.isDone(e.id) && isUnlocked(e.id))?.id || null;
+  const actEl = (a) => h('section', { class: `hub-act act-${a.n} cal-${a.season}` },
+    h('div', { class: 'cal-head' }, h('h2', { text: a.title }), h('p', { text: a.sub })),
+    h('div', { class: 'hub-eps cal7' }, ...a.ids.map((id) => epCard(getEpisode(id), id === today))));
+  scr.body.append(h('div', { class: 'hub-acts cal-acts' },
+    store.year() > 1 ? h('p', { class: 'cal-year', text: `${yearName(store.year())} · 단골과의 관계를 처음부터 다시 쌓는 중이에요` }) : null,
     ...ACTS.map(actEl),
-    h('section', { class: `hub-act act-end ${seen ? 'is-clear' : ''}` },
-      h('h2', { text: ENDING.label }), h('p', { text: seen ? '언제든 다시 볼 수 있어요' : '마지막 이야기를 마치면 볼 수 있어요' }),
-      h('div', { class: 'hub-eps' }, endCard(), seen ? clearNote() : null))));
+    h('section', { class: `hub-act act-end ${seenThisYear ? 'is-clear' : ''}` },
+      h('div', { class: 'cal-head' }, h('h2', { text: '이야기 뒤' }), h('p', { text: seenThisYear ? '엔딩은 언제든 다시 볼 수 있어요. 자유 영업으로 카페를 계속 열 수 있어요.' : '겨울 7일을 마치면 엔딩이 열려요.' })),
+      h('div', { class: 'hub-eps cal-end' }, endCard(), freeCard(), seenThisYear ? yearCard() : null, seenThisYear ? clearNote() : null))));
+  scr.body.querySelector('.is-today')?.scrollIntoView({ block: 'center' });
   return scr;
 }

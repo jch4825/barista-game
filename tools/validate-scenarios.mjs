@@ -37,10 +37,10 @@ const MOTIONS = ['bow', 'nod', 'shake', 'jump', 'breathe'];
 const KNOWN = new Set(['bg', 'bgm', 'amb', 'sfx', 'show', 'enter', 'leave', 'face', 'motion', 'camera', 'fx', 'earplugs', 'say', 'narr', 'think', 'sys', 'phone',
   'time', 'place', 'big', 'schedule', 'memo', 'memoHi', 'info', 'act', 'breathe', 'decide', 'choose', 'branch',
   'mini', 'snap', 'photo', 'stamp', 'term', 'finish', 'credits', 'letter', 'label', 'jump', 'set', 'checkpoint', 'wait', 'end',
-  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond']);
+  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond', 'chalk', 'seen', 'album', 'eyes', 'secret']);
 // check(일정 완료)는 실패·칭찬 장면 안에 두지 않습니다(되감기 전 장면에서 완료로 표시되면 안 됨)
 const NO_NEST = new Set(['decide', 'choose', 'mini', 'respond', 'label', 'jump', 'checkpoint', 'end', 'schedule', 'check']);
-const LONG = 70;
+const LONG = 90; // 2026-10-31 사용자 "대본을 너무 단문으로 쓰지 마라. 맥락과 힌트를 중시하라": 한 칸 두 문장 이내, 문장은 이어 써도 됨
 
 let errors = 0;
 let warns = 0;
@@ -56,10 +56,16 @@ let curSchedule = [];
 let checks = [];
 
 /** 조건(onlyIf)이 보는 선택 기억 이름: flag·notFlag 는 '=' 앞, 숫자 비교({ 이름: '>=4' })는 그 이름, 단골 신뢰(trust)는 'touch' (js/core/cond.js) */
-const condFlags = (c) => (Array.isArray(c) ? c.flatMap(condFlags) : Object.entries(c || {}).map(([k, v]) => (k === 'flag' || k === 'notFlag' ? String(v).split('=')[0] : k === 'trust' ? 'touch' : k)));
+const condFlags = (c) => (Array.isArray(c) ? c.flatMap(condFlags) : Object.entries(c || {}).filter(([k]) => k !== 'album').map(([k, v]) => (k === 'flag' || k === 'notFlag' ? String(v).split('=')[0] : k === 'trust' || k === 'warmth' ? 'touch' : k === 'pick' ? 'picks' : k)));
+// pick 조건이 가리키는 선택지가 실제로 있는지(대응 기회 · 선택지 id)
+const pickUsed = [];
 const REGULAR_IDS = Object.keys(REGULARS);
 // 대본에서 부른 대응 기회: '사람.기회' → 에피소드 (한 기회는 이야기에서 한 번만)
 const touchUsed = new Map();
+// 숨은 장면(seen) 번호: 1~11 이 모두 한 번씩 있는지(PRD 5.6)
+const seenUsed = [];
+// 비밀 장면(secret): 단골 8명 모두 3단계 장면이 있는지(PRD 8.3)
+const secretUsed = new Set();
 
 function checkFace(ep, who, face) {
   if (!face) return;
@@ -86,6 +92,10 @@ function checkText(ep, text) {
   const plain = text.replace(/\{\{([^}|]+)(\|[^}]+)?\}\}/g, '$1').replace(/\*\*/g, '');
   totals.chars += plain.length;
   if (plain.length > LONG) warn(ep, `긴 대사(${plain.length}자): ${plain.slice(0, 40)}…`);
+  // 한 칸 두 문장 이내(원칙 9): 따옴표 안의 인용은 한 덩어리로 셈
+  const bare = plain.replace(/"[^"]*"|“[^”]*”|'[^']*'/g, 'Q');
+  const n = (bare.match(/[.!?](?!\d)(?=[)」]*(\s|$))/g) || []).length;
+  if (n > 2) warn(ep, `한 칸에 ${n}문장: ${plain.slice(0, 40)}…`);
 }
 
 function checkOops(ep, o, where) {
@@ -122,6 +132,7 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
       if (b.ifFirst !== false) {
         for (const e of condErrors(b.if, REGULAR_IDS)) err(ep, `조건(if) ${e}: ${b.t}`);
         for (const f of condFlags(b.if)) flagsUsed.push([ep, f]);
+        for (const c of [b.if].flat()) if (c?.pick) pickUsed.push([ep, c.pick]);
       }
     }
     switch (b.t) {
@@ -169,6 +180,10 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
         break;
       case 'meet': if (!CHARS[b.who]?.card) err(ep, `크루 카드가 없는 인물: meet('${b.who}')`); break;
       case 'cg': if (b.id !== null && !CG_IDS.includes(b.id)) err(ep, `이벤트 CG 없음: ${b.id} (js/data/cg.js)`); break;
+      case 'chalk': if (b.text !== null && typeof b.text !== 'string') err(ep, 'chalk 글씨는 문자열 또는 null'); break;
+      case 'seen': if (!Number.isInteger(b.n) || b.n < 1 || b.n > 11) err(ep, `숨은 장면 번호는 1~11: seen(${b.n})`); else seenUsed.push([ep, b.n]); break;
+      case 'album': case 'eyes': if (ep !== ENDING?.id) err(ep, `${b.t}() 는 엔딩에만`); break;
+      case 'secret': if (!REGULARS[b.who]) err(ep, `secret: 없는 단골 ${b.who}`); else secretUsed.add(b.who); break;
       case 'emote':
         if (!CHARS[b.who]) err(ep, `인물 없음: ${b.who}`);
         if (!EMOTES.includes(b.kind)) err(ep, `이모트 없음: ${b.kind}`);
@@ -185,10 +200,16 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
         checkTimer(ep, b, `mini ${b.name}`);
         for (const e of MINIGAME_CHECKS[b.name]?.(b) || []) err(ep, `mini ${b.name} ${e}`);
         // 커피 만들기: 손님의 주문·고마움 말도 쉬운 한국어 검사
-        for (const o of b.orders || []) for (const t of [o.say, o.thanks].filter(Boolean)) checkText(ep, t);
+        for (const o of b.orders || []) for (const t of [o.say, o.thanks, o.miss, ...Object.values(o.reply || {})].filter(Boolean)) checkText(ep, t);
+        // 둘러보기: 물건의 글 · 숨은 장면(seen)
+        for (const sp of b.spots || []) {
+          for (const l of sp.lines || []) checkText(ep, typeof l === 'string' ? l : l.text);
+          if (sp.seen) seenUsed.push([ep, sp.seen]);
+        }
         break;
       case 'respond': { // 한 잔의 마음: 기회의 내용(장면·힌트·선택지)은 아래 단골 검사에서 한 번만 봄
         flagsSet.add('touch');
+        flagsSet.add('picks');
         if (!REGULARS[b.who]) { err(ep, `단골 없음: respond('${b.who}') (js/data/regulars.js)`); break; }
         if (!REGULARS[b.who].touches[b.touch]) { err(ep, `대응 기회 없음: respond('${b.who}', '${b.touch}')`); break; }
         const key = `${b.who}.${b.touch}`;
@@ -337,11 +358,32 @@ for (const ep of [...EPISODES, ENDING].filter(Boolean)) {
         // 반응 연출을 글로도(PRD 8.6, 원칙 11): 맞음 = '오래 바라봄', 어긋남 = "괜찮아요"
         const afterText = (c.after || []).map((x) => x.text || '').join(' ');
         if (c.score === 2 && !/오래 바라/.test(afterText)) warn(where, `맞는 대응 뒤 장면에 '오래 바라봄'이 글로 없음: ${c.id}`);
-        if (c.score === 0 && !/괜찮아요/.test(afterText)) warn(where, `어긋난 대응 뒤 장면에 "괜찮아요"가 없음: ${c.id}`);
+        if (c.score === 0 && !/괜찮아/.test(afterText)) warn(where, `어긋난 대응 뒤 장면에 "괜찮아요"(반말 "괜찮아")가 없음: ${c.id}`);
         walk(where, c.after, { nested: true });
       }
       if (!touchUsed.has(where)) warn(where, '대본 어디에서도 부르지 않는 대응 기회');
     }
+  }
+}
+
+// 비밀 장면(3단계): 단골마다 secret(who) 가 있는지(엔딩 앨범 액자)
+for (const who of REGULAR_IDS) if (!secretUsed.has(who)) warn(`단골 ${who}`, `3단계 비밀 장면 secret('${who}') 이 없음(엔딩 앨범 액자가 열리지 않음)`);
+
+// pick 조건: '사람.기회=선택지' 가 실제로 있는지
+for (const [ep, v] of pickUsed) {
+  const [key, want = ''] = String(v).split('=');
+  const [who, tid] = key.split('.');
+  const t = REGULARS[who]?.touches?.[tid];
+  if (!t) { err(ep, `pick: 없는 대응 기회 ${key}`); continue; }
+  for (const w of want.split('|')) if (w && !t.choices.some((c) => c.id === w)) err(ep, `pick: ${key} 에 없는 선택지 ${w}`); // 빈 값 = 아직 고르지 않음
+}
+
+// 사장의 숨은 장면 11(PRD 5.6): 이야기 어딘가에 seen(n) 이 한 번씩
+{
+  const count = new Map();
+  for (const [, n] of seenUsed) count.set(n, (count.get(n) || 0) + 1);
+  for (let n = 1; n <= 11; n++) {
+    if (!count.get(n)) warn('사장의 눈', `숨은 장면 ${n} 을 보여 주는 seen(${n}) 이 없음`);
   }
 }
 
@@ -352,6 +394,23 @@ for (const e of menuProblems()) err('menu', e);
 for (const o of MINIGAME_OOPS) checkOops('mini', o, 'mini');
 
 console.log('\n에피소드별 요약');
+// 자유 영업(js/data/episodes/free.js): 28일 한 바퀴를 모두 만들어 검사(앨범이 열린 경우와 아닌 경우). 합계에는 넣지 않음
+{
+  const { freeDay } = await imp('js/data/episodes/free.js');
+  const keep = { ...totals };
+  const allOpen = Object.fromEntries(Object.keys(REGULARS).map((k) => [k, 1]));
+  for (let d = 1; d <= 28; d += 1) for (const album of [{}, allOpen]) {
+    const ep = freeDay(d, { album });
+    const id = `free_${d}`;
+    for (const k of ['id', 'label', 'title', 'goal', 'diary']) if (!ep[k]) err(id, `메타 정보 '${k}' 없음`);
+    if (ep.script[ep.script.length - 1]?.t !== 'end') err(id, '마지막 비트는 end() 이어야 함');
+    curSchedule = [];
+    checks = [];
+    walk(id, ep.script);
+  }
+  Object.assign(totals, keep);
+}
+
 console.table(summary);
 console.log(`합계: 에피소드 ${EPISODES.length}편 + 엔딩 · 비트 ${totals.beats} · 대사 ${totals.lines}줄 · 글자 ${totals.chars} · 판단 ${totals.decides} · 대응 ${totals.responds} · 아차 ${totals.oops}`);
 console.log(errors ? `\n✗ 오류 ${errors}개, 경고 ${warns}개` : `\n✓ 오류 없음 (경고 ${warns}개)`);

@@ -53,6 +53,12 @@ SHEETS: dict[str, list[str | None]] = {
         'cup_mug_heart', 'cup_thick', 'cup_glass_empty', 'cup_glass_ice',
         'cup_paper', 'cup_shot', 'obj_tray', None,
     ],
+    # 풀 버전 메뉴의 재료 · 도구(2026-10-31, docs/requests_full.md 3장)
+    'sheet_more': [
+        'obj_decaf', 'obj_drip_beans', 'obj_mix', 'obj_barley',
+        'obj_yuja', 'obj_strawberry', 'obj_matcha', 'obj_cocoa',
+        'obj_hand_grinder', 'obj_spoon', 'cup_plastic', None,
+    ],
 }
 
 KEY = np.array([0x00, 0xB1, 0x40], np.float32)  # 요청서의 초록. 실제 바탕색은 시트에서 다시 잼(표본이 모자랄 때만 이 값)

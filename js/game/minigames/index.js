@@ -1,24 +1,24 @@
 /**
  * 미니게임 등록부: mini('이름', 옵션) 비트로 실행합니다.
- * 새 게임의 바리스타 작업대와 손 기술(PRD.md 6장)을 만들면 여기에 등록합니다.
- * 틀(frame.js: 머리글·[그만하기]·도중 정리)과 실시간·턴 방식 고리(arcade.js)는 그대로 씁니다.
+ * 틀(frame.js: 머리글·[그만하기]·도중 정리)과 실시간·턴 방식 고리(arcade.js)는 함께 씁니다.
+ *  - brew: 커피 만들기(주문 받기 + 카운터 + 손 동작, PRD 6장)
+ *  - routine: 순서대로(가게 열기 · 마감 · 혼자 여는 아침 · 정전 준비, 동작 H)
+ *  - lookaround: 둘러보기(여는 때 · 닫는 때, 숨은 장면 찾기 Q-13)
+ *  - tray: 쟁반 나르기(서두르면 쏟는다)
  */
 
 import { brew, brewLines, brewProblems } from './brew.js';
+import { routine, routineLines, routineProblems } from './routine.js';
+import { lookaround, lookaroundLines, lookaroundProblems } from './lookaround.js';
+import { tray, trayLines, trayProblems } from './tray.js';
 
-export const MINIGAMES = {
-  brew, // 커피 만들기(바리스타 작업대 + 손 기술, PRD 6장): mini('brew', { orders: [{ who, say, menu }], level })
-};
+export const MINIGAMES = { brew, routine, lookaround, tray };
 
 /** 미니게임이 읽어 주는 문장 (tools/export-lines.mjs 가 mini 비트의 옵션으로 호출) */
-export const MINIGAME_LINES = {
-  brew: brewLines,
-};
+export const MINIGAME_LINES = { brew: brewLines, routine: routineLines, lookaround: lookaroundLines, tray: trayLines };
 
 /** 미니게임 옵션 검사 (tools/validate-scenarios.mjs 가 mini 비트마다 부름): 문제 글 목록 */
-export const MINIGAME_CHECKS = {
-  brew: brewProblems,
-};
+export const MINIGAME_CHECKS = { brew: brewProblems, routine: routineProblems, lookaround: lookaroundProblems, tray: trayProblems };
 
 /** 미니게임의 모양(skin) 이름 (검사기용) */
 export const MINIGAME_SKINS = {};

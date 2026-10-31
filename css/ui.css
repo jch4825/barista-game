@@ -904,3 +904,35 @@ body.reduce-motion .ov-got .got-art { animation: none !important; }
 
 /* 표정 초상이 없는 인물의 초상: 스탠딩 그림에서 머리·어깨를 잘라 씀 (js/data/characters.js portraitHTML) */
 .pol-stand { display: block; width: 100%; height: 100%; background-repeat: no-repeat; background-color: #F3ECE0; }
+
+/* ---------- 이벤트 CG 의 임시 그림(대체 요망, js/ui/cg-placeholder.js) ---------- */
+.cgph { position: absolute; inset: 0; overflow: hidden; background: #1E3A44; }
+.cgph-bg { position: absolute; inset: 0; filter: saturate(.85) blur(1.5px); transform: scale(1.03); }
+.cgph-bg > * { width: 100%; height: 100%; }
+.cgph-bg .bg-img { width: 100%; height: 100%; object-fit: cover; }
+.cgph-shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 38%, rgba(255, 230, 180, .18), rgba(8, 20, 26, .55) 70%); }
+.cgph.is-night .cgph-shade { background: radial-gradient(ellipse at 50% 38%, rgba(255, 190, 110, .26), rgba(4, 10, 20, .78) 70%); }
+.cgph-cast { position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%); display: flex; align-items: flex-end; gap: 46px; }
+.cgph-who { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.cgph-face { position: relative; display: block; width: 250px; height: 250px; border-radius: 50%; overflow: hidden; border: 7px solid #F0D9A2; box-shadow: 0 0 0 4px var(--accent), 0 18px 40px rgba(0, 0, 0, .5); background: #FFF8EC; }
+.cgph-face .face-img, .cgph-face .face-svg { position: absolute; inset: 0; border-radius: 50%; }
+.cgph-face .face-svg svg { width: 100%; height: 100%; }
+.cgph-who small { padding: 2px 16px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 26px; font-weight: 800; }
+.cgph-prop { display: grid; place-items: center; width: 170px; height: 170px; border-radius: 50%; background: rgba(255, 248, 230, .92); border: 5px solid #D4AE62; box-shadow: 0 14px 30px rgba(0, 0, 0, .45); }
+.cgph-prop svg { width: 104px; height: 104px; color: #5A3A1C; }
+.cgph-cap { position: absolute; left: 50%; top: 60px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 0; padding: 10px 34px; border-radius: 16px; background: rgba(4, 18, 23, .7); border: 2px solid rgba(212, 174, 98, .7); text-align: center; }
+.cgph-cap b { font-family: var(--font-title); font-size: 40px; color: #F0D9A2; }
+.cgph-cap span { font-size: 25px; color: #FFF4D6; }
+.cgph-tag { position: absolute; right: 24px; top: 24px; margin: 0; padding: 4px 14px; border-radius: 8px; background: rgba(20, 20, 24, .78); color: #FFE14D; font-size: 20px; font-weight: 700; }
+.cgph.has-board .cgph-cast { left: 22%; top: 40%; }
+.cgph-board { position: absolute; left: 36%; top: 16%; width: 52%; height: 46%; border-radius: 10px; background: linear-gradient(160deg, #2E4A3A, #1F3529); border: 14px solid #7A5232; box-shadow: inset 0 0 40px rgba(0, 0, 0, .45), 0 18px 40px rgba(0, 0, 0, .5); }
+
+/* ---------- 칠판 글씨(stage.chalk): 분필처럼 흐린 흰 글자가 한 자씩. 사장님 글씨는 삐뚤(is-shaky) ---------- */
+.bg-chalk { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .4s; }
+.bg-chalk.is-on { opacity: 1; }
+.chalk-text { position: absolute; transform: translate(-50%, -50%) rotate(var(--rot, 0deg)); display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--font-title); font-size: 70px; font-weight: 700; color: rgba(250, 248, 238, .92); text-shadow: 0 0 2px rgba(255, 255, 255, .6), 1px 2px 0 rgba(255, 255, 255, .15); letter-spacing: .04em; }
+.chalk-line { display: flex; white-space: pre; }
+.chalk-text i { display: inline-block; font-style: normal; opacity: 0; transform: translateY(var(--dy, 0)) rotate(var(--r, 0deg)); animation: chalk-in .3s var(--d, 0s) ease-out forwards; }
+.chalk-text.is-shaky { font-size: 64px; color: rgba(250, 248, 238, .88); }
+@keyframes chalk-in { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: none; } }
+body.reduce-motion .chalk-text i { animation: none; opacity: 1; }

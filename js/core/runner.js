@@ -170,7 +170,7 @@ async function exec(s, b, index) {
   // 조건부 비트(선택 기억). onlyIf 묶음은 첫 비트에서 한 번만 검사
   if (b.if) {
     s.ifGroups = s.ifGroups || {};
-    const cond = () => checkCond(b.if, (k) => store.flag(k));
+    const cond = () => checkCond(b.if, (k) => store.flag(k), { album: store.album() });
     let ok;
     if (b.ifGroup) {
       if (b.ifFirst || !(b.ifGroup in s.ifGroups)) s.ifGroups[b.ifGroup] = cond();
@@ -224,6 +224,14 @@ async function exec(s, b, index) {
     case 'check': hud.checkStep(b.n); await w(ov.check(b.n, s.ep.schedule?.[b.n - 1])); return undefined;
     case 'meet': if (store.meet(b.who)) await w(ov.crewCard(b.who)); return undefined;
     case 'cg': if (stage.setCg(b.id) && b.id) store.unlockPhoto(`cg_${b.id}`); return undefined;
+    case 'chalk': stage.chalk(b.text, { shaky: b.shaky }); await w(sleep(b.text ? Math.min(2600, 400 + String(b.text).length * 120) : 0)); return undefined;
+    case 'seen': // 사장의 숨은 뒷받침: 알림 없이 기록만(PRD 5.6 ✅)
+      store.setFlag('seen', { ...(store.flag('seen') || {}), [b.n]: true });
+      store.log({ type: 'seen', ep: s.ep.id, n: b.n });
+      return undefined;
+    case 'secret': store.openAlbum(b.who); store.log({ type: 'secret', ep: s.ep.id, who: b.who }); return undefined;
+    case 'album': dialogue.hide(); await w(ov.album()); return undefined;
+    case 'eyes': dialogue.hide(); await w(ov.eyes()); return undefined;
     case 'emote': stage.emote(b.who, b.kind); return undefined;
     case 'memo': memo.set(b.title, b.items); await w(sleep(250)); return undefined;
     case 'memoHi': memo.highlight(b.n); return undefined;
@@ -424,6 +432,8 @@ async function respondBeat(s, b, index, w) {
     const c = t.choices[order[res.index]];
     // 신뢰 = 기회마다 마지막 대응의 점수(선택 기억 'touch'). 되감기·저장과 함께 돌아감
     store.setFlag('touch', { ...(store.flag('touch') || {}), [id]: c.score });
+    // 고른 대응(선택지 id): 그 뒤 장면이 고른 것에 따라 달라질 때 onlyIf({ pick: '사람.기회=선택지' }) 가 봄(예: 지안이 고른 색의 음료)
+    store.setFlag('picks', { ...(store.flag('picks') || {}), [id]: c.id });
     store.log({
       type: 'respond', ep: s.ep.id, id, who: b.who, touch: b.touch, season: t.season, nth: t.nth,
       choice: c.id, kind: c.kind, score: c.score, chosen: plain(fill(c.label)), replays, ms: Math.round(performance.now() - t0),
@@ -451,14 +461,14 @@ async function miniBeat(s, b, index, w) {
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
   // 미니게임이 돌려준 자세한 기록(커피 만들기: 만든 메뉴·다시 만들기·보기·손 기술마다 알맞음 수·라테아트·단계·턴 방식)
   const detail = {};
-  for (const k of ['served', 'made', 'remakes', 'kept', 'watched', 'skills', 'art', 'turn']) if (r?.[k] !== undefined) detail[k] = r[k];
+  for (const k of ['served', 'made', 'cups', 'remakes', 'kept', 'watched', 'skills', 'art', 'turn', 'asked', 'spills', 'looked']) if (r?.[k] !== undefined) detail[k] = r[k];
   if (r?.level !== undefined) detail.stage = r.level;
   if (r?.quit) { // [그만하기]: 남은 일은 지은이 알아서 함(frame.js QUIT_ASK). 축하·별 없이 다음 장면으로
     store.log({ type: 'mini', ep: s.ep.id, id, name: b.name, title: b.title || null, skill: b.skill || null, quit: true, attempts: r.attempts || 0, mistakes: r.mistakes || 0, ms: Math.round(r.ms || 0), ...detail });
     return undefined;
   }
   const level = r.attempts === 1 && r.mistakes === 0 ? 3 : r.attempts <= 2 && r.mistakes <= 2 ? 2 : 1;
-  await celebrate(s, w, { skill: b.skill, level, title: b.title });
+  if (!r.noCheer) await celebrate(s, w, { skill: b.skill, level, title: b.title });
   store.log({ type: 'mini', ep: s.ep.id, id, name: b.name, title: b.title || null, skill: b.skill || null, attempts: r.attempts, mistakes: r.mistakes, level, ms: Math.round(r.ms || 0), ...detail });
   return undefined;
 }

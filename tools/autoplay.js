@@ -53,7 +53,7 @@ function pickRespond(choices, mode) {
 export async function autoplay({ episode = null, bad = false, timeout = false, respond = 'best', hint = false, delay = 40, maxSteps = 6000 } = {}) {
   const J = window.__jm;
   if (!J) throw new Error('?debug 로 열어 주세요');
-  if (episode && !J.getEpisode(episode)) throw new Error(`없는 에피소드: ${episode} (쓸 수 있는 것: ${[...EPISODES, ENDING].map((e) => e.id).join(' ')})`);
+  if (episode && episode !== 'free' && !J.getEpisode(episode)) throw new Error(`없는 에피소드: ${episode} (쓸 수 있는 것: ${[...EPISODES, ENDING].map((e) => e.id).join(' ')})`);
   const errors = [];
   const onErr = (e) => errors.push(String(e.message || e.reason || e));
   window.addEventListener('error', onErr);
@@ -78,7 +78,8 @@ export async function autoplay({ episode = null, bad = false, timeout = false, r
       // 엔딩은 결과 화면 없이 (처음이면 엔딩 뒤 알림 다음) 근무표로 나감
       if (q('#layer-screen .scr-hub') && !J.runner.isRunning()) break;
 
-      const ov = q('#layer-overlay .ov');
+      // 미니게임 안의 창(온도 고르기 · 레시피 수첩 · 둘러보기 글)은 미니게임의 자동 풀이가 다룸
+      const ov = [...document.querySelectorAll('#layer-overlay .ov')].find((x) => !/ov-brew-temp|ov-brew-book|ov-look/.test(x.className)) || null;
       if (ov) {
         if (ov.classList.contains('ov-oops')) stats.fails += 1;
         // 두 버튼 아차(ov.oops 의 alt): 처음엔 되감기, 같은 아차가 또 나오면 다른 쪽(예: 이대로 계속)
@@ -94,7 +95,7 @@ export async function autoplay({ episode = null, bad = false, timeout = false, r
           continue;
         }
         if (ov.classList.contains('ov-rewind')) continue;
-        (ov.querySelector('.btn-rewind') || ov.querySelector('.act-btn') || ov.querySelector('.btn-big') || ov.querySelector('.ov-next') || ov.querySelector('button'))?.click();
+        (ov.querySelector('.btn-rewind') || ov.querySelector('.act-btn') || ov.querySelector('.btn-big') || ov.querySelector('.ov-next, .en-next') || ov.querySelector('button'))?.click();
         continue;
       }
 

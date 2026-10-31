@@ -131,6 +131,19 @@ export function drawPortrait(spec = {}, face = 'normal') {
   if (acc.has('camera')) parts.push(`<path d="M144 322 L166 380 M216 322 L194 380" ${S(4)}/><rect x="148" y="372" width="64" height="42" rx="8" fill="#3D3D45" ${S(4)}/><circle cx="180" cy="393" r="12" fill="#9FC7E8" ${S(3)}/>`);
   if (acc.has('phone')) parts.push(`<rect x="248" y="296" width="44" height="78" rx="8" fill="#2B2B33" ${S(4)}/><rect x="254" y="304" width="32" height="56" rx="4" fill="#9FC7E8"/><ellipse cx="270" cy="372" rx="27" ry="18" fill="${skin}" ${S(4)}/>`);
   if (acc.has('bags')) parts.push(`<path d="M246 330 C266 362 300 362 312 330" stroke="#8A6A4A" stroke-width="8" fill="none"/><rect x="268" y="350" width="72" height="68" rx="10" fill="#E9D8B4" ${S(4)}/>`);
+  // 새 단골의 소품(2026-10-31): 우편 가방 · 털모자 · 수염 · 운전 모자 · 아기 띠 · 이어폰 · 귀에 꽂은 연필 · 선글라스 · 헤드셋 · 목도리
+  if (acc.has('mailbag')) parts.push(`<path d="M120 322 L238 418" stroke="#6B4A2A" stroke-width="14"/><rect x="226" y="360" width="96" height="58" rx="10" fill="#8A5A34" ${S(4)}/><rect x="236" y="372" width="76" height="14" rx="4" fill="#B0413E"/>`);
+  if (acc.has('beanie')) parts.push(`<path d="M98 150 C100 84 260 84 262 150 Z" fill="#B0413E" ${S()}/><path d="M96 150 L264 150 L262 172 L98 172 Z" fill="#8E2F2C" ${S(4)}/>`);
+  if (acc.has('stubble')) parts.push('<path d="M140 250 Q180 296 220 250 Q214 280 180 286 Q146 280 140 250 Z" fill="rgba(60,50,45,.28)"/>');
+  if (acc.has('driver_cap')) parts.push(`<path d="M100 150 C104 96 256 96 260 150 Z" fill="#2F3A55" ${S()}/><path d="M92 150 L268 150 C258 166 102 166 92 150 Z" fill="#1E2538" ${S()}/><rect x="166" y="118" width="28" height="16" rx="4" fill="#E2B64E"/>`);
+  if (acc.has('baby_sling')) parts.push(`<path d="M96 330 L270 418" stroke="#B48A9A" stroke-width="18"/><circle cx="214" cy="380" r="30" fill="#F6D5C0" ${S(4)}/><path d="M188 372 Q214 346 240 372" fill="#F2E3C8" ${S(3)}/>`);
+  if (acc.has('earphones')) parts.push(`<path d="M100 214 C96 260 120 300 150 318 M260 214 C264 260 240 300 210 318" stroke="#FFFFFF" stroke-width="5" fill="none"/><circle cx="100" cy="212" r="9" fill="#FFFFFF" ${S(3)}/><circle cx="260" cy="212" r="9" fill="#FFFFFF" ${S(3)}/>`);
+  if (acc.has('pencil_ear')) parts.push('<path d="M254 168 L284 128" stroke="#E2B64E" stroke-width="9" stroke-linecap="round"/><path d="M284 128 L290 120" stroke="#2A2228" stroke-width="5" stroke-linecap="round"/>');
+  if (acc.has('sunglasses')) parts.push(`<rect x="124" y="186" width="52" height="30" rx="12" fill="#2A2228" ${S(3)}/><rect x="184" y="186" width="52" height="30" rx="12" fill="#2A2228" ${S(3)}/><path d="M176 198 L184 198" ${S(4)}/>`);
+  if (acc.has('headset')) parts.push(`<path d="M96 196 C96 96 264 96 264 196" stroke="#2A2228" stroke-width="8" fill="none"/><rect x="84" y="184" width="22" height="36" rx="8" fill="#2A2228"/><path d="M96 220 Q110 262 150 262" stroke="#2A2228" stroke-width="5" fill="none"/>`);
+  if (acc.has('scarf')) parts.push(`<path d="M120 318 C150 346 210 346 240 318 L246 342 C210 368 150 368 114 342 Z" fill="#E07B45" ${S(4)}/>`);
 
+  // 임시 그림 표시(2026-10-31 사용자 "대체 요망이라고 적어두면 된다"): 폴라로이드 아래에만 보이고, 얼굴 동그라미에서는 잘림
+  parts.push('<g><rect x="0" y="388" width="360" height="30" fill="rgba(20,20,24,.72)"/><text x="180" y="409" text-anchor="middle" font-size="18" font-weight="700" fill="#FFE14D" font-family="Pretendard, sans-serif">임시 그림 · 대체 요망</text></g>');
   return `<svg class="pol-svg" viewBox="0 0 360 418" xmlns="http://www.w3.org/2000/svg" role="img">${parts.join('')}</svg>`;
 }

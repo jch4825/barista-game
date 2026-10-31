@@ -41,7 +41,7 @@ function newProfile(name) {
     updatedAt: Date.now(),
     settings: { ...CONFIG.DEFAULT_SETTINGS },
     settingsLocked: false,
-    progress: { done: {}, checkpoint: null, unlockedAll: false },
+    progress: { done: {}, checkpoint: null, unlockedAll: false, year: 1 },
     flags: {},
     stamps: {},      // skill -> { best, count, last }
     log: [],         // 과제 기록
@@ -50,6 +50,8 @@ function newProfile(name) {
     photos: [],      // 오늘의 한 장
     oops: [],        // 아차 노트(발견한 실패 결과)
     met: [],         // 크루 카드를 본 사람
+    album: {},       // 엔딩 앨범: 열린 단골 액자 { 단골 id: 처음 열린 해 } (두 번째 해에도 남음, PRD 5.9)
+    book: [],        // 메뉴 도감: 만들어 본 메뉴 id (해가 바뀌어도 남음)
     tut: {},         // 처음 보는 버튼 알려 주기: 배운 버튼 종류 -> 시각
     interview: [],   // 면접 답변(설정 시)
     playMs: 0,
@@ -112,6 +114,8 @@ function normalizeProfile(raw) {
       unlockedAll: Boolean(pr.unlockedAll),
       ending: isObj(pr.ending) ? pr.ending : undefined,
       daily: isObj(pr.daily) ? pr.daily : undefined,
+      year: Math.max(1, Math.floor(num(pr.year, 1))),
+      free: isObj(pr.free) ? pr.free : undefined,
     },
     flags: obj(raw.flags),
     stamps: obj(raw.stamps),
@@ -121,6 +125,8 @@ function normalizeProfile(raw) {
     photos: ids(raw.photos),
     oops: ids(raw.oops),
     met: ids(raw.met),
+    album: obj(raw.album),
+    book: ids(raw.book),
     tut: obj(raw.tut),
     interview: list(raw.interview).filter(isObj),
     saves: obj(raw.saves),
@@ -167,12 +173,18 @@ function mergeProfiles(a, b) {
   const ending = e1 && e2 ? (num(e2.times) >= num(e1.times) ? e2 : e1) : e2 || e1;
   const [d1, d2] = [old.progress.daily, cur.progress.daily];
   const daily = d1 && d2 ? (num(d2.days) >= num(d1.days) ? d2 : d1) : d2 || d1;
+  const [f1, f2] = [old.progress.free, cur.progress.free];
+  const free = f1 && f2 ? (num(f2.day) >= num(f1.day) ? f2 : f1) : f2 || f1;
+  const album = { ...cur.album };
+  for (const [k, y] of Object.entries(old.album || {})) album[k] = album[k] ? Math.min(num(album[k], 1), num(y, 1)) : y;
   return {
     ...cur,
     ...onlyIn(old, cur),
     createdAt: Math.min(num(old.createdAt, Date.now()), num(cur.createdAt, Date.now())),
     updatedAt: Math.max(num(old.updatedAt), num(cur.updatedAt)),
-    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily },
+    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily, free, year: Math.max(num(old.progress.year, 1), num(cur.progress.year, 1)) },
+    album,
+    book: union(cur.book || [], old.book || []),
     stamps,
     log: unionBy(cur.log, old.log, (l) => `${l.at}|${l.type}|${l.id ?? ''}|${l.ep ?? ''}`, 2000),
     diary: unionBy(cur.diary, old.diary, (d) => `${d.at}|${d.ep}`),
@@ -277,7 +289,7 @@ export const store = {
     const p = active();
     if (!p) return;
     const prev = p.progress.ending;
-    p.progress.ending = { at: Date.now(), times: (prev?.times || 0) + 1, after };
+    p.progress.ending = { at: Date.now(), times: (prev?.times || 0) + 1, after, year: store.year() };
     touch(p);
     saveNow();
   },
@@ -287,6 +299,52 @@ export const store = {
     const p = active();
     if (!p) return;
     p.progress.daily = { ...d };
+    touch(p);
+    saveNow();
+  },
+  /* ---------- 몇 번째 해 · 엔딩 앨범 · 메뉴 도감 · 자유 영업(PRD 5.9 · 7장) ---------- */
+  year() { return Math.max(1, active()?.progress.year || 1); },
+  /**
+   * 두 번째 해(PRD 5.9 · Q-14): 같은 마을에서 다시. 마친 이야기 · 이어 하기 · 선택 기억(신뢰 · 본 숨은 장면)은 처음부터,
+   * 앨범 · 메뉴 도감 · 단골 수첩 · 엔딩을 본 기록(자유 영업)은 남음. 기록(log)에는 해마다 year 가 붙음
+   */
+  newYear() {
+    const p = active();
+    if (!p) return;
+    const keep = { usuals: p.flags.usuals, menuBook: p.flags.menuBook };
+    p.progress.year = Math.max(1, p.progress.year || 1) + 1;
+    p.progress.done = {};
+    p.progress.checkpoint = null;
+    p.flags = Object.fromEntries(Object.entries(keep).filter(([, v]) => v !== undefined));
+    touch(p);
+    saveNow();
+    bus.emit('profile', p);
+  },
+  album() { return { ...(active()?.album || {}) }; },
+  /** 액자 열기(3단계 비밀 장면을 본 단골). 처음이면 true */
+  openAlbum(who) {
+    const p = active();
+    if (!p || p.album?.[who]) return false;
+    p.album = { ...(p.album || {}), [who]: store.year() };
+    touch(p);
+    save();
+    return true;
+  },
+  book() { return [...(active()?.book || [])]; },
+  addBook(ids) {
+    const p = active();
+    if (!p) return;
+    const add = ids.filter((id) => !(p.book || []).includes(id));
+    if (!add.length) return;
+    p.book = [...(p.book || []), ...add];
+    touch(p);
+    save();
+  },
+  free() { return { day: 0, served: 0, best: 0, ...(active()?.progress.free || {}) }; },
+  setFree(f) {
+    const p = active();
+    if (!p) return;
+    p.progress.free = { ...f };
     touch(p);
     saveNow();
   },
@@ -377,6 +435,7 @@ export const store = {
 
   /* ---------- 학습 기록 ---------- */
   log(entry) {
+    if (entry && entry.year === undefined) entry = { ...entry, year: store.year() };
     const p = active();
     if (!p) return;
     p.log.push({ at: Date.now(), ...entry });

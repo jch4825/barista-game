@@ -187,3 +187,102 @@ body.reduce-motion .hw-soap.use, body.reduce-motion .hw-towels.use { animation: 
 /* 소품 그림(assets/items)을 쓰는 미니게임 물건(주문서·컵 보관대): 픽셀 소품과 같은 상자 크기 */
 .mg-art { display: inline-block; flex: none; }
 .mg-art .item-art { width: 100%; height: 100%; }
+
+/* ==========================================================================
+   장면 미니게임(2026-10-31 풀 버전): 순서대로 · 둘러보기 · 쟁반 나르기
+   카페 그림을 화면 가득 깔고(위쪽 띠 아래) 그 위에 단추. 머리글은 가운데 위의 알약(커피 만들기와 같은 모양)
+   ========================================================================== */
+html body .mg.mg-scene { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap: 0; border: 0; border-radius: 0; outline: 0; box-shadow: none; background: #0B1C20; }
+.mg.mg-scene .mg-head { position: absolute; z-index: 6; top: 14px; left: 50%; transform: translateX(-50%); gap: 12px; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(4, 18, 23, .78); border: 1px solid rgba(212, 174, 98, .5); color: #FFF4D6; }
+.mg.mg-scene .mg-head h2 { font-size: 28px; color: #FFF4D6; white-space: nowrap; }
+.mg.mg-scene .mg-head p { display: none; }
+.mg.mg-scene .mg-ico { width: 48px; height: 48px; border-radius: 50%; }
+.mg.mg-scene .mg-ico svg { width: 30px; height: 30px; }
+.mg.mg-scene .mg-say { width: 48px; height: 48px; padding: 6px; border-radius: 50%; }
+.mg.mg-scene .mg-quit { min-height: 48px; padding: 4px 14px; font-size: 20px; }
+.mg.mg-scene .mg-body { position: absolute; inset: 0; display: block; }
+.mg.mg-scene .sc-bg { position: absolute; inset: 0; transition: filter .5s; }
+.mg.mg-scene .sc-bg > *, .mg.mg-scene .sc-bg .bg-img { width: 100%; height: 100%; object-fit: cover; }
+.mg.mg-scene .sc-bg.is-dim { filter: brightness(.38) saturate(.7); }
+
+/* 순서대로: 물건 단추 한 줄 + 아래 할 일 목록 */
+.mg-routine .rt-row { position: absolute; left: 50%; top: 36%; transform: translate(-50%, -50%); display: flex; gap: 26px; }
+.mg-routine .rt-obj { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 210px; padding: 22px 12px 18px; border-radius: 22px; border: 3px solid rgba(212, 174, 98, .7); background: rgba(4, 18, 23, .72); color: #FFF4D6; transition: transform .18s, box-shadow .18s, opacity .18s; }
+.mg-routine .rt-ico { display: grid; place-items: center; width: 116px; height: 116px; border-radius: 50%; background: rgba(255, 248, 230, .92); color: #3F2A16; }
+.mg-routine .rt-ico svg { width: 72px; height: 72px; }
+.mg-routine .rt-name { font-size: 26px; font-weight: 800; text-align: center; line-height: 1.25; }
+.mg-routine .rt-n { position: absolute; top: -16px; left: -12px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #3F2A16; border: 3px solid #F0D9A2; color: #F0D9A2; font-size: 24px; }
+.mg-routine .rt-check { position: absolute; top: -14px; right: -12px; display: none; width: 46px; height: 46px; padding: 6px; border-radius: 50%; background: var(--main); color: #fff; border: 3px solid #fff; }
+.mg-routine .rt-obj.is-now { border-color: #F0D9A2; box-shadow: 0 0 0 6px rgba(240, 217, 162, .55), 0 0 40px rgba(255, 220, 140, .65); transform: translateY(-8px); }
+.mg-routine .rt-obj.is-now .rt-ico { background: #FFE9B0; }
+.mg-routine .rt-obj.is-done { opacity: .62; }
+.mg-routine .rt-obj.is-done .rt-check { display: block; }
+.mg-routine .rt-foot { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); width: min(1500px, calc(100% - 60px)); display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 22px; padding: 16px 22px; border-radius: 16px; border: 2px solid var(--gold-d, #8E6C33); background: rgba(255, 253, 247, .96); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.mg-routine .rt-list { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0; padding: 0; list-style: none; }
+.mg-routine .rt-list li { display: flex; align-items: center; gap: 6px; padding: 4px 12px 4px 4px; border-radius: 999px; background: #F4EEDF; font-size: 21px; font-weight: 700; }
+.mg-routine .rt-list li b { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #3F2A16; color: #F0D9A2; font-size: 18px; }
+.mg-routine .rt-list li.is-now { background: #FFE9B0; box-shadow: 0 0 0 3px #D4AE62; }
+.mg-routine .rt-list li.is-done { text-decoration: line-through; opacity: .6; }
+.mg-routine .rt-say { margin: 0; font-size: 30px; font-weight: 800; color: #2A1D12; }
+
+/* 둘러보기: 그림 위의 물건 단추 + 아래 [다 둘러봤어요] */
+.mg-look .lk-spots { position: absolute; inset: 0; }
+.mg-look .lk-spot { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; background: none; color: #FFF4D6; }
+.mg-look .lk-ico { display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: rgba(255, 248, 230, .9); border: 4px solid #D4AE62; box-shadow: 0 0 0 6px rgba(240, 217, 162, .3), 0 10px 22px rgba(0, 0, 0, .45); color: #3F2A16; animation: lk-breathe 2.4s ease-in-out infinite; }
+.mg-look .lk-ico svg { width: 56px; height: 56px; }
+.mg-look .lk-name { padding: 2px 14px; border-radius: 999px; background: rgba(4, 18, 23, .78); font-size: 22px; font-weight: 800; white-space: nowrap; }
+.mg-look .lk-seen { position: absolute; top: -8px; right: -8px; display: none; width: 38px; height: 38px; padding: 5px; border-radius: 50%; background: var(--main); color: #fff; border: 3px solid #fff; }
+.mg-look .lk-spot.is-seen .lk-seen { display: block; }
+.mg-look .lk-spot.is-seen .lk-ico { animation: none; border-color: #8FA79A; opacity: .8; }
+.mg-look .lk-spot:hover .lk-ico, .mg-look .lk-spot:focus-visible .lk-ico { background: #FFE9B0; box-shadow: 0 0 0 8px rgba(240, 217, 162, .7), 0 10px 22px rgba(0, 0, 0, .45); }
+.mg-look .lk-spot:focus-visible { outline: none; }
+@keyframes lk-breathe { 50% { box-shadow: 0 0 0 12px rgba(240, 217, 162, .12), 0 10px 22px rgba(0, 0, 0, .45); } }
+.mg-look .lk-foot { position: absolute; right: 30px; bottom: 26px; display: flex; align-items: center; gap: 18px; }
+.mg-look .lk-count { margin: 0; padding: 6px 18px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 24px; font-weight: 800; }
+.ov.ov-look { display: grid; place-items: end center; padding-bottom: 60px; background: rgba(3, 14, 18, .35); }
+.ov-look .lk-card { display: flex; flex-direction: column; gap: 12px; width: min(1180px, 88%); padding: 20px 28px; border-radius: 18px; border: 2px solid #8E6C33; background: #FFFDF7; box-shadow: 0 18px 40px rgba(0, 0, 0, .5); }
+.ov-look header { display: flex; align-items: center; gap: 12px; }
+.ov-look header i svg { width: 42px; height: 42px; color: #6B4E1E; }
+.ov-look header h3 { margin: 0; font-family: var(--font-title); font-size: 32px; color: #6B4E1E; }
+.ov-look .lk-who { font-size: 20px; color: var(--main); }
+.ov-look .lk-who:empty { display: none; }
+.ov-look .lk-text { margin: 0; font-size: 32px; font-weight: 700; line-height: 1.45; }
+.ov-look .lk-text.is-think { color: #23603A; }
+.ov-look .lk-next { align-self: flex-end; min-width: 220px; }
+body:is(.reduce-motion, .theme-calm) .mg-look .lk-ico { animation: none; }
+
+/* 쟁반 나르기: 길(카운터 → 자리) 위를 걷는 지은 + 쟁반의 잔 + 오른쪽 흔들림 띠 */
+.mg-tray .tr-path { position: absolute; left: 4%; right: 22%; top: 18%; height: 52%; }
+.mg-tray .tr-line { position: absolute; left: 6%; right: 6%; bottom: 18%; height: 0; border-bottom: 6px dashed rgba(240, 217, 162, .85); }
+.mg-tray .tr-goal { position: absolute; right: 0; bottom: 6%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mg-tray .tr-goal i { display: grid; place-items: center; width: 110px; height: 110px; border-radius: 50%; background: rgba(255, 248, 230, .92); border: 4px solid #D4AE62; color: #3F2A16; }
+.mg-tray .tr-goal i svg { width: 64px; height: 64px; }
+.mg-tray .tr-goal span { padding: 2px 14px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 24px; font-weight: 800; }
+.mg-tray .tr-walker { position: absolute; bottom: 10%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; transition: left .08s linear; }
+.mg-tray .tr-face { position: relative; display: block; width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 5px solid #F0D9A2; background: #FFF8EC; box-shadow: 0 12px 26px rgba(0, 0, 0, .45); }
+.mg-tray .tr-face .face-img, .mg-tray .tr-face .face-svg { position: absolute; inset: 0; }
+.mg-tray .tr-tray { display: flex; gap: 8px; padding: 6px 18px 10px; border-radius: 10px 10px 30px 30px; background: linear-gradient(180deg, #C08A52, #8A5A34); box-shadow: 0 8px 14px rgba(0, 0, 0, .4);
+  transform: rotate(calc(sin(var(--t, 0) * 9) * var(--w, 0) * 16deg)); }
+.mg-tray .tr-item { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 12px; background: #FFFDF7; color: #3F2A16; }
+.mg-tray .tr-item svg { width: 50px; height: 50px; }
+.mg-tray .tr-walker.is-walking .tr-face { animation: tr-bob .5s ease-in-out infinite; }
+@keyframes tr-bob { 50% { translate: 0 -6px; } }
+.mg-tray .tr-walker.is-spill .tr-tray::after { content: ''; position: absolute; left: 60%; top: 70%; width: 70px; height: 30px; border-radius: 50%; background: rgba(214, 180, 140, .8); animation: tr-drip .7s ease-out forwards; }
+@keyframes tr-drip { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 10px 60px; } }
+.mg-tray .tr-side { position: absolute; right: 30px; top: 16%; bottom: 22%; width: 230px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 14px; border-radius: 16px; background: rgba(255, 253, 247, .95); border: 2px solid #8E6C33; }
+.mg-tray .tr-side b { font-family: var(--font-title); font-size: 26px; color: #6B4E1E; text-align: center; }
+.mg-tray .tr-items { margin: 0; font-size: 20px; font-weight: 700; text-align: center; }
+.mg-tray .tr-meter { position: relative; flex: 1; display: flex; flex-direction: column-reverse; border-radius: 14px; border: 3px solid #8E6C33; overflow: hidden; }
+.mg-tray .tr-seg { display: grid; place-items: center; font-size: 21px; font-weight: 800; }
+.mg-tray .tr-seg.calm { flex: 60; background: #E6F4EA; }
+.mg-tray .tr-seg.warn { flex: 25; background: #FFF1CF; }
+.mg-tray .tr-seg.shake { flex: 15; background: #FBDDD6; }
+.mg-tray .tr-needle { position: absolute; left: 0; right: 0; bottom: calc(var(--p, 0) * 100%); height: 6px; margin-bottom: -3px; background: #2A1D12; box-shadow: 0 0 0 2px #fff; }
+.mg-tray .tr-foot { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); display: flex; align-items: center; gap: 24px; padding: 12px 20px; border-radius: 16px; background: rgba(255, 253, 247, .96); border: 2px solid #8E6C33; box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.mg-tray .tr-status { margin: 0; min-width: 240px; font-size: 26px; font-weight: 800; }
+.mg-tray .tr-ctrl { display: flex; gap: 16px; }
+.mg-tray .tr-hold { min-width: 320px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.mg-tray .tr-hold.is-holding { transform: translateY(3px) scale(.97); filter: brightness(.9); }
+body:is(.reduce-motion, .theme-calm) .mg-tray .tr-tray { transform: none; }
+body:is(.reduce-motion, .theme-calm) .mg-tray .tr-walker.is-walking .tr-face { animation: none; }
+body.contrast .mg-routine .rt-obj, body.contrast .mg-look .lk-name { background: #000; border-color: #FFE14D; }

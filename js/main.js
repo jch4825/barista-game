@@ -23,6 +23,7 @@ import { showRecipeBook } from './game/minigames/brew.js';
 import { tutor } from './ui/tutor.js';
 import { preloadEpisode, warmAll } from './ui/loading.js';
 import { getEpisode, nextEpisode, ENDING, FINALE } from './data/episodes/index.js';
+import { freeDay } from './data/episodes/free.js';
 import { ov } from './ui/overlays.js';
 import { showTitle, hideTitle } from './screens/title.js';
 import { showProfileSetup } from './screens/profile.js';
@@ -39,7 +40,8 @@ let playing = false;
 
 /** resume: 자동 저장(이어하기)부터 · save: 세이브 슬롯에서 불러온 저장 데이터 */
 async function playEpisode(id, { resume = false, save = null } = {}) {
-  const ep = getEpisode(id);
+  // 자유 영업: 다음 날 번호로 그날을 만듦(같은 날은 늘 같은 하루, js/data/episodes/free.js)
+  const ep = id === 'free' ? freeDay(store.free().day + 1, { album: store.album() }) : getEpisode(id);
   if (!ep) { console.warn(`없는 이야기: ${id}`); nav.go('hub'); return; } // 빈 화면에 멈추지 않게 근무표로
   if (runner.isRunning()) runner.abort();
   closeAllScreens();
@@ -51,11 +53,13 @@ async function playEpisode(id, { resume = false, save = null } = {}) {
   playing = false;
   if (result.status !== 'ended') return;
   if (ep.id === ENDING.id) { await afterEnding(); return; }
+  if (ep.id === 'free') { await afterFreeDay(ep, result); return; }
   store.markDone(ep.id);
   hud.hide();
   dialogue.hide();
-  // 이야기의 마지막 에피소드를 처음 마치면 결과 화면 뒤에 엔딩(본 뒤에 다시 하면 엔딩은 근무표에서)
-  const endingNext = ep.id === FINALE && store.ending()?.after !== FINALE;
+  // 이야기의 마지막 에피소드를 처음 마치면(해마다) 결과 화면 뒤에 엔딩(본 뒤에 다시 하면 엔딩은 달력에서)
+  const end = store.ending();
+  const endingNext = ep.id === FINALE && !(end && end.after === FINALE && (end.year || 1) === store.year());
   const next = await showResult(ep, result, { ending: endingNext });
   if (next === 'ending') nav.go('play', ENDING.id);
   else if (next === 'next' && nextEpisode(ep.id)) nav.go('play', nextEpisode(ep.id).id);
@@ -63,13 +67,27 @@ async function playEpisode(id, { resume = false, save = null } = {}) {
   else nav.go('title');
 }
 
-/** 엔딩이 끝나면: 본 것으로 기록 → (처음이면) 모든 이야기가 열렸다는 알림 → 근무표 */
+/** 자유 영업 하루가 끝나면: 날 번호를 올리고 하루 끝 화면 → [다음 날 열기] · 달력 · 처음 화면 */
+async function afterFreeDay(ep, result) {
+  const f = store.free();
+  const served = store.logs().filter((l) => l.ep === 'free' && l.type === 'mini' && (l.at || 0) >= Date.now() - (result.ms || 0) - 3000)
+    .reduce((n, l) => n + (Array.isArray(l.cups) ? l.cups.length : 0), 0);
+  store.setFree({ ...f, day: Math.max(f.day, ep.free || 0), served: (f.served || 0) + served, best: Math.max(f.best || 0, served) });
+  hud.hide();
+  dialogue.hide();
+  const next = await showResult(ep, result, { again: '다음 날 열기' });
+  if (next === 'again') nav.go('play', 'free');
+  else if (next === 'hub') { nav.go('title'); nav.go('hub'); }
+  else nav.go('title');
+}
+
+/** 엔딩이 끝나면: 본 것으로 기록 → (처음이면) 모든 이야기가 열렸다는 알림 → 달력 */
 async function afterEnding() {
   const first = !store.ending();
   store.markEnding(FINALE);
   hud.hide();
   dialogue.hide();
-  if (first) await ov.info({ title: ENDING.notice.title, body: ENDING.notice.body, icon: 'calendar', button: '근무표 보기' });
+  if (first) await ov.info({ title: ENDING.notice.title, body: ENDING.notice.body, icon: 'calendar', button: '달력 보기' });
   nav.go('title');
   nav.go('hub');
 }

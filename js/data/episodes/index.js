@@ -1,22 +1,55 @@
 /**
- * 에피소드 목록 + 엔딩
- * 지금은 M1 시험판(사계절 네 편: 해순 할머니·지안의 대응 기회 10개 + 작업대)과 엔딩 자리 표시만 있습니다.
- * 새 게임의 사계절 이야기(PRD.md 5장)를 쓰면 시험판을 빼고 여기에 넣습니다.
+ * 에피소드 목록 + 엔딩 (docs/story.md 4장)
+ * 한 해 = 계절 4막 × 7일(고요한 날 6 + 폭발 사건 1, Q-12 ✅). 에피소드 하나가 하루입니다(결과 화면 = 하루 끝).
+ * 엔딩은 EPISODES 에 넣지 않고, 마지막 막의 마지막 날(FINALE)을 처음 마치면 main.js 가 엔딩으로 보냅니다.
  */
 
-import m1Spring from './m1_spring.js';
-import m1Summer from './m1_summer.js';
-import m1Autumn from './m1_autumn.js';
-import m1Winter from './m1_winter.js';
+import spring1 from './spring_1.js';
+import spring2 from './spring_2.js';
+import spring3 from './spring_3.js';
+import spring4 from './spring_4.js';
+import spring5 from './spring_5.js';
+import spring6 from './spring_6.js';
+import spring7 from './spring_7.js';
+import summer1 from './summer_1.js';
+import summer2 from './summer_2.js';
+import summer3 from './summer_3.js';
+import summer4 from './summer_4.js';
+import summer5 from './summer_5.js';
+import summer6 from './summer_6.js';
+import summer7 from './summer_7.js';
+import autumn1 from './autumn_1.js';
+import autumn2 from './autumn_2.js';
+import autumn3 from './autumn_3.js';
+import autumn4 from './autumn_4.js';
+import autumn5 from './autumn_5.js';
+import autumn6 from './autumn_6.js';
+import autumn7 from './autumn_7.js';
+import winter1 from './winter_1.js';
+import winter2 from './winter_2.js';
+import winter3 from './winter_3.js';
+import winter4 from './winter_4.js';
+import winter5 from './winter_5.js';
+import winter6 from './winter_6.js';
+import winter7 from './winter_7.js';
 import ending from './ending.js';
 import { registerOops } from '../../core/oops.js';
 import { MINIGAME_OOPS } from '../../game/minigames/index.js';
 
 /** 이야기 순서(결과 화면이 있는 에피소드). 엔딩은 여기에 넣지 않습니다 */
-export const EPISODES = [m1Spring, m1Summer, m1Autumn, m1Winter];
+export const EPISODES = [
+  spring1, spring2, spring3, spring4, spring5, spring6, spring7,
+  summer1, summer2, summer3, summer4, summer5, summer6, summer7,
+  autumn1, autumn2, autumn3, autumn4, autumn5, autumn6, autumn7,
+  winter1, winter2, winter3, winter4, winter5, winter6, winter7,
+];
 
+/** 계절(막): 달력의 한 줄. sub 는 달력에 보이는 한 줄 소개 */
 export const ACTS = [
-  { n: 1, title: 'M1 시험판', sub: '해순 할머니와 지안, 그리고 작업대', ids: ['m1_spring', 'm1_summer', 'm1_autumn', 'm1_winter'] },
+  { n: 1, season: 'spring', title: '봄 · 첫 컵', sub: '바닷가 마을 카페에 온 지은. 해순 할머니 · 도 씨 · 강 씨를 만나요.', ids: ['spring_1', 'spring_2', 'spring_3', 'spring_4', 'spring_5', 'spring_6', 'spring_7'] },
+  { n: 2, season: 'summer', title: '여름 · 줄', sub: '사진 한 장으로 카페가 붐벼요. 지안 · 한 씨 · 은주 · 수민 · 노 씨를 만나요.', ids: ['summer_1', 'summer_2', 'summer_3', 'summer_4', 'summer_5', 'summer_6', 'summer_7'] },
+  { n: 3, season: 'autumn', title: '가을 · 손', sub: '사장님의 손이 떨려요. 열쇠를 받고 혼자 가게를 열어요.', ids: ['autumn_1', 'autumn_2', 'autumn_3', 'autumn_4', 'autumn_5', 'autumn_6', 'autumn_7'] },
+  { n: 4, season: 'winter', title: '겨울 · 불', sub: '폭설로 마을이 정전돼요. 불이 켜진 곳은 카페뿐이에요.', ids: ['winter_1', 'winter_2', 'winter_3', 'winter_4', 'winter_5', 'winter_6', 'winter_7'] },
 ];
 
 /**

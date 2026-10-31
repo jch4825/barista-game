@@ -23,8 +23,14 @@ export const fx = (name, on = true) => ({ t: 'fx', name, on }); // overload | fl
 export const earplugs = (on = true) => ({ t: 'earplugs', on });
 /** 감정 이모트: emote('who', 'idea') (sweat exclaim question idea heart note sparkle tear dots ok blush sigh). 표정이 바뀔 때는 자동으로도 뜸 */
 export const emote = (who, kind) => ({ t: 'emote', who, kind });
-/** 이벤트 CG: cg('door') 로 전체 화면 그림, cg(null) 또는 다음 bg() 로 끝. 그림 파일이 없으면 아무 일도 없음 */
+/** 이벤트 CG: cg('door') 로 전체 화면 그림, cg(null) 또는 다음 bg() 로 끝. 그림 파일이 없으면 임시 그림(대체 요망, js/ui/cg-placeholder.js) */
 export const cg = (id) => ({ t: 'cg', id });
+/** 칠판 글씨: 지금 CG 의 칠판 자리(cg.js 의 chalk)에 분필 글씨. shaky: 사장님의 삐뚤한 글씨 · chalk(null) 로 지움 */
+export const chalk = (text, shaky = false) => ({ t: 'chalk', text, shaky });
+/** 사장의 숨은 뒷받침을 봄(PRD 5.6, 1~11): 알림 없이 기록만(엔딩 '사장의 눈'에서 처음 보는 컷을 천천히) */
+export const seen = (n) => ({ t: 'seen', n });
+/** 단골의 비밀 장면(3단계)을 봄: 엔딩 앨범에 그 단골의 액자가 열림(두 번째 해에도 남음). 알림 없이 기록만 */
+export const secret = (who) => ({ t: 'secret', who });
 
 /* ---------- 대사 ---------- */
 /** say('who', '대사') 또는 say('who', 'smile', '대사') */
@@ -110,6 +116,10 @@ export const term = (id) => ({ t: 'term', id });
 export const finish = (title, sub = '') => ({ t: 'finish', title, sub });
 /** 엔딩: 사진 벽(모은 사진을 한 장씩 붙이며 제목을 읽어 줌) + 크레디트 */
 export const credits = () => ({ t: 'credits' });
+/** 엔딩 앨범(PRD 5.8): 단골 8명의 액자. 3단계(비밀 장면을 본) 단골은 그림과 한 줄, 아니면 '아직 모르는 이야기' */
+export const album = () => ({ t: 'album' });
+/** 사장의 눈(PRD 5.8): 숨은 장면 11컷을 사장님 시점의 한 줄과 함께. 처음 보는 컷은 조금 더 천천히 */
+export const eyes = () => ({ t: 'eyes' });
 /**
  * 마지막 메모(엔딩): 노란 메모에 받는 사람·줄·추신·이름.
  * 받는 사람({player} 님에게)은 화면에만 쓰고, 읽어 주기는 speech(이름이 없는 줄) → 음성 파일을 미리 만들 수 있음
