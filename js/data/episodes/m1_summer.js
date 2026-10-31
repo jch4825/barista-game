@@ -28,8 +28,8 @@ export default {
     mini('brew', {
       id: 'm1_summer_brew', title: '관광객 주문', level: 'normal',
       orders: [
-        { who: 'customer', say: '라테 한 잔이요.', menu: 'latte' },
-        { who: 'customer', say: '아메리카노도 한 잔이요.', menu: 'americano' },
+        { who: 'customer', say: '라테 한 잔이요.', menu: 'latte', temp: 'iced', togo: true, ask: ['temp', 'togo'] },
+        { who: 'customer', say: '아이스 아메리카노도 한 잔이요.', menu: 'americano', temp: 'iced', togo: true },
       ],
     }),
     leave('customer'),
