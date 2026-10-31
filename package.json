@@ -8,6 +8,7 @@
     "web": "node tools/serve.mjs 5175",
     "validate": "node tools/validate-scenarios.mjs",
     "export": "node tools/export-script.mjs",
+    "requests": "node tools/export-requests.mjs",
     "assets": "node tools/scan-assets.mjs",
     "audio": "node tools/import-audio.mjs && node tools/scan-assets.mjs",
     "images": "python tools/import-images.py && node tools/scan-assets.mjs",
@@ -21,7 +22,13 @@
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux"
   },
-  "keywords": ["barista", "special-education", "visual-novel", "electron", "accessibility"],
+  "keywords": [
+    "barista",
+    "special-education",
+    "visual-novel",
+    "electron",
+    "accessibility"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -31,7 +38,19 @@
   "build": {
     "appId": "kr.barista-game.app",
     "productName": "직업 ε바리스타3",
-    "files": ["index.html", "main.js", "preload.js", "css/**", "js/**", "assets/**", "!assets/**/*.md", "!assets/*_sheet.jpg", "!assets/_src/**"],
-    "win": { "target": "nsis" }
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "css/**",
+      "js/**",
+      "assets/**",
+      "!assets/**/*.md",
+      "!assets/*_sheet.jpg",
+      "!assets/_src/**"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }
