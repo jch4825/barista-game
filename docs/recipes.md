@@ -225,6 +225,22 @@
   - 🙋 연결 방법: 얼음 담기는 누른 박자 수만큼 `ice` 단계(3번이면 0 → 3 → 6 → 8개), 물 붓기는 머그면 `water` · 유리컵이면 `water_glass`, 붓기는 유리컵이면 `pour_glass_latte`/`pour_glass_milk`. 플라스틱 컵(포장 아이스) · 종이컵(포장 따뜻함)은 같은 틀로 컵만 바꿔 더 그리면 됩니다.
 - **다시 만들기**: `… scene_bench.py -- C:/AI/game3/assets/_src/blender shots ice,water_glass,pour_glass` → `shots_post.py … ice,water_glass,pour_glass_milk,pour_glass_latte` → `npm run assets` → `npm run credits`.
 
+### 6.8 포장 컵 · 음료 색 컷 (✅ 2026-10-31 렌더, 사용자 "테이크아웃용 플라스틱 컵도 있어야 한다 … 길쭉한 것으로" · "종이컵(따뜻한 음료용)도 … 블랜더로" · "딸기우유, 녹차라테, 코코아는 음료 색만 바꾼 장면")
+- **이름 규칙**: 이야기 가지 작업대(`brew.js` `shotIdFor`)가 정한 이름을 그대로 씁니다. 붓기 `pour{잔}_{latte|milk|strawberry|matcha|cocoa}`, 물 붓기 `water{잔}`(에스프레소가 든 때), 얼음 담기 `ice{잔}`. {잔}은 머그 = 없음 · 유리컵 `_glass` · 종이컵 `_paper` · 플라스틱 컵 `_plastic`(유리컵의 얼음 담기만 `ice`). `shots.json`에 이 이름이 생기면 코드를 고치지 않아도 씁니다.
+- **종이컵**(가져가요 · 따뜻하게, 약 355mL): 위 지름 9cm · 아래 5.8cm · 높이 11cm, 말린 종이 테두리, 가운데 크라프트 슬리브(골판지 띠, 무늬 · 글자 없음). 속이 안 보이므로 머그의 붓기 · 물 붓기와 같은 구도(위에서 약 62°)로 컵 안을 내려다봅니다. 받침 없이 작업대 위, 뚜껑은 붓는 중이라 없음.
+  - `water_paper`(뜨거운 물, 아메리카노: 드립 주전자, 크레마가 흩어짐, 배경판 `water_paper_plate`) · `pour_paper_milk` · `pour_paper_latte`(라테 하트 프레임 있음, 머그와 같은 단계) · `pour_paper_matcha` · `pour_paper_cocoa`. 붓기 넷은 배경판 하나 `pour_paper_plate`(빈 종이컵).
+- **플라스틱 컵**(가져가요 · 차갑게, 길쭉한 약 590mL): 위 지름 9.6cm · 아래 6cm · 높이 15cm, 얇은 투명 컵, 바닥 1.6cm 위에 한 단 턱, 가는 말린 테두리. 유리컵과 같은 구도(앞에서 약 24°), 같은 밝은 컵받침 위.
+  - 컵받침: 투명한 바닥 턱에 나무색이 비쳐 커피가 든 것처럼 보여서 깔았습니다. 받침이 얇은 컵 벽에 비치면 아래가 흰 띠처럼 보여 받침은 비침에서 뺐습니다(바닥 너머로는 보임).
+  - 얼음 24개(6층)로 컵 위쪽까지 가득. `ice_plastic`은 한 국자(3개)씩 떨어져 9단계(0 → 24개) × 떨어지는 얼음 있음/없음, 배경판 `ice_plastic_plate`(빈 컵).
+  - `water_plastic`(아이스 아메리카노, 배경판 `water_plastic_plate`) · `pour_plastic_milk` · `pour_plastic_latte` · `pour_plastic_strawberry` · `pour_plastic_matcha` · `pour_plastic_cocoa`. 붓기 다섯은 배경판 하나 `pour_plastic_plate`(얼음만).
+- **음료 색**(딸기우유 · 녹차라테 · 코코아): 붓기와 같은 장면에서 음료 색만 바꿉니다. 바탕(딸기청 = 진한 빨강 · 푼 말차 = 진한 초록 · 코코아 = 짙은 갈색)이 컵 바닥에 깔려 있고, 우유를 부을수록 그 음료 색(분홍 · 연두 · 밀크 초콜릿 색)이 됩니다. 따뜻한 잔(머그 · 종이컵)은 끝 무렵 가운데에 우유 거품 동그라미가 생깁니다(하트는 에스프레소 라테만).
+  - 머그 `pour_matcha` · `pour_cocoa`(배경판 `pour_plate`), 유리컵 `pour_glass_strawberry` · `pour_glass_matcha` · `pour_glass_cocoa`(배경판 `pour_glass_plate`), 종이컵 · 플라스틱 컵은 위. 딸기우유는 아이스만이라 머그 · 종이컵 컷이 없습니다.
+  - 색은 `menu.js`의 음료 색(딸기우유 `#F7B6C8` · 녹차라테 `#A8C97F` · 코코아 `#8A5A3C`)에 맞춤(`scene_bench.py`의 `TINTS`).
+- **새 컵의 음료 그리기**: 음료 옆면은 컵 벽에 붙어 있어 비치지 않으므로 윗면만 반짝이게 했습니다(`top_spec`, 아래를 보는 옆면에 밝은 받침이 비쳐 흰 띠처럼 보이던 것).
+- 🙋 남은 것: 녹차라테 · 코코아(아이스)는 가루 · 말차를 먼저 넣고 얼음을 담는데, 얼음 담기 컷은 빈 컵에서 시작합니다(검수 I-29에서 말한 것). 바탕이 깔린 얼음 담기 컷이 필요하면 이름 규칙(`brew.js`)부터 정해야 합니다. 믹스커피 · 보리차 · 유자차의 물 붓기는 에스프레소가 없어 컷이 없습니다.
+- **다시 만들기**: `… scene_bench.py -- C:/AI/game3/assets/_src/blender shots pour_tint,pour_glass_tint,water_paper,pour_paper,ice_plastic,water_plastic,pour_plastic` → `shots_post.py … (컷 이름, 쉼표)` → `npm run assets` → `npm run credits`.
+- 모아 보기: `docs/design/brew_shots_togo.jpg`(컷마다 거의 찬 단계).
+
 ## 7. 학생에게 보이는 말 (쉬운 한국어)
 - 동작 안내는 한 줄입니다.
   - 지금 쓰는 말(A): "[누르고 있기]를 꾹 누르면 샷이 나와요. 알맞아요 칸에서 손을 떼요." · 턴 방식은 "띠가 알맞아요 칸에 오면 [멈추기]를 눌러요."

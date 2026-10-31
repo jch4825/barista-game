@@ -3,9 +3,9 @@
 - 오래된 2그룹 에스프레소 머신(스테인리스 + 초록 법랑 옆판) · 머그와 받침 · 스팀 피처 · 탬퍼 · 샷 잔
 - 빛: 왼쪽 위 큰 창빛(주광) + 오른쪽 약한 채움 + 뒤쪽 테두리 빛. 반사는 블렌더에 든 실내 HDRI
 - 쓰는 법: blender --background --factory-startup --python scene_bench.py -- <출력 폴더> <preview|full|bg|sprites|extract|shots_preview|shots|all>
-- shots [extract,steam,pour,foam]: 동작마다 한 컷(샷 내리기 · 우유 데우기 · 붓기 · 거품 내기) 배경판 + 프레임 → tools/blender/shots_post.py 가 assets/shots/ 로
+- shots [extract,steam,pour,foam,…]: 동작마다 한 컷(샷 내리기 · 우유 데우기 · 붓기 · 거품 내기 · 물 붓기 · 얼음 담기 + 컵 · 음료 색, SHOTS) 배경판 + 프레임 → tools/blender/shots_post.py 가 assets/shots/ 로
 """
-import bpy, bmesh, math, os, sys, json
+import bpy, bmesh, math, os, sys, json, random
 from mathutils import Vector
 from bpy_extras.object_utils import world_to_camera_view
 
@@ -297,6 +297,9 @@ M = {
     'water': basic('water', lin('#F4F8FA'), rough=0.02, trans=1.0, ior=1.33),
     'ice': basic('ice', lin('#F2F8FB'), rough=0.07, trans=1.0, ior=1.31),
     'coaster': basic('coaster', lin('#E6E2DA'), rough=0.85),
+    'pet': basic('pet', (1, 1, 1, 1), rough=0.03, trans=1.0, ior=1.45),
+    'paper': basic('paper', lin('#F4F1EA'), rough=0.62),
+    'kraft': basic('kraft', lin('#94653A'), rough=0.85),
 }
 
 if 'Subsurface Scale' in M['milk'].node_tree.nodes['Principled BSDF'].inputs:
@@ -1301,10 +1304,8 @@ def build_saucer_mug(mx, my, z0, c):
 LATTE = None
 
 
-def shot_pour(sdir, preview, only=None):
-    """붓기: 받침 위 머그를 위에서(약 62°) 내려다보고, 왼쪽에서 기운 피처로 붓기.
-    두 가지(pour_milk: 빈 머그에 우유 · pour_latte: 에스프레소에 우유) × 17단계 × 줄기 있음/없음 + 라테 하트(알맞아요 칸의 단계)"""
-    global LATTE
+def mug_pour_scene():
+    """붓기(머그) 장면: 받침 위 머그 + 왼쪽에서 기운 피처 · 위에서(약 62°) 본 카메라. 돌려줌: (mx, my, z0, 주둥이 끝, 프레임 자리)"""
     mx, my, z0 = 0.10, -0.20, 0.0072
     for ob in list(coll('pour_static').objects):
         bpy.data.objects.remove(ob, do_unlink=True)
@@ -1323,6 +1324,17 @@ def shot_pour(sdir, preview, only=None):
     cam.data.dof.focus_distance = (Vector((mx, my, z0 + 0.07)) - cam.location).length
     cam.data.dof.aperture_fstop = 5.6
     cy.seed = 11
+    pts = [Vector((mx + dx, my + dy, zz)) for dx in (-0.046, 0.046) for dy in (-0.046, 0.046) for zz in (z0 + 0.01, z0 + 0.095)]
+    pts += [Vector(lip), Vector((lip[0] - 0.012, lip[1], lip[2] + 0.012))]
+    pts += [Vector((mx + 0.05 + dx, my - 0.028 + dy, 0.011)) for dx in (-0.032, 0.032) for dy in (-0.02, 0.02)]
+    return mx, my, z0, lip, frame_rect(pts)
+
+
+def shot_pour(sdir, preview, only=None):
+    """붓기: 받침 위 머그를 위에서(약 62°) 내려다보고, 왼쪽에서 기운 피처로 붓기.
+    두 가지(pour_milk: 빈 머그에 우유 · pour_latte: 에스프레소에 우유) × 17단계 × 줄기 있음/없음 + 라테 하트(알맞아요 칸의 단계)"""
+    global LATTE
+    mx, my, z0, lip, rect = mug_pour_scene()
     if LATTE is None:
         LATTE = mat_latte('latte_top')
     lat, R, H = LATTE
@@ -1353,10 +1365,6 @@ def shot_pour(sdir, preview, only=None):
         return
     if not only:
         render(os.path.join(sdir, 'pour_plate.png'), SHOT_RES, 384)
-    pts = [Vector((mx + dx, my + dy, zz)) for dx in (-0.046, 0.046) for dy in (-0.046, 0.046) for zz in (z0 + 0.01, z0 + 0.095)]
-    pts += [Vector(lip), Vector((lip[0] - 0.012, lip[1], lip[2] + 0.012))]
-    pts += [Vector((mx + 0.05 + dx, my - 0.028 + dy, 0.011)) for dx in (-0.032, 0.032) for dy in (-0.02, 0.02)]
-    rect = frame_rect(pts)
     if not only:
         render_frames(sdir, 'pour_milk', rect, 17, build_for(False), plate='pour_plate')
     # 라테아트 하트: 알맞아요 칸(0.69~0.94)에 드는 단계만, 줄기 없음
@@ -1679,16 +1687,16 @@ def glass_inner_r(h):
     return GLASS_INNER[-1][1]
 
 
-def build_ice(at, n, lift, c, falling=False):
-    """유리컵 안 얼음 n 개(쌓이는 차례대로), lift 만큼 떠오름. falling: 다음 얼음이 컵 위에서 떨어지는 중"""
+def build_ice(at, n, lift, c, falling=False, pile=None, rim=0.1255, scoop=1):
+    """컵 안 얼음 n 개(쌓이는 차례대로, pile 기본은 유리컵), lift 만큼 떠오름. falling: 다음 얼음 scoop 개가 컵 위(테두리 rim 위)에서 떨어지는 중"""
+    pile = pile or ICE_PILE
     x0, y0, z0 = at
-    for i, (dx, dy, z, rx, ry, rz) in enumerate(ICE_PILE[:n]):
+    for i, (dx, dy, z, rx, ry, rz) in enumerate(pile[:n]):
         box(f'ICE_{i}', (ICE, ICE, ICE), (x0 + dx, y0 + dy, z0 + z + lift), M['ice'], c, bev=0.0045, segs=3,
             rot=(math.radians(rx), math.radians(ry), math.radians(rz)))
-    if falling and n < len(ICE_PILE):
-        dx, dy, z, rx, ry, rz = ICE_PILE[n]
-        box('ICE_fall', (ICE, ICE, ICE), (x0 + dx * 0.5, y0 + dy * 0.5, z0 + 0.1255 + 0.026), M['ice'], c, bev=0.0045, segs=3,
-            rot=(math.radians(rx + 28), math.radians(ry - 18), math.radians(rz + 40)))
+    for j, (dx, dy, z, rx, ry, rz) in enumerate(pile[n:n + scoop] if falling else []):
+        box(f'ICE_fall{j}' if j else 'ICE_fall', (ICE, ICE, ICE), (x0 + dx * 0.5, y0 + dy * 0.5, z0 + rim + 0.026 - 0.004 * min(j, 1) + 0.02 * j), M['ice'], c,
+            bev=0.0045, segs=3, rot=(math.radians(rx + 28), math.radians(ry - 18), math.radians(rz + 40)))
 
 
 def build_glass_liquid(at, h, mat, c):
@@ -1701,6 +1709,17 @@ def build_glass_liquid(at, h, mat, c):
     prof += [(glass_inner_r(h) - 0.0003, h), (0.0, h)]
     lathe('GLASS_liquid', prof, mat, (x0, y0, z0), c, segs=128)
     return z0 + h
+
+
+def top_spec(N, L, bsdf, spec):
+    """컵 안 음료는 윗면만 반짝이게(옆면은 컵 벽에 붙어 있어 비치지 않음: 아래를 보는 옆면에 밝은 컵받침이 띠처럼 비치던 것)"""
+    geo = N.new('ShaderNodeNewGeometry')
+    sep = N.new('ShaderNodeSeparateXYZ')
+    L.new(geo.outputs['Normal'], sep.inputs[0])
+    mr = map_range(N, 0.3, 0.7, 0.0, spec)
+    mr.clamp = True
+    L.new(sep.outputs['Z'], mr.inputs['Value'])
+    L.new(mr.outputs['Result'], bsdf.inputs[SOCK['spec']])
 
 
 def mat_blend(name, a, b, scale=10.0, rough=0.2, sss=0.0):
@@ -1730,13 +1749,16 @@ def mat_blend(name, a, b, scale=10.0, rough=0.2, sss=0.0):
     L.new(ra.outputs['Color'], add.inputs[0])
     L.new(sc.outputs['Vector'], add.inputs[1])
     L.new(add.outputs['Vector'], bsdf.inputs['Base Color'])
-    S(bsdf, rough=rough, spec=0.4, sss=sss)
+    S(bsdf, rough=rough, sss=sss)
+    top_spec(N, L, bsdf, 0.4)
     return m, K
 
 
 ESPRESSO_COL = ('#1E0E05', '#3A1D0B')
 GLASS_AT = (0.10, -0.20, 0.004)  # 유리컵 자리(붓기의 머그와 같은 곳, 밝은 컵받침 위: 나무색이 두꺼운 바닥에 비쳐 커피처럼 보이지 않게)
 ICED = {}  # 아이스 음료 재질(한 번만 만듦)
+GLASS_CUP = {'at': GLASS_AT, 'bottom': 0.0088, 'base': 0.0105, 'full': 0.118, 'rim': 0.1255, 'pile': ICE_PILE, 'top': ICE_TOP,
+             'liquid': lambda h, mat: build_glass_liquid(GLASS_AT, h, mat, 'shot_dyn')}  # 얼음 컵에 붓기(iced_build)가 쓰는 컵 정보
 
 
 def glass_scene(c, pitcher=None):
@@ -1794,18 +1816,21 @@ def shot_ice(sdir, preview):
     render_frames(sdir, 'ice', frame_rect(pts), 9, build)
 
 
-def iced_build(lip, liquid, lo, stream_mat, spill_mat):
-    """얼음이 든 유리컵에 붓는 단계 그리기: liquid(p) → 재질, lo = 처음 높이(0 이면 빈 컵에 얼음만). 17단계 붓기와 같은 칸"""
+def iced_build(lip, liquid, lo, stream_mat, spill_mat, cup=None):
+    """얼음이 든 컵(cup, 기본 유리컵)에 붓는 단계 그리기: liquid(p) → 재질, lo = 처음 높이(0 이면 빈 컵에 얼음만). 17단계 붓기와 같은 칸"""
+    cup = cup or GLASS_CUP
+    at = cup['at']
+
     def build(k, p, flow):
-        h = lo + p * (0.118 - lo) if (lo > 0 or k > 0) else 0.0
-        surf = GLASS_AT[2] + 0.0105
+        h = lo + p * (cup['full'] - lo) if (lo > 0 or k > 0) else 0.0
+        surf = at[2] + cup['base']
         if h > 0:
-            surf = build_glass_liquid(GLASS_AT, h, liquid(p), 'shot_dyn')
-        build_ice(GLASS_AT, len(ICE_PILE), max(0.0, h + 0.001 - ICE_TOP), 'shot_dyn')  # 음료가 차면 얼음이 떠올라 맨 위가 반쯤 드러남
+            surf = cup['liquid'](h, liquid(p))
+        build_ice(at, len(cup['pile']), max(0.0, h + 0.001 - cup['top']), 'shot_dyn', pile=cup['pile'], rim=cup['rim'])  # 음료가 차면 얼음이 떠올라 맨 위가 반쯤 드러남
         if p >= 0.999:  # 넘쳐요: 작업대에 흘러넘침
-            ball('ICED_spill', 0.02, (GLASS_AT[0] + 0.05, GLASS_AT[1] - 0.03, 0.002), spill_mat, 'shot_dyn', scale=(1.6, 1.0, 0.06))
+            ball('ICED_spill', 0.02, (at[0] + 0.05, at[1] - 0.03, 0.002), spill_mat, 'shot_dyn', scale=(1.6, 1.0, 0.06))
         if flow:
-            build_pour_stream(lip, (GLASS_AT[0] - 0.012, GLASS_AT[1], surf), 'shot_dyn', stream_mat)
+            build_pour_stream(lip, (at[0] - 0.012, at[1], surf), 'shot_dyn', stream_mat)
     return build
 
 
@@ -1861,9 +1886,469 @@ def shot_pour_glass(sdir, preview):
     render_frames(sdir, 'pour_glass_latte', rect, 17, lat, plate='pour_glass_plate')
 
 
+# ------------------------------------------------------------------ 음료 색 · 포장 컵 (2026-10-31 사용자)
+# 딸기우유 · 녹차라테 · 코코아는 붓기 장면에서 음료 색만 바꿈: 바탕(딸기청 · 푼 말차 · 코코아)에 우유를 부을수록 그 음료 색.
+# 가져가는 컵: 따뜻하면 종이컵(붓기 · 물 붓기와 같은 구도, 위에서) · 차가우면 길쭉한 플라스틱 컵(유리컵과 같은 구도, 앞에서).
+# 컷 이름은 작업대(brew.js shotIdFor)의 규칙: 붓기 pour{잔}_{latte|milk|색} · 물 붓기 water{잔} · 얼음 담기 ice{잔}
+TINTS = {  # base: 붓기 전 바탕 · iced / hot: 다 부었을 때 · foam: 따뜻할 때 가운데 거품(각각 어두운 · 밝은 얼룩) · lo: 바탕 두께(컵 안쪽 바닥에서)
+    'strawberry': {'base': ('#A3162D', '#C8304B'), 'iced': ('#EA7F9C', '#F6A9BD'), 'lo': 0.010},
+    'matcha': {'base': ('#2C5512', '#46741F'), 'iced': ('#94B865', '#B3D08A'), 'hot': ('#8DB15E', '#A9C97C'), 'foam': ('#E9EDD8', '#F8F8EE'), 'lo': 0.013},
+    'cocoa': {'base': ('#2B1508', '#472612'), 'iced': ('#70432A', '#8E5E3C'), 'hot': ('#75472B', '#8F5C3B'), 'foam': ('#C29C7E', '#DCC2A8'), 'lo': 0.010},
+}
+TINT_MATS = {}
+
+
+def mat_milky(name, a, b, foam=None, scale=8.0, rough=0.2, sss=0.0):
+    """음료 색이 a 에서 b 로(값 노드 K) + foam 이 있으면 가운데 거품 동그라미(반지름 R, 라테처럼 가장자리가 부서짐).
+    a · b · foam 은 (어두운, 밝은) 얼룩 한 쌍. 돌려줌: (재질, K, R)"""
+    m, nt, bsdf = new_mat(name)
+    N, L = nt.nodes, nt.links
+    tc = N.new('ShaderNodeTexCoord')
+
+    def noise(sc, detail):
+        nz = N.new('ShaderNodeTexNoise')
+        nz.inputs['Scale'].default_value = sc
+        nz.inputs['Detail'].default_value = detail
+        L.new(tc.outputs['Object'], nz.inputs['Vector'])
+        return nz
+
+    def math_node(op, x=None, y=None, clamp=False):
+        n = N.new('ShaderNodeMath')
+        n.operation = op
+        n.use_clamp = clamp
+        for idx, v in ((0, x), (1, y)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[idx].default_value = v
+            else:
+                L.new(v, n.inputs[idx])
+        return n
+
+    def vmix(c0, c1, t):  # c0 + (c1 - c0) × t
+        d = N.new('ShaderNodeVectorMath')
+        d.operation = 'SUBTRACT'
+        L.new(c1, d.inputs[0])
+        L.new(c0, d.inputs[1])
+        sc = N.new('ShaderNodeVectorMath')
+        sc.operation = 'SCALE'
+        L.new(d.outputs['Vector'], sc.inputs[0])
+        L.new(t, sc.inputs['Scale'])
+        add = N.new('ShaderNodeVectorMath')
+        add.operation = 'ADD'
+        L.new(c0, add.inputs[0])
+        L.new(sc.outputs['Vector'], add.inputs[1])
+        return add.outputs['Vector']
+    nz = noise(scale, 5.0)
+    ra, rb = ramp2(N, lin(a[0]), lin(a[1]), 0.3, 0.75), ramp2(N, lin(b[0]), lin(b[1]), 0.3, 0.75)
+    L.new(nz.outputs['Fac'], ra.inputs['Fac'])
+    L.new(nz.outputs['Fac'], rb.inputs['Fac'])
+    K = N.new('ShaderNodeValue')
+    K.outputs[0].default_value = 0.0
+    col = vmix(ra.outputs['Color'], rb.outputs['Color'], K.outputs[0])
+    R = N.new('ShaderNodeValue')
+    R.outputs[0].default_value = 0.0
+    if foam:  # 라테(mat_latte)와 같은 거품 동그라미: 가장자리 5mm 에 걸쳐 번지고, 경계가 노이즈로 부서짐
+        flat = N.new('ShaderNodeVectorMath')
+        flat.operation = 'MULTIPLY'
+        flat.inputs[1].default_value = (1.0, 1.0, 0.0)
+        L.new(tc.outputs['Object'], flat.inputs[0])
+        ln = N.new('ShaderNodeVectorMath')
+        ln.operation = 'LENGTH'
+        L.new(flat.outputs['Vector'], ln.inputs[0])
+        dot0 = math_node('MULTIPLY_ADD', math_node('SUBTRACT', R.outputs[0], ln.outputs['Value']).outputs['Value'], 1 / 0.005, clamp=True)
+        dot0.inputs[2].default_value = 0.5
+        dot = math_node('MULTIPLY', dot0.outputs['Value'], math_node('MULTIPLY', R.outputs[0], 1 / 0.004, clamp=True).outputs['Value'])
+        twice = math_node('MULTIPLY_ADD', dot.outputs['Value'], 2.0)
+        twice.inputs[2].default_value = -1.0
+        edge = math_node('SUBTRACT', 1.0, math_node('ABSOLUTE', twice.outputs['Value']).outputs['Value'])
+        wob = math_node('MULTIPLY', math_node('SUBTRACT', noise(160.0, 4.0).outputs['Fac'], 0.5).outputs['Value'], edge.outputs['Value'])
+        mask = math_node('MULTIPLY_ADD', wob.outputs['Value'], 0.9, clamp=True)
+        L.new(dot.outputs['Value'], mask.inputs[2])
+        fm = ramp2(N, lin(foam[0]), lin(foam[1]), 0.3, 0.7)
+        L.new(noise(700.0, 2.0).outputs['Fac'], fm.inputs['Fac'])
+        col = vmix(col, fm.outputs['Color'], mask.outputs['Value'])
+    L.new(col, bsdf.inputs['Base Color'])
+    S(bsdf, rough=rough, sss=sss)
+    top_spec(N, L, bsdf, 0.3)
+    return m, K, R
+
+
+def tint_liquid(key, kind):
+    """음료 색 컷의 음료: kind = 'iced'(유리컵 · 플라스틱 컵, 빛이 조금 스밈) | 'hot'(머그 · 종이컵, 가운데 거품). 돌려줌: p → 재질"""
+    if (key, kind) not in TINT_MATS:
+        t = TINTS[key]
+        TINT_MATS[(key, kind)] = (mat_milky(f'tint_{key}_hot', t['base'], t['hot'], foam=t['foam'], scale=40.0, rough=0.3) if kind == 'hot'
+                                  else mat_milky(f'tint_{key}_iced', t['base'], t['iced'], scale=6.0, rough=0.18, sss=0.15))
+    m, K, R = TINT_MATS[(key, kind)]
+
+    def f(p):
+        K.outputs[0].default_value = sstep(p / 0.55)
+        R.outputs[0].default_value = 0.024 * sstep((p - 0.45) / 0.5)
+        return m
+    return f
+
+
+def tint_spill(key, kind):
+    name = f'spill_{key}_{kind}'
+    return bpy.data.materials.get(name) or basic(name, lin(TINTS[key][kind][1]), rough=0.3)
+
+
+def table_r(T, h):
+    """안쪽 반지름 표 T = [(높이, 반지름)…] 에서 높이 h 의 반지름"""
+    if h <= T[0][0]:
+        return T[0][1]
+    for (h0, r0), (h1, r1) in zip(T, T[1:]):
+        if h <= h1:
+            return r0 + (r1 - r0) * (h - h0) / (h1 - h0)
+    return T[-1][1]
+
+
+def build_cup_liquid(name, at, T, h, mat, c):
+    """컵 안 음료(안쪽 반지름 표 T, 첫 높이가 안쪽 바닥): 바닥에서 높이 h 까지, 안쪽 벽보다 조금 작게. 돌려줌: 표면 높이(세상)"""
+    h0 = T[0][0] + 0.0002
+    # 바닥 · 표면 바로 옆에 고리 하나씩: 옆면의 매끈한 법선이 바닥 · 표면과 섞여 아래를 보면 밝은 컵받침이 비쳐 띠처럼 보임
+    hs = sorted({h0 + 0.0006, h - 0.0006, 0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12} | {hh for hh, _ in T})  # 표의 꺾이는 곳(플라스틱 컵의 턱)도 따라감
+    prof = [(0.0, h0), (table_r(T, h0) - 0.0003, h0)]
+    prof += [(table_r(T, hh) - 0.0003, hh) for hh in hs if h0 + 0.0005 < hh < h - 0.0005]
+    prof += [(table_r(T, h) - 0.0003, h), (0.0, h)]
+    lathe(name, prof, mat, at, c, segs=128)
+    return at[2] + h
+
+
+# 종이컵(가져가요 · 따뜻하게, 약 355mL): 위 지름 9cm · 아래 5.8cm · 높이 11cm, 테두리는 말린 종이, 바닥 원판은 6.5mm 올라가 있음
+PAPER = [(0.0, 0.0065), (0.0268, 0.0065), (0.0275, 0.0006), (0.0282, 0.0), (0.0288, 0.0), (0.0441, 0.1075),
+         (0.0455, 0.1073), (0.0463, 0.1086), (0.0459, 0.1099), (0.0449, 0.1104), (0.0439, 0.1098), (0.0435, 0.1086),
+         (0.0290, 0.0075), (0.0, 0.0075)]
+PAPER_INNER = [(0.0075, 0.0290), (0.1086, 0.0435)]
+PAPER_AT = (0.10, -0.20, 0.0)  # 붓기의 머그와 같은 곳(받침 없이 작업대 위)
+PAPER_RIM = 0.1104
+PAPER_FULL = 0.1062  # 다 찬 높이(넘쳐요 = 이때 작업대에 흘러넘침)
+
+
+def paper_r(h):
+    """종이컵 바깥 반지름(바닥에서 잰 높이 h)"""
+    return 0.0288 + (0.0441 - 0.0288) * h / 0.1075
+
+
+def build_paper_cup(at, c):
+    """종이컵 + 가운데 크라프트 슬리브(손 데지 않게 끼우는 골판지 띠, 무늬 · 글자 없음)"""
+    lathe('PAPER_body', PAPER, M['paper'], at, c)
+    h0, h1, t = 0.030, 0.084, 0.0016
+    ro0, ro1 = paper_r(h0) + t, paper_r(h1) + t
+    lathe('PAPER_sleeve', [(paper_r(h0) + 0.0002, h0), (ro0, h0), (ro0 + 0.0001, h0 + 0.0012), (ro1 - 0.0001, h1 - 0.0012), (ro1, h1),
+                           (paper_r(h1) + 0.0002, h1), (paper_r(h0) + 0.0002, h0)], M['kraft'], at, c)
+
+
+def paper_scene(c, tool):
+    """종이컵 컷의 공통 장면: 작업대 위 종이컵 + 왼쪽에서 기운 스팀 피처(tool = 'pitcher') 또는 드립 주전자('kettle') ·
+    붓기 · 물 붓기와 같은 구도(위에서 약 62°). 돌려줌: 주둥이 끝"""
+    for ob in list(coll(c).objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
+    clear_dyn()
+    mx, my, z0 = PAPER_AT
+    build_paper_cup(PAPER_AT, c)
+    if tool == 'kettle':
+        tip = (mx - 0.026, my, z0 + PAPER_RIM + 0.035)
+        build_pour_kettle(tip, 24.0, c)
+    else:
+        tip = (mx - 0.028, my, z0 + PAPER_RIM + 0.02)
+        build_pour_pitcher(tip, 58.0, c)
+    show_only((c, 'shot_dyn'))
+    cam.data.lens = 50
+    el, d = math.radians(62), 0.82
+    tgt = Vector((mx - (0.075 if tool == 'kettle' else 0.06), my + 0.005, 0.07))
+    cam.location = tgt + Vector((0.0, -math.cos(el) * d, math.sin(el) * d))
+    look(cam, tgt)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_object = None
+    cam.data.dof.focus_distance = (Vector((mx, my, z0 + 0.085)) - cam.location).length
+    cam.data.dof.aperture_fstop = 5.6
+    cy.seed = 11
+    return tip
+
+
+def paper_rect(tip):
+    mx, my, z0 = PAPER_AT
+    pts = [Vector((mx + dx, my + dy, z0 + zz)) for dx in (-0.047, 0.047) for dy in (-0.047, 0.047) for zz in (0.01, 0.112)]
+    pts += [Vector(tip), Vector((tip[0] - 0.012, tip[1], tip[2] + 0.012))]
+    pts += [Vector((mx + 0.05 + dx, my - 0.03 + dy, 0.002)) for dx in (-0.035, 0.035) for dy in (-0.022, 0.022)]  # 넘친 자국
+    return frame_rect(pts)
+
+
+def paper_build(tip, liquid, lo, spill_mat, stream=None):
+    """종이컵에 붓는 단계 그리기: liquid(p) → 재질, lo = 처음 높이(0 이면 빈 컵). stream(tip, surf): 줄기(없으면 피처의 우유 줄기)"""
+    mx, my, z0 = PAPER_AT
+    bottom = PAPER_INNER[0][0]
+
+    def build(k, p, flow):
+        surf = z0 + bottom
+        if lo > 0 or k > 0:
+            h0 = lo or bottom + 0.002
+            surf = build_cup_liquid('PAPER_liquid', PAPER_AT, PAPER_INNER, h0 + p * (PAPER_FULL - h0), liquid(p), 'shot_dyn')
+        if p >= 0.999:  # 넘쳐요: 작업대에 흘러넘침
+            ball('PAPER_spill', 0.02, (mx + 0.05, my - 0.03, 0.002), spill_mat, 'shot_dyn', scale=(1.6, 1.0, 0.06))
+        if flow:
+            if stream:
+                stream(tip, surf)
+            else:
+                build_pour_stream(tip, (mx - 0.012, my, surf), 'shot_dyn')
+    return build
+
+
+def shot_pour_paper(sdir, preview):
+    """붓기(종이컵 · 따뜻하게): 빈 컵에 우유(pour_paper_milk) · 에스프레소에 우유(pour_paper_latte, 라테 하트) · 녹차라테(pour_paper_matcha) ·
+    코코아(pour_paper_cocoa) × 17단계 × 줄기 있음/없음. 배경판은 하나 pour_paper_plate(빈 종이컵)"""
+    global LATTE
+    tip = paper_scene('pour_paper_static', 'pitcher')
+    if LATTE is None:
+        LATTE = mat_latte('latte_top')
+    lat, R, H = LATTE
+    bottom = PAPER_INNER[0][0]
+
+    def latte(art):
+        def f(p):
+            R.outputs[0].default_value = 0.0 if art else 0.026 * sstep((p - 0.45) / 0.5)
+            H.outputs[0].default_value = 1.0 if art else 0.0
+            return lat
+        return f
+    spill_latte = bpy.data.materials.get('spill_latte') or basic('spill_latte', lin('#C79A6B'), rough=0.3)
+    builds = {'milk': paper_build(tip, lambda p: M['milk'], 0.0, M['milk']),
+              'latte': paper_build(tip, latte(False), bottom + 0.014, spill_latte)}
+    for key in ('matcha', 'cocoa'):
+        builds[key] = paper_build(tip, tint_liquid(key, 'hot'), bottom + TINTS[key]['lo'], tint_spill(key, 'hot'))
+    if preview:
+        for name, key, k, p, flow in (('preview_pour_paper_latte.jpg', 'latte', 14, 0.875, True), ('preview_pour_paper_matcha.jpg', 'matcha', 12, 0.75, False),
+                                      ('preview_pour_paper_cocoa.jpg', 'cocoa', 4, 0.25, True)):
+            clear_dyn()
+            builds[key](k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        clear_dyn()
+        paper_build(tip, latte(True), bottom + 0.014, spill_latte)(13, 0.8125, False)
+        render(os.path.join(sdir, 'preview_pour_paper_heart.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    render(os.path.join(sdir, 'pour_paper_plate.png'), SHOT_RES, 384)
+    rect = paper_rect(tip)
+    art_ks = [k for k in range(17) if 0.69 - 1e-6 <= k / 16 <= 0.94 + 1e-6]  # 라테아트 하트: 알맞아요 칸의 단계(머그와 같음)
+    for key, b in builds.items():
+        art = (art_ks, paper_build(tip, latte(True), bottom + 0.014, spill_latte)) if key == 'latte' else None
+        render_frames(sdir, f'pour_paper_{key}', rect, 17, b, plate='pour_paper_plate', art=art)
+
+
+def shot_water_paper(sdir, preview):
+    """물 붓기(종이컵 · 아메리카노): 에스프레소가 든 종이컵에 드립 주전자로 뜨거운 물. 크레마가 흩어지며 차오름. 17단계 × 물줄기 있음/없음"""
+    global AMERICANO
+    tip = paper_scene('water_paper_static', 'kettle')
+    if AMERICANO is None:
+        AMERICANO = mat_americano_top('americano_top')
+    am, K = AMERICANO
+
+    def liquid(p):
+        K.outputs[0].default_value = 0.8 * sstep(p / 0.75)  # 다 차도 크레마 얼룩이 조금 남음(머그와 같음)
+        return am
+
+    def stream(t, surf):  # 거위목 끝에서 거의 곧게 떨어지는 가는 물줄기
+        tube('WATER_stream', [t, (t[0] + 0.0045, t[1], (t[2] + surf) / 2), (t[0] + 0.007, t[1], surf)], 0.0019, M['water'], 'shot_dyn')
+    build = paper_build(tip, liquid, PAPER_INNER[0][0] + 0.014, M['americano'], stream)
+    if preview:
+        for name, k, p, flow in (('preview_water_paper.jpg', 13, 0.8125, True), ('preview_water_paper0.jpg', 1, 0.0625, True)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)  # 배경판: 에스프레소만 든 종이컵
+    render(os.path.join(sdir, 'water_paper_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, 'water_paper', paper_rect(tip), 17, build)
+
+
+# 플라스틱 컵(가져가요 · 차갑게, 길쭉한 약 590mL): 위 지름 9.6cm · 아래 6cm · 높이 15cm, 얇은 투명 컵.
+# 바닥 1.6cm 위에 한 단 턱(겹쳐 쌓는 자리), 테두리는 말린 가는 띠
+PLASTIC = [(0.0, 0.0022), (0.022, 0.0016), (0.0282, 0.0), (0.0292, 0.0003), (0.0298, 0.0018), (0.02987, 0.0025), (0.03113, 0.0148),
+           (0.0312, 0.0155), (0.0318, 0.0168), (0.03188, 0.0175), (0.04640, 0.1466),
+           (0.0465, 0.1475), (0.0477, 0.1477), (0.0482, 0.1487), (0.0476, 0.1497), (0.0465, 0.1496), (0.0459, 0.1486),
+           (0.0460, 0.1475), (0.04592, 0.1468), (0.03138, 0.0179), (0.0313, 0.0172), (0.0307, 0.0158), (0.03062, 0.0151),
+           (0.02938, 0.0037), (0.0293, 0.0030), (0.0287, 0.0030), (0.0, 0.0030)]  # 꺾이는 곳마다 바로 옆에 점(매끈한 면이 렌즈처럼 휘어 보이지 않게)
+PLASTIC_INNER = [(0.0030, 0.0293), (0.0158, 0.0307), (0.0172, 0.0313), (0.1475, 0.0460)]
+PLASTIC_AT = (0.10, -0.20, 0.004)  # 유리컵처럼 밝은 컵받침 위(투명한 바닥 턱에 나무색이 비쳐 커피처럼 보이지 않게)
+PLASTIC_RIM = 0.1497
+
+
+def ice_layers(layers, seed=7):
+    """얼음 자리를 층마다 고리로: [(높이, 개수, 고리 반지름, 시작 각°, 기울기 최대°)…] → ICE_PILE 꼴"""
+    rnd = random.Random(seed)
+    out = []
+    for z, n, r, a0, tilt in layers:
+        for i in range(n):
+            a = math.radians(a0 + 360.0 * i / n)
+            out.append((r * math.cos(a), r * math.sin(a), z + rnd.uniform(-0.0008, 0.0008),
+                        rnd.uniform(-tilt, tilt), rnd.uniform(-tilt, tilt), math.degrees(a) + rnd.uniform(-20, 20)))
+    return out
+
+
+ICE_PILE_PL = ice_layers([(0.0155, 3, 0.0128, 20, 5), (0.0365, 3, 0.0135, 80, 12), (0.058, 4, 0.0168, 15, 14),
+                          (0.0795, 4, 0.0172, 60, 14), (0.101, 5, 0.0198, 10, 14), (0.1225, 5, 0.0205, 46, 14)])  # 24개, 컵 위쪽까지 가득
+PLASTIC_CUP = {'at': PLASTIC_AT, 'bottom': 0.003, 'base': 0.0032, 'full': 0.140, 'rim': PLASTIC_RIM, 'pile': ICE_PILE_PL, 'top': 0.1225,
+               'liquid': lambda h, mat: build_cup_liquid('PL_liquid', PLASTIC_AT, PLASTIC_INNER, h, mat, 'shot_dyn')}
+
+
+def plastic_scene(c, pitcher=None):
+    """플라스틱 컵 컷의 공통 장면: 작업대 위 플라스틱 컵 + (pitcher 가 있으면 왼쪽에서 기운 피처, 그 안의 것) · 유리컵처럼 앞에서 조금 위로(약 24°).
+    돌려줌: 피처 주둥이 끝(없으면 None)"""
+    for ob in list(coll(c).objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
+    clear_dyn()
+    gx, gy, gz = PLASTIC_AT
+    cyl('PL_coaster', 0.048, gz, (gx, gy, gz / 2), M['coaster'], c, bev=0.0012).visible_glossy = False  # 얇은 컵 벽에 밝은 받침이 비쳐 아래가 흰 띠로 보이지 않게(바닥 너머로는 보임)
+    lathe('PL_body', PLASTIC, M['pet'], PLASTIC_AT, c)
+    lip = None
+    if pitcher is not None:
+        lip = (gx - 0.026, gy, gz + PLASTIC_RIM + 0.03)  # 주둥이 끝: 컵 왼쪽 가장자리 쪽, 테두리 위 3cm
+        build_pour_pitcher(lip, 55.0, c, fill=pitcher)
+    show_only((c, 'shot_dyn'))
+    cam.data.lens = 50
+    tgt = Vector((gx - 0.03, gy, 0.112))
+    el, az, d = math.radians(24), math.radians(10), 1.12
+    cam.location = tgt + d * Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
+    look(cam, tgt)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_object = None
+    cam.data.dof.focus_distance = (Vector((gx, gy, gz + 0.08)) - cam.location).length
+    cam.data.dof.aperture_fstop = 5.6
+    cy.seed = 11
+    return lip
+
+
+def plastic_rect(lip=None, top=0.205):
+    gx, gy, gz = PLASTIC_AT
+    pts = [Vector((gx + dx, gy + dy, gz + zz)) for dx in (-0.049, 0.049) for dy in (-0.049, 0.049) for zz in (0.0, top)]
+    if lip:
+        pts += [Vector(lip), Vector((lip[0] - 0.012, lip[1], lip[2] + 0.012))]
+    pts += [Vector((gx + 0.05 + dx, gy - 0.03 + dy, 0.002)) for dx in (-0.035, 0.035) for dy in (-0.022, 0.022)]  # 넘친 자국
+    return frame_rect(pts)
+
+
+def shot_ice_plastic(sdir, preview):
+    """얼음 담기(플라스틱 컵): 빈 컵에 얼음이 한 국자(3개)씩 떨어져 쌓여 컵 위쪽까지 가득(24개). 9단계 × 떨어지는 얼음 있음/없음"""
+    plastic_scene('ice_plastic_static')
+    n_all = len(ICE_PILE_PL)
+
+    def build(k, p, flow):
+        build_ice(PLASTIC_AT, round(p * n_all), 0.0, 'shot_dyn', falling=flow, pile=ICE_PILE_PL, rim=PLASTIC_RIM, scoop=3)
+    if preview:
+        for name, k, p, flow in (('preview_ice_plastic.jpg', 4, 0.5, True), ('preview_ice_plastic8.jpg', 8, 1.0, False)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    render(os.path.join(sdir, 'ice_plastic_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, 'ice_plastic', plastic_rect(top=0.24), 9, build)
+
+
+def shot_water_plastic(sdir, preview):
+    """찬물 붓기(플라스틱 컵 · 아이스 아메리카노): 얼음 + 에스프레소가 든 컵에 피처로 찬물. 17단계 × 물줄기 있음/없음"""
+    lip = plastic_scene('water_plastic_static', pitcher=M['water'])
+    m, K = iced_mat('americano', ('#2E1608', '#4E2810'), scale=14.0)
+
+    def liquid(p):
+        K.outputs[0].default_value = sstep(p / 0.6)
+        return m
+    build = iced_build(lip, liquid, PLASTIC_CUP['bottom'] + 0.013, M['water'], M['americano'], cup=PLASTIC_CUP)
+    if preview:
+        for name, k, p, flow in (('preview_water_plastic.jpg', 13, 0.8125, True), ('preview_water_plastic0.jpg', 1, 0.0625, True)):
+            clear_dyn()
+            build(k, p, flow)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)  # 배경판: 얼음 + 에스프레소
+    render(os.path.join(sdir, 'water_plastic_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, 'water_plastic', plastic_rect(lip), 17, build)
+
+
+def iced_builds(lip, cup):
+    """얼음 컵에 찬 우유 붓기: 우유 · 라테 · 음료 색(딸기우유 · 녹차라테 · 코코아)"""
+    lat, K = iced_mat('latte', ('#B98C60', '#E2C7A4'), scale=6.0, sss=0.15)
+
+    def latte(p):
+        K.outputs[0].default_value = sstep(p / 0.55)
+        return lat
+    out = {'milk': iced_build(lip, lambda p: M['milk'], 0.0, M['milk'], M['milk'], cup=cup),
+           'latte': iced_build(lip, latte, cup['bottom'] + 0.013, M['milk'], lat, cup=cup)}
+    for key in TINTS:
+        out[key] = iced_build(lip, tint_liquid(key, 'iced'), cup['bottom'] + TINTS[key]['lo'], M['milk'], tint_spill(key, 'iced'), cup=cup)
+    return out
+
+
+def shot_pour_plastic(sdir, preview):
+    """붓기(플라스틱 컵 · 얼음): 찬 우유를 얼음만 든 컵(pour_plastic_milk) · 에스프레소(pour_plastic_latte) · 딸기청(pour_plastic_strawberry) ·
+    푼 말차(pour_plastic_matcha) · 코코아(pour_plastic_cocoa)에. 17단계 × 줄기 있음/없음, 배경판은 하나 pour_plastic_plate(얼음만)"""
+    lip = plastic_scene('pour_plastic_static', pitcher=M['milk'])
+    builds = iced_builds(lip, PLASTIC_CUP)
+    if preview:
+        for name, key, k, p in (('preview_pour_plastic_latte.jpg', 'latte', 13, 0.8125), ('preview_pour_plastic_strawberry.jpg', 'strawberry', 13, 0.8125),
+                                ('preview_pour_plastic_matcha.jpg', 'matcha', 6, 0.375)):
+            clear_dyn()
+            builds[key](k, p, True)
+            render(os.path.join(sdir, name), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    builds['milk'](0, 0.0, False)  # 배경판: 얼음만
+    render(os.path.join(sdir, 'pour_plastic_plate.png'), SHOT_RES, 384)
+    rect = plastic_rect(lip)
+    for key, b in builds.items():
+        render_frames(sdir, f'pour_plastic_{key}', rect, 17, b, plate='pour_plastic_plate')
+
+
+def shot_pour_glass_tint(sdir, preview):
+    """붓기(유리컵 · 얼음)의 음료 색: 딸기우유 · 녹차라테 · 코코아. 유리컵 붓기와 같은 장면 · 같은 배경판(pour_glass_plate)"""
+    lip = glass_scene('pour_glass_static', pitcher=M['milk'])
+    builds = iced_builds(lip, GLASS_CUP)
+    if preview:
+        for key in TINTS:
+            clear_dyn()
+            builds[key](13, 0.8125, True)
+            render(os.path.join(sdir, f'preview_pour_glass_{key}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    rect = glass_rect(lip)
+    for key in TINTS:
+        render_frames(sdir, f'pour_glass_{key}', rect, 17, builds[key], plate='pour_glass_plate')
+
+
+def shot_pour_tint(sdir, preview):
+    """붓기(머그 · 따뜻하게)의 음료 색: 녹차라테 · 코코아(딸기우유는 아이스만). 머그 붓기와 같은 장면 · 같은 배경판(pour_plate)"""
+    mx, my, z0, lip, rect = mug_pour_scene()
+
+    def tint(key):
+        liquid = tint_liquid(key, 'hot')
+        lo = 0.0108 + TINTS[key]['lo'] + 0.002  # 머그 안쪽 바닥(0.0108)에서
+
+        def build(k, p, flow):
+            surf = build_mug_liquid((mx, my), z0, lo + p * (0.0895 - lo), liquid(p), 'shot_dyn')
+            if p >= 0.999:  # 넘쳐요: 받침에 흘러넘침
+                ball('POUR_spill', 0.02, (mx + 0.05, my - 0.028, 0.011), tint_spill(key, 'hot'), 'shot_dyn', scale=(1.5, 0.9, 0.07))
+            if flow:
+                build_pour_stream(lip, (mx - 0.012, my, surf), 'shot_dyn')
+        return build
+    keys = [k for k in TINTS if 'hot' in TINTS[k]]
+    if preview:
+        for key in keys:
+            clear_dyn()
+            tint(key)(13, 0.8125, False)
+            render(os.path.join(sdir, f'preview_pour_{key}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    for key in keys:
+        render_frames(sdir, f'pour_{key}', rect, 17, tint(key), plate='pour_plate')
+
+
 SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam': shot_foam, 'water': shot_water,
          'ice': shot_ice, 'water_glass': shot_water_glass, 'pour_glass': shot_pour_glass,
-         'pour_latte': lambda sdir, preview: shot_pour(sdir, preview, only='latte')}  # 라테 프레임만(배경판·우유는 그대로)
+         'pour_latte': lambda sdir, preview: shot_pour(sdir, preview, only='latte'),  # 라테 프레임만(배경판·우유는 그대로)
+         'pour_tint': shot_pour_tint, 'pour_glass_tint': shot_pour_glass_tint,  # 음료 색(녹차라테 · 코코아 · 딸기우유)
+         'water_paper': shot_water_paper, 'pour_paper': shot_pour_paper,  # 종이컵
+         'ice_plastic': shot_ice_plastic, 'water_plastic': shot_water_plastic, 'pour_plastic': shot_pour_plastic}  # 플라스틱 컵
 
 
 ALL = ('machine', 'mug', 'pitcher', 'tamper', 'shot')

@@ -220,7 +220,8 @@ for (const who of ['yeonwoo', 'dohyun', 'manager']) {
   imageList.push({ id: `${who}_sheet`, kind: 'sheet', group: '설정화', title: p.title, file: `assets/${who}_sheet.jpg`, tool: 'Google Flow', made: '', flow: '직업 마1스톤 작업 전(1판)에 사용자가 만든 설정화', first: '', from: p.from, prompt: p.prompt, neg: p.neg, note: `${p.note ? `${p.note} · ` : ''}표정 초상(assets/portraits/${who}_*.jpg)을 여기서 잘라 씀(tools/crop-portraits.py)` });
 }
 // 손 기술의 한 컷(블렌더 3D 렌더, 생성 AI 아님): 배경판 + 단계 프레임 묶음을 한 줄로(tools/blender/scene_bench.py → shots_post.py)
-const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)', ice: '얼음 담기', water_glass: '찬물 붓기(아이스 아메리카노)', pour_glass_milk: '붓기(유리컵 · 찬 우유)', pour_glass_latte: '붓기(유리컵 · 아이스 라테)' };
+const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)', ice: '얼음 담기', water_glass: '찬물 붓기(아이스 아메리카노)', pour_glass_milk: '붓기(유리컵 · 찬 우유)', pour_glass_latte: '붓기(유리컵 · 아이스 라테)',
+  pour_matcha: '붓기(머그 · 녹차라테)', pour_cocoa: '붓기(머그 · 코코아)', pour_glass_strawberry: '붓기(유리컵 · 딸기우유)', pour_glass_matcha: '붓기(유리컵 · 아이스 녹차라테)', pour_glass_cocoa: '붓기(유리컵 · 아이스 코코아)', water_paper: '물 붓기(종이컵 · 아메리카노)', pour_paper_milk: '붓기(종이컵 · 따뜻한 우유)', pour_paper_latte: '붓기(종이컵 · 라테 · 하트)', pour_paper_matcha: '붓기(종이컵 · 녹차라테)', pour_paper_cocoa: '붓기(종이컵 · 코코아)', ice_plastic: '얼음 담기(플라스틱 컵)', water_plastic: '찬물 붓기(플라스틱 컵 · 아이스 아메리카노)', pour_plastic_milk: '붓기(플라스틱 컵 · 찬 우유)', pour_plastic_latte: '붓기(플라스틱 컵 · 아이스 라테)', pour_plastic_strawberry: '붓기(플라스틱 컵 · 딸기우유)', pour_plastic_matcha: '붓기(플라스틱 컵 · 아이스 녹차라테)', pour_plastic_cocoa: '붓기(플라스틱 컵 · 아이스 코코아)' };
 const SHOT_NOTES = {
   extract: '오래된 2그룹 머신(스테인리스 + 초록 법랑), 왼쪽 그룹 아래 샷 잔, 왼쪽 앞에서 비스듬히 본 2944×800 장면. 잔이 차오르는 13단계 × 줄기 있음/없음(docs/recipes.md 6.2)',
   steam: '물받이 위 우유 담은 스팀 피처에 노즐을 넣고 집게 온도계를 꽂은 2944×800 장면. 바늘 25단계 × 김 있음/옅음, 다이얼의 초록 칸 = 알맞아요, 스팀을 켜면 우유가 돎(docs/recipes.md 6.3)',
@@ -232,8 +233,26 @@ const SHOT_NOTES = {
   water_glass: '같은 유리컵(얼음 + 에스프레소)에 왼쪽 피처로 찬물: 짙은 갈색이 차오르고 얼음이 떠오르는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.7)',
   pour_glass_milk: '같은 유리컵(얼음만)에 피처로 찬 우유: 17단계 × 줄기 있음/없음, 배경판은 pour_glass_plate(docs/recipes.md 6.7)',
   pour_glass_latte: '같은 유리컵(얼음 + 에스프레소)에 찬 우유: 섞이며 밝은 갈색이 되는 17단계 × 줄기 있음/없음(docs/recipes.md 6.7)',
+  pour_matcha: '머그 붓기와 같은 장면(배경판 pour_plate)에서 음료 색만: 푼 말차(진한 초록)에 데운 우유를 부으면 연두색이 되고 가운데 우유 거품 동그라미. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_cocoa: '같은 장면, 코코아(짙은 갈색)에 데운 우유: 밀크 초콜릿 색 + 옅은 거품 동그라미. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_glass_strawberry: '유리컵 붓기와 같은 장면(배경판 pour_glass_plate)에서 음료 색만: 얼음 + 딸기청(진한 빨강)에 찬 우유를 부으면 분홍. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_glass_matcha: '같은 장면, 얼음 + 푼 말차에 찬 우유: 연두색. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_glass_cocoa: '같은 장면, 얼음 + 코코아에 찬 우유: 밀크 초콜릿 색. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  water_paper: '작업대 위 종이컵(크라프트 슬리브)을 위에서 내려다보고 드립 주전자로 뜨거운 물을 붓는 2944×800 장면. 에스프레소의 크레마가 흩어지며 차오르는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_paper_milk: '같은 종이컵에 기운 피처로 데운 우유: 17단계 × 줄기 있음/없음, 배경판은 pour_paper_plate(빈 종이컵)(docs/recipes.md 6.8)',
+  pour_paper_latte: '같은 종이컵의 에스프레소에 우유: 17단계 × 줄기 있음/없음(끝 무렵 흰 거품 동그라미) + 바리스타 단계의 하트(docs/recipes.md 6.8)',
+  pour_paper_matcha: '같은 종이컵의 푼 말차에 데운 우유: 연두색 + 거품 동그라미. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_paper_cocoa: '같은 종이컵의 코코아에 데운 우유: 밀크 초콜릿 색 + 옅은 거품 동그라미. 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  ice_plastic: '밝은 컵받침 위 길쭉한 플라스틱 컵(약 590mL)을 앞에서 조금 위로 본 2944×800 장면. 얼음이 한 국자(3개)씩 떨어져 24개까지 쌓이는 9단계 × 떨어지는 얼음 있음/없음(docs/recipes.md 6.8)',
+  water_plastic: '같은 플라스틱 컵(얼음 + 에스프레소)에 왼쪽 피처로 찬물: 짙은 갈색이 차오르고 얼음이 떠오르는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_plastic_milk: '같은 플라스틱 컵(얼음만)에 찬 우유: 17단계 × 줄기 있음/없음, 배경판은 pour_plastic_plate(docs/recipes.md 6.8)',
+  pour_plastic_latte: '같은 컵(얼음 + 에스프레소)에 찬 우유: 섞이며 밝은 갈색(아이스 라테). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_plastic_strawberry: '같은 컵(얼음 + 딸기청)에 찬 우유: 분홍(딸기우유). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_plastic_matcha: '같은 컵(얼음 + 푼 말차)에 찬 우유: 연두색(아이스 녹차라테). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
+  pour_plastic_cocoa: '같은 컵(얼음 + 코코아)에 찬 우유: 밀크 초콜릿 색(아이스 코코아). 17단계 × 줄기 있음/없음(docs/recipes.md 6.8)',
 };
-const SHOT_RUN = { pour_milk: 'pour', pour_latte: 'pour', pour_glass_milk: 'pour_glass', pour_glass_latte: 'pour_glass' }; // 한 번에 렌더하는 묶음(scene_bench.py 의 SHOTS)
+const SHOT_RUN = { pour_milk: 'pour', pour_latte: 'pour', pour_glass_milk: 'pour_glass', pour_glass_latte: 'pour_glass', pour_matcha: 'pour_tint', pour_cocoa: 'pour_tint' }; // 한 번에 렌더하는 묶음(scene_bench.py 의 SHOTS)
+const shotRun = (sid) => SHOT_RUN[sid] || (/^pour_glass_(strawberry|matcha|cocoa)$/.test(sid) ? 'pour_glass_tint' : sid.replace(/^(pour_(paper|plastic))_.*$/, '$1'));
 const shotFiles = images.shots || {};
 let shotMeta = {};
 try { shotMeta = JSON.parse(read('assets/shots/shots.json')); } catch (e) { /* 컷이 아직 없음 */ }
@@ -245,7 +264,7 @@ for (const [sid, m] of Object.entries(shotMeta)) {
     file: `assets/${shotFiles[plate] || Object.values(shotFiles)[0]}`,
     tool: 'Blender 5.2 (Cycles) · 이 저장소의 스크립트', made: '', flow: '블렌더로 렌더(생성 AI 아님): assets/_src/blender/bench_test.blend', first: '', firstMade: '', upscaled: false,
     from: 'blender',
-    prompt: `blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender shots ${SHOT_RUN[sid] || sid}\npython -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots`,
+    prompt: `blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender shots ${shotRun(sid)}\npython -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots`,
     neg: '',
     note: SHOT_NOTES[sid] || '',
   });

@@ -138,5 +138,246 @@
       800
     ],
     "levels": 17
+  },
+  "ice_plastic": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1335,
+      0,
+      566,
+      800
+    ],
+    "levels": 9
+  },
+  "pour_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1512,
+      57,
+      719,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_plate"
+  },
+  "pour_glass_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_glass_plate"
+  },
+  "pour_glass_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_glass_plate"
+  },
+  "pour_glass_strawberry": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_glass_plate"
+  },
+  "pour_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1512,
+      57,
+      719,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_plate"
+  },
+  "pour_paper_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1503,
+      82,
+      691,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_paper_plate"
+  },
+  "pour_paper_latte": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1503,
+      82,
+      691,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_paper_plate",
+    "art": [
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "pour_paper_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1503,
+      82,
+      691,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_paper_plate"
+  },
+  "pour_paper_milk": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1503,
+      82,
+      691,
+      718
+    ],
+    "levels": 17,
+    "plate": "pour_paper_plate"
+  },
+  "pour_plastic_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_plastic_plate"
+  },
+  "pour_plastic_latte": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_plastic_plate"
+  },
+  "pour_plastic_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_plastic_plate"
+  },
+  "pour_plastic_milk": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_plastic_plate"
+  },
+  "pour_plastic_strawberry": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_plastic_plate"
+  },
+  "water_paper": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1572,
+      82,
+      694,
+      718
+    ],
+    "levels": 17
+  },
+  "water_plastic": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17
   }
 }
