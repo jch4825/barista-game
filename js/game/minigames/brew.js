@@ -59,7 +59,7 @@ const PROMPT = {
   cup: '카운터에서 알맞은 컵을 찾아 눌러요.',
   base: '컵에 넣을 재료를 찾아 눌러요.',
   adds: '더 넣을 재료가 있으면 눌러요. 다 넣었으면 [만들기 시작]을 눌러요.',
-  temp: '차갑게 만들려면 얼음을 눌러요.',
+  temp: '온도를 바꾸려면 [따뜻하게]를 눌러요. 얼음을 눌러도 차갑게 돼요.',
   confirm: '레시피를 다 골랐어요. 이대로 만들까요?',
   serve: '다 만들었어요. 손님에게 드려요.',
   mild: '다시 만들어도 되고, 그대로 드려도 돼요.',
@@ -88,6 +88,7 @@ const SYS = {
   done: '주문을 모두 만들었어요!',
   holdShort: '조금 더 꾹 누르고 있어요.',
   perfect: '딱 좋아요!',
+  temp: '따뜻하게 할까요, 차갑게 할까요?',
   retry: '다시 해 볼까요? 이대로 해도 괜찮아요.',
   again: '좋아요. 다시 해 봐요.',
 };
@@ -429,12 +430,15 @@ const nameOf = (k, id) => (k === 'cup' ? CUPS[id]?.name : k === 'temp' ? TEMPS[i
  * 카운터의 물건 자리(카운터 그림 workbench_morning 의 16:9 판에 대한 %): [가운데 x, 아래 끝 bottom, 너비]
  * 크기는 실제 크기 비율(2026-10-31 사용자 의견 "크기를 제대로 반영하지 않아 중구난방"): 머그 높이 10cm = 판 높이의 9.6%를 잣대로,
  * 그림 파일의 가로·세로 비율에서 너비를 셈(머신 36cm · 주전자 17cm · 우유병 22cm · 시럽병 24cm · 종이컵 12cm · 유리컵 13cm).
- * 서 있는 물건은 모두 카운터 안쪽의 같은 줄(bottom 28%)에, 컵은 왼쪽 나무판 · 우유 · 시럽 · 얼음은 오른쪽 나무판 위에. 받침 · 수첩은 앞줄
+ * bottom 은 물건 바닥(이름표는 그 아래에 매달림). 카운터 판은 그림 아래에서 12.3%(앞 끝) ~ 32.4%(벽과 만나는 뒤 끝)이고 손 띠가 아래 15%쯤을 가림.
+ * 서 있는 물건은 모두 판 위 같은 줄(BACK 25%, 뒤 끝에서 판 깊이의 3분의 1쯤 앞)에, 컵은 왼쪽 나무판 · 우유 · 시럽 · 얼음은 오른쪽 나무판 위에.
+ * 받침 · 수첩은 앞줄(17.5%, 손 띠 바로 위). 2026-10-31 사용자 "테이블보다 위쪽에 물건들이 다 놓여있네"
  */
-const BACK = 28;
+const BACK = 25;
+const FRONT = 17.5;
 const HOT_POS = {
-  book: [6.2, 19.5, 9],
-  mat: [43, 19.5, 10],
+  book: [6.2, FRONT, 9],
+  mat: [43, FRONT, 10],
   espresso: [55.5, BACK, 16.8],
   water: [71, BACK, 12.4],
   milk: [81, BACK, 5.4],
@@ -660,7 +664,7 @@ export async function brew(opts = {}) {
   const mat = h('div', { class: 'bw-mat', 'aria-hidden': 'true', style: hotStyle(HOT_POS.mat) });
   // 나무판(꾸밈): 컵 줄 아래 · 우유 · 시럽 · 얼음 아래. 물건이 같은 줄에 정돈되어 보이게
   const cupEnds = [CUP_ROW.x - 3.4, CUP_ROW.x + (pantry.cups.length - 1) * CUP_ROW.step + 3.4];
-  const board = ([a, b]) => h('i', { class: 'bw-board', style: { left: `${a}%`, width: `${b - a}%`, bottom: `${BACK - 1.4}%` } });
+  const board = ([a, b]) => h('i', { class: 'bw-board', style: { left: `${a}%`, width: `${b - a}%`, bottom: `${BACK - 1.2}%` } }); // 물건 바닥이 판 윗면 가운데에
   const boards = h('div', { class: 'bw-boards', 'aria-hidden': 'true' }, board(cupEnds), pantry.temps.includes('iced') || pantry.adds.includes('syrup') ? board(BOARD_BOTTLES) : null);
   const set = h('div', { class: 'bw-set' }, boards, mat, hots, bookBtn);
   const scene = h('div', { class: 'bw-scene' }, set, spots.left, spots.center, tube, spots.right);
@@ -926,9 +930,19 @@ export async function brew(opts = {}) {
     const ingHint = hint.includes('base') || hint.includes('adds');
     for (const id of ings) slots.push(chip(INGREDIENTS[id].name, objArt(INGREDIENTS[id].obj, 'small'), () => pickIng(id), ingHint));
     if (!ings.length) slots.push(h('span', { class: `bw-chip is-empty ${ingHint ? 'is-hint' : ''}`.trim() }, h('i', { html: ICON('milk') }), h('em', { text: '재료' })));
+    ui.tempChip = null;
     if (pantry.temps.length > 1) {
-      slots.push(made.temp === 'iced' ? chip('얼음', objArt('iced', 'small'), () => pickIce(), hint.includes('temp'))
-        : h('span', { class: `bw-chip is-temp ${hint.includes('temp') ? 'is-hint' : ''}`.trim() }, h('i', { html: ICON('coffee') }), h('em', { text: TEMPS[made.temp]?.name || '' })));
+      // 온도: 누르면 따뜻하게 · 차갑게를 고르는 작은 창(openTemp)
+      const t = made.temp;
+      const isHint = hint.includes('temp');
+      const b = h('button', {
+        class: `bw-chip is-temp t-${t}${isHint ? ' is-hint' : ''}`, disabled: lock, 'aria-haspopup': 'dialog',
+        'aria-label': `${TEMPS[t]?.name || ''}${lock ? '' : ', 누르면 온도를 골라요'}`,
+      }, t === 'iced' ? objArt('iced', 'small') : h('i', { html: ICON(TEMPS[t]?.icon || 'coffee') }), h('em', { text: TEMPS[t]?.name || '' }),
+      isHint ? h('span', { class: 'bw-chip-hint', text: '다시 봐요' }) : null);
+      if (!lock) onTap(b, () => openTemp(b));
+      ui.tempChip = b;
+      slots.push(b);
     }
     return h('div', { class: 'bw-hand', role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
   }
@@ -1014,6 +1028,65 @@ export async function brew(opts = {}) {
     audio.sfx(made.temp === 'iced' ? 'ice' : 'tap');
     keepFocus('temp:iced');
     talk(sysV(TEMPS[made.temp].name));
+  }
+
+  /* ---- 온도 고르기 창(2026-10-31 사용자 "따뜻하게 버튼을 누르면 팝업이 뜨면서 따뜻하게와 차갑게를 고를 수 있게") ----
+   * 손 띠의 온도 칩 바로 위에 뜸. 카운터의 얼음을 눌러도 차갑게(같은 값). 창 밖을 누르거나 Esc 면 바꾸지 않고 닫음 */
+  let tempEl = null;
+  let offTempEsc = null;
+  function openTemp(anchor) {
+    if (phase !== 'recipe' || tempEl || over) return;
+    armed?.classList.remove('is-armed');
+    armed = null;
+    const opts = pantry.temps.map((t) => {
+      const on = made.temp === t;
+      const b = h('button', { class: `bw-temp-opt t-${t}${on ? ' is-on' : ''}`, 'aria-pressed': String(on), 'aria-label': `${TEMPS[t].name}${on ? ', 지금 골랐어요' : ''}` },
+        t === 'iced' ? objArt('iced', 'small') : h('i', { html: ICON(TEMPS[t].icon || 'coffee') }),
+        h('b', { text: TEMPS[t].name }),
+        on ? h('i', { class: 'bw-temp-on', html: ICON('check') }) : null);
+      onTap(b, () => chooseTemp(t));
+      return b;
+    });
+    const pop = h('div', { class: 'bw-temp-pop' }, h('p', { text: SYS.temp }), h('div', { class: 'bw-temp-opts' }, ...opts));
+    const el = h('section', { class: 'ov ov-brew-temp', role: 'dialog', 'aria-label': '온도 고르기' }, pop);
+    el.addEventListener('click', (e) => { if (e.target === el) { e.stopPropagation(); closeTemp(); } });
+    const layer = document.getElementById('layer-overlay');
+    layer.append(el);
+    // 칩 바로 위에(무대가 화면에 맞춰 줄어 있어 화면 좌표를 무대 좌표로 바꿈)
+    const lr = layer.getBoundingClientRect();
+    const ar = anchor.getBoundingClientRect();
+    const k = lr.width / (layer.offsetWidth || lr.width) || 1;
+    pop.style.left = `${(ar.left + ar.width / 2 - lr.left) / k}px`;
+    pop.style.bottom = `${(lr.bottom - ar.top) / k + 18}px`;
+    tempEl = el;
+    ui.tempOpts = new Map(pantry.temps.map((t, i) => [t, opts[i]]));
+    input.pushScope(el);
+    requestAnimationFrame(() => el.classList.add('is-in'));
+    offTempEsc = bus.on('escape', () => closeTemp());
+    audio.sfx('open');
+    talk(sysV(SYS.temp));
+    focusLater(opts[pantry.temps.indexOf(made.temp)] || opts[0]);
+  }
+  function closeTemp(focus = true) {
+    if (!tempEl) return;
+    const el = tempEl;
+    tempEl = null;
+    ui.tempOpts = null;
+    offTempEsc?.();
+    offTempEsc = null;
+    input.popScope(el);
+    el.remove();
+    if (focus) focusLater(ui.tempChip);
+  }
+  function chooseTemp(t) {
+    if (phase !== 'recipe') return;
+    closeTemp(false);
+    const was = made.temp;
+    made.temp = t;
+    audio.sfx(t === 'iced' && was !== 'iced' ? 'ice' : 'tap');
+    renderRecipe();
+    focusLater(ui.tempChip);
+    talk(sysV(TEMPS[t].name));
   }
 
   function pickRecipe(keep) {
@@ -1535,7 +1608,7 @@ export async function brew(opts = {}) {
         const extra = ings.find((x) => !want.includes(x));
         const miss = want.find((x) => !ings.includes(x));
         if (extra || miss) { clickIf(ui.hot?.get(`ing:${extra || miss}`)); return; }
-        if (made.temp !== t.temp) { clickIf(ui.hot?.get('temp:iced')); return; }
+        if (made.temp !== t.temp) { clickIf(tempEl ? ui.tempOpts?.get(t.temp) : ui.tempChip); return; } // 온도 창으로 고름
         arrange();
         if (!compareRecipe(made, t).length && badLeft) badLeft = 0;
         clickIf(ui.make);
@@ -1599,6 +1672,7 @@ export async function brew(opts = {}) {
     curLoop = null;
     curShot?.stop();
     curShot = null;
+    closeTemp(false);
     closeBook(true);
     offQuit?.();
     talkNo += 1;
