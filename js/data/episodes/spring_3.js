@@ -40,7 +40,8 @@ export default {
     say('owner', 'normal', '강 씨, 오셨어요.'),
     say('kang', 'normal', '…블랙.'),
     say('owner', 'normal', '지은 씨, 강 씨는 어부예요. 서른 해 동안 배가 나가기 전에 여기서 한 잔을 마셔요.'),
-    say('owner', 'normal', '새벽 블랙은 기계 말고 손으로 내려요. 오늘은 내가 하는 걸 옆에서 잘 봐요.'),
+    say('owner', 'normal', '새벽 블랙은 기계 말고 손으로 내려요. 내리는 건 내가 할게요.'),
+    say('owner', 'normal', '지은 씨는 도구만 좀 챙겨 줘요. 그리고 옆에서 잘 봐요.'), // 학생은 컵 · 원두 · 물을 챙기고, 손 동작은 사장님의 손(쉬움 = 보기, 2026-11-01 사용자)
     mini('brew', {
       id: 'spring_3_kang', title: '새벽 블랙(사장님의 손 보기)', level: 'easy',
       book: ['warm_milk', 'americano', 'hand_drip'],
