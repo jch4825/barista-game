@@ -229,6 +229,7 @@ async function exec(s, b, index) {
       store.setFlag('seen', { ...(store.flag('seen') || {}), [b.n]: true });
       store.log({ type: 'seen', ep: s.ep.id, n: b.n });
       return undefined;
+    case 'secret': store.openAlbum(b.who); store.log({ type: 'secret', ep: s.ep.id, who: b.who }); return undefined;
     case 'album': dialogue.hide(); await w(ov.album()); return undefined;
     case 'eyes': dialogue.hide(); await w(ov.eyes()); return undefined;
     case 'emote': stage.emote(b.who, b.kind); return undefined;

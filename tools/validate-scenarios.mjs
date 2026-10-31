@@ -37,10 +37,10 @@ const MOTIONS = ['bow', 'nod', 'shake', 'jump', 'breathe'];
 const KNOWN = new Set(['bg', 'bgm', 'amb', 'sfx', 'show', 'enter', 'leave', 'face', 'motion', 'camera', 'fx', 'earplugs', 'say', 'narr', 'think', 'sys', 'phone',
   'time', 'place', 'big', 'schedule', 'memo', 'memoHi', 'info', 'act', 'breathe', 'decide', 'choose', 'branch',
   'mini', 'snap', 'photo', 'stamp', 'term', 'finish', 'credits', 'letter', 'label', 'jump', 'set', 'checkpoint', 'wait', 'end',
-  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond', 'chalk', 'seen', 'album', 'eyes']);
+  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond', 'chalk', 'seen', 'album', 'eyes', 'secret']);
 // check(일정 완료)는 실패·칭찬 장면 안에 두지 않습니다(되감기 전 장면에서 완료로 표시되면 안 됨)
 const NO_NEST = new Set(['decide', 'choose', 'mini', 'respond', 'label', 'jump', 'checkpoint', 'end', 'schedule', 'check']);
-const LONG = 70;
+const LONG = 90; // 2026-10-31 사용자 "대본을 너무 단문으로 쓰지 마라. 맥락과 힌트를 중시하라": 한 칸 두 문장 이내, 문장은 이어 써도 됨
 
 let errors = 0;
 let warns = 0;
@@ -64,6 +64,8 @@ const REGULAR_IDS = Object.keys(REGULARS);
 const touchUsed = new Map();
 // 숨은 장면(seen) 번호: 1~11 이 모두 한 번씩 있는지(PRD 5.6)
 const seenUsed = [];
+// 비밀 장면(secret): 단골 8명 모두 3단계 장면이 있는지(PRD 8.3)
+const secretUsed = new Set();
 
 function checkFace(ep, who, face) {
   if (!face) return;
@@ -177,6 +179,7 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
       case 'chalk': if (b.text !== null && typeof b.text !== 'string') err(ep, 'chalk 글씨는 문자열 또는 null'); break;
       case 'seen': if (!Number.isInteger(b.n) || b.n < 1 || b.n > 11) err(ep, `숨은 장면 번호는 1~11: seen(${b.n})`); else seenUsed.push([ep, b.n]); break;
       case 'album': case 'eyes': if (ep !== ENDING?.id) err(ep, `${b.t}() 는 엔딩에만`); break;
+      case 'secret': if (!REGULARS[b.who]) err(ep, `secret: 없는 단골 ${b.who}`); else secretUsed.add(b.who); break;
       case 'emote':
         if (!CHARS[b.who]) err(ep, `인물 없음: ${b.who}`);
         if (!EMOTES.includes(b.kind)) err(ep, `이모트 없음: ${b.kind}`);
@@ -351,13 +354,16 @@ for (const ep of [...EPISODES, ENDING].filter(Boolean)) {
         // 반응 연출을 글로도(PRD 8.6, 원칙 11): 맞음 = '오래 바라봄', 어긋남 = "괜찮아요"
         const afterText = (c.after || []).map((x) => x.text || '').join(' ');
         if (c.score === 2 && !/오래 바라/.test(afterText)) warn(where, `맞는 대응 뒤 장면에 '오래 바라봄'이 글로 없음: ${c.id}`);
-        if (c.score === 0 && !/괜찮아요/.test(afterText)) warn(where, `어긋난 대응 뒤 장면에 "괜찮아요"가 없음: ${c.id}`);
+        if (c.score === 0 && !/괜찮아/.test(afterText)) warn(where, `어긋난 대응 뒤 장면에 "괜찮아요"(반말 "괜찮아")가 없음: ${c.id}`);
         walk(where, c.after, { nested: true });
       }
       if (!touchUsed.has(where)) warn(where, '대본 어디에서도 부르지 않는 대응 기회');
     }
   }
 }
+
+// 비밀 장면(3단계): 단골마다 secret(who) 가 있는지(엔딩 앨범 액자)
+for (const who of REGULAR_IDS) if (!secretUsed.has(who)) warn(`단골 ${who}`, `3단계 비밀 장면 secret('${who}') 이 없음(엔딩 앨범 액자가 열리지 않음)`);
 
 // pick 조건: '사람.기회=선택지' 가 실제로 있는지
 for (const [ep, v] of pickUsed) {

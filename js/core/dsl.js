@@ -29,6 +29,8 @@ export const cg = (id) => ({ t: 'cg', id });
 export const chalk = (text, shaky = false) => ({ t: 'chalk', text, shaky });
 /** 사장의 숨은 뒷받침을 봄(PRD 5.6, 1~11): 알림 없이 기록만(엔딩 '사장의 눈'에서 처음 보는 컷을 천천히) */
 export const seen = (n) => ({ t: 'seen', n });
+/** 단골의 비밀 장면(3단계)을 봄: 엔딩 앨범에 그 단골의 액자가 열림(두 번째 해에도 남음). 알림 없이 기록만 */
+export const secret = (who) => ({ t: 'secret', who });
 
 /* ---------- 대사 ---------- */
 /** say('who', '대사') 또는 say('who', 'smile', '대사') */

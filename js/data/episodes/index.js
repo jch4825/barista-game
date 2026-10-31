@@ -25,6 +25,13 @@ import autumn4 from './autumn_4.js';
 import autumn5 from './autumn_5.js';
 import autumn6 from './autumn_6.js';
 import autumn7 from './autumn_7.js';
+import winter1 from './winter_1.js';
+import winter2 from './winter_2.js';
+import winter3 from './winter_3.js';
+import winter4 from './winter_4.js';
+import winter5 from './winter_5.js';
+import winter6 from './winter_6.js';
+import winter7 from './winter_7.js';
 import ending from './ending.js';
 import { registerOops } from '../../core/oops.js';
 import { MINIGAME_OOPS } from '../../game/minigames/index.js';
@@ -34,6 +41,7 @@ export const EPISODES = [
   spring1, spring2, spring3, spring4, spring5, spring6, spring7,
   summer1, summer2, summer3, summer4, summer5, summer6, summer7,
   autumn1, autumn2, autumn3, autumn4, autumn5, autumn6, autumn7,
+  winter1, winter2, winter3, winter4, winter5, winter6, winter7,
 ];
 
 /** 계절(막): 달력의 한 줄. sub 는 달력에 보이는 한 줄 소개 */
@@ -41,6 +49,7 @@ export const ACTS = [
   { n: 1, season: 'spring', title: '봄 · 첫 컵', sub: '바닷가 마을 카페에 온 지은. 해순 할머니 · 도 씨 · 강 씨를 만나요.', ids: ['spring_1', 'spring_2', 'spring_3', 'spring_4', 'spring_5', 'spring_6', 'spring_7'] },
   { n: 2, season: 'summer', title: '여름 · 줄', sub: '사진 한 장으로 카페가 붐벼요. 지안 · 한 씨 · 은주 · 수민 · 노 씨를 만나요.', ids: ['summer_1', 'summer_2', 'summer_3', 'summer_4', 'summer_5', 'summer_6', 'summer_7'] },
   { n: 3, season: 'autumn', title: '가을 · 손', sub: '사장님의 손이 떨려요. 열쇠를 받고 혼자 가게를 열어요.', ids: ['autumn_1', 'autumn_2', 'autumn_3', 'autumn_4', 'autumn_5', 'autumn_6', 'autumn_7'] },
+  { n: 4, season: 'winter', title: '겨울 · 불', sub: '폭설로 마을이 정전돼요. 불이 켜진 곳은 카페뿐이에요.', ids: ['winter_1', 'winter_2', 'winter_3', 'winter_4', 'winter_5', 'winter_6', 'winter_7'] },
 ];
 
 /**

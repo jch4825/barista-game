@@ -89,15 +89,15 @@ export const REGULARS = {
       },
       winter_blackout: {
         season: 'winter', nth: 4, title: '정전 밤의 의자',
-        scene: [narr('담요를 나눠 드린다. 해순 할머니 차례다.'), cg('winter_blanket_chair')],
+        scene: [narr('할머니가 아이들에게 담요를 다 나눠 주었다. 할머니 몫이 없다.'), narr('뒷방에서 사장님의 담요 두 장을 꺼내 온다.'), cg('winter_blanket_chair')],
         hints: [
           narr('할머니의 눈이 옆의 빈 의자로 간다.'),
           narr('할머니가 내 손의 담요를 보고, 다시 빈 의자를 본다.'),
         ],
         q: '담요를 어떻게 할까?',
         choices: [
-          { id: 'blanket_chair', score: 2, kind: 'wait', icon: 'chair', label: '담요 한 장을 빈 의자 위에 덮어 둔다.', after: [cg('haesun_blanket_chair_warm'), narr('할머니가 의자 위의 담요를 손으로 펴고, 오래 바라본다.'), say('haesun', 'smile', '이 의자도 따뜻하네요. 고마워요.'), cg(null)] },
-          { id: 'blanket_her', score: 1, kind: 'plain', icon: 'cloth', label: '담요를 할머니에게 드린다.', after: [say('haesun', 'smile', '고마워요.'), narr('할머니가 담요 끝을 빈 의자에도 걸쳐 둔다.'), cg(null)] },
+          { id: 'blanket_chair', score: 2, kind: 'wait', icon: 'chair', label: '한 장은 할머니 무릎에, 한 장은 빈 의자 위에 덮어 둔다.', after: [cg('haesun_blanket_chair_warm'), narr('할머니가 의자 위의 담요를 손으로 펴고, 오래 바라본다.'), say('haesun', 'smile', '이 의자도 따뜻하네요. 고마워요.'), cg(null)] },
+          { id: 'blanket_her', score: 1, kind: 'plain', icon: 'cloth', label: '담요 두 장을 모두 할머니께 드린다.', after: [say('haesun', 'smile', '고마워요.'), narr('할머니가 담요 끝을 빈 의자에도 걸쳐 둔다.'), cg(null)] },
         ],
         why: '할머니는 담요를 보고 빈 의자를 봤어요. 할머니에게 그 의자는 늘 함께 앉는 자리예요.',
       },
@@ -301,6 +301,21 @@ export const REGULARS = {
         ],
         why: '도 씨는 퇴직 소식지에서 눈을 피했고, 의자를 오래 봤어요. 묻지 않고 앉을 자리를 내어 줘요.',
       },
+      winter_last: {
+        season: 'winter', nth: 5, title: '마지막 배달',
+        scene: [narr('마감 무렵. 문 밖에 도 씨가 서 있다. 오늘이 마지막 배달 날이다.'), narr('가방이 납작하다. 다 배달해서 비었다.'), cg('do_last_day')],
+        hints: [
+          narr('도 씨의 눈이 문 옆 못으로 갔다가, "영업 끝" 팻말로 간다.'),
+          narr('도 씨의 눈이 불 켜진 카운터 안쪽으로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'light_wait', score: 2, kind: 'wait', icon: 'light', label: '팻말은 그대로 두고, 불 하나를 켜 둔 채 문을 조금 열어 둔다.', after: [cg('do_last_hook'), narr('도 씨가 들어와 빈 가방을 못에 건다. 마지막으로.'), narr('도 씨가 카운터 옆 의자를 오래 바라보다가 앉는다.'), say('do', 'smile', '오늘이 마지막 배달이었어요. 서른 해.'), say('do', 'smile', '마지막에 여기 들르고 싶었어요.'), cg(null)] },
+          { id: 'open_door', score: 1, kind: 'plain', icon: 'door', label: '"들어오세요." 하고 문을 열어 드린다.', after: [say('do', 'smile', '아, 닫았는데. 고마워요.'), narr('도 씨가 문 옆 못에 가방을 걸고, 서서 가게를 둘러본다.'), cg(null)] },
+          { id: 'clap', score: 0, kind: 'step', icon: 'heart', label: '"오늘 마지막 날이시죠? 축하드려요!" 하고 크게 박수를 친다.', after: [say('do', 'surprised', '허허, 축하는 무슨. 괜찮아요.'), narr('도 씨가 머쓱하게 웃고 들어와, 문 옆 못을 한 번 본다.'), cg(null)] },
+        ],
+        why: '도 씨는 영업 끝 팻말과 불 켜진 카운터를 봤어요. 들어올지 스스로 정할 수 있게, 불을 켜 두고 기다려요.',
+      },
     },
   },
 
@@ -375,6 +390,21 @@ export const REGULARS = {
         ],
         why: '강 씨는 낯선 양복 차림에 자기 손을 보고, 늘 앉던 자리를 봤어요. 늘 하던 대로가 강 씨를 편하게 해요.',
       },
+      winter_snow: {
+        season: 'winter', nth: 5, title: '첫눈과 소문',
+        scene: [narr('첫눈이 내린 새벽. 강 씨가 어깨의 눈을 털며 들어온다.'), narr('어제 시장에서 들은 말이 떠오른다. "강 씨가 배를 팔았대."'), cg('kang_first_snow')],
+        hints: [
+          narr('강 씨의 눈이 창밖의 빈 항구로 간다.'),
+          narr('강 씨의 눈이 언 손으로 간다. 손가락을 몇 번 쥐었다 편다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'warm_mug', score: 2, kind: 'wait', icon: 'coffee', label: '아무것도 묻지 않고, 잔을 뜨거운 물로 데워 두고 블랙을 내린다.', after: [cg('kang_warm_mug'), narr('강 씨가 데운 잔을 두 손으로 감싸고 오래 바라본다.'), say('kang', 'smile', '…잔까지 따뜻하네.'), cg(null)] },
+          { id: 'first_snow', score: 1, kind: 'plain', icon: 'greet', label: '"첫눈이에요. 추우시죠?" 하고 인사한다.', after: [say('kang', 'normal', '…그래. 춥네.'), narr('강 씨가 손을 비비며 블랙을 기다린다.'), cg(null)] },
+          { id: 'ask_rumor', score: 0, kind: 'ask', icon: 'question', label: '"배 파셨다면서요? 정말이에요?" 하고 묻는다.', after: [narr('강 씨의 손이 멈춘다.'), say('kang', 'normal', '…괜찮아요. 블랙.'), narr('강 씨가 다시 빈 항구를 본다.'), cg(null)] },
+        ],
+        why: '강 씨는 빈 항구를 보고, 언 손을 쥐었다 폈어요. 소문을 묻지 않고, 손을 녹일 따뜻한 잔을 건네요.',
+      },
     },
   },
 
@@ -448,6 +478,21 @@ export const REGULARS = {
         ],
         why: '한 씨는 시계를 보고, 미리 만든 잔을 봤어요. 3분뿐일 때는 말보다 바로 건네는 잔이 필요해요.',
       },
+      winter_daughter: {
+        season: 'winter', nth: 5, title: '딸과 함께 온 새벽',
+        scene: [narr('겨울 방학. 6시 10분, 한 씨 뒤에 패딩을 입은 아이가 있다.'), narr('딸이 아빠의 마지막 버스를 타고 같이 왔다고 한다.'), cg('han_with_daughter')],
+        hints: [
+          narr('한 씨의 눈이 딸을 보다가, 벽시계로 간다. 남은 시간은 10분.'),
+          narr('딸의 눈이 메뉴판의 갈색 동그라미로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'cocoa_quiet', score: 2, kind: 'wait', icon: 'cup', label: '묻지 않고, 한 씨의 잔 옆에 따뜻한 코코아를 놓아 둔다.', after: [cg('han_two_cups'), narr('딸이 코코아를 보고 아빠를 본다. 한 씨가 나를 오래 바라본다.'), say('han_daughter', 'smile', '아빠, 이거 나 먹어도 돼?'), say('han', 'smile', '그럼. 천천히 마셔. 오늘은 아빠도 천천히야.'), cg(null)] },
+          { id: 'ask_daughter', score: 1, kind: 'ask', icon: 'question', label: '"따님은 뭐 드실래요?" 하고 묻는다.', after: [narr('딸이 메뉴판을 한참 고른다. 한 씨가 시계를 본다.'), say('han_daughter', 'normal', '…코코아요.'), cg(null)] },
+          { id: 'tell_dad', score: 0, kind: 'step', icon: 'speech', label: '"아빠가 매일 오세요! 따님 얘기 많이 해요." 하고 말한다.', after: [say('han', 'surprised', '아, 그런 얘기를… 허허. 괜찮아요.'), narr('딸이 쑥스러워 고개를 숙인다. 둘 다 말이 없어진다.'), cg(null)] },
+        ],
+        why: '한 씨는 딸과 남은 10분을 봤고, 딸은 갈색 동그라미를 봤어요. 묻는 시간도 아껴 주면 둘이 더 오래 이야기해요.',
+      },
     },
   },
 
@@ -501,6 +546,36 @@ export const REGULARS = {
           { id: 'hold_baby', score: 0, kind: 'step', icon: 'hand', label: '아기를 안아 들어 주려고 두 손을 내민다.', after: [say('eunju', 'surprised', '아, 괜찮아요. 아기가 낯을 가려서요.'), narr('은주 씨가 유모차를 입구에 세워 둔다. 창가 쪽을 한 번 본다.'), cg(null)] },
         ],
         why: '은주 씨는 유모차가 걸려 머뭇거리며 창가 쪽을 봤어요. 은주 씨에게는 "어디가 편하세요?" 하고 물어보는 것이 맞아요.',
+      },
+      winter_tired: {
+        season: 'winter', nth: 4, title: '지친 얼굴',
+        scene: [narr('첫눈 오는 오후. 은주 씨가 들어온다. 눈이 빨갛다.'), narr('아기가 감기에 걸려 밤새 깼다고 한다.'), cg('eunju_tired')],
+        hints: [
+          narr('은주 씨의 눈이 창밖의 눈으로 갔다가, 나에게 온다. 무언가 말하려다 멈춘다.'),
+          narr('은주 씨의 눈이 늘 앉던 유모차 자리로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'ask_sleep', score: 2, kind: 'ask', icon: 'speech', label: '"어젯밤엔 좀 주무셨어요?" 하고 묻고, 유모차 자리로 안내한다.', after: [cg('eunju_heard'), narr('은주 씨가 나를 오래 바라본다.'), say('eunju', 'sad', '…한숨도 못 잤어요. 그걸 물어봐 준 사람, 지은 씨가 처음이에요.'), narr('은주 씨가 자리에 앉아 조금 운다. 그리고 웃는다.'), cg(null)] },
+          { id: 'latte_quiet', score: 1, kind: 'wait', icon: 'coffee', label: '말없이 따뜻한 라테를 두꺼운 컵에 내 드린다.', after: [say('eunju', 'smile', '고마워요.'), narr('은주 씨가 컵을 감싸고 창밖을 본다.'), cg(null)] },
+          { id: 'go_doctor', score: 0, kind: 'step', icon: 'caution', label: '"감기면 병원부터 가셔야죠!" 하고 말한다.', after: [say('eunju', 'normal', '…다녀왔어요. 괜찮아요.'), narr('은주 씨가 고개를 숙이고 유모차 쪽을 본다.'), cg(null)] },
+        ],
+        why: '은주 씨는 무언가 말하려다 멈췄어요. 묻기를 기다리는 사람에게는 먼저 부드럽게 물어봐 줘요.',
+      },
+      winter_friend: {
+        season: 'winter', nth: 5, title: '처음 온 엄마',
+        scene: [sfx('bell'), narr('은주 씨가 유모차를 밀고 들어온다. 뒤에 처음 보는 엄마가 서 있다.'), narr('처음 온 엄마는 문 앞에서 머뭇거린다. 유모차를 꼭 쥐고 있다.'), cg('eunju_friend')],
+        hints: [
+          narr('은주 씨의 눈이 처음 온 엄마로 갔다가, 나에게 온다.'),
+          narr('처음 온 엄마의 눈이 유모차 자리로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'welcome_new', score: 2, kind: 'ask', icon: 'speech', label: '처음 온 엄마에게 "유모차는 여기 두세요. 따뜻한 걸로 드릴까요?" 하고 묻는다.', after: [cg('eunju_two_moms'), say('mom2', 'smile', '아… 네. 따뜻한 걸로요.'), narr('은주 씨가 나를 오래 바라본다. 그리고 작게 엄지를 든다.'), say('eunju', 'smile', '거봐요. 여기 좋다고 했죠.'), cg(null)] },
+          { id: 'make_space', score: 1, kind: 'wait', icon: 'chair', label: '말없이 유모차 자리를 하나 더 만들어 둔다.', after: [narr('처음 온 엄마가 조심스럽게 들어와 앉는다.'), say('eunju', 'smile', '고마워요, 지은 씨.'), cg(null)] },
+          { id: 'only_eunju', score: 0, kind: 'plain', icon: 'menu', label: '은주 씨에게만 "늘 먹던 거죠?" 하고 묻는다.', after: [say('eunju', 'normal', '네. 아, 이분은…'), narr('처음 온 엄마는 아직 문 앞에 서 있다.'), say('eunju', 'smile', '괜찮아요. 이리 와요.'), cg(null)] },
+        ],
+        why: '은주 씨는 처음 온 엄마와 나를 번갈아 봤어요. 은주 씨에게 그랬듯, 처음 온 사람에게도 먼저 따뜻하게 물어봐요.',
       },
     },
   },
@@ -571,6 +646,21 @@ export const REGULARS = {
         ],
         why: '수민은 떨리는 손과 하얀 슬리브를 봤어요. 말 대신 작은 그림 하나가 수민에게 응원이 돼요.',
       },
+      winter_letter: {
+        season: 'winter', nth: 5, title: '봉투',
+        scene: [narr('수민이 카운터 앞에 선다. 손에 하얀 봉투가 있다.'), narr('대학교 이름이 찍힌 봉투다. 아직 뜯지 않았다.'), cg('sumin_envelope')],
+        hints: [
+          narr('수민의 눈이 봉투로 갔다가, 나를 본다.'),
+          narr('수민의 눈이 카운터 앞의 의자로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'wipe_wait', score: 2, kind: 'wait', icon: 'cloth', label: '아무것도 묻지 않고, 컵을 닦으며 수민이 말할 때까지 기다린다.', after: [cg('sumin_wait'), narr('수민이 카운터 앞 의자에 앉는다. 봉투를 오래 바라본다.'), say('sumin', 'normal', '…내일 열어 볼게요. 여기서요.'), cg(null)] },
+          { id: 'usual_ask', score: 1, kind: 'plain', icon: 'cup', label: '"보리차요?" 하고 늘 하던 대로 묻는다.', after: [say('sumin', 'normal', '…네.'), narr('수민이 봉투를 가방에 넣는다.'), cg(null)] },
+          { id: 'push_open', score: 0, kind: 'step', icon: 'hand', label: '"합격했어요? 열어 봐요!" 하고 재촉한다.', after: [say('sumin', 'surprised', '아… 아직요. 괜찮아요.'), narr('수민이 봉투를 가방 깊이 넣는다.'), cg(null)] },
+        ],
+        why: '수민은 봉투와 나를 번갈아 보고, 앞 의자를 봤어요. 재촉하지 않고 기다리면 수민이 스스로 말해요.',
+      },
     },
   },
 
@@ -629,6 +719,36 @@ export const REGULARS = {
           { id: 'ask_owner', score: 0, kind: 'ask', icon: 'speech', label: '"사장님 손은 많이 안 좋으세요?" 하고 묻는다.', after: [narr('노 씨가 한참 말이 없다.'), say('noh', 'normal', '…괜찮아질 거야. 그 잔 줘.'), cg(null)] },
         ],
         why: '노 씨는 사장님의 빈 잔을 보고, 믹스 봉지를 꺼냈다가 넣었어요. 걱정을 말하지 않는 사람이니 평소처럼 대해 줘요.',
+      },
+      winter_check: {
+        season: 'winter', nth: 4, title: '지나가다 들른 아침',
+        scene: [narr('눈 오는 아침. 노 씨가 "지나가다" 들른다. 오늘로 사흘째다.'), narr('노 씨가 들어오자마자 덜덜거리는 난로 쪽을 본다.'), cg('noh_heater')],
+        hints: [
+          narr('노 씨의 눈이 난로로 갔다가, 카운터 뒤 사장님 자리로 간다.'),
+          narr('노 씨의 눈이 나에게 와서, 내 손을 잠깐 본다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'believe', score: 2, kind: 'wait', icon: 'coffee', label: '"지나가다"라는 말을 그대로 믿는 척, 늘 그 잔을 탄다.', after: [cg('noh_mix_winter'), narr('노 씨가 종이컵을 받아 들고, 나를 오래 바라본다.'), say('noh', 'smile', '…사장 맛이 나.'), cg(null)] },
+          { id: 'thank_daily', score: 1, kind: 'plain', icon: 'greet', label: '"매일 와 주셔서 고맙습니다." 하고 인사한다.', after: [say('noh', 'normal', '허, 지나가다 들렀다니까.'), narr('노 씨가 헛기침을 한다.'), cg(null)] },
+          { id: 'ask_owner_sent', score: 0, kind: 'ask', icon: 'question', label: '"사장님이 부탁하셨어요? 저 보러 오시는 거죠?" 하고 묻는다.', after: [narr('노 씨가 잠깐 말이 없다.'), say('noh', 'normal', '…아니. 괜찮아. 지나가다 들렀어.'), cg(null)] },
+        ],
+        why: '노 씨는 난로와 사장님 자리, 내 손을 살폈어요. 지나가다 들렀다는 말 뒤의 마음을 모른 척 받아 줘요.',
+      },
+      winter_lantern: {
+        season: 'winter', nth: 5, title: '랜턴',
+        scene: [narr('정전 밤. 노 씨가 커다란 랜턴을 들고 들어온다.'), narr('아주 오래된 랜턴이다. 손잡이가 닳아 반질반질하다.'), cg('noh_lantern')],
+        hints: [
+          narr('노 씨의 눈이 걸 곳을 찾다가, 사장님 자리 위의 못에 머문다.'),
+          narr('노 씨의 눈이 나에게 잠깐 왔다가, 다시 그 못으로 간다.'),
+        ],
+        q: '어떻게 할까?',
+        choices: [
+          { id: 'step_aside', score: 2, kind: 'wait', icon: 'light', label: '아무것도 묻지 않고, 그 못에 걸 수 있게 자리를 비켜 준다.', after: [cg('noh_lantern_hung'), narr('노 씨가 사장님 자리 위에 랜턴을 건다. 가게가 환해진다.'), narr('노 씨가 불빛을 오래 바라본다.'), say('noh', 'smile', '…이 랜턴, 저기가 원래 자리야.'), cg(null)] },
+          { id: 'hang_myself', score: 1, kind: 'plain', icon: 'hand', label: '"제가 걸게요." 하고 받아서 가까운 데 건다.', after: [say('noh', 'normal', '…그래, 고맙네.'), narr('노 씨가 랜턴을 사장님 자리 위의 못으로 옮겨 건다.'), cg(null)] },
+          { id: 'ask_lantern', score: 0, kind: 'ask', icon: 'question', label: '"이거 사장님 거예요? 왜 갖고 계세요?" 하고 묻는다.', after: [narr('노 씨가 잠깐 말이 없다.'), say('noh', 'normal', '…나중에. 괜찮아. 일단 불부터.'), narr('노 씨가 사장님 자리 위의 못에 랜턴을 건다.'), cg(null)] },
+        ],
+        why: '노 씨는 랜턴을 걸 곳으로 사장님 자리의 못을 봤어요. 사연을 묻지 않고, 그 자리에 걸 수 있게 해 줘요.',
       },
     },
   },
