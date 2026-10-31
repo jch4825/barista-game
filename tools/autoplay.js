@@ -53,7 +53,7 @@ function pickRespond(choices, mode) {
 export async function autoplay({ episode = null, bad = false, timeout = false, respond = 'best', hint = false, delay = 40, maxSteps = 6000 } = {}) {
   const J = window.__jm;
   if (!J) throw new Error('?debug 로 열어 주세요');
-  if (episode && !J.getEpisode(episode)) throw new Error(`없는 에피소드: ${episode} (쓸 수 있는 것: ${[...EPISODES, ENDING].map((e) => e.id).join(' ')})`);
+  if (episode && episode !== 'free' && !J.getEpisode(episode)) throw new Error(`없는 에피소드: ${episode} (쓸 수 있는 것: ${[...EPISODES, ENDING].map((e) => e.id).join(' ')})`);
   const errors = [];
   const onErr = (e) => errors.push(String(e.message || e.reason || e));
   window.addEventListener('error', onErr);
