@@ -23,7 +23,16 @@ const BG_NAME = { home: '방', living: '거실', bus_stop: '버스 정류장', c
 /** 조건 { flag: 'payPlan=gift' } → '선택 기억 `payPlan` = gift' · { trust: { haesun: '>=4' } } → '해순 할머니의 신뢰 >=4' (js/core/cond.js) */
 const flagText = (v, not) => { const [f, val] = String(v).split('='); return val === undefined ? `선택 기억 \`${f}\` ${not ? '없음' : '있음'}` : `선택 기억 \`${f}\` ${not ? '≠' : '='} ${val}`; };
 const trustText = (v) => Object.entries(v || {}).map(([who, rule]) => `${CHARS[who]?.name || who}의 신뢰 ${rule}`).join(', ');
-const condText = (c) => (Array.isArray(c) ? c.map(condText).join(' 또는 ') : Object.entries(c || {}).map(([k, v]) => (k === 'flag' ? flagText(v) : k === 'notFlag' ? flagText(v, true) : k === 'trust' ? trustText(v) : `선택 기억 \`${k}\` ${v}`)).join(', '));
+/** pick: 'jian.summer_anything=ask_color|x' → '지안 · 아무거나요에서 「…」를 골랐을 때' (끝이 '|' 면 '아직 안 골랐을 때'도) */
+const pickText = (v) => {
+  const [key, want = ''] = String(v).split('=');
+  const [who, touch] = key.split('.');
+  const tc = REGULARS[who]?.touches?.[touch];
+  const labels = want.split('|').map((id) => (id ? `「${t(tc?.choices.find((c) => c.id === id)?.label || id)}」` : '아직 안 고름'));
+  return `${REGULARS[who]?.name || who} · ${tc?.title || touch}에서 ${labels.join(' 또는 ')}`;
+};
+const condText = (c) => (Array.isArray(c) ? c.map(condText).join(' 또는 ') : Object.entries(c || {}).map(([k, v]) => (k === 'flag' ? flagText(v) : k === 'notFlag' ? flagText(v, true) : k === 'trust' ? trustText(v)
+  : k === 'warmth' ? `마을 온기 ${v}` : k === 'album' ? `${REGULARS[v]?.name || v}의 앨범 액자가 열렸을 때` : k === 'pick' ? pickText(v) : `선택 기억 \`${k}\` ${v}`)).join(', '));
 const name = (who) => CHARS[who]?.name || who;
 const t = (s) => plain(fill(s || ''));
 const skill = (k) => (k && SKILLS[k] ? ` · 스킬: ${SKILLS[k].name}` : '');
@@ -65,7 +74,12 @@ function lines(list, depth = 0) {
       case 'earplugs': out.push(`${pad}🎧 *(귀마개 ${b.on ? '끼기: 장면 속 소리가 먹먹해짐' : '빼기'})*`); break;
       case 'fx': if (b.name === 'overload') out.push(`${pad}*(${b.on ? '소리 과부하 효과 시작' : '과부하 효과 끝'})*`); break;
       case 'finish': out.push(`${pad}🏁 **${b.title}** — ${b.sub}`); break;
-      case 'credits': out.push(`${pad}🎞 *(사진 벽에 모은 '오늘의 한 장'이 한 장씩 붙으며 제목을 읽어 줌 → 크레디트)*`); break;
+      case 'credits': out.push(`${pad}🎞 *(한 해를 함께한 사람들의 얼굴이 하나씩 걸린 뒤 크레디트)*`); break;
+      case 'chalk': out.push(`${pad}✏️ *(칠판 글씨${b.shaky ? ', 삐뚤게' : ''}: ${t(b.text).replace(/\n/g, ' / ')})*`); break;
+      case 'seen': out.push(`${pad}🔎 *(사장님의 숨은 장면 ${b.n}: 학생에게 알리지 않고 기록만, 엔딩 '사장의 눈'에서 다시 봄)*`); break;
+      case 'secret': out.push(`${pad}📔 *(엔딩 앨범에 ${REGULARS[b.who]?.name || b.who}의 액자가 열림: ${REGULARS[b.who]?.album?.title || ''})*`); break;
+      case 'album': out.push(`${pad}📔 **단골 앨범**: 단골 여덟 사람의 액자. 들은 이야기가 있으면 그 장면과 한 줄, 없으면 '아직 모르는 이야기'`); break;
+      case 'eyes': out.push(`${pad}👁 **사장의 눈**: 같은 한 해를 사장님의 눈으로 본 11컷(js/data/eyes.js). 처음 보는 장면은 표시하고 천천히`); break;
       case 'letter': out.push(`${pad}💌 **마지막 메모** (${t(b.to)}): ${b.lines.map((x, i) => `${i + 1}. ${t(x)}`).join(' / ')}${b.ps ? ` — ${t(b.ps)}` : ''} — ${b.from}`); break;
       case 'branch':
         out.push(`${pad}🔀 *선택 기억 \`${b.flag}\` 에 따라:*`);
@@ -123,6 +137,11 @@ function lines(list, depth = 0) {
       }
       case 'mini':
         out.push('', `${pad}### 🎮 미니게임: ${b.title ? `${t(b.title)} (${b.name})` : b.name}${skill(b.skill)}`);
+        // 커피 만들기: 손님마다 주문 · 무엇을 묻는지 / 둘러보기: 눌러 볼 곳과 그 말 / 순서대로 · 쟁반: 할 일
+        for (const o of b.orders || []) out.push(`${pad}- **${name(o.who)}**: "${t(o.say)}" → ${o.usual ? '늘 먹던 것 · ' : ''}${o.menu}${o.temp ? ` · ${o.temp === 'iced' ? '아이스' : '따뜻하게'}` : ''}${o.togo === undefined ? '' : o.togo ? ' · 포장' : ' · 매장'}${o.ask?.length ? ` · 지은이 물어볼 것: ${o.ask.map((k) => (k === 'temp' ? '온도' : '매장/포장')).join(', ')}` : ''}${o.thanks ? ` · 받으면: "${t(o.thanks)}"` : ''}`);
+        for (const sp of b.spots || []) out.push(`${pad}- 👀 **${sp.name}**${sp.seen ? ` (숨은 장면 ${sp.seen})` : ''}: ${sp.lines.map((l) => (typeof l === 'string' ? t(l) : `*${t(l.text)}*`)).join(' ')}`);
+        for (const st of b.steps || []) out.push(`${pad}- 🔁 ${st.name}: ${t(st.done)}`);
+        if (b.items) out.push(`${pad}- 🫖 나를 것: ${b.items.map((it) => it.name).join(', ')} → ${b.to || ''}`);
         if (b.oops) out.push(`${pad}- 실패하면: **아차! ${b.oops.title}** — ${t(b.oops.lesson)}`);
         if (b.timer) out.push(`${pad}- ⏱ **시간 제한**${b.timer.sec ? ` ${b.timer.sec}초` : ''} · ${b.timer.label} · 시간이 다 되면: ${b.timer.say ? `"${t(b.timer.say)}" → ` : ''}${b.timer.oops ? `**아차! ${b.timer.oops.title}** — ${t(b.timer.oops.lesson)}` : '미니게임이 정한 결과'}`);
         out.push('');
