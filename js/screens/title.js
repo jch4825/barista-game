@@ -158,11 +158,11 @@ export function showTitle() {
   tts.speakSeq(TITLE_SAY(), 'sys');
 }
 
-/** 처음부터: 묻고 나서 이번 해를 봄 1일부터(마친 날 · 단골과의 관계는 다시 쌓고, 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
+/** 처음부터: 묻고 나서 이번 해를 봄 1일부터(마친 날만 다시, 단골과의 관계 · 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
 async function restartFromTop() {
   const ok = await ov.confirm({
     text: '처음부터 다시 할까요?',
-    detail: `${EPISODES[0].label}부터 다시 시작해요. 마친 날과 단골과의 관계는 처음부터 다시 쌓아요. 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
+    detail: `${EPISODES[0].label}부터 다시 시작해요. 단골과의 관계 · 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
     yes: '처음부터', no: '아니요',
   });
   if (!ok) return;
