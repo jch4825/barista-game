@@ -220,7 +220,7 @@ for (const who of ['yeonwoo', 'dohyun', 'manager']) {
   imageList.push({ id: `${who}_sheet`, kind: 'sheet', group: '설정화', title: p.title, file: `assets/${who}_sheet.jpg`, tool: 'Google Flow', made: '', flow: '직업 마1스톤 작업 전(1판)에 사용자가 만든 설정화', first: '', from: p.from, prompt: p.prompt, neg: p.neg, note: `${p.note ? `${p.note} · ` : ''}표정 초상(assets/portraits/${who}_*.jpg)을 여기서 잘라 씀(tools/crop-portraits.py)` });
 }
 // 손 기술의 한 컷(블렌더 3D 렌더, 생성 AI 아님): 배경판 + 단계 프레임 묶음을 한 줄로(tools/blender/scene_bench.py → shots_post.py)
-const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)' };
+const SHOT_TITLES = { extract: '샷 내리기', steam: '우유 데우기', pour_milk: '붓기(따뜻한 우유)', pour_latte: '붓기(라테 · 하트)', foam: '거품 내기', water: '물 붓기(아메리카노)', ice: '얼음 담기', water_glass: '찬물 붓기(아이스 아메리카노)', pour_glass_milk: '붓기(유리컵 · 찬 우유)', pour_glass_latte: '붓기(유리컵 · 아이스 라테)' };
 const SHOT_NOTES = {
   extract: '오래된 2그룹 머신(스테인리스 + 초록 법랑), 왼쪽 그룹 아래 샷 잔, 왼쪽 앞에서 비스듬히 본 2944×800 장면. 잔이 차오르는 13단계 × 줄기 있음/없음(docs/recipes.md 6.2)',
   steam: '물받이 위 우유 담은 스팀 피처에 노즐을 넣고 집게 온도계를 꽂은 2944×800 장면. 바늘 25단계 × 김 있음/옅음, 다이얼의 초록 칸 = 알맞아요, 스팀을 켜면 우유가 돎(docs/recipes.md 6.3)',
@@ -228,7 +228,12 @@ const SHOT_NOTES = {
   pour_latte: '같은 장면에서 에스프레소에 우유: 17단계 × 줄기 있음/없음(끝 무렵 흰 거품 동그라미) + 바리스타 단계의 하트 4장(docs/recipes.md 6.4)',
   foam: '물받이 위 스팀 피처를 오른쪽 앞 위에서 내려다본 2944×800 장면. 우유가 부풀어 겉면이 오르는 13단계 × 스팀 켬(소용돌이)/끔, 매끈한 우유 → 고운 거품 → 굵은 방울(docs/recipes.md 6.5)',
   water: '받침 위 머그(에스프레소)에 기운 드립 주전자로 뜨거운 물을 붓는 2944×800 장면. 크레마가 흩어지며 차오르는 17단계 × 물줄기 있음/없음, 작업대에서는 저절로 차오름(docs/recipes.md 6.6)',
+  ice: '밝은 컵받침 위 아이스 유리컵을 앞에서 조금 위로 본 2944×800 장면. 얼음 8개가 하나씩 쌓이는 9단계 × 떨어지는 얼음 있음/없음(docs/recipes.md 6.7)',
+  water_glass: '같은 유리컵(얼음 + 에스프레소)에 왼쪽 피처로 찬물: 짙은 갈색이 차오르고 얼음이 떠오르는 17단계 × 물줄기 있음/없음(docs/recipes.md 6.7)',
+  pour_glass_milk: '같은 유리컵(얼음만)에 피처로 찬 우유: 17단계 × 줄기 있음/없음, 배경판은 pour_glass_plate(docs/recipes.md 6.7)',
+  pour_glass_latte: '같은 유리컵(얼음 + 에스프레소)에 찬 우유: 섞이며 밝은 갈색이 되는 17단계 × 줄기 있음/없음(docs/recipes.md 6.7)',
 };
+const SHOT_RUN = { pour_milk: 'pour', pour_latte: 'pour', pour_glass_milk: 'pour_glass', pour_glass_latte: 'pour_glass' }; // 한 번에 렌더하는 묶음(scene_bench.py 의 SHOTS)
 const shotFiles = images.shots || {};
 let shotMeta = {};
 try { shotMeta = JSON.parse(read('assets/shots/shots.json')); } catch (e) { /* 컷이 아직 없음 */ }
@@ -240,7 +245,7 @@ for (const [sid, m] of Object.entries(shotMeta)) {
     file: `assets/${shotFiles[plate] || Object.values(shotFiles)[0]}`,
     tool: 'Blender 5.2 (Cycles) · 이 저장소의 스크립트', made: '', flow: '블렌더로 렌더(생성 AI 아님): assets/_src/blender/bench_test.blend', first: '', firstMade: '', upscaled: false,
     from: 'blender',
-    prompt: `blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender shots ${sid.replace(/_.*/, '')}\npython -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots`,
+    prompt: `blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender shots ${SHOT_RUN[sid] || sid}\npython -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots`,
     neg: '',
     note: SHOT_NOTES[sid] || '',
   });

@@ -84,5 +84,59 @@
       714
     ],
     "levels": 17
+  },
+  "ice": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      465,
+      800
+    ],
+    "levels": 9
+  },
+  "pour_glass_latte": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_glass_plate"
+  },
+  "pour_glass_milk": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17,
+    "plate": "pour_glass_plate"
+  },
+  "water_glass": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17
   }
 }
