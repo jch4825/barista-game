@@ -26,6 +26,7 @@ const { QUIT_ASK } = await imp('js/game/minigames/frame.js');
 const { EPISODES, ENDING } = await imp('js/data/episodes/index.js');
 const { REGULARS } = await imp('js/data/regulars.js');
 const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
+const { metSpeech } = await imp('js/screens/result.js');
 
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째']; // overlays.js 와 같음
 const lines = new Map();
@@ -115,7 +116,7 @@ for (const ep of [...EPISODES, ENDING]) {
   // 오늘의 일정 완료 배너 (overlays.check 와 같은 문장)
   (ep.schedule || []).forEach(([, l], i) => add('sys', `${ORDINAL[i]} 일정 끝! ${l}.`, ep.id));
   add('sys', `${ep.title}: 저장된 곳부터 이어서 할까요?`, ep.id); // 근무표에서 이어하기
-  add('sys', `${ep.title}. 오늘의 마일스톤.`, ep.id); // 결과 화면 요약 첫 조각
+  add('sys', `${ep.title}. 오늘 하루를 돌아봐요.`, ep.id); // 하루 끝 화면 요약 첫 조각(result.js)
 }
 
 // 미니게임 [그만하기] 확인 창(frame.js) · 미니게임 안에서 생기는 아차
@@ -142,7 +143,7 @@ const EXTRA = [
   ['sys', '보기 편하게 맞춰요.'],
   ['sys', '이 빠르기로 읽어 줄게요.'],
   ['sys', '지은은 오늘 처음으로 바리스타 앞치마를 매요.'], // 첫 시작 빠르기 견본(profile.js)
-  ['sys', '근무표로 나갈까요? 지금까지 한 것은 저장돼요.'],
+  ['sys', '달력으로 나갈까요? 지금까지 한 것은 저장돼요.'],
   ['sys', '처음 화면으로 갈까요? 지금까지 한 것은 저장돼요.'],
   ['sys', '나는 오늘 어땠나요?'],
   ['sys', '들이쉬기'], ['sys', '내쉬기'], ['sys', '잘했어요. 마음이 조금 편해졌나요?'],
@@ -152,6 +153,9 @@ const EXTRA = [
 ];
 for (const [v, t] of EXTRA) add(v, t, 'common');
 for (const f of FEELINGS) add('sys', f.label, 'common');
+// 하루 끝 화면의 '오늘 만난 사람'(result.js metSpeech): 단골 8명 × 반응 3가지
+add('sys', '오늘 만난 사람.', 'result');
+for (const who of Object.keys(REGULARS)) for (const sc of [0, 1, 2]) add('sys', metSpeech(who, sc), 'result');
 // 결과 화면 요약 조각: 스킬 × 별 단계 (result.js 의 speakSeq)
 for (const sk of Object.values(SKILLS)) for (const lv of Object.values(LEVELS)) add('sys', `${sk.name}, ${lv.name}.`, 'result');
 

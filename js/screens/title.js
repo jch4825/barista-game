@@ -109,7 +109,7 @@ export function showTitle() {
   } else if (endingWaits) {
     menu.append(menuBtn('star', '엔딩 보기', `${ENDING.label} · ${ENDING.title}`, () => nav.go('play', ENDING.id), 'primary'));
   } else if (cleared) {
-    menu.append(menuBtn('calendar', '근무표', ENDING.notice.title, () => nav.go('hub'), 'primary'));
+    menu.append(menuBtn('calendar', '달력', ENDING.notice.title, () => nav.go('hub'), 'primary'));
   } else if (!p) {
     menu.append(menuBtn('play', '처음 시작하기', '이름을 정하고 시작해요', () => nav.go('newProfile'), 'primary'));
     // 이 기기에 학생이 없을 때(새 컴퓨터·복원된 학교 PC·웹판): 다른 컴퓨터에서 하던 기록 파일로 이어 하기
@@ -121,9 +121,9 @@ export function showTitle() {
   }
   if (p) {
     // 엔딩을 본 뒤에는 근무표가 맨 위 큰 버튼이므로 여기서는 빼요
-    if (!(cleared && !cpEp)) menu.append(menuBtn('calendar', '근무표', store.ending() ? '원하는 이야기 골라 하기' : '이야기 골라 하기', () => nav.go('hub')));
+    if (!(cleared && !cpEp)) menu.append(menuBtn('calendar', '달력', store.ending() ? '원하는 날 골라 하기' : '이야기 골라 하기', () => nav.go('hub')));
     menu.append(
-      menuBtn('book', '마일스톤 수첩', '도장 · 말 사전 · 아차 노트', () => nav.go('notebook')),
+      menuBtn('book', '수첩', '단골 · 메뉴 도감 · 장면 앨범', () => nav.go('notebook')),
       menuBtn('settings', '설정', '글자 · 소리 · 읽어 주기', () => nav.go('settings')),
     );
   }

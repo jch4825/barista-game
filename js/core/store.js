@@ -289,7 +289,7 @@ export const store = {
     const p = active();
     if (!p) return;
     const prev = p.progress.ending;
-    p.progress.ending = { at: Date.now(), times: (prev?.times || 0) + 1, after };
+    p.progress.ending = { at: Date.now(), times: (prev?.times || 0) + 1, after, year: store.year() };
     touch(p);
     saveNow();
   },

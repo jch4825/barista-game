@@ -21,7 +21,7 @@
  * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry? }
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
  *  - miss: 손 동작이 벗어난 잔을 받을 때 그 손님만의 말
- * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], watched, skills, art, level, turn, asked(물어본 수) }
+ * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], cups: [{ who, menu, temp }], watched, skills, art, level, turn, asked(물어본 수) }
  *  - 도중에 정리되면(되감기·나가기) { ok: false, aborted: true, … } · [그만하기]면 { ok: false, quit: true, … }
  * 그림: 물건 그림(assets/objects)이 있으면 쓰고, 없으면 아래 임시 그림(SVG, 대체 요망: docs/requests_full.md). 작업대 배경은 bg/workbench_morning
  *  - 손 동작의 한 컷(Q-R9): assets/shots/ 에 배경판·프레임이 있으면(샷 내리기 · 우유 데우기 · 거품 내기 · 붓기) 그 장면, 없으면 임시 그림
@@ -841,11 +841,11 @@ export async function brew(opts = {}) {
   document.body.classList.add('brew-open');
 
   /* ---- 기록 ---- */
-  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], skills: {} };
+  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {} };
   const result = (extra = {}) => ({
     ok: !extra.aborted && !extra.quit,
     attempts: 1, served: R.attempts, mistakes: R.mistakes, remakes: R.remakes, kept: R.kept, // runner 의 별·선생님 화면의 되감기는 attempts 로 셈
-    ms: performance.now() - t0, made: [...R.made], watched: R.watched, skills: R.skills, art: R.art, asked: R.asked,
+    ms: performance.now() - t0, made: [...R.made], cups: [...R.cups], watched: R.watched, skills: R.skills, art: R.art, asked: R.asked,
     level, turn: pace().turn, ...extra,
   });
 
@@ -2018,6 +2018,7 @@ export async function brew(opts = {}) {
     }
     // 손님이 받음(알맞게 만들었거나 그대로 드림). 단골의 평소 주문이면 수첩의 단골 쪽에 남음(PRD 6.3)
     R.made.push(cur.menu);
+    R.cups.push({ who: cur.who, menu: cur.menu, temp: orderTemp(cur) }); // 하루 끝 화면의 '오늘 만든 잔'
     store.addBook([cur.menu]); // 메뉴 도감(해가 바뀌어도 남음)
     const usual = REGULARS[cur.who]?.usual;
     if (usual && (!usual.menu || usual.menu === cur.menu)) store.setFlag('usuals', { ...(store.flag('usuals') || {}), [cur.who]: true });

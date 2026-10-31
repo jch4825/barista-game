@@ -1,7 +1,9 @@
 /**
- * 마일스톤 수첩: 도장 · 함께 일하는 사람 · 말 사전 · 사진첩 · 아차 노트 · 일기
- *  - 함께 일하는 사람: 왼쪽 목록 · 가운데 종이 카드 · 오른쪽 큰 그림 (크루 카드를 본 사람만 열림)
- *  - 사진첩: 왼쪽 목록 + 오른쪽 큰 인화 (오늘의 한 장 + 본 이벤트 CG)
+ * 수첩: 단골 · 메뉴 도감 · 장면 앨범 · 말 사전 · 일기 (옛 게임의 도장 · 크루 카드 · 아차 노트는 데이터가 생기면 다시 보임)
+ *  - 단골: 만난 단골(대응을 한 번 한 사람)만 열림. 늘 마시는 것은 한 번 맞게 낸 뒤에 적힘(store 'usuals'),
+ *    들은 이야기(앨범 액자)는 그 장면을 본 뒤에만. 신뢰 점수는 보이지 않음(원칙 1)
+ *  - 메뉴 도감: 만들어 본 메뉴(store.book, 해가 바뀌어도 남음)와 아직 안 만든 메뉴
+ *  - 장면 앨범: 본 이벤트 CG(그림이 없으면 임시 그림) · 오늘의 한 장
  */
 
 import { h } from '../core/dom.js';
@@ -13,6 +15,11 @@ import { GLOSSARY } from '../data/glossary.js';
 import { PHOTOS, PHOTO_ORDER, photoHTML } from '../data/photos.js';
 import { CHARS, CARD_IDS, faceHTML, portraitHTML, hasStand, standURL, cardSpeech } from '../data/characters.js';
 import { CGS, CG_IDS } from '../data/cg.js';
+import { REGULARS } from '../data/regulars.js';
+import { RECIPES, TEMPS } from '../data/menu.js';
+import { usualOf } from '../data/eyes.js';
+import { freeDay } from '../data/episodes/free.js';
+import { cgPlaceholder } from '../ui/cg-placeholder.js';
 import { img } from '../core/assets.js';
 import { EPISODES, ALL_OOPS, getEpisode } from '../data/episodes/index.js';
 import { tts } from '../av/tts.js';
@@ -21,13 +28,58 @@ import { ov } from '../ui/overlays.js';
 import { openScreen } from './screen.js';
 
 const TABS = [
-  ['stamps', '도장', 'stamp'],
-  ['people', '함께 일하는 사람', 'team'],
+  ['regulars', '단골', 'team'],
+  ['menu', '메뉴 도감', 'coffee'],
+  ['photos', '장면 앨범', 'photo'],
   ['words', '말 사전', 'book'],
-  ['photos', '사진첩', 'photo'],
-  ['oops', '아차 노트', 'think'],
   ['diary', '일기', 'note'],
 ];
+
+/** 단골: 대응을 한 번이라도 한 사람(기록 'respond')만 열림 */
+function regularsView() {
+  const met = new Set(store.logs().filter((l) => l.type === 'respond').map((l) => l.who));
+  const usuals = store.flag('usuals') || {};
+  const album = store.album();
+  const first = {};
+  for (const l of store.logs()) if (l.type === 'respond' && !first[l.who]) first[l.who] = getEpisode(l.ep)?.label || '';
+  const items = Object.keys(REGULARS).map((id) => ({
+    id, on: met.has(id), label: REGULARS[id].name, sub: first[id] ? `${first[id]}에 처음 만남` : '',
+    icon: `<span class="nb-face">${faceHTML(id, 'smile')}</span>`,
+  }));
+  const n = items.filter((it) => it.on).length;
+  return h('div', {},
+    h('p', { class: 'nb-sum', text: `만난 단골 ${n} / ${items.length}` }),
+    listDetail('nb-people nb-regulars', items, ({ id }) => {
+      const r = REGULARS[id];
+      const lines = [
+        usuals[id] ? `늘 마시는 것: ${usualOf(id)}` : '늘 마시는 것: 아직 몰라요. "늘 먹던 거"를 한 번 맞게 내면 적혀요.',
+        album[id] ? `들은 이야기: ${r.album.title}. ${r.album.line}` : null,
+      ].filter(Boolean);
+      return h('div', { class: 'nb-person', style: { '--accent': CHARS[id]?.color || 'var(--main)' } },
+        h('div', { class: 'nb-card' },
+          h('div', { class: 'nb-card-head' }, h('b', { text: r.name }), h('span', { text: first[id] ? `${first[id]}에 처음 만남` : '' })),
+          h('ul', { class: 'nb-card-lines' }, ...lines.map((l) => h('li', { text: l }))),
+          h('button', { class: 'btn btn-small', 'aria-label': '읽어 주기', onclick: (e) => { e.stopPropagation(); tts.speak(`${r.name}. ${lines.join(' ')}`, 'sys', { force: true }); } }, h('i', { html: ICON('volume') }), h('span', { text: '듣기' }))),
+        hasStand(id) ? h('div', { class: 'nb-stand', style: { backgroundImage: `url('${standURL(id, 'smile')}')` } })
+          : h('figure', { class: 'nb-bigpol' }, h('div', { class: 'pol-photo', html: portraitHTML(id, 'smile') }), h('figcaption', { text: r.name })));
+    }));
+}
+
+/** 메뉴 도감: 만들어 본 메뉴는 이름 · 온도 · 만드는 순서, 아직이면 ??? */
+function menuView() {
+  const made = new Set(store.book());
+  const ids = Object.keys(RECIPES);
+  return h('div', {},
+    h('p', { class: 'nb-sum', text: `만들어 본 메뉴 ${ids.filter((id) => made.has(id)).length} / ${ids.length}` }),
+    h('div', { class: 'nb-menu' }, ...ids.map((id) => {
+      const r = RECIPES[id];
+      const on = made.has(id);
+      return h('div', { class: `nb-menu-card ${on ? 'got' : ''}` },
+        h('i', { class: 'nb-menu-dot', style: { '--c': r.color || '#B08A5A' } }),
+        h('b', { text: on ? r.name : '???' }),
+        on ? h('small', { text: r.temps.map((t) => TEMPS[t]?.name || t).join(' · ') }) : h('small', { text: '아직 만들어 보지 않았어요' }));
+    })));
+}
 
 function stampsView() {
   const st = store.stamps();
@@ -112,12 +164,12 @@ function peopleView() {
 function photosView() {
   const got = new Set(store.photos());
   const items = PHOTO_ORDER.map((id) => ({ kind: 'photo', id, on: got.has(id), label: PHOTOS[id].title, sub: getEpisode(PHOTOS[id].ep)?.label || '', icon: ICON('photo') }))
-    .concat(CG_IDS.filter((id) => got.has(`cg_${id}`) && img.has('cg', `cg_${id}`)).map((id) => ({ kind: 'cg', id, on: true, label: CGS[id].title, sub: `${getEpisode(CGS[id].ep)?.label || ''} · 명장면`, icon: ICON('sparkle') })));
-  const n = items.filter((it) => it.on && it.kind === 'photo').length;
+    .concat(CG_IDS.filter((id) => got.has(`cg_${id}`)).map((id) => ({ kind: 'cg', id, on: true, label: CGS[id].title, sub: `${getEpisode(CGS[id].ep)?.label || (CGS[id].ep === 'ending' ? '엔딩' : '')} · 장면`, icon: ICON('sparkle') })));
+  const n = items.filter((it) => it.kind === 'cg').length;
   return h('div', {},
-    h('p', { class: 'nb-sum', text: `오늘의 한 장 ${n} / ${PHOTO_ORDER.length}` }),
+    h('p', { class: 'nb-sum', text: `본 장면 ${n} / ${CG_IDS.length}` }),
     listDetail('nb-album', items, (it) => (it.kind === 'cg'
-      ? h('figure', { class: 'nb-print cg' }, h('img', { src: img.url('cg', `cg_${it.id}`), alt: '' }), h('figcaption', { text: it.label }))
+      ? h('figure', { class: 'nb-print cg' }, img.has('cg', `cg_${it.id}`) ? h('img', { src: img.url('cg', `cg_${it.id}`), alt: '' }) : h('div', { class: 'nb-cg-ph' }, h('div', { class: 'en-cg-mini nb-cg-mini' }, cgPlaceholder(it.id))), h('figcaption', { text: it.label }))
       : h('figure', { class: 'nb-print' }, h('div', { class: 'ph-in', html: photoHTML(it.id) }), h('figcaption', { text: it.label })))));
 }
 
@@ -148,7 +200,7 @@ function diaryView() {
   if (!list.length) return h('p', { class: 'nb-empty', text: '아직 일기가 없어요. 에피소드를 마치면 지은의 일기가 생겨요.' });
   const fl = Object.fromEntries(FEELINGS.map((f) => [f.id, f]));
   return h('div', { class: 'nb-diary' }, ...list.map((d) => {
-    const ep = getEpisode(d.ep);
+    const ep = d.ep === 'free' ? freeDay(d.day || 1) : getEpisode(d.ep);
     return h('article', { class: 'nb-diary-item' },
       h('h3', { text: ep ? `${ep.label} · ${ep.title}` : d.ep }),
       h('p', { class: 'nb-diary-text', text: ep?.diary || '' }),
@@ -158,10 +210,11 @@ function diaryView() {
   }));
 }
 
-const VIEWS = { stamps: stampsView, people: peopleView, words: wordsView, photos: photosView, oops: oopsView, diary: diaryView };
+const VIEWS = { regulars: regularsView, menu: menuView, stamps: stampsView, people: peopleView, words: wordsView, photos: photosView, oops: oopsView, diary: diaryView };
 
-export function showNotebook(tab = 'stamps') {
-  const scr = openScreen({ cls: 'scr-notebook', title: '마일스톤 수첩', icon: 'book' });
+export function showNotebook(tab = 'regulars') {
+  if (!TABS.some(([id]) => id === tab)) tab = 'regulars';
+  const scr = openScreen({ cls: 'scr-notebook', title: '수첩', icon: 'book' });
   const content = h('div', { class: 'nb-content' });
   const tabs = h('div', { class: 'nb-tabs', role: 'tablist' });
   const select = (id) => {

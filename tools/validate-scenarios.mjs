@@ -375,7 +375,7 @@ for (const [ep, v] of pickUsed) {
   const [who, tid] = key.split('.');
   const t = REGULARS[who]?.touches?.[tid];
   if (!t) { err(ep, `pick: 없는 대응 기회 ${key}`); continue; }
-  for (const w of want.split('|')) if (!t.choices.some((c) => c.id === w)) err(ep, `pick: ${key} 에 없는 선택지 ${w}`);
+  for (const w of want.split('|')) if (w && !t.choices.some((c) => c.id === w)) err(ep, `pick: ${key} 에 없는 선택지 ${w}`); // 빈 값 = 아직 고르지 않음
 }
 
 // 사장의 숨은 장면 11(PRD 5.6): 이야기 어딘가에 seen(n) 이 한 번씩
@@ -394,6 +394,23 @@ for (const e of menuProblems()) err('menu', e);
 for (const o of MINIGAME_OOPS) checkOops('mini', o, 'mini');
 
 console.log('\n에피소드별 요약');
+// 자유 영업(js/data/episodes/free.js): 28일 한 바퀴를 모두 만들어 검사(앨범이 열린 경우와 아닌 경우). 합계에는 넣지 않음
+{
+  const { freeDay } = await imp('js/data/episodes/free.js');
+  const keep = { ...totals };
+  const allOpen = Object.fromEntries(Object.keys(REGULARS).map((k) => [k, 1]));
+  for (let d = 1; d <= 28; d += 1) for (const album of [{}, allOpen]) {
+    const ep = freeDay(d, { album });
+    const id = `free_${d}`;
+    for (const k of ['id', 'label', 'title', 'goal', 'diary']) if (!ep[k]) err(id, `메타 정보 '${k}' 없음`);
+    if (ep.script[ep.script.length - 1]?.t !== 'end') err(id, '마지막 비트는 end() 이어야 함');
+    curSchedule = [];
+    checks = [];
+    walk(id, ep.script);
+  }
+  Object.assign(totals, keep);
+}
+
 console.table(summary);
 console.log(`합계: 에피소드 ${EPISODES.length}편 + 엔딩 · 비트 ${totals.beats} · 대사 ${totals.lines}줄 · 글자 ${totals.chars} · 판단 ${totals.decides} · 대응 ${totals.responds} · 아차 ${totals.oops}`);
 console.log(errors ? `\n✗ 오류 ${errors}개, 경고 ${warns}개` : `\n✓ 오류 없음 (경고 ${warns}개)`);

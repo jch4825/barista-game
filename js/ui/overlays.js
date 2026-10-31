@@ -536,7 +536,7 @@ export const ov = {
   /** 돌려주는 값: 'next' | 'hub'. 읽어 주는 말은 고정 문장(DAILY_SAY), 숫자는 화면에만 */
   async dailyDone({ week = 1, dayName = '', money = 0, smiles = 0, weekMoney = 0, weekSmiles = 0, days = 0, weekEnd = false, say = '' }) {
     const nextB = bigBtn(weekEnd ? '다음 주 시작하기' : '다음 날 하기', 'arrow_right', 'btn-main');
-    const hubB = bigBtn('근무표로', 'calendar');
+    const hubB = bigBtn('달력으로', 'calendar');
     const row = (label, value) => h('li', {}, h('span', { text: label }), h('b', { text: value }));
     const won = (n) => `${Number(n || 0).toLocaleString('ko-KR')}원`;
     const el = h('section', { class: 'ov ov-daily', role: 'dialog', 'aria-label': `${week}주 차 ${dayName} 근무 끝` },

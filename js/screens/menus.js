@@ -26,11 +26,11 @@ export function showPause() {
       bigBtn('resume', '불러오기', () => nav.go('saves', 'load')),
       bigBtn('book', '지난 대화', () => showBacklog()),
       bigBtn('rewind', '되감기', () => { scr.close(); showRewindList(); }),
-      bigBtn('stamp', '마일스톤 수첩', () => nav.go('notebook')),
+      bigBtn('book', '수첩', () => nav.go('notebook')),
       bigBtn('settings', '설정', () => nav.go('settings')),
       bigBtn('coffee', '레시피 수첩', () => { scr.close(); bus.emit('hud:recipe'); }),
-      bigBtn('calendar', '근무표로 나가기', async () => {
-        if (await ov.confirm({ text: '근무표로 나갈까요? 지금까지 한 것은 저장돼요.', yes: '나가기', no: '계속하기' })) {
+      bigBtn('calendar', '달력으로 나가기', async () => {
+        if (await ov.confirm({ text: '달력으로 나갈까요? 지금까지 한 것은 저장돼요.', yes: '나가기', no: '계속하기' })) {
           scr.close();
           runner.abort();
           nav.go('hub');

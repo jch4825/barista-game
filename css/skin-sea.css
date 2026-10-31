@@ -781,3 +781,42 @@ body.reduce-motion :is(.al-frame, .al-cap, .ey-stage, .ey-line, .cr-face) { tran
 body.skin-sea.contrast :is(.al-frame, .ey-box) { background: #000; border: 3px solid #FFE14D; outline: 0; }
 body.skin-sea.contrast .al-frame.is-cur { background: #1A1A00; }
 body.skin-sea.contrast .ey-stage { filter: none; }
+
+/* ---------- 하루 끝: 오늘 만난 사람 · 오늘 만든 잔 (js/screens/result.js) ---------- */
+.rs-today { display: flex; justify-content: center; align-items: flex-start; gap: 34px; max-width: 1640px; margin: 6px auto 16px; text-align: left; }
+.rs-today h3 { margin: 0 0 10px; font-family: var(--font-title); font-size: 30px; color: var(--gold-l); }
+.rs-met { flex: 1 1 60%; display: flex; flex-direction: column; gap: 10px; }
+.rs-met-row { display: flex; gap: 18px; align-items: flex-start; padding: 12px 18px; border-radius: 14px; background: var(--parch); color: var(--ink); border: 2px solid var(--gold-line); box-shadow: inset 6px 0 0 var(--accent); }
+.rs-met-face { position: relative; flex: none; width: 82px; height: 82px; border-radius: 50%; overflow: hidden; border: 3px solid var(--gold); background: #FFF8EC; }
+.rs-met-face :is(.face-img, .face-svg) { position: absolute; inset: 0; }
+.rs-met-face .face-svg svg { width: 100%; height: 100%; }
+.rs-met-text b { font-size: 26px; color: var(--gold-d); }
+.rs-met-react { margin: 2px 0 0; font-size: 26px; font-weight: 800; }
+.rs-met-lesson { margin: 4px 0 0; font-size: 22px; line-height: 1.4; color: #5E5446; }
+.rs-cups { flex: 0 1 34%; padding: 14px 18px; border-radius: 14px; background: var(--plate); border: 2px solid var(--gold-line); }
+.rs-cup-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.rs-cup-list .chip { font-size: 22px; }
+
+/* ---------- 달력(js/screens/hub.js): 계절마다 한 줄, 하루가 한 칸 ---------- */
+.hub-acts.cal-acts { display: flex; flex-direction: column; gap: 22px; }
+.cal-year { margin: 0; padding: 10px 20px; border-radius: 12px; background: rgba(212, 174, 98, .16); border: 1px solid var(--gold); color: var(--gold-l); font-size: 24px; font-weight: 700; }
+.scr-cal .hub-act { padding: 16px 18px 18px; }
+.cal-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px; }
+.cal-head h2 { flex: none; margin: 0; }
+.cal-head p { margin: 0; font-size: 21px; color: var(--foam-2); }
+.hub-eps.cal7 { grid-template-columns: repeat(7, 1fr); gap: 12px; }
+.hub-eps.cal-end { grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: stretch; }
+.scr-cal .hub-ep { min-height: 0; gap: 4px; padding: 12px 14px 14px; }
+.scr-cal .hub-thumb { width: calc(100% + 28px); margin: -12px -14px 4px; }
+.scr-cal .hub-label { font-size: 18px; padding: 2px 10px; }
+.scr-cal .hub-title { font-size: 23px; line-height: 1.25; min-height: 2.5em; }
+.scr-cal .hub-state { font-size: 18px; }
+.scr-cal .hub-sched { display: none; }
+body.skin-sea .scr-cal .hub-ep.is-today { box-shadow: 0 0 0 4px var(--gold-l), 0 0 26px rgba(240, 217, 162, .45), 0 12px 26px rgba(0, 0, 0, .45); }
+body.skin-sea .scr-cal .hub-ep.is-today .hub-state { color: var(--gold-l); font-weight: 900; }
+body.skin-sea .cal-spring { box-shadow: inset 6px 0 0 #E7A6B6; }
+body.skin-sea .cal-summer { box-shadow: inset 6px 0 0 #5FB3C9; }
+body.skin-sea .cal-autumn { box-shadow: inset 6px 0 0 #D9A13B; }
+body.skin-sea .cal-winter { box-shadow: inset 6px 0 0 #C9D7E3; }
+body.skin-sea .hub-free:not(.locked), body.skin-sea .hub-year { background: linear-gradient(180deg, #1D4E5A, #10343E); }
+body.reduce-motion .scr-cal .hub-ep { transition: none; }
