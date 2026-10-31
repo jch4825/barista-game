@@ -19,18 +19,14 @@ import { PHOTOS, PHOTO_ORDER, photoHTML } from '../data/photos.js';
 import { input } from '../core/input.js';
 import { bus } from '../core/bus.js';
 import { artHTML, itemOf } from '../data/items.js';
+import { album as endingAlbum, eyes as endingEyes } from './ending.js';
+import { CREDIT_ROLL, CREDIT_THANKS, creditSpeech } from '../data/eyes.js';
+import { CONFIG } from '../config.js';
 
 const layer = () => $('#layer-overlay');
 /** 확인 창·글자 입력 창은 전체 화면 창(#layer-screen)보다 위에 띄움 */
 const modalLayer = () => $('#layer-modal') || layer();
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째'];
-
-/** 엔딩 크레디트: [제목, 이름들] (맨 끝에 '그리고 함께 일한 {player} 님'이 붙음) */
-const CREDIT_ROLL = [
-  ['카페 마일스톤', '정연우 · 강도현 · 박건우 · 한소라 · 오민재 · 유지호'],
-  ['연우를 응원한 사람들', '엄마 · 김선영 선생님'],
-  ['손님들', '봉순 할머니 · 서진 · 최 대리 · 루나 · 그리고 카페 마일스톤의 모든 손님'],
-];
 
 /** 장 제목 뒤의 이정표 엠블럼 (노란 기둥 + 메인 색 화살표 깃발) */
 const EMBLEM = `<svg viewBox="0 0 520 520" aria-hidden="true">
@@ -457,24 +453,28 @@ export const ov = {
     await sleep(dur(150));
   },
 
-  /* ---------- 엔딩: 사진 벽 + 크레디트 ----------
-   * 모은 '오늘의 한 장'이 한 장씩 붙으며 제목을 읽어 줌(음성 파일: tools/export-lines.mjs 의 credits) →
-   * 다 붙으면 사진 벽이 흐려지고 크레디트가 차례로 떠오름. 시간 제한 없음: [계속]을 누를 때까지, 언제 눌러도 넘어감 */
+  /* ---------- 엔딩: 얼굴(또는 사진) 벽 + 크레디트 ----------
+   * 모은 '오늘의 한 장'이 있으면 한 장씩 붙으며 제목을 읽어 줌. 없으면 한 해를 함께한 사람들의 얼굴이 하나씩 걸림 →
+   * 벽이 흐려지고 크레디트(js/data/eyes.js CREDIT_ROLL)가 차례로 떠오름. 시간 제한 없음: [계속]을 누를 때까지 */
   async credits() {
     const got = new Set(store.photos());
     const ids = PHOTO_ORDER.filter((id) => got.has(id));
-    const pols = ids.map((id, i) => h('figure', { class: 'cr-pol', style: { '--r': `${((i * 37) % 11) - 5}deg` } },
-      h('div', { class: 'ph-in', html: photoHTML(id) }), h('figcaption', { text: PHOTOS[id].title })));
-    const wall = h('div', { class: `cr-wall ${ids.length > 12 ? 'many' : ''}` }, ...pols);
+    const CAST = ['jieun', 'owner', 'haesun', 'jian', 'do', 'kang', 'han', 'eunju', 'sumin', 'noh'];
+    const pols = ids.length
+      ? ids.map((id, i) => h('figure', { class: 'cr-pol', style: { '--r': `${((i * 37) % 11) - 5}deg` } },
+        h('div', { class: 'ph-in', html: photoHTML(id) }), h('figcaption', { text: PHOTOS[id].title })))
+      : CAST.filter((id) => CHARS[id]).map((id) => h('figure', { class: 'cr-face', style: { '--accent': CHARS[id].color || '#C9A45C' } },
+        h('span', { class: 'cr-face-in', html: faceHTML(id, 'smile') }), h('figcaption', { text: CHARS[id].name })));
+    const wall = h('div', { class: `cr-wall ${ids.length > 12 ? 'many' : ''} ${ids.length ? '' : 'faces'}` }, ...pols);
     const you = `${fill('{player}')} 님`;
     const roll = h('div', { class: 'cr-roll' },
-      h('h2', { text: '직업 마1스톤' }),
+      h('h2', { text: CONFIG.TITLE }),
       ...CREDIT_ROLL.map(([head, names]) => h('div', { class: 'cr-sec' }, h('h3', { text: head }), h('p', { text: names }))),
-      h('div', { class: 'cr-sec cr-you' }, h('h3', { text: '그리고 함께 일한 사람' }), h('p', { text: you })),
-      h('p', { class: 'cr-thanks', text: '모르면 물어보기. 실수하면 말하기. 힘들면 쉬겠다고 말하기.' }));
+      h('div', { class: 'cr-sec cr-you' }, h('h3', { text: '그리고 함께 일한 바리스타' }), h('p', { text: you })),
+      h('p', { class: 'cr-thanks', text: CREDIT_THANKS }));
     [...roll.children].forEach((c, i) => { c.style.transitionDelay = `${0.3 + i * 0.45}s`; });
     const go = h('button', { class: 'btn btn-small ov-next' }, '계속 ▶');
-    const el = h('section', { class: 'ov ov-credits', role: 'dialog', 'aria-label': '사진 벽과 크레디트' }, wall, roll, go);
+    const el = h('section', { class: 'ov ov-credits', role: 'dialog', 'aria-label': '크레디트' }, wall, roll, go);
     const close = mount(el);
     go.focus({ preventScroll: true });
     let stopped = false;
@@ -483,14 +483,17 @@ export const ov = {
       for (const [i, fig] of pols.entries()) {
         if (stopped) return;
         fig.classList.add('on');
-        const title = PHOTOS[ids[i]].title;
-        announce(title);
-        await Promise.all([sleep(dur(1000)), tts.speak(title, 'sys')]);
+        if (ids.length) {
+          const title = PHOTOS[ids[i]].title;
+          announce(title);
+          await Promise.all([sleep(dur(1000)), tts.speak(title, 'sys')]);
+        } else await sleep(dur(420));
       }
       if (stopped) return;
-      await sleep(dur(500));
+      await sleep(dur(700));
       el.classList.add('roll-on');
-      announce(`직업 마1스톤. ${CREDIT_ROLL.map(([hd, n]) => `${hd}: ${n}`).join('. ')}. 그리고 함께 일한 ${you}.`);
+      announce(`${creditSpeech()} 그리고 함께 일한 바리스타, ${you}.`);
+      await tts.speak(creditSpeech(), 'sys');
     })();
     await waitButton(go);
     stopped = true;
@@ -498,6 +501,10 @@ export const ov = {
     close();
     await sleep(dur(300));
   },
+
+  /* ---------- 엔딩 앨범 · 사장의 눈 (js/ui/ending.js) ---------- */
+  album: endingAlbum,
+  eyes: endingEyes,
 
   /* ---------- 연우의 마지막 메모 (엔딩) ----------
    * 노란 메모에 받는 사람 → 줄 → 추신 → 이름이 차례로 써짐. 받는 사람({player} 님에게)은 화면에만 쓰고,

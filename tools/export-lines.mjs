@@ -25,6 +25,7 @@ const { TIMEOUT_SAY } = await imp('js/ui/timer.js');
 const { QUIT_ASK } = await imp('js/game/minigames/frame.js');
 const { EPISODES, ENDING } = await imp('js/data/episodes/index.js');
 const { REGULARS } = await imp('js/data/regulars.js');
+const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
 
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째']; // overlays.js 와 같음
 const lines = new Map();
@@ -82,8 +83,10 @@ function walk(list, ep) {
       // 화면 안내도 같은 문장으로 (overlays.js 의 tts.speak 와 똑같이 만듦)
       case 'act': add('sys', fill(b.label), ep); break;
       case 'finish': add('sys', `${b.title} ${b.sub}`, ep); break;
-      // 엔딩: 사진 벽에 붙는 사진 제목(overlays.credits) · 마지막 메모(overlays.letter, yeonwoo 목소리)
-      case 'credits': for (const id of PHOTO_ORDER) add('sys', PHOTOS[id].title, ep); break;
+      // 엔딩: 사진 벽에 붙는 사진 제목 · 크레디트(overlays.credits) · 앨범 · 사장의 눈(js/ui/ending.js, 문장은 js/data/eyes.js)
+      case 'credits': for (const id of PHOTO_ORDER) add('sys', PHOTOS[id].title, ep); add('sys', creditSpeech(), ep); break;
+      case 'album': for (const [v, t] of albumLines()) add(v, t, ep); break;
+      case 'eyes': for (const [, t] of eyesLines()) add(voiceOf('owner'), t, ep); break;
       case 'letter': add(voiceOf('jieun'), b.speech, ep); break;
       case 'big': add('sys', `${b.text}. ${b.sub}`, ep); break;
       case 'photo': if (PHOTOS[b.id]) add('sys', `오늘의 한 장. ${PHOTOS[b.id].title}`, ep); break;

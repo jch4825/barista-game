@@ -95,7 +95,7 @@ export async function autoplay({ episode = null, bad = false, timeout = false, r
           continue;
         }
         if (ov.classList.contains('ov-rewind')) continue;
-        (ov.querySelector('.btn-rewind') || ov.querySelector('.act-btn') || ov.querySelector('.btn-big') || ov.querySelector('.ov-next') || ov.querySelector('button'))?.click();
+        (ov.querySelector('.btn-rewind') || ov.querySelector('.act-btn') || ov.querySelector('.btn-big') || ov.querySelector('.ov-next, .en-next') || ov.querySelector('button'))?.click();
         continue;
       }
 
