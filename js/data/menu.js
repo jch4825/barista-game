@@ -276,6 +276,7 @@ export const RECIPES = {
   vanilla_latte: {
     name: '바닐라 라테', icon: 'coffee',
     base: 'espresso', adds: ['milk', 'syrup'], temps: ['hot', 'iced'], steps: ['syrup', 'ice', 'tamp', 'extract', 'steam', 'pour'],
+    look: { mug: 'cup_mug_latte' }, art: { heart: 'cup_mug_heart' }, // 겉보기는 라테와 같음(2026-11-01)
     color: '#CFA373', foam: '#F6EAD6',
     thanks: '딱 좋게 다네요. 고마워요.',
     desc: '달게 마시고 싶은 손님에게. 라테에 바닐라 시럽.',
@@ -283,6 +284,7 @@ export const RECIPES = {
   decaf_latte: {
     name: '디카페인 라테', icon: 'coffee',
     base: 'decaf', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
+    look: { mug: 'cup_mug_latte' }, // 겉보기는 라테와 같음
     color: '#C49A70', foam: '#F4E7D3',
     thanks: '이거면 마음 놓고 마셔요. 고마워요.',
     desc: '카페인을 뺀 원두로 만든 라테.',
@@ -298,6 +300,7 @@ export const RECIPES = {
   hand_drip: {
     name: '핸드드립', icon: 'coffee',
     base: 'drip', adds: ['water'], temps: ['hot'], steps: ['hand_grind', 'boil', 'bloom', 'bloom_wait', 'spiral'],
+    look: { mug: 'cup_mug_americano' }, // 머그에 담은 블랙 커피: 아메리카노 그림과 같음(2026-11-01 사용자 "다른 이미지를 써도")
     color: '#2A1A10',
     thanks: '깊네요. 고마워요.',
     desc: '전기 없이도 만드는 커피. 천천히 내려요.',
