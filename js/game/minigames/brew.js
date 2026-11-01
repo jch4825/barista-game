@@ -19,7 +19,9 @@
  *  - 빠르기는 설정 '시간 제한'(arcade.pace): 보통 · 넉넉히(2배 천천히) · 두 번 눌러 고르기(1.5배). 끄기·자동 스캔은 턴 방식([한 칸] · [기다리기] + [멈추기] · [지금!])
  *  - [시작!]을 눌러야 움직임. 언제든 [보기]: 저절로 알맞게 해 줌(보기로 기록, 실수 아님)
  *  - 단계(opts.level): easy = 손 동작을 모두 보기로 · normal = 직접 · barista = 거품까지 직접 + 라테아트(하트) + 알맞아요 칸이 조금 좁음
- * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, count?, more?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry? }
+ * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, count?, more?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry?, maker? }
+ *  - maker: 'owner' = 사장님이 내리는 장면(학생은 도구만 챙김). [만들기 시작]에서 사장님이 먼저 살펴, 레시피가 다르면 만들지 않고 부드럽게 일러 줌
+ *    ("재료가 조금 부족하네요." 등, 2026-11-01 사용자: 잘못 고른 재료로 사장님이 무언가를 만드는 건 이상함). 손 띠에 빠진 재료 · 빼요 표시가 고칠 때까지 남음
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
  *  - count: 손님이 말한 잔 수(주문 확인이 '두 잔'으로) · more: 앞 주문의 다음 잔(주문 확인이 '한 잔 더'로). 잔은 한 주문에 하나씩 만듦
  *  - miss: 손 동작이 벗어난 잔을 받을 때 그 손님만의 말
@@ -234,6 +236,7 @@ export function brewLines(opts = {}) {
 export function brewProblems(opts = {}) {
   const errs = [];
   if (opts.level !== undefined && !LEVELS.includes(opts.level)) errs.push(`level 은 ${LEVELS.join(' · ')} 가운데 하나`);
+  if (opts.maker !== undefined && opts.maker !== 'owner') errs.push("maker 는 'owner'(사장님이 내리는 장면)만");
   if (!Array.isArray(opts.orders) || !opts.orders.length) errs.push('orders(주문 목록)가 비어 있음');
   (opts.orders || []).forEach((o, i) => {
     for (const e of orderProblems(o)) errs.push(`orders[${i}] ${e}`);
@@ -935,6 +938,7 @@ export async function brew(opts = {}) {
   let made = { cup: null, base: null, adds: [], temp: warmTemp };
   let ings = [];           // 컵에 넣을 재료(누른 차례). 바탕·더하기는 arrange() 가 레시피에 맞춰 나눔
   let recipeDone = null;   // [만들기 시작] → 고른 레시피
+  let fix = null;          // maker: 'owner' — 사장님이 만들기 전에 일러 준 것 { target, say }(고칠 때까지 손 띠에 표시)
   let armed = null;        // '두 번 눌러 고르기': 한 번 눌러 읽어 준 버튼
   let safetySaid = false;
   const ui = {};           // 자동 플레이가 누를 버튼
@@ -1267,7 +1271,9 @@ export async function brew(opts = {}) {
     });
     ui.make = go;
     foot.push(go);
-    setPanel(askRow('', promptNow()), handRow(), h('div', { class: 'bw-row' }, ...foot));
+    const fx = fixNow();
+    // 사장님이 일러 준 뒤에는 할 일 줄 자리에 사장님의 말(띠 높이는 그대로). 다 고치면 "이제 됐어요."
+    setPanel(fx ? ownerAsk(fx.done ? '이제 됐어요. [만들기 시작]을 눌러요.' : fx.say) : askRow('', promptNow()), handRow(fx || {}), h('div', { class: 'bw-row' }, ...foot));
     panel.dataset.kind = 'hand';
   }
 
@@ -2196,6 +2202,33 @@ export async function brew(opts = {}) {
   }
   /** 지은이 하는 말(아래 띠 위쪽 한 줄 + 지은 목소리) */
   const meLine = (text) => h('p', { class: 'bw-me' }, h('b', { text: CHARS.jieun?.name || '지은' }), h('span', { text }));
+  /** 사장님이 하는 말(사장님이 내리는 장면에서 만들기 전에 일러 줌): 할 일 줄과 같은 자리 · 앞에 이름 */
+  const ownerAsk = (text) => h('div', { class: 'bw-ask is-owner' }, h('p', { class: 'bw-ask-t' }, h('b', { class: 'bw-ask-who', text: CHARS.owner?.name || '사장님' }), text), sayBtn(text));
+
+  /** maker: 'owner' — 고른 것을 레시피와 견줌: 사장님의 말 + 손 띠 표시(컵 · 온도 · 빠진 재료 · 빼요). 같으면 null */
+  function ownerCheck(target) {
+    const want = [target.base, ...(target.adds || [])].filter(Boolean);
+    const missing = want.filter((x) => !ings.includes(x));
+    const extra = ings.filter((x) => !want.includes(x));
+    const says = [];
+    const fixedCup = cur.cup || RECIPES[cur.menu]?.cup; // 믹스커피처럼 컵이 정해진 메뉴
+    if (made.cup !== target.cup) says.push(fixedCup ? `이건 ${CUPS[target.cup]?.name || ''}에 내요.` : orderService(cur) === 'togo' ? '손님은 가져가신답니다.' : '손님은 여기서 드시고 가신답니다.');
+    if (missing.length && extra.length) says.push('재료가 조금 다르네요.');
+    else if (missing.length) says.push('재료가 조금 부족하네요.');
+    else if (extra.length) says.push('재료가 좀 많네요.');
+    if (made.temp !== target.temp) says.push(target.temp === 'iced' ? '차갑게 드신답니다.' : '따뜻하게 드신답니다.');
+    return says.length ? says.slice(0, 2).join(' ') : null;
+  }
+  /** 사장님이 일러 준 뒤: 지금 고른 것으로 남은 고칠 곳(고치면 표시가 사라짐) */
+  function fixNow() {
+    if (!fix) return null;
+    const t = fix.target;
+    const want = [t.base, ...(t.adds || [])].filter(Boolean);
+    const miss = { missing: want.filter((x) => !ings.includes(x)), extra: ings.filter((x) => !want.includes(x)) };
+    const hint = [made.cup !== t.cup && 'cup', made.temp !== t.temp && 'temp'].filter(Boolean);
+    const left = miss.missing.length || miss.extra.length;
+    return { say: fix.say, hint, miss: left ? miss : null, done: !hint.length && !left };
+  }
   function takeOrder() {
     phase = 'order';
     const need = orderAsk(cur);
@@ -2378,8 +2411,20 @@ export async function brew(opts = {}) {
       setReact('');
       let pending = pickRecipe(false);
       talk(sysV(PROMPT.cup));
+      fix = null;
       for (;;) {
         await w(pending);
+        if (opts.maker === 'owner') { // 사장님이 내리는 장면: 다르면 만들지 않고 부드럽게 일러 줌 → 고른 것을 그대로 두고 다시
+          const say = ownerCheck(target);
+          if (say) {
+            R.mistakes += 1;
+            fix = { target, say };
+            pending = pickRecipe(true);
+            talk([say, voiceOf('owner', 'say')]);
+            continue;
+          }
+          fix = null;
+        }
         const res = await makeDrink();
         await serve(res);
         const how = await react(target, res);

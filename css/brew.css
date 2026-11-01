@@ -325,6 +325,7 @@ html body .mg.mg-brew { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap
 .mg.mg-brew .bw-chip.is-empty { border-style: dashed; background: rgba(23, 65, 77, .3); color: rgba(255, 244, 214, .75); }
 .mg.mg-brew .bw-chip.is-temp { background: rgba(23, 65, 77, .3); }
 .mg.mg-brew .bw-chip.is-hint { border: 3px dashed var(--red); }
+.mg.mg-brew .bw-ask-who { display: inline-block; margin-right: 10px; padding: 1px 12px; border-radius: 999px; background: var(--main); color: #fff; font-size: .8em; vertical-align: 2px; } /* 사장님의 말(maker: 'owner') */
 .mg.mg-brew .bw-chip.is-missing .bw-art { opacity: .45; } /* 빠진 재료: 더해진 빈 칸에 흐린 그림 + '빠진 재료' */
 .mg.mg-brew .bw-chip-hint { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 0 8px; border-radius: 999px; background: var(--red); color: #fff; font-size: 15px; white-space: nowrap; }
 

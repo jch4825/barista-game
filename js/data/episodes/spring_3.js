@@ -43,7 +43,7 @@ export default {
     say('owner', 'normal', '새벽 블랙은 기계 말고 손으로 내려요. 내리는 건 내가 할게요.'),
     say('owner', 'normal', '지은 씨는 도구만 좀 챙겨 줘요. 그리고 옆에서 잘 봐요.'), // 학생은 컵 · 원두 · 물을 챙기고, 손 동작은 사장님의 손(쉬움 = 보기, 2026-11-01 사용자)
     mini('brew', {
-      id: 'spring_3_kang', title: '새벽 블랙(사장님의 손 보기)', level: 'easy',
+      id: 'spring_3_kang', title: '새벽 블랙(사장님의 손 보기)', level: 'easy', maker: 'owner', // 고른 도구가 다르면 사장님이 만들기 전에 일러 줌
       book: ['warm_milk', 'americano', 'hand_drip'],
       orders: [
         { who: 'kang', say: '…블랙.', menu: 'hand_drip', togo: false, thanks: '…좋네.' },
