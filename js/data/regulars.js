@@ -367,7 +367,7 @@ export const REGULARS = {
         ],
         q: '아저씨는 문 앞에서 기다리고 계신다. 어떻게 하면 마음 편히 들어오실까?',
         choices: [
-          { id: 'light_on', score: 2, kind: 'wait', icon: 'light', label: '먼저 들어가 불을 켜고, 말없이 문을 활짝 열어 둔다.', after: [sfx('tap'), cg('kang_light_on'), narr('창에 노란 불이 들어온다. 아저씨가 불 켜진 창을 오래 바라본다.'), narr('아저씨가 천천히 들어와, 바다가 보이는 창가에 앉는다.'), say('kang', 'smile', '…고마워. 불 켜진 걸 보니 좋네.'), cg(null)] },
+          { id: 'light_on', score: 2, kind: 'wait', icon: 'light', label: '먼저 들어가 불을 켜고, 말없이 문을 활짝 열어 둔다.', after: [sfx('tap'), cg('kang_light_on'), narr('창에 노란 불이 들어온다. 아저씨가 불 켜진 창을 웃으며 바라본다.'), narr('아저씨가 천천히 들어와, 뒤쪽 테이블에 앉는다. 앉아서도 켜진 불빛을 오래 바라본다.'), say('kang', 'smile', '…고마워. 불 켜진 걸 보니 좋네.'), cg(null)] },
           { id: 'greet_in', score: 1, kind: 'plain', icon: 'greet', label: '"안녕하세요. 들어오세요." 하고 인사한다.', after: [say('kang', 'normal', '…아, 그래.'), narr('아저씨는 꾸벅 인사하고 들어오더니, 자기 손으로 먼저 불 스위치를 켠다.'), think('아저씨는 불부터 켜셨다. 불이 켜져 있어야 마음이 놓이시나 보다.'), cg(null)] },
           { id: 'ask_boat', score: 0, kind: 'ask', icon: 'question', label: '"오늘 배 나가세요? 날씨 좋죠?" 하고 묻는다.', after: [narr('아저씨는 대답 대신 바다 쪽을 한 번 본다.'), say('kang', 'normal', '…괜찮아요. 블랙이나 줘요.'), narr('아저씨가 들어와, 말없이 불 스위치를 켠다.'), think('새벽에는 말보다 불빛이 먼저였나 보다.'), cg(null)] },
         ],
