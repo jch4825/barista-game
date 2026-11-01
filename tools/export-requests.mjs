@@ -21,7 +21,7 @@ const { freeDay } = await imp('js/data/episodes/free.js');
 const { PEOPLE_EN, FACE_EN, CG_EN } = await imp('tools/requests/prompts_en.mjs');
 const { MISSING } = await imp('tools/audio/audio_map.mjs');
 const { BGM_VARIANTS } = await imp('js/av/audio.js');
-// 곡 파일이 있는 분위기(2026-11-01 사용자가 Suno로 만든 곡을 넣음): 요청서에서 뺌
+// 곡 파일이 있는 분위기(2026-11-01 저작자가 AI 음악 모델 Gemini · Suno로 만든 곡을 넣음): 요청서에서 뺌
 let bgmFiles = {};
 try { bgmFiles = JSON.parse(fs.readFileSync(path.join(root, 'assets/audio/manifest.json'), 'utf8')).bgm || {}; } catch { /* 소리 서브모듈이 없으면 모두 요청 */ }
 const bgmHas = (mood) => (BGM_VARIANTS[mood] || [mood]).some((id) => bgmFiles[id]);
@@ -130,7 +130,7 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   `| 작업대 물건 시트 3 | ${objMissing.length}개를 시트 1장에 | \`assets/_src/objects/sheet_more.jpg\` | \`npm run objects\` |`,
   `| 블렌더 한 컷(손 동작) | ${noShot.length}가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
-  `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 사용자가 Suno로 만든 곡으로 채움, 2026-11-01) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
+  `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 저작자가 AI 음악 모델 Gemini · Suno로 만든 곡으로 채움, 2026-11-01) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
   '| 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |', '');
 
 /* 1. 인물 */
@@ -228,7 +228,7 @@ for (const id of MISSING.amb) P(`| 환경음 | \`${id}\` | ${ambUse[id] ? [...am
 P('', '### 5.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)', '',
   '| mood | 쓰는 곳 | 느낌 · 악기 | 길이 |', '| :--- | :--- | :--- | :--- |');
 const bgmLeft = Object.entries(BGM_KO).filter(([mood]) => !bgmHas(mood));
-if (!bgmLeft.length) P('| 모두 있음 | ✅ 사용자가 Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |');
+if (!bgmLeft.length) P('| 모두 있음 | ✅ 저작자가 AI 음악 모델 Gemini · Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |');
 for (const [mood, [where, feel, len]] of bgmLeft) P(`| \`${mood}\` | ${where}${bgmUse[mood] ? `(${bgmUse[mood].size}일)` : ''} | ${feel} | ${len} |`);
 P('', '- 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.', '');
 

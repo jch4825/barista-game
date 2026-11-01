@@ -311,11 +311,13 @@ const portraits = fs.readdirSync(path.join(root, 'assets', 'portraits')).filter(
 const srcList = (e) => [...new Set(e.layers ? e.layers.map((l) => l.src) : e.repeat ? [e.repeat.src] : [e.src])];
 const packKey = (rel) => Object.keys(PACKS).find((k) => rel.startsWith(k));
 const fileName = (rel) => rel.split('/').pop();
-const packs = Object.entries(PACKS).map(([key, p]) => ({ key, ...p, used: AUDIO_MAP.filter((e) => srcList(e).some((s) => s.startsWith(key))).length }));
+// 곡마다 팩을 적은 것(e.pack: AI 음악의 모델)은 그것을, 아니면 원본 경로로
+const packOfEntry = (e) => e.pack || packKey(srcList(e)[0]);
+const packs = Object.entries(PACKS).map(([key, p]) => ({ key, ...p, used: AUDIO_MAP.filter((e) => (e.pack ? e.pack === key : srcList(e).some((s) => s.startsWith(key)))).length }));
 // 배경음악: 직업 마1스톤 곡은 모두 뺐고 새 곡을 넣을 자리. 쓰는 곳·곡 이름은 audio_map 의 bgm 줄에 use·track 으로 적음
 const music = AUDIO_MAP.filter((e) => e.kind === 'bgm').map((e) => {
   const s = srcList(e)[0];
-  const p = PACKS[packKey(s)] || {};
+  const p = PACKS[packOfEntry(e)] || {};
   return { id: e.id, use: e.use || e.id, track: e.track || fileName(s).replace(/\.\w+$/, ''), file: fileName(s), pack: p.name, composer: p.composer || p.author, composerNote: p.composerNote || '', license: p.license, ai: p.ai || '', note: e.note || '' };
 });
 const sounds = AUDIO_MAP.filter((e) => e.kind !== 'bgm').map((e) => ({

@@ -14,7 +14,7 @@
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
 | 블렌더 한 컷(손 동작) | 3가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 7 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
-| 배경음악 | 0곡(✅ 사용자가 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
+| 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Gemini · Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
 
 ## 1. 인물 스탠딩 (새 인물)
@@ -1669,7 +1669,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 | mood | 쓰는 곳 | 느낌 · 악기 | 길이 |
 | :--- | :--- | :--- | :--- |
-| 모두 있음 | ✅ 사용자가 Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |
+| 모두 있음 | ✅ 저작자가 AI 음악 모델 Gemini · Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |
 
 - 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.
 

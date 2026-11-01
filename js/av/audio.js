@@ -466,7 +466,7 @@ function stopFileBgm() {
  *  - 그 분위기로 들어올 때마다 다음 곡, 한 곡이 끝나면 다음 곡으로 이어서(파일이 있는 곡만)
  *  - 상황 곡은 한 곡 그대로
  * 배경음악은 모두 새 곡을 씁니다(2026-10-27 사용자 결정). 새 곡을 넣으면 { 분위기: [곡 id, …] } 를 적습니다(PRD.md 11.1).
- * 2026-11-01 사용자가 Suno로 만든 곡(tools/audio/audio_map.mjs 의 note 에 고른 까닭). 가사가 있는 letter 는 엔딩 크레디트에서만(사용자 결정)
+ * 2026-11-01 저작자가 AI 음악 모델로 만든 곡(영어 제목 = Gemini, 한글 제목 = Suno, tools/audio/audio_map.mjs 의 note 에 고른 까닭). 가사가 있는 letter 는 엔딩 크레디트에서만(사용자 결정)
  */
 export const BGM_VARIANTS = {
   title: ['glow_a'],              // Rising Glow: 처음 화면과 엔딩에 같은 곡(한 해를 여닫음)
