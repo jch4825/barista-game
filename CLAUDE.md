@@ -99,7 +99,7 @@ assets/               stand/(61, 지은 6·사장님 4·해순 3·지안 3 + 이
 | 상호작용 | `act(label, icon, sfx)` `breathe(cycles, note)`(엔진에만 남음: 2026-10-28 '숨 고르기'를 화면에서 뺌) |
 | 숨은 것 · 엔딩 | `chalk(text, shaky)`(CG 칠판 위 분필 글씨, 자리는 `cg.js`의 chalk) `seen(n)`(사장님의 숨은 장면 n: 알림 없이 기록, 둘러보기 spots 의 `seen` 도 같음) `secret(who)`(단골 3단계 비밀 장면 → 엔딩 앨범 액자) `album()` `eyes()`(엔딩 화면 `js/ui/ending.js`, 글은 `js/data/eyes.js`) |
 | 판단·선택 | `respond(who, touch)`(단골 대응) `decide({ … choices:[good(…), bad(…)] })` `choose({ … options:[opt(…)] })` `branch(flag, { 값: […] })` `...onlyIf(조건, 비트…)`(조건 문법: `js/core/cond.js`) |
-| 미니게임 | `mini('이름', { … })` (등록부: `js/game/minigames/index.js`): `brew`(커피 만들기) · `routine`(순서대로: 가게 열기 · 혼자 열기 · 정전 준비) · `lookaround`(둘러보기: spots, 숨은 장면) · `tray`(쟁반 나르기: 서두르면 쏟음) |
+| 미니게임 | `mini('이름', { … })` (등록부: `js/game/minigames/index.js`): `brew`(커피 만들기) · `routine`(순서대로: 가게 열기 · 혼자 열기 · 정전 준비) · `lookaround`(둘러보기: spots, 숨은 장면) · `tray`(쟁반 나르기: 서두르면 쏟음. 지은은 오른쪽에서 왼쪽 자리로 걸음, 창가 자리가 그림 왼쪽이라서. [시작!]은 화면 가운데에 크게) |
 | 보상·끝 | `snap` `photo(id)` `got(item, 이름)` `stamp(skill, level)` `term(id)` `finish(title, sub)` `credits()` `letter({…})` `label` `jump` `set` `checkpoint` `wait` `end()` |
 
 - 직업 마1스톤의 면접(`ask`·`ivStart`·`ivEnd`), 계약서(`doc…`), 근무판(`briefing`·`board`·`block`…) 비트는 지웠습니다.
@@ -125,7 +125,7 @@ assets/               stand/(61, 지은 6·사장님 4·해순 3·지안 3 + 이
 - 오버레이와 화면을 열면 `input.pushScope`, 닫으면 `popScope`. 지워진 창의 범위는 `input.js`가 건너뛰지만, 정상 닫기에서는 꼭 `popScope`합니다.
 - 비동기 화면 조작 뒤에 이야기를 이어 갈 때는 runner의 `w()`로 감쌉니다(되감기 뒤 이전 작업이 화면을 건드리지 않게 하는 epoch 검사).
 - **미니게임 정리**: 되감기·나가기·[그만하기]는 `abortMinigame()`을 부릅니다. 새 미니게임은 `f.onAbort(…)`로 고리·막대·방향키를 멈추고, 대사·잠깐 쉬기를 기다리는 곳에서는 `abortGeneration()`을 받아 두었다가 기다린 뒤 달라졌으면 그만둡니다(2026-10-27 버그 고침: 정리된 뒤 늦게 끝난 기다림이 다음 장면에 대사·아차를 띄우던 문제).
-- **목소리를 자르지 않기**(2026-10-31 사용자 의견 '음성 진행 중 다음으로 넘어가 말이 끊어진다'): 대사는 목소리가 나오는 동안 누르면 '말이 끝나면 넘어가요'로 받아 두고 끝난 뒤 넘김, 한 번 더 누르면 바로 넘김(`dialogue.js` `setQueued`). 작업대에서 게임이 스스로 다음 단계로 갈 때의 말은 `talkAfter`(지금 읽는 한 문장은 끝까지), 학생이 누른 것에 답하는 말은 `talk`(`brew.js`). 순서대로(`routine.js`)도 마지막 한 일의 말(간판 돌리기 등)을 끝까지 듣고 '다 했어요!'로 넘어감(2026-10-31 사용자).
+- **목소리를 자르지 않기**(2026-10-31 사용자 의견 '음성 진행 중 다음으로 넘어가 말이 끊어진다'): 대사는 목소리가 나오는 동안 누르면 '말이 끝나면 넘어가요'로 받아 두고 끝난 뒤 넘김, 한 번 더 누르면 바로 넘김(`dialogue.js` `setQueued`). 작업대에서 게임이 스스로 다음 단계로 갈 때의 말은 `talkAfter`(지금 읽는 한 문장은 끝까지), 학생이 누른 것에 답하는 말은 `talk`(`brew.js`). 순서대로(`routine.js`)는 마지막 일 뒤에 저절로 닫지 않고 아래에 큰 단추([오픈 준비 완료] · [마감 완료] · [준비 완료], `ROUTINES`의 `finish`)를 띄워 학생이 눌러 마침: 누르면 효과음만, 목소리가 아직 나오면 그 말이 끝난 뒤 닫고 한 번 더 누르면 바로(2026-11-01 사용자: 마지막 말을 읽다가 끊겨 버그 같음).
 - 화면 가득한 장면 미니게임(`frame({ cls: 'mg-scene …' })`: 쟁반 · 둘러보기 · 순서대로)이 열린 동안은 `body.mg-scene-open`으로 앞 대사의 대화창을 숨김(대화창이 아래 단추를 가리고 누름을 가로채던 버그, 2026-10-31). 작업대는 `body.brew-open`.
 - 시간 막대(`js/ui/timer.js`)는 한 번 멈추면 다시 시작하지 않고, 화면에서 사라지면 스스로 멈춥니다. 카드는 `cards.close()`가 막대·숫자키·입력 범위를 정리합니다.
 - Electron에서는 `window.prompt` 대신 `ov.prompt()`. 확인 창(`ov.confirm`·`ov.prompt`)은 맨 위 층 `#layer-modal`.

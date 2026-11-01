@@ -4,7 +4,9 @@
  *  - 카페 그림 위에 오늘 할 일이 물건 단추로 한 줄. 지금 할 것이 금색으로 빛남. 빛나는 것을 누르면 다음이 빛남.
  *  - 순서가 아닌 것을 누르면 "그건 조금 뒤에 해요. 빛나는 것부터 해요."(감점 없음, 실수 수만 기록)
  *  - 아래 할 일 목록(번호 · 이름 · 끝낸 표시)이 늘 보임. 누를 때마다 한 일을 한 줄로 읽어 줌. 시간 제한 없음
- * 옵션: { title, kind: 'open' | 'alone' | 'close' | 'blackout', steps?: [{ icon, name, done }], bg?: [배경 id, 변형], quit? }
+ *  - 마지막 일을 하면 아래에 큰 단추([오픈 준비 완료] 등 finish). 저절로 닫지 않고, 학생이 마지막 말을 다 듣고 읽은 뒤 눌러 마침
+ *    (누르면 효과음만. 목소리가 아직 나오면 그 말이 끝난 뒤 닫고, 한 번 더 누르면 바로 닫음: 2026-11-01 사용자)
+ * 옵션: { title, kind: 'open' | 'alone' | 'close' | 'blackout', steps?: [{ icon, name, done }], finish?, bg?: [배경 id, 변형], quit? }
  * 돌려줌: { ok, attempts: 1, mistakes(순서가 아닌 것을 누른 수), ms } · 도중에 정리되면 { aborted: true }
  * 자동 플레이(?debug): window.__mgAuto(순서대로 모두) · window.__mgBad(순서가 아닌 것을 한 번 누름)
  */
@@ -21,7 +23,7 @@ import { bus } from '../../core/bus.js';
 /** 하루를 여닫는 순서(같은 순서를 날마다 되풀이: 작업 단계와 절차 [12진로03-01]) */
 export const ROUTINES = {
   open: {
-    title: '가게 열기', bg: ['hall', 'morning'],
+    title: '가게 열기', bg: ['hall', 'morning'], finish: '오픈 준비 완료',
     howto: '빛나는 것을 순서대로 눌러요. 가게 열 준비를 해요.',
     steps: [
       { icon: 'light', name: '불 켜기', done: '불을 켰어요.' },
@@ -32,7 +34,7 @@ export const ROUTINES = {
     ],
   },
   alone: {
-    title: '혼자 여는 아침', bg: ['cafe_front', 'morning'],
+    title: '혼자 여는 아침', bg: ['cafe_front', 'morning'], finish: '오픈 준비 완료',
     howto: '사장님이 하던 순서 그대로예요. 빛나는 것을 순서대로 눌러요.',
     steps: [
       { icon: 'door', name: '열쇠로 문 열기', done: '열쇠가 딸깍 돌아갔어요.' },
@@ -43,7 +45,7 @@ export const ROUTINES = {
     ],
   },
   close: {
-    title: '마감', bg: ['hall', 'evening'],
+    title: '마감', bg: ['hall', 'evening'], finish: '마감 완료',
     howto: '빛나는 것을 순서대로 눌러요. 내일을 위해 정리해요.',
     steps: [
       { icon: 'towel', name: '머신 닦기', done: '머신을 깨끗이 닦았어요.' },
@@ -54,7 +56,7 @@ export const ROUTINES = {
     ],
   },
   blackout: {
-    title: '정전 밤의 준비', bg: ['hall', 'blackout'],
+    title: '정전 밤의 준비', bg: ['hall', 'blackout'], finish: '준비 완료',
     howto: '전기가 없어요. 빛나는 것을 순서대로 눌러 손으로 커피를 내릴 준비를 해요.',
     steps: [
       { icon: 'light', name: '촛불 켜기', done: '병 속 촛불이 하나씩 켜졌어요.' },
@@ -67,7 +69,6 @@ export const ROUTINES = {
 
 const SYS = {
   wrong: '그건 조금 뒤에 해요. 빛나는 것부터 해요.',
-  done: '다 했어요!',
 };
 
 const routineOf = (opts) => ROUTINES[opts.kind] || ROUTINES.open;
@@ -77,7 +78,7 @@ const stepsOf = (opts) => (Array.isArray(opts.steps) && opts.steps.length ? opts
 export function routineLines(opts = {}) {
   const r = routineOf(opts);
   const title = opts.title || r.title;
-  const out = [...line.intro(title, r.howto), line.sys(SYS.wrong), line.sys(SYS.done)];
+  const out = [...line.intro(title, r.howto), line.sys(SYS.wrong)];
   stepsOf(opts).forEach((s, i) => out.push(line.sys(`${i + 1}. ${s.name}`), line.sys(s.done)));
   return out;
 }
@@ -103,6 +104,7 @@ export async function routine(opts = {}) {
   let next = 0;
   let mistakes = 0;
   let over = false;
+  let fin = null;
   let doneRes;
   const doneP = new Promise((res) => { doneRes = res; });
 
@@ -154,16 +156,29 @@ export async function routine(opts = {}) {
     const spoken = tts.speak(steps[i].done, 'sys');
     if (next >= steps.length) {
       over = true;
-      // 마지막 한 일의 말(간판 돌리기 · 불 끄기 …)은 끝까지 듣고 '다 했어요'(2026-10-31 사용자: 말이 다 끝나기 전에 넘어가 버그 같음)
-      await Promise.all([spoken, sleep(dur(700))]);
-      if (stopped()) return;
-      say.textContent = SYS.done;
-      audio.sfx('great');
-      await tts.speak(SYS.done, 'sys');
-      doneRes('done');
+      showFinish(spoken);
       return;
     }
     setTimeout(() => { if (!over) btns[next]?.focus({ preventScroll: true }); }, 60);
+  }
+
+  // 마지막 일 뒤의 큰 단추: 저절로 닫으면 마지막 말을 듣고 읽다가 끊겨 버그 같아서, 학생이 눌러 마침(2026-11-01 사용자)
+  function showFinish(spoken) {
+    let pressed = false;
+    fin = h('button', { class: 'btn btn-main btn-big rt-finish', type: 'button' },
+      h('i', { html: ICON('check') }), h('span', { text: opts.finish || r.finish || '준비 완료' }));
+    fin.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (stopped()) return;
+      if (pressed) { doneRes('done'); return; }
+      pressed = true;
+      fin.classList.add('is-pressed');
+      audio.sfx('great');
+      await spoken;
+      if (!stopped()) doneRes('done');
+    });
+    f.body.append(h('div', { class: 'rt-finish-row' }, fin));
+    setTimeout(() => { if (!stopped()) fin.focus({ preventScroll: true }); }, 60);
   }
 
   if (isDebug()) {
@@ -172,6 +187,8 @@ export async function routine(opts = {}) {
         await sleep(90);
         if (!document.querySelector('#layer-modal .ov')) btns[next]?.click();
       }
+      await sleep(90);
+      fin?.click();
       await doneP;
     };
     window.__mgBad = async () => { if (!over) btns[Math.min(steps.length - 1, next + 1)]?.click(); };

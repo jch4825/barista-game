@@ -40,6 +40,8 @@ export const TUT = [
   { key: 'mg-spill', sel: '.mg .sp-tool', need: true, hand: 'group', tip: '도구를 눌러 들어요' },
   // 4장 손맛 미니게임(받기·청소·지렁이): [시작!] → 조작 버튼. 고르는 것은 모두 group(정답을 가리키지 않음)
   { key: 'mg-go', sel: '.mg .mg-go', need: true, hand: 'on', tip: '준비되면 눌러요' },
+  // 순서대로: 마지막 일 뒤의 [오픈 준비 완료] 등(2026-11-01)
+  { key: 'rt-finish', sel: '.mg .rt-finish', need: true, hand: 'on', tip: '다 하면 눌러요' },
   { key: 'mg-catch', sel: '.mg .ct-move', need: true, hand: 'group', tip: '눌러서 옮겨요' },
   { key: 'mg-catch-place', sel: '.mg .ct-place', after: 'mg-catch', max: 2, hand: 'on', tip: '모은 것을 갖다 놓아요' },
   { key: 'mg-timing', sel: '.mg .tg-drop', need: true, hand: 'on', tip: '빈 칸 위에 오면 눌러요' },

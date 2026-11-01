@@ -225,6 +225,12 @@ html body .mg.mg-scene { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; ga
 .mg-routine .rt-list li.is-now { background: #FFE9B0; box-shadow: 0 0 0 3px #D4AE62; }
 .mg-routine .rt-list li.is-done { text-decoration: line-through; opacity: .6; }
 .mg-routine .rt-say { margin: 0; font-size: 30px; font-weight: 800; color: #2A1D12; }
+.mg-routine .rt-finish-row { position: absolute; left: 0; right: 0; bottom: 172px; display: flex; justify-content: center; pointer-events: none; }
+.mg-routine .rt-finish { pointer-events: auto; min-width: 560px; min-height: 108px; gap: 16px; font-size: 40px; animation: rt-finish-in .35s ease-out backwards; }
+.mg-routine .rt-finish i svg { width: 44px; height: 44px; }
+.mg-routine .rt-finish.is-pressed { opacity: .8; }
+@keyframes rt-finish-in { from { opacity: 0; transform: translateY(24px); } }
+body:is(.reduce-motion, .theme-calm) .mg-routine .rt-finish { animation: none; }
 
 /* 둘러보기: 그림 위의 물건 단추 + 아래 [다 둘러봤어요] */
 .mg-look .lk-spots { position: absolute; inset: 0; }
@@ -254,8 +260,13 @@ body:is(.reduce-motion, .theme-calm) .mg-look .lk-ico { animation: none; }
 
 /* 쟁반 나르기: 길(카운터 → 자리) 위를 걷는 지은 + 쟁반의 잔 + 오른쪽 흔들림 띠 */
 .mg-tray .tr-path { position: absolute; left: 4%; right: 22%; top: 18%; height: 52%; }
+/* [시작!]: 예전 자리(길 왼쪽 위, 단추 가운데 = 18% + 42px)와 같은 높이 · 화면 가운데 · 2배 크기(2026-11-01 사용자) */
+.mg-tray .mg-gate { position: absolute; left: 0; right: 0; top: calc(18% - 42px); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: none; }
+.mg-tray .mg-gate .mg-go { pointer-events: auto; min-height: 168px; padding: 28px 72px; gap: 20px; font-size: 64px; }
+.mg-tray .mg-gate .mg-go i, .mg-tray .mg-gate .mg-go i svg { width: 64px; height: 64px; }
+.mg-tray .mg-gate p { margin: 0; padding: 4px 18px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 26px; font-weight: 800; }
 .mg-tray .tr-line { position: absolute; left: 6%; right: 6%; bottom: 18%; height: 0; border-bottom: 6px dashed rgba(240, 217, 162, .85); }
-.mg-tray .tr-goal { position: absolute; right: 0; bottom: 6%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mg-tray .tr-goal { position: absolute; left: 0; bottom: 6%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .mg-tray .tr-goal i { display: grid; place-items: center; width: 110px; height: 110px; border-radius: 50%; background: rgba(255, 248, 230, .92); border: 4px solid #D4AE62; color: #3F2A16; }
 .mg-tray .tr-goal i svg { width: 64px; height: 64px; }
 .mg-tray .tr-goal span { padding: 2px 14px; border-radius: 999px; background: rgba(4, 18, 23, .78); color: #F0D9A2; font-size: 24px; font-weight: 800; }

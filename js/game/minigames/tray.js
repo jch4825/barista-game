@@ -93,7 +93,7 @@ export async function tray(opts = {}) {
   }
   const zoneOf = (w) => (w < 0.6 ? 'calm' : w < 0.85 ? 'warn' : 'shake');
   const draw = () => {
-    walker.style.left = `${6 + d * 76}%`;
+    walker.style.left = `${94 - d * 76}%`; // 오른쪽에서 왼쪽 자리로(창가 자리가 그림 왼쪽, 2026-11-01 사용자)
     walker.style.setProperty('--w', wob.toFixed(3));
     meter.style.setProperty('--p', wob.toFixed(3));
     meter.setAttribute('aria-valuenow', String(Math.round(wob * 100)));
@@ -133,14 +133,15 @@ export async function tray(opts = {}) {
 
   draw();
   // 자동 플레이(?debug): 시작 창보다 먼저 열어 둠(시작 창이 있으면 [시작!]부터 누름)
-  const pressGate = () => path.querySelector('.mg-gate .mg-go')?.click();
+  const pressGate = () => f.body.querySelector('.mg-gate .mg-go')?.click();
   if (isDebug()) {
     window.__mgAuto = async () => { robot = 'auto'; pressGate(); await doneP; };
     window.__mgBad = async () => { robot = 'bad'; pressGate(); while (!spills && !over && !stopped()) await sleep(60); robot = 'auto'; };
   }
   let earlyAbort = false;
   f.onAbort(() => { earlyAbort = true; doneRes('abort'); });
-  await Promise.race([startGate(path, { note: '천천히 해도 괜찮아요.' }), doneP]);
+  // [시작!]은 화면 가운데에 크게(2026-11-01 사용자: 높이는 그대로, 가로는 가운데, 크기 2배)
+  await Promise.race([startGate(f.body, { note: '천천히 해도 괜찮아요.' }), doneP]);
   if (earlyAbort || stopped()) { if (isDebug()) { delete window.__mgAuto; delete window.__mgBad; } f.close(); return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; }
   [goB, restB, watchB].forEach((b) => { if (b) b.disabled = false; });
   setTimeout(() => goB.focus({ preventScroll: true }), 40);
