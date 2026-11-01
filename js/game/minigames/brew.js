@@ -2293,7 +2293,7 @@ export async function brew(opts = {}) {
 
   /* ---- 자동 플레이(?debug) ---- */
   let robot = null;   // null · 'auto' · 'bad'
-  let speed = 1;
+  let speed = opts.maker === 'owner' ? 0.9 : 1; // 사장님 시연은 조금 천천히(0.9배, 2026-11-01 사용자). 자동 플레이는 3
   let badLeft = 0;    // 남은 '틀리게 고르기'
   let robotMiss = 0;  // 남은 '손 기술을 일부러 넘치게'(__mgAuto({ miss }))
   let robotKeep = false; // 넘친 뒤 [다시 하기] 대신 [이대로 하기](__mgAuto({ keep: true }))
