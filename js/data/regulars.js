@@ -350,7 +350,7 @@ export const REGULARS = {
   /* ---------- 어부 강 씨: 기다림. 새벽 블랙. 배를 팔았지만 아무에게도 말하지 않음 ---------- */
   kang: {
     name: '강 씨', wants: 'wait',
-    usual: { menu: 'hand_drip', temp: 'hot', togo: false, say: '강 씨: 새벽 블랙(핸드드립). 머그컵. 창가에서 바다를 봐요.' },
+    usual: { menu: 'hand_drip', temp: 'hot', togo: false, say: '강 씨: 새벽 블랙(핸드드립). 머그컵. 뒤쪽 테이블에서 창 너머 바다를 봐요.' },
     album: { title: '배를 판 날', line: '"그날 바다가 참 잔잔했어. 그래서 더 못 말했지."', cg: 'kang_secret' },
     touches: {
       spring_dawn: {
@@ -376,7 +376,7 @@ export const REGULARS = {
       spring_sea: {
         season: 'spring', nth: 2, title: '바다 안 나가요',
         scene: [
-          narr('새벽, 강 씨가 블랙을 받아 들고 늘 앉는 창가에 앉는다.'),
+          narr('새벽, 강 씨가 블랙을 받아 들고 늘 앉는 뒤쪽 테이블에 앉는다.'),
           narr('항구에서 배들이 하나둘 바다로 나간다. 그런데 오늘은 강 씨가 일어나지 않는다.'),
           cg('kang_window_sea'),
         ],
@@ -395,12 +395,12 @@ export const REGULARS = {
       summer_return: {
         season: 'summer', nth: 3, title: '며칠 만에 온 날',
         scene: [
-          narr('사흘 동안 강 씨가 오지 않았다. 새벽마다 창가 자리가 비어 있었다.'),
+          narr('사흘 동안 강 씨가 오지 않았다. 새벽마다 뒤쪽 테이블이 비어 있었다.'),
           narr('"7시 전은 동네 시간"이 된 새벽, 문이 열리고 강 씨가 들어온다.'),
           cg('kang_returns'),
         ],
         hints: [
-          narr('강 씨가 늘 앉던 창가 자리에 앉는다. 두 손을 탁자 위에 가만히 올려 둔다.'),
+          narr('강 씨가 늘 앉던 뒤쪽 테이블에 앉는다. 두 손을 탁자 위에 가만히 올려 둔다.'),
           narr('강 씨는 항구 쪽을 보다가, 무언가를 피하듯 고개를 돌린다.'),
         ],
         q: '며칠 만에 오신 강 씨에게 무슨 일이 있으셨던 것 같다. 어떻게 맞이할까?',
@@ -420,7 +420,7 @@ export const REGULARS = {
         ],
         hints: [
           narr('강 씨의 눈이 자기 손으로 간다. 그물을 오래 만진 거친 손이, 양복 소매 밖으로 나와 있다.'),
-          narr('강 씨의 눈이 늘 앉던 창가 자리와, 선반 위의 머그잔으로 간다.'),
+          narr('강 씨의 눈이 늘 앉던 뒤쪽 테이블과, 선반 위의 머그잔으로 간다.'),
         ],
         q: '처음 보는 양복 차림의 강 씨가 어색해 보이신다. 어떻게 할까?',
         choices: [

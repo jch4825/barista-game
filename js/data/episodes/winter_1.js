@@ -36,7 +36,7 @@ export default {
       id: 'winter_1_kang', title: '첫눈의 블랙', level: 'normal', book: WINTER_BOOK,
       orders: [{ who: 'kang', say: '블랙.', menu: 'hand_drip', togo: false, usual: true, thanks: '…좋네. 사장 맛이야.' }],
     }),
-    narr('강 씨는 창가에 앉아, 배가 한 척 빠진 항구를 오래 본다.'),
+    narr('강 씨는 뒤쪽 테이블에 앉아, 창 너머 배가 한 척 빠진 항구를 오래 본다.'),
     leave('kang'),
 
     // 오후: 은주

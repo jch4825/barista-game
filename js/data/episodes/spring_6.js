@@ -24,7 +24,7 @@ export default {
     place('봄 새벽 06:05', '바닷가 마을 카페'),
     show({ left: 'jieun:normal', center: 'kang:normal', right: 'owner:normal' }),
     narr('오늘은 내가 먼저 와서 불을 켜 두었다. 강 씨는 창에 불이 켜져 있어야 들어오신다.'),
-    narr('강 씨가 들어와 늘 앉는 창가에 앉는다. 사장님이 물을 끓이고, 천천히 블랙을 내린다.'),
+    narr('강 씨가 들어와 늘 앉는 뒤쪽 테이블에 앉는다. 사장님이 물을 끓이고, 천천히 블랙을 내린다.'),
     say('kang', 'normal', '…블랙.'),
     leave('owner'),
     show({ left: 'jieun:normal', right: 'kang:normal' }),

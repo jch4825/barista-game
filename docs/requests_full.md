@@ -12,7 +12,7 @@
 | 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 104장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
-| 블렌더 한 컷(손 동작) | 15가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
+| 블렌더 한 컷(손 동작) | 3가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 7 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 9곡(새로 만듦, 3장 규칙) | `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
@@ -609,7 +609,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
 New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn at the harbor seen through the cafe window: KANG sits by the window holding a cup of black coffee, staring at one empty mooring spot at the end of the pier while the other boats leave.
+Scene: Dawn at the harbor seen through the cafe window: KANG sits at his usual back table beside the side window, holding a cup of black coffee, staring at one empty mooring spot at the end of the pier while the other boats leave.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
@@ -866,7 +866,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
 New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn: KANG sits at his usual window seat after days away, both hands resting still on the table, turning his face away from the harbor.
+Scene: Dawn: KANG sits at his usual back table beside the side window after days away, both hands resting still on the table, turning his face away from the harbor.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
@@ -1628,25 +1628,13 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 4. 블렌더 한 컷 (손 동작)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic`. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja`. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
 게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7). 이름만 맞으면 코드를 고치지 않아도 됩니다.
 
 | 손 동작 id | 이름 | 동작 | 쓰는 메뉴 | 알맞아요 칸 | 제안 장면 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `grind` | 원두 갈기 | G 기다렸다 누르기 | 아메리카노 | 0.56~0.8 | 그라인더 호퍼의 원두가 줄고, 아래 통에 가루가 쌓임(13단계) |
-| `tamp` | 꾹 누르기 | A 누르고 떼기 | 아메리카노 · 라테 · 바닐라 라테 · 디카페인 라테 | 0.44~0.69 | 포터필터 위에서 탬퍼를 누름: 가루가 평평해지는 정도(13단계) |
-| `syrup` | 시럽 넣기 | D 박자 | 바닐라 라테 | 2번 | 시럽 펌프를 눌러 컵에 시럽이 들어감(두 번) |
 | `jam` | 청 떠 넣기 | D 박자 | 유자차 · 딸기우유 | 2번 | 청 병에서 숟가락으로 떠서 컵에 넣음(두 번) |
 | `powder` | 가루 떠 넣기 | D 박자 | 녹차라테 · 코코아 | 2번 | 가루 통에서 숟가락으로 떠서 컵에 넣음(두 번) |
-| `whisk` | 말차 풀기 | B 원 그리기 | 녹차라테 | 5바퀴 | 컵 속 말차를 차선으로 풂: 덩어리 → 고운 거품 |
-| `milk_in` | 피처에 우유 붓기 | A 누르고 떼기 | 따뜻한 우유 | 0.5~0.75 | 우유병에서 피처에 찬 우유를 따름: 피처 눈금까지 |
-| `tap` | 피처 톡톡 | D 박자 | 따뜻한 우유 | 2번 |  |
-| `boil` | 물 끓이기 | G 기다렸다 누르기 | 핸드드립 · 보리차 · 유자차 | 0.66~0.88 | 버너 위 주전자의 물이 끓기 시작함: 김과 거품 |
-| `steep` | 우리기 | G 기다렸다 누르기 | 보리차 | 0.58~0.82 | 보리차가 우러남: 물 색이 진해짐 |
-| `hand_grind` | 손으로 원두 갈기 | B 원 그리기 | 핸드드립 | 6바퀴 | 손 그라인더 손잡이를 돌림 |
-| `bloom` | 뜸 붓기 | A 누르고 떼기 | 핸드드립 | 0.3~0.55 | 드리퍼의 커피 가루에 처음 조금 붓기 |
-| `bloom_wait` | 뜸 들이기 | G 기다렸다 누르기 | 핸드드립 | 0.62~0.86 | 뜸: 커피 가루가 부풀었다가 가라앉음 |
-| `spiral` | 나선 붓기 | B 원 그리기 | 핸드드립 | 3바퀴 | 드리퍼 위로 주전자 물을 나선으로 세 바퀴 |
 | `stir` | 젓기 | B 원 그리기 | 믹스커피 · 유자차 · 딸기우유 · 코코아 | 3바퀴 | 컵 속을 숟가락으로 젓기: 가루가 풀리는 정도 |
 
 **I-28 포장 컵(종이컵 · 플라스틱 컵)** 🙋
@@ -1695,16 +1683,16 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 6. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2380줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2389줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 622 |
+| `sys` | 624 |
 | `narr` | 607 |
 | `think` | 278 |
-| `owner` | 153 |
-| `jieun` | 88 |
+| `owner` | 156 |
+| `jieun` | 92 |
 | `jian` | 70 |
 | `do` | 65 |
 | `customer_f` | 65 |
