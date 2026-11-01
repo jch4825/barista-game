@@ -17,7 +17,7 @@ export default {
   schedule: [],
   skills: [],
   standards: ['[12진로04-05]', '[12진로02-01]'],
-  diary: '해순 할머니가 손녀를 데려왔다. 창가에 우유가 놓였다. 할머니에게 그 의자는 늘 함께 앉는 자리다.',
+  diary: '해순 할머니가 손녀를 데려왔다. 빈 의자는 돌아가신 할아버지의 자리였다. 할머니는 날마다 우유 한 잔으로 할아버지를 기억한다.',
   script: [
     big('겨울 · 6일', '세 번째 잔'),
     bg('hall', 'winter'),
@@ -55,18 +55,24 @@ export default {
       narr('할머니는 한 잔을 빈 의자 앞으로 옮기고, 남은 한 잔을 손녀와 나눠 마신다.'),
     ),
 
-    // 해순 3단계: 남편의 마지막 주문
+    // 모두에게: 빈 의자는 돌아가신 할아버지의 자리(2026-11-01 사용자 '두 잔의 까닭이 서야 한다' → 검수 13.25)
+    show({ left: 'jieun:normal', center: 'haesun:smile', right: 'granddaughter:smile' }),
+    narr('손녀가 빈 의자 앞의 잔을 보다가, 나에게 작게 말한다.'),
+    say('granddaughter', 'normal', '할아버지는 제가 아기 때 돌아가셨대요. 그래도 할머니는 여기 오면 할아버지 우유를 꼭 시킨대요.'),
+    think('빈 의자는 돌아가신 할아버지의 자리였다. 할머니는 날마다 우유 한 잔으로 할아버지를 기억하고 계셨구나.'),
+
+    // 해순 3단계: 남편의 마지막 주문(왜 우유 두 잔인지)
     ...onlyIf({ trust: { haesun: '>=7' } },
       show({ left: 'jieun:normal', center: 'haesun:smile', right: 'granddaughter:smile' }),
       narr('손녀가 창밖의 눈사람을 보러 나간다. 할머니가 조용히 나를 부른다.'),
       cg('haesun_secret'),
-      say('haesun', 'normal', '지은 씨, 이 의자 이야기 해 줄까요.'),
+      say('haesun', 'normal', '지은 씨, 내가 왜 늘 우유 두 잔을 시키는지 이야기해 줄까요.'),
       say('haesun', 'normal', '그 사람은 늘 블랙만 마셨어요. 나는 우유고요.'),
       say('haesun', 'normal', '그런데 마지막으로 여기 온 날, 그 사람이 우유를 두 잔 시켰어요.'),
       say('haesun', 'smile', '"오늘은 당신이랑 같은 걸로." 그게 그 사람의 마지막 주문이었어요.'),
       say('haesun', 'smile', '그래서 나는 지금도 두 잔을 시켜요. 그 사람 주문대로요.'),
       secret('haesun'),
-      think('할머니가 처음으로 의자 이야기를 해 주셨다. 한 번도 묻지 않고 기다린 날들 덕분일까.'),
+      think('왜 꼭 우유 두 잔인지, 할머니가 처음으로 이야기해 주셨다. 한 번도 묻지 않고 기다린 날들 덕분일까.'),
       cg(null),
     ),
 

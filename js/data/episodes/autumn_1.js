@@ -76,6 +76,10 @@ export default {
     show({ left: 'jieun:normal', right: 'haesun:normal' }),
     sfx('bell'),
     respond('haesun', 'autumn_one_milk'),
+    // 모두에게: 빈 의자의 주인(첫 실마리, 2026-11-01 사용자 '두 잔의 까닭이 서야 한다' → 검수 13.25)
+    narr('할머니가 빈 의자 쪽을 보며, 혼잣말처럼 작게 말한다.'),
+    say('haesun', 'normal', '여보, 오늘은 우유가 늦게 왔대요. 그래도 지은 씨가 따뜻하게 데워 줬어요.'),
+    think('할머니가 빈 의자에게 "여보"라고 하셨다. 그 의자는 한 번도 오신 적 없는 할머니 남편분의 자리였구나.'),
     narr('오후 늦게 우유 배달이 왔다. 텅 비었던 냉장고가 다시 가득 찬다.'),
     leave('haesun'),
 

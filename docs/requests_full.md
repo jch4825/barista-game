@@ -1683,20 +1683,20 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 6. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2389줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2395줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
 | `sys` | 624 |
-| `narr` | 607 |
-| `think` | 278 |
+| `narr` | 609 |
+| `think` | 280 |
 | `owner` | 156 |
 | `jieun` | 92 |
 | `jian` | 70 |
+| `customer_f` | 66 |
 | `do` | 65 |
-| `customer_f` | 65 |
-| `haesun` | 60 |
+| `haesun` | 61 |
 | `eunju` | 53 |
 | `kang` | 44 |
 | `han` | 44 |
