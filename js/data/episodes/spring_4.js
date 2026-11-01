@@ -3,7 +3,7 @@
  * → "천천히 해도 돼요. 대신 정확하게." → 오후 비, 흠뻑 젖은 도 씨(대응 D2) → 비가 와도 아이스 아메리카노
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, seen, term, motion, face, emote, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, seen, term, motion, face, emote, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_4',
@@ -23,6 +23,7 @@ export default {
     amb('cafe'),
     bgm('cafe'),
     place('봄 오전 10:20', '바닷가 마을 카페'),
+    info('오늘의 칠판', '오후에 비가 온대요. 젖은 손님에게는 마른 수건을 챙겨요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'student:normal' }),
     narr('운동복을 입은 대학생 손님이 휴대전화를 보며 카운터 앞에 선다.'),
     say('student', 'normal', '{{아아}} 하나요.'),

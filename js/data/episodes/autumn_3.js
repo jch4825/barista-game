@@ -3,7 +3,7 @@
  * → 유모차가 걸린 은주(대응 E3) → (은주 신뢰 4 이상) 처음 끝까지 마심 · 사장님이 의자를 치워 유모차 자리를 만듦
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('cafe'),
     place('가을 오전 09:30', '바닷가 마을 카페'),
+    info('오늘의 칠판', '사장님이 은행에 가요. 잠깐 혼자 가게를 봐요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     say('owner', 'normal', '은행에 좀 다녀올게요. 한 시간쯤 걸려요.'),
     leave('owner'),

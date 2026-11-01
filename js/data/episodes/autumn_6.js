@@ -4,7 +4,7 @@
  * → 닫는 때 둘러보기: 마감 선반의 메모 "서두르면 쏟는다."(숨은 장면 10)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, fx, mini, respond, onlyIf, term, motion, face, emote, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, fx, mini, respond, onlyIf, term, motion, face, emote, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -26,6 +26,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('가을 새벽 06:05', '안개 낀 아침'),
+    info('오늘의 칠판', '수능 날이에요. 아침 안개가 짙어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'sumin:nervous' }),
     sfx('bell'),
     narr('새벽부터 짙은 안개가 꼈다. 오늘은 {{수능}} 날이다.'),

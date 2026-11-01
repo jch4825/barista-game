@@ -5,7 +5,7 @@
  * → 줄에서 금 씨: "천천히 해요."(마을 온기가 높으면 한 줄 더) → 느리고 정확한 손이 힘이 됨 → 새벽에 불이 들어옴. 실패 화면 없음
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, act, respond, onlyIf, term, motion, face, emote, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, act, respond, onlyIf, term, motion, face, emote, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -28,6 +28,7 @@ export default {
     amb('street'),
     bgm('blackout'), // 그레고리안 찬송가: 마을 불이 꺼지는 무거운 밤(2026-11-01)
     place('겨울 저녁 18:20', '폭설'),
+    info('오늘의 칠판', '폭설 예보! 저녁에 눈이 아주 많이 온대요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     cg('winter_storm'),
     narr('라디오에서 말한 대로, 오후부터 눈이 쏟아졌다. 골목에 눈이 무릎까지 쌓였다.'),
     narr('저녁이 되자 마을의 불이 하나씩 꺼진다. 가로등도, 집집의 창문도.'),

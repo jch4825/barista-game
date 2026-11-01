@@ -3,7 +3,7 @@
  * → 우유가 한 잔뿐인 날의 해순 할머니(대응 H3) → 마감, 사장님은 잔을 두 손으로 든다
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('가을 새벽 06:00', '바닷가 마을 카페'),
+    info('오늘의 칠판', '우유 배달이 늦어요. 우유가 한 잔 몫뿐이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('여름이 지나자 관광객이 줄었다. 창밖의 은행나무는 어느새 노랗게 물들었다.'),
     say('owner', 'normal', '지은 씨, 오늘부터 강 씨의 새벽 블랙은 지은 씨가 내려요.'),

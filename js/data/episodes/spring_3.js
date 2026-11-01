@@ -3,7 +3,7 @@
  * → 여는 때 둘러보기(숨은 장면 2: 컵이 지은의 손 높이로 내려와 있음) → 우체부 도 씨, 서서 마시는 사람(대응 D1)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, fx, mini, respond, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, fx, mini, respond, motion, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_3',
@@ -21,6 +21,7 @@ export default {
     bg('harbor', 'dawn'),
     amb('street'),
     place('봄 새벽 05:50', '항구 앞'),
+    info('오늘의 칠판', '새벽 다섯 시 오십 분에 문을 열어요. 오늘은 사장님의 핸드드립을 봐요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('바다가 아직 짙은 파란색이다. 항구에서는 배 몇 척이 불을 켜고 그물을 싣는다.'),
     narr('어제 마감 때 사장님이 말했다. "내일은 여섯 시까지 와요. 새벽 손님이 있어요."'),

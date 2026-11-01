@@ -3,7 +3,7 @@
  * → 사장님의 빗자루 "컵은 깨지라고 있어요."(숨은 장면 1) → 다시 천천히 → 닫는 때 둘러보기 → 마감 우유
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, respond, act, guide, seen, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, respond, act, guide, seen, motion, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_2',
@@ -22,6 +22,7 @@ export default {
     amb('street'),
     bgm('morning'),
     place('봄 아침 07:50', '카페 가는 골목'),
+    info('오늘의 칠판', '첫 출근! 가게 여는 순서를 사장님께 배워요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('골목의 벚나무에 꽃봉오리가 부풀어 있다. 바다 쪽에서 갈매기 소리가 들린다.'),
     think('첫 출근이라 십 분 일찍 나왔다. 늦어서 허둥대는 것보다, 일찍 와서 기다리는 게 낫다.'),

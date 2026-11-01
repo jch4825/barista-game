@@ -4,7 +4,7 @@
  * → 지은이 처음 타는 믹스커피 → "…같네."
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -25,6 +25,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('가을 새벽 06:10', '바닷가 마을 카페'),
+    info('오늘의 칠판', '가을의 마지막 날이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'han:normal' }),
     sfx('bus'),
     sfx('bell'),
@@ -93,6 +94,11 @@ export default {
     say('noh', 'smile', '사장한테 전해. 가게는 걱정 말라고.'),
     face('jieun', 'smile'),
     think('"같네." 가을 내내 들은 말 가운데 제일 좋은 말이다.'),
+    // 계절 끝 배지: 가을을 마치면 마을의 바리스타(사장님은 손을 쉬러 가셔서, 노 씨에게 맡겨 둠)
+    narr('노 씨가 주머니에서 작은 배지를 꺼내 카운터에 놓는다.'),
+    say('noh', 'normal', '사장이 맡기고 갔어. 가을이 끝나면 달아 주라더라.'),
+    sfx('stamp'),
+    info('새 배지', '「마을의 바리스타」 배지를 받았어요!', 'badge'),
     cg(null),
     leave('noh'),
     sfx('door'),

@@ -2,7 +2,7 @@
  * 가을 2일 · 양복: 새벽, 양복을 입고 온 강 씨(대응 K4) → 6시 10분 한 씨, 딸 사진과 펜(대응 Han3) → 낮의 손님들(가을에도 아아)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, motion, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('가을 새벽 06:00', '바닷가 마을 카페'),
+    info('오늘의 칠판', '바람이 쌀쌀해요. 그래도 아이스 아메리카노는 잘 나가요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'kang:normal' }),
     sfx('bell'),
     respond('kang', 'autumn_suit'),
@@ -51,6 +52,16 @@ export default {
     bgm('cafe'),
     show({ left: 'jieun:normal', right: 'customer:normal' }),
     sfx('bell'),
+    // 금 씨의 아아(웃음 줄기 2/3: 가을 — 손이 빨개져도)
+    show({ left: 'jieun:normal', right: 'geum:normal' }),
+    say('geum', 'normal', '아아… 하나요.'),
+    narr('찬 바람이 부는데, 금 씨는 오늘도 아이스 아메리카노다. 컵을 쥘 손이 벌써 빨갛다.'),
+    mini('brew', {
+      id: 'autumn_2_geum', title: '가을에도 아아', level: 'normal', book: AUTUMN_BOOK,
+      orders: [{ who: 'geum', say: '아아… 하나요.', menu: 'americano', temp: 'iced', togo: true, thanks: '으, 손 시려. 그래도 이거죠.' }],
+    }),
+    leave('geum'),
+    show({ left: 'jieun:normal', right: 'customer:normal' }),
     narr('점심시간, 근처 회사에 다니는 손님이 들어온다. 바람이 쌀쌀한데도 겉옷 소매를 걷고 있다.'),
     say('customer', 'normal', '아아 하나랑 따뜻한 라테 하나요. 하나는 팀장님 거예요.'),
     mini('brew', {

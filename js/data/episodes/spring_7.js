@@ -3,7 +3,7 @@
  * → 해순 할머니가 이름을 물음 → 나가며 "지은 씨, 내일 또 봐요." → 처음으로 마을에서 이름이 불림 → 봄의 끝
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, onlyIf, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_7',
@@ -22,6 +22,7 @@ export default {
     amb('street'),
     bgm('morning'),
     place('봄 아침 07:55', '카페 가는 골목'),
+    info('오늘의 칠판', '벚꽃이 지는 날. 봄의 마지막 날이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('밤사이 바람이 불어서, 골목에 벚꽃잎이 하얗게 깔려 있다.'),
     think('이 마을에 온 지 일주일이다. 처음에는 골목도 헷갈렸는데, 이제는 카페 가는 길이 손에 익었다.'),
@@ -87,6 +88,11 @@ export default {
     say('owner', 'smile', '할머니는 이름을 쉽게 안 불러요. 일주일 동안 지은 씨를 지켜보신 거예요.'),
     say('owner', 'normal', '봄 동안 수고했어요. 이제 여름이 오면, 바다 보러 오는 손님들로 훨씬 바빠질 거예요.'),
     think('바빠지는 건 아직 무섭다. 그래도 이제 이 마을에는 내 이름을 불러 주는 사람이 있다.'),
+    // 계절 끝 배지(재미 개편 6.3): 봄을 마치면 새내기 바리스타
+    sfx('stamp'),
+    narr('사장님이 앞치마 주머니에서 작은 배지를 꺼내, 내 앞치마에 달아 준다.'),
+    say('owner', 'normal', '봄을 다 했으니, 이제 견습은 아니에요. 새내기 바리스타.'),
+    info('새 배지', '「새내기 바리스타」 배지를 받았어요! 수첩의 「나의 성장」에서 볼 수 있어요.', 'badge'),
     motion('jieun', 'bow'),
     end(),
   ],

@@ -3,7 +3,7 @@
  * → 오후, 스케치북을 안은 지안의 "아무거나요"(대응 J1) → 고른 대응에 따라 만드는 음료가 달라짐(pick)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     amb('crowd'),
     bgm('cafe'),
     place('여름 오전 09:30', '카페 앞'),
+    info('오늘의 칠판', '배우의 사진이 퍼졌대요. 관광객이 늘었어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     cg('summer_rumor'),
     narr('여름이 왔다. 아침부터 카페 앞에 처음 보는 사람들이 줄을 서 있다.'),
     narr('다들 휴대전화를 들고 있다. 화면에는 봄에 배우가 올린, 이 카페의 창가 사진이 떠 있다.'),

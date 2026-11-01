@@ -3,7 +3,7 @@
  * → 오전, 해순 할머니의 늘 먹던 거 → 관광객이 빈 의자에 앉음(대응 H2)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, motion, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     bg('bus_terminal', 'evening'),
     amb('street'),
     place('여름 새벽 06:10', '버스 종점'),
+    info('오늘의 칠판', '새벽 여섯 시 십 분에 밤 버스가 들어와요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     narr('여름 새벽, 종점에 마지막 밤 버스가 들어온다. 봄에 내가 이 마을에 처음 내린 바로 그 종점이다.'),
     sfx('bus'),
     bg('hall', 'morning'),
@@ -51,6 +52,13 @@ export default {
     bg('hall', 'summer'),
     bgm('cafe'),
     amb('crowd'),
+    // 푸슉 머신(웃음 줄기, 재미 개편 3.2): 진지한 사람이 무너지지 않는 순간
+    show({ left: 'jieun:normal', right: 'owner:normal' }),
+    narr('손님이 오기 전, 머신에 원두를 꾹 눌러 담았다. 너무 세게 눌렀나 보다.'),
+    sfx('poof'),
+    narr('머신이 "푸슉!" 하고 커피 가루를 뿜는다. 옆에 있던 사장님 얼굴이 새까매졌다.'),
+    say('owner', 'normal', '…날씨 좋네.'),
+    think('사장님은 얼굴을 닦지도 않고 신문을 넘긴다. 웃으면 안 되는데, 입술을 꾹 깨물었다.'),
     show({ left: 'jieun:normal', right: 'haesun:normal' }),
     sfx('bell'),
     say('haesun', 'smile', '지은 씨, 늘 먹던 거요.'),

@@ -3,7 +3,7 @@
  * → 며칠 만에 온 강 씨(대응 K3) → 도 씨 · 노 씨 · 해순 할머니까지 단골 다섯이 한 방에 → 조용하다
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, branch, onlyIf, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, branch, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     amb('street'),
     bgm('morning'),
     place('여름 새벽 05:50', '카페 앞'),
+    info('오늘의 칠판', '오늘부터 아침 7시 전은 동네 시간이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('골목이 조용하다. 어제는 문 앞까지 줄이 섰는데, 오늘은 아무도 없다.'),
     narr('문에 사장님의 글씨가 붙어 있다. "7시 전은 동네 시간"'),
@@ -88,6 +89,11 @@ export default {
     think('어제의 시끄러운 줄과는 전혀 다르다. 이 조용함이 이 가게의 진짜 모습인 것 같다.'),
     cg(null),
     say('owner', 'normal', '여름이 다 갔네요. 가을에는 바다 축제가 있어서, 또 한 번 바빠질 거예요.'),
+    // 계절 끝 배지: 여름을 마치면 바리스타
+    sfx('stamp'),
+    narr('사장님이 내 앞치마의 배지 옆에, 배지를 하나 더 달아 준다.'),
+    say('owner', 'smile', '그 줄을 끝까지 버텼으니, 이제 그냥 바리스타라고 해도 되겠네요.'),
+    info('새 배지', '「바리스타」 배지를 받았어요!', 'badge'),
     motion('owner', 'nod'),
     end(),
   ],

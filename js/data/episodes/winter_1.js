@@ -2,7 +2,7 @@
  * 겨울 1일 · 첫눈: 첫눈 새벽, 마을에 퍼진 "배를 팔았대" 소문 속의 강 씨(대응 K5) → 오후, 밤새 아기 곁을 지킨 은주(대응 E4)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -23,6 +23,7 @@ export default {
     amb('street'),
     bgm('morning'),
     place('겨울 새벽 05:45', '눈 내린 골목'),
+    info('오늘의 칠판', '첫눈이 와요. 문 앞 길이 미끄러워요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('밤사이 첫눈이 와서, 골목이 하얗게 덮였다.'),
     narr('아직 아무도 지나가지 않은 눈길에, 내가 첫 발자국을 낸다.'),
@@ -38,6 +39,18 @@ export default {
     }),
     narr('강 씨는 뒤쪽 테이블에 앉아, 창 너머 배가 한 척 빠진 항구를 오래 본다.'),
     leave('kang'),
+
+    // 금 씨의 아아(웃음 줄기 3/3: 겨울 — 눈사람)
+    sfx('door'),
+    show({ left: 'jieun:surprised', right: 'geum:normal' }),
+    narr('문이 열리고, 커다란 눈사람 하나가 들어온다.'),
+    say('geum', 'normal', '아…아… 하나요.'),
+    think('눈사람이 아니라 금 씨였다. 눈썹까지 하얗다.'),
+    mini('brew', {
+      id: 'winter_1_geum', title: '눈사람의 아아', level: 'normal', book: WINTER_BOOK,
+      orders: [{ who: 'geum', say: '아…아… 하나요.', menu: 'americano', temp: 'iced', togo: true, thanks: '으으… 역시 이거죠.' }],
+    }),
+    leave('geum'),
 
     // 오후: 은주
     place('겨울 오후 14:00', '눈 오는 오후'),

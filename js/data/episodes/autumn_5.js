@@ -4,7 +4,7 @@
  * → 오후, 수민이 떨어뜨린 대학 안내서(대응 S3)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -25,6 +25,7 @@ export default {
     amb('street'),
     bgm('morning'),
     place('가을 새벽 05:40', '카페 가는 골목'),
+    info('오늘의 칠판', '오늘은 혼자 문을 열어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:nervous' }),
     narr('아직 어둡다. 걸으면서 주머니 속 열쇠를 몇 번이나 만져 본다.'),
     think('오늘은 사장님이 안 계신다. 무엇이 어디 있는지, 순서가 어떻게 되는지 머릿속으로 한 번 더 떠올린다.'),
@@ -45,6 +46,10 @@ export default {
     cg('autumn_dawn_open'),
     narr('카페 문 앞에 선다. 열쇠를 넣고, 천천히 돌린다.'),
     cg(null),
+    // 그 갈매기(웃음 줄기 3/4: 가을 — 단골처럼 앉아 기다림)
+    narr('그런데 테라스 의자마다 갈매기가 한 마리씩 앉아 있다. 꼭 문 열기를 기다리는 단골들처럼.'),
+    sfx('squawk'),
+    think('…오늘은 손님이 일찍 왔네. 사장님 없이 여는 첫날인데, 혼자는 아니구나.'),
     mini('routine', { id: 'autumn_5_open', kind: 'alone', title: '혼자 여는 아침' }),
 
     // 강 씨

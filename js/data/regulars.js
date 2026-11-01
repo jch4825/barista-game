@@ -22,6 +22,7 @@ export const KINDS = { wait: '기다림', ask: '묻기', plain: '그대로', ste
 /** 신뢰 단계: 1 평소 · 2 행동이 변함(4~6) · 3 비밀 장면(7~10) */
 export const TIER_MIN = { 2: 4, 3: 7 };
 
+// card: 기억 카드(재미 개편 6.5) — 대응 뒤 수첩에 붙는 '오늘 알게 된 것'. 고른 대응과 관계없이 늘 받음(점수가 드러나지 않게, 원칙 1)
 export const REGULARS = {
   /* ---------- 해순 할머니: 기다림. 늘 따뜻한 우유 두 잔, 한 잔은 남편 자리의 몫 ---------- */
   haesun: {
@@ -30,7 +31,7 @@ export const REGULARS = {
     album: { title: '남편의 마지막 주문', line: '"그 사람이 마지막으로 시킨 게 우유 두 잔이었어요."', cg: 'haesun_secret' },
     touches: {
       spring_cup2: {
-        season: 'spring', nth: 1, title: '우유 두 잔',
+        season: 'spring', nth: 1, title: '우유 두 잔', card: '해순 할머니는 우유 두 잔을 시키고, 한 잔은 늘 빈 의자 앞에 둔다.',
         scene: [
           narr('창가 탁자에 쟁반을 내려놓는다. 할머니 옆에는 아무도 앉지 않은 의자가 하나 있다.'),
           narr('그 의자 앞의 탁자도, 할머니 앞처럼 깨끗하게 닦여 있다.'),
@@ -49,7 +50,7 @@ export const REGULARS = {
         why: '할머니가 두 번째 잔을 놓을 곳을 말로 알려 주고, 손으로 의자를 쓸었어요. 묻지 않고 말한 대로 놓으면 돼요.',
       },
       summer_tourist: {
-        season: 'summer', nth: 2, title: '그 의자의 손님',
+        season: 'summer', nth: 2, title: '그 의자의 손님', card: '할머니 옆의 빈 의자는, 누가 앉으면 할머니가 말을 멈출 만큼 소중한 자리다.',
         scene: [
           narr('여름 오후, 가게 안이 관광객으로 북적인다. 해순 할머니는 늘 그렇듯 창가에서 우유 두 잔을 앞에 두고 있다.'),
           enter('center', 'customer:smile'),
@@ -70,7 +71,7 @@ export const REGULARS = {
         why: '할머니는 "거기는…" 하다가 말을 멈추고 잔을 감쌌어요. 자리는 지키고 싶지만 소란은 싫으니, 다른 자리를 조용히 권해요.',
       },
       autumn_one_milk: {
-        season: 'autumn', nth: 3, title: '한 잔 남은 우유',
+        season: 'autumn', nth: 3, title: '한 잔 남은 우유', card: '할머니는 우유가 한 잔뿐인 날에도 서두르지 않고 기다려 주셨다.',
         scene: [
           narr('가을 아침, 문을 열자마자 해순 할머니가 들어온다.'),
           say('haesun', 'normal', '늘 먹던 거요. 우유 두 잔.'),
@@ -91,7 +92,7 @@ export const REGULARS = {
         why: '할머니는 한 잔뿐이라는 말에 고개를 끄덕이고, 앉아서 생각했어요. 한 잔을 데워 두고 할머니가 정할 때까지 기다려요.',
       },
       winter_blackout: {
-        season: 'winter', nth: 4, title: '정전 밤의 의자',
+        season: 'winter', nth: 4, title: '정전 밤의 의자', card: '할머니는 담요를 남에게 다 나눠 주고, 빈 의자부터 챙기는 사람이다.',
         scene: [
           narr('할머니는 집에서 가져온 담요를 아이들에게 다 나눠 주었다. 정작 할머니 몫은 남지 않았다.'),
           narr('나는 뒷방에서 사장님이 아껴 두던 담요 두 장을 꺼내 온다.'),
@@ -110,7 +111,7 @@ export const REGULARS = {
         why: '할머니는 담요를 보고 빈 의자를 봤어요. 할머니에게 그 의자는 늘 함께 앉는 자리라서, 그 자리도 따뜻하게 해 두면 돼요.',
       },
       winter_granddaughter: {
-        season: 'winter', nth: 5, title: '손녀가 온 날',
+        season: 'winter', nth: 5, title: '손녀가 온 날', card: '할머니에게는 방학이면 놀러 오는 손녀가 있다.',
         scene: [
           narr('눈이 펑펑 오는 오후, 해순 할머니가 처음으로 누군가와 함께 들어온다.'),
           say('haesun', 'smile', '우리 손녀예요. 방학이라 놀러 왔어요.'),
@@ -140,7 +141,7 @@ export const REGULARS = {
     album: { title: '지은의 손', line: '"커피 내리는 손이요. 천천히 움직여서, 그리기 좋았어요."', cg: 'jian_secret' },
     touches: {
       summer_anything: {
-        season: 'summer', nth: 1, title: '아무거나요',
+        season: 'summer', nth: 1, title: '아무거나요', card: '지안 씨는 "아무거나"라고 말하지만, 메뉴판의 색 동그라미를 오래 본다.',
         scene: [
           narr('요즘 오후마다 오는 손님이 계산대 앞에 선다. 물감 자국이 있는 셔츠를 입고, 품에 스케치북을 꼭 안고 있다.'),
           say('jieun', 'normal', '어서 오세요. 무엇으로 드릴까요?'),
@@ -160,7 +161,7 @@ export const REGULARS = {
         why: '지안은 무슨 색을 마셔야 할지 모르겠다며 메뉴판의 색을 짚었어요. 색으로 부드럽게 물어 주면 스스로 고를 수 있어요.',
       },
       summer_cool: {
-        season: 'summer', nth: 2, title: '시원한 거 아무거나',
+        season: 'summer', nth: 2, title: '시원한 거 아무거나', card: '지안 씨의 스케치북은 오래 비어 있었다. 더우면 색이 다 똑같아 보인다고 했다.',
         scene: [
           narr('관광객으로 붐비는 오후, 지안은 구석 자리에 스케치북을 펴 놓고 연필만 쥐고 있다.'),
           narr('종이는 오늘도 하얗게 비어 있다. 한참 뒤, 지안이 계산대로 온다.'),
@@ -180,7 +181,7 @@ export const REGULARS = {
         why: '지안은 색이 다 똑같아 보인다며 빈 스케치북을 꼭 안았어요. 그림 이야기 대신 오늘의 색을 물어보면 돼요.',
       },
       autumn_leaves: {
-        season: 'autumn', nth: 3, title: '창밖의 노란 잎',
+        season: 'autumn', nth: 3, title: '창밖의 노란 잎', card: '지안 씨는 창밖의 계절 색을 보고 마실 것을 고른다.',
         scene: [
           narr('가을 아침, 창밖 은행나무가 노랗게 물들었다.'),
           narr('지안이 들어와 계산대 앞에 서지만, 한참 동안 말이 없다.'),
@@ -201,7 +202,7 @@ export const REGULARS = {
         why: '지안은 말 대신 창밖의 노란 잎과 메뉴판의 색을 봤어요. 지안은 색으로 고르는 사람이라, 색을 물어 주면 고를 수 있어요.',
       },
       winter_candle: {
-        season: 'winter', nth: 4, title: '촛불 아래',
+        season: 'winter', nth: 4, title: '촛불 아래', card: '지안 씨는 정전 밤에 촛불 옆에서 연필을 쥐고 있었다.',
         scene: [
           narr('정전 밤, 지안은 촛불 옆 구석에 앉아 있다. 무릎 위에 빈 스케치북이 펴져 있고, 손에는 연필이 들려 있다.'),
           cg('winter_candle_jian'),
@@ -219,7 +220,7 @@ export const REGULARS = {
         why: '지안은 촛불을 오래 보고 빈 종이를 내려다봤어요. 재촉하지 않고 지금의 색을 물으면, 스스로 그리기 시작해요.',
       },
       winter_snow: {
-        season: 'winter', nth: 5, title: '눈 오는 날',
+        season: 'winter', nth: 5, title: '눈 오는 날', card: '지안 씨의 스케치북이 여러 색으로 두툼해졌다.',
         scene: [
           narr('눈 오는 아침, 지안이 들어온다. 품에 안은 스케치북이 전보다 훨씬 두툼하다.'),
           say('jieun', 'normal', '어서 오세요. 눈 오는데 오셨네요.'),
@@ -248,7 +249,7 @@ export const REGULARS = {
     album: { title: '마지막 우편', line: '"서른 해 동안 남의 편지만 날랐어요. 마지막은 내 편지를 날라 보고 싶었어요."', cg: 'do_secret' },
     touches: {
       spring_stand: {
-        season: 'spring', nth: 1, title: '서서 마시는 사람',
+        season: 'spring', nth: 1, title: '서서 마시는 사람', card: '도 씨는 앉으면 못 일어난다며, 늘 서서 커피를 마신다.',
         scene: [
           narr('도 씨는 카운터 앞에 선 채로 커피를 마신다. 바로 옆에 의자가 있는데도 쳐다보지 않는다.'),
           narr('어깨에 멘 우편 가방이 무거워서, 도 씨는 가방을 자꾸 고쳐 멘다.'),
@@ -267,7 +268,7 @@ export const REGULARS = {
         why: '도 씨는 앉으면 못 일어난다며 웃었지만, 눈은 의자로 갔어요. 권하지 않고 앉을 수 있게 자리만 만들어 둬요.',
       },
       spring_rain: {
-        season: 'spring', nth: 2, title: '젖은 편지',
+        season: 'spring', nth: 2, title: '젖은 편지', card: '도 씨는 비에 젖어도 자기 얼굴보다 편지를 먼저 닦는다.',
         scene: [
           narr('오후에 갑자기 비가 쏟아진다. 골목이 금방 물웅덩이로 가득 찬다.'),
           sfx('door'),
@@ -287,7 +288,7 @@ export const REGULARS = {
         why: '도 씨는 편지가 젖을까 걱정했고, 자기보다 편지를 먼저 닦았어요. 말없이 수건을 두면 도 씨가 편지부터 닦을 수 있어요.',
       },
       summer_hook: {
-        season: 'summer', nth: 3, title: '무거운 가방',
+        season: 'summer', nth: 3, title: '무거운 가방', card: '도 씨의 우편 가방은 무거워서, 잠깐 내려놓을 곳이 필요하다.',
         scene: [
           narr('한여름은 소포가 많은 계절이다. 도 씨의 가방이 터질 듯이 불룩하다.'),
           narr('도 씨가 커피를 받으려고 가방을 내려놓으려다, 물기 있는 바닥을 보고 멈춘다.'),
@@ -306,7 +307,7 @@ export const REGULARS = {
         why: '도 씨는 가방을 젖은 바닥에 못 내려놓고 안고 있었고, 문 옆 빈 벽을 봤어요. 말없이 걸 곳을 만들어 두면 돼요.',
       },
       autumn_notice: {
-        season: 'autumn', nth: 4, title: '퇴직 소식',
+        season: 'autumn', nth: 4, title: '퇴직 소식', card: '도 씨는 곧 정년 퇴직을 한다.',
         scene: [
           narr('가을 아침, 도 씨가 들어와 문 옆 못에 가방을 건다.'),
           narr('도 씨가 우편 한 묶음을 카운터에 놓는다. 맨 위에 우체국 소식지가 있다.'),
@@ -326,7 +327,7 @@ export const REGULARS = {
         why: '도 씨는 퇴직 소식지에서 눈을 피했고, 의자를 오래 봤어요. 묻지 않고 앉을 자리를 내어 줘요.',
       },
       winter_last: {
-        season: 'winter', nth: 5, title: '마지막 배달',
+        season: 'winter', nth: 5, title: '마지막 배달', card: '오늘은 도 씨의 마지막 배달 날이었다.',
         scene: [
           narr('마감 무렵, 문에 "오늘 영업 끝" 팻말을 걸었다. 그런데 문밖에 도 씨가 서 있다.'),
           narr('오늘은 도 씨의 마지막 배달 날이다. 편지를 다 나눠 주어서, 우편 가방이 납작하게 비었다.'),
@@ -354,7 +355,7 @@ export const REGULARS = {
     album: { title: '배를 판 날', line: '"그날 바다가 참 잔잔했어. 그래서 더 못 말했지."', cg: 'kang_secret' },
     touches: {
       spring_dawn: {
-        season: 'spring', nth: 1, title: '불 꺼진 창',
+        season: 'spring', nth: 1, title: '불 꺼진 창', card: '강 씨는 불이 켜진 가게에만 들어온다. 늘 마시는 것은 새벽 블랙이다.',
         scene: [
           narr('새벽 다섯 시 오십 분, 카페 문은 열려 있지만 불은 아직 꺼져 있다.'),
           narr('사장님은 뒷방에서 오늘 쓸 원두를 고르고 있다. 문 앞에는 털모자를 쓴 아저씨 한 분이 서 있다.'),
@@ -374,7 +375,7 @@ export const REGULARS = {
         why: '강 씨는 불이 켜져 있으면 들어간다고 말하고, 깜깜한 창을 봤어요. 묻지 않고 불을 켜 두면 마음 편히 들어와요.',
       },
       spring_sea: {
-        season: 'spring', nth: 2, title: '바다 안 나가요',
+        season: 'spring', nth: 2, title: '바다 안 나가요', card: '강 씨는 바다에 나가지 않는 날에도 항구의 배 자리를 오래 본다.',
         scene: [
           narr('새벽, 강 씨가 블랙을 받아 들고 늘 앉는 뒤쪽 테이블에 앉는다.'),
           narr('항구에서 배들이 하나둘 바다로 나간다. 그런데 오늘은 강 씨가 일어나지 않는다.'),
@@ -393,7 +394,7 @@ export const REGULARS = {
         why: '강 씨는 바다에 안 나간다고만 하고, 항구의 빈자리를 보며 커피를 식혔어요. 묻지 않고 따뜻한 잔으로 곁을 지켜요.',
       },
       summer_return: {
-        season: 'summer', nth: 3, title: '며칠 만에 온 날',
+        season: 'summer', nth: 3, title: '며칠 만에 온 날', card: '강 씨는 사흘 동안 오지 않다가, 늘 앉던 뒤쪽 테이블로 돌아왔다.',
         scene: [
           narr('사흘 동안 강 씨가 오지 않았다. 새벽마다 뒤쪽 테이블이 비어 있었다.'),
           narr('"7시 전은 동네 시간"이 된 새벽, 문이 열리고 강 씨가 들어온다.'),
@@ -412,7 +413,7 @@ export const REGULARS = {
         why: '강 씨는 늘 앉던 자리에 손을 가만히 두고, 항구에서 눈을 돌렸어요. 묻지 않고 늘 하던 대로 해 주는 것이 위로예요.',
       },
       autumn_suit: {
-        season: 'autumn', nth: 4, title: '양복',
+        season: 'autumn', nth: 4, title: '양복', card: '강 씨는 낡은 양복을 입은 날에도 늘 쓰던 머그잔을 찾는다.',
         scene: [
           narr('가을 새벽, 문이 열리고 강 씨가 들어온다.'),
           narr('그런데 늘 입던 작업복이 아니다. 낡은 양복에 넥타이를 맸는데, 넥타이가 조금 삐뚤다.'),
@@ -431,7 +432,7 @@ export const REGULARS = {
         why: '강 씨는 낯선 양복 차림에 자기 손을 보고, 늘 앉던 자리와 잔을 봤어요. 늘 하던 대로 해 드리면 강 씨가 편해져요.',
       },
       winter_snow: {
-        season: 'winter', nth: 5, title: '첫눈과 소문',
+        season: 'winter', nth: 5, title: '첫눈과 소문', card: '마을에는 강 씨가 배를 팔았다는 소문이 돈다.',
         scene: [
           narr('첫눈이 내린 새벽, 강 씨가 어깨의 눈을 털며 들어온다.'),
           narr('어제 시장에서 들은 말이 떠오른다. "강 씨가 배를 팔았대. 아무한테도 말 안 하고."'),
@@ -459,7 +460,7 @@ export const REGULARS = {
     album: { title: '컵 속의 쪽지', line: '"아빠가 먼저 갈게. 아침 꼭 먹어." 컵 받침에 쓴 쪽지.', cg: 'han_secret' },
     touches: {
       summer_first: {
-        season: 'summer', nth: 1, title: '10분',
+        season: 'summer', nth: 1, title: '10분', card: '한 씨는 밤 버스 기사님이다. 버스를 차고에 넣기 전 10분 동안 들른다.',
         scene: [
           narr('새벽 여섯 시 십 분, 종점에 마지막 밤 버스가 들어온다.'),
           sfx('bus'),
@@ -479,7 +480,7 @@ export const REGULARS = {
         why: '한 씨는 10분밖에 없다며 시계를 두 번 봤어요. 기다리는 시간을 줄여 주는 것이 한 씨에게 맞는 친절이에요.',
       },
       summer_clock: {
-        season: 'summer', nth: 2, title: '여섯 시 십 분',
+        season: 'summer', nth: 2, title: '여섯 시 십 분', card: '한 씨는 날마다 새벽 여섯 시 십 분에 온다. 늘 마시는 것은 달게 한 잔이다.',
         scene: [
           narr('"7시 전은 동네 시간"이 된 첫 새벽, 벽시계가 여섯 시 칠 분을 가리킨다.'),
           narr('며칠 전 한 씨가 나가면서 한 말이 떠오른다.'),
@@ -498,7 +499,7 @@ export const REGULARS = {
         why: '한 씨는 늘 여섯 시 십 분에 와서 10분만 쉬어요. 오는 시간에 맞춰 미리 만들어 두면 기다림 없이 쉴 수 있어요.',
       },
       autumn_note: {
-        season: 'autumn', nth: 3, title: '딸 사진과 펜',
+        season: 'autumn', nth: 3, title: '딸 사진과 펜', card: '한 씨에게는 학교에 다니는 딸이 있다. 한 씨가 집에 가면 딸은 이미 학교에 가 있다.',
         scene: [
           narr('가을 새벽 여섯 시 십 분, 한 씨가 컵을 받아 들고 의자에 앉는다.'),
           narr('한 씨가 휴대전화 속 교복 입은 아이의 사진을 본다. 한 씨가 집에 가면 이미 학교에 가 있는 딸이다.'),
@@ -517,7 +518,7 @@ export const REGULARS = {
         why: '한 씨는 딸 사진을 보다가 펜을 꺼냈지만, 쓸 종이가 없었어요. 쓸 것을 놓아 두면 마음을 전할 수 있어요.',
       },
       autumn_fog: {
-        season: 'autumn', nth: 4, title: '안개로 늦은 날',
+        season: 'autumn', nth: 4, title: '안개로 늦은 날', card: '안개가 낀 날, 한 씨에게는 3분밖에 없었다.',
         scene: [
           narr('짙은 안개가 낀 새벽, 여섯 시 십 분에 맞춰 달게 한 잔을 만들어 두었다.'),
           narr('그런데 버스가 오지 않는다. 여섯 시 이십오 분이 되어서야, 한 씨가 숨을 몰아쉬며 뛰어 들어온다.'),
@@ -536,7 +537,7 @@ export const REGULARS = {
         why: '한 씨는 시계를 보고, 미리 만든 잔을 봤어요. 3분뿐일 때는 말보다 바로 들고 갈 수 있는 잔이 필요해요.',
       },
       winter_daughter: {
-        season: 'winter', nth: 5, title: '딸과 함께 온 새벽',
+        season: 'winter', nth: 5, title: '딸과 함께 온 새벽', card: '한 씨의 딸은 코코아를 좋아하지만, 아빠에게 말하지 않았다.',
         scene: [
           narr('겨울 방학, 여섯 시 십 분에 들어온 한 씨 뒤로 패딩을 입은 아이가 따라 들어온다.'),
           narr('딸이 아빠와 함께 있고 싶어서, 아빠의 마지막 버스를 타고 같이 왔다고 한다.'),
@@ -564,7 +565,7 @@ export const REGULARS = {
     album: { title: '일주일의 말', line: '"일주일 동안 어른이랑 말한 게 여기가 처음이었어요."', cg: 'eunju_secret' },
     touches: {
       summer_cold: {
-        season: 'summer', nth: 1, title: '늘 식는 커피',
+        season: 'summer', nth: 1, title: '늘 식는 커피', card: '은주 씨는 아기를 돌보느라 커피를 끝까지 마셔 본 적이 없다.',
         scene: [
           narr('아기 엄마가 아기를 달래는 사이, 라테가 다 식어 버렸다.'),
           narr('삼십 분 동안 한 모금도 마시지 못했다. 컵 위의 우유 거품도 다 꺼져 있다.'),
@@ -583,7 +584,7 @@ export const REGULARS = {
         why: '은주는 커피가 늘 식는다며 한숨을 쉬고, 말하고 싶은 얼굴로 머뭇거렸어요. 덜 식는 컵과 따뜻한 말 한마디가 필요해요.',
       },
       summer_talk: {
-        season: 'summer', nth: 2, title: '아기랑만 하는 이야기',
+        season: 'summer', nth: 2, title: '아기랑만 하는 이야기', card: '은주 씨는 요즘 아기하고만 이야기한다고 했다.',
         scene: [
           narr('은주 씨가 아기를 재우고, 창가에서 라테를 마신다.'),
           narr('옆 탁자에서는 친구끼리 온 손님들이 깔깔 웃으며 이야기한다.'),
@@ -602,7 +603,7 @@ export const REGULARS = {
         why: '은주는 요즘 아기하고만 이야기한다며 다른 사람들의 웃음소리를 봤어요. 은주의 이야기를 들을 수 있게 먼저 물어봐요.',
       },
       autumn_space: {
-        season: 'autumn', nth: 3, title: '걸리는 유모차',
+        season: 'autumn', nth: 3, title: '걸리는 유모차', card: '은주 씨의 유모차는 좁은 통로에서 의자 다리에 걸린다.',
         scene: [
           sfx('bell'),
           narr('은주 씨가 유모차를 밀고 들어오다, 의자 다리에 걸린다.'),
@@ -622,7 +623,7 @@ export const REGULARS = {
         why: '은주 씨는 유모차가 걸려 머뭇거리며 창가 쪽을 봤어요. 은주 씨에게는 "어디가 편하세요?" 하고 물어보는 것이 맞아요.',
       },
       winter_tired: {
-        season: 'winter', nth: 4, title: '지친 얼굴',
+        season: 'winter', nth: 4, title: '지친 얼굴', card: '은주 씨의 아기가 감기에 걸렸다. 은주 씨는 많이 지쳐 보였다.',
         scene: [
           narr('첫눈 오는 오후, 은주 씨가 들어온다. 눈이 빨갛고, 머리도 대충 묶었다.'),
           narr('유모차 안의 아기는 감기에 걸렸는지, 자꾸 콧물을 훌쩍인다.'),
@@ -641,7 +642,7 @@ export const REGULARS = {
         why: '은주 씨는 무언가 말하려다 멈췄어요. 묻기를 기다리는 사람에게는 먼저 부드럽게 물어봐 줘요.',
       },
       winter_friend: {
-        season: 'winter', nth: 5, title: '처음 온 엄마',
+        season: 'winter', nth: 5, title: '처음 온 엄마', card: '은주 씨가 처음 온 엄마를 카페에 데려왔다.',
         scene: [
           sfx('bell'),
           narr('은주 씨가 유모차를 밀고 들어온다. 그 뒤에 처음 보는 엄마가 서 있다.'),
@@ -670,7 +671,7 @@ export const REGULARS = {
     album: { title: '합격 통지서', line: '"여기서 열고 싶었어요. 혼자 열면 무서울 것 같아서."', cg: 'sumin_secret' },
     touches: {
       summer_corner: {
-        season: 'summer', nth: 1, title: '구석의 이어폰',
+        season: 'summer', nth: 1, title: '구석의 이어폰', card: '수민은 가장 구석진 자리에서 이어폰을 끼고 문제집을 푼다.',
         scene: [
           narr('보리차를 다 만들었다. 학생은 벌써 가게에서 가장 구석진 자리에 앉아 문제집을 펴 놓았다.'),
           narr('학생은 이어폰을 다시 끼고, 문제집에 고개를 묻는다.'),
@@ -689,7 +690,7 @@ export const REGULARS = {
         why: '수민은 조용해서 좋다며 의자를 벽 쪽으로 돌렸어요. 말을 걸기보다 조용히 두는 것이 수민에게 맞아요.',
       },
       summer_rain: {
-        season: 'summer', nth: 2, title: '처마 밑의 비',
+        season: 'summer', nth: 2, title: '처마 밑의 비', card: '수민은 비 오는 날 우산이 없어서 처마 밑에 서 있었다.',
         scene: [
           narr('줄이 골목 끝까지 섰던 날 저녁, 갑자기 비가 쏟아진다.'),
           narr('처마 밑에 교복 입은 수민이 서 있다. 우산이 없는지, 가방을 가슴에 꼭 안고 있다.'),
@@ -708,7 +709,7 @@ export const REGULARS = {
         why: '수민은 비가 그치면 가겠다며 시계를 봤어요. 다가가지 않고 우산 하나만 건네도 충분해요.',
       },
       autumn_brochure: {
-        season: 'autumn', nth: 3, title: '떨어진 안내서',
+        season: 'autumn', nth: 3, title: '떨어진 안내서', card: '수민은 바다가 없는 먼 도시의 대학교를 생각하고 있다.',
         scene: [
           narr('수민이 계산대 앞에서 지갑을 꺼내다가, 접힌 종이 한 장을 떨어뜨린다.'),
           narr('바닥에 펼쳐진 종이는, 바다가 없는 먼 도시에 있는 대학교의 입학 안내서다.'),
@@ -727,7 +728,7 @@ export const REGULARS = {
         why: '수민은 안내서를 주우려다 멈추고 얼굴이 빨개졌어요. 보지 않고 돌려주는 것이 수민의 마음을 지켜 줘요.',
       },
       autumn_exam: {
-        season: 'autumn', nth: 4, title: '수능 날 아침',
+        season: 'autumn', nth: 4, title: '수능 날 아침', card: '오늘은 수민의 수능 날이었다. 수험표를 쥔 손이 많이 떨렸다.',
         scene: [
           narr('{{수능}} 날 아침, 따뜻한 보리차를 종이컵에 담았다. 이제 컵에 슬리브를 끼울 차례다.'),
           narr('수민은 계산대 앞에 서서 기다린다. 오늘은 이어폰도 끼지 않았다.'),
@@ -746,7 +747,7 @@ export const REGULARS = {
         why: '수민은 떨리는 손과 하얀 슬리브를 봤어요. 말 대신 작은 그림 하나가 수민에게 응원이 돼요.',
       },
       winter_letter: {
-        season: 'winter', nth: 5, title: '봉투',
+        season: 'winter', nth: 5, title: '봉투', card: '수민이 아직 뜯지 않은 대학교 봉투를 들고 왔다.',
         scene: [
           narr('수민이 카운터 앞에 선다. 손에 하얀 봉투가 들려 있다.'),
           narr('대학교 이름이 찍힌 봉투인데, 아직 뜯지 않았다.'),
@@ -774,7 +775,7 @@ export const REGULARS = {
     album: { title: '처음 떨린 날', line: '"그날 내가 옆에 있었어. 아무 말도 안 했지. 그게 그 사람 방식이니까."', cg: 'noh_secret' },
     touches: {
       summer_spoon: {
-        season: 'summer', nth: 1, title: '떨리는 숟가락',
+        season: 'summer', nth: 1, title: '떨리는 숟가락', card: '노 씨는 철물점 주인이다. 사장님은 서른 해 동안 노 씨에게 믹스커피를 타 주었다.',
         scene: [
           narr('철물점 노 씨가 들어와 카운터 앞 의자에 앉는다. 주문은 하지 않는다.'),
           narr('사장님이 말없이 종이컵에 믹스커피를 탄다. 서른 해 동안 그렇게 해 왔다고 한다.'),
@@ -794,7 +795,7 @@ export const REGULARS = {
         why: '노 씨는 사장님 손을 보고도 일부러 창밖 이야기를 했어요. 사장님이 불편하지 않게 모른 척 함께해 줘요.',
       },
       autumn_shelf: {
-        season: 'autumn', nth: 2, title: '낮아진 선반',
+        season: 'autumn', nth: 2, title: '낮아진 선반', card: '노 씨는 사장님 몰래 선반을 낮추고, 수도꼭지를 돌리기 쉽게 바꿔 주었다.',
         scene: [
           narr('사장님이 은행에 간 사이, 노 씨가 공구 상자를 들고 온다.'),
           narr('노 씨는 원두 통을 올려 두는 높은 선반을 한 칸 낮추고, 뻑뻑한 수도꼭지를 돌리기 쉬운 손잡이로 바꾼다.'),
@@ -813,7 +814,7 @@ export const REGULARS = {
         why: '노 씨는 사장님이 없을 때 몰래 고치고, 입에 손가락을 댔어요. 모른 척해 주는 것이 노 씨의 방식이에요.',
       },
       autumn_empty: {
-        season: 'autumn', nth: 3, title: '사장님의 빈 잔',
+        season: 'autumn', nth: 3, title: '사장님의 빈 잔', card: '노 씨는 사장님의 빈 잔을 오래 보았다. 늘 사장님이 타 주던 커피가 있다.',
         scene: [
           narr('마감 무렵, 노 씨가 들어와 카운터 앞에 선다.'),
           narr('사장님이 손을 쉬러 가신 뒤, 처음 맞는 가을 저녁이다.'),
@@ -832,7 +833,7 @@ export const REGULARS = {
         why: '노 씨는 사장님의 빈 잔을 보고, 믹스 봉지를 꺼냈다가 넣었어요. 걱정을 말하지 않는 사람이니 평소처럼 대해 줘요.',
       },
       winter_check: {
-        season: 'winter', nth: 4, title: '지나가다 들른 아침',
+        season: 'winter', nth: 4, title: '지나가다 들른 아침', card: '노 씨는 "지나가다 들렀다"며 사흘째 아침마다 온다.',
         scene: [
           narr('눈 오는 아침, 노 씨가 "지나가다 들렀다"며 또 들어온다. 오늘로 사흘째다.'),
           narr('노 씨는 들어오자마자, 덜덜 소리를 내는 난로 쪽을 본다.'),
@@ -851,7 +852,7 @@ export const REGULARS = {
         why: '노 씨는 난로와 사장님 자리, 내 손을 살폈어요. 지나가다 들렀다는 말 뒤의 마음을 모른 척 받아 줘요.',
       },
       winter_lantern: {
-        season: 'winter', nth: 5, title: '랜턴',
+        season: 'winter', nth: 5, title: '랜턴', card: '노 씨가 오래된 랜턴을 가져왔다. 꼭 사장님 자리 위의 못에 걸고 싶어 했다.',
         scene: [
           narr('정전 밤, 노 씨가 커다란 랜턴을 들고 들어온다.'),
           narr('아주 오래된 랜턴이다. 손잡이가 닳아서 반질반질하다.'),

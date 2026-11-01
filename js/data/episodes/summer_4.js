@@ -3,7 +3,7 @@
  * → 지안의 "시원한 거 아무거나"(대응 J2, 고른 대응에 따라 음료가 달라짐) → 마감, 사장님이 앞치마 끈을 다시 매 줌(숨은 장면 7)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, seen, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, seen, motion, face, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('cafe'),
     place('여름 오전 08:20', '바닷가 마을 카페'),
+    info('오늘의 칠판', '한낮에 손님이 몰려요. 시원한 음료가 많이 나가요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', center: 'owner:normal', right: 'noh:normal' }),
     sfx('bell'),
     say('owner', 'normal', '노 씨, 오셨어요.'),

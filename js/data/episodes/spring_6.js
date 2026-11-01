@@ -3,7 +3,7 @@
  * → 마감 둘러보기(숨은 장면 5: 칠판 오른쪽 아래의 빈칸을 사장님은 지우지 않음)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, branch, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, branch, motion, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_6',
@@ -22,6 +22,7 @@ export default {
     bg('hall', 'morning'),
     amb('cafe'),
     place('봄 새벽 06:05', '바닷가 마을 카페'),
+    info('오늘의 칠판', '빵 바구니를 테라스에 내놓았어요. 갈매기를 조심해요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', center: 'kang:normal', right: 'owner:normal' }),
     narr('오늘은 내가 먼저 와서 불을 켜 두었다. 강 씨는 창에 불이 켜져 있어야 들어오신다.'),
     narr('강 씨가 들어와 늘 앉는 뒤쪽 테이블에 앉는다. 사장님이 물을 끓이고, 천천히 블랙을 내린다.'),
@@ -37,6 +38,18 @@ export default {
     say('owner', 'normal', '…그렇군요. 바다 사람이 바다에 안 나갈 때는, 다 이유가 있어요.'),
     say('owner', 'normal', '말하고 싶어지면 말할 거예요. 그때까지는 늘 하던 대로 해요.'),
     think('사장님은 무언가 아시는 것 같다. 그래도 강 씨에게 묻지 않으신다.'),
+
+    // 그 갈매기(웃음 줄기 1/4: 봄 — 빵 도둑, 재미 개편 3.2)
+    bg('cafe_front', 'morning'),
+    show({ center: 'jieun:surprised' }),
+    narr('문 앞 테라스에 내놓은 빵 바구니로, 통통한 갈매기 한 마리가 슬금슬금 다가온다.'),
+    sfx('squawk'),
+    say('jieun', 'surprised', '앗, 그건 손님 빵이야!'),
+    mini('rush', { id: 'spring_6_gull', theme: 'gull', title: '그 갈매기를 쫓아라' }),
+    show({ left: 'jieun:normal', right: 'owner:normal' }),
+    say('owner', 'normal', '…또 왔네. 저 녀석은 해마다 봄이면 와요.'),
+    think('해마다? 사장님은 저 갈매기를 잘 아시는 것 같다.'),
+    bg('hall', 'spring'),
 
     // 사진을 보고 온 손님들
     place('봄 오전 11:00', '바닷가 마을 카페'),

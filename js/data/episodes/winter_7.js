@@ -5,7 +5,7 @@
  * 글씨가 삐뚤다. 이 컷에서 끝남 → 엔딩(앨범 · 사장의 눈 · 우유 한 컵)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, act, onlyIf, seen, motion, face, emote, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, act, onlyIf, seen, motion, face, emote, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -26,6 +26,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('겨울 아침 07:30', '눈이 그친 아침'),
+    info('오늘의 칠판', '한 해의 마지막 날이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     cg('winter_wipe_cups'),
     narr('며칠 동안 내리던 눈이 그쳤다. 창밖이 눈부시게 하얗다.'),
@@ -89,7 +90,7 @@ export default {
       id: 'winter_7_day', title: '사장님이 보는 앞에서', level: 'normal', book: WINTER_BOOK,
       orders: [
         { who: 'haesun', say: '늘 먹던 거요.', menu: 'warm_milk', temp: 'hot', togo: false, usual: true },
-        { who: 'geum', say: '아아 하나요. 천천히 해요.', menu: 'americano', temp: 'iced', togo: true, thanks: '겨울에도 역시 이거죠. 고마워요.' },
+        { who: 'geum', say: '…뜨거운 아이스 아메리카노 하나요.', menu: 'americano', temp: 'hot', togo: true, ask: ['temp'], reply: { temp: '…농담이에요. 올해 처음으로, 따뜻하게요.' }, thanks: '…따뜻하네. 내년 여름엔 다시 아아예요.' },
       ],
     }),
 
@@ -99,6 +100,12 @@ export default {
     bgm('ending'),
     place('겨울 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    // 그 갈매기(웃음 줄기 4/4: 겨울 — 사장님의 주머니). 엔딩 '사장의 눈' 덤 12번째 컷과 이어짐
+    narr('사장님이 앞치마를 벗어 걸자, 주머니에서 빵 부스러기가 우수수 떨어진다.'),
+    sfx('squawk'),
+    say('jieun', 'surprised', '사장님… 혹시 봄부터 그 갈매기한테 빵을 주셨어요?'),
+    say('owner', 'normal', '…단골이야.'),
+    think('그 갈매기도 사장님이 몰래 챙기던 손님이었다. 웃음이 터졌는데, 사장님도 입꼬리가 조금 올라갔다.'),
     narr('손님이 모두 갔다. 사장님이 늘 하던 대로 우유를 데우려고 냄비를 든다.'),
     narr('그런데 냄비를 든 사장님의 손이 조금 떨린다.'),
     say('jieun', 'normal', '사장님, 오늘은 제가 할게요. 앉아 계세요.'),
@@ -124,6 +131,8 @@ export default {
     narr('글씨가 삐뚤다.'),
     think('내 이름이다.'),
     narr('사장님은 분필을 내려놓고, 아무 말도 하지 않는다. 그래도 나는 다 알 것 같다.'),
+    // 계절 끝 배지: 한 해를 마치면 우리 카페의 바리스타(칠판의 이름이 배지)
+    info('새 배지', '「우리 카페의 바리스타」 — 칠판에 지은의 이름이 생겼어요.', 'badge'),
     end(),
   ],
 };

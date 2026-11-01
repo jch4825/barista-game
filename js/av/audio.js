@@ -726,6 +726,7 @@ bus.on('settings', () => applyVolumes());
 bus.on('profile', () => applyVolumes());
 
 /** 도구(검사·에셋 목록)용 */
-export const SFX_NAMES = Object.keys(SYN);
+// 합성음이 없고 파일로만 있는 효과음(재미 개편 새 놀이 · 웃음 줄기, 2026-11-01). 파일이 없으면 조용히 넘어감
+export const SFX_NAMES = [...new Set([...Object.keys(SYN), 'poof', 'boom', 'squawk', 'bus'])];
 export const BGM_NAMES = [...new Set([...Object.keys(MOODS), ...Object.keys(BGM_VARIANTS)])];
 export const AMB_NAMES = ['cafe', 'crowd', 'street', 'kitchen', 'home', 'classroom'];

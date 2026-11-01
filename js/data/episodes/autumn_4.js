@@ -4,7 +4,7 @@
  * → 단골들은 돕지 않고 평소 주문을 함. 평소가 위로가 됨 → 마감, 열쇠: "내일은 네가 연다. 손님은 평소대로 온다."(숨은 장면 9)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, seen, motion, face, emote, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, seen, motion, face, emote, end, info } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -26,6 +26,7 @@ export default {
     amb('crowd'),
     bgm('peak'),
     place('가을 낮 11:00', '마을 축제'),
+    info('오늘의 칠판', '바다 축제 날! 주문이 아주 많을 거예요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     cg('festival_rush'),
     narr('일 년에 한 번 열리는 바다 축제 날이다. 골목마다 깃발과 천막이 가득하고, 구운 생선 냄새가 난다.'),
     narr('카페 앞에도 줄이 선다. 여름보다 더 길다.'),
@@ -34,6 +35,8 @@ export default {
 
     bg('hall', 'autumn'),
     show({ left: 'jieun:nervous', right: 'customer:normal' }),
+    // 몰림 시간(재미 개편 Q-44): 축제 손님이 한꺼번에
+    mini('rush', { id: 'autumn_4_rush', theme: 'cafe', title: '축제의 몰림 시간' }),
     mini('brew', {
       id: 'autumn_4_rush', title: '축제 손님', level: 'normal', quit: true, book: AUTUMN_BOOK,
       orders: [

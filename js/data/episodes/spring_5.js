@@ -4,7 +4,7 @@
  * → 배우: "조용해서 좋네요." → 마감, 사장님의 잔이 아주 조금 흔들림 → 그날 밤 배우가 이 카페 사진을 올림(여름의 소문)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, choose, opt, branch, seen, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, choose, opt, branch, seen, motion, face, end, info } from '../../core/dsl.js';
 
 export default {
   id: 'spring_5',
@@ -23,11 +23,16 @@ export default {
     amb('crowd'),
     bgm('tension'),
     place('봄 오전 08:40', '벚꽃 핀 골목'),
+    info('오늘의 칠판', '벚꽃 주간! 골목에서 드라마를 찍어요. 손님이 한꺼번에 몰려올 거예요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     cg('spring_crew'),
     narr('골목의 벚꽃이 활짝 피었다. 일 년 중 이 마을에 사람이 가장 많이 오는 "벚꽃 주간"이다.'),
     narr('오늘은 골목에서 드라마를 찍는다고 한다. 카메라와 조명 주변에 구경하는 사람들이 빽빽하다.'),
     think('평소보다 손님이 훨씬 많겠다. 그래도 서두르지 말자, 서두르면 쏟으니까.'),
     cg(null),
+    // 몰림 시간(재미 개편 Q-44): 구경 온 사람들이 한꺼번에. 오래 둔 주문은 사장님이 받아 줌
+    bg('hall', 'spring'),
+    mini('rush', { id: 'spring_5_rush', theme: 'cafe', title: '벚꽃 주간의 몰림 시간' }),
+    think('도시 카페와 다르다. 놓친 주문은 사장님이 받아 주셨다.'),
 
     bg('hall', 'spring'),
     show({ left: 'jieun:nervous', right: 'agent:normal' }),

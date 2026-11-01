@@ -4,7 +4,7 @@
  * → 처음 온 엄마를 데려온 은주(대응 E5)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, secret, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, secret, motion, face, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -25,6 +25,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('겨울 아침 09:00', '바닷가 마을 카페'),
+    info('오늘의 칠판', '전기가 다시 들어왔어요. 손님이 한꺼번에 올지도 몰라요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
     narr('정전 밤에 쓴 컵들을 아침까지 다 닦았다. 창밖에는 아직 눈이 조금씩 내린다.'),
     narr('사장님 자리 위에는 노 씨의 랜턴이 그대로 걸려 있다.'),
@@ -84,6 +85,10 @@ export default {
       }),
     ),
     leave('jian'),
+
+    // 몰림 시간(재미 개편 Q-44): 전기가 들어오자 마을 사람들이 한꺼번에
+    narr('전기가 들어오자, 며칠 동안 따뜻한 것을 못 마신 마을 사람들이 한꺼번에 몰려온다.'),
+    mini('rush', { id: 'winter_5_rush', theme: 'cafe', title: '불이 들어온 날의 몰림 시간' }),
 
     // 은주와 처음 온 엄마
     place('겨울 오후 14:00', '바닷가 마을 카페'),

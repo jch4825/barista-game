@@ -3,7 +3,7 @@
  * → 마감 무렵, 빈 가방의 도 씨(대응 D5) → 겨울에도 아이스
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, secret, motion, face, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, secret, motion, face, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('겨울 새벽 06:10', '바닷가 마을 카페'),
+    info('오늘의 칠판', '겨울 방학이 시작됐어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', center: 'han:normal', right: 'han_daughter:normal' }),
     sfx('bus'),
     sfx('bell'),

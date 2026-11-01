@@ -5,7 +5,7 @@
  * → 비, 처마 밑의 수민(대응 S2) → 사장님이 칠판에 "7시 전은 동네 시간"(숨은 장면 8, 선택마다 앞의 한 줄이 다름)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, choose, opt, branch, seen, motion, face, emote, fx, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, choose, opt, branch, seen, motion, face, emote, fx, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -27,14 +27,22 @@ export default {
     amb('crowd'),
     bgm('tension'),
     place('여름 새벽 06:00', '카페 앞 골목'),
+    info('오늘의 칠판', '여름 성수기! 줄이 골목 끝까지 설지도 몰라요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     cg('summer_line'),
     narr('주말 새벽, 해 뜨는 바다를 찍으러 온 관광객들이 문을 열기도 전부터 줄을 섰다.'),
     narr('줄이 골목 끝까지 이어진다. 그런데 그 줄 사이에, 늘 오던 얼굴은 하나도 보이지 않는다.'),
+    // 그 갈매기(웃음 줄기 2/4: 여름 — 같이 줄을 섬)
+    narr('그런데 줄 중간에, 갈매기 한 마리가 손님들 사이에 끼어 얌전히 서 있다.'),
+    sfx('squawk'),
+    think('봄에 빵을 물고 간 그 갈매기다. 설마 주문하려고 줄을 선 건 아니겠지.'),
     cg(null),
     bg('hall', 'busy_summer'),
     show({ left: 'jieun:nervous', right: 'owner:normal' }),
     say('owner', 'normal', '열어요. 많아도 한 잔씩, 순서대로.'),
     think('도시 카페의 줄이 떠오른다. 그래도 여기서는 사장님이 옆에 계신다.'),
+    // 몰림 시간(재미 개편 Q-44): 문을 열자마자 주문이 한꺼번에. 오래 둔 주문은 사장님이 받아 줌
+    mini('rush', { id: 'summer_6_tickets', theme: 'cafe', title: '문 열자마자 몰림 시간' }),
+    say('owner', 'normal', '좋아요. 이제 한 잔씩 만들어요.'),
     sfx('door'),
     mini('brew', {
       id: 'summer_6_rush', title: '골목 끝까지 선 줄', level: 'normal', quit: true, book: SUMMER_BOOK,

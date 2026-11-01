@@ -3,7 +3,7 @@
  * → 두꺼운 컵의 은주, "요즘은 아기랑만 이야기해요"(대응 E2)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('cafe'),
     place('여름 오전 09:00', '바닷가 마을 카페'),
+    info('오늘의 칠판', '소포가 많은 계절이에요. 우체부 도 씨의 가방이 무거워요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'do:smile' }),
     sfx('bell'),
     say('do', 'smile', '우편이요! 아이고 더워라, 오늘은 소포가 산더미예요.'),

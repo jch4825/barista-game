@@ -3,7 +3,7 @@
  * → 구석의 수민("제일 싼 거요" = 말로 설명하는 주문 → 구석 자리, 대응 S1)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, term, motion, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, term, motion, end, info } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -24,6 +24,7 @@ export default {
     amb('cafe'),
     bgm('cafe'),
     place('여름 오전 09:20', '바닷가 마을 카페'),
+    info('오늘의 칠판', '디카페인 원두가 새로 들어왔어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'eunju:normal' }),
     sfx('bell'),
     narr('유모차를 미는 사람이 들어오다가, 문턱에서 바퀴가 덜컹 걸린다.'),
