@@ -37,6 +37,7 @@
 
 | 게임 파일 | 원래 이름 | 쓰이는 장면 |
 | :--- | :--- | :--- |
+| `city_cafe_rush.jpg` | `Customers_waiting_in_bakery_cafe_20261010155034.jpg`(직업 마1스톤의 `counter_peak.jpg`, 2026-11-01 사용자 "마1스톤의 붐비는 카페 이미지 받아와라") | 봄 1일 도시 카페의 점심시간(러시) |
 | `living.jpg` | `Apartment_living_room_with_lamp_20261010155029.jpg` | (쓰지 않음) |
 | `office.jpg` | `Manager_office_in_bakery_20261010155041.jpg` | (쓰지 않음) |
 | `tea.jpg` | `Two_empty_mugs_on_table_20261010155042.jpg` | (쓰지 않음) |

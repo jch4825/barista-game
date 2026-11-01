@@ -307,6 +307,7 @@ const SCENES = { home, living, bus_stop: busStop, cafe_front: cafeFront, counter
 const PHOTO_SCENES = {
   hall: 'counter', alley: 'cafe_front', festival_alley: 'cafe_front', harbor: 'bus_stop', bus_terminal: 'bus_stop',
   hardware_front: 'cafe_front', post_office_front: 'cafe_front', backroom: 'staff', jieun_room: 'home', title_cafe: 'cafe_front',
+  city_cafe: 'counter', // 봄 1일 도시 카페(직업 마1스톤의 피크타임 그림, 2026-11-01)
 };
 
 /**

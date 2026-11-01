@@ -298,3 +298,74 @@ body:is(.reduce-motion, .theme-calm) .mg-look .lk-ico { animation: none; }
 body:is(.reduce-motion, .theme-calm) .mg-tray .tr-tray { transform: none; }
 body:is(.reduce-motion, .theme-calm) .mg-tray .tr-walker.is-walking .tr-face { animation: none; }
 body.contrast .mg-routine .rt-obj, body.contrast .mg-look .lk-name { background: #000; border-color: #FFE14D; }
+
+/* ---------- 몰림(rush, 재미 개편 4.4): 주문 종이 · 그 갈매기 ---------- */
+.mg-rush .ru-field { position: absolute; inset: 0 0 120px 0; }
+.mg-rush.rs-city .sc-bg { filter: grayscale(.85) sepia(.12) contrast(1.05) brightness(.97); } /* 지은의 기억: 색이 거의 빠진 장면(2026-11-01 사용자 '색을 더 빼라') */
+.mg-rush.rs-city .sc-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 8, 14, .55) 100%); pointer-events: none; }
+.mg-rush .ru-slip { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px; max-width: 300px; padding: 14px 18px; border-radius: 6px; border: 2px solid #8E6C33; background: #FFFDF2; color: #2A1D12; font-size: 23px; font-weight: 800; box-shadow: 0 10px 22px rgba(0, 0, 0, .35); animation: ru-in .28s ease-out backwards; }
+.mg-rush .ru-slip i svg { width: 30px; height: 30px; flex: none; color: #8E6C33; }
+.mg-rush .ru-slip:focus-visible { outline: 4px solid #F0D9A2; outline-offset: 4px; }
+.mg-rush .ru-slip.is-done { animation: ru-done .38s ease-in forwards; }
+.mg-rush .ru-slip.is-owner { animation: ru-owner .38s ease-in forwards; }
+@keyframes ru-in { from { opacity: 0; transform: translate(-50%, -30%) scale(.8); } }
+@keyframes ru-done { 0% { transform: translate(-50%, -50%) scale(1); } 35% { opacity: 1; transform: translate(-50%, -50%) scale(1.25) rotate(-4deg); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); filter: blur(4px); } }
+/* 주문 종이를 누를 때 배경이 조금 흔들림(--amp: 쌓인 종이가 많을수록 큼) */
+.mg-rush .sc-bg.is-jolt { animation: ru-jolt .32s ease-out; }
+@keyframes ru-jolt { 20% { transform: translate(calc(var(--amp, 6px) * -1), calc(var(--amp, 6px) * .4)); } 45% { transform: translate(var(--amp, 6px), calc(var(--amp, 6px) * -.4)); } 70% { transform: translate(calc(var(--amp, 6px) * -.5), 0); } 100% { transform: none; } }
+@keyframes ru-owner { to { opacity: 0; transform: translate(60%, -50%); } }
+.mg-rush .ru-foot { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); width: min(1100px, calc(100% - 60px)); display: grid; gap: 10px; padding: 14px 22px; border-radius: 16px; border: 2px solid var(--gold-d, #8E6C33); background: rgba(255, 253, 247, .96); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.mg-rush .ru-count { margin: 0; font-size: 28px; font-weight: 800; color: #2A1D12; }
+.mg-rush .ru-time { height: 12px; border-radius: 6px; background: #EFE6D2; overflow: hidden; }
+.mg-rush .ru-time i { display: block; height: 100%; width: calc(var(--t, 0) * 100%); background: #8E6C33; }
+.mg-rush .ru-time { --t: 0; }
+.mg-rush.is-crash .ru-field::after { content: '와르르!'; position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) rotate(-6deg); padding: 18px 40px; border-radius: 20px; background: #6B4423; color: #FFF4D6; font-size: 88px; font-weight: 900; box-shadow: 0 20px 40px rgba(0, 0, 0, .5); }
+.mg-rush.is-crash .sc-bg { animation: ru-shake .5s ease-in-out 2; }
+@keyframes ru-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-14px); } 75% { transform: translateX(14px); } }
+.mg-rush .ru-gull { position: absolute; transform: translate(-50%, -85%); width: 170px; height: 140px; padding: 0; border: 0; background: none; transition: left .35s ease, top .35s ease; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .35)); }
+.mg-rush .ru-gull-pic svg { width: 170px; height: 130px; }
+.mg-rush .ru-gull .ru-bread { position: absolute; right: -24px; top: 18px; width: 54px; height: 54px; color: #B5752E; }
+.mg-rush .ru-gull .ru-bread svg { width: 54px; height: 54px; }
+.mg-rush .ru-gull:focus-visible { outline: 4px solid #F0D9A2; outline-offset: 6px; border-radius: 20px; }
+.mg-rush .ru-gull.is-hit { animation: ru-hit .35s ease; }
+@keyframes ru-hit { 30% { transform: translate(-50%, -85%) rotate(-14deg) scale(1.1); } 70% { transform: translate(-50%, -85%) rotate(10deg); } }
+.mg-rush .ru-gull.is-gone .ru-bread { opacity: 0; }
+.mg-rush .ru-gull.is-gone, .mg-rush .ru-gull.is-fled { transition: left 1.2s ease-in, top 1.2s ease-in, opacity 1.2s; left: 110% !important; top: -10% !important; opacity: 0; }
+body:is(.reduce-motion, .theme-calm) .mg-rush :is(.ru-slip, .ru-gull, .sc-bg) { animation: none !important; transition: none !important; }
+
+/* ---------- 바닷가로 가는 버스(bus, 재미 개편 7장) ---------- */
+.mg-bus .bs-scene { position: absolute; inset: 0 0 130px 0; overflow: hidden; border-radius: 0 0 24px 24px; }
+.mg-bus .bs-view { position: absolute; inset: 0; }
+.mg-bus .bs-sky { position: absolute; inset: 0; background: linear-gradient(180deg, #F6C9A5 0%, #F3D9B8 30%, #CFE3EA 55%); }
+.mg-bus .bs-hills { position: absolute; left: -5%; right: -5%; top: 34%; height: 18%; background: linear-gradient(180deg, #7D9A8C, #5E7F72); border-radius: 50% 50% 0 0 / 100% 100% 0 0; opacity: .85; }
+.mg-bus .bs-sea { position: absolute; left: 0; right: 0; top: 48%; height: 26%; background: repeating-linear-gradient(90deg, #3E7FA0 0 80px, #4A8DAE 80px 160px); background-size: 320px 100%; animation: bs-flow 4s linear infinite; }
+.mg-bus .bs-road { position: absolute; left: 0; right: 0; bottom: 0; height: 26%; background: repeating-linear-gradient(90deg, #6E6A66 0 120px, #7A7672 120px 240px); background-size: 480px 100%; animation: bs-flow 1.6s linear infinite; }
+@keyframes bs-flow { to { background-position: -320px 0; } }
+.mg-bus .bs-lane { position: absolute; inset: 0; }
+.mg-bus .bs-sight { position: absolute; left: 100%; width: 150px; height: 110px; padding: 0; border: 0; background: none; animation: bs-pass var(--dur, 6s) linear forwards; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .25)); }
+.mg-bus .bs-sight svg { width: 100%; height: 100%; }
+.mg-bus .bs-sight.s-lighthouse { height: 190px; width: 110px; }
+.mg-bus .bs-sight:focus-visible { outline: 4px solid #FFF4D6; outline-offset: 4px; border-radius: 16px; }
+.mg-bus .bs-sight.is-got { filter: drop-shadow(0 0 14px #FFE08A); opacity: .55; }
+@keyframes bs-pass { to { transform: translateX(-125vw); } }
+.mg-bus .bs-window { position: absolute; inset: 0; border: 34px solid #2F3B44; border-radius: 30px; box-shadow: inset 0 0 0 6px #4C5C68; pointer-events: none; }
+.mg-bus .bs-window::after { content: ''; position: absolute; top: -34px; bottom: -34px; left: 50%; width: 26px; transform: translateX(-50%); background: #2F3B44; }
+.mg-bus .bs-bag { position: absolute; left: 70px; bottom: 50px; width: 90px; height: 90px; color: #7A4E2D; }
+.mg-bus .bs-bag svg { width: 90px; height: 90px; }
+.mg-bus .bs-bag.is-roll { animation: bs-roll 1.2s ease-in-out; }
+@keyframes bs-roll { 30% { transform: translateX(120px) rotate(160deg); } 60% { transform: translateX(60px) rotate(300deg); } 100% { transform: none; } }
+.mg-bus.is-bump .bs-scene { animation: bs-bump .45s ease-in-out; }
+@keyframes bs-bump { 30% { transform: translateY(-14px) rotate(-1deg); } 60% { transform: translateY(8px) rotate(1deg); } }
+.mg-bus .bs-foot { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(1500px, calc(100% - 60px)); display: flex; align-items: center; gap: 18px; padding: 12px 20px; border-radius: 16px; border: 2px solid var(--gold-d, #8E6C33); background: rgba(255, 253, 247, .96); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+.mg-bus .bs-tally { flex: 1; margin: 0; font-size: 26px; font-weight: 800; color: #2A1D12; }
+.mg-bus .bs-strap.is-ready { box-shadow: 0 0 0 6px rgba(240, 217, 162, .7), 0 0 30px rgba(255, 220, 140, .8); }
+.mg-bus.is-still .bs-sight { animation: bs-fade var(--dur, 6s) linear forwards; left: 60%; }
+@keyframes bs-fade { 0% { opacity: 0; } 10%, 85% { opacity: 1; } 100% { opacity: 0; } }
+body:is(.reduce-motion, .theme-calm) .mg-bus :is(.bs-sea, .bs-road, .bs-scene, .bs-bag) { animation: none !important; }
+.mg-bus .bs-sight.is-hold { animation: none; left: 55%; }
+
+/* 떠오르는 짧은 글(펑! · 꽥! · 갈매기 1!, arcade.js popText). 직업 마1스톤의 work.css 에서 가져와 바닷가 밤 색으로 */
+.mg-pop { position: absolute; z-index: 30; pointer-events: none; transform: translate(-50%, -50%); font-size: 40px; font-weight: 900; color: #FFF4D6; -webkit-text-stroke: 2px #2A1D12; paint-order: stroke fill; text-shadow: 0 4px 10px rgba(0, 0, 0, .45); white-space: nowrap; animation: mg-pop .75s ease-out both; }
+.mg-pop.big { font-size: 56px; color: #FFE08A; }
+@keyframes mg-pop { 0% { opacity: 0; translate: 0 10px; scale: .6; } 20% { opacity: 1; scale: 1.15; } 40% { scale: 1; } 100% { opacity: 0; translate: 0 -46px; } }
+body.reduce-motion .mg-pop { animation: none !important; }

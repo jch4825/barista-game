@@ -151,8 +151,10 @@ export const IMAGE_PROMPTS = {
     ['jian_shy', '지안 · 망설임', 'shy hesitant expression, eyes looking down, hugging the closed sketchbook tightly with both arms'],
   ].map(([id, title, what]) => [id, { title, from: 'doc', prompt: P([SEA_SAME, what + '.', SEA_STYLE + '.']), neg: SEA_SAME_NEG, note: '참조 이미지: jian_normal' }])),
 
-  /* ===== 배경 (직업 마1스톤 요청서 B, 1376×768): 새 이야기에 쓰지 않아 나중에 지울 것 ===== */
+  /* ===== 배경 (직업 마1스톤 요청서 B, 1376×768): city_cafe_rush 말고는 새 이야기에 쓰지 않아 나중에 지울 것 ===== */
   ...Object.fromEntries([
+    // 2026-11-01 사용자: 봄 1일 '도시 카페의 점심시간'(러시)의 배경으로 직업 마1스톤의 counter_peak 를 가져옴(지은이 일하던 도시의 큰 카페)
+    ['city_cafe_rush', '도시 카페 · 점심시간(직업 마1스톤의 피크타임 그림)', 'bakery cafe counter, glass pastry showcase, busy lunch rush, soft blurred silhouettes of many customers in line, warm lights'],
     ['tea', '휴게 공간', 'small break nook in a cafe, window daylight, round wooden table, two empty mugs, potted plant'],
     ['office', '점장실', 'small manager office, venetian blinds casting soft stripes, dark wood desk with papers and a gold pocket watch, binders, framed certificates (blank), coffee sacks'],
     ['living', '거실 · 저녁', 'cozy Korean apartment living room at dusk, small dining table with lamp, sofa, warm orange window light'],

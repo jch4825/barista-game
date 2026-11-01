@@ -19,6 +19,7 @@ const CY = 'Cyberleaf-RetroSFXs/';
 const IS = 'interfaceanditemsounds/';
 const TW = 'userinterfacesoundfxscifitech/';
 const VN = 'visualnovelanimemusicpack_v2/WAV/';
+const OVV = 'OVANI/Vehicles Heavy Sound FX Pack/Vehicles Heavy/'; // 버스(2026-11-01)
 const AIM = 'BGM/'; // 저작자가 AI 음악 모델로 만든 배경음악(프로젝트의 BGM/ 폴더)
 // AI 음악은 곡마다 만든 모델을 적음(entry 의 pack). 지금 곡은 모두 Suno(2026-11-01 사용자). Gemini로 만든 곡이 오면 Gemini 팩을 더함
 const SUNO = 'ai:suno';
@@ -47,6 +48,7 @@ export const PACKS = {
   // 만든 곳: Humble 다운로드 페이지 표기(사용자 확인 2026-10-16). 썸네일의 '320'이 우리 팩의 소리 개수(320개)와 같음
   [IS]: { name: 'Interface & Item Sounds (320개, V1~V3)', author: 'GameDev Market', license: GDM, bundle: HB21 },
   [TW]: { name: 'User Interface Sound FX - Scifi & Tech', author: 'TomWinandySFX (tomwinandy.com)', license: GDM, bundle: HB21 },
+  [OVV]: { name: 'Vehicles Heavy Sound FX Pack', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
   /* 2026-11-01 사용자: "AI로 만든 음악은 꼭 자를 필요도, 따로 올려서 저작권을 보호할 필요도 없다. 전부 저작자가 만든 음악이므로
    * SUNO나 Gemini 음악 모델로 만든 것이라는 것만 명시하면 된다."
    * 사용자(같은 날 고침): "Rising Glow, Galactic Waltz, Untitled, Across the Horizon 모두 SUNO로 만든 곡이야." → 지금 곡은 모두 Suno
@@ -76,6 +78,9 @@ export const AUDIO_MAP = [
   { id: 'chant_a', kind: 'bgm', pack: SUNO, src: S('그레고리안 찬송가'), track: '그레고리안 찬송가', use: '정전 밤(돌려 듣기 1)', trim: [0, 158.4], fadeOut: 1.5, target: { lufs: -20 }, note: '「그레고리안 찬송가」(바장조): "그레고리안 찬트 · 찬송가 · 무거운" → 폭설로 마을 불이 꺼지고 촛불을 켜는 밤' },
   { id: 'chant_b', kind: 'bgm', pack: SUNO, src: S('그레고리안 찬송가 (1)'), track: '그레고리안 찬송가 (2)', use: '정전 밤(돌려 듣기 2)', trim: [0, 114.4], fadeOut: 1.5, target: { lufs: -20 }, note: '같은 곡의 다른 판(가단조, 1분 54초)' },
   { id: 'letter', kind: 'bgm', pack: SUNO, src: S('아이에게 보내는 편지 (Remastered)'), track: '아이에게 보내는 편지 (Remastered)', use: '엔딩 크레디트(가사가 있는 곡이라 여기서만, 한 번만)', trim: [0, 198.0], fadeOut: 2, target: { lufs: -18 }, note: '가사가 있는 노래(여성 목소리 · 발라드): 사용자 결정으로 엔딩 크레디트 · 오프닝에서만 → 이야기 중에는 대사와 겹치므로 크레디트에서만 한 번 틂' },
+
+  /* ---------------- 환경음(버스, 2026-11-01) ---------------- */
+  { id: 'bus', kind: 'amb', src: `${OVV}Diesel/Diesel Engine Interior Loop.wav`, loop: 1.5, lowpass: 3200, target: { lufs: -26 }, bitrate: '64k', note: '디젤 엔진 실내 소리(19초 반복) → 바닷가로 가는 버스 안' },
 
   /* ---------------- 환경음 ----------------
    * 매장 웅성거림(amb/cafe)은 2026-10-11부터 쓰지 않다가 2026-10-16 파일째 지움(사용자). 옛 저장에 남아 있어도 audio.js 가 틀지 않음 */
@@ -190,11 +195,20 @@ export const AUDIO_MAP = [
   { id: 'miss_high', kind: 'sfx', src: `${AC}Expressions/AC_Surprised_01v1.wav`, target: { peak: -8 }, note: '깜짝 놀람 → 손 기술이 넘칠 때' },
   { id: 'miss_sulk', kind: 'sfx', src: `${AC}Expressions/AC_Depressed_Tremolo.wav`, trim: [0, 2], fadeOut: 0.6, target: { peak: -9 }, note: '축 처지는 떨림 → 지은의 시무룩한 얼굴' },
   { id: 'sweat', kind: 'sfx', src: `${AC}Cute Sounds/AC_Funny_Sweat_01v1.wav`, target: { peak: -10 }, note: '식은땀 한 방울(만화 효과음)' },
+  // 2026-11-01 재미 개편의 새 놀이(몰림 · 갈매기 · 버스). 사용자 "효과음 적절한 거 찾아서 넣어주고"
+  { id: 'poof', kind: 'sfx', src: `${AC}Whooshes Swishes Slides Transitions/AC_Vanish_Funny_Smoke_01v2.wav`, trim: [0, 0.9], fadeOut: 0.35, target: { peak: -9 }, note: '만화 같은 연기 펑(0.1~0.3초가 가장 큼) → 주문 종이를 누르면 펑 터짐' },
+  { id: 'boom', kind: 'sfx', src: `${AC}Impacts/AC_Retro_Explosion_02_Subtle.wav`, trim: [0, 1.4], fadeOut: 0.5, target: { peak: -8 }, note: '작은 옛날 게임 폭발(무섭지 않게) → 도시 카페에서 주문이 쌓여 와르르' },
+  { id: 'squawk', kind: 'sfx', src: `${AC}Misc/AC_Squeaky_Mouse_02.wav`, trim: [0, 0.3], fadeOut: 0.08, target: { peak: -10 }, note: '짧고 높은 끽 → 그 갈매기를 맞혔을 때 "꽥!"(갈매기 울음 소리는 팩에 없음)' },
+  {
+    id: 'bus', kind: 'sfx', target: { peak: -10 },
+    layers: [{ src: `${OVV}Truck/Truck Braking Pedal Normal.wav` }, { src: `${OVV}Truck/Truck Handbrake Up Normal.wav`, at: 0.7 }],
+    note: '브레이크를 밟고 → 손 브레이크 "칙" → 버스가 정류장에 섬(봄 1일 버스 놀이의 끝)',
+  },
 ];
 
 /** 아직 알맞은 원본이 없어 합성음으로 두는 ID (사용자에게 요청할 목록) */
 export const MISSING = {
   bgm: [],
-  sfx: ['snap', 'bus', 'espresso', 'steam', 'mixer', 'shutter_phone', 'mug'],
+  sfx: ['snap', 'espresso', 'steam', 'mixer', 'shutter_phone', 'mug'],
   amb: ['street', 'kitchen', 'classroom'],
 };

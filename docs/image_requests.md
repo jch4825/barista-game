@@ -719,3 +719,73 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 - **I-11** 지안의 메뉴판: 글자 없이 색 동그라미 + 컵 그림(Q-9 제안). 이 그림이 정해지면 메뉴판 배경과 커피 만들기 화면도 같은 색을 씁니다.
 - **I-12** 마지막 컷의 이름: 칠판은 비워 두고 게임이 '지은'을 삐뚤한 분필 글씨로 얹습니다(그림 속 한글 글씨는 생성 그림에서 깨지기 쉬움).
 - **I-13** 양: 장면·이벤트 CG P0 6장 · P1 24장 · P2 약 25장. 배경 20장(5장)과 합치면 이야기 전체에 그림 75장쯤이 필요합니다. 계절마다 나눠 만들지.
+
+## 8. 새 놀이의 그림 (재미 개편, 2026-11-01)
+
+> 사용자(2026-11-01): "갈매기, 자동차, 동산 등은 나에게 flow로 제작할 프롬프트를 제시해라." 지금은 코드로 그린 임시 그림(갈매기 · 배 · 등대 · 물고기는 단순한 SVG, 버스 창밖은 색 띠)입니다.
+> 그림이 오면 `assets/flow/`에 넣고 알려 주세요. 초록 바탕을 지우고 잘라서 게임에 넣습니다.
+
+### 8.1 규칙
+- 그림체는 **5장의 배경과 같은 손그림 애니 배경 그림체**에 맞춥니다(장면 위에 놓여도 튀지 않게). 그래서 프롬프트 맨 앞에 [놀이 그림] 블록을 붙입니다.
+- 시트(①·③)는 **초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움**입니다(2장 물건 시트와 같은 규칙).
+- 버스 창밖(②)은 **좌우가 이어지는 그림**이어야 끊김 없이 흘러갑니다. 왼쪽 끝과 오른쪽 끝이 맞닿게 해 달라고 적었습니다.
+- 글자 · 숫자 · 간판 글씨, 해 · 빛살은 넣지 않습니다(욱일기 연상 금지).
+
+**[놀이 그림]** (①·③ 맨 앞에 붙임)
+```
+Hand-painted anime game sprites for a gentle story game, matching soft painterly anime background art: clean confident line art in dark brown (not black), soft cel shading with a little painterly texture, warm and friendly look, medium saturation. Palette: deep sea teal and navy, warm cream, warm oak brown, soft forest green, a little antique brass.
+```
+
+### 8.2 ① 놀이 시트 `sheet_play` · 1:1 · 참조: `cafe_front_morning`
+그 갈매기(쫓기 놀이 · 버스 창밖), 창밖을 지나가는 것들(배 · 등대 · 물고기 · 자동차), 지은의 가방.
+```
+[놀이 그림 블록]
+A game asset sheet. The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one subject is centered in each cell with wide empty margins; subjects never touch or overlap each other or the cell edges. All subjects use the same light from the upper left.
+Row 1 (the same chubby, slightly cheeky seagull in every cell: white body, light grey wings, yellow beak and legs, round black eyes, a little smug expression): the seagull standing on its feet, side view facing right, holding a golden croissant in its beak; the same seagull startled with ruffled feathers, eyes wide, the croissant slipping out of its beak (comic surprise pose); the same seagull flying away to the upper right with wings spread wide, the croissant in its beak; the same seagull gliding seen from slightly below, wings spread, small and simple.
+Row 2: a small Korean coastal fishing boat, side view facing left, white hull with a red stripe, a small cabin and a mast with a little flag; a short white lighthouse with two red stripes on a small rock; a silver fish jumping in an arc, side view facing left, with a few water drops; a small white compact car, side view facing left.
+Row 3: a small yellow delivery van, side view facing left; a small sky-blue local bus, side view facing left; a large worn canvas backpack (warm brown, rolled blanket strapped on top), side view; the last cell (bottom right) completely empty.
+Flat solid chroma key green background (#00B140) everywhere, no gradients, no ground, no cast shadows on the background, no green reflections on the subjects.
+Avoid: text, letters, numbers, license plates, logos, brand names, watermark, people, drivers visible in cars, sun, sun rays, overlapping subjects.
+```
+
+### 8.3 ② 버스 창밖 세 장 · 16:9 · 참조: `cafe_front_morning`
+버스 놀이의 창밖 풍경입니다. 뒤에서부터 **하늘 · 먼 바다 → 동산 → 버스 창틀** 순서로 겹쳐서, 앞의 것이 더 빨리 흘러가게 합니다.
+
+**②-1 먼 바다** `bus_far` (가장 뒤, 천천히 흐름)
+```
+[5.2 이야기 배경 블록]
+A seamless horizontally tileable panorama (the left edge and the right edge match exactly so the picture can repeat side by side). Late afternoon, warm peach and soft blue sky with a few soft clouds; below it, a calm wide sea with gentle light on the water and two or three small distant islands. The lower third is plain calm sea. No land in the foreground, nothing in the middle that draws the eye.
+Avoid: text, letters, people, boats, birds, sun, sun disk, sun rays, light beams.
+```
+
+**②-2 동산** `bus_hills` (가운데, 조금 빨리 흐름)
+```
+[5.2 이야기 배경 블록]
+A seamless horizontally tileable band of low green coastal hills (the left edge and the right edge match exactly), seen from a moving bus: soft rounded hills with patches of trees, a few small village houses with tiled roofs, a winding stone wall, a utility pole here and there. The hills fill only the lower half of the picture; the whole upper half above the hills is flat solid chroma key green (#00B140) so it can be removed. No green reflections on the hills, keep the grass a natural olive green that is clearly different from the key green.
+Avoid: text, letters, signs, people, cars, sun, sun rays.
+```
+
+**②-3 버스 창틀** `bus_window_frame` (맨 앞, 움직이지 않음)
+```
+[5.2 이야기 배경 블록]
+The inside of an old Korean local country bus, seen from a passenger seat looking sideways at a large window. The big window glass area fills the middle of the picture and is flat solid chroma key green (#00B140) so the outside view can be placed behind it. Around it: a worn metal window frame with a sliding upper pane, a hanging hand strap ring at the top, the top of a seat back with fabric at the bottom left, a little warm afternoon light on the inside panels. Calm and cozy.
+Avoid: text, letters, signs, advertisements, people, hands, sun, sun rays, anything visible through the window.
+```
+
+### 8.4 ③ 꾸미기 · 앞치마 시트 `sheet_deco` · 1:1 · 참조: `title_cafe_dusk`
+가게 꾸미기(처음 화면의 카페 앞에 놓임)와 앞치마(수첩 '나의 성장')입니다. 지금은 아이콘으로 섭니다.
+```
+[놀이 그림 블록]
+A game asset sheet. The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps. Same light from the upper left.
+Row 1: a terracotta flower pot with small white and yellow flowers; a wind chime made of small seashells hanging from a short driftwood bar; a long wooden bench for outside a cafe, three-quarter view; a small warm hanging porch lamp with a brass frame.
+Row 2: a small folding A-frame chalkboard stand, the board left completely blank; a small sea-blue cloth flag on a short wooden pole, waving; a navy blue barista bib apron on a wooden hanger; a coffee-brown barista bib apron on a wooden hanger.
+Row 3: a blue-and-white striped barista bib apron on a wooden hanger; a coral pink barista bib apron on a wooden hanger; a forest green barista bib apron on a wooden hanger; the last cell (bottom right) completely empty.
+Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
+Avoid: text, letters, numbers, logos, writing on the chalkboard, people, sun, sun rays.
+```
+
+### 8.5 검수 포인트 🙋
+- 갈매기는 **조금 얄밉고 귀여운 얼굴**이 좋을지, 그냥 평범한 갈매기가 좋을지.
+- 자동차 · 버스는 창밖을 지나가는 것으로만 씁니다(버스 놀이). 더 넣고 싶은 것(자전거 · 경운기 등)이 있으면 알려 주세요.
+- 도시 카페의 점심시간은 직업 마1스톤의 `counter_peak` 그림을 그대로 씁니다(2026-11-01 사용자). 색을 많이 빼서 지은의 기억처럼 보이게 했습니다.
+
