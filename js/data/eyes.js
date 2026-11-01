@@ -87,6 +87,14 @@ export const EYES = [
   ] },
 ];
 
+/** 덤 12번째 컷(재미 개편 3.2): 한 해 내내 빵을 물고 가던 그 갈매기. 감동 장면 뒤의 작은 웃음 */
+export const EYES_BONUS = {
+  when: '덤', title: '그 갈매기', cg: 'eye_12', lines: [
+    '봄마다 오는 그 갈매기에게, 나는 서른 해 동안 아침마다 빵 한 조각을 주었다.',
+    '그 아이가 빵 바구니를 지키려고 갈매기를 쫓을 때, 나는 신문 뒤에서 웃었다. …그 녀석도 단골이니까.',
+  ],
+};
+
 export const EYES_OUTRO = [
   '서두르지 않는 사람을 찾으려고 구인 글을 붙였다. 그런데 돌아보니, 그 아이가 이 가게를 찾아온 것이었다.',
   '칠판의 빈칸에 이름을 쓰던 날, 내 글씨는 삐뚤었다. 그래도 그 이름은 어느 때보다 반듯해 보였다.',
@@ -127,5 +135,5 @@ export function albumLines() {
 }
 
 export function eyesLines() {
-  return [...EYES_INTRO, ...EYES.flatMap(eyeLines), ...EYES_OUTRO].map((t) => ['owner', t]);
+  return [...EYES_INTRO, ...EYES.flatMap(eyeLines), ...EYES_OUTRO, ...EYES_BONUS.lines].map((t) => ['owner', t]);
 }

@@ -196,6 +196,12 @@ export const AUDIO_MAP = [
   { id: 'miss_sulk', kind: 'sfx', src: `${AC}Expressions/AC_Depressed_Tremolo.wav`, trim: [0, 2], fadeOut: 0.6, target: { peak: -9 }, note: '축 처지는 떨림 → 지은의 시무룩한 얼굴' },
   { id: 'sweat', kind: 'sfx', src: `${AC}Cute Sounds/AC_Funny_Sweat_01v1.wav`, target: { peak: -10 }, note: '식은땀 한 방울(만화 효과음)' },
   // 2026-11-01 재미 개편의 새 놀이(몰림 · 갈매기 · 버스). 사용자 "효과음 적절한 거 찾아서 넣어주고"
+  // 2026-11-02 사용자 "성공 시에 경쾌하고 빵 터지는 느낌의 소리": 손 기술이 알맞아요 칸에서 성공했을 때(작업대). 펑 + 맑은 딩
+  {
+    id: 'pang', kind: 'sfx', trim: [0, 1.1], fadeOut: 0.45, target: { peak: -7 },
+    layers: [{ src: `${AC}Bubble/AC_Bubble_Pop_01.wav` }, { src: `${CY}Various/SFX_pop2.wav`, at: 0.02, gain: -3 }, { src: `${AC}Chimes and Bells/AC_Bell_Ding_02.wav`, at: 0.06, gain: -5 }],
+    note: '물방울 펑 + 레트로 팝 + 맑은 딩을 겹침 → 손 기술 성공(지금! 에서 뗐을 때)',
+  },
   { id: 'poof', kind: 'sfx', src: `${AC}Whooshes Swishes Slides Transitions/AC_Vanish_Funny_Smoke_01v2.wav`, trim: [0, 0.9], fadeOut: 0.35, target: { peak: -9 }, note: '만화 같은 연기 펑(0.1~0.3초가 가장 큼) → 주문 종이를 누르면 펑 터짐' },
   { id: 'boom', kind: 'sfx', src: `${AC}Impacts/AC_Retro_Explosion_02_Subtle.wav`, trim: [0, 1.4], fadeOut: 0.5, target: { peak: -8 }, note: '작은 옛날 게임 폭발(무섭지 않게) → 도시 카페에서 주문이 쌓여 와르르' },
   { id: 'squawk', kind: 'sfx', src: `${AC}Misc/AC_Squeaky_Mouse_02.wav`, trim: [0, 0.3], fadeOut: 0.08, target: { peak: -10 }, note: '짧고 높은 끽 → 그 갈매기를 맞혔을 때 "꽥!"(갈매기 울음 소리는 팩에 없음)' },

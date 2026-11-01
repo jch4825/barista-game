@@ -18,7 +18,7 @@ import { img } from '../core/assets.js';
 import { REGULARS } from '../data/regulars.js';
 import { CHARS, faceHTML } from '../data/characters.js';
 import { cgPlaceholder } from './cg-placeholder.js';
-import { ALBUM_ORDER, ALBUM_SAY, albumSpeech, usualOf, EYES, EYES_INTRO, EYES_OUTRO, EYES_SAY } from '../data/eyes.js';
+import { ALBUM_ORDER, ALBUM_SAY, albumSpeech, usualOf, EYES, EYES_INTRO, EYES_OUTRO, EYES_SAY, EYES_BONUS } from '../data/eyes.js';
 
 const layer = () => document.getElementById('layer-overlay');
 
@@ -224,8 +224,10 @@ export async function eyes() {
   for (const [i, cut] of EYES.entries()) {
     await page({ cg: cut.cg, head: `${cut.when} · ${cut.title}`, n: i + 1, isFresh: !seenMap[cut.n], body: cut.lines });
   }
-  step.label('계속');
   await page({ cg: 'winter_chalk_name', body: EYES_OUTRO });
+  // 덤 12번째 컷: 그 갈매기(재미 개편 3.2). 감동 뒤의 작은 웃음
+  step.label('계속');
+  await page({ cg: EYES_BONUS.cg, head: `${EYES_BONUS.when} · ${EYES_BONUS.title}`, body: EYES_BONUS.lines });
   tts.stop();
   close();
   await sleep(dur(300));

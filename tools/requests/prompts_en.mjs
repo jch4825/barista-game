@@ -145,4 +145,5 @@ export const CG_EN = {
   eye_9: 'From the OWNER\'s point of view: an old brass key held out in the owner\'s calm hand toward JIEUN, who looks nervous but brave.',
   eye_10: 'From the OWNER\'s point of view at night: the owner\'s hand sticking a small paper memo inside the closing shelf with upside-down cups (no readable text).',
   eye_11: 'Night of the blackout from far away: a dark snowy seaside village and one warm lit cafe window glowing in the middle, seen from another house\'s window.',
+  eye_12: 'Early spring morning in front of the cafe: the OWNER (Korean man, 66, neatly combed back white hair, short white beard, white shirt, charcoal apron) crouches by the terrace and quietly gives a small piece of bread to a chubby white seagull, with a tiny secret smile; the cafe door is still closed, soft morning light, calm sea behind. No sun rays.',
 };

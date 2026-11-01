@@ -134,6 +134,8 @@ export const CGS = {
   eye_9: { ep: 'ending', title: '사장의 눈 9 · 열쇠', ph: P('hall', 'evening', ['jieun:nervous'], ['lock', 'hand'], '주머니에서 꺼낸 낡은 열쇠', { night: true }) },
   eye_10: { ep: 'ending', title: '사장의 눈 10 · 서두르면 쏟는다', ph: P('hall', 'evening', [], ['note', 'cup'], '마감 선반에 붙이는 작은 메모', { night: true }) },
   eye_11: { ep: 'ending', title: '사장의 눈 11 · 먼 창의 불빛', ph: P('alley', 'morning', [], ['window', 'light'], '깜깜한 마을, 불이 켜진 창 하나', { night: true }) },
+  // 덤 12번째 컷(재미 개편 3.2 웃음 줄기 '그 갈매기'의 끝): 사장님이 몰래 갈매기에게 빵을 줌
+  eye_12: { ep: 'ending', title: '사장의 눈 덤 · 그 갈매기', ph: P('cafe_front', 'morning', ['owner'], ['bread'], '사장님이 몰래 갈매기에게 빵을 준다') },
   blackout_cafe_lit: { ep: 'winter_4', title: '겨울 · 불 켜진 카페', ph: P('hall', 'blackout', [], ['light'], '마을에서 불이 켜진 곳은 카페뿐', { night: true }) },
   // 해순 할머니: 힌트 장면 · 맞는 대응
   summer_tourist_chair: { ep: 'summer_2', title: '그 의자의 손님', ph: P('hall', 'summer', ['haesun:look', 'customer'], ['chair'], '관광객이 빈 의자에 앉는다') },

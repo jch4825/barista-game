@@ -18,9 +18,75 @@
   "ep": "spring_1"
  },
  {
-  "key": "8e3f8434",
-  "voice": "think",
-  "text": "빨리, 더 빨리. 머릿속에서 그 말만 계속 울렸다.",
+  "key": "6d4471e5",
+  "voice": "sys",
+  "text": "도시 카페의 점심시간. 주문 종이를 눌러서 처리해요. 빨리, 더 빨리!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "45ea8bb9",
+  "voice": "sys",
+  "text": "주문 종이를 눌러서 처리해요. 빨리, 더 빨리!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "123af7d9",
+  "voice": "sys",
+  "text": "빨리, 더 빨리!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "be5f5522",
+  "voice": "sys",
+  "text": "와르르! 라테가 카운터 위로 쏟아졌다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "97463570",
+  "voice": "sys",
+  "text": "아이스 아메리카노 세 잔!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "cba59b86",
+  "voice": "sys",
+  "text": "라테 빨리요!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0e5c30b2",
+  "voice": "sys",
+  "text": "아직이에요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "aff0c9cd",
+  "voice": "sys",
+  "text": "포장이요!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ed34e50e",
+  "voice": "sys",
+  "text": "바닐라 라테 두 잔!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "fe289043",
+  "voice": "sys",
+  "text": "물 좀 주세요!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "36e986a1",
+  "voice": "sys",
+  "text": "회사 늦어요!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "57a0e913",
+  "voice": "sys",
+  "text": "아이스로요!",
   "ep": "spring_1"
  },
  {
@@ -42,33 +108,183 @@
   "ep": "spring_1"
  },
  {
-  "key": "b62273bb",
-  "voice": "narr",
-  "text": "그만두고 나서 며칠 동안 구인 글만 찾아보았다. 글마다 \"손이 빠른 사람\", \"바쁜 매장\"이라는 말이 있었다.",
-  "ep": "spring_1"
- },
- {
   "key": "55c03854",
   "voice": "sys",
   "text": "구인 글. 바닷가 마을 카페에서 함께 일할 사람을 찾습니다(경력은 없어도 됨, 지낼 방 있음). 서두르지 않는 사람이면 좋겠습니다.",
   "ep": "spring_1"
  },
  {
-  "key": "085e58ed",
+  "key": "7f42a234",
   "voice": "think",
-  "text": "서두르지 않는 사람. 그런 사람을 찾는 카페도 있구나.",
+  "text": "서두르지 않는 사람을 찾는 카페도 있구나. 나는 그 한 줄을 몇 번이나 다시 읽고, 다음 날 짐을 쌌다.",
   "ep": "spring_1"
  },
  {
-  "key": "499a4d1b",
-  "voice": "think",
-  "text": "나는 그 한 줄을 몇 번이나 다시 읽었다. 그리고 다음 날 짐을 쌌다.",
+  "key": "dd6a3cd7",
+  "voice": "sys",
+  "text": "바닷가로 가는 버스. 창밖으로 지나가는 것을 눌러서 세어요. \"덜컹!\" 하면 [손잡이 잡기]를 눌러요.",
   "ep": "spring_1"
  },
  {
-  "key": "5a8caa97",
+  "key": "b491fde3",
+  "voice": "sys",
+  "text": "창밖으로 지나가는 것을 눌러서 세어요. \"덜컹!\" 하면 [손잡이 잡기]를 눌러요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "1e7d3327",
+  "voice": "sys",
+  "text": "버스가 바닷가 마을로 달려요. 창밖을 봐요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0a76c741",
+  "voice": "sys",
+  "text": "덜컹!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3f35e9bd",
+  "voice": "sys",
+  "text": "잘 잡았어요!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "b53b6f4b",
+  "voice": "sys",
+  "text": "앗, 가방이 데굴데굴…",
+  "ep": "spring_1"
+ },
+ {
+  "key": "db3b4bff",
+  "voice": "sys",
+  "text": "바다 냄새가 나요. 곧 내릴 정류장이에요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "df58d051",
+  "voice": "sys",
+  "text": "갈매기 일",
+  "ep": "spring_1"
+ },
+ {
+  "key": "d758c3b9",
+  "voice": "sys",
+  "text": "갈매기 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "dd65991e",
+  "voice": "sys",
+  "text": "갈매기 삼",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ed65b24e",
+  "voice": "sys",
+  "text": "갈매기 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "714cea34",
+  "voice": "sys",
+  "text": "갈매기 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "9f6248a5",
+  "voice": "sys",
+  "text": "고깃배 일",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a762553d",
+  "voice": "sys",
+  "text": "고깃배 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "9d32e74a",
+  "voice": "sys",
+  "text": "고깃배 삼",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ad33007a",
+  "voice": "sys",
+  "text": "고깃배 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "2169d110",
+  "voice": "sys",
+  "text": "고깃배 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "1ce23fd5",
+  "voice": "sys",
+  "text": "등대 일",
+  "ep": "spring_1"
+ },
+ {
+  "key": "24e24c6d",
+  "voice": "sys",
+  "text": "등대 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "1b00fd5a",
+  "voice": "sys",
+  "text": "등대 삼",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0b00e42a",
+  "voice": "sys",
+  "text": "등대 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7ee995e0",
+  "voice": "sys",
+  "text": "등대 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "74c4bb47",
+  "voice": "sys",
+  "text": "물고기 일",
+  "ep": "spring_1"
+ },
+ {
+  "key": "6cc4aeaf",
+  "voice": "sys",
+  "text": "물고기 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f28b9610",
+  "voice": "sys",
+  "text": "물고기 삼",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e28b7ce0",
+  "voice": "sys",
+  "text": "물고기 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "8eca0cfa",
+  "voice": "sys",
+  "text": "물고기 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0fc78027",
   "voice": "narr",
-  "text": "도시에서 버스를 세 시간 탔다. 버스에서 내리자 바다 냄새가 훅 밀려온다.",
+  "text": "버스에서 내리자 바다 냄새가 훅 밀려온다.",
   "ep": "spring_1"
  },
  {
@@ -84,33 +300,15 @@
   "ep": "spring_1"
  },
  {
-  "key": "c75f9a22",
-  "voice": "think",
-  "text": "카페는 골목 끝에 있다고 했다. 해가 다 지기 전에 찾아가 보자.",
-  "ep": "spring_1"
- },
- {
   "key": "3ed5060d",
   "voice": "narr",
   "text": "골목 끝에 낡은 카페가 있다. 간판 자리는 비어 있고, 문에는 \"오늘 영업 끝\" 팻말이 걸려 있다.",
   "ep": "spring_1"
  },
  {
-  "key": "71dccbec",
-  "voice": "think",
-  "text": "벌써 문을 닫았구나. 오늘은 근처에서 자고, 내일 아침에 다시 와 볼까.",
-  "ep": "spring_1"
- },
- {
   "key": "9218152e",
   "voice": "narr",
   "text": "그때 창 너머로 할아버지 한 분이 보인다. 불을 하나만 켜 두고, 혼자 하얀 잔을 두 손으로 감싸고 있다.",
-  "ep": "spring_1"
- },
- {
-  "key": "2e1ed5b7",
-  "voice": "think",
-  "text": "저분이 사장님일까. 닫은 가게 문을 두드려도 될까.",
   "ep": "spring_1"
  },
  {
@@ -417,6 +615,42 @@
   "key": "816b4335",
   "voice": "sys",
   "text": "손가락으로 원을 그려도 돼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7b1d8e4c",
+  "voice": "sys",
+  "text": "익숙한 일이라 손이 알아서 해요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "26f3f3f6",
+  "voice": "sys",
+  "text": "완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f15e0ee4",
+  "voice": "sys",
+  "text": "늘 드시던 걸로 담았어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "47d58e36",
+  "voice": "sys",
+  "text": "사장님이 한 모금 맛보세요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "12a33924",
+  "voice": "sys",
+  "text": "엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0df0714d",
+  "voice": "sys",
+  "text": "이 잔은 전에도 맛보셨어요.",
   "ep": "spring_1"
  },
  {
@@ -1008,6 +1242,270 @@
   "ep": "spring_1"
  },
  {
+  "key": "2365c93b",
+  "voice": "jieun",
+  "text": "이제 원두 갈기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "de149580",
+  "voice": "jieun",
+  "text": "이제 꾹 누르기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "39f8fd36",
+  "voice": "jieun",
+  "text": "이제 샷 내리기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a58ac0d1",
+  "voice": "jieun",
+  "text": "이제 얼음 담기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "416d23c2",
+  "voice": "jieun",
+  "text": "이제 시럽 넣기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e42bd8ba",
+  "voice": "jieun",
+  "text": "이제 청 떠 넣기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "644cdff7",
+  "voice": "jieun",
+  "text": "이제 가루 떠 넣기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "511da82b",
+  "voice": "jieun",
+  "text": "이제 말차 풀기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "06391c0c",
+  "voice": "jieun",
+  "text": "이제 우유 데우기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "905485b3",
+  "voice": "jieun",
+  "text": "이제 거품 내기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "99ae3b14",
+  "voice": "jieun",
+  "text": "이제 피처에 우유 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "466e0e1b",
+  "voice": "jieun",
+  "text": "이제 피처 톡톡은 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "9c266322",
+  "voice": "jieun",
+  "text": "이제 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "c8693605",
+  "voice": "jieun",
+  "text": "이제 물 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "26903279",
+  "voice": "jieun",
+  "text": "이제 물 끓이기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "4f3e32b9",
+  "voice": "jieun",
+  "text": "이제 우리기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "83d8e771",
+  "voice": "jieun",
+  "text": "이제 손으로 원두 갈기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "d6496e69",
+  "voice": "jieun",
+  "text": "이제 뜸 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "4e9523fe",
+  "voice": "jieun",
+  "text": "이제 뜸 들이기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a52d086f",
+  "voice": "jieun",
+  "text": "이제 나선 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "bccd779b",
+  "voice": "jieun",
+  "text": "이제 젓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "b5239b61",
+  "voice": "owner",
+  "text": "…새 메뉴로 하자.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "eddfc961",
+  "voice": "jieun",
+  "text": "네?!",
+  "ep": "spring_1"
+ },
+ {
+  "key": "46457417",
+  "voice": "owner",
+  "text": "농담이다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "5ab1b80e",
+  "voice": "owner",
+  "text": "…싱겁다. 바다가 조금 들어갔나.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ea5d3f02",
+  "voice": "sys",
+  "text": "「물 탄 라테」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "36f011a8",
+  "voice": "owner",
+  "text": "…커피에서 딸기 맛이 나네. 봄이구나.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a0668848",
+  "voice": "sys",
+  "text": "「딸기 커피」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0760aa0e",
+  "voice": "owner",
+  "text": "…시큼하고 쓰네. 정신이 번쩍 든다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e80d6007",
+  "voice": "sys",
+  "text": "「유자 커피」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "94a30a0f",
+  "voice": "owner",
+  "text": "…눈이 번쩍 떠지네. 오늘 밤엔 못 자겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a2ded266",
+  "voice": "sys",
+  "text": "「두 배 커피」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "2f68ba2b",
+  "voice": "owner",
+  "text": "…구수하네. 시골 할머니 댁 맛이다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "22e3482c",
+  "voice": "sys",
+  "text": "「보리 커피」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ad16f101",
+  "voice": "owner",
+  "text": "…우유가 몽글몽글해졌네. 유자가 놀랐나 보다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "606a458f",
+  "voice": "sys",
+  "text": "「유자 우유」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "8c2a98cd",
+  "voice": "owner",
+  "text": "…초록인지 갈색인지 모르겠다. 맛은 괜찮네.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "8242833c",
+  "voice": "sys",
+  "text": "「초코 말차」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "550d0fca",
+  "voice": "owner",
+  "text": "…달다. 이건 그 갈매기한테 줘야겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ba2ca75d",
+  "voice": "sys",
+  "text": "「딸기 초코」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "eb6a2320",
+  "voice": "owner",
+  "text": "…색이 다섯 가지쯤 보이네. 맛은 하나도 모르겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "2c205b0b",
+  "voice": "sys",
+  "text": "「무지개 잔」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "1be68495",
+  "voice": "owner",
+  "text": "…무슨 맛인지 모르겠다. 그래도 따뜻하네.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "96b6fb89",
+  "voice": "sys",
+  "text": "「이름 없는 잔」 엉뚱한 잔 도감에 올렸어요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "a8af1dda",
   "voice": "owner",
   "text": "따뜻한 우유 한 잔이요. 여기서 마실게요.",
@@ -1197,6 +1695,12 @@
   "key": "dcf13871",
   "voice": "sys",
   "text": "봄   이일. 컵은 깨지라고 있다",
+  "ep": "spring_2"
+ },
+ {
+  "key": "d71f2559",
+  "voice": "sys",
+  "text": "오늘의 칠판. 첫 출근! 가게 여는 순서를 사장님께 배워요.",
   "ep": "spring_2"
  },
  {
@@ -2028,6 +2532,12 @@
   "ep": "spring_3"
  },
  {
+  "key": "4c6690f2",
+  "voice": "sys",
+  "text": "오늘의 칠판. 새벽 다섯 시 오십 분에 문을 열어요. 오늘은 사장님의 핸드드립을 봐요.",
+  "ep": "spring_3"
+ },
+ {
   "key": "0fe90026",
   "voice": "narr",
   "text": "바다가 아직 짙은 파란색이다. 항구에서는 배 몇 척이 불을 켜고 그물을 싣는다.",
@@ -2646,6 +3156,12 @@
   "ep": "spring_4"
  },
  {
+  "key": "a868763f",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오후에 비가 온대요. 젖은 손님에게는 마른 수건을 챙겨요.",
+  "ep": "spring_4"
+ },
+ {
   "key": "f003e858",
   "voice": "narr",
   "text": "운동복을 입은 대학생 손님이 휴대전화를 보며 카운터 앞에 선다.",
@@ -3036,6 +3552,12 @@
   "ep": "spring_5"
  },
  {
+  "key": "586d8f1c",
+  "voice": "sys",
+  "text": "오늘의 칠판. 벚꽃 주간! 골목에서 드라마를 찍어요. 손님이 한꺼번에 몰려올 거예요.",
+  "ep": "spring_5"
+ },
+ {
   "key": "bd1b22fd",
   "voice": "narr",
   "text": "골목의 벚꽃이 활짝 피었다. 일 년 중 이 마을에 사람이 가장 많이 오는 \"벚꽃 주간\"이다.",
@@ -3051,6 +3573,78 @@
   "key": "b9b90ca7",
   "voice": "think",
   "text": "평소보다 손님이 훨씬 많겠다. 그래도 서두르지 말자, 서두르면 쏟으니까.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "bebab628",
+  "voice": "sys",
+  "text": "벚꽃 주간의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "a31856be",
+  "voice": "sys",
+  "text": "주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "def48af2",
+  "voice": "sys",
+  "text": "손님이 한꺼번에 몰려와요. 하나씩 해요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "d648744d",
+  "voice": "sys",
+  "text": "이건 내가 할게요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "2c24e493",
+  "voice": "sys",
+  "text": "몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!",
+  "ep": "spring_5"
+ },
+ {
+  "key": "3576f8c1",
+  "voice": "sys",
+  "text": "아이스 아메리카노 하나요!",
+  "ep": "spring_5"
+ },
+ {
+  "key": "f0c68273",
+  "voice": "sys",
+  "text": "라테 두 잔이요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "ca905a8d",
+  "voice": "sys",
+  "text": "유자차 하나요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "4fb237fe",
+  "voice": "sys",
+  "text": "딸기우유 하나요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "1f0357e9",
+  "voice": "sys",
+  "text": "따뜻한 우유요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "a5d71a14",
+  "voice": "sys",
+  "text": "아아 둘이요!",
+  "ep": "spring_5"
+ },
+ {
+  "key": "c15dcf7e",
+  "voice": "think",
+  "text": "도시 카페와 다르다. 놓친 주문은 사장님이 받아 주셨다.",
   "ep": "spring_5"
  },
  {
@@ -3486,6 +4080,12 @@
   "ep": "spring_6"
  },
  {
+  "key": "702667e0",
+  "voice": "sys",
+  "text": "오늘의 칠판. 빵 바구니를 테라스에 내놓았어요. 갈매기를 조심해요.",
+  "ep": "spring_6"
+ },
+ {
   "key": "ebf06714",
   "voice": "narr",
   "text": "오늘은 내가 먼저 와서 불을 켜 두었다. 강 씨는 창에 불이 켜져 있어야 들어오신다.",
@@ -3633,6 +4233,66 @@
   "key": "bb2dc1a4",
   "voice": "think",
   "text": "사장님은 무언가 아시는 것 같다. 그래도 강 씨에게 묻지 않으신다.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "eabe898d",
+  "voice": "narr",
+  "text": "문 앞 테라스에 내놓은 빵 바구니로, 통통한 갈매기 한 마리가 슬금슬금 다가온다.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "17f62298",
+  "voice": "jieun",
+  "text": "앗, 그건 손님 빵이야!",
+  "ep": "spring_6"
+ },
+ {
+  "key": "8f72e669",
+  "voice": "sys",
+  "text": "그 갈매기를 쫓아라. 빵을 문 갈매기를 눌러요. 세 번 누르면 빵을 떨어뜨려요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "1543402f",
+  "voice": "sys",
+  "text": "빵을 문 갈매기를 눌러요. 세 번 누르면 빵을 떨어뜨려요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "496aa67b",
+  "voice": "sys",
+  "text": "앗, 갈매기가 빵을 물고 간다!",
+  "ep": "spring_6"
+ },
+ {
+  "key": "761e8a39",
+  "voice": "sys",
+  "text": "꽥!",
+  "ep": "spring_6"
+ },
+ {
+  "key": "0060fae5",
+  "voice": "sys",
+  "text": "빵을 되찾았어요! 갈매기는 아쉬운 듯 날아갔어요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "bb09789f",
+  "voice": "sys",
+  "text": "갈매기가 빵을 물고 바다로 날아갔어요. …내일 또 오겠지.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "72b513cc",
+  "voice": "owner",
+  "text": "…또 왔네. 저 녀석은 해마다 봄이면 와요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "25989ef9",
+  "voice": "think",
+  "text": "해마다? 사장님은 저 갈매기를 잘 아시는 것 같다.",
   "ep": "spring_6"
  },
  {
@@ -3942,6 +4602,12 @@
   "ep": "spring_7"
  },
  {
+  "key": "0be27446",
+  "voice": "sys",
+  "text": "오늘의 칠판. 벚꽃이 지는 날. 봄의 마지막 날이에요.",
+  "ep": "spring_7"
+ },
+ {
   "key": "4058f677",
   "voice": "narr",
   "text": "밤사이 바람이 불어서, 골목에 벚꽃잎이 하얗게 깔려 있다.",
@@ -4116,6 +4782,24 @@
   "ep": "spring_7"
  },
  {
+  "key": "e4e19edf",
+  "voice": "narr",
+  "text": "사장님이 앞치마 주머니에서 작은 배지를 꺼내, 내 앞치마에 달아 준다.",
+  "ep": "spring_7"
+ },
+ {
+  "key": "fdaca08e",
+  "voice": "owner",
+  "text": "봄을 다 했으니, 이제 견습은 아니에요. 새내기 바리스타.",
+  "ep": "spring_7"
+ },
+ {
+  "key": "3b16b818",
+  "voice": "sys",
+  "text": "새 배지. 「새내기 바리스타」 배지를 받았어요! 수첩의 「나의 성장」에서 볼 수 있어요.",
+  "ep": "spring_7"
+ },
+ {
   "key": "36f24ae1",
   "voice": "jieun",
   "text": "벚꽃이 다 졌다. 해순 할머니가 처음으로 내 이름을 불렀다. \"지은 씨, 내일 또 봐요.\"",
@@ -4137,6 +4821,12 @@
   "key": "637f44ef",
   "voice": "sys",
   "text": "여름   일일. 소문",
+  "ep": "summer_1"
+ },
+ {
+  "key": "267cfc81",
+  "voice": "sys",
+  "text": "오늘의 칠판. 배우의 사진이 퍼졌대요. 관광객이 늘었어요.",
   "ep": "summer_1"
  },
  {
@@ -4734,6 +5424,12 @@
   "ep": "summer_2"
  },
  {
+  "key": "81f812f5",
+  "voice": "sys",
+  "text": "오늘의 칠판. 새벽 여섯 시 십 분에 밤 버스가 들어와요.",
+  "ep": "summer_2"
+ },
+ {
   "key": "4848762e",
   "voice": "narr",
   "text": "여름 새벽, 종점에 마지막 밤 버스가 들어온다. 봄에 내가 이 마을에 처음 내린 바로 그 종점이다.",
@@ -4974,6 +5670,30 @@
   "ep": "summer_2"
  },
  {
+  "key": "531fd495",
+  "voice": "narr",
+  "text": "손님이 오기 전, 머신에 원두를 꾹 눌러 담았다. 너무 세게 눌렀나 보다.",
+  "ep": "summer_2"
+ },
+ {
+  "key": "932d12f2",
+  "voice": "narr",
+  "text": "머신이 \"푸슉!\" 하고 커피 가루를 뿜는다. 옆에 있던 사장님 얼굴이 새까매졌다.",
+  "ep": "summer_2"
+ },
+ {
+  "key": "35c44c03",
+  "voice": "owner",
+  "text": "…날씨 좋네.",
+  "ep": "summer_2"
+ },
+ {
+  "key": "821c915f",
+  "voice": "think",
+  "text": "사장님은 얼굴을 닦지도 않고 신문을 넘긴다. 웃으면 안 되는데, 입술을 꾹 깨물었다.",
+  "ep": "summer_2"
+ },
+ {
   "key": "181a846f",
   "voice": "haesun",
   "text": "지은 씨, 늘 먹던 거요.",
@@ -5139,6 +5859,12 @@
   "key": "89bcc73e",
   "voice": "sys",
   "text": "여름   삼일. 식은 커피",
+  "ep": "summer_3"
+ },
+ {
+  "key": "54c44a6b",
+  "voice": "sys",
+  "text": "오늘의 칠판. 디카페인 원두가 새로 들어왔어요.",
   "ep": "summer_3"
  },
  {
@@ -5658,6 +6384,12 @@
   "ep": "summer_4"
  },
  {
+  "key": "10236118",
+  "voice": "sys",
+  "text": "오늘의 칠판. 한낮에 손님이 몰려요. 시원한 음료가 많이 나가요.",
+  "ep": "summer_4"
+ },
+ {
   "key": "a0662691",
   "voice": "owner",
   "text": "노 씨, 오셨어요.",
@@ -6096,6 +6828,12 @@
   "ep": "summer_5"
  },
  {
+  "key": "e1ab1858",
+  "voice": "sys",
+  "text": "오늘의 칠판. 소포가 많은 계절이에요. 우체부 도 씨의 가방이 무거워요.",
+  "ep": "summer_5"
+ },
+ {
   "key": "53e5559f",
   "voice": "do",
   "text": "우편이요! 아이고 더워라, 오늘은 소포가 산더미예요.",
@@ -6456,6 +7194,12 @@
   "ep": "summer_6"
  },
  {
+  "key": "0d2eb065",
+  "voice": "sys",
+  "text": "오늘의 칠판. 여름 성수기! 줄이 골목 끝까지 설지도 몰라요.",
+  "ep": "summer_6"
+ },
+ {
   "key": "6c1e9daf",
   "voice": "narr",
   "text": "주말 새벽, 해 뜨는 바다를 찍으러 온 관광객들이 문을 열기도 전부터 줄을 섰다.",
@@ -6468,6 +7212,18 @@
   "ep": "summer_6"
  },
  {
+  "key": "055ea94d",
+  "voice": "narr",
+  "text": "그런데 줄 중간에, 갈매기 한 마리가 손님들 사이에 끼어 얌전히 서 있다.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "764d614e",
+  "voice": "think",
+  "text": "봄에 빵을 물고 간 그 갈매기다. 설마 주문하려고 줄을 선 건 아니겠지.",
+  "ep": "summer_6"
+ },
+ {
   "key": "94876c70",
   "voice": "owner",
   "text": "열어요. 많아도 한 잔씩, 순서대로.",
@@ -6477,6 +7233,18 @@
   "key": "cefdf0c6",
   "voice": "think",
   "text": "도시 카페의 줄이 떠오른다. 그래도 여기서는 사장님이 옆에 계신다.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "c87ba4d5",
+  "voice": "sys",
+  "text": "문 열자마자 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "5b94c1e4",
+  "voice": "owner",
+  "text": "좋아요. 이제 한 잔씩 만들어요.",
   "ep": "summer_6"
  },
  {
@@ -7044,6 +7812,12 @@
   "ep": "summer_7"
  },
  {
+  "key": "b48f2683",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘부터 아침 일곱 시 전은 동네 시간이에요.",
+  "ep": "summer_7"
+ },
+ {
   "key": "ec585f60",
   "voice": "narr",
   "text": "골목이 조용하다. 어제는 문 앞까지 줄이 섰는데, 오늘은 아무도 없다.",
@@ -7380,6 +8154,24 @@
   "ep": "summer_7"
  },
  {
+  "key": "0639bc99",
+  "voice": "narr",
+  "text": "사장님이 내 앞치마의 배지 옆에, 배지를 하나 더 달아 준다.",
+  "ep": "summer_7"
+ },
+ {
+  "key": "09da627e",
+  "voice": "owner",
+  "text": "그 줄을 끝까지 버텼으니, 이제 그냥 바리스타라고 해도 되겠네요.",
+  "ep": "summer_7"
+ },
+ {
+  "key": "3aa38376",
+  "voice": "sys",
+  "text": "새 배지. 「바리스타」 배지를 받았어요!",
+  "ep": "summer_7"
+ },
+ {
   "key": "ce4caf7b",
   "voice": "jieun",
   "text": "동네 시간의 첫 아침. 단골 다섯 명이 한 방에 있었다. 아무도 크게 말하지 않았다. 조용해서 좋았다.",
@@ -7401,6 +8193,12 @@
   "key": "678e5a48",
   "voice": "sys",
   "text": "가을   일일. 노란 잎",
+  "ep": "autumn_1"
+ },
+ {
+  "key": "9f5c335f",
+  "voice": "sys",
+  "text": "오늘의 칠판. 우유 배달이 늦어요. 우유가 한 잔 몫뿐이에요.",
   "ep": "autumn_1"
  },
  {
@@ -7848,6 +8646,12 @@
   "ep": "autumn_2"
  },
  {
+  "key": "f5c14f1c",
+  "voice": "sys",
+  "text": "오늘의 칠판. 바람이 쌀쌀해요. 그래도 아이스 아메리카노는 잘 나가요.",
+  "ep": "autumn_2"
+ },
+ {
   "key": "3c43090e",
   "voice": "narr",
   "text": "가을 새벽, 문이 열리고 강 씨가 들어온다.",
@@ -8094,6 +8898,30 @@
   "ep": "autumn_2"
  },
  {
+  "key": "5816373e",
+  "voice": "geum",
+  "text": "아아… 하나요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "0559d968",
+  "voice": "narr",
+  "text": "찬 바람이 부는데, 금 씨는 오늘도 아이스 아메리카노다. 컵을 쥘 손이 벌써 빨갛다.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "36729389",
+  "voice": "sys",
+  "text": "가을에도 아아. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "282574ee",
+  "voice": "geum",
+  "text": "으, 손 시려. 그래도 이거죠.",
+  "ep": "autumn_2"
+ },
+ {
   "key": "c9638e03",
   "voice": "narr",
   "text": "점심시간, 근처 회사에 다니는 손님이 들어온다. 바람이 쌀쌀한데도 겉옷 소매를 걷고 있다.",
@@ -8199,6 +9027,12 @@
   "key": "14be6b26",
   "voice": "sys",
   "text": "가을   삼일. 손잡이",
+  "ep": "autumn_3"
+ },
+ {
+  "key": "c047a3c5",
+  "voice": "sys",
+  "text": "오늘의 칠판. 사장님이 은행에 가요. 잠깐 혼자 가게를 봐요.",
   "ep": "autumn_3"
  },
  {
@@ -8550,6 +9384,12 @@
   "ep": "autumn_4"
  },
  {
+  "key": "dc4d3a93",
+  "voice": "sys",
+  "text": "오늘의 칠판. 바다 축제 날! 주문이 아주 많을 거예요.",
+  "ep": "autumn_4"
+ },
+ {
   "key": "6b95fe3c",
   "voice": "narr",
   "text": "일 년에 한 번 열리는 바다 축제 날이다. 골목마다 깃발과 천막이 가득하고, 구운 생선 냄새가 난다.",
@@ -8565,6 +9405,12 @@
   "key": "2203a191",
   "voice": "think",
   "text": "여름에는 사장님이 옆에서 컵을 놓아 주셨다. 오늘도 함께라면 괜찮을 거야.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "89b4efc9",
+  "voice": "sys",
+  "text": "축제의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
   "ep": "autumn_4"
  },
  {
@@ -8994,6 +9840,12 @@
   "ep": "autumn_5"
  },
  {
+  "key": "7f354ce2",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘은 혼자 문을 열어요.",
+  "ep": "autumn_5"
+ },
+ {
   "key": "d570da13",
   "voice": "narr",
   "text": "아직 어둡다. 걸으면서 주머니 속 열쇠를 몇 번이나 만져 본다.",
@@ -9039,6 +9891,18 @@
   "key": "2c65dbec",
   "voice": "narr",
   "text": "카페 문 앞에 선다. 열쇠를 넣고, 천천히 돌린다.",
+  "ep": "autumn_5"
+ },
+ {
+  "key": "2f609a1b",
+  "voice": "narr",
+  "text": "그런데 테라스 의자마다 갈매기가 한 마리씩 앉아 있다. 꼭 문 열기를 기다리는 단골들처럼.",
+  "ep": "autumn_5"
+ },
+ {
+  "key": "145ae27d",
+  "voice": "think",
+  "text": "…오늘은 손님이 일찍 왔네. 사장님 없이 여는 첫날인데, 혼자는 아니구나.",
   "ep": "autumn_5"
  },
  {
@@ -9465,6 +10329,12 @@
   "key": "011e8d34",
   "voice": "sys",
   "text": "가을   육일. 서두르면 쏟는다",
+  "ep": "autumn_6"
+ },
+ {
+  "key": "af07dc48",
+  "voice": "sys",
+  "text": "오늘의 칠판. 수능 날이에요. 아침 안개가 짙어요.",
   "ep": "autumn_6"
  },
  {
@@ -9930,6 +10800,12 @@
   "ep": "autumn_7"
  },
  {
+  "key": "1ec65aed",
+  "voice": "sys",
+  "text": "오늘의 칠판. 가을의 마지막 날이에요.",
+  "ep": "autumn_7"
+ },
+ {
   "key": "e53f1d4a",
   "voice": "sys",
   "text": "믹스커피. 따뜻하게. 믹스커피, 물.",
@@ -10248,6 +11124,24 @@
   "ep": "autumn_7"
  },
  {
+  "key": "48d73ed4",
+  "voice": "narr",
+  "text": "노 씨가 주머니에서 작은 배지를 꺼내 카운터에 놓는다.",
+  "ep": "autumn_7"
+ },
+ {
+  "key": "f1c4220a",
+  "voice": "noh",
+  "text": "사장이 맡기고 갔어. 가을이 끝나면 달아 주라더라.",
+  "ep": "autumn_7"
+ },
+ {
+  "key": "a2cf13f2",
+  "voice": "sys",
+  "text": "새 배지. 「마을의 바리스타」 배지를 받았어요!",
+  "ep": "autumn_7"
+ },
+ {
   "key": "77e8b467",
   "voice": "narr",
   "text": "창밖의 은행잎이 다 떨어졌다. 저녁 바람이 차다.",
@@ -10269,6 +11163,12 @@
   "key": "ae7dd8d0",
   "voice": "sys",
   "text": "겨울   일일. 첫눈",
+  "ep": "winter_1"
+ },
+ {
+  "key": "3006c1dc",
+  "voice": "sys",
+  "text": "오늘의 칠판. 첫눈이 와요. 문 앞 길이 미끄러워요.",
   "ep": "winter_1"
  },
  {
@@ -10401,6 +11301,36 @@
   "key": "c620603d",
   "voice": "narr",
   "text": "강 씨는 뒤쪽 테이블에 앉아, 창 너머 배가 한 척 빠진 항구를 오래 본다.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "91c84f2c",
+  "voice": "narr",
+  "text": "문이 열리고, 커다란 눈사람 하나가 들어온다.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "e1f3f17e",
+  "voice": "geum",
+  "text": "아…아… 하나요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "26795dbf",
+  "voice": "think",
+  "text": "눈사람이 아니라 금 씨였다. 눈썹까지 하얗다.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "b25e7cba",
+  "voice": "sys",
+  "text": "눈사람의 아아. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "34b1e2b5",
+  "voice": "geum",
+  "text": "으으… 역시 이거죠.",
   "ep": "winter_1"
  },
  {
@@ -10557,6 +11487,12 @@
   "key": "761e31b1",
   "voice": "sys",
   "text": "겨울   이일. 봉투",
+  "ep": "winter_2"
+ },
+ {
+  "key": "6ced7443",
+  "voice": "sys",
+  "text": "오늘의 칠판. 난로가 덜덜 소리를 내요.",
   "ep": "winter_2"
  },
  {
@@ -10863,6 +11799,12 @@
   "key": "a0a93a7e",
   "voice": "sys",
   "text": "겨울   삼일. 마지막 배달",
+  "ep": "winter_3"
+ },
+ {
+  "key": "aaebec87",
+  "voice": "sys",
+  "text": "오늘의 칠판. 겨울 방학이 시작됐어요.",
   "ep": "winter_3"
  },
  {
@@ -11331,6 +12273,12 @@
   "key": "59699e40",
   "voice": "sys",
   "text": "겨울   사일. 정전",
+  "ep": "winter_4"
+ },
+ {
+  "key": "f279eede",
+  "voice": "sys",
+  "text": "오늘의 칠판. 폭설 예보! 저녁에 눈이 아주 많이 온대요.",
   "ep": "winter_4"
  },
  {
@@ -12078,6 +13026,12 @@
   "ep": "winter_5"
  },
  {
+  "key": "57e44ef3",
+  "voice": "sys",
+  "text": "오늘의 칠판. 전기가 다시 들어왔어요. 손님이 한꺼번에 올지도 몰라요.",
+  "ep": "winter_5"
+ },
+ {
   "key": "c16e5d0f",
   "voice": "narr",
   "text": "정전 밤에 쓴 컵들을 아침까지 다 닦았다. 창밖에는 아직 눈이 조금씩 내린다.",
@@ -12336,6 +13290,18 @@
   "ep": "winter_5"
  },
  {
+  "key": "e73720e6",
+  "voice": "narr",
+  "text": "전기가 들어오자, 며칠 동안 따뜻한 것을 못 마신 마을 사람들이 한꺼번에 몰려온다.",
+  "ep": "winter_5"
+ },
+ {
+  "key": "706ae731",
+  "voice": "sys",
+  "text": "불이 들어온 날의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "winter_5"
+ },
+ {
   "key": "4217d2b7",
   "voice": "narr",
   "text": "은주 씨가 유모차를 밀고 들어온다. 그 뒤에 처음 보는 엄마가 서 있다.",
@@ -12579,6 +13545,12 @@
   "key": "c3e3829a",
   "voice": "sys",
   "text": "겨울   육일. 세 번째 잔",
+  "ep": "winter_6"
+ },
+ {
+  "key": "032d7ced",
+  "voice": "sys",
+  "text": "오늘의 칠판. 눈이 펑펑 오는 오후예요.",
   "ep": "winter_6"
  },
  {
@@ -12960,6 +13932,12 @@
   "ep": "winter_7"
  },
  {
+  "key": "c7d1cb34",
+  "voice": "sys",
+  "text": "오늘의 칠판. 한 해의 마지막 날이에요.",
+  "ep": "winter_7"
+ },
+ {
   "key": "866ad294",
   "voice": "narr",
   "text": "며칠 동안 내리던 눈이 그쳤다. 창밖이 눈부시게 하얗다.",
@@ -13110,15 +14088,51 @@
   "ep": "winter_7"
  },
  {
-  "key": "cb827a73",
+  "key": "058ed08b",
   "voice": "geum",
-  "text": "아아 하나요. 천천히 해요.",
+  "text": "…뜨거운 아이스 아메리카노 하나요.",
   "ep": "winter_7"
  },
  {
-  "key": "c02f80f2",
+  "key": "8175a3cc",
   "voice": "geum",
-  "text": "겨울에도 역시 이거죠. 고마워요.",
+  "text": "…따뜻하네. 내년 여름엔 다시 아아예요.",
+  "ep": "winter_7"
+ },
+ {
+  "key": "537e25d5",
+  "voice": "geum",
+  "text": "…농담이에요. 올해 처음으로, 따뜻하게요.",
+  "ep": "winter_7"
+ },
+ {
+  "key": "2159e1ef",
+  "voice": "jieun",
+  "text": "따뜻한 아메리카노 한 잔, 가져가시는 거죠?",
+  "ep": "winter_7"
+ },
+ {
+  "key": "c18ba608",
+  "voice": "narr",
+  "text": "사장님이 앞치마를 벗어 걸자, 주머니에서 빵 부스러기가 우수수 떨어진다.",
+  "ep": "winter_7"
+ },
+ {
+  "key": "b6f4c05d",
+  "voice": "jieun",
+  "text": "사장님… 혹시 봄부터 그 갈매기한테 빵을 주셨어요?",
+  "ep": "winter_7"
+ },
+ {
+  "key": "dd8d11b1",
+  "voice": "owner",
+  "text": "…단골이야.",
+  "ep": "winter_7"
+ },
+ {
+  "key": "c739cd23",
+  "voice": "think",
+  "text": "그 갈매기도 사장님이 몰래 챙기던 손님이었다. 웃음이 터졌는데, 사장님도 입꼬리가 조금 올라갔다.",
   "ep": "winter_7"
  },
  {
@@ -13221,6 +14235,12 @@
   "key": "170c16c9",
   "voice": "narr",
   "text": "사장님은 분필을 내려놓고, 아무 말도 하지 않는다. 그래도 나는 다 알 것 같다.",
+  "ep": "winter_7"
+ },
+ {
+  "key": "62d8f1cf",
+  "voice": "sys",
+  "text": "새 배지. 「우리 카페의 바리스타」 — 칠판에 지은의 이름이 생겼어요.",
   "ep": "winter_7"
  },
  {
@@ -13563,6 +14583,18 @@
   "key": "665f99d9",
   "voice": "owner",
   "text": "칠판의 빈칸에 이름을 쓰던 날, 내 글씨는 삐뚤었다. 그래도 그 이름은 어느 때보다 반듯해 보였다.",
+  "ep": "ending"
+ },
+ {
+  "key": "fbb73786",
+  "voice": "owner",
+  "text": "봄마다 오는 그 갈매기에게, 나는 서른 해 동안 아침마다 빵 한 조각을 주었다.",
+  "ep": "ending"
+ },
+ {
+  "key": "3752c945",
+  "voice": "owner",
+  "text": "그 아이가 빵 바구니를 지키려고 갈매기를 쫓을 때, 나는 신문 뒤에서 웃었다. …그 녀석도 단골이니까.",
   "ep": "ending"
  },
  {

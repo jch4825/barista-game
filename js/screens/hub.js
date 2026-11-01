@@ -1,7 +1,7 @@
 /**
  * 달력(옛 근무표): 계절마다 한 줄, 하루가 한 칸(봄 · 여름 · 가을 · 겨울 × 7일) + 이야기 뒤(엔딩 · 자유 영업 · 새 해)
  *  - 칸마다 그날의 첫 장소 그림, 날 번호와 제목, 상태(마침 · 오늘 · 이어 하기 · 잠김). 다음에 할 날은 '오늘'로 빛남
- *  - 이번 해의 엔딩을 본 뒤에는 모든 날이 열림. 자유 영업은 엔딩을 한 번 보면 열림(js/data/episodes/free.js)
+ *  - 이번 해의 엔딩을 본 뒤에는 모든 날이 열림. 자유 영업은 봄 7일을 마치면 열림(재미 개편 Q-47, js/data/episodes/free.js)
  *  - 새 해(PRD 5.9 · Q-14): 단골과의 관계와 마친 날은 처음부터, 앨범 · 메뉴 도감 · 자유 영업은 남음(store.newYear)
  */
 
@@ -101,16 +101,16 @@ function clearNote() {
     listen);
 }
 
-/** 자유 영업 칸: 엔딩을 한 번 보면 열림. 다음 날 번호를 보여 줌 */
+/** 자유 영업 칸: 봄 7일을 마치면 열림(재미 개편 Q-47, 전에는 엔딩 뒤). 다음 날 번호를 보여 줌 */
 function freeCard() {
-  const open = Boolean(store.ending());
+  const open = Boolean(store.ending()) || store.isDone('spring_7') || store.unlockedAll();
   const f = store.free();
   const cp = store.checkpoint();
   const resumable = open && cp && cp.ep === 'free';
   return h('button', {
     class: `hub-ep hub-free ${open ? '' : 'locked'} ${resumable ? 'resume' : ''}`,
     disabled: !open,
-    'aria-label': `자유 영업 ${f.day + 1}번째 날${open ? '' : ', 엔딩을 보면 열려요'}`,
+    'aria-label': `자유 영업 ${f.day + 1}번째 날${open ? '' : ', 봄 7일을 마치면 열려요'}`,
     onclick: async (e) => {
       e.stopPropagation();
       if (resumable) {
@@ -122,7 +122,7 @@ function freeCard() {
   h('span', { class: `hub-thumb ${open ? '' : 'is-locked'}`, html: renderBg('hall', 'morning') }, open ? null : h('i', { class: 'hub-lock', html: ICON('lock') })),
   h('span', { class: 'hub-label', text: '자유 영업' }),
   h('b', { class: 'hub-title', text: `${f.day + 1}번째 날` }),
-  h('span', { class: 'hub-state', text: open ? (resumable ? '▶ 이어 하기' : f.served ? `▶ 문 열기 · 지금까지 ${f.served}잔` : '▶ 문 열기') : '🔒 엔딩을 보면 열려요' }));
+  h('span', { class: 'hub-state', text: open ? (resumable ? '▶ 이어 하기' : f.served ? `▶ 문 열기 · 지금까지 ${f.served}잔` : '▶ 문 열기') : '🔒 봄 7일을 마치면 열려요' }));
 }
 
 /** 새 해 칸: 이번 해의 엔딩을 본 뒤에 보임 */

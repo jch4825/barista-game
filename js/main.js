@@ -42,7 +42,12 @@ let playing = false;
 /** resume: 자동 저장(이어하기)부터 · save: 세이브 슬롯에서 불러온 저장 데이터 */
 async function playEpisode(id, { resume = false, save = null } = {}) {
   // 자유 영업: 다음 날 번호로 그날을 만듦(같은 날은 늘 같은 하루, js/data/episodes/free.js)
-  const ep = id === 'free' ? freeDay(store.free().day + 1, { album: store.album() }) : getEpisode(id);
+  // 자유 영업: 엔딩 전(봄 7일 뒤 일찍 연 것, 재미 개편 Q-47)은 만난 단골 · 마친 계절만
+  const early = !store.ending() ? {
+    regs: [...new Set(store.logs().filter((l) => l.type === 'respond').map((l) => l.who))],
+    seasons: ['spring', 'summer', 'autumn', 'winter'].filter((x) => store.isDone(`${x}_7`)),
+  } : {};
+  const ep = id === 'free' ? freeDay(store.free().day + 1, { album: store.album(), ...early }) : getEpisode(id);
   if (!ep) { console.warn(`없는 이야기: ${id}`); nav.go('hub'); return; } // 빈 화면에 멈추지 않게 근무표로
   if (runner.isRunning()) runner.abort();
   closeAllScreens();

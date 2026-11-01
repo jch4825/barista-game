@@ -121,15 +121,17 @@ const CHALLENGES = [
 
 /**
  * n번째 자유 영업 날(1부터). opts.album: 열린 앨범 액자 { 단골 id: 해 } (근황이 달라짐)
+ * opts.regs · opts.seasons: 엔딩 전에 일찍 연 자유 영업(재미 개편 Q-47, 봄 7일 뒤)은 만난 단골 · 마친 계절만(뒤 이야기를 미리 보이지 않게)
  * 돌려줌: 에피소드와 같은 꼴 { id: 'free', label, title, script, … }
  */
-export function freeDay(n = 1, { album = {} } = {}) {
+export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = null } = {}) {
   const day = Math.max(1, Math.floor(n));
   const r = rng(day * 9973 + 17);
-  const idx = (day - 1) % 28;
-  const season = SEASONS[Math.floor(idx / 7)];
+  const pool = seasons && seasons.length ? seasons : SEASONS;
+  const idx = (day - 1) % (pool.length * 7);
+  const season = pool[Math.floor(idx / 7)];
   const sName = SEASON_NAME[season];
-  const regs = Object.keys(REGULARS);
+  const regs = metRegs && metRegs.filter((id) => REGULARS[id]).length >= 2 ? metRegs.filter((id) => REGULARS[id]) : Object.keys(REGULARS);
   // 오늘 오는 단골 둘(날마다 돌아가며)
   const r1 = regs[day % regs.length];
   const r2 = regs[(day * 3 + 1) % regs.length] === r1 ? regs[(day + 4) % regs.length] : regs[(day * 3 + 1) % regs.length];

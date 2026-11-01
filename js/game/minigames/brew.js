@@ -1670,6 +1670,35 @@ export async function brew(opts = {}) {
     let playing = false;
     let flow = false; // 한 컷의 줄기: 누르는 동안 · [보기]로 차는 동안 · [한 칸] 바로 뒤
     let flowTok = 0;
+    // 성공 타이밍을 확실하게(2026-11-02 사용자 "게이지가 없으니까 어느 상황이 성공 타이밍인지 알기 어렵다. 배경이 초록색으로 뜬다고 해서 이해할 수 있는게 아니야"):
+    // 알맞아요 칸에 들면 장면 위에 큰 표시("지금 떼요!")가 뜨고, 누르는 단추의 글자도 바뀜(넘치면 "넘쳐요!"). 박자(beats)는 원래의 원 표시
+    // 2026-11-02 사용자: "지금 글자가 랜덤한 위치에 뜨면 그게 큐가 될 거 같은데!" · "만화나 웹툰의 효과음처럼 디자인" →
+    // 알맞아요 칸에 들 때마다 장면 안 아무 곳에 웹툰 효과음 글자 "지금!"이 툭 튀어나옴(글자마다 통통, 반짝이 조금). 넘치면 "넘쳐!"
+    const nowSign = act === 'beats' ? null : h('div', { class: 'bw-now', 'aria-hidden': 'true' });
+    if (nowSign) view.append(nowSign);
+    const SIGN = { good: turn ? '멈춰!' : '지금!', high: act === 'wait' ? '늦었어!' : '넘쳐!' };
+    const letters = (text) => [...text].map((ch, i) => h('span', { class: 'bw-now-ch', style: { '--i': String(i) }, text: ch }));
+    const CUE = turn ? { good: act === 'wait' ? '지금!' : '지금 멈춰요!', high: '넘쳤어요' }
+      : act === 'wait' ? { low: '기다려요…', good: '지금!', high: '늦었어요' }
+      : { good: '지금 떼요!', high: '넘쳤어요' };
+    const cue = (z) => {
+      if (!nowSign) return;
+      if (z === 'good' || z === 'high') {
+        // 자리 · 기울기는 그때그때 다르게(같은 자리를 외우지 않고 글자를 보고 떼게)
+        const rnd = (a, b) => a + Math.random() * (b - a);
+        nowSign.style.setProperty('--x', `${rnd(22, 78).toFixed(1)}%`);
+        nowSign.style.setProperty('--y', `${rnd(20, 68).toFixed(1)}%`);
+        nowSign.style.setProperty('--rot', `${rnd(-14, 14).toFixed(1)}deg`);
+        nowSign.replaceChildren(...letters(SIGN[z]));
+        nowSign.classList.remove('is-on', 'is-over');
+        void nowSign.offsetWidth;
+        nowSign.classList.add(z === 'good' ? 'is-on' : 'is-over');
+        if (z === 'good') requestAnimationFrame(() => { const c = centerOf(nowSign); vfx.burst('sparkle', c.x, c.y, { n: 7, dist: [60, 150], size: [18, 34], ms: [380, 620], colors: ['#FFFFFF', '#FFE14D', '#FFB347'] }); });
+      } else nowSign.classList.remove('is-on', 'is-over');
+      const label = stopB?.querySelector('span');
+      if (label && CUE[z]) label.textContent = CUE[z];
+      stopB?.classList.toggle('is-cue', z === 'good');
+    };
     const draw = () => {
       const v = p.toFixed(4);
       gauge.style.setProperty('--p', v);
@@ -1683,6 +1712,7 @@ export async function brew(opts = {}) {
       const first = lastZone === null;
       lastZone = z;
       card.classList.toggle('is-in-zone', z === 'good' && !first);
+      cue(first ? (act === 'wait' && !turn ? 'low' : null) : z);
       gauge.dataset.zone = z;
       gauge.setAttribute('aria-valuetext', sk.labels[z]);
       status.textContent = `지금: ${sk.labels[z]}`;
@@ -2044,6 +2074,7 @@ export async function brew(opts = {}) {
     for (;;) {
       const { zone, watched, perfect } = await w(act === 'beats' ? attemptBeats(how) : attempt(how));
       phase = 'busy';
+      cue(null);
       st[zone] += 1;
       if (perfect) st.perfect = (st.perfect || 0) + 1;
       if (watched) { st.watched += 1; R.watched += 1; }
@@ -2059,7 +2090,10 @@ export async function brew(opts = {}) {
       ].filter(Boolean));
       if (perfect) gauge.classList.add('is-perfect');
       if (zone === 'good') {
-        audio.sfx(artShape ? 'heart' : perfect ? 'great' : 'good');
+        // 성공은 경쾌하게 "빵!"(2026-11-02 사용자) + 반짝이. 딱 좋아요 · 하트는 그 위에 한 번 더
+        audio.sfx('pang');
+        if (artShape || perfect) setTimeout(() => audio.sfx(artShape ? 'heart' : 'great'), 200);
+        { const c = centerOf(view); vfx.burst('sparkle', c.x, c.y, { n: 12, dist: [80, 240], size: [22, 46], colors: ['#FFFFFF', '#FFE14D', '#7FD8A4'] }); }
         talk(sysV(perfect ? SYS.perfect : sk.labels[zone]), artShape ? sysV(SYS.art) : null);
         noteSkill();
         return { skill: id, zone, watched, art: artShape, perfect: Boolean(perfect) };

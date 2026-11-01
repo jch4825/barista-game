@@ -10,10 +10,10 @@
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 104장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 장면 그림(CG) | 새로 105장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
 | 블렌더 한 컷(손 동작) | 3가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
-| 효과음 · 환경음 | 효과음 7 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
+| 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
 
@@ -379,7 +379,7 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 104장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
+- 새로 요청하는 105장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -491,6 +491,7 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 | 102 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
 | 103 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
 | 104 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
+| 105 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
 
 ### 2.1 프롬프트
 
@@ -1607,6 +1608,16 @@ Scene: Night of the blackout from far away: a dark snowy seaside village and one
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
+#### 105. `eye_12` · 사장의 눈 덤 · 그 갈매기
+
+- 나오는 날: 엔딩 · 장면: 사장님이 몰래 갈매기에게 빵을 준다 · 참조: `owner_sheet` · `cafe_front_morning`
+
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
+Scene: Early spring morning in front of the cafe: the OWNER (Korean man, 66, neatly combed back white hair, short white beard, white shirt, charcoal apron) crouches by the terrace and quietly gives a small piece of bread to a chubby white seagull, with a tiny secret smile; the cafe door is still closed, soft morning light, calm sea behind. No sun rays.
+Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
+```
+
 ## 3. 작업대 물건 시트 3 (`sheet_more`)
 
 - 풀 버전 메뉴(디카페인 · 핸드드립 · 믹스커피 · 보리차 · 유자차 · 딸기우유 · 녹차라테 · 코코아)와 포장 컵에 쓰는 물건입니다. 지금은 임시 그림(SVG)으로 섭니다.
@@ -1655,7 +1666,6 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | 종류 | id | 쓰는 곳 | 바라는 소리 |
 | :--- | :--- | :--- | :--- |
 | 효과음 | `snap` | 작업대 · 화면 | 사진 스냅 연출 |
-| 효과음 | `bus` | 봄 1일 · 여름 2일 · 가을 2일 · 가을 7일 · 겨울 3일 | 버스가 서는 소리(브레이크 · 문 열림) |
 | 효과음 | `espresso` | 작업대 · 화면 | 에스프레소가 나오는 소리 |
 | 효과음 | `steam` | 봄 1일 | 스팀 노즐(쉬익) |
 | 효과음 | `mixer` | 작업대 · 화면 | 그라인더 가는 소리 |
@@ -1675,16 +1685,16 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 6. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2394줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2566줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 623 |
-| `narr` | 609 |
-| `think` | 280 |
-| `owner` | 156 |
-| `jieun` | 92 |
+| `sys` | 731 |
+| `narr` | 620 |
+| `think` | 282 |
+| `owner` | 176 |
+| `jieun` | 117 |
 | `jian` | 70 |
 | `customer_f` | 66 |
 | `do` | 65 |
@@ -1693,8 +1703,8 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `kang` | 44 |
 | `han` | 44 |
 | `sumin` | 44 |
-| `noh` | 38 |
-| `geum` | 27 |
+| `noh` | 39 |
+| `geum` | 32 |
 | `customer` | 24 |
 | `agent` | 21 |
 | `dohyun` | 16 |
