@@ -22,6 +22,7 @@ import { hasSaves } from './saves.js';
 import { loadRecordFiles } from './records.js';
 import { AI_NOTICE } from '../data/credits.js';
 import { ov } from '../ui/overlays.js';
+import * as grow from '../core/grow.js';
 
 let titleEl = null;
 // 표지 영상(assets/movies/title_intro): 앱을 켜고 처음 본 표지에서만 끝까지 틀고, 그 뒤로는 마지막 장면. 영상이 없으면 그림만
@@ -84,6 +85,14 @@ export function hideTitle() {
   }
 }
 
+/** 가게 꾸미기(지은의 성장 · 재미 개편 Q-42): 산 것이 카페 앞 그림 위 제자리에. 그림이 오기 전에는 임시 표시(아이콘) */
+function decoLayer() {
+  const owned = grow.SHOP.filter((it) => it.kind === 'deco' && grow.owns(it.id));
+  if (!owned.length) return null;
+  return h('div', { class: 'tt-deco', 'aria-label': `가게 꾸미기: ${owned.map((it) => it.name).join(', ')}` },
+    ...owned.map((it) => h('span', { class: `tt-deco-item d-${it.id}`, title: it.name, style: { left: `${it.spot[0]}%`, top: `${it.spot[1]}%` }, html: ICON(it.icon) })));
+}
+
 export function showTitle() {
   hideTitle();
   hud.hide();
@@ -139,6 +148,7 @@ export function showTitle() {
   // 오른쪽은 영상 자리 · 왼쪽 한 줄에 제목 → 메뉴(두 칸) → 학생 이름과 안내
   titleEl = h('section', { class: 'title-screen', role: 'main', 'aria-label': `${CONFIG.TITLE_SAY} 처음 화면` },
     h('div', { class: 'tt-bg', html: renderBg('title_cafe', 'dusk') }),
+    decoLayer(),
     h('div', { class: 'tt-shade' }),
     titleMovie(),
     // 생성형 AI 사용 알림(AI 기본법 제31조 취지, 사용자 결정 2026-10-16). 자세한 내용은 선생님 모드 → 제작·저작권 정보

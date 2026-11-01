@@ -463,3 +463,8 @@ body.reduce-motion .sv-card.fresh .sv-main { animation: none; }
 @keyframes ld-in { from { opacity: 0; } }
 body.reduce-motion .ld, body.reduce-motion .ld.out { animation: none; transition: none; }
 body.reduce-motion .ld-fill { transition: none; }
+
+/* 처음 화면: 가게 꾸미기(지은의 성장, 재미 개편 Q-42). 그림이 오기 전의 임시 표시 */
+.tt-deco { position: absolute; inset: 0; pointer-events: none; }
+.tt-deco-item { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 248, 230, .9); box-shadow: 0 0 0 3px rgba(212, 174, 98, .8), 0 6px 18px rgba(0, 0, 0, .45); color: #6B4E1E; }
+.tt-deco-item svg { width: 38px; height: 38px; }

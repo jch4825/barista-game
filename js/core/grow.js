@@ -139,12 +139,12 @@ export function receive(pay) {
 /* ---------- 가게 꾸미기 · 앞치마 (Q-42) ---------- */
 // 꾸미기는 처음 화면의 카페 앞(title_cafe) 그림 위에 놓임(spot: 그림 안의 자리 %). 그림은 docs/requests_full.md 로 요청
 export const SHOP = [
-  { id: 'deco_pot', kind: 'deco', name: '문 옆 화분', price: 30000, icon: 'sparkle', spot: [62, 74], desc: '문 옆에 작은 화분을 놓아요.' },
-  { id: 'deco_chime', kind: 'deco', name: '조개 풍경', price: 25000, icon: 'bell_call', spot: [57, 30], desc: '바람이 불면 딸랑딸랑 울려요.' },
-  { id: 'deco_bench', kind: 'deco', name: '창가 긴 의자', price: 60000, icon: 'chair', spot: [38, 80], desc: '가게 앞에 앉아 쉬는 의자예요.' },
-  { id: 'deco_lamp', kind: 'deco', name: '처마 등', price: 70000, icon: 'light', spot: [47, 22], desc: '밤에도 가게 앞이 환해요.' },
-  { id: 'deco_board', kind: 'deco', name: '오늘의 메뉴 칠판', price: 40000, icon: 'menu', spot: [72, 70], desc: '문 앞에 세우는 작은 칠판이에요.' },
-  { id: 'deco_flag', kind: 'deco', name: '바다색 깃발', price: 20000, icon: 'sign_open', spot: [80, 36], desc: '바닷바람에 펄럭여요.' },
+  { id: 'deco_pot', kind: 'deco', name: '문 옆 화분', price: 30000, icon: 'sparkle', spot: [70.5, 80], desc: '문 옆에 작은 화분을 놓아요.' },
+  { id: 'deco_chime', kind: 'deco', name: '조개 풍경', price: 25000, icon: 'bell_call', spot: [62, 30], desc: '바람이 불면 딸랑딸랑 울려요.' },
+  { id: 'deco_bench', kind: 'deco', name: '창가 긴 의자', price: 60000, icon: 'chair', spot: [52, 84], desc: '가게 앞에 앉아 쉬는 의자예요.' },
+  { id: 'deco_lamp', kind: 'deco', name: '처마 등', price: 70000, icon: 'light', spot: [64, 17], desc: '밤에도 가게 앞이 환해요.' },
+  { id: 'deco_board', kind: 'deco', name: '오늘의 메뉴 칠판', price: 40000, icon: 'menu', spot: [77, 79], desc: '문 앞에 세우는 작은 칠판이에요.' },
+  { id: 'deco_flag', kind: 'deco', name: '바다색 깃발', price: 20000, icon: 'sign_open', spot: [87, 30], desc: '바닷바람에 펄럭여요.' },
   { id: 'apron_navy', kind: 'apron', name: '남색 앞치마', price: 30000, color: '#26406B', desc: '차분한 남색이에요.' },
   { id: 'apron_brown', kind: 'apron', name: '갈색 앞치마', price: 30000, color: '#7A4E2D', desc: '커피 빛 갈색이에요.' },
   { id: 'apron_stripe', kind: 'apron', name: '줄무늬 앞치마', price: 40000, color: '#3C6E8F', desc: '바다 같은 줄무늬예요.' },

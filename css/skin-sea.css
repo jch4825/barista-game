@@ -831,3 +831,44 @@ body.reduce-motion .scr-cal .hub-ep { transition: none; }
 .rs-grow .rs-rise { padding: 6px 12px; border-radius: 10px; background: rgba(46, 156, 90, .25); }
 .rs-grow .rs-rank { padding: 8px 14px; border-radius: 10px; background: linear-gradient(90deg, rgba(240, 217, 162, .35), rgba(240, 217, 162, .1)); font-size: 28px; }
 body.contrast .rs-grow { background: #000; border-color: #FFE14D; }
+
+/* 수첩: 나의 성장(재미 개편 6장) — 단계 · 능력치 · 익숙해진 손 기술 · 가게 꾸미기 · 엉뚱한 잔 도감 */
+.nb-grow { display: flex; flex-direction: column; gap: 18px; text-align: left; }
+.nb-grow h3 { margin: 0 0 10px; font-family: var(--font-title); font-size: 30px; color: var(--gold-l); }
+.gr-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch; }
+.gr-head > div { display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 14px; background: var(--plate); border: 2px solid var(--gold-line); font-size: 26px; color: #F4EAD2; }
+.gr-head i svg { width: 34px; height: 34px; color: var(--gold-l); }
+.gr-rank b { font-family: var(--font-title); font-size: 32px; color: #FFE9B0; }
+.gr-apron i svg { color: var(--c) !important; filter: drop-shadow(0 0 2px #fff); }
+.gr-money { flex-direction: column; align-items: flex-start !important; gap: 2px !important; }
+.gr-money small { font-size: 18px; opacity: .8; }
+.gr-stats, .gr-skills, .gr-shop, .gr-odd { padding: 16px 20px; border-radius: 14px; background: rgba(4, 18, 23, .55); border: 1px solid var(--gold-line); }
+.gr-stat { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 10px 0; border-top: 1px dashed rgba(240, 217, 162, .25); }
+.gr-stat:first-of-type { border-top: 0; }
+.gr-stat-ico svg { width: 46px; height: 46px; color: var(--gold-l); }
+.gr-stat-name { display: flex; align-items: baseline; gap: 14px; margin: 0; font-size: 26px; color: #F4EAD2; }
+.gr-stat-name span { font-weight: 900; color: #FFE9B0; }
+.gr-stat-name small { font-size: 18px; opacity: .8; }
+.gr-pips { display: flex; gap: 6px; margin: 6px 0; }
+.gr-pips i { width: 28px; height: 12px; border-radius: 6px; background: rgba(255, 255, 255, .15); }
+.gr-pips i.on { background: linear-gradient(90deg, #2E9C5A, #6FD49A); }
+.gr-stat-how { margin: 0; font-size: 19px; color: #DCCFB0; }
+.gr-skill-list, .gr-shop-list, .gr-odd-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.gr-skill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #F4EAD2; font-size: 20px; }
+.gr-skill i svg { width: 24px; height: 24px; }
+.gr-skill small { opacity: .8; }
+.gr-skill.is-done { background: rgba(240, 217, 162, .25); }
+.gr-shop-note { margin: 0 0 10px; font-size: 19px; color: #DCCFB0; }
+.gr-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; flex: 1 1 46%; min-width: 420px; padding: 10px 14px; border-radius: 12px; background: var(--parch, #FFFDF7); color: #2A1D12; }
+.gr-item b { display: block; font-size: 22px; }
+.gr-item small { font-size: 17px; color: #6B5A44; }
+.gr-item-ico svg { width: 40px; height: 40px; color: var(--c, #8E6C33); }
+.gr-item.is-owned { outline: 3px solid #2E9C5A; }
+.gr-owned { font-size: 18px; font-weight: 800; color: #1B5E35; }
+.gr-odd-card { flex: 1 1 30%; min-width: 260px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, .08); color: #F4EAD2; font-size: 20px; }
+.gr-odd-card.got { background: var(--parch, #FFFDF7); color: #2A1D12; }
+.gr-odd-card p { margin: 4px 0 0; font-size: 18px; }
+.gr-odd-card i svg { width: 22px; height: 22px; }
+.nb-menu-card.is-gold { box-shadow: 0 0 0 3px #E2B84A, 0 0 18px rgba(226, 184, 74, .5); }
+.nb-menu-star svg { width: 26px; height: 26px; color: #E2B84A; }
+body.contrast .gr-item, body.contrast .gr-odd-card.got { background: #000; color: #fff; border: 2px solid #FFE14D; }

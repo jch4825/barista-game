@@ -16,7 +16,9 @@ import { PHOTOS, PHOTO_ORDER, photoHTML } from '../data/photos.js';
 import { CHARS, CARD_IDS, faceHTML, portraitHTML, hasStand, standURL, cardSpeech } from '../data/characters.js';
 import { CGS, CG_IDS } from '../data/cg.js';
 import { REGULARS } from '../data/regulars.js';
-import { RECIPES, TEMPS } from '../data/menu.js';
+import { RECIPES, TEMPS, HAND_SKILLS, ODD_DRINKS, ODD_ANY } from '../data/menu.js';
+import * as grow from '../core/grow.js';
+import { josa } from '../core/text.js';
 import { usualOf } from '../data/eyes.js';
 import { freeDay } from '../data/episodes/free.js';
 import { cgPlaceholder } from '../ui/cg-placeholder.js';
@@ -29,6 +31,7 @@ import { openScreen } from './screen.js';
 
 const TABS = [
   ['regulars', '단골', 'team'],
+  ['grow', '나의 성장', 'star'],
   ['menu', '메뉴 도감', 'coffee'],
   ['photos', '장면 앨범', 'photo'],
   ['words', '말 사전', 'book'],
@@ -51,8 +54,12 @@ function regularsView() {
     h('p', { class: 'nb-sum', text: `만난 단골 ${n} / ${items.length}` }),
     listDetail('nb-people nb-regulars', items, ({ id }) => {
       const r = REGULARS[id];
+      // 기억 카드(재미 개편 6.5): 대응마다 '오늘 알게 된 것'. 고른 대응과 관계없이 늘 받음(점수는 보이지 않음)
+      const cards = store.grow().cards;
+      const known = Object.entries(r.touches || {}).filter(([tid, t]) => t.card && cards.includes(`${id}.${tid}`)).map(([, t]) => `기억 카드: ${t.card}`);
       const lines = [
         usuals[id] ? `늘 마시는 것: ${usualOf(id)}` : '늘 마시는 것: 아직 몰라요. "늘 먹던 거"를 한 번 맞게 내면 적혀요.',
+        ...known,
         album[id] ? `들은 이야기: ${r.album.title}. ${r.album.line}` : null,
       ].filter(Boolean);
       return h('div', { class: 'nb-person', style: { '--accent': CHARS[id]?.color || 'var(--main)' } },
@@ -68,14 +75,16 @@ function regularsView() {
 /** 메뉴 도감: 만들어 본 메뉴는 이름 · 온도 · 만드는 순서, 아직이면 ??? */
 function menuView() {
   const made = new Set(store.book());
+  const gold = new Set(store.grow().perfect); // 완벽한 한 잔(손 동작을 모두 '딱 좋아요'로 직접) → 금빛 별
   const ids = Object.keys(RECIPES);
   return h('div', {},
-    h('p', { class: 'nb-sum', text: `만들어 본 메뉴 ${ids.filter((id) => made.has(id)).length} / ${ids.length}` }),
+    h('p', { class: 'nb-sum', text: `만들어 본 메뉴 ${ids.filter((id) => made.has(id)).length} / ${ids.length} · 금빛 별 ${ids.filter((id) => gold.has(id)).length}` }),
     h('div', { class: 'nb-menu' }, ...ids.map((id) => {
       const r = RECIPES[id];
       const on = made.has(id);
-      return h('div', { class: `nb-menu-card ${on ? 'got' : ''}` },
+      return h('div', { class: `nb-menu-card ${on ? 'got' : ''} ${gold.has(id) ? 'is-gold' : ''}`.trim() },
         h('i', { class: 'nb-menu-dot', style: { '--c': r.color || '#B08A5A' } }),
+        gold.has(id) ? h('i', { class: 'nb-menu-star', 'aria-label': '완벽한 한 잔', html: ICON('star') }) : null,
         h('b', { text: on ? r.name : '???' }),
         on ? h('small', { text: r.temps.map((t) => TEMPS[t]?.name || t).join(' · ') }) : h('small', { text: '아직 만들어 보지 않았어요' }));
     })));
@@ -210,7 +219,79 @@ function diaryView() {
   }));
 }
 
-const VIEWS = { regulars: regularsView, menu: menuView, stamps: stampsView, people: peopleView, words: wordsView, photos: photosView, oops: oopsView, diary: diaryView };
+/**
+ * 나의 성장(재미 개편 6장): 단계 · 능력치 넷 · 익숙해진 손 기술 · 모은 돈과 가게 꾸미기 · 엉뚱한 잔 도감.
+ * 지은 자신의 기록이라 보임(단골 신뢰는 숨김, 원칙 1). 오르기만 하고 다른 학생과 견주지 않음(원칙 14)
+ */
+function growView() {
+  const wrap = h('div', { class: 'nb-grow' });
+  const draw = () => {
+    const g = store.grow();
+    const st = grow.stats(g);
+    const rk = grow.rank();
+    const apron = grow.apronOf(g.apron);
+    const head = h('div', { class: 'gr-head' },
+      h('div', { class: 'gr-rank' }, h('i', { html: ICON('badge') }), h('b', { text: rk.name })),
+      h('div', { class: 'gr-apron', style: { '--c': apron.color } }, h('i', { html: ICON('apron') }), h('span', { text: apron.name })),
+      h('div', { class: 'gr-money' }, h('i', { html: ICON('coin') }), h('b', { text: `모은 돈 ${grow.won(g.money)}` }), h('small', { text: `지금까지 번 돈 ${grow.won(g.earned)}` })));
+    const stats = h('section', { class: 'gr-stats' }, h('h3', { text: '능력치' }), ...grow.STATS.map((s) => {
+      const v = st[s.id];
+      const say = `${s.name} ${v.level}단계. ${s.how} ${s.effect}`;
+      return h('div', { class: 'gr-stat' },
+        h('i', { class: 'gr-stat-ico', html: ICON(s.icon) }),
+        h('div', { class: 'gr-stat-main' },
+          h('p', { class: 'gr-stat-name' }, h('b', { text: s.name }), h('span', { text: `${v.level}단계` }), v.next ? h('small', { text: `다음 단계까지 ${v.next}` }) : h('small', { text: '가장 높은 단계' })),
+          h('span', { class: 'gr-pips', 'aria-hidden': 'true' }, ...Array.from({ length: grow.MAX_LEVEL }, (_, i) => h('i', { class: i < v.level ? 'on' : '' }))),
+          h('p', { class: 'gr-stat-how', text: `${s.how} ${s.effect}` })),
+        h('button', { class: 'nb-say', 'aria-label': `${s.name} 읽어 주기`, html: ICON('volume'), onclick: (e) => { e.stopPropagation(); tts.speak(say, 'sys', { force: true }); } }));
+    }));
+    const skills = Object.entries(HAND_SKILLS).filter(([id]) => g.skills[id]);
+    const hand = h('section', { class: 'gr-skills' }, h('h3', { text: `익숙해진 손 기술 ${skills.filter(([id]) => g.skills[id] >= grow.MASTER_AT).length}` }),
+      skills.length ? h('div', { class: 'gr-skill-list' }, ...skills.map(([id, sk]) => {
+        const n = g.skills[id];
+        const done = n >= grow.MASTER_AT;
+        return h('span', { class: `gr-skill ${done ? 'is-done' : ''}`.trim() }, h('i', { html: ICON(done ? 'sparkle' : sk.icon || 'hand') }), h('b', { text: sk.name }), h('small', { text: done ? '익숙해짐 · [맡기기] 가능' : `${n} / ${grow.MASTER_AT}번` }));
+      })) : h('p', { class: 'nb-empty', text: '커피를 만들면 손 기술이 하나씩 쌓여요. 열 번 하면 익숙해져요.' }));
+    const shop = h('section', { class: 'gr-shop' }, h('h3', { text: '가게 꾸미기 · 앞치마' }),
+      h('p', { class: 'gr-shop-note', text: '일해서 모은 돈으로 사요. 꾸미기는 처음 화면의 카페 앞에 놓여요.' }),
+      h('div', { class: 'gr-shop-list' }, ...[grow.APRON_BASIC, ...grow.SHOP].map((it) => {
+        const owned = grow.owns(it.id);
+        const wearing = it.kind === 'apron' && g.apron === it.id;
+        let act;
+        if (it.kind === 'apron' && owned) {
+          act = h('button', { class: `btn btn-small ${wearing ? 'btn-main' : 'btn-soft'}`, disabled: wearing, onclick: (e) => { e.stopPropagation(); audio.sfx('towel'); grow.wearApron(it.id); draw(); } }, h('span', { text: wearing ? '입고 있어요' : '입기' }));
+        } else if (owned) act = h('span', { class: 'gr-owned', text: '가게에 있어요' });
+        else {
+          act = h('button', {
+            class: 'btn btn-small btn-main', disabled: g.money < it.price,
+            onclick: async (e) => {
+              e.stopPropagation();
+              const ok = await ov.confirm({ text: `${josa(it.name, '을/를')} ${grow.won(it.price)}에 살까요?`, detail: `모은 돈 ${grow.won(g.money)} → ${grow.won(g.money - it.price)}`, yes: '사기', no: '그만두기' });
+              if (!ok || !grow.buy(it.id)) return;
+              audio.sfx('coin');
+              ov.toast(`${josa(it.name, '을/를')} 샀어요!`, it.kind === 'apron' ? 'apron' : 'sparkle');
+              draw();
+            },
+          }, h('i', { html: ICON('coin') }), h('span', { text: g.money < it.price ? `${grow.won(it.price)} · 돈이 모자라요` : `${grow.won(it.price)}에 사기` }));
+        }
+        return h('div', { class: `gr-item ${owned ? 'is-owned' : ''}`.trim(), style: it.color ? { '--c': it.color } : {} },
+          h('i', { class: 'gr-item-ico', html: ICON(it.kind === 'apron' ? 'apron' : it.icon) }),
+          h('div', {}, h('b', { text: it.name }), h('small', { text: it.desc })), act);
+      })));
+    const found = new Set(g.odd);
+    const odds = [...ODD_DRINKS, ODD_ANY];
+    const odd = h('section', { class: 'gr-odd' }, h('h3', { text: `엉뚱한 잔 도감 ${odds.filter((o) => found.has(o.id)).length} / ${odds.length}` }),
+      h('p', { class: 'gr-shop-note', text: '레시피에 없는 잔을 만들면 사장님께 맛보일 수 있어요.' }),
+      h('div', { class: 'gr-odd-list' }, ...odds.map((o) => (found.has(o.id)
+        ? h('div', { class: 'gr-odd-card got' }, h('b', { text: o.name }), h('p', { text: `사장님: ${o.say}` }))
+        : h('div', { class: 'gr-odd-card' }, h('i', { html: ICON('lock') }), h('b', { text: '???' }))))));
+    wrap.replaceChildren(head, stats, hand, shop, odd);
+  };
+  draw();
+  return wrap;
+}
+
+const VIEWS = { grow: growView, regulars: regularsView, menu: menuView, stamps: stampsView, people: peopleView, words: wordsView, photos: photosView, oops: oopsView, diary: diaryView };
 
 export function showNotebook(tab = 'regulars') {
   if (!TABS.some(([id]) => id === tab)) tab = 'regulars';
