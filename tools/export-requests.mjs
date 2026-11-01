@@ -20,6 +20,22 @@ const { REGULARS } = await imp('js/data/regulars.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const { PEOPLE_EN, FACE_EN, CG_EN } = await imp('tools/requests/prompts_en.mjs');
 const { MISSING } = await imp('tools/audio/audio_map.mjs');
+const { BGM_VARIANTS } = await imp('js/av/audio.js');
+// 곡 파일이 있는 분위기(2026-11-01 사용자가 Suno로 만든 곡을 넣음): 요청서에서 뺌
+let bgmFiles = {};
+try { bgmFiles = JSON.parse(fs.readFileSync(path.join(root, 'assets/audio/manifest.json'), 'utf8')).bgm || {}; } catch { /* 소리 서브모듈이 없으면 모두 요청 */ }
+const bgmHas = (mood) => (BGM_VARIANTS[mood] || [mood]).some((id) => bgmFiles[id]);
+const BGM_KO = {
+  title: ['처음 화면', '밤바다, 잔잔한 피아노 + 어쿠스틱 기타, 그리움', '1~2분 루프'],
+  morning: ['아침 · 새벽 장면', '맑고 느린 어쿠스틱 기타 + 첼레스타, 하루의 시작', '1~2분 루프'],
+  cafe: ['가게 안 낮 장면', '부드러운 재즈 피아노 트리오(작게), 대화를 가리지 않게', '2분 루프'],
+  warm: ['마감 · 정다운 장면', '따뜻한 피아노 + 현악 패드, 느림', '2분 루프'],
+  tension: ['바쁜 날 · 폭설 전', '낮은 현악 스타카토 + 시계 같은 리듬, 무섭지 않게', '1분 루프'],
+  peak: ['가을 축제', '아코디언 + 손뼉 + 작은 북, 흥겹지만 시끄럽지 않게', '1분 30초 루프'],
+  home: ['도시를 떠나 마을에 오는 장면', '버스 창밖 같은 잔잔한 신스 패드 + 기타', '1분 루프'],
+  ending: ['겨울 마지막 날 · 엔딩', '피아노 솔로에서 현악이 더해지는 감동적인 곡, 루프 없이 끝나도 됨', '3~4분'],
+  celebrate: ['하루 끝 화면', '짧고 밝은 마무리(실로폰 + 기타)', '30초 루프'],
+};
 
 const ls = (dir) => { try { return fs.readdirSync(path.join(root, dir)); } catch { return []; } };
 const haveCg = new Set(ls('assets/cg').map((f) => f.replace(/^cg_/, '').replace(/\.jpg$/, '')));
@@ -114,7 +130,7 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   `| 작업대 물건 시트 3 | ${objMissing.length}개를 시트 1장에 | \`assets/_src/objects/sheet_more.jpg\` | \`npm run objects\` |`,
   `| 블렌더 한 컷(손 동작) | ${noShot.length}가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
-  '| 배경음악 | 9곡(새로 만듦, 3장 규칙) | `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |',
+  `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 사용자가 Suno로 만든 곡으로 채움, 2026-11-01) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
   '| 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |', '');
 
 /* 1. 인물 */
@@ -211,18 +227,9 @@ for (const id of MISSING.sfx) P(`| 효과음 | \`${id}\` | ${sfxUse[id] ? [...sf
 for (const id of MISSING.amb) P(`| 환경음 | \`${id}\` | ${ambUse[id] ? [...ambUse[id]].map(epLabel).slice(0, 8).join(' · ') + (ambUse[id].size > 8 ? ` 외 ${ambUse[id].size - 8}일` : '') : '지금 대본에는 없음'} | ${SFX_KO[id] || ''} |`);
 P('', '### 5.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)', '',
   '| mood | 쓰는 곳 | 느낌 · 악기 | 길이 |', '| :--- | :--- | :--- | :--- |');
-const BGM_KO = {
-  title: ['처음 화면', '밤바다, 잔잔한 피아노 + 어쿠스틱 기타, 그리움', '1~2분 루프'],
-  morning: ['아침 · 새벽 장면', '맑고 느린 어쿠스틱 기타 + 첼레스타, 하루의 시작', '1~2분 루프'],
-  cafe: ['가게 안 낮 장면', '부드러운 재즈 피아노 트리오(작게), 대화를 가리지 않게', '2분 루프'],
-  warm: ['마감 · 정다운 장면', '따뜻한 피아노 + 현악 패드, 느림', '2분 루프'],
-  tension: ['바쁜 날 · 폭설 전', '낮은 현악 스타카토 + 시계 같은 리듬, 무섭지 않게', '1분 루프'],
-  peak: ['가을 축제', '아코디언 + 손뼉 + 작은 북, 흥겹지만 시끄럽지 않게', '1분 30초 루프'],
-  home: ['도시를 떠나 마을에 오는 장면', '버스 창밖 같은 잔잔한 신스 패드 + 기타', '1분 루프'],
-  ending: ['겨울 마지막 날 · 엔딩', '피아노 솔로에서 현악이 더해지는 감동적인 곡, 루프 없이 끝나도 됨', '3~4분'],
-  celebrate: ['하루 끝 화면', '짧고 밝은 마무리(실로폰 + 기타)', '30초 루프'],
-};
-for (const [mood, [where, feel, len]] of Object.entries(BGM_KO)) P(`| \`${mood}\` | ${where}${bgmUse[mood] ? `(${bgmUse[mood].size}일)` : ''} | ${feel} | ${len} |`);
+const bgmLeft = Object.entries(BGM_KO).filter(([mood]) => !bgmHas(mood));
+if (!bgmLeft.length) P('| 모두 있음 | ✅ 사용자가 Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |');
+for (const [mood, [where, feel, len]] of bgmLeft) P(`| \`${mood}\` | ${where}${bgmUse[mood] ? `(${bgmUse[mood].size}일)` : ''} | ${feel} | ${len} |`);
 P('', '- 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.', '');
 
 /* 6. 음성 */

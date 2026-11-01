@@ -26,7 +26,7 @@ export default {
     bg('alley', 'morning'),
     fx('dark'),
     amb('street'),
-    bgm('tension'),
+    bgm('blackout'), // 그레고리안 찬송가: 마을 불이 꺼지는 무거운 밤(2026-11-01)
     place('겨울 저녁 18:20', '폭설'),
     cg('winter_storm'),
     narr('라디오에서 말한 대로, 오후부터 눈이 쏟아졌다. 골목에 눈이 무릎까지 쌓였다.'),

@@ -478,6 +478,9 @@ export const ov = {
     const close = mount(el);
     go.focus({ preventScroll: true });
     let stopped = false;
+    // 크레디트 노래(가사 있음)는 읽어 주는 동안만 낮춤(2026-11-01)
+    const reading = store.settings().voice === 'auto';
+    if (reading) audio.duck(true);
     (async () => {
       await sleep(dur(600));
       for (const [i, fig] of pols.entries()) {
@@ -494,10 +497,12 @@ export const ov = {
       el.classList.add('roll-on');
       announce(`${creditSpeech()} 그리고 함께 일한 바리스타, ${you}.`);
       await tts.speak(creditSpeech(), 'sys');
+      if (!stopped) audio.duck(false);
     })();
     await waitButton(go);
     stopped = true;
     tts.stop();
+    if (reading) audio.duck(false);
     close();
     await sleep(dur(300));
   },

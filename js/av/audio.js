@@ -9,7 +9,7 @@ import { store } from '../core/store.js';
 import { bus } from '../core/bus.js';
 
 let ctx = null;
-let master, uiBus, envIn, envFilter, envGain, bgmBus, musicGain, sfxBus, ambBus, delay, delayFb, delayWet;
+let master, uiBus, envIn, envFilter, envGain, bgmBus, musicGain, duckGain, sfxBus, ambBus, delay, delayFb, delayWet;
 let noiseBuf = null;
 let brownBuf = null;
 
@@ -47,7 +47,9 @@ function ensure() {
   bgmBus = ctx.createGain();
   musicGain = ctx.createGain();
   musicGain.gain.value = 0;
-  musicGain.connect(bgmBus);
+  duckGain = ctx.createGain(); // 읽어 주는 말 아래로 잠깐 낮춤(audio.duck)
+  musicGain.connect(duckGain);
+  duckGain.connect(bgmBus);
   bgmBus.connect(envIn);
   sfxBus = ctx.createGain();
   sfxBus.connect(envIn);
@@ -464,8 +466,23 @@ function stopFileBgm() {
  *  - 그 분위기로 들어올 때마다 다음 곡, 한 곡이 끝나면 다음 곡으로 이어서(파일이 있는 곡만)
  *  - 상황 곡은 한 곡 그대로
  * 배경음악은 모두 새 곡을 씁니다(2026-10-27 사용자 결정). 새 곡을 넣으면 { 분위기: [곡 id, …] } 를 적습니다(PRD.md 11.1).
+ * 2026-11-01 사용자가 Suno로 만든 곡(tools/audio/audio_map.mjs 의 note 에 고른 까닭). 가사가 있는 letter 는 엔딩 크레디트에서만(사용자 결정)
  */
-const BGM_VARIANTS = {};
+export const BGM_VARIANTS = {
+  title: ['glow_a'],              // Rising Glow: 처음 화면과 엔딩에 같은 곡(한 해를 여닫음)
+  ending: ['glow_a'],
+  morning: ['glow_b'],            // Rising Glow 다른 판: 해 뜨는 아침
+  cafe: ['waltz'],                // Galactic Waltz: 손님이 오가는 낮
+  celebrate: ['waltz'],           // 하루 끝 결과 화면
+  warm: ['ballad_a', 'ballad_b'], // 피아노 발라드 두 판을 돌려 가며: 단골의 마음 · 마감 · 일기
+  home: ['ballad_b'],             // 첫날 밤의 작은 방
+  tension: ['horizon_a', 'horizon_b'], // Across the Horizon: 계절의 큰 사건
+  peak: ['horizon_b'],            // 가을 축제
+  blackout: ['chant_a', 'chant_b'],    // 그레고리안 찬송가: 겨울 정전 밤
+  credits: ['letter'],            // 아이에게 보내는 편지(가사 있음): 엔딩 크레디트에서만, 한 번
+};
+// 반복하지 않고 한 번만 트는 곡(끝나면 조용히)
+const ONCE = ['letter'];
 const variantTurn = {};
 const variantsOf = (m) => (BGM_VARIANTS[m] || [m]).filter((id) => manifest.bgm?.[id]);
 function nextVariant(m) {
@@ -483,7 +500,7 @@ function startFileBgm(id, moodName = id) {
   const el = new Audio(`./assets/audio/${manifest.bgm[id]}`);
   const playlist = variantsOf(moodName).length > 1;
   const from = LOOP_FROM[id];
-  el.loop = id !== 'ending' && !playlist && !from;
+  el.loop = !ONCE.includes(id) && !playlist && !from;
   if (from) {
     el.addEventListener('ended', () => {
       if (bgmEl !== el) return;
@@ -642,6 +659,7 @@ export const audio = {
     if (next === targetMood) return;
     targetMood = next;
     const now = ctx.currentTime;
+    audio.duck(false);
     musicGain.gain.cancelScheduledValues(now);
     musicGain.gain.setValueAtTime(musicGain.gain.value, now);
     musicGain.gain.linearRampToValueAtTime(0, now + 0.8);
@@ -659,6 +677,15 @@ export const audio = {
       const file = nextVariant(mood);
       if (file) startFileBgm(file, mood);
     }, 850);
+  },
+
+  /** 읽어 주는 말 아래로 배경음악을 낮춤(엔딩 크레디트: 가사가 있는 노래와 읽어 주기가 겹치지 않게). 분위기가 바뀌면 저절로 풀림 */
+  duck(on) {
+    if (!ensure() || !duckGain) return;
+    const now = ctx.currentTime;
+    duckGain.gain.cancelScheduledValues(now);
+    duckGain.gain.setValueAtTime(duckGain.gain.value, now);
+    duckGain.gain.linearRampToValueAtTime(on ? 0.3 : 1, now + (on ? 0.5 : 1.5));
   },
 
   ambience(kind, level = 1) {
@@ -685,7 +712,7 @@ export const audio = {
     if (ctx) { stopAmbience(); audio.setEarplugs(false); }
   },
 
-  state() { return { mood: targetMood, ambience: amb?.kind || null, ambLevel: amb?.level || 1 }; },
+  state() { return { mood: targetMood, ambience: amb?.kind || null, ambLevel: amb?.level || 1, duck: duckGain ? Number(duckGain.gain.value.toFixed(2)) : 1 }; },
   hasFile(kind, id) { return Boolean(manifest[kind]?.[id]); },
   applyVolumes,
 };
@@ -695,5 +722,5 @@ bus.on('profile', () => applyVolumes());
 
 /** 도구(검사·에셋 목록)용 */
 export const SFX_NAMES = Object.keys(SYN);
-export const BGM_NAMES = Object.keys(MOODS);
+export const BGM_NAMES = [...new Set([...Object.keys(MOODS), ...Object.keys(BGM_VARIANTS)])];
 export const AMB_NAMES = ['cafe', 'crowd', 'street', 'kitchen', 'home', 'classroom'];

@@ -54,6 +54,7 @@ export default {
     narr('창밖 항구에 고깃배 불빛이 하나둘 켜진다. 내일 새벽에 바다로 나갈 배들이다.'),
     cg(null),
     motion('owner', 'nod'),
+    bgm('credits'), // 가사가 있는 노래「아이에게 보내는 편지」는 크레디트에서만(2026-11-01 사용자)
     credits(),
     end(),
   ],

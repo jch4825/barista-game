@@ -19,6 +19,7 @@ const CY = 'Cyberleaf-RetroSFXs/';
 const IS = 'interfaceanditemsounds/';
 const TW = 'userinterfacesoundfxscifitech/';
 const VN = 'visualnovelanimemusicpack_v2/WAV/';
+const SUNO = 'BGM/'; // 사용자가 Suno로 만든 배경음악(프로젝트의 BGM/ 폴더, 이 PC에만 · .gitignore)
 
 /**
  * 팩 정보 (CREDITS.md · 선생님 모드 '제작·저작권 정보')
@@ -44,14 +45,32 @@ export const PACKS = {
   // 만든 곳: Humble 다운로드 페이지 표기(사용자 확인 2026-10-16). 썸네일의 '320'이 우리 팩의 소리 개수(320개)와 같음
   [IS]: { name: 'Interface & Item Sounds (320개, V1~V3)', author: 'GameDev Market', license: GDM, bundle: HB21 },
   [TW]: { name: 'User Interface Sound FX - Scifi & Tech', author: 'TomWinandySFX (tomwinandy.com)', license: GDM, bundle: HB21 },
+  // 2026-11-01 사용자: "모두 SUNO로 만든 곡들이므로 사용가능하다. 단, 아이에게 보내는 편지 (Remastered) 는 가사가 있으므로 앤딩 크레딧이나 오프닝에서만"
+  [SUNO]: {
+    name: 'Suno로 만든 배경음악', author: '사용자(Suno로 만듦)', composer: '사용자가 Suno(AI 음악 도구)로 만듦',
+    license: '사용자가 만든 곡(사용자 확인 2026-11-01: 모두 사용 가능)', bundle: '', ai: 'AI로 만든 음악(처음 화면의 AI 안내와 같음)',
+  },
 };
 
 const V = (name) => `${VN}${name}.wav`;
+const S = (name) => `${SUNO}${name}.mp3`;
 
 export const AUDIO_MAP = [
   /* ---------------- 배경음악 ----------------
    * 새 게임은 배경음악을 모두 새로 넣습니다(2026-10-27 사용자: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음).
-   * 새 곡은 { id, kind: 'bgm', src, use, track, … } 로 여기에 더하고, 쓰는 팩을 PACKS 에 적습니다. */
+   * 새 곡은 { id, kind: 'bgm', src, use, track, … } 로 여기에 더하고, 쓰는 팩을 PACKS 에 적습니다.
+   * 2026-11-01 사용자가 Suno로 만든 곡(한 곡에 두 판씩: _a · _b). 어느 분위기에 무엇을 트는지는 js/av/audio.js 의 BGM_VARIANTS.
+   * 고른 기준: Suno 곡 페이지의 스타일 글 + 길이 · 음량 · 밝기 · 조 분석(사람이 들어 보고 확정). 끝의 무음만 잘라 냄 */
+  { id: 'glow_a', kind: 'bgm', src: S('Rising Glow'), track: 'Rising Glow', use: '처음 화면 · 엔딩 · 한 해의 마지막 마감', trim: [0, 320.1], fadeOut: 1.5, target: { lufs: -18 }, note: '「Rising Glow」(다장조, 5분 20초): 스타일 "tranquil and hopeful · harp · cello · slow tempo with piano · warm". 고르고 차분해(음량 폭 5.9) 처음 화면과 엔딩에 같은 곡(한 해를 여닫는 곡)' },
+  { id: 'glow_b', kind: 'bgm', src: S('Rising Glow (1)'), track: 'Rising Glow (2)', use: '아침(가게 열기 전)', trim: [0, 256.4], fadeOut: 1.5, target: { lufs: -18 }, note: '「Rising Glow」의 다른 판(내림마장조, 더 밝음 1063Hz) → 해 뜨는 아침' },
+  { id: 'waltz', kind: 'bgm', src: S('Galactic Waltz'), track: 'Galactic Waltz', use: '일하는 카페 · 하루 끝(결과 화면)', trim: [0, 173.6], fadeOut: 1, target: { lufs: -19 }, note: '「Galactic Waltz」(내림마장조 왈츠): "grand piano · classical · start with simple rhythm · growing fast tempo · grand ending" → 손님이 오가는 낮의 카페, 하루를 마친 결과 화면' },
+  { id: 'ballad_a', kind: 'bgm', src: S('Untitled'), track: 'Untitled', use: '따뜻한 장면 · 일기(돌려 듣기 1)', trim: [0, 226.2], fadeOut: 1.5, target: { lufs: -19 }, note: '이름 없는 곡(다장조): "ballad · piano pop", 아주 부드러움(밝기 609Hz) → 단골의 마음 · 마감 · 일기' },
+  { id: 'ballad_b', kind: 'bgm', src: S('Untitled (1)'), track: 'Untitled (2)', use: '따뜻한 장면(돌려 듣기 2) · 첫날 밤의 작은 방', trim: [0, 200.4], fadeOut: 1.5, target: { lufs: -19 }, note: '같은 곡의 다른 판(다단조, 더 조용함 -16.6 LUFS) → 조금 쓸쓸한 따뜻함, 낯선 마을의 첫날 밤' },
+  { id: 'horizon_a', kind: 'bgm', src: S('Across the Horizon'), track: 'Across the Horizon', use: '계절의 큰 사건(돌려 듣기 1)', trim: [0, 141.4], fadeOut: 1, target: { lufs: -19 }, note: '「Across the Horizon」(가단조): "soundtrack · cinematic · orchestral", 조용히 시작해 커짐(음량 폭 12) → 촬영 · 줄 · 큰 사건' },
+  { id: 'horizon_b', kind: 'bgm', src: S('Across the Horizon (1)'), track: 'Across the Horizon (2)', use: '계절의 큰 사건(돌려 듣기 2) · 가을 축제', fadeOut: 3, target: { lufs: -19 }, note: '같은 곡의 다른 판(사단조, 3분 14초로 더 길게 쌓임) → 위기 넷이 겹치는 가을 축제' },
+  { id: 'chant_a', kind: 'bgm', src: S('그레고리안 찬송가'), track: '그레고리안 찬송가', use: '정전 밤(돌려 듣기 1)', trim: [0, 158.4], fadeOut: 1.5, target: { lufs: -20 }, note: '「그레고리안 찬송가」(바장조): "그레고리안 찬트 · 찬송가 · 무거운" → 폭설로 마을 불이 꺼지고 촛불을 켜는 밤' },
+  { id: 'chant_b', kind: 'bgm', src: S('그레고리안 찬송가 (1)'), track: '그레고리안 찬송가 (2)', use: '정전 밤(돌려 듣기 2)', trim: [0, 114.4], fadeOut: 1.5, target: { lufs: -20 }, note: '같은 곡의 다른 판(가단조, 1분 54초)' },
+  { id: 'letter', kind: 'bgm', src: S('아이에게 보내는 편지 (Remastered)'), track: '아이에게 보내는 편지 (Remastered)', use: '엔딩 크레디트(가사가 있는 곡이라 여기서만, 한 번만)', trim: [0, 198.0], fadeOut: 2, target: { lufs: -18 }, note: '가사가 있는 노래(여성 목소리 · 발라드): 사용자 결정으로 엔딩 크레디트 · 오프닝에서만 → 이야기 중에는 대사와 겹치므로 크레디트에서만 한 번 틂' },
 
   /* ---------------- 환경음 ----------------
    * 매장 웅성거림(amb/cafe)은 2026-10-11부터 쓰지 않다가 2026-10-16 파일째 지움(사용자). 옛 저장에 남아 있어도 audio.js 가 틀지 않음 */

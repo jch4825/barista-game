@@ -42,7 +42,7 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 - **비공개** `jch4825/barista-game-audio`: 효과음 · 환경음 · 배경음악(사서 쓰는 팩에서 잘라 만든 것이라 공개하지 않음). 공개 저장소의 `assets/audio` 자리에 **서브모듈**로 연결. 받을 때 `git clone --recurse-submodules`(권한이 없으면 `assets/audio`가 비고 게임은 소리 없이 돎, `audio.js`가 목록 없음을 그냥 넘어감).
 - 소리를 바꾸면(`npm run audio` · `npm run assets`가 `assets/audio/manifest.json`을 다시 씀): `assets/audio` 안에서 커밋 · 푸시 → 바깥에서 `git add assets/audio`로 가리키는 커밋을 바꿔 커밋 · 푸시.
 - 공개에 넣지 않는 것(`.gitignore`): 다른 게임 화면 같은 남의 참고 그림(`docs/design/ref_*`), 사서 쓰는 소리(위 서브모듈만), 블렌더 자동 백업 `*.blend1`, 확인용 출력 `assets/_src/_check/`, 블렌더 렌더 원본 프레임 `assets/_src/blender/shots/*.png`(컷마다 수백 MB라 이 PC에만, 사용자 결정 2026-11-01: 게임 그림 `assets/shots/*.webp` · 자리 정보 json · 미리 보기 jpg만 올림. 다시 만들 때는 이 PC에서 렌더 → `shots_post.py`). 새 참고 그림은 `ref_`로 시작하는 이름으로 둡니다. 선생님 화면 '작업 기록'의 `assets/credits/credits.json`에는 사용자의 요청 글이 들어 있어 함께 공개됩니다.
-- 이 컴퓨터에만 있는 것: 블렌더(한 컷 렌더) · Supertonic(음성) · 원본 소리 팩(`SOUND_SRC`) · 원본 직업 마1스톤(`C:\AI\game`). 그래서 `npm run voices` · `npm run audio` · 블렌더 렌더는 이 컴퓨터에서 합니다. 클라우드 세션에서 고친 것은 이 폴더에서 `git pull`(소리까지 `git pull --recurse-submodules`)로 받습니다.
+- 이 컴퓨터에만 있는 것: 블렌더(한 컷 렌더) · Supertonic(음성) · 원본 소리 팩(`SOUND_SRC`) · Suno 배경음악 원본(`BGM/`) · 원본 직업 마1스톤(`C:\AI\game`). 그래서 `npm run voices` · `npm run audio` · 블렌더 렌더는 이 컴퓨터에서 합니다. 클라우드 세션에서 고친 것은 이 폴더에서 `git pull`(소리까지 `git pull --recurse-submodules`)로 받습니다.
 
 ## 2. 절대 원칙 (PRD 2장)
 
@@ -68,6 +68,7 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 - **직업 마1스톤의 주조연은 손님으로만** 나옵니다(연우·도현·점장·소라·민재·엄마·김선영 선생님·지호 + 손님들). 그림·목소리 배정(`tools/voice/voice_cast.json`)을 그대로 써서 알아보게 합니다.
 - **새로 만듦**: 주인공급 인물(지은, 사장님, 단골 8명. 금 씨도 권함), **배경음악 전부**(직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음), 작업대 오브젝트(정교한 2D).
 - 배경음악 파일이 없으면 조용히 둡니다(`js/av/audio.js`). 합성 배경음악은 쓰지 않습니다.
+- **배경음악은 사용자가 Suno로 만든 곡**(2026-11-01): 원본 MP3는 프로젝트의 `BGM/`(이 PC에만, `.gitignore`) → `tools/audio/audio_map.mjs`의 `S('곡 이름')` 줄 → `npm run audio`(끝 무음 자르기 · 음량 맞춤 → 비공개 `assets/audio/bgm/*.ogg`). 어느 분위기(`bgm('warm')` 등)에 어느 곡을 트는지는 `audio.js`의 `BGM_VARIANTS`(여러 곡이면 돌려 듣기), 한 번만 트는 곡은 `ONCE`. **가사가 있는 「아이에게 보내는 편지」(`letter`)는 엔딩 크레디트(`bgm('credits')`)나 오프닝에서만**(사용자 결정). 크레디트를 읽어 주는 동안은 `audio.duck(true)`로 음악을 낮춤(분위기가 바뀌면 저절로 풀림).
 
 ## 4. 구조
 

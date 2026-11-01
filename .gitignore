@@ -19,3 +19,6 @@ docs/design/ref_*
 
 # 시험용 브라우저 출력
 .playwright-mcp/
+
+# 사용자가 Suno로 만든 배경음악 원본(이 PC에만). 게임용 .ogg 는 비공개 서브모듈 assets/audio/bgm/ (2026-11-01)
+/BGM/
