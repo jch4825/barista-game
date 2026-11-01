@@ -1,0 +1,14 @@
+{
+  "bgm": {
+    "ballad_a": "ballad_a.ogg",
+    "ballad_b": "ballad_b.ogg",
+    "chant_a": "chant_a.ogg",
+    "chant_b": "chant_b.ogg",
+    "glow_a": "glow_a.ogg",
+    "glow_b": "glow_b.ogg",
+    "horizon_a": "horizon_a.ogg",
+    "horizon_b": "horizon_b.ogg",
+    "letter": "letter.ogg",
+    "waltz": "waltz.ogg"
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * 오디오 엔진
- *  - 파일 우선: assets/audio/manifest.json 에 등록된 파일(BGM·효과음·환경음)을 재생합니다.
- *  - 효과음은 파일이 없으면 Web Audio 합성음으로 대신합니다. 배경음악은 파일이 없으면 조용히 둡니다(새 곡을 기다림).
+ *  - 파일 우선: assets/audio/manifest.json(효과음·환경음, 비공개 서브모듈) · assets/music/manifest.json(배경음악, 공개)에 등록된 파일을 재생합니다.
+ *  - 효과음은 파일이 없으면 Web Audio 합성음으로 대신합니다. 배경음악은 파일이 없으면 조용히 둡니다.
  *  - 장면 속 소리(env)와 화면 조작 소리(ui)를 나눕니다. 귀마개를 끼면 장면 속 소리만 먹먹해집니다.
  */
 
@@ -95,12 +95,17 @@ function applyVolumes() {
 }
 
 async function loadManifest() {
-  try {
-    const res = await fetch('./assets/audio/manifest.json', { cache: 'no-store' });
-    if (res.ok) manifest = { bgm: {}, sfx: {}, amb: {}, ...(await res.json()) };
-  } catch (e) {
-    /* 파일이 없으면 합성음만 사용 */
-  }
+  // 효과음 · 환경음(비공개 서브모듈)과 배경음악(공개 assets/music/)은 목록이 따로. 없는 쪽은 빈 목록(합성음 · 조용히)
+  const get = async (url) => {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      return res.ok ? await res.json() : {};
+    } catch (e) {
+      return {};
+    }
+  };
+  const [sounds, music] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json')]);
+  manifest = { sfx: {}, amb: {}, ...sounds, bgm: music.bgm || {} };
 }
 
 async function preloadSfx() {
@@ -497,7 +502,7 @@ function nextVariant(m) {
 const LOOP_FROM = {};
 
 function startFileBgm(id, moodName = id) {
-  const el = new Audio(`./assets/audio/${manifest.bgm[id]}`);
+  const el = new Audio(`./assets/music/${manifest.bgm[id]}`);
   const playlist = variantsOf(moodName).length > 1;
   const from = LOOP_FROM[id];
   el.loop = !ONCE.includes(id) && !playlist && !from;

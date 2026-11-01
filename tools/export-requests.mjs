@@ -23,7 +23,7 @@ const { MISSING } = await imp('tools/audio/audio_map.mjs');
 const { BGM_VARIANTS } = await imp('js/av/audio.js');
 // 곡 파일이 있는 분위기(2026-11-01 저작자가 AI 음악 모델 Suno로 만든 곡을 넣음): 요청서에서 뺌
 let bgmFiles = {};
-try { bgmFiles = JSON.parse(fs.readFileSync(path.join(root, 'assets/audio/manifest.json'), 'utf8')).bgm || {}; } catch { /* 소리 서브모듈이 없으면 모두 요청 */ }
+try { bgmFiles = JSON.parse(fs.readFileSync(path.join(root, 'assets/music/manifest.json'), 'utf8')).bgm || {}; } catch { /* 목록이 없으면 모두 요청 */ }
 const bgmHas = (mood) => (BGM_VARIANTS[mood] || [mood]).some((id) => bgmFiles[id]);
 const BGM_KO = {
   title: ['처음 화면', '밤바다, 잔잔한 피아노 + 어쿠스틱 기타, 그리움', '1~2분 루프'],

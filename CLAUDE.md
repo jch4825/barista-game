@@ -20,7 +20,7 @@ npm start            # Electron (app:// 프로토콜)
 npm run validate     # 시나리오 검사: 오류 0 이어야 함
 npm run export       # 읽기용 대본 → scenarios/*.md (자동 생성물, 직접 고치지 않기)
 npm run requests     # 아직 없는 그림 · 물건 · 블렌더 컷 · 소리 · 음성 요청서 → docs/requests_full.md (자동 생성물)
-npm run assets       # 소리 assets/audio/{bgm,sfx,amb}/ → manifest.json, 그림 → assets/images.json
+npm run assets       # 소리 assets/audio/{sfx,amb}/ → assets/audio/manifest.json, 배경음악 assets/music/ → assets/music/manifest.json, 그림 → assets/images.json
 npm run images       # assets/_src/{stand,vfx,…} 원본 → 게임용 그림(tools/import-images.py) + 목록
 npm run objects      # 작업대 물건 시트 assets/_src/objects/sheet_*.jpg → assets/objects/{id}.webp(초록 바탕 지우기·자르기) + 목록. --check 는 python tools/import-objects.py --check
 npm run lines        # 읽어 줄 문장 목록 → tools/voice/lines.json
@@ -39,7 +39,8 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 ### 저장소(깃허브, 사용자 결정 2026-10-31)
 
 - **공개** `jch4825/barista-game`(main): 게임 전체. 클라우드 세션은 이 저장소로 엽니다.
-- **비공개** `jch4825/barista-game-audio`: 효과음 · 환경음 · 배경음악(사서 쓰는 팩에서 잘라 만든 것이라 공개하지 않음). 공개 저장소의 `assets/audio` 자리에 **서브모듈**로 연결. 받을 때 `git clone --recurse-submodules`(권한이 없으면 `assets/audio`가 비고 게임은 소리 없이 돎, `audio.js`가 목록 없음을 그냥 넘어감).
+- **비공개** `jch4825/barista-game-audio`: 효과음 · 환경음(사서 쓰는 팩에서 잘라 만든 것이라 공개하지 않음). 공개 저장소의 `assets/audio` 자리에 **서브모듈**로 연결. 받을 때 `git clone --recurse-submodules`(권한이 없으면 `assets/audio`가 비고 게임은 효과음 · 환경음 없이 돎, `audio.js`가 목록 없음을 그냥 넘어감).
+- **배경음악은 공개 저장소의 `assets/music/`**(2026-11-01 사용자 '공개로 옮기기'): 저작자가 AI로 만든 곡이라 보호할 필요가 없음. 목록은 따로 `assets/music/manifest.json`이라 서브모듈이 없어도 음악은 나옴.
 - 소리를 바꾸면(`npm run audio` · `npm run assets`가 `assets/audio/manifest.json`을 다시 씀): `assets/audio` 안에서 커밋 · 푸시 → 바깥에서 `git add assets/audio`로 가리키는 커밋을 바꿔 커밋 · 푸시.
 - 공개에 넣지 않는 것(`.gitignore`): 다른 게임 화면 같은 남의 참고 그림(`docs/design/ref_*`), 사서 쓰는 소리(위 서브모듈만), 블렌더 자동 백업 `*.blend1`, 확인용 출력 `assets/_src/_check/`, 블렌더 렌더 원본 프레임 `assets/_src/blender/shots/*.png`(컷마다 수백 MB라 이 PC에만, 사용자 결정 2026-11-01: 게임 그림 `assets/shots/*.webp` · 자리 정보 json · 미리 보기 jpg만 올림. 다시 만들 때는 이 PC에서 렌더 → `shots_post.py`). 새 참고 그림은 `ref_`로 시작하는 이름으로 둡니다. 선생님 화면 '작업 기록'의 `assets/credits/credits.json`에는 사용자의 요청 글이 들어 있어 함께 공개됩니다.
 - 이 컴퓨터에만 있는 것: 블렌더(한 컷 렌더) · Supertonic(음성) · 원본 소리 팩(`SOUND_SRC`) · AI 배경음악 원본 MP3(`BGM/`) · 원본 직업 마1스톤(`C:\AI\game`). 그래서 `npm run voices` · `npm run audio` · 블렌더 렌더는 이 컴퓨터에서 합니다. 클라우드 세션에서 고친 것은 이 폴더에서 `git pull`(소리까지 `git pull --recurse-submodules`)로 받습니다.
@@ -68,7 +69,7 @@ npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘�
 - **직업 마1스톤의 주조연은 손님으로만** 나옵니다(연우·도현·점장·소라·민재·엄마·김선영 선생님·지호 + 손님들). 그림·목소리 배정(`tools/voice/voice_cast.json`)을 그대로 써서 알아보게 합니다.
 - **새로 만듦**: 주인공급 인물(지은, 사장님, 단골 8명. 금 씨도 권함), **배경음악 전부**(직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음), 작업대 오브젝트(정교한 2D).
 - 배경음악 파일이 없으면 조용히 둡니다(`js/av/audio.js`). 합성 배경음악은 쓰지 않습니다.
-- **배경음악은 저작자가 AI 음악 모델 Suno로 만든 곡**(2026-11-01, 10개 파일 모두 Suno. 곡마다 `audio_map.mjs`의 `pack: SUNO`, Gemini로 만든 곡이 오면 Gemini 팩을 더함). **AI로 만든 음악은 저작자가 만든 것이라 자르거나 비공개로 올려 저작권을 보호할 필요가 없고, 어느 AI 모델로 만들었는지만 밝힘**(사용자 2026-11-01, 끝의 무음은 잘라도 됨; 비공개 원칙은 사서 쓰는 소리 팩에만). 엔딩 크레디트에도 '음악: AI 음악 모델 Suno로 만든 곡'. 원본 MP3는 프로젝트의 `BGM/`(`.gitignore`, 게임은 같은 곡의 .ogg를 씀) → `tools/audio/audio_map.mjs`의 `S('곡 이름')` 줄 → `npm run audio`(끝 무음 자르기 · 음량 맞춤 → 비공개 `assets/audio/bgm/*.ogg`). 어느 분위기(`bgm('warm')` 등)에 어느 곡을 트는지는 `audio.js`의 `BGM_VARIANTS`(여러 곡이면 돌려 듣기), 한 번만 트는 곡은 `ONCE`. **가사가 있는 「아이에게 보내는 편지」(`letter`)는 엔딩 크레디트(`bgm('credits')`)나 오프닝에서만**(사용자 결정). 크레디트를 읽어 주는 동안은 `audio.duck(true)`로 음악을 낮춤(분위기가 바뀌면 저절로 풀림).
+- **배경음악은 저작자가 AI 음악 모델 Suno로 만든 곡**(2026-11-01, 10개 파일 모두 Suno. 곡마다 `audio_map.mjs`의 `pack: SUNO`, Gemini로 만든 곡이 오면 Gemini 팩을 더함). **AI로 만든 음악은 저작자가 만든 것이라 자르거나 비공개로 올려 저작권을 보호할 필요가 없고, 어느 AI 모델로 만들었는지만 밝힘**(사용자 2026-11-01, 끝의 무음은 잘라도 됨; 비공개 원칙은 사서 쓰는 소리 팩에만). 엔딩 크레디트에도 '음악: AI 음악 모델 Suno로 만든 곡'. 원본 MP3는 프로젝트의 `BGM/`(`.gitignore`, 게임은 같은 곡의 .ogg를 씀) → `tools/audio/audio_map.mjs`의 `S('곡 이름')` 줄 → `npm run audio`(끝 무음 자르기 · 음량 맞춤 → 공개 `assets/music/*.ogg` + `assets/music/manifest.json`). 어느 분위기(`bgm('warm')` 등)에 어느 곡을 트는지는 `audio.js`의 `BGM_VARIANTS`(여러 곡이면 돌려 듣기), 한 번만 트는 곡은 `ONCE`. **가사가 있는 「아이에게 보내는 편지」(`letter`)는 엔딩 크레디트(`bgm('credits')`)나 오프닝에서만**(사용자 결정). 크레디트를 읽어 주는 동안은 `audio.duck(true)`로 음악을 낮춤(분위기가 바뀌면 저절로 풀림).
 
 ## 4. 구조
 
@@ -84,7 +85,7 @@ js/data/              episodes/(봄~겨울 28일 · ending · free 자유 영업
 js/screens/           title · profile · hub(달력: 계절 × 7일 + 엔딩 · 자유 영업 · 새 해) · result(하루 끝: 오늘 만난 사람 · 오늘 만든 잔 · 일기) · notebook(수첩: 단골 · 메뉴 도감 · 장면 앨범 · 말 사전 · 일기) · settings · teacher · credits · menus · saves · records · screen
 js/av/                audio(파일 우선) · tts(음성 파일 우선 + Web Speech)
 tools/                serve · validate-scenarios · export-script · export-lines · run-voices · voice/ · scan-assets · autoplay · import-images.py · import-objects.py(물건 시트) · blender/(scene_bench.py 장면·렌더 · sprites_post.py 물건 그림 · shots_post.py 한 컷) · import-audio · import-movies · crop-portraits.py · face-boxes.py · export-credits · build-web
-assets/               stand/(61, 지은 6·사장님 4·해순 3·지안 3 + 이전 인물·손님) · bg/(24: 새 21 + 옛 3) · cg/(7) · vfx/(16) · portraits/(13) · objects/(작업대 물건 22) · shots/(손 기술의 한 컷, 블렌더) · audio/{sfx,amb}/ · fonts/ · voice/ · _src/(원본·블렌더 장면 _src/blender, 배포에서 빠짐)
+assets/               music/(배경음악 10, 공개) · stand/(61, 지은 6·사장님 4·해순 3·지안 3 + 이전 인물·손님) · bg/(24: 새 21 + 옛 3) · cg/(7) · vfx/(16) · portraits/(13) · objects/(작업대 물건 22) · shots/(손 기술의 한 컷, 블렌더) · audio/{sfx,amb}/ · fonts/ · voice/ · _src/(원본·블렌더 장면 _src/blender, 배포에서 빠짐)
 ```
 
 ## 5. 시나리오 DSL (`js/core/dsl.js`)

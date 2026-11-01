@@ -1,6 +1,6 @@
 /**
  * 사운드 팩에서 게임 소리 만들기
- *   node tools/import-audio.mjs            전체 → assets/audio/{bgm,sfx,amb}/{ID}.ogg + assets/audio/CREDITS.md
+ *   node tools/import-audio.mjs            전체 → assets/audio/{sfx,amb}/{ID}.ogg · 배경음악 assets/music/{ID}.ogg + assets/audio/CREDITS.md
  *   node tools/import-audio.mjs bell tap   일부만
  *   node tools/import-audio.mjs --credits  소리는 그대로 두고 CREDITS.md 만 다시 씀(팩 정보를 고쳤을 때)
  * 대응표: tools/audio/audio_map.mjs · 원본 폴더: 환경 변수 SOUND_SRC (기본 C:\AI\sound effect assets)
@@ -130,7 +130,8 @@ function measure(file, target) {
 }
 
 function build(e) {
-  const outDir = path.join(root, 'assets', 'audio', e.kind);
+  // 배경음악은 공개 폴더 assets/music/(저작자가 AI로 만든 곡, 2026-11-01), 사서 쓰는 소리는 비공개 서브모듈 assets/audio/
+  const outDir = e.kind === 'bgm' ? path.join(root, 'assets', 'music') : path.join(root, 'assets', 'audio', e.kind);
   fs.mkdirSync(outDir, { recursive: true });
   const t1 = path.join(tmp, `${e.kind}_${e.id}_1.wav`);
   const { inputs, filter } = graph(e);
@@ -164,7 +165,7 @@ function packOf(rel) {
 function writeCredits() {
   const rows = AUDIO_MAP.map((e) => {
     const src = sources(e).map((s) => `${e.pack ? PACKS[e.pack].name : packOf(s)} · \`${s.split('/').pop()}\``).join('<br>');
-    return `| \`${e.kind}/${e.id}.ogg\` | ${src} | ${e.note || ''} |`;
+    return `| \`${e.kind === 'bgm' ? 'music' : e.kind}/${e.id}.ogg\` | ${src} | ${e.note || ''} |`;
   });
   const packs = Object.values(PACKS).map((p) => `| ${p.name} | ${p.author} | ${p.license} | ${p.bundle || ''} | ${p.ai || ''} |`);
   // 배경음악은 새 게임에 맞춰 모두 새로 넣음(직업 마1스톤 곡·「The Carousel Turn」은 2026-10-27 뺌). 2026-11-01부터 저작자가 AI 음악 모델 Suno로 만든 곡
