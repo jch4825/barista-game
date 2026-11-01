@@ -37,7 +37,7 @@ function duration(file) {
 }
 function srcPath(rel) {
   // 사용자가 직접 만든 곡처럼 프로젝트 안(assets/_src/audio/, 배포에서 빠짐)에 둔 원본은 그 자리에서(2026-10-26)
-  // 저작자가 AI 음악 모델(Gemini · Suno)로 만든 배경음악(BGM/)도 그 자리에서(2026-11-01)
+  // 저작자가 AI 음악 모델(Suno 등)로 만든 배경음악(BGM/)도 그 자리에서(2026-11-01)
   const p = rel.startsWith('assets/_src/') || rel.startsWith('BGM/') ? path.join(root, rel) : path.join(SRC, rel);
   if (!fs.existsSync(p)) throw new Error(`원본이 없어요: ${rel}`);
   return p;
@@ -167,9 +167,9 @@ function writeCredits() {
     return `| \`${e.kind}/${e.id}.ogg\` | ${src} | ${e.note || ''} |`;
   });
   const packs = Object.values(PACKS).map((p) => `| ${p.name} | ${p.author} | ${p.license} | ${p.bundle || ''} | ${p.ai || ''} |`);
-  // 배경음악은 새 게임에 맞춰 모두 새로 넣음(직업 마1스톤 곡·「The Carousel Turn」은 2026-10-27 뺌). 2026-11-01부터 저작자가 AI 음악 모델(Gemini · Suno)로 만든 곡
+  // 배경음악은 새 게임에 맞춰 모두 새로 넣음(직업 마1스톤 곡·「The Carousel Turn」은 2026-10-27 뺌). 2026-11-01부터 저작자가 AI 음악 모델 Suno로 만든 곡
   const noBgm = AUDIO_MAP.some((e) => e.kind === 'bgm')
-    ? '\n- 배경음악은 이 제품의 저작자가 AI 음악 모델로 만든 곡입니다(2026-11-01). 영어 제목 곡은 Gemini, 한글 제목 곡은 Suno로 만들었습니다. 끝의 무음만 잘라 음량을 맞춘 Opus(.ogg)로 넣었습니다.'
+    ? '\n- 배경음악은 이 제품의 저작자가 AI 음악 모델 Suno로 만든 곡입니다(2026-11-01). 끝의 무음만 잘라 음량을 맞춘 Opus(.ogg)로 넣었습니다.'
     : '\n- 배경음악은 새 게임에 맞춰 모두 새로 넣습니다(직업 마1스톤의 곡은 쓰지 않음). 지금은 배경음악 파일이 없습니다.';
   const md = `# 음악·효과음 출처와 라이선스
 
