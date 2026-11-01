@@ -820,3 +820,14 @@ body.skin-sea .cal-autumn { box-shadow: inset 6px 0 0 #D9A13B; }
 body.skin-sea .cal-winter { box-shadow: inset 6px 0 0 #C9D7E3; }
 body.skin-sea .hub-free:not(.locked), body.skin-sea .hub-year { background: linear-gradient(180deg, #1D4E5A, #10343E); }
 body.reduce-motion .scr-cal .hub-ep { transition: none; }
+
+/* 하루 끝: 오늘의 일(지은의 성장, 재미 개편 6장) — 받은 돈 · 오른 능력치 · 새 단계 */
+.rs-grow { max-width: 1100px; margin: 0 auto 18px; padding: 14px 22px; border-radius: 14px; background: var(--plate); border: 2px solid var(--gold-line); outline: 1px solid rgba(240, 217, 162, .25); outline-offset: -6px; text-align: left; }
+.rs-grow h3 { margin: 0 0 8px; font-family: var(--font-title); font-size: 30px; color: var(--gold-l); }
+.rs-grow p { display: flex; align-items: center; gap: 12px; margin: 6px 0; font-size: 24px; color: #F4EAD2; }
+.rs-grow i svg { width: 30px; height: 30px; color: var(--gold-l); }
+.rs-grow .rs-pay-total { justify-content: space-between; font-size: 26px; }
+.rs-grow .rs-pay-total b { color: #FFE9B0; }
+.rs-grow .rs-rise { padding: 6px 12px; border-radius: 10px; background: rgba(46, 156, 90, .25); }
+.rs-grow .rs-rank { padding: 8px 14px; border-radius: 10px; background: linear-gradient(90deg, rgba(240, 217, 162, .35), rgba(240, 217, 162, .1)); font-size: 28px; }
+body.contrast .rs-grow { background: #000; border-color: #FFE14D; }

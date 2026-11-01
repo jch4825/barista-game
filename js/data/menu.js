@@ -592,3 +592,31 @@ export function menuProblems() {
   }
   return errs;
 }
+
+/* ---------- 엉뚱한 잔(재미 개편 3.2 · 6.5, 2026-11-01) ----------
+ * 레시피에 없는 잔을 만들면 [사장님께 맛보이기]: 사장님이 한 모금 → 무뚝뚝한 한마디 → '엉뚱한 잔 도감'에 모음.
+ * 손님에게는 다시 알맞게 만들어 드림(직무 교육: 손님 잔은 주문대로). 단골 신뢰와는 관계없음(원칙 7).
+ * has: 이 재료가 모두 들어 있으면(컵 · 온도는 보지 않음). 여럿이 맞으면 재료가 많은 쪽. 맞는 것이 없으면 ODD_ANY */
+export const ODD_DRINKS = [
+  { id: 'odd_water_latte', name: '물 탄 라테', has: ['espresso', 'milk', 'water'], say: '…싱겁다. 바다가 조금 들어갔나.' },
+  { id: 'odd_strawberry_coffee', name: '딸기 커피', has: ['espresso', 'strawberry'], say: '…커피에서 딸기 맛이 나네. 봄이구나.' },
+  { id: 'odd_yuja_coffee', name: '유자 커피', has: ['espresso', 'yuja'], say: '…시큼하고 쓰네. 정신이 번쩍 든다.' },
+  { id: 'odd_double', name: '두 배 커피', has: ['espresso', 'mix'], say: '…눈이 번쩍 떠지네. 오늘 밤엔 못 자겠다.' },
+  { id: 'odd_barley_coffee', name: '보리 커피', has: ['espresso', 'barley'], say: '…구수하네. 시골 할머니 댁 맛이다.' },
+  { id: 'odd_yuja_milk', name: '유자 우유', has: ['milk', 'yuja'], say: '…우유가 몽글몽글해졌네. 유자가 놀랐나 보다.' },
+  { id: 'odd_choco_matcha', name: '초코 말차', has: ['matcha', 'cocoa'], say: '…초록인지 갈색인지 모르겠다. 맛은 괜찮네.' },
+  { id: 'odd_strawberry_choco', name: '딸기 초코', has: ['strawberry', 'cocoa'], say: '…달다. 이건 그 갈매기한테 줘야겠다.' },
+  { id: 'odd_rainbow', name: '무지개 잔', colors: 3, say: '…색이 다섯 가지쯤 보이네. 맛은 하나도 모르겠다.' },
+];
+export const ODD_ANY = { id: 'odd_any', name: '이름 없는 잔', say: '…무슨 맛인지 모르겠다. 그래도 따뜻하네.' };
+// 처음 맛볼 때만: 사장님이 무너지는 한 번(긴 침묵 → 확대 → 농담)
+export const ODD_FIRST = { pause: '……', owner: '…새 메뉴로 하자.', jieun: '네?!', joke: '농담이다.' };
+
+/** 만든 잔(made: base · adds)이 어느 엉뚱한 잔인지 */
+export function findOdd(made) {
+  const all = [made.base, ...(made.adds || [])].filter(Boolean);
+  const flavors = all.filter((x) => ['yuja', 'strawberry', 'matcha', 'cocoa'].includes(x)).length;
+  if (flavors >= 3) return ODD_DRINKS.find((o) => o.colors);
+  const hits = ODD_DRINKS.filter((o) => o.has && o.has.every((x) => all.includes(x))).sort((a, b) => b.has.length - a.has.length);
+  return hits[0] || ODD_ANY;
+}

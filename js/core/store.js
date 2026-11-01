@@ -53,8 +53,26 @@ function newProfile(name) {
     album: {},       // 엔딩 앨범: 열린 단골 액자 { 단골 id: 처음 열린 해 } (두 번째 해에도 남음, PRD 5.9)
     book: [],        // 메뉴 도감: 만들어 본 메뉴 id (해가 바뀌어도 남음)
     tut: {},         // 처음 보는 버튼 알려 주기: 배운 버튼 종류 -> 시각
+    grow: newGrow(), // 지은의 성장(재미 개편 6장): 한 일 · 익숙함 · 돈 · 꾸미기 · 모으기 (js/core/grow.js)
     interview: [],   // 면접 답변(설정 시)
     playMs: 0,
+  };
+}
+
+/** 지은의 성장 칸(js/core/grow.js 가 읽고 씀). 해가 바뀌어도 남음 */
+function newGrow() {
+  return {
+    counts: {},   // 한 일: cups · usual · asks · respond · rush · tray · routine …
+    skills: {},   // 손 기술을 한 횟수 { 손 기술 id: n } → 10번이면 익숙해짐
+    handoff: {},  // 익숙해진 손 기술을 맡길지 { 손 기술 id: true }
+    money: 0,     // 지금 가진 돈(원)
+    earned: 0,    // 지금까지 번 돈
+    paid: {},     // 받은 날 { '해:에피소드': 원 } (같은 날을 다시 해도 두 번 받지 않게)
+    owned: [],    // 산 꾸미기 id
+    apron: 'basic',
+    perfect: [],  // 완벽한 한 잔을 만든 메뉴 id(도감 금빛)
+    odd: [],      // 엉뚱한 잔 도감 id
+    cards: [],    // 단골 기억 카드 '사람.기회'
   };
 }
 
@@ -128,9 +146,46 @@ function normalizeProfile(raw) {
     album: obj(raw.album),
     book: ids(raw.book),
     tut: obj(raw.tut),
+    grow: normalizeGrow(raw.grow),
     interview: list(raw.interview).filter(isObj),
     saves: obj(raw.saves),
     playMs: num(raw.playMs, 0),
+  };
+}
+
+function normalizeGrow(raw) {
+  const g = obj(raw);
+  const base = newGrow();
+  const nums = (v) => Object.fromEntries(Object.entries(obj(v)).filter(([, n]) => Number.isFinite(n)));
+  return {
+    ...g,
+    counts: nums(g.counts),
+    skills: nums(g.skills),
+    handoff: obj(g.handoff),
+    money: Math.max(0, num(g.money)),
+    earned: Math.max(0, num(g.earned)),
+    paid: nums(g.paid),
+    owned: ids(g.owned),
+    apron: typeof g.apron === 'string' ? g.apron : base.apron,
+    perfect: ids(g.perfect),
+    odd: ids(g.odd),
+    cards: ids(g.cards),
+  };
+}
+
+/** 성장 합치기: 한 일은 큰 쪽, 모은 것은 모두, 돈 · 앞치마 · 맡기기는 최근 기록(cur) */
+function mergeGrow(old, cur) {
+  const maxOf = (a, b) => { const o = { ...a }; for (const [k, n] of Object.entries(b)) o[k] = Math.max(num(o[k]), num(n)); return o; };
+  return {
+    ...cur,
+    counts: maxOf(cur.counts, old.counts),
+    skills: maxOf(cur.skills, old.skills),
+    paid: { ...old.paid, ...cur.paid },
+    earned: Math.max(num(old.earned), num(cur.earned)),
+    owned: union(cur.owned, old.owned),
+    perfect: union(cur.perfect, old.perfect),
+    odd: union(cur.odd, old.odd),
+    cards: union(cur.cards, old.cards),
   };
 }
 
@@ -194,6 +249,7 @@ function mergeProfiles(a, b) {
     oops: union(cur.oops, old.oops),
     met: union(cur.met, old.met),
     tut,
+    grow: mergeGrow(normalizeGrow(old.grow), normalizeGrow(cur.grow)),
     saves,
     playMs: Math.max(num(old.playMs), num(cur.playMs)),
   };
@@ -347,6 +403,17 @@ export const store = {
     touch(p);
     save();
     return true;
+  },
+  /** 지은의 성장(js/core/grow.js): 읽기는 복사본, 쓰기는 updateGrow(fn) */
+  grow() { const p = active(); return p ? normalizeGrow(p.grow) : newGrow(); },
+  updateGrow(fn) {
+    const p = active();
+    if (!p) return;
+    p.grow = normalizeGrow(p.grow);
+    fn(p.grow);
+    touch(p);
+    save();
+    bus.emit('grow', p.grow);
   },
   book() { return [...(active()?.book || [])]; },
   addBook(ids) {

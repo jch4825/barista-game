@@ -18,6 +18,8 @@ import { drinkName } from '../data/menu.js';
 import { audio } from '../av/audio.js';
 import { tts } from '../av/tts.js';
 import { openScreen } from './screen.js';
+import * as grow from '../core/grow.js';
+import { josa } from '../core/text.js';
 
 /** 대응 직후 연출과 같은 말(runner.js REACT): 0 작은 끄덕임 · 1 미소 · 2 오래 바라봄 */
 export const REACT_TEXT = { 2: '오래 바라봤어요', 1: '살짝 웃었어요', 0: '작게 고개를 끄덕였어요' };
@@ -69,6 +71,32 @@ function cupsView(cups) {
     h('div', { class: 'rs-cup-list' }, ...[...count].map(([name, n]) => h('span', { class: 'chip', text: n > 1 ? `${name} ${n}잔` : name }))));
 }
 
+/** 지은의 성장(재미 개편 6장): 오늘 받은 돈(시급 × 시간 + 팁, 같은 날은 한 번만) · 오른 능력치 · 새 단계. say 에 읽을 말을 더함 */
+function growView(ep, today, say) {
+  const pay = grow.payFor(ep.free ? `free:${ep.free}` : ep.id, today.cups.length);
+  grow.receive(pay);
+  const rise = grow.dayRise();
+  const rows = [];
+  if (pay) {
+    rows.push(h('p', { class: 'rs-pay' }, h('i', { html: ICON('coin') }),
+      h('span', { text: `시급 ${grow.won(pay.hourly)} × ${pay.hours}시간 = ${grow.won(pay.wage)}${pay.tips ? ` · 팁 ${grow.won(pay.tips)}` : ''}` })));
+    say.push(`오늘 받은 돈은 ${grow.won(pay.total)}이에요.`);
+  }
+  rows.push(h('p', { class: 'rs-pay-total' }, h('b', { text: pay ? `오늘 받은 돈 ${grow.won(pay.total)}` : '오늘 받은 돈은 이미 받았어요' }), h('span', { text: `모은 돈 ${grow.won(grow.money())}` })));
+  for (const st of rise.stats) {
+    const text = `${josa(st.name, '이/가')} ${st.level}단계가 되었어요! ${st.effect}`;
+    rows.push(h('p', { class: 'rs-rise' }, h('i', { html: ICON(st.icon) }), h('span', { text })));
+    say.push(text);
+  }
+  if (rise.rank) {
+    const text = `이제 ${rise.rank.name}예요!`;
+    rows.push(h('p', { class: 'rs-rank' }, h('i', { html: ICON('badge') }), h('b', { text })));
+    say.push(text);
+  }
+  if (rise.stats.length || rise.rank) setTimeout(() => audio.sfx('jingle_unlock'), dur(500));
+  return h('section', { class: 'rs-grow' }, h('h3', { text: '오늘의 일' }), ...rows);
+}
+
 function waitBtn(btn) {
   return new Promise((r) => btn.addEventListener('click', (e) => { e.stopPropagation(); r(); }, { once: true }));
 }
@@ -115,6 +143,7 @@ export async function showResult(ep, result, { ending = false, again = '' } = {}
 
   const say = [`${ep.title}. 오늘 하루를 돌아봐요.`];
   if (today.met.length) say.push('오늘 만난 사람.', ...today.met.map((l) => metSpeech(l.who, l.score)));
+  nextBtn.before(growView(ep, today, say));
   for (const [skill, lv] of best) {
     const sk = SKILLS[skill];
     stampWrap.append(h('div', { class: 'rs-stamp', style: { '--c': sk.color } },

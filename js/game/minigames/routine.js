@@ -19,6 +19,7 @@ import { renderBg } from '../../data/backgrounds.js';
 import { frame, line, abortGeneration, abortMinigame } from './frame.js';
 import { isDebug } from './arcade.js';
 import { bus } from '../../core/bus.js';
+import * as grow from '../../core/grow.js';
 
 /** 하루를 여닫는 순서(같은 순서를 날마다 되풀이: 작업 단계와 절차 [12진로03-01]) */
 export const ROUTINES = {
@@ -204,5 +205,6 @@ export async function routine(opts = {}) {
   if (how === 'abort') return { ok: false, aborted: true, attempts: 0, mistakes, ms };
   if (how === 'quit') return { ok: false, quit: true, attempts: 1, mistakes, ms };
   await sleep(dur(150));
+  grow.add('routine'); // 지은의 성장: 차분함(재미 개편 6.1)
   return { ok: true, attempts: 1, mistakes, ms };
 }

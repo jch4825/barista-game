@@ -34,6 +34,7 @@ import { showSettings, applySettingsToBody } from './screens/settings.js';
 import { showTeacher } from './screens/teacher.js';
 import { showPause, showBacklog, showRewindList } from './screens/menus.js';
 import { closeAllScreens } from './screens/screen.js';
+import * as grow from './core/grow.js';
 import { showSaves } from './screens/saves.js';
 
 let playing = false;
@@ -48,6 +49,7 @@ async function playEpisode(id, { resume = false, save = null } = {}) {
   hideTitle();
   audio.unlock();
   playing = true;
+  grow.markDay(); // 하루 끝 화면의 '오늘 오른 능력치'(지은의 성장)
   await preloadEpisode(ep); // 출근 중 화면: 그날 그림을 미리 받기(웹판)
   const result = await runner.play(ep, { resume: save || (resume ? store.checkpoint() : null) });
   playing = false;

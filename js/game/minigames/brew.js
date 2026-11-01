@@ -58,8 +58,10 @@ import {
   SERVICES, COLORS, ASK_SAY, CUP_RULE,
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
   orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
+  ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
 } from '../../data/menu.js';
 import { REGULARS } from '../../data/regulars.js';
+import * as grow from '../../core/grow.js';
 import { josa } from '../../core/text.js';
 
 const TITLE = '커피 만들기';
@@ -132,7 +134,16 @@ const SYS = {
   late: '늦어요',
   beatGood: '좋아요',
   drag: '손가락으로 원을 그려도 돼요.',
+  // 지은의 성장(재미 개편 6장): 익숙해진 손 기술 맡기기 · 완벽한 한 잔 · 한 번에 묻기 · 늘 드시던 거
+  handoff: '익숙한 일이라 손이 알아서 해요.',
+  perfectCup: '완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.',
+  usualFill: '늘 드시던 걸로 담았어요.',
+  taste: '사장님이 한 모금 맛보세요.',
+  odd: '엉뚱한 잔 도감에 올렸어요.',
+  oddAgain: '이 잔은 전에도 맛보셨어요.',
 };
+/** 손 기술에 처음 익숙해졌을 때 지은의 말(재미 개편 6.2) */
+const mastered = (sk) => `이제 ${josa(sk.name, '은/는')} 눈 감고도 할 수 있겠다.`;
 /** 박자 동작의 단추 이름 */
 const BEAT_BTN = { ice: '담기', syrup: '펌프', jam: '떠 넣기', powder: '떠 넣기', tap: '톡' };
 
@@ -211,6 +222,10 @@ export function brewLines(opts = {}) {
   }
   for (const ing of Object.values(INGREDIENTS)) for (const t of Object.values(ing.auto || {})) out.push(line.sys(t));
   for (const t of Object.values(TEMPS)) if (t.auto) out.push(line.sys(t.auto));
+  // 지은의 성장: 처음 익숙해진 손 기술의 한마디 · 엉뚱한 잔(사장님의 맛보기)
+  for (const sk of Object.values(HAND_SKILLS)) out.push(line.say('jieun', mastered(sk)));
+  out.push(line.say('owner', ODD_FIRST.owner), line.say('jieun', ODD_FIRST.jieun), line.say('owner', ODD_FIRST.joke));
+  for (const o of [...ODD_DRINKS, ODD_ANY]) out.push(line.say('owner', o.say), line.sys(`「${o.name}」 ${SYS.odd}`));
   // 주문 받기: 지은이 묻는 말 · 손님의 대답 · 주문 확인(되풀이) · "네, 맞아요."
   // 손님 말: 주문 · 고마움 · 레시피가 틀렸을 때 · 다시 만들 때 · 그대로 받을 때 · 손 동작이 칸을 벗어났을 때
   for (const o of orders) {
@@ -988,6 +1003,43 @@ export async function brew(opts = {}) {
     reactText.textContent = text || '';
     reactEl.classList.toggle('is-hidden', !text);
   }
+  /**
+   * 엉뚱한 잔 맛보기(재미 개편 3.2): 손님 자리에 잠깐 사장님. 처음 한 번은 긴 침묵 → 얼굴 확대 → "…새 메뉴로 하자." "네?!" "농담이다."
+   * 그다음은 그 잔의 한마디 → 엉뚱한 잔 도감(지은의 성장 odd). 실수로 세지 않고 단골 신뢰와도 관계없음
+   */
+  async function ownerTaste() {
+    phase = 'busy';
+    const odd = findOdd(made);
+    const firstEver = !store.grow().odd.length;
+    const isNew = grow.addOdd(odd.id);
+    const say = (...parts) => w(robot ? sleep(60) : talk(...parts));
+    faceEl.innerHTML = faceHTML('owner', 'normal');
+    faceEl.style.setProperty('--accent', CHARS.owner?.color || '#7D7D86');
+    nameEl.textContent = CHARS.owner?.name || '사장님';
+    setReact(SYS.taste);
+    audio.sfx('nom');
+    await say(sysV(SYS.taste));
+    if (firstEver) {
+      setReact(ODD_FIRST.pause);
+      faceEl.classList.add('is-zoom');
+      await w(sleep(robot ? 60 : 1400));
+      setReact(ODD_FIRST.owner);
+      await say([ODD_FIRST.owner, 'owner']);
+      faceEl.classList.remove('is-zoom');
+      setReact(`${CHARS.jieun?.name || '지은'}: ${ODD_FIRST.jieun}`);
+      audio.sfx('miss_high');
+      await say([ODD_FIRST.jieun, 'jieun']);
+      setReact(ODD_FIRST.joke);
+      audio.sfx('sad_trombone');
+      await say([ODD_FIRST.joke, 'owner']);
+    }
+    setReact(odd.say);
+    await say([odd.say, 'owner']);
+    const note = isNew ? `「${odd.name}」 ${SYS.odd}` : SYS.oddAgain;
+    setReact(note);
+    audio.sfx(isNew ? 'jingle_unlock' : 'tap');
+    await say(sysV(note));
+  }
   function showProgress() {
     progressText.textContent = orders.length > 1 ? `손님 ${curIndex + 1} / ${orders.length}` : '손님';
     progress.replaceChildren(...orders.map((_, i) => h('i', { class: i < curIndex ? 'done' : i === curIndex ? 'now' : '', html: ICON('coffee') })));
@@ -1249,9 +1301,28 @@ export async function brew(opts = {}) {
     return h('div', { class: 'bw-hand', role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
   }
 
+  /** 기억(지은의 성장)이 오르면 단골의 '늘 먹던 거'를 한 번에 담음(재미 개편 6.1) */
+  function fillUsual() {
+    if (phase !== 'recipe') return;
+    const t = orderTarget(cur);
+    made.cup = t.cup;
+    made.temp = t.temp;
+    ings = [t.base, ...(t.adds || [])].filter(Boolean);
+    audio.sfx('pickup');
+    renderRecipe();
+    focusLater(ui.make);
+    talk(sysV(SYS.usualFill), sysV(PROMPT.confirm));
+  }
+
   function renderRecipe() {
     renderHots();
     const foot = [];
+    if (cur?.usual && !fix && opts.maker !== 'owner' && grow.level('memory') >= grow.UNLOCK.memoryUsual) {
+      const usualB = btn('book', '늘 드시던 거', 'btn-soft bw-usual');
+      onTap(usualB, fillUsual);
+      ui.usual = usualB;
+      foot.push(usualB);
+    } else ui.usual = null;
     if (made.cup || ings.length || made.temp !== warmTemp) {
       const reset = btn('repeat', '처음부터 다시', 'btn-soft bw-reset');
       onTap(reset, resetRecipe);
@@ -1451,17 +1522,20 @@ export async function brew(opts = {}) {
   }
 
   /* ---- 손 기술: 띠 ---- */
-  function gate(sk, turn) {
+  function gate(sk, turn, canHand = false) {
     phase = 'gate';
     const go = btn('play', '시작!', 'btn-big btn-main mg-go');
     const see = btn(EYE, '보기', 'btn-big btn-soft bw-gate-watch');
+    // 익숙해진 손 기술(10번 넘게 함): [맡기기]를 누르면 손이 알아서 알맞게(재미 개편 6.2 · Q-41). 직접 할지는 학생이 고름
+    const hand = canHand ? btn('sparkle', '맡기기', 'btn-big btn-soft bw-gate-hand') : null;
     const wrap = h('div', { class: 'bw-gate', role: 'group', 'aria-label': `${sk.name} 시작` },
       h('div', { class: 'bw-gate-card' },
         h('h3', {}, h('i', { html: ICON(sk.icon) }), sk.name),
         h('p', { text: howtoOf(sk, turn) }),
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
-        h('div', { class: 'bw-row' }, see, go)));
+        hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [맡기기]를 누르면 손이 알아서 해요.`) : null,
+        h('div', { class: 'bw-row' }, see, hand, go)));
     (closeEl || bench).append(wrap);
     ui.gateGo = go;
     ui.gateSee = see;
@@ -1482,6 +1556,7 @@ export async function brew(opts = {}) {
       };
       onTap(go, () => done('play'));
       onTap(see, () => done('watch'));
+      if (hand) onTap(hand, () => done('hand'));
       wrap.addEventListener('click', (e) => { if (e.target === wrap) done('play'); }); // 카드 밖 장면을 눌러도 [시작!](2026-10-31 사용자 "화면을 눌러도")
     });
   }
@@ -1508,7 +1583,12 @@ export async function brew(opts = {}) {
       const half = ((zoneSpan[1] - zoneSpan[0]) / 2) * narrow;
       zoneSpan = [c0 - half, c0 + half];
     }
-    const sk = { ...base, zone: zoneSpan };
+    // 손맛(지은의 성장)이 오르면 알맞아요 칸이 조금씩 넓어짐(설정 growHelp 로 끌 수 있음). 턴 방식 · 원 그리기는 그대로
+    if (act !== 'circle' && !turn && store.settings().growHelp !== false) {
+      const wide = Math.min(0.06, (grow.level('hand') - 1) * 0.0075);
+      zoneSpan = [Math.max(0.04, zoneSpan[0] - wide), Math.min(0.98, zoneSpan[1] + wide)];
+    }
+    const sk = { ...base, id, zone: zoneSpan };
     const [z0, z1] = sk.zone;
     const center = (z0 + z1) / 2;
     const zoneOf = (p) => (p < z0 - 1e-6 ? 'low' : p > z1 + 1e-6 ? 'high' : 'good');
@@ -1533,6 +1613,10 @@ export async function brew(opts = {}) {
     h('i', { class: 'bw-gauge-fill' }),
     turn && act !== 'circle' ? h('span', { class: 'bw-ticks' }, ...Array.from({ length: STEPS - 1 }, (_, i) => h('i', { style: { bottom: `${((i + 1) / STEPS) * 100}%` } }))) : null,
     needle);
+    // 띠는 도움 표시(재미 개편 4.2 · Q-38): 실시간에서는 기본으로 숨기고, 잔(한 컷)이 알맞게 차면 확대 창이 반짝 + 소리.
+    // 도움 많이 · 설정 helpBar · 턴 방식 · 박자는 띠를 그대로 보임
+    const showBar = turn || act === 'beats' || store.settings().help === 'many' || store.settings().helpBar === true;
+    if (!showBar) gauge.classList.add('is-quiet');
     const status = h('p', { class: 'bw-status', 'aria-live': 'polite' });
     // 단추: 한 번 해 볼 때마다 새로 만듦([다시 하기] 때 앞의 손잡이가 남지 않게)
     // hold · circle: [누르고 있기](턴 방식 [한 칸] + [멈추기]) · wait: [지금!](턴 방식 [기다리기] + [지금!]) · beats: [담기] 같은 이름(턴 방식 [한 칸] + 그 단추)
@@ -1598,6 +1682,7 @@ export async function brew(opts = {}) {
       if (z === lastZone) return;
       const first = lastZone === null;
       lastZone = z;
+      card.classList.toggle('is-in-zone', z === 'good' && !first);
       gauge.dataset.zone = z;
       gauge.setAttribute('aria-valuetext', sk.labels[z]);
       status.textContent = `지금: ${sk.labels[z]}`;
@@ -1923,8 +2008,39 @@ export async function brew(opts = {}) {
       });
     };
 
+    // 한 번 한 손 기술을 셈(지은의 성장: 손맛 · 익숙함). 처음 익숙해지면 지은의 한마디
+    const noteSkill = () => {
+      if (!grow.addSkill(id)) return;
+      status.append(h('em', { class: 'bw-mastered' }, h('i', { html: ICON('sparkle') }), '익숙해졌어요!'));
+      talkAfter([mastered(sk), 'jieun']);
+    };
     let how = 'watch';
-    if (level !== 'easy') how = await w(gate(sk, turn));
+    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id)));
+    if (how === 'hand') {
+      // 맡기기: 손이 알아서 알맞아요 칸 가운데까지(실패 없음, '딱 좋아요'는 직접 했을 때만)
+      talk(sysV(SYS.handoff));
+      phase = 'skill';
+      flow = true;
+      await w(new Promise((resolve) => {
+        let t = 0;
+        curLoop = loop((dt) => {
+          t += dt;
+          p = Math.min(center, (t / 1100) * center);
+          draw();
+          if (p >= center - 1e-6) { curLoop?.stop(); curLoop = null; resolve(); }
+        }, () => speed);
+      }));
+      flow = false;
+      draw();
+      phase = 'busy';
+      st.good += 1;
+      gauge.classList.add('is-done');
+      [stepB, stopB, watchB].forEach((b) => { if (b) b.disabled = true; });
+      status.replaceChildren(h('b', { class: 'bw-verdict z-good' }, h('i', { html: ICON('check') }), `${sk.labels.good}!`));
+      audio.sfx('good');
+      noteSkill();
+      return { skill: id, zone: 'good', watched: false, art: null, handed: true };
+    }
     for (;;) {
       const { zone, watched, perfect } = await w(act === 'beats' ? attemptBeats(how) : attempt(how));
       phase = 'busy';
@@ -1945,11 +2061,12 @@ export async function brew(opts = {}) {
       if (zone === 'good') {
         audio.sfx(artShape ? 'heart' : perfect ? 'great' : 'good');
         talk(sysV(perfect ? SYS.perfect : sk.labels[zone]), artShape ? sysV(SYS.art) : null);
-        return { skill: id, zone, watched, art: artShape };
+        noteSkill();
+        return { skill: id, zone, watched, art: artShape, perfect: Boolean(perfect) };
       }
       missShow(view, sk, zone);
       talk(sysV(sk.labels[zone]), sysV(SYS.retry));
-      if (!(await w(askRetry()))) return { skill: id, zone, watched, art: null };
+      if (!(await w(askRetry()))) { noteSkill(); return { skill: id, zone, watched, art: null }; }
       missClear(view);
       st.tries += 1;
       p = 0;
@@ -2121,11 +2238,26 @@ export async function brew(opts = {}) {
       const hint2 = cur.usual && diff.some((d) => d === 'base' || d === 'adds') ? HINT.usual : HINT.book;
       const again = btn('repeat', '다시 만들기', 'btn-big btn-main bw-remake');
       ui.remake = again;
-      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss: miss.missing.length || miss.extra.length ? miss : null }), resultBox(res), h('div', { class: 'bw-row' }, again));
+      // 레시피에 없는 엉뚱한 잔이면 [사장님께 맛보이기](재미 개편 3.2): 사장님의 한마디 + 엉뚱한 잔 도감. 손님 잔은 그다음에 다시 만듦
+      const odd = !findMenu(made) && opts.maker !== 'owner' ? btn('coffee', '사장님께 맛보이기', 'btn-big btn-soft bw-taste') : null;
+      ui.taste = odd;
+      const rowEl = h('div', { class: 'bw-row' }, odd, again);
+      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss: miss.missing.length || miss.extra.length ? miss : null }), resultBox(res), rowEl);
       phase = 'wrong';
       talk(guestV(wrongSay), sysV(hint), sysV(hint2));
       focusLater(again);
-      await w(waitTap(again));
+      if (odd && (await w(waitTap(again, odd))) === 1) {
+        odd.remove();
+        ui.taste = null;
+        again.disabled = true;
+        await ownerTaste();
+        again.disabled = false;
+        showGuest('normal');
+        setReact(wrongSay);
+        phase = 'wrong';
+        focusLater(again);
+        await w(waitTap(again));
+      } else if (!odd) await w(waitTap(again));
       phase = 'busy';
       R.remakes += 1;
       audio.sfx('tap');
@@ -2166,6 +2298,11 @@ export async function brew(opts = {}) {
     R.made.push(cur.menu);
     R.cups.push({ who: cur.who, menu: cur.menu, temp: orderTemp(cur) }); // 하루 끝 화면의 '오늘 만든 잔'
     store.addBook([cur.menu]); // 메뉴 도감(해가 바뀌어도 남음)
+    // 지은의 성장: 드린 잔 · 늘 먹던 것 · 완벽한 한 잔(손 동작을 모두 '딱 좋아요'로 직접 했을 때 → 도감에 금빛 별)
+    grow.add('cups');
+    if (cur.usual) grow.add('usual');
+    const perfectNew = !miss && opts.maker !== 'owner' && res.checks.length > 0 && res.checks.every((c) => c.perfect) && grow.addPerfect(cur.menu);
+    if (perfectNew) R.perfect = (R.perfect || 0) + 1;
     const usual = REGULARS[cur.who]?.usual;
     if (usual && (!usual.menu || usual.menu === cur.menu)) store.setFlag('usuals', { ...(store.flag('usuals') || {}), [cur.who]: true });
     showGuest('smile');
@@ -2173,9 +2310,12 @@ export async function brew(opts = {}) {
     audio.sfx(miss ? 'good' : 'great');
     const next = btn(last ? 'check' : 'arrow_right', last ? '다 했어요' : '다음 주문', 'btn-big btn-main bw-next'); // 같은 손님의 다음 잔일 때도 있어 '주문'(2026-10-31 사용자)
     ui.next = next;
-    setPanel(last ? askRow('', SYS.done, { say: null }) : null, resultBox(res), h('div', { class: 'bw-row' }, next));
+    setPanel(last ? askRow('', SYS.done, { say: null }) : null,
+      perfectNew ? h('p', { class: 'bw-perfect-cup' }, h('i', { html: ICON('star') }), SYS.perfectCup) : null,
+      resultBox(res), h('div', { class: 'bw-row' }, next));
     phase = 'good';
-    talk(guestV(words), last ? sysV(SYS.done) : null);
+    if (perfectNew) audio.sfx('jingle_unlock');
+    talk(guestV(words), perfectNew ? sysV(SYS.perfectCup) : null, last ? sysV(SYS.done) : null);
     focusLater(next);
     await w(waitTap(next));
     phase = 'busy';
@@ -2249,7 +2389,19 @@ export async function brew(opts = {}) {
         ok.disabled = busy || left.length > 0;
         onTap(ok, confirm);
         ui.confirm = ok;
-        setPanel(said ? meLine(said) : null, askRow('', left.length ? PROMPT.order : PROMPT.orderDone), h('div', { class: 'bw-row bw-asks' }, ...ui.asks, ok));
+        // 응대(지은의 성장)가 오르면 온도와 매장 · 포장을 한 번에(재미 개편 6.1)
+        const all = left.length >= 2 && grow.level('service') >= grow.UNLOCK.serviceAsk ? btn('speech', '한 번에 묻기', 'btn-big btn-main bw-askall') : null;
+        if (all) {
+          all.disabled = busy;
+          onTap(all, async () => {
+            for (const k of [...left]) {
+              if (know.has(k)) continue;
+              await ask(k);
+              await w(robot ? sleep(60) : talking);
+            }
+          });
+        }
+        setPanel(said ? meLine(said) : null, askRow('', left.length ? PROMPT.order : PROMPT.orderDone), h('div', { class: 'bw-row bw-asks' }, all, ...ui.asks, ok));
         panel.dataset.kind = 'order';
         if (!busy) focusLater(ui.asks[0] || ok);
       };
@@ -2261,6 +2413,7 @@ export async function brew(opts = {}) {
         if (busy || phase !== 'order') return;
         busy = true;
         R.asked += 1;
+        grow.add('asks');
         audio.sfx('tap');
         said = ASK_SAY[k];
         render();

@@ -31,7 +31,8 @@ import { tutor } from '../ui/tutor.js';
 import { timerBar, timerFactor } from '../ui/timer.js';
 import { setCostumes } from '../data/characters.js';
 import { findTerm } from '../data/glossary.js';
-import { touchOf } from '../data/regulars.js';
+import { touchOf, REGULARS } from '../data/regulars.js';
+import * as grow from './grow.js';
 
 class Interrupt {
   constructor(kind, data) { this.kind = kind; this.data = data; }
@@ -445,6 +446,13 @@ async function respondBeat(s, b, index, w) {
     if (fx.sfx) audio.sfx(fx.sfx);
     await w(sleep(fx.ms));
     await runSub(s, c.after, w);
+    // 지은의 성장(재미 개편 6장): 단골을 만난 것(기억 · 응대) + 기억 카드 '오늘 알게 된 것'.
+    // 카드는 고른 대응과 관계없이 늘 받음(점수가 드러나지 않게, 원칙 1). 수첩의 단골 쪽에 남음
+    grow.add('respond');
+    if (t.card && grow.addCard(id)) {
+      audio.sfx('page');
+      ov.toast(`수첩에 ${REGULARS[b.who]?.name || ''}의 기억 카드가 생겼어요`, 'book');
+    }
     return undefined;
   }
 }

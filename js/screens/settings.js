@@ -51,6 +51,9 @@ export function showSettings() {
     row('카드 고르기', segmented([['one', '한 번 눌러 고르기'], ['two', '두 번 눌러 고르기']], s.selectMode, set('selectMode'), { disabled: locked }), '두 번: 처음 누르면 읽어 주고, 한 번 더 누르면 골라요.'),
     row('되감은 뒤 도움', segmented([['many', '많이'], ['some', '보통'], ['self', '스스로']], s.help, set('help'), { disabled: locked }), '실패하고 되감은 뒤 메모 강조와 카드 반짝임을 얼마나 줄지 정해요.'),
     row('시간 제한', segmented([['normal', '보통'], ['slow', '넉넉히'], ['off', '끄기']], s.timer || 'normal', set('timer'), { disabled: locked }), '급한 장면(손님이 기다리거나 바닥이 젖었을 때 등)에 줄어드는 막대가 나와요. 넉넉히는 2배, 자동 스캔을 켜면 시간 제한이 없어요.'),
+    // 재미 개편(2026-11-01): 손 기술의 띠는 도움 표시(Q-38) · 손맛이 오르면 알맞아요 칸이 넓어짐(Q-41)
+    row('손 기술 도움 띠', segmented([[false, '숨기기'], [true, '보이기']], s.helpBar === true, set('helpBar'), { disabled: locked }), '커피 만들기의 손 기술에 띠를 보여 줘요. 숨기면 잔이 알맞게 차오를 때 반짝이고 소리가 나요. 턴 방식과 「도움 많이」에서는 늘 보여요.'),
+    row('손맛이 오르면 쉬워지기', segmented([[true, '켜기'], [false, '끄기']], s.growHelp !== false, set('growHelp'), { disabled: locked }), '지은의 손맛이 오를수록 알맞아요 칸이 조금씩 넓어져요.'),
     row('처음 보는 버튼 알려 주기', h('div', { class: 'set-tut' },
       segmented([[true, '켜기'], [false, '끄기']], s.tutorial !== false, set('tutorial'), { disabled: locked }),
       h('button', {

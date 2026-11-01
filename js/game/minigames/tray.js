@@ -18,6 +18,7 @@ import { renderBg } from '../../data/backgrounds.js';
 import { faceHTML } from '../../data/characters.js';
 import { frame, line, abortGeneration, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate } from './arcade.js';
+import * as grow from '../../core/grow.js';
 
 const HOWTO = '[누르고 걷기]를 누르는 동안 걸어요. 쟁반이 흔들리면 손을 떼고 멈춰요.';
 const HOWTO_TURN = '[한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.';
@@ -226,5 +227,6 @@ export async function tray(opts = {}) {
   const ms = performance.now() - t0;
   if (how === 'abort') return { ok: false, aborted: true, attempts: 0, mistakes: spills, ms };
   await sleep(dur(150));
+  grow.add('tray'); // 지은의 성장: 차분함(재미 개편 6.1)
   return { ok: true, attempts: 1, mistakes: spills, spills, watched: watched ? 1 : 0, ms };
 }

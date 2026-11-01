@@ -59,6 +59,8 @@ export const CONFIG = {
     scan: false,          // 스위치 자동 스캔
     scanSpeed: 1.8,       // 초
     tutorial: true,       // 처음 보는 버튼 알려 주기(무지개 테두리 + 손가락 + 쪽지)
+    helpBar: false,       // 커피 만들기 손 기술의 띠(재미 개편 Q-38: 띠는 도움 표시. 숨기면 잔이 알맞을 때 반짝 + 소리)
+    growHelp: true,       // 손맛(지은의 성장)이 오르면 알맞아요 칸이 조금씩 넓어짐(Q-41)
   },
 
   DEFAULT_TEACHER_PIN: '1234',
