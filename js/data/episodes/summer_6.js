@@ -5,7 +5,7 @@
  * → 비, 처마 밑의 수민(대응 S2) → 사장님이 칠판에 "7시 전은 동네 시간"(숨은 장면 8, 선택마다 앞의 한 줄이 다름)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, choose, opt, branch, seen, motion, face, emote, fx, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, chalk, mini, respond, choose, opt, branch, seen, motion, face, emote, fx, end, info, today } from '../../core/dsl.js';
 
 const SUMMER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea'];
 
@@ -27,7 +27,8 @@ export default {
     amb('crowd'),
     bgm('tension'),
     place('여름 새벽 06:00', '카페 앞 골목'),
-    info('오늘의 칠판', '여름 성수기! 줄이 골목 끝까지 설지도 몰라요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
+    info('오늘의 칠판', '여름 성수기라 줄이 골목 끝까지 설지도 몰라요. 우유 배달은 오후에 와요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
+    today({ milk: 2 }), // 오늘의 칠판이 그날 일을 바꿈(2026-11-02 사용자 "칠판이 일을 바꾸기"): 우유가 두 잔 몫(줄의 마지막 라테에서 떨어짐)
     cg('summer_line'),
     narr('주말 새벽, 해 뜨는 바다를 찍으러 온 관광객들이 문을 열기도 전부터 줄을 섰다.'),
     narr('줄이 골목 끝까지 이어진다. 그런데 그 줄 사이에, 늘 오던 얼굴은 하나도 보이지 않는다.'),
@@ -51,6 +52,7 @@ export default {
         { who: 'customer', say: '아아 하나 더요.', menu: 'americano', temp: 'iced', togo: true, more: true },
         { who: 'customer', say: '라테 하나요. 사진 찍고 마실 거예요.', menu: 'latte', temp: 'iced', togo: false, ask: ['temp'], reply: { temp: '당연히 아이스죠.' } },
         { who: 'customer', say: '딸기우유요. 가져갈게요.', menu: 'strawberry_milk', temp: 'iced', togo: true },
+        { who: 'customer', say: '따뜻한 라테 하나요. 여기서 마실게요.', menu: 'latte', temp: 'hot', togo: false }, // 우유가 떨어져 손님께 사정을 말하고 권함
       ],
     }),
 
@@ -88,6 +90,8 @@ export default {
         }),
       ],
     }),
+
+    today({}), // 노 씨가 우유 상자를 가져와 다시 채워짐
 
     // 숨은 장면 6: "오늘의 커피는 저 친구가 내립니다"
     show({ left: 'jieun:nervous', center: 'customer:normal', right: 'owner:normal' }),

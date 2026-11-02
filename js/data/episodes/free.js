@@ -5,10 +5,12 @@
  *    온도나 매장/포장을 말하지 않는 손님도 섞어서, 묻고 되풀이하는 연습이 되게 함
  *  - 이야기 뒤 단골들의 근황(앨범 액자가 열린 단골은 그 뒤의 이야기) · 직업 마1스톤 손님의 한두 마디 · 오늘의 도전 하나
  *  - 대응 기회가 없어서 단골 신뢰는 바뀌지 않음. 하루 끝 화면에는 '오늘 만든 잔'이 나옴
+ *  - 오늘의 칠판 카드(2026-11-02 사용자 "칠판이 일을 바꾸기"): 날마다 하나(BOARD 차례). 우유 · 얼음이 모자람 · 머신이 늦게 데워짐 ·
+ *    비(포장 손님이 많음) · 사장님 외출(혼자 몰림 시간) · 행사(손님이 많고 몰림 시간) · 추천 메뉴. 모자람은 오전만(점심때 채워짐)
  * main.js 가 store.free().day + 1 로 만들어 틀고, 마치면 날 번호를 올립니다. 검사기는 1~28일을 모두 검사합니다.
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, memo, mini, end } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, memo, mini, end, info, today } from '../../core/dsl.js';
 import { RECIPES } from '../menu.js';
 import { REGULARS } from '../regulars.js';
 
@@ -32,10 +34,56 @@ function rng(seed) {
 /** 온도가 하나뿐인 메뉴는 그 온도, 아니면 주어진 온도 */
 const tempOf = (menu, want) => (RECIPES[menu].temps.length > 1 ? want : RECIPES[menu].temps[0]);
 
-/** 이름 없는 손님의 주문(계절에 따라). r: 난수 */
-function guestOrder(season, r) {
-  const togo = r() < 0.5;
+/**
+ * 오늘의 칠판 카드(자유 영업, 날마다 차례로). mods: today(…)와 같음(js/data/menu.js TODAY_KEYS) · until: 'am' 이면 점심때 채워짐(그 말) ·
+ * need: 오전 주문에 꼭 있어야 하는 것(칠판이 실제로 일을 바꾸게) · togo: 포장 손님 비율 · more: 손님 수 더 · rush: 오전에 몰림 시간 · special: 추천 메뉴
+ */
+const BOARD = [
+  { id: 'calm', text: '평소와 같은 하루예요.', owner: '오늘도 평소대로 해요. 손님은 평소대로 오니까요.' },
+  { id: 'milk', text: '우유 배달이 늦어요. 오전에는 우유가 두 잔 몫뿐이에요.', mods: { milk: 2 }, until: '점심때 우유 배달이 왔다. 냉장고가 다시 가득 찼다.', need: 'milk',
+    owner: '우유가 떨어지면 손님께 사정을 말하고, 다른 걸 권해 봐요.' },
+  { id: 'rain', text: '비가 와요. 가져가는 손님이 많을 거예요.', togo: 0.8, owner: '비 오는 날은 가져가는 손님이 많아요. 드시고 가는지 꼭 물어봐요.' },
+  { id: 'machine', text: '아침에 머신이 늦게 데워져요. 첫 커피 손님께는 조금 기다려 달라고 해요.', mods: { machine: true }, need: 'coffee',
+    owner: '머신이 데워질 때까지는 손님께 조금 기다려 달라고 해요.' },
+  { id: 'special', text: '오늘의 추천 메뉴가 있어요. 추천 메뉴를 찾는 손님이 많을 거예요.', special: true, owner: '오늘은 추천 메뉴를 찾는 손님이 많을 거예요.' },
+  { id: 'ice', text: '얼음 기계가 쉬어요. 오전에는 얼음이 두 잔 몫뿐이에요.', mods: { ice: 2 }, until: '점심때 얼음 기계가 다시 얼음을 만들었다.', need: 'iced',
+    owner: '얼음이 떨어지면 따뜻하게 드려도 되는지 여쭤 봐요.' },
+  { id: 'owner', text: '사장님이 장 보러 가요. 오전에는 혼자 가게를 봐요.', mods: { owner: false }, until: '점심때 사장님이 장바구니를 들고 돌아왔다.', rush: true,
+    owner: '장 보러 다녀올게요. 손님이 몰려도 한 잔씩, 천천히 해요.' },
+  { id: 'busy', text: '마을에 행사가 있어요. 손님이 평소보다 많이 몰려와요.', more: 2, rush: true, owner: '오늘은 손님이 많아요. 그래도 한 잔씩, 순서대로 해요.' },
+];
+/** 추천 메뉴(계절마다): 이름이 모두 받침 없이 끝나 '예요' */
+const SPECIAL = { spring: 'strawberry_milk', summer: 'greentea_latte', autumn: 'vanilla_latte', winter: 'yuja_tea' };
+const SPECIAL_TEMP = { spring: 'iced', summer: 'iced', autumn: 'hot', winter: 'hot' };
+
+/** 칠판 카드가 일을 바꾸도록 오전 주문을 맞춤: 우유 잔 · 아이스가 세 잔 넘게 · 커피가 하나는(단골 주문은 그대로, 이름 없는 손님만) */
+function fitOrders(orders, need, season) {
+  const uses = (o) => [RECIPES[o.menu].base, ...RECIPES[o.menu].adds];
+  const count = { milk: (o) => uses(o).includes('milk'), iced: (o) => o.temp === 'iced', coffee: (o) => uses(o).includes('espresso') || uses(o).includes('decaf') }[need];
+  const want = { milk: 3, iced: 3, coffee: 1 }[need];
+  if (!count) return orders;
+  let have = orders.filter(count).length;
+  return orders.map((o) => {
+    if (have >= want || o.who !== 'customer' || count(o)) return o;
+    have += 1;
+    const where = o.togo ? '가져갈게요.' : '여기서 마실게요.';
+    if (need === 'milk') {
+      const iced = season === 'summer' || (season !== 'winter' && o.temp === 'iced');
+      return { who: 'customer', say: `${iced ? '아이스' : '따뜻한'} 라테 하나요. ${where}`, menu: 'latte', temp: iced ? 'iced' : 'hot', togo: o.togo };
+    }
+    return { who: 'customer', say: '아아 하나요.', menu: 'americano', temp: 'iced', togo: o.togo, ask: ['togo'], reply: { togo: where } };
+  });
+}
+
+/** 이름 없는 손님의 주문(계절에 따라). r: 난수 · board: 오늘의 칠판 카드(포장 비율 · 추천 메뉴) */
+function guestOrder(season, r, board = {}) {
+  const togo = r() < (board.togo || 0.5);
   const where = togo ? '가져갈게요.' : '여기서 마실게요.';
+  // 0) 오늘의 추천 메뉴(칠판 카드): 열에 넷
+  if (board.special && r() < 0.4) {
+    const menu = SPECIAL[season];
+    return { who: 'customer', say: '칠판에 적힌 추천 메뉴로 주세요.', menu, temp: tempOf(menu, SPECIAL_TEMP[season]), togo, ticket: '오늘의 추천 메뉴', ask: ['togo'], reply: { togo: where } };
+  }
   const x = r();
   // 1) 아이스 아메리카노: 가장 많음. 온도를 말하지 않는 손님도 섞음(겨울이면 따뜻한 걸 찾기도 함)
   if (x < 0.42) {
@@ -137,10 +185,14 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
   const r2 = regs[(day * 3 + 1) % regs.length] === r1 ? regs[(day + 4) % regs.length] : regs[(day * 3 + 1) % regs.length];
   const cameo = r() < 0.6 ? CAMEOS[Math.floor(r() * CAMEOS.length)] : null;
   const challenge = CHALLENGES[(day - 1) % CHALLENGES.length];
-  const guests = 4 + Math.floor(r() * 3); // 4~6명 + 단골 둘 (+ 마1스톤 손님)
-  const am = [...regularOrders(r1, season), guestOrder(season, r), guestOrder(season, r), guestOrder(season, r)];
-  const pm = [...Array.from({ length: guests - 3 }, () => guestOrder(season, r)), ...regularOrders(r2, season)];
+  const board = BOARD[(day - 1) % BOARD.length]; // 오늘의 칠판 카드(첫날은 평소)
+  const guests = 4 + Math.floor(r() * 3) + (board.more || 0); // 4~6명 + 단골 둘 (+ 마1스톤 손님) (+ 행사 날)
+  // 단골 주문이 먼저(모자란 날에도 단골의 늘 먹던 것은 그대로 나가게): 모자람은 뒤의 손님이 겪음
+  const am = fitOrders([...regularOrders(r1, season), ...Array.from({ length: 3 + Math.ceil((board.more || 0) / 2) }, () => guestOrder(season, r, board))], board.need, season);
+  const pm = [...Array.from({ length: Math.max(1, guests - 3 - Math.ceil((board.more || 0) / 2)) }, () => guestOrder(season, r, board)), ...regularOrders(r2, season)];
   const news = (who) => narr(NEWS[who][album[who] ? 0 : 1]);
+  const special = board.special ? RECIPES[SPECIAL[season]].name : null;
+  const boardText = special ? `오늘의 추천 메뉴는 ${special}예요. 추천 메뉴를 찾는 손님이 많을 거예요.` : board.text;
 
   return {
     id: 'free',
@@ -161,11 +213,15 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
       amb('cafe'),
       bgm('morning'),
       place(`${sName} 아침`, '바닷가 마을 카페'),
+      info('오늘의 칠판', boardText, 'menu'),
+      ...(board.mods ? [today(board.mods)] : []),
       show({ left: 'jieun:normal', right: 'owner:smile' }),
       narr(`오늘도 가게 문을 연다. ${sName} 아침의 바닷가 마을은 조용하다.`),
-      say('owner', 'smile', '오늘도 평소대로 해. 손님은 평소대로 오니까.'),
+      say('owner', 'smile', board.owner),
+      ...(board.id === 'owner' ? [leave('owner'), sfx('door')] : []),
       memo('오늘의 도전', [challenge]),
       news(r1),
+      ...(board.rush ? [mini('rush', { id: `free_${day}_rush`, theme: 'cafe', title: board.id === 'owner' ? '혼자 맞는 몰림 시간' : '행사 날의 몰림 시간', bg: ['hall', season], quit: true })] : []),
       mini('brew', { id: `free_${day}_am`, title: '오전 손님', level: 'normal', quit: true, book: FULL_BOOK, orders: am }),
       ...(cameo ? [
         show({ left: 'jieun:normal', right: `${cameo.who}:smile` }),
@@ -176,6 +232,8 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
       ] : []),
       place(`${sName} 오후`, '바닷가 마을 카페'),
       bgm('cafe'),
+      ...(board.until ? [narr(board.until), today({})] : []), // 모자랐던 것이 채워짐 · 사장님이 돌아옴
+      ...(board.id === 'owner' ? [show({ left: 'jieun:normal', right: 'owner:smile' }), say('owner', 'smile', '혼자서도 잘했네요. 오후는 같이 해요.')] : []),
       news(r2),
       mini('brew', { id: `free_${day}_pm`, title: '오후 손님', level: 'normal', quit: true, book: FULL_BOOK, orders: pm }),
       bg('hall', 'evening'),

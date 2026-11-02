@@ -642,6 +642,12 @@
   "ep": "spring_1"
  },
  {
+  "key": "8e55d5d4",
+  "voice": "sys",
+  "text": "처음 하는 일이면 [보기]로 먼저 봐도 좋아요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "7b1d8e4c",
   "voice": "sys",
   "text": "익숙한 일이라 손이 알아서 해요.",
@@ -1590,6 +1596,108 @@
   "ep": "spring_1"
  },
  {
+  "key": "dced7f5e",
+  "voice": "sys",
+  "text": "얼음이 다 떨어졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3541e41a",
+  "voice": "sys",
+  "text": "우유가 다 떨어졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "61ab5904",
+  "voice": "sys",
+  "text": "머신이 아직 데워지는 중이에요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "4ec33585",
+  "voice": "sys",
+  "text": "머신이 다 데워졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7a153979",
+  "voice": "sys",
+  "text": "손님에게 말하기",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ef57aa4b",
+  "voice": "sys",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "44ee5f81",
+  "voice": "sys",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3408357e",
+  "voice": "sys",
+  "text": "네, 기다릴게요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a4e0547d",
+  "voice": "jieun",
+  "text": "죄송해요, 머신이 아직 데워지는 중이에요. 조금만 기다려 주시겠어요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "a430eb01",
+  "voice": "jieun",
+  "text": "죄송해요, 얼음이 다 떨어졌어요. 따뜻하게 드려도 될까요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "07914e3d",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 아메리카노는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f6307fec",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 아메리카노는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7a41b317",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 보리차는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0f5b002a",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 보리차는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "d7e6c5e8",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 유자차는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "83f17445",
+  "voice": "jieun",
+  "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 유자차는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
+  "key": "da35b8b8",
+  "voice": "jieun",
+  "text": "죄송해요, 얼음이 다 떨어졌어요. 따뜻한 유자차는 어떠세요?",
+  "ep": "spring_1"
+ },
+ {
   "key": "a8af1dda",
   "voice": "owner",
   "text": "따뜻한 우유 한 잔이요. 여기서 마실게요.",
@@ -1623,6 +1731,18 @@
   "key": "63ccc138",
   "voice": "owner",
   "text": "네, 맞아요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e6dde331",
+  "voice": "owner",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "9e734217",
+  "voice": "owner",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "spring_1"
  },
  {
@@ -2010,6 +2130,18 @@
   "ep": "spring_2"
  },
  {
+  "key": "2a7e1832",
+  "voice": "haesun",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "eee1aede",
+  "voice": "haesun",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "spring_2"
+ },
+ {
   "key": "cff11075",
   "voice": "jieun",
   "text": "드시고 가세요, 가져가세요?",
@@ -2385,6 +2517,18 @@
   "key": "4d91dba7",
   "voice": "geum",
   "text": "네, 맞아요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "ecd85d8c",
+  "voice": "geum",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "f4ee1258",
+  "voice": "geum",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "spring_2"
  },
  {
@@ -2838,6 +2982,18 @@
   "ep": "spring_3"
  },
  {
+  "key": "345edb43",
+  "voice": "kang",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "62776629",
+  "voice": "kang",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "spring_3"
+ },
+ {
   "key": "5bff2b37",
   "voice": "jieun",
   "text": "핸드드립 한 잔, 드시고 가시는 거죠?",
@@ -3039,6 +3195,18 @@
   "key": "c04f10f8",
   "voice": "do",
   "text": "네, 맞아요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "1f925771",
+  "voice": "do",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "c0b9b357",
+  "voice": "do",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "spring_3"
  },
  {
@@ -3360,6 +3528,18 @@
   "ep": "spring_4"
  },
  {
+  "key": "d7e488d5",
+  "voice": "student",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_4"
+ },
+ {
+  "key": "9671995b",
+  "voice": "student",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "spring_4"
+ },
+ {
   "key": "d835060a",
   "voice": "student",
   "text": "가져갈게요. 바로 수업 가야 해요.",
@@ -3672,6 +3852,12 @@
   "ep": "spring_5"
  },
  {
+  "key": "acacd59d",
+  "voice": "sys",
+  "text": "주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
+  "ep": "spring_5"
+ },
+ {
   "key": "def48af2",
   "voice": "sys",
   "text": "손님이 한꺼번에 몰려와요. 하나씩 해요.",
@@ -3687,6 +3873,12 @@
   "key": "2c24e493",
   "voice": "sys",
   "text": "몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!",
+  "ep": "spring_5"
+ },
+ {
+  "key": "95e9803a",
+  "voice": "sys",
+  "text": "사장님이 안 계셔도 차근차근 해냈어요!",
   "ep": "spring_5"
  },
  {
@@ -3801,6 +3993,18 @@
   "key": "0a171ab2",
   "voice": "agent",
   "text": "네, 맞아요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "b05799bb",
+  "voice": "agent",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "62195731",
+  "voice": "agent",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "spring_5"
  },
  {
@@ -4464,6 +4668,18 @@
   "ep": "spring_6"
  },
  {
+  "key": "28829d09",
+  "voice": "customer_f",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "87189a3f",
+  "voice": "customer_f",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "spring_6"
+ },
+ {
   "key": "f9a895c1",
   "voice": "customer_f",
   "text": "여기서 사진 찍고 마실게요.",
@@ -5040,6 +5256,18 @@
   "ep": "summer_1"
  },
  {
+  "key": "906b50da",
+  "voice": "yeonwoo",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "0cbf3e16",
+  "voice": "yeonwoo",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "summer_1"
+ },
+ {
   "key": "9182498b",
   "voice": "jieun",
   "text": "아이스 라테 한 잔, 드시고 가시는 거죠?",
@@ -5115,6 +5343,18 @@
   "key": "8e44249c",
   "voice": "dohyun",
   "text": "네, 맞아요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "17bd815d",
+  "voice": "dohyun",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "a73cec13",
+  "voice": "dohyun",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "summer_1"
  },
  {
@@ -5349,6 +5589,18 @@
   "key": "9a1af107",
   "voice": "jian",
   "text": "네, 맞아요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "213a512c",
+  "voice": "jian",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "b9c28578",
+  "voice": "jian",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "summer_1"
  },
  {
@@ -5661,6 +5913,18 @@
   "key": "5ea5c0c8",
   "voice": "han",
   "text": "네, 맞아요.",
+  "ep": "summer_2"
+ },
+ {
+  "key": "f7c6ae41",
+  "voice": "han",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_2"
+ },
+ {
+  "key": "6e75eda7",
+  "voice": "han",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "summer_2"
  },
  {
@@ -6024,6 +6288,18 @@
   "ep": "summer_3"
  },
  {
+  "key": "ded1cce7",
+  "voice": "eunju",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "d9d0267d",
+  "voice": "eunju",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "summer_3"
+ },
+ {
   "key": "c6aba112",
   "voice": "eunju",
   "text": "따뜻한 걸로요. 찬 건 배가 아파서요.",
@@ -6273,6 +6549,18 @@
   "key": "5b5e9713",
   "voice": "sumin",
   "text": "네, 맞아요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "304b6d60",
+  "voice": "sumin",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "782a794c",
+  "voice": "sumin",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "summer_3"
  },
  {
@@ -7278,9 +7566,9 @@
   "ep": "summer_6"
  },
  {
-  "key": "0d2eb065",
+  "key": "50488902",
   "voice": "sys",
-  "text": "오늘의 칠판. 여름 성수기! 줄이 골목 끝까지 설지도 몰라요.",
+  "text": "오늘의 칠판. 여름 성수기라 줄이 골목 끝까지 설지도 몰라요. 우유 배달은 오후에 와요.",
   "ep": "summer_6"
  },
  {
@@ -7401,6 +7689,30 @@
   "key": "490a0c5c",
   "voice": "jieun",
   "text": "딸기우유 한 잔, 가져가시는 거죠?",
+  "ep": "summer_6"
+ },
+ {
+  "key": "1abcc9fa",
+  "voice": "customer_f",
+  "text": "따뜻한 라테 하나요. 여기서 마실게요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "1f3eb100",
+  "voice": "jieun",
+  "text": "따뜻한 라테 한 잔, 드시고 가시는 거죠?",
+  "ep": "summer_6"
+ },
+ {
+  "key": "83616728",
+  "voice": "customer_f",
+  "text": "조금 미지근하네요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "698307b8",
+  "voice": "customer_f",
+  "text": "조금 뜨겁네요.",
   "ep": "summer_6"
  },
  {
@@ -7569,24 +7881,6 @@
   "key": "613f50b2",
   "voice": "customer_f",
   "text": "…어, 맛있네요. 아까는 미안해요.",
-  "ep": "summer_6"
- },
- {
-  "key": "1f3eb100",
-  "voice": "jieun",
-  "text": "따뜻한 라테 한 잔, 드시고 가시는 거죠?",
-  "ep": "summer_6"
- },
- {
-  "key": "83616728",
-  "voice": "customer_f",
-  "text": "조금 미지근하네요.",
-  "ep": "summer_6"
- },
- {
-  "key": "698307b8",
-  "voice": "customer_f",
-  "text": "조금 뜨겁네요.",
   "ep": "summer_6"
  },
  {
@@ -8730,9 +9024,9 @@
   "ep": "autumn_2"
  },
  {
-  "key": "f5c14f1c",
+  "key": "78f83257",
   "voice": "sys",
-  "text": "오늘의 칠판. 바람이 쌀쌀해요. 그래도 아이스 아메리카노는 잘 나가요.",
+  "text": "오늘의 칠판. 바람이 쌀쌀해서 얼음을 조금만 받았어요. 얼음은 한 잔 몫뿐이에요.",
   "ep": "autumn_2"
  },
  {
@@ -9537,6 +9831,18 @@
   "key": "029cde25",
   "voice": "customer",
   "text": "네, 맞아요.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "5b03113a",
+  "voice": "customer",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "56ed9f76",
+  "voice": "customer",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "autumn_4"
  },
  {
@@ -11160,6 +11466,18 @@
   "ep": "autumn_7"
  },
  {
+  "key": "4d3ecc0b",
+  "voice": "noh",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "autumn_7"
+ },
+ {
+  "key": "3ddcc141",
+  "voice": "noh",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "autumn_7"
+ },
+ {
   "key": "20dd345b",
   "voice": "noh",
   "text": "…조금 다르네. 그래도 고맙네.",
@@ -12039,6 +12357,18 @@
   "key": "540c44b1",
   "voice": "han_daughter",
   "text": "네, 맞아요.",
+  "ep": "winter_3"
+ },
+ {
+  "key": "51ceeace",
+  "voice": "han_daughter",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "winter_3"
+ },
+ {
+  "key": "e6c5c7aa",
+  "voice": "han_daughter",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "winter_3"
  },
  {
@@ -13110,9 +13440,9 @@
   "ep": "winter_5"
  },
  {
-  "key": "57e44ef3",
+  "key": "72781a6c",
   "voice": "sys",
-  "text": "오늘의 칠판. 전기가 다시 들어왔어요. 손님이 한꺼번에 올지도 몰라요.",
+  "text": "오늘의 칠판. 전기가 다시 들어왔어요. 머신이 데워질 때까지 첫 커피 손님께 조금 기다려 달라고 해요.",
   "ep": "winter_5"
  },
  {
@@ -13533,6 +13863,18 @@
   "key": "e81ed0ea",
   "voice": "mom2",
   "text": "네, 맞아요.",
+  "ep": "winter_5"
+ },
+ {
+  "key": "da8e7873",
+  "voice": "mom2",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "winter_5"
+ },
+ {
+  "key": "1006ead9",
+  "voice": "mom2",
+  "text": "좋아요, 그걸로 주세요.",
   "ep": "winter_5"
  },
  {

@@ -62,6 +62,11 @@ export const meet = (who) => ({ t: 'meet', who });
 export const memo = (title, items) => ({ t: 'memo', title, items });
 export const memoHi = (n) => ({ t: 'memoHi', n });
 export const info = (title, body, icon) => ({ t: 'info', title, body, icon });
+/**
+ * 오늘의 칠판이 그날 일을 바꿈(2026-11-02 사용자 "칠판이 일을 바꾸기"): 그 날의 미니게임이 함께 씀(작업대 · 몰림, js/data/menu.js TODAY)
+ * { ice: n } 얼음이 n잔 몫 · { milk: n } 우유가 n잔 몫 · { machine: true } 머신이 데워지는 중(첫 에스프레소 잔은 손님이 기다림) · { owner: false } 사장님이 자리를 비움
+ */
+export const today = (mods) => ({ t: 'today', mods });
 
 /* ---------- 상호작용 ---------- */
 export const act = (label, icon, sfxName) => ({ t: 'act', label, icon, sfx: sfxName });

@@ -2,7 +2,7 @@
  * 가을 2일 · 양복: 새벽, 양복을 입고 온 강 씨(대응 K4) → 6시 10분 한 씨, 딸 사진과 펜(대응 Han3) → 낮의 손님들(가을에도 아아)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, motion, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, motion, end, info, today } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -24,7 +24,8 @@ export default {
     amb('cafe'),
     bgm('morning'),
     place('가을 새벽 06:00', '바닷가 마을 카페'),
-    info('오늘의 칠판', '바람이 쌀쌀해요. 그래도 아이스 아메리카노는 잘 나가요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
+    info('오늘의 칠판', '바람이 쌀쌀해서 얼음을 조금만 받았어요. 얼음은 한 잔 몫뿐이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
+    today({ ice: 1 }), // 오늘의 칠판이 그날 일을 바꿈(2026-11-02 사용자 "칠판이 일을 바꾸기"): 얼음이 한 잔 몫(금 씨의 아아 다음 손님은 따뜻하게 권함)
     show({ left: 'jieun:normal', right: 'kang:normal' }),
     sfx('bell'),
     respond('kang', 'autumn_suit'),

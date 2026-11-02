@@ -9,6 +9,7 @@ import { tts } from '../../av/tts.js';
 import { input } from '../../core/input.js';
 import { bus } from '../../core/bus.js';
 import { ov } from '../../ui/overlays.js';
+import { store } from '../../core/store.js';
 
 /**
  * 미니게임이 읽어 주는 문장 목록 (tools/export-lines.mjs 가 음성 파일로 미리 만듦)
@@ -41,7 +42,13 @@ export const TIMING = {
   autumn: { beatWin: 1, speed: 1.5, tray: 1.3 },
   winter: { beatWin: 1, speed: 2, tray: 1.5 },
 };
-export function timingOf(opts = {}) { return TIMING[opts.season] || TIMING.spring; }
+/** 학생마다 길(선생님 화면 · store.path): 쉬운 길은 박자 칸 넓게 · 쟁반이 덜 흔들림, 깊은 길은 박자 칸 좁게 · 띠 · 쟁반이 조금 빠르게. 쉬운 길의 느린 띠는 시간 제한 넉넉히(timer.js) */
+const PATH_TIMING = { easy: { beatWin: 1.3, speed: 1, tray: 0.8 }, deep: { beatWin: 0.85, speed: 1.15, tray: 1.15 } };
+export function timingOf(opts = {}) {
+  const t = TIMING[opts.season] || TIMING.spring;
+  const p = PATH_TIMING[store.path()];
+  return p ? { beatWin: t.beatWin * p.beatWin, speed: t.speed * p.speed, tray: t.tray * p.tray } : t;
+}
 
 /**
  * 지금의 정리 번호. 미니게임이 시작할 때 받아 두고, 대사·잠깐 쉬기를 기다린 뒤 번호가 달라졌으면 그만둠

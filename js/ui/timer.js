@@ -19,7 +19,7 @@ export const TIMEOUT_SAY = '시간이 다 됐어요!';
 /** 설정에 따른 시간 배율. 0 이면 시간 제한 없음 */
 export function timerFactor(s = store.settings()) {
   if (s.timer === 'off' || s.scan) return 0;
-  return (s.timer === 'slow' ? 2 : 1) * (s.selectMode === 'two' ? 1.5 : 1);
+  return (s.timer === 'slow' || store.path() === 'easy' ? 2 : 1) * (s.selectMode === 'two' ? 1.5 : 1); // 쉬운 길(선생님이 정함)은 늘 넉넉히
 }
 
 /** 다른 창이 열려 있으면 시간이 가지 않음 */

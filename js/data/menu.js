@@ -457,6 +457,98 @@ export function findMenu(made = {}) {
   return null;
 }
 
+/* ------------------------------------------------------------------ */
+/* 오늘의 칠판이 바꾸는 일(2026-11-02 사용자 "칠판이 일을 바꾸기")          */
+/* ------------------------------------------------------------------ */
+/**
+ * 이야기의 today({ … }) · 자유 영업의 칠판 카드가 그날 작업대를 바꿈. 아침 칠판으로 미리 알려 주므로 예측할 수 있음(감점 없음).
+ *  ice: n · milk: n = 남은 잔 몫(드린 잔마다 하나씩 줄고, 0 이면 떨어짐) · machine: true = 머신이 데워지는 중(첫 에스프레소 잔은 손님이 조금 기다림) ·
+ *  owner: false = 사장님이 자리를 비움(엉뚱한 잔 맛보기 없음 · 몰림 시간에 주문을 받아 주지 않음)
+ * 못 만드는 주문은 [주문 확인]에서 학생이 [손님에게 말하기]를 눌러 사정을 말하고 다른 것을 권함(lackOf)
+ */
+export const TODAY_KEYS = { ice: 'number', milk: 'number', machine: 'boolean', owner: 'boolean' };
+export const TODAY_SAY = {
+  iceOut: '얼음이 다 떨어졌어요.',
+  milkOut: '우유가 다 떨어졌어요.',
+  machine: '머신이 아직 데워지는 중이에요.',
+  machineReady: '머신이 다 데워졌어요.',
+  tell: '손님에게 말하기',
+  okHot: '네, 따뜻하게 주세요.',
+  okSwap: '좋아요, 그걸로 주세요.',
+  wait: '네, 기다릴게요.',
+};
+
+/** 작업대 위 작은 칠판에 적을 것: ['얼음 2잔 남음', '우유 다 떨어짐', '머신 데우는 중', '사장님 외출'] */
+export function todayTags(t) {
+  if (!t) return [];
+  const left = (name, n) => (n > 0 ? `${name} ${n}잔 남음` : `${name} 다 떨어짐`);
+  return [
+    t.ice !== undefined && left('얼음', t.ice),
+    t.milk !== undefined && left('우유', t.milk),
+    t.machine && '머신 데우는 중',
+    t.owner === false && '사장님 외출',
+  ].filter(Boolean);
+}
+
+/** 메뉴가 바뀐 주문(손님이 권한 것을 받음): 늘 먹던 것 · 손님이 정한 말(고마움 · 메모 글)은 원래 메뉴의 것이라 뺌 */
+function swapOrder(o, menu, temp) {
+  const same = menu === o.menu;
+  return { ...o, menu, temp, usual: same && o.usual, ticket: same ? o.ticket : undefined, thanks: same ? o.thanks : undefined, miss: same ? o.miss : undefined, cup: same ? o.cup : undefined };
+}
+
+/** 이 주문을 오늘 만들 수 있나. 못 만들면 { kind, notice(알림), say(지은), reply(손님), order(바뀐 주문) }, 만들 수 있으면 null */
+export function lackOf(o, t) {
+  const r = RECIPES[o?.menu];
+  if (!t || !r) return null;
+  const temp = orderTemp(o);
+  const uses = [r.base, ...r.adds];
+  if (t.machine && (uses.includes('espresso') || uses.includes('decaf'))) {
+    return { kind: 'machine', notice: TODAY_SAY.machine, say: `죄송해요, ${TODAY_SAY.machine} 조금만 기다려 주시겠어요?`, reply: TODAY_SAY.wait, order: o };
+  }
+  const iceOut = t.ice !== undefined && t.ice <= 0;
+  if (uses.includes('milk') && t.milk !== undefined && t.milk <= 0) {
+    // 우유 대신: 커피는 아메리카노, 디카페인 · 따뜻한 우유는 카페인 없는 보리차, 그 밖(말차 · 코코아 · 딸기)은 유자차. 이름은 모두 받침이 없어 '는'
+    const menu = r.base === 'espresso' ? 'americano' : ['decaf', 'milk'].includes(r.base) ? 'barley_tea' : 'yuja_tea';
+    const temps = RECIPES[menu].temps;
+    const tt = temps.includes(temp) && !(temp === 'iced' && iceOut) ? temp : temps.includes('hot') ? 'hot' : temps[0];
+    return { kind: 'milk', notice: TODAY_SAY.milkOut, say: `죄송해요, ${TODAY_SAY.milkOut} ${drinkName(menu, tt)}는 어떠세요?`, reply: TODAY_SAY.okSwap, order: swapOrder(o, menu, tt) };
+  }
+  if (temp === 'iced' && iceOut) {
+    if (r.temps.includes('hot')) {
+      return { kind: 'ice', notice: TODAY_SAY.iceOut, say: `죄송해요, ${TODAY_SAY.iceOut} 따뜻하게 드려도 될까요?`, reply: TODAY_SAY.okHot, order: swapOrder(o, o.menu, 'hot') };
+    }
+    return { kind: 'ice', notice: TODAY_SAY.iceOut, say: `죄송해요, ${TODAY_SAY.iceOut} ${drinkName('yuja_tea', 'hot')}는 어떠세요?`, reply: TODAY_SAY.okSwap, order: swapOrder(o, 'yuja_tea', 'hot') };
+  }
+  return null;
+}
+
+/** 오늘 바뀌는 일의 지은 · 손님 말(음성 목록용) */
+export function todayLines() {
+  const out = new Set(Object.values(TODAY_SAY));
+  const t = { ice: 0, milk: 0 };
+  for (const menu of Object.keys(RECIPES)) {
+    for (const temp of RECIPES[menu].temps) {
+      for (const tt of [{ machine: true }, t, { ice: 0 }, { milk: 0 }]) {
+        const l = lackOf({ menu, temp }, tt);
+        if (l) out.add(l.say);
+      }
+    }
+  }
+  return [...out];
+}
+
+/** today({ … }) 검사: 문제 글 목록 */
+export function todayProblems(mods) {
+  if (!mods || typeof mods !== 'object') return ['{ ice · milk · machine · owner } 꼴이어야 함'];
+  const errs = [];
+  for (const [k, v] of Object.entries(mods)) {
+    if (!TODAY_KEYS[k]) errs.push(`모르는 칸 ${k} (${Object.keys(TODAY_KEYS).join(' · ')})`);
+    else if (typeof v !== TODAY_KEYS[k]) errs.push(`${k} 는 ${TODAY_KEYS[k] === 'number' ? '숫자' : '참/거짓'}`);
+    else if (TODAY_KEYS[k] === 'number' && (v < 0 || !Number.isInteger(v))) errs.push(`${k} 는 0 이상의 정수`);
+  }
+  return errs;
+}
+
 /** 레시피와 다른 곳: ['cup' | 'base' | 'adds' | 'temp'] (같으면 빈 목록) */
 export function compareRecipe(made = {}, target = {}) {
   const diff = [];

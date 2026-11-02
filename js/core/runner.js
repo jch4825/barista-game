@@ -51,7 +51,7 @@ function deferred() {
 function newSession(ep) {
   const labels = {};
   ep.script.forEach((b, i) => { if (b.t === 'label') labels[b.name] = i; });
-  return { ep, labels, index: 0, epoch: 0, stamps: [], points: [], photos: [], terms: [], interrupt: deferred(), earplugs: false };
+  return { ep, labels, index: 0, epoch: 0, stamps: [], points: [], photos: [], terms: [], interrupt: deferred(), earplugs: false, today: null };
 }
 
 /* ------------------------------------------------------------------ */
@@ -66,6 +66,7 @@ function snapshot(s) {
     sched: hud.getSchedule().done,
     audio: audio.state(),
     earplugs: s.earplugs,
+    today: s.today ? { ...s.today } : null, // 오늘의 칠판이 바꾸는 일(남은 얼음 · 우유 …)
     flags: { ...(store.active()?.flags || {}) },
   };
 }
@@ -90,6 +91,7 @@ function restore(s, snap) {
   audio.bgm(snap.audio?.mood || null);
   audio.ambience(snap.audio?.ambience || null, snap.audio?.ambLevel || 1);
   s.earplugs = Boolean(snap.earplugs);
+  s.today = snap.today ? { ...snap.today } : null;
   audio.setEarplugs(s.earplugs);
   stage.effect('earplugs', s.earplugs);
   store.restoreFlags(snap.flags);
@@ -237,6 +239,7 @@ async function exec(s, b, index) {
     case 'memo': memo.set(b.title, b.items); await w(sleep(250)); return undefined;
     case 'memoHi': memo.highlight(b.n); return undefined;
     case 'info': await w(ov.info({ title: b.title, body: b.body, icon: b.icon })); return undefined;
+    case 'today': s.today = { ...(b.mods || {}) }; return undefined; // 오늘의 칠판이 그날 일을 바꿈: 미니게임 옵션의 today 로(작업대 · 몰림)
 
     case 'act': await w(ov.act({ label: fill(b.label), icon: b.icon, sfx: b.sfx })); return undefined;
     case 'breathe': {
@@ -465,11 +468,13 @@ async function miniBeat(s, b, index, w) {
   save(s, index, id, snap);
   const fn = MINIGAMES[b.name];
   if (!fn) { console.warn('[runner] 없는 미니게임', b.name); return undefined; }
-  const r = await w(fn({ ...b, season: b.season || s.ep.season || null })); // 그 날의 계절 = 손맛 단계(frame.js TIMING)
+  // 그 날의 계절 = 손맛 단계(frame.js TIMING) · 오늘의 칠판(today: 같은 날의 미니게임이 함께 씀, 남은 얼음 · 우유가 이어짐)
+  const r = await w(fn({ ...b, season: b.season || s.ep.season || null, today: b.today || s.today || null }));
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
   // 미니게임이 돌려준 자세한 기록(커피 만들기: 만든 메뉴·다시 만들기·보기·손 기술마다 알맞음 수·라테아트·단계·턴 방식)
   const detail = {};
   for (const k of ['served', 'made', 'cups', 'remakes', 'kept', 'watched', 'skills', 'art', 'turn', 'asked', 'spills', 'looked']) if (r?.[k] !== undefined) detail[k] = r[k];
+  if (r?.adapted?.length) detail.adapted = r.adapted; // 오늘의 칠판에 맞춰 손님에게 권한 것(선생님 화면 비고)
   if (r?.level !== undefined) detail.stage = r.level;
   if (r?.quit) { // [그만하기]: 남은 일은 지은이 알아서 함(frame.js QUIT_ASK). 축하·별 없이 다음 장면으로
     store.log({ type: 'mini', ep: s.ep.id, id, name: b.name, title: b.title || null, skill: b.skill || null, quit: true, attempts: r.attempts || 0, mistakes: r.mistakes || 0, ms: Math.round(r.ms || 0), ...detail });

@@ -23,7 +23,7 @@ const { CG_IDS } = await imp('js/data/cg.js');
 const { EMOTES } = await imp('js/ui/emote.js');
 const { condErrors } = await imp('js/core/cond.js');
 const { MINIGAMES, MINIGAME_SKINS, MINIGAME_OOPS, MINIGAME_CHECKS } = await imp('js/game/minigames/index.js');
-const { menuProblems } = await imp('js/data/menu.js');
+const { menuProblems, todayProblems } = await imp('js/data/menu.js');
 const { GUIDE_KEYS } = await imp('js/data/tutorial.js');
 const { EPISODES, ACTS, ENDING } = await imp('js/data/episodes/index.js');
 const { REGULARS, KINDS } = await imp('js/data/regulars.js');
@@ -37,7 +37,7 @@ const MOTIONS = ['bow', 'nod', 'shake', 'jump', 'breathe'];
 const KNOWN = new Set(['bg', 'bgm', 'amb', 'sfx', 'show', 'enter', 'leave', 'face', 'motion', 'camera', 'fx', 'earplugs', 'say', 'narr', 'think', 'sys', 'phone',
   'time', 'place', 'big', 'schedule', 'memo', 'memoHi', 'info', 'act', 'breathe', 'decide', 'choose', 'branch',
   'mini', 'snap', 'photo', 'stamp', 'term', 'finish', 'credits', 'letter', 'label', 'jump', 'set', 'checkpoint', 'wait', 'end',
-  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond', 'chalk', 'seen', 'album', 'eyes', 'secret']);
+  'check', 'meet', 'cg', 'emote', 'guide', 'got', 'respond', 'chalk', 'seen', 'album', 'eyes', 'secret', 'today']);
 // check(일정 완료)는 실패·칭찬 장면 안에 두지 않습니다(되감기 전 장면에서 완료로 표시되면 안 됨)
 const NO_NEST = new Set(['decide', 'choose', 'mini', 'respond', 'label', 'jump', 'checkpoint', 'end', 'schedule', 'check']);
 const LONG = 90; // 2026-10-31 사용자 "대본을 너무 단문으로 쓰지 마라. 맥락과 힌트를 중시하라": 한 칸 두 문장 이내, 문장은 이어 써도 됨
@@ -181,6 +181,7 @@ function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {})
       case 'meet': if (!CHARS[b.who]?.card) err(ep, `크루 카드가 없는 인물: meet('${b.who}')`); break;
       case 'cg': if (b.id !== null && !CG_IDS.includes(b.id)) err(ep, `이벤트 CG 없음: ${b.id} (js/data/cg.js)`); break;
       case 'chalk': if (b.text !== null && typeof b.text !== 'string') err(ep, 'chalk 글씨는 문자열 또는 null'); break;
+      case 'today': for (const e of todayProblems(b.mods)) err(ep, `today: ${e}`); break;
       case 'seen': if (!Number.isInteger(b.n) || b.n < 1 || b.n > 11) err(ep, `숨은 장면 번호는 1~11: seen(${b.n})`); else seenUsed.push([ep, b.n]); break;
       case 'album': case 'eyes': if (ep !== ENDING?.id) err(ep, `${b.t}() 는 엔딩에만`); break;
       case 'secret': if (!REGULARS[b.who]) err(ep, `secret: 없는 단골 ${b.who}`); else secretUsed.add(b.who); break;

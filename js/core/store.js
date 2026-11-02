@@ -33,6 +33,9 @@ function uid() {
   return `p${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 }
 
+/** 학생마다 길(선생님 화면에서만 고름, 학생 화면에는 이름이 나오지 않음): easy 쉬운 길 · normal 보통 길 · deep 깊은 길 */
+export const PATHS = ['easy', 'normal', 'deep'];
+
 function newProfile(name) {
   return {
     id: uid(),
@@ -41,6 +44,7 @@ function newProfile(name) {
     updatedAt: Date.now(),
     settings: { ...CONFIG.DEFAULT_SETTINGS },
     settingsLocked: false,
+    path: 'normal',
     progress: { done: {}, checkpoint: null, unlockedAll: false, year: 1 },
     flags: {},
     stamps: {},      // skill -> { best, count, last }
@@ -125,6 +129,7 @@ function normalizeProfile(raw) {
     updatedAt: num(raw.updatedAt, 0),
     settings: { ...base.settings, ...obj(raw.settings) },
     settingsLocked: Boolean(raw.settingsLocked),
+    path: PATHS.includes(raw.path) ? raw.path : 'normal',
     progress: {
       ...pr,
       done: obj(pr.done),
@@ -307,7 +312,7 @@ export const store = {
   resetProgress(id) {
     const p = db.profiles[id];
     if (!p) return;
-    const keep = { id: p.id, name: p.name, createdAt: p.createdAt, settings: p.settings, settingsLocked: p.settingsLocked };
+    const keep = { id: p.id, name: p.name, createdAt: p.createdAt, settings: p.settings, settingsLocked: p.settingsLocked, path: p.path };
     db.profiles[id] = { ...newProfile(p.name), ...keep };
     saveNow();
     bus.emit('profile', active());
@@ -337,6 +342,18 @@ export const store = {
   settingsLocked() { return Boolean(active()?.settingsLocked); },
   setSettingsLocked(id, v) {
     if (db.profiles[id]) { db.profiles[id].settingsLocked = v; save(); }
+  },
+  /** 학생마다 길(선생님 화면): 작업대 · 몰림 · 시간 제한이 읽음 */
+  path() {
+    const v = active()?.path;
+    return PATHS.includes(v) ? v : 'normal';
+  },
+  setPath(id, v) {
+    if (!db.profiles[id] || !PATHS.includes(v)) return;
+    db.profiles[id].path = v;
+    touch(db.profiles[id]);
+    save();
+    bus.emit('settings', store.settings());
   },
 
   /* ---------- 진행 ---------- */

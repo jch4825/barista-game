@@ -18,6 +18,7 @@ import { frame, line, abortGeneration, abortMinigame } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus } from '../../core/bus.js';
 import * as grow from '../../core/grow.js';
+import { store } from '../../core/store.js';
 import { vfx, centerOf } from '../../ui/vfx.js';
 
 const GULL = '<svg viewBox="0 0 120 92" aria-hidden="true"><path d="M44 78 l-5 12 M62 78 l3 12" stroke="#E2A23A" stroke-width="5" stroke-linecap="round"/><ellipse cx="56" cy="56" rx="36" ry="22" fill="#fff" stroke="#55585C" stroke-width="3"/><path d="M30 50 q14 -30 40 -10 q-14 6 -40 10z" fill="#BCC7CF" stroke="#55585C" stroke-width="3" stroke-linejoin="round"/><circle cx="88" cy="38" r="15" fill="#fff" stroke="#55585C" stroke-width="3"/><path d="M101 38 l16 4 -16 5z" fill="#F2B233" stroke="#8A5A00" stroke-width="2" stroke-linejoin="round"/><circle cx="92" cy="34" r="3" fill="#222"/><path d="M84 28 l10 -2" stroke="#55585C" stroke-width="3" stroke-linecap="round"/></svg>';
@@ -34,10 +35,11 @@ const THEMES = {
   cafe: {
     title: '몰림 시간', bg: ['hall', 'busy_summer'], seconds: 30, icon: 'order_check',
     howto: '주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.',
+    howtoAlone: '주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.',
     spots: [[20, 30], [38, 24], [56, 28], [74, 24], [26, 54], [46, 50], [66, 54], [82, 46], [30, 74], [52, 74], [72, 72]],
     slips: ['아이스 아메리카노 하나요!', '라테 두 잔이요.', '유자차 하나요.', '포장이요!', '딸기우유 하나요.', '따뜻한 우유요.', '아아 둘이요!'],
     spawn: [1900, 1000], max: 6, life: 5200,
-    say: { start: '손님이 한꺼번에 몰려와요. 하나씩 해요.', owner: '이건 내가 할게요.', end: '몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!' },
+    say: { start: '손님이 한꺼번에 몰려와요. 하나씩 해요.', owner: '이건 내가 할게요.', end: '몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!', alone: '사장님이 안 계셔도 차근차근 해냈어요!' },
   },
   gull: {
     title: '그 갈매기를 쫓아라', bg: ['cafe_front', 'morning'], seconds: 26, icon: 'bread',
@@ -53,6 +55,7 @@ const themeOf = (opts) => THEMES[opts.theme] || THEMES.cafe;
 export function rushLines(opts = {}) {
   const th = themeOf(opts);
   const out = [...line.intro(opts.title || th.title, th.howto)];
+  if (th.howtoAlone) out.push(line.sys(th.howtoAlone));
   for (const t of Object.values(th.say)) out.push(line.sys(t));
   for (const t of th.slips || []) out.push(line.sys(t));
   return out;
@@ -71,7 +74,7 @@ export async function rush(opts = {}) {
   const title = opts.title || th.title;
   const { turn, k } = pace();
   const [bgId, bgVar] = opts.bg || th.bg;
-  const f = frame({ title, instruction: th.howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: opts.today?.owner === false && th.howtoAlone ? th.howtoAlone : th.howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit) });
 
   let over = false;
   let started = false;
@@ -191,8 +194,11 @@ export async function rush(opts = {}) {
   const total = (opts.seconds || th.seconds) * 1000 * k;
   let tAcc = 0;
   let spawnIn = 300;
-  // 차분함(지은의 성장)이 오를수록 사장님이 일찍 받아 줌(재미 개편 6.1)
-  const life = th.life ? th.life * k * Math.max(0.6, 1 - (grow.level('calm') - 1) * 0.05) : 0;
+  // 차분함(지은의 성장)이 오를수록 사장님이 일찍 받아 줌(재미 개편 6.1). 깊은 길(선생님이 정함)은 주문이 조금 빨리 옴
+  // 오늘의 칠판 '사장님 외출'(today.owner === false): 받아 주는 사람이 없어 주문이 기다림(실패 없음, 시간이 끝나면 마침)
+  const pk = store.path() === 'deep' ? 0.85 : 1;
+  const alone = opts.today?.owner === false;
+  const life = alone ? Infinity : th.life ? th.life * k * pk * Math.max(0.6, 1 - (grow.level('calm') - 1) * 0.05) : 0;
   function step(dt) {
     if (over || !started) return;
     tAcc += dt;
@@ -209,7 +215,7 @@ export async function rush(opts = {}) {
     if (spawnIn <= 0) {
       if (kind === 'city' && live.size >= th.max) { finish(); return; } // 쌓이고 쌓여서 와르르
       if (live.size < (kind === 'city' ? S.length : th.max)) addSlip();
-      spawnIn = (th.spawn[0] + (th.spawn[1] - th.spawn[0]) * prog) * k;
+      spawnIn = (th.spawn[0] + (th.spawn[1] - th.spawn[0]) * prog) * k * pk;
     }
     if (kind === 'cafe') {
       for (const [i, s] of [...live]) {
@@ -234,7 +240,7 @@ export async function rush(opts = {}) {
     curLoop?.stop();
     for (const s of live.values()) s.el.disabled = true;
     if (gull) gull.disabled = true;
-    let text = th.say.end;
+    let text = alone && th.say.alone ? th.say.alone : th.say.end;
     if (kind === 'city') {
       audio.sfx('boom');
       f.el.classList.add('is-crash');

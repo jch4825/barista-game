@@ -59,6 +59,7 @@ import {
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
   orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
+  TODAY_SAY, todayTags, lackOf, todayLines,
 } from '../../data/menu.js';
 import { REGULARS } from '../../data/regulars.js';
 import * as grow from '../../core/grow.js';
@@ -138,6 +139,7 @@ const SYS = {
   dragPress: '탬퍼를 누른 채 아래로 끌어요.',
   scoopHere: '얼음 통을 눌러 얼음을 떠요.',
   scoopDrop: '얼음은 컵 위에 놓아요. 다시 해 봐요.',
+  seeFirst: '처음 하는 일이면 [보기]로 먼저 봐도 좋아요.',
   // 지은의 성장(재미 개편 6장): 익숙해진 손 기술 맡기기 · 완벽한 한 잔 · 한 번에 묻기 · 늘 드시던 거
   handoff: '익숙한 일이라 손이 알아서 해요.',
   perfectCup: '완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.',
@@ -236,11 +238,14 @@ export function brewLines(opts = {}) {
   for (const sk of Object.values(HAND_SKILLS)) out.push(line.say('jieun', mastered(sk)));
   out.push(line.say('owner', ODD_FIRST.owner), line.say('jieun', ODD_FIRST.jieun), line.say('owner', ODD_FIRST.joke));
   for (const o of [...ODD_DRINKS, ODD_ANY]) out.push(line.say('owner', o.say), line.sys(`「${o.name}」 ${SYS.odd}`));
+  // 오늘의 칠판(today): 떨어졌다는 알림 · 지은이 사정을 말하고 권하는 말(손님 대답은 주문마다 아래)
+  for (const t of todayLines()) out.push(t.startsWith('죄송해요') ? line.say('jieun', t) : line.sys(t));
   // 주문 받기: 지은이 묻는 말 · 손님의 대답 · 주문 확인(되풀이) · "네, 맞아요."
   // 손님 말: 주문 · 고마움 · 레시피가 틀렸을 때 · 다시 만들 때 · 그대로 받을 때 · 손 동작이 칸을 벗어났을 때
   for (const o of orders) {
     const r = RECIPES[o.menu];
     out.push(line.say(o.who, o.say), line.say(o.who, thanksOf(o)), line.say(o.who, o.usual ? SAY.usualWrong : SAY.wrong), line.say(o.who, SAY.wait), line.say(o.who, SAY.accept), line.say(o.who, SAY.yes));
+    out.push(line.say(o.who, TODAY_SAY.okHot), line.say(o.who, TODAY_SAY.okSwap));
     for (const k of orderAsk(o)) out.push(line.say('jieun', ASK_SAY[k]), line.say(o.who, replyOf(o, k)));
     out.push(line.say('jieun', repeatBack(o)), line.sys(cupHintOf(o)), line.sys(TEMP_HINT[orderTemp(o)]));
     if (o.miss) out.push(line.say(o.who, o.miss));
@@ -866,8 +871,13 @@ export async function brew(opts = {}) {
   const stopped = () => abortGeneration() !== gen;
   const shots = await shotsP; // 보통 앱을 켤 때 이미 받아 둠
   if (stopped()) return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 };
-  const orders = ordersOf(opts);
-  const level = levelOf(opts);
+  const orders = ordersOf(opts).map((o) => ({ ...o })); // 오늘의 칠판으로 주문이 바뀔 수 있어 옮겨 씀
+  // 학생마다 길(선생님 화면 · store.path): 쉬운 길은 바리스타 단계도 보통으로, 깊은 길은 보통도 바리스타 단계로(칸 좁게 · 라테아트). 사장님 시연은 그대로
+  const path = store.path();
+  const level0 = levelOf(opts);
+  const level = opts.maker === 'owner' ? level0 : path === 'easy' && level0 === 'barista' ? 'normal' : path === 'deep' && level0 === 'normal' ? 'barista' : level0;
+  // 오늘의 칠판(runner 가 넣음, menu.js TODAY_KEYS): 남은 얼음 · 우유는 같은 날의 다음 작업대로 이어짐(같은 물건을 고침)
+  const today = opts.today || null;
   const book = bookOf(opts);
   const pantry = pantryOf(opts);
   const title = opts.title || TITLE;
@@ -880,12 +890,12 @@ export async function brew(opts = {}) {
   document.body.classList.add('brew-open');
 
   /* ---- 기록 ---- */
-  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {} };
+  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {}, adapted: [] };
   const result = (extra = {}) => ({
     ok: !extra.aborted && !extra.quit,
     attempts: 1, served: R.attempts, mistakes: R.mistakes, remakes: R.remakes, kept: R.kept, // runner 의 별·선생님 화면의 되감기는 attempts 로 셈
     ms: performance.now() - t0, made: [...R.made], cups: [...R.cups], watched: R.watched, skills: R.skills, art: R.art, asked: R.asked,
-    level, turn: pace().turn, ...extra,
+    adapted: [...R.adapted], level, turn: pace().turn, ...extra,
   });
 
   /* ---- 도중 정리(되감기·나가기·[그만하기]) ---- */
@@ -951,7 +961,20 @@ export async function brew(opts = {}) {
   const set = h('div', { class: 'bw-set' }, boards, mat, hots, bookBtn);
   const scene = h('div', { class: 'bw-scene' }, set, spots.left, spots.center, tube, spots.right);
   const panel = h('div', { class: 'bw-panel' });
-  const bench = h('section', { class: 'bw-bench', 'aria-label': '작업대' }, scene, guest, panel);
+  // 오늘의 칠판(작은 칠판, 카운터 오른쪽 위): 남은 얼음 · 우유 · 머신 · 사장님. 깊은 길은 '오늘의 도전'도(다른 학생과 견주지 않는 혼자의 목표)
+  const todayEl = h('div', { class: 'bw-today', role: 'status', 'aria-label': '오늘의 칠판' });
+  const showToday = () => {
+    const tags = todayTags(today);
+    const goal = path === 'deep' && opts.maker !== 'owner' ? '도전: 손 동작 모두 「딱 좋아요」' : null;
+    todayEl.replaceChildren(...[
+      tags.length ? h('b', { text: '오늘의 칠판' }) : null,
+      ...tags.map((t) => h('span', { text: t })),
+      goal ? h('span', { class: 'is-goal' }, h('i', { html: ICON('star') }), goal) : null,
+    ].filter(Boolean));
+    todayEl.hidden = !tags.length && !goal;
+  };
+  showToday();
+  const bench = h('section', { class: 'bw-bench', 'aria-label': '작업대' }, scene, guest, todayEl, panel);
   if (img.has('bg', 'workbench_morning')) set.style.backgroundImage = `url('${img.url('bg', 'workbench_morning')}')`;
   f.body.append(bench);
 
@@ -1589,8 +1612,10 @@ export async function brew(opts = {}) {
   /* ---- 손 기술: 띠 ---- */
   function gate(sk, turn, canHand = false, drag = false) {
     phase = 'gate';
-    const go = btn('play', '시작!', 'btn-big btn-main mg-go');
-    const see = btn(EYE, '보기', 'btn-big btn-soft bw-gate-watch');
+    // 쉬운 길(선생님이 정함): 아직 두 번도 안 해 본 손 기술은 [보기]를 앞에(먼저 보고 따라 하게). [시작!]도 그대로 있음
+    const seeFirst = path === 'easy' && !turn && grow.skillCount(sk.id || '') < 2;
+    const go = btn('play', '시작!', `btn-big ${seeFirst ? 'btn-soft' : 'btn-main'} mg-go`);
+    const see = btn(EYE, '보기', `btn-big ${seeFirst ? 'btn-main' : 'btn-soft'} bw-gate-watch`);
     // 익숙해진 손 기술(10번 넘게 함): [맡기기]를 누르면 손이 알아서 알맞게(재미 개편 6.2 · Q-41). 직접 할지는 학생이 고름
     const hand = canHand ? btn('sparkle', '맡기기', 'btn-big btn-soft bw-gate-hand') : null;
     const wrap = h('div', { class: 'bw-gate', role: 'group', 'aria-label': `${sk.name} 시작` },
@@ -1599,15 +1624,16 @@ export async function brew(opts = {}) {
         h('p', { text: howtoOf(sk, turn, drag) }),
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
+        seeFirst ? h('p', { class: 'bw-hand-note' }, h('i', { html: EYE }), SYS.seeFirst) : null,
         hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [맡기기]를 누르면 손이 알아서 해요.`) : null,
         h('div', { class: 'bw-row' }, see, hand, go)));
     (closeEl || bench).append(wrap);
     ui.gateGo = go;
     ui.gateSee = see;
     ui.gateSkill = sk.id;
-    talkAfter(sysV(skillSpeech(sk, turn, drag)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : null);
+    talkAfter(sysV(skillSpeech(sk, turn, drag)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null);
     if (sk.safety) safetySaid = true;
-    focusLater(go);
+    focusLater(seeFirst ? see : go);
     return new Promise((resolve) => {
       let gone = false;
       const done = (how) => {
@@ -1654,6 +1680,12 @@ export async function brew(opts = {}) {
       const wide = Math.min(0.06, (grow.level('hand') - 1) * 0.0075);
       zoneSpan = [Math.max(0.04, zoneSpan[0] - wide), Math.min(0.98, zoneSpan[1] + wide)];
     }
+    // 쉬운 길(선생님이 정함): 알맞아요 칸을 가운데에서 1.35배 넓게(원 그리기는 바퀴 오차가 그만큼)
+    if (path === 'easy' && !turn) {
+      const c0 = (zoneSpan[0] + zoneSpan[1]) / 2;
+      const half = ((zoneSpan[1] - zoneSpan[0]) / 2) * 1.35;
+      zoneSpan = [Math.max(0.04, c0 - half), Math.min(0.98, c0 + half)];
+    }
     const sk = { ...base, id, zone: zoneSpan };
     // 조작법 '드래그 활용'(설정 control): 물건을 직접 끎. 턴 방식이면 터치 기반. 단추 · 키보드 · 스캔 길은 그대로(원칙 11)
     //  tilt = 붓는 그릇을 끌어 내려 기울이기 · press = 탬퍼를 누른 채 끌어 내리기 · scoop = 얼음 통에서 국자로 떠 컵까지(블렌더 그림이 있을 때) · draw = 원 그리기
@@ -1691,7 +1723,7 @@ export async function brew(opts = {}) {
     needle);
     // 띠는 도움 표시(재미 개편 4.2 · Q-38): 실시간에서는 기본으로 숨기고, 잔(한 컷)이 알맞게 차면 확대 창이 반짝 + 소리.
     // 도움 많이 · 설정 helpBar · 턴 방식 · 박자는 띠를 그대로 보임
-    const showBar = turn || act === 'beats' || store.settings().help === 'many' || store.settings().helpBar === true;
+    const showBar = turn || act === 'beats' || store.settings().help === 'many' || store.settings().helpBar === true || path === 'easy'; // 쉬운 길은 띠를 늘 보임
     if (!showBar) gauge.classList.add('is-quiet');
     const status = h('p', { class: 'bw-status', 'aria-live': 'polite' });
     // 단추: 한 번 해 볼 때마다 새로 만듦([다시 하기] 때 앞의 손잡이가 남지 않게)
@@ -2581,7 +2613,7 @@ export async function brew(opts = {}) {
       const again = btn('repeat', '다시 만들기', 'btn-big btn-main bw-remake');
       ui.remake = again;
       // 레시피에 없는 엉뚱한 잔이면 [사장님께 맛보이기](재미 개편 3.2): 사장님의 한마디 + 엉뚱한 잔 도감. 손님 잔은 그다음에 다시 만듦
-      const odd = !findMenu(made) && opts.maker !== 'owner' ? btn('coffee', '사장님께 맛보이기', 'btn-big btn-soft bw-taste') : null;
+      const odd = !findMenu(made) && opts.maker !== 'owner' && today?.owner !== false ? btn('coffee', '사장님께 맛보이기', 'btn-big btn-soft bw-taste') : null; // 사장님이 자리를 비운 날은 맛보기 없음
       ui.taste = odd;
       const rowEl = h('div', { class: 'bw-row' }, odd, again);
       setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss: miss.missing.length || miss.extra.length ? miss : null }), resultBox(res), rowEl);
@@ -2768,9 +2800,52 @@ export async function brew(opts = {}) {
         render();
         talk(guestV(reply));
       };
+      // 오늘의 칠판(얼음 · 우유가 떨어짐 · 머신이 데워지는 중): 알림 → 학생이 [손님에게 말하기] → 지은이 사정을 말하고 권함 → 손님 대답 → 주문이 바뀜
+      const tellLack = (lack) => new Promise((done) => {
+        phase = 'lack';
+        const b = btn('speech', TODAY_SAY.tell, 'btn-big btn-main bw-tell');
+        ui.tell = b;
+        setPanel(askRow('', lack.notice), h('p', { class: 'bw-lack-say' }, h('i', { html: ICON('speech') }), lack.say), h('div', { class: 'bw-row' }, b));
+        panel.dataset.kind = 'order';
+        audio.sfx('hint');
+        talk(sysV(lack.notice));
+        focusLater(b);
+        onTap(b, async () => {
+          if (b.disabled) return;
+          b.disabled = true;
+          audio.sfx('tap');
+          said = lack.say;
+          setPanel(meLine(lack.say));
+          await speak([[lack.say, 'jieun']]);
+          showGuest('smile');
+          setReact(lack.reply);
+          await speak([guestV(lack.reply)]);
+          R.adapted.push({ kind: lack.kind, from: cur.menu, to: lack.order.menu, temp: orderTemp(lack.order) });
+          grow.add('asks');
+          if (lack.kind === 'machine') {
+            today.machine = false; // 기다리는 동안 머신이 다 데워짐
+            showToday();
+            audio.sfx('steam');
+            setReact('');
+            setPanel(askRow('', TODAY_SAY.machineReady));
+            await speak([sysV(TODAY_SAY.machineReady)]);
+          } else {
+            cur = lack.order;
+            orders[curIndex] = cur;
+            renderTicket(new Set(['temp', 'togo']));
+          }
+          phase = 'order';
+          done();
+        });
+      });
       const confirm = async () => {
         if (busy || phase !== 'order' || need.some((k) => !know.has(k))) return;
         busy = true;
+        for (let n = 0; n < 3; n++) { // 우유도 얼음도 없으면 두 번
+          const lack = lackOf(cur, today);
+          if (!lack) break;
+          await w(tellLack(lack));
+        }
         audio.sfx('tap');
         said = repeatBack(cur);
         render();
@@ -2818,6 +2893,7 @@ export async function brew(opts = {}) {
         return;
       }
       case 'order': { const q = ui.asks?.find((b) => b?.isConnected && !b.disabled); if (q) q.click(); else clickIf(ui.confirm); return; }
+      case 'lack': clickIf(ui.tell); return;
       case 'gate':
         if (robotGate && ui.gateSkill === robotGate) { robot = null; speed = 1; return; }
         clickIf(ui.gateGo);
@@ -2895,7 +2971,7 @@ export async function brew(opts = {}) {
     for (let i = 0; i < orders.length; i++) {
       cur = orders[i];
       curIndex = i;
-      const target = orderTarget(cur);
+      let target = orderTarget(cur);
       if (!target) { console.warn('[brew] 없는 메뉴', cur.menu); continue; }
       f.el.querySelector('.mg-head h2').textContent = orders.length > 1 ? `${title} (${i + 1}/${orders.length})` : title;
       showGuest('normal');
@@ -2908,6 +2984,7 @@ export async function brew(opts = {}) {
       const ordering = takeOrder();
       talk(i === 0 ? sysV(speechOf(opts)) : null, guestV(cur.say), sysV(orderAsk(cur).length ? PROMPT.order : PROMPT.orderDone));
       await w(ordering);
+      target = orderTarget(cur); // 오늘의 칠판으로 바뀐 주문
       setReact('');
       let pending = pickRecipe(false);
       talk(sysV(PROMPT.cup));
@@ -2928,7 +3005,13 @@ export async function brew(opts = {}) {
         const res = await makeDrink();
         await serve(res);
         const how = await react(target, res);
-        if (how === 'next') break;
+        if (how === 'next') {
+          // 오늘의 칠판: 드린 잔만큼 얼음 · 우유가 줄어듦(0 이면 다음 손님에게 사정을 말함)
+          if (today?.ice !== undefined && made.temp === 'iced') today.ice = Math.max(0, today.ice - 1);
+          if (today?.milk !== undefined && [made.base, ...made.adds].includes('milk')) today.milk = Math.max(0, today.milk - 1);
+          showToday();
+          break;
+        }
         // 다시 만들기: 레시피가 틀렸으면 처음부터, 손 기술만 벗어났으면 같은 레시피로(고친 것만 다시 고를 수 있음)
         const keep = how === 'keep';
         pending = pickRecipe(keep);

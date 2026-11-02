@@ -8,12 +8,12 @@
  */
 
 import { h } from '../core/dom.js';
-import { store } from '../core/store.js';
+import { store, PATHS } from '../core/store.js';
 import { ICON } from '../data/icons.js';
 import { SKILLS, SKILL_ORDER, LEVELS, STANDARDS, FEELINGS } from '../data/skills.js';
 import { EPISODES, ALL_OOPS, getEpisode } from '../data/episodes/index.js';
 import { REGULARS, KINDS, regularReport, touchOf } from '../data/regulars.js';
-import { HAND_SKILLS, LEVEL_NAMES } from '../data/menu.js';
+import { HAND_SKILLS, LEVEL_NAMES, RECIPES } from '../data/menu.js';
 import { CONFIG, isElectron } from '../config.js';
 import { tts } from '../av/tts.js';
 import { ov } from '../ui/overlays.js';
@@ -54,6 +54,10 @@ function fmtDate(t) {
   return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
+const ADAPT_TEXT = { ice: '얼음이 떨어짐', milk: '우유가 떨어짐', machine: '머신을 기다려 달라고 함' };
+/** 학생마다 길(학생 화면에는 이름이 나오지 않음) */
+const PATH_NOTE = '학생 화면에는 길 이름이 나오지 않아요. 쉬운 길: 띠가 보이고 알맞아요 칸이 넓어요, 처음 하는 손 기술은 [보기]를 먼저 권해요, 시간이 넉넉해요. 깊은 길: 바리스타 단계(칸이 좁고 라테아트), 몰림 시간이 조금 빨라요, 「완벽한 한 잔」에 도전해요. 이야기와 단골 신뢰는 같아요.';
+
 /** 미니게임 기록의 비고: 실수 + (커피 만들기) 다시 만들기 · 보기 · 손 기술마다 알맞음/해 본 수(딱 좋아요 수) · 단계 · 턴 방식. 커피 솜씨는 단골 신뢰와 따로(원칙 7) */
 function miniExtra(l) {
   if (l.quit) return '그만하기';
@@ -63,6 +67,8 @@ function miniExtra(l) {
   if (l.watched) parts.push(`보기 ${l.watched}`);
   for (const [id, st] of Object.entries(l.skills || {})) parts.push(`${HAND_SKILLS[id]?.name || id} 알맞음 ${st.good}/${st.tries}${st.perfect ? `(딱 좋아요 ${st.perfect})` : ''}`);
   if (l.art) parts.push(`라테아트 ${l.art}`);
+  // 오늘의 칠판에 맞춰 손님에게 사정을 말하고 권한 것(얼음 · 우유가 떨어짐 · 머신이 데워지는 중)
+  for (const a of l.adapted || []) parts.push(`칠판 대처: ${ADAPT_TEXT[a.kind] || a.kind}${a.to && a.to !== a.from ? ` → ${RECIPES[a.to]?.name || a.to}` : ''}`);
   if (l.stage) parts.push(`단계 ${LEVEL_NAMES[l.stage] || l.stage}`);
   if (l.turn) parts.push('턴 방식');
   return parts.join(' · ');
@@ -251,6 +257,8 @@ function dashboard() {
         h('button', { class: 'btn', onclick: (e) => { e.stopPropagation(); store.selectProfile(p.id); ov.toast(`${p.name} 학생으로 바꿨어요`, 'idcard'); renderAll(); } }, h('i', { html: ICON('idcard') }), h('span', { text: active ? '지금 하는 학생' : '이 학생으로 하기' }))),
       row('모든 이야기 열기', segmented([[false, '순서대로'], [true, '모두 열기']], Boolean(p.progress.unlockedAll), (v) => store.setUnlockedAll(p.id, v)), '수업에서 원하는 에피소드로 바로 갈 수 있어요.'),
       row('설정 잠그기', segmented([[false, '학생이 바꿀 수 있음'], [true, '잠금']], Boolean(p.settingsLocked), (v) => store.setSettingsLocked(p.id, v))),
+      // 학생마다 길(2026-11-02 사용자 "학생마다 길 정하기"): 선생님만 고름
+      row('이 학생의 길', segmented([['easy', '쉬운 길'], ['normal', '보통 길'], ['deep', '깊은 길']], PATHS.includes(p.path) ? p.path : 'normal', (v) => store.setPath(p.id, v)), PATH_NOTE),
       report(p),
       h('p', { class: 'tc-note', text: `음성 파일 ${tts.fileCount()}줄 준비됨 (없는 줄은 브라우저 음성으로 읽어요). 기록은 이 기기에만 저장돼요.` }),
       h('div', { class: 'tc-danger' },
