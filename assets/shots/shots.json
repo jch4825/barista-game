@@ -43,7 +43,22 @@
       13,
       14,
       15
-    ]
+    ],
+    "tilt": {
+      "patch": [
+        1512,
+        57,
+        198,
+        580
+      ],
+      "vessel": [
+        855,
+        0,
+        815,
+        648
+      ],
+      "n": 4
+    }
   },
   "pour_milk": {
     "size": [
@@ -57,7 +72,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_plate"
+    "plate": "pour_plate",
+    "tilt": {
+      "patch": [
+        1512,
+        57,
+        198,
+        580
+      ],
+      "vessel": [
+        855,
+        0,
+        815,
+        648
+      ],
+      "n": 4
+    }
   },
   "foam": {
     "size": [
@@ -83,7 +113,22 @@
       719,
       714
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1585,
+        71,
+        246,
+        680
+      ],
+      "vessel": [
+        238,
+        0,
+        1550,
+        794
+      ],
+      "n": 4
+    }
   },
   "ice": {
     "size": [
@@ -96,7 +141,31 @@
       465,
       800
     ],
-    "levels": 9
+    "levels": 9,
+    "drag": {
+      "plate": "ice_drag_plate",
+      "scoop": [
+        1402,
+        419,
+        573,
+        260
+      ],
+      "grip": [
+        1527,
+        509
+      ],
+      "bucket": [
+        805,
+        208,
+        584,
+        561
+      ],
+      "mouth": [
+        1602,
+        230,
+        163
+      ]
+    }
   },
   "pour_glass_latte": {
     "size": [
@@ -110,7 +179,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_glass_plate"
+    "plate": "pour_glass_plate",
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "pour_glass_milk": {
     "size": [
@@ -124,7 +208,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_glass_plate"
+    "plate": "pour_glass_plate",
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "water_glass": {
     "size": [
@@ -137,7 +236,22 @@
       612,
       800
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "ice_plastic": {
     "size": [
@@ -150,7 +264,31 @@
       566,
       800
     ],
-    "levels": 9
+    "levels": 9,
+    "drag": {
+      "plate": "ice_plastic_drag_plate",
+      "scoop": [
+        1414,
+        469,
+        475,
+        216
+      ],
+      "grip": [
+        1518,
+        544
+      ],
+      "bucket": [
+        875,
+        314,
+        496,
+        483
+      ],
+      "mouth": [
+        1582,
+        266,
+        171
+      ]
+    }
   },
   "pour_cocoa": {
     "size": [
@@ -164,7 +302,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_plate"
+    "plate": "pour_plate",
+    "tilt": {
+      "patch": [
+        1512,
+        57,
+        198,
+        580
+      ],
+      "vessel": [
+        855,
+        0,
+        815,
+        648
+      ],
+      "n": 4
+    }
   },
   "pour_glass_cocoa": {
     "size": [
@@ -178,7 +331,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_glass_plate"
+    "plate": "pour_glass_plate",
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "pour_glass_matcha": {
     "size": [
@@ -192,7 +360,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_glass_plate"
+    "plate": "pour_glass_plate",
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "pour_glass_strawberry": {
     "size": [
@@ -206,7 +389,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_glass_plate"
+    "plate": "pour_glass_plate",
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        612,
+        800
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "pour_matcha": {
     "size": [
@@ -220,7 +418,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_plate"
+    "plate": "pour_plate",
+    "tilt": {
+      "patch": [
+        1512,
+        57,
+        719,
+        718
+      ],
+      "vessel": [
+        855,
+        0,
+        815,
+        648
+      ],
+      "n": 4
+    }
   },
   "pour_paper_cocoa": {
     "size": [
@@ -234,7 +447,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_paper_plate"
+    "plate": "pour_paper_plate",
+    "tilt": {
+      "patch": [
+        1503,
+        82,
+        185,
+        552
+      ],
+      "vessel": [
+        879,
+        0,
+        769,
+        642
+      ],
+      "n": 4
+    }
   },
   "pour_paper_latte": {
     "size": [
@@ -254,7 +482,22 @@
       13,
       14,
       15
-    ]
+    ],
+    "tilt": {
+      "patch": [
+        1503,
+        82,
+        185,
+        552
+      ],
+      "vessel": [
+        879,
+        0,
+        769,
+        642
+      ],
+      "n": 4
+    }
   },
   "pour_paper_matcha": {
     "size": [
@@ -268,7 +511,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_paper_plate"
+    "plate": "pour_paper_plate",
+    "tilt": {
+      "patch": [
+        1503,
+        82,
+        185,
+        552
+      ],
+      "vessel": [
+        879,
+        0,
+        769,
+        642
+      ],
+      "n": 4
+    }
   },
   "pour_paper_milk": {
     "size": [
@@ -282,7 +540,22 @@
       718
     ],
     "levels": 17,
-    "plate": "pour_paper_plate"
+    "plate": "pour_paper_plate",
+    "tilt": {
+      "patch": [
+        1503,
+        82,
+        185,
+        552
+      ],
+      "vessel": [
+        879,
+        0,
+        769,
+        642
+      ],
+      "n": 4
+    }
   },
   "pour_plastic_cocoa": {
     "size": [
@@ -296,7 +569,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_plastic_plate"
+    "plate": "pour_plastic_plate",
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "pour_plastic_latte": {
     "size": [
@@ -310,7 +598,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_plastic_plate"
+    "plate": "pour_plastic_plate",
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "pour_plastic_matcha": {
     "size": [
@@ -324,7 +627,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_plastic_plate"
+    "plate": "pour_plastic_plate",
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "pour_plastic_milk": {
     "size": [
@@ -338,7 +656,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_plastic_plate"
+    "plate": "pour_plastic_plate",
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "pour_plastic_strawberry": {
     "size": [
@@ -352,7 +685,22 @@
       800
     ],
     "levels": 17,
-    "plate": "pour_plastic_plate"
+    "plate": "pour_plastic_plate",
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "water_paper": {
     "size": [
@@ -365,7 +713,22 @@
       694,
       718
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1572,
+        82,
+        230,
+        649
+      ],
+      "vessel": [
+        293,
+        0,
+        1468,
+        771
+      ],
+      "n": 4
+    }
   },
   "water_plastic": {
     "size": [
@@ -378,7 +741,22 @@
       565,
       800
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1336,
+        0,
+        214,
+        445
+      ],
+      "vessel": [
+        971,
+        0,
+        519,
+        508
+      ],
+      "n": 4
+    }
   },
   "milk_in": {
     "size": [
@@ -391,7 +769,22 @@
       590,
       573
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1332,
+        227,
+        469,
+        313
+      ],
+      "vessel": [
+        891,
+        0,
+        761,
+        459
+      ],
+      "n": 4
+    }
   },
   "tap": {
     "size": [
@@ -417,7 +810,22 @@
       794,
       800
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1230,
+        0,
+        457,
+        341
+      ],
+      "vessel": [
+        700,
+        0,
+        946,
+        431
+      ],
+      "n": 4
+    }
   },
   "bloom_wait": {
     "size": [
@@ -755,7 +1163,22 @@
       719,
       714
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1585,
+        71,
+        246,
+        680
+      ],
+      "vessel": [
+        238,
+        0,
+        1550,
+        794
+      ],
+      "n": 4
+    }
   },
   "water_glass_barley": {
     "size": [
@@ -768,7 +1191,22 @@
       612,
       800
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "water_glass_yuja": {
     "size": [
@@ -781,7 +1219,22 @@
       612,
       800
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1365,
+        0,
+        201,
+        436
+      ],
+      "vessel": [
+        888,
+        0,
+        614,
+        517
+      ],
+      "n": 4
+    }
   },
   "water_paper_mix": {
     "size": [
@@ -794,7 +1247,22 @@
       694,
       718
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1572,
+        82,
+        230,
+        649
+      ],
+      "vessel": [
+        293,
+        0,
+        1468,
+        771
+      ],
+      "n": 4
+    }
   },
   "water_yuja": {
     "size": [
@@ -807,6 +1275,21 @@
       719,
       714
     ],
-    "levels": 17
+    "levels": 17,
+    "tilt": {
+      "patch": [
+        1585,
+        71,
+        246,
+        680
+      ],
+      "vessel": [
+        238,
+        0,
+        1550,
+        794
+      ],
+      "n": 4
+    }
   }
 }

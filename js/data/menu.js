@@ -83,6 +83,7 @@ export const HAND_SKILLS = {
     name: '꾹 누르기', act: 'hold', of: ['espresso', 'decaf'], obj: 'obj_tamper', icon: 'hand', sfx: 'stack',
     howto: '[누르고 있기]를 꾹 누르면 힘이 들어가요. 알맞아요 칸에서 손을 떼요.',
     howtoTurn: '힘이 알맞아요 칸에 오면 [멈추기]를 눌러요.',
+    howtoDrag: '탬퍼를 누른 채 아래로 끌면 꾹 눌려요. 알맞아요 칸에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     zone: [0.44, 0.69],
     labels: { low: '약해요', good: '알맞아요', high: '세요' },
     react: { low: '조금 연하네요.', high: '조금 쓰네요.' },
@@ -99,6 +100,7 @@ export const HAND_SKILLS = {
     name: '얼음 담기', act: 'beats', n: 3, of: 'ice', obj: 'obj_ice_bucket', icon: 'ice', sfx: 'ice', temp: 'iced',
     howto: '동그라미가 가운데 원에 겹칠 때 [담기]를 눌러요. 세 번 해요.',
     howtoTurn: '[한 칸]으로 동그라미를 줄이고, 원에 겹치면 [담기]를 눌러요.',
+    howtoDrag: '얼음 통을 눌러 얼음을 뜨고, 컵 위까지 끌어다 놓아요. 세 번 해요.', // 조작법 '드래그 활용'(2026-11-02)
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '얼음이 조금 적네요.', high: '얼음이 조금 많네요.' },
   },
@@ -127,6 +129,7 @@ export const HAND_SKILLS = {
     name: '말차 풀기', act: 'circle', laps: 5, of: 'matcha', obj: 'obj_matcha', icon: 'tea', sfx: 'wipe',
     howto: '[누르고 있기]를 누르거나 컵 위에 원을 그려요. 다섯 바퀴에서 멈춰요.',
     howtoTurn: '[한 칸]을 누르면 반 바퀴씩 돌아요. 다섯 바퀴에서 [멈추기]를 눌러요.',
+    howtoDrag: '컵 위에 손가락으로 원을 그려요. 다섯 바퀴에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     labels: { low: '덜 풀렸어요', good: '알맞아요', high: '너무 저었어요' },
     react: { low: '가루가 조금 남았네요.', high: '거품이 조금 많네요.' },
   },
@@ -151,6 +154,7 @@ export const HAND_SKILLS = {
     name: '피처에 우유 붓기', act: 'hold', of: 'milk', obj: 'obj_milk_bottle', icon: 'milk', sfx: 'pour', temp: 'hot',
     howto: '[누르고 있기]를 꾹 누르면 피처에 우유가 들어가요. 선에서 손을 떼요.',
     howtoTurn: '우유가 선에 오면 [멈추기]를 눌러요.',
+    howtoDrag: '우유병을 누른 채 아래로 끌면 기울어져 우유가 나와요. 우유가 선에 오면 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     zone: [0.5, 0.75],
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '양이 조금 적네요.', high: '양이 조금 많네요.' },
@@ -166,6 +170,7 @@ export const HAND_SKILLS = {
     name: '붓기', act: 'hold', of: 'milk', obj: 'obj_pitcher_milk', icon: 'milk', sfx: 'pour', art: 'heart',
     howto: '[누르고 있기]를 꾹 누르면 우유를 부어요. 알맞아요 칸에서 손을 떼요.',
     howtoTurn: '컵이 알맞아요 칸까지 차면 [멈추기]를 눌러요.',
+    howtoDrag: '피처를 누른 채 아래로 끌면 기울어져 우유가 나와요. 더 끌수록 빨리 나오고, 알맞아요 칸에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     zone: [0.69, 0.94],
     labels: { low: '적어요', good: '알맞아요', high: '넘쳐요' },
     react: { low: '양이 조금 적네요.', high: '조금 넘쳤네요.' },
@@ -174,6 +179,7 @@ export const HAND_SKILLS = {
     name: '물 붓기', act: 'hold', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'pour',
     howto: '[누르고 있기]를 꾹 누르면 주전자로 물을 부어요. 잔이 알맞아요 칸까지 차면 손을 떼요.',
     howtoTurn: '물이 알맞아요 칸까지 차면 [멈추기]를 눌러요.',
+    howtoDrag: '주전자를 누른 채 아래로 끌면 기울어져 물이 나와요. 더 끌수록 빨리 나오고, 알맞아요 칸에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     zone: [0.69, 0.94], // 블렌더 물 붓기 컷(water)과 같은 칸: 0.69~0.94 = 거의 가득, 1 = 받침에 넘침(docs/recipes.md 6.6)
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '조금 진하네요.', high: '조금 싱겁네요.' },
@@ -199,6 +205,7 @@ export const HAND_SKILLS = {
     name: '손으로 원두 갈기', act: 'circle', laps: 6, of: 'drip', obj: 'obj_hand_grinder', icon: 'coffee', sfx: 'mixer',
     howto: '[누르고 있기]를 누르거나 손잡이 쪽에 원을 그려요. 여섯 바퀴에서 멈춰요.',
     howtoTurn: '[한 칸]을 누르면 반 바퀴씩 돌아요. 여섯 바퀴에서 [멈추기]를 눌러요.',
+    howtoDrag: '손잡이 쪽에 손가락으로 원을 그려요. 여섯 바퀴에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     labels: { low: '덜 갈았어요', good: '알맞아요', high: '너무 갈았어요' },
     react: { low: '조금 연하네요.', high: '조금 쓰네요.' },
   },
@@ -206,6 +213,7 @@ export const HAND_SKILLS = {
     name: '뜸 붓기', act: 'hold', of: 'water', obj: 'obj_dripper', icon: 'water', sfx: 'pour', temp: 'hot',
     howto: '[누르고 있기]를 살짝 눌러 물을 조금만 부어요. 가루가 젖으면 손을 떼요.',
     howtoTurn: '가루가 알맞게 젖으면 [멈추기]를 눌러요.',
+    howtoDrag: '주전자를 누른 채 아래로 살짝 끌어 물을 조금만 부어요. 가루가 젖으면 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     zone: [0.3, 0.55],
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '조금 진하네요.', high: '조금 연하네요.' },
@@ -222,6 +230,7 @@ export const HAND_SKILLS = {
     name: '나선 붓기', act: 'circle', laps: 3, of: 'water', obj: 'obj_dripper', icon: 'water', sfx: 'pour', temp: 'hot',
     howto: '[누르고 있기]를 누르거나 드리퍼 위에 천천히 원을 그려요. 세 바퀴에서 멈춰요.',
     howtoTurn: '[한 칸]을 누르면 반 바퀴씩 부어요. 세 바퀴에서 [멈추기]를 눌러요.',
+    howtoDrag: '드리퍼 위에 손가락으로 천천히 원을 그려요. 세 바퀴에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '조금 진하네요.', high: '조금 연하네요.' },
   },
@@ -229,6 +238,7 @@ export const HAND_SKILLS = {
     name: '젓기', act: 'circle', laps: 3, of: ['mix', 'yuja', 'strawberry', 'cocoa'], obj: 'obj_spoon', icon: 'cup', sfx: 'wipe',
     howto: '[누르고 있기]를 누르거나 컵 위에 원을 그려요. 알맞은 바퀴에서 멈춰요.',
     howtoTurn: '[한 칸]을 누르면 반 바퀴씩 돌아요. 알맞은 바퀴에서 [멈추기]를 눌러요.',
+    howtoDrag: '컵 위에 손가락으로 원을 그려요. 알맞은 바퀴에서 손을 떼요.', // 조작법 '드래그 활용'(2026-11-02)
     labels: { low: '덜 저었어요', good: '알맞아요', high: '너무 저었어요' },
     react: { low: '가루가 조금 남았네요.', high: '조금 흘렀네요.' },
   },

@@ -134,6 +134,10 @@ const SYS = {
   late: '늦어요',
   beatGood: '좋아요',
   drag: '손가락으로 원을 그려도 돼요.',
+  dragTilt: '그릇을 누른 채 아래로 끌어요. 많이 끌수록 많이 기울어요.',
+  dragPress: '탬퍼를 누른 채 아래로 끌어요.',
+  scoopHere: '얼음 통을 눌러 얼음을 떠요.',
+  scoopDrop: '얼음은 컵 위에 놓아요. 다시 해 봐요.',
   // 지은의 성장(재미 개편 6장): 익숙해진 손 기술 맡기기 · 완벽한 한 잔 · 한 번에 묻기 · 늘 드시던 거
   handoff: '익숙한 일이라 손이 알아서 해요.',
   perfectCup: '완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.',
@@ -158,9 +162,14 @@ const ordersOf = (opts) => (Array.isArray(opts.orders) && opts.orders.length ? o
 const levelOf = (opts) => (LEVELS.includes(opts.level) ? opts.level : 'normal');
 const speechOf = (opts) => opts.speech || `${opts.title || TITLE}. ${HOWTO}`;
 const thanksOf = (o) => o.thanks || RECIPES[o.menu]?.thanks || SAY.thanks;
-/** 손 동작 설명: 실시간은 누르고 떼기(howto), 턴 방식은 [한 칸]·[멈추기](howtoTurn) */
-const howtoOf = (sk, turn) => (turn && sk.howtoTurn) || sk.howto;
-const skillSpeech = (sk, turn = false) => `${sk.name}. ${howtoOf(sk, turn)}`;
+/** 손 동작 설명: 실시간은 누르고 떼기(howto), 턴 방식은 [한 칸]·[멈추기](howtoTurn), 조작법 '드래그 활용'은 끌기(howtoDrag) */
+const howtoOf = (sk, turn, drag = false) => (turn && sk.howtoTurn) || (drag && sk.howtoDrag) || sk.howto;
+const skillSpeech = (sk, turn = false, drag = false) => `${sk.name}. ${howtoOf(sk, turn, drag)}`;
+// 조작법 '드래그 활용'(설정 control, 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라")
+const TILT_SKILLS = new Set(['pour', 'water', 'milk_in', 'bloom']); // 붓는 그릇을 끌어 내려 기울이기
+const POUR_AT = 0.42;   // 끌어 붓기: 이만큼(장면 높이의 TILT_PULL 에 대한 비율) 끌면 붓기 시작, 더 끌수록 빨리
+const TILT_PULL = 0.5;  // 끌어 붓기: 장면 높이의 이만큼 끌면 가장 많이 기욺
+const PRESS_PULL = 0.55; // 끌어 누르기(탬핑): 장면 높이의 이만큼 끌면 끝까지 눌림
 /** 주문 메모의 메뉴 칸: 단골의 '늘 먹던 거'는 메뉴 이름을 보이지 않음 */
 const menuLabel = (o) => (o.usual ? '늘 드시던 것' : drinkName(o.menu, orderTemp(o)));
 /** 컵이 틀렸을 때 읽어 줄 말 */
@@ -217,6 +226,7 @@ export function brewLines(opts = {}) {
   // 손 동작: 시작 설명 · 안전 · 띠 글자, 손 동작 없이 넣는 재료
   for (const sk of Object.values(HAND_SKILLS)) {
     out.push(line.sys(skillSpeech(sk)), line.sys(skillSpeech(sk, true)));
+    if (sk.howtoDrag) out.push(line.sys(skillSpeech(sk, false, true)));
     if (sk.safety) out.push(line.sys(sk.safety));
     for (const t of Object.values(sk.labels)) out.push(line.sys(t));
   }
@@ -1088,23 +1098,40 @@ export async function brew(opts = {}) {
    * 배경판을 작업대 칸에 꽉 채우고(cover), 띠 값에 맞는 프레임을 그 자리에 겹침. 컷 그림이 없으면 null(물건 그림으로)
    * shots.json 의 plate: 다른 컷과 같은 배경판(붓기 두 가지) · art: 라테아트 프레임이 있는 단계
    */
-  function shotView(id) {
+  function shotView(id, { drag = false } = {}) {
     const m = shots[id];
-    const plateId = m?.plate || `${id}_plate`;
-    if (!m || !img.has('shots', plateId)) return null;
+    const plateId0 = m?.plate || `${id}_plate`;
+    if (!m || !img.has('shots', plateId0)) return null;
+    // 조작법 '드래그 활용'(2026-11-02 사용자): 끌어 붓기는 붓기 전의 덜 기운 그릇(tilt), 얼음 담기는 얼음 통이 있는 배경판 + 국자(ice)
+    const iceDrag = drag && m.drag && img.has('shots', m.drag.plate) && img.has('shots', `${id}_scoop`) ? m.drag : null;
+    const tiltM = drag && m.tilt?.patch && img.has('shots', `${plateId0}_bare`) && img.has('shots', `${plateId0}_v0`) ? m.tilt : null;
+    const plateId = iceDrag ? iceDrag.plate : plateId0;
     const [W, H] = m.size;
     const [x, y, rw, rh] = m.rect;
     const nn = (k) => String(k).padStart(2, '0');
-    const urls = { l: [], s: [], a: [] };
+    const urls = { l: [], s: [], a: [], p: [], v: [] };
     for (let k = 0; k < m.levels; k++) {
       for (const kind of ['l', 's']) urls[kind].push(img.url('shots', `${id}_${kind}${nn(k)}`));
+      if (tiltM) urls.p.push(img.url('shots', `${id}_p${nn(k)}`));
     }
     for (const k of m.art || []) urls.a[k] = img.url('shots', `${id}_a${nn(k)}`);
+    for (let i = 0; tiltM && i < tiltM.n; i++) urls.v.push(img.url('shots', `${plateId0}_v${i}`));
     const pct = (a, b) => `${(a / b) * 100}%`;
+    const at = (el, [ax, ay, aw, ah]) => Object.assign(el.style, { left: pct(ax, W), top: pct(ay, H), width: pct(aw, W), height: pct(ah, H) });
     const frameEl = h('img', { class: 'bw-shot-frame', alt: '', draggable: 'false', style: { left: pct(x, W), top: pct(y, H), width: pct(rw, W), height: pct(rh, H) } });
-    const box = h('div', { class: 'bw-shot-box' }, h('img', { class: 'bw-shot-plate', src: img.url('shots', plateId), alt: '', draggable: 'false' }), frameEl);
+    const plateEl = h('img', { class: 'bw-shot-plate', src: img.url('shots', plateId), alt: '', draggable: 'false' });
+    const box = h('div', { class: 'bw-shot-box' }, plateEl, frameEl);
+    // 덜 기운 그릇: 그릇 없는 배경판 + 프레임 + 굳은 그릇 자리만 그릇 없는 조각(단계마다) + 덜 기운 그릇 그림
+    const patchEl = tiltM ? h('img', { class: 'bw-shot-frame bw-shot-patch', alt: '', draggable: 'false', hidden: true }) : null;
+    const vesselEl = tiltM ? h('img', { class: 'bw-shot-frame bw-shot-vessel', alt: '', draggable: 'false', hidden: true }) : null;
+    if (tiltM) {
+      at(patchEl, tiltM.patch);
+      at(vesselEl, tiltM.vessel);
+      box.append(patchEl, vesselEl);
+    }
     const el = h('div', { class: 'bw-shot', 'data-shot': id }, box);
-    let keep = [...urls.l, ...urls.s, ...urls.a].filter(Boolean).map((u) => Object.assign(new Image(), { src: u })); // 바뀔 때 깜빡이지 않게 미리 받기
+    const bareUrl = tiltM ? img.url('shots', `${plateId0}_bare`) : null;
+    let keep = [...urls.l, ...urls.s, ...urls.a, ...urls.p, ...urls.v, bareUrl].filter(Boolean).map((u) => Object.assign(new Image(), { src: u })); // 바뀔 때 깜빡이지 않게 미리 받기
     const fit = () => { // 칸 크기가 조금 달라져도(아래 손 띠의 높이에 따라) 빈틈 없이
       const s = Math.max(el.clientWidth / W, el.clientHeight / H) || 1;
       box.style.width = `${W * s}px`;
@@ -1112,11 +1139,19 @@ export async function brew(opts = {}) {
     };
     const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(fit) : null;
     let last = '';
+    let tiltI = null; // 붓지 않을 때 보일 덜 기운 그릇(0 = 가장 덜 기욺), null = 원래 컷(굳은 그릇)
+    let now = [0, false, false];
+    const swap = (im, u) => { if (u && im.getAttribute('src') !== u) im.src = u; };
     return {
       el,
+      /** 끌어 붓기 그림이 있는지: 덜 기운 그릇 수 · 얼음 끌기 정보 */
+      tiltN: tiltM ? tiltM.n : 0,
+      ice: iceDrag,
+      size: [W, H],
       start() { fit(); ro?.observe(el); },
       /** v: 띠 값 0~1 · flow: 줄기(누르는 동안 · [보기]로 차는 동안 · [한 칸] 바로 뒤) · art: 라테아트(가장 가까운 단계의 그림) */
       set(v, flow, art = false) {
+        now = [v, flow, art];
         const k = Math.max(0, Math.min(m.levels - 1, Math.round(v * (m.levels - 1))));
         const ka = art && m.art?.length ? m.art.reduce((b, a) => (Math.abs(a - k) < Math.abs(b - k) ? a : b), m.art[0]) : -1;
         const u = ka >= 0 ? urls.a[ka] : (flow ? urls.s : urls.l)[k];
@@ -1124,6 +1159,36 @@ export async function brew(opts = {}) {
           frameEl.src = u;
           last = u;
         }
+        if (!tiltM) return;
+        const bare = tiltI !== null && !flow && ka < 0; // 붓는 동안 · 라테아트는 원래 컷(굳은 그릇)
+        swap(plateEl, bare ? bareUrl : img.url('shots', plateId));
+        patchEl.hidden = !bare;
+        vesselEl.hidden = !bare;
+        if (bare) {
+          swap(patchEl, urls.p[k]);
+          swap(vesselEl, urls.v[tiltI]);
+        }
+      },
+      /** 덜 기운 그릇(i = 0 ~ tiltN-1), null 이면 원래 컷 */
+      tilt(i) {
+        if (!tiltM) return;
+        tiltI = i === null ? null : Math.max(0, Math.min(tiltM.n - 1, i));
+        this.set(...now);
+      },
+      /** 장면 위에 얹는 것(국자 · 안내 손): 배경판 좌표 [x, y, w, h] 로 자리 */
+      put(node, rect) {
+        at(node, rect);
+        if (node.parentNode !== box) box.append(node);
+      },
+      /** 화면 좌표 → 배경판 좌표 */
+      toPlate(cx, cy) {
+        const r = box.getBoundingClientRect();
+        return [((cx - r.left) / (r.width || 1)) * W, ((cy - r.top) / (r.height || 1)) * H];
+      },
+      /** 배경판 좌표 → 화면 좌표 */
+      toClient(px, py) {
+        const r = box.getBoundingClientRect();
+        return [r.left + (px / W) * r.width, r.top + (py / H) * r.height];
       },
       stop() { ro?.disconnect(); keep = []; },
     };
@@ -1522,7 +1587,7 @@ export async function brew(opts = {}) {
   }
 
   /* ---- 손 기술: 띠 ---- */
-  function gate(sk, turn, canHand = false) {
+  function gate(sk, turn, canHand = false, drag = false) {
     phase = 'gate';
     const go = btn('play', '시작!', 'btn-big btn-main mg-go');
     const see = btn(EYE, '보기', 'btn-big btn-soft bw-gate-watch');
@@ -1531,7 +1596,7 @@ export async function brew(opts = {}) {
     const wrap = h('div', { class: 'bw-gate', role: 'group', 'aria-label': `${sk.name} 시작` },
       h('div', { class: 'bw-gate-card' },
         h('h3', {}, h('i', { html: ICON(sk.icon) }), sk.name),
-        h('p', { text: howtoOf(sk, turn) }),
+        h('p', { text: howtoOf(sk, turn, drag) }),
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
         hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [맡기기]를 누르면 손이 알아서 해요.`) : null,
@@ -1539,7 +1604,8 @@ export async function brew(opts = {}) {
     (closeEl || bench).append(wrap);
     ui.gateGo = go;
     ui.gateSee = see;
-    talkAfter(sysV(skillSpeech(sk, turn)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : null);
+    ui.gateSkill = sk.id;
+    talkAfter(sysV(skillSpeech(sk, turn, drag)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : null);
     if (sk.safety) safetySaid = true;
     focusLater(go);
     return new Promise((resolve) => {
@@ -1589,6 +1655,16 @@ export async function brew(opts = {}) {
       zoneSpan = [Math.max(0.04, zoneSpan[0] - wide), Math.min(0.98, zoneSpan[1] + wide)];
     }
     const sk = { ...base, id, zone: zoneSpan };
+    // 조작법 '드래그 활용'(설정 control): 물건을 직접 끎. 턴 방식이면 터치 기반. 단추 · 키보드 · 스캔 길은 그대로(원칙 11)
+    //  tilt = 붓는 그릇을 끌어 내려 기울이기 · press = 탬퍼를 누른 채 끌어 내리기 · scoop = 얼음 통에서 국자로 떠 컵까지(블렌더 그림이 있을 때) · draw = 원 그리기
+    const dragOn = store.settings().control === 'drag' && !turn;
+    const shotId = shotIdFor(id, soFar);
+    const shot = shotId ? shotView(shotId, { drag: dragOn }) : null;
+    const dk = !dragOn ? null
+      : act === 'hold' && TILT_SKILLS.has(id) ? 'tilt'
+        : id === 'tamp' ? 'press'
+          : id === 'ice' && shot?.ice ? 'scoop'
+            : act === 'circle' ? 'draw' : null;
     const [z0, z1] = sk.zone;
     const center = (z0 + z1) / 2;
     const zoneOf = (p) => (p < z0 - 1e-6 ? 'low' : p > z1 + 1e-6 ? 'high' : 'good');
@@ -1643,8 +1719,8 @@ export async function brew(opts = {}) {
       h('header', { class: 'bw-close-head' },
         total > 1 ? h('b', { class: 'bw-close-n', text: `${n}/${total}` }) : null,
         h('h3', { text: sk.name }),
-        h('p', { text: howtoOf(sk, turn) }),
-        sayBtn(skillSpeech(sk, turn)), bookMini),
+        h('p', { text: howtoOf(sk, turn, Boolean(dk)) }),
+        sayBtn(skillSpeech(sk, turn, Boolean(dk))), bookMini),
       h('div', { class: 'bw-close-body' }, view, gauge),
       h('footer', { class: 'bw-close-foot' }, status, ctrl));
     closeUpOff();
@@ -1653,14 +1729,36 @@ export async function brew(opts = {}) {
     bench.classList.add('is-close');
 
     // 장면: 블렌더 한 컷이 있으면 그것(샷 · 데우기 · 거품 · 붓기 · 물 붓기 · 얼음 담기), 없으면 동작에 맞는 임시 그림(움직임은 set 으로)
-    const shotId = shotIdFor(id, soFar);
-    const shot = shotId ? shotView(shotId) : null;
     const art = shot ? null : actView(id, act, soFar, res);
     if (shot) setScene({ mode: id, shot, host: view, keep: true });
     else {
       setScene({ mode: id, keep: true });
       view.append(art.el);
     }
+    if (dk === 'tilt') shot?.tilt(0); // 끌어 붓기: 처음엔 덜 기운 그릇(아직 붓지 않음)
+    card.classList.toggle('is-drag', Boolean(dk));
+    if (dk) card.dataset.drag = dk;
+    // 끌기 안내: 처음 끌 때까지 손이 아래로(붓기 · 누르기) · 얼음 통에서 컵으로(얼음) 움직임
+    const hint = dk && dk !== 'draw' ? h('div', { class: `bw-drag-hint k-${dk}`, 'aria-hidden': 'true' }, h('i', { html: ICON('hand') })) : null;
+    if (hint) view.append(hint);
+    const hintOff = () => hint?.classList.add('is-off');
+    const hintOn = () => {
+      if (!hint) return;
+      hint.classList.remove('is-off');
+      if (dk !== 'scoop' || !shot?.ice) return;
+      // 얼음 통 가운데에서 컵 위로(장면 크기에 따라 그때그때 셈)
+      requestAnimationFrame(() => {
+        const vr = view.getBoundingClientRect();
+        const [bx, by, bw, bh] = shot.ice.bucket;
+        const [ax, ay] = shot.toClient(bx + bw / 2, by + bh * 0.3);
+        const [mx, my, mr] = shot.ice.mouth;
+        const [cx, cy] = shot.toClient(mx, my - mr * 0.7);
+        hint.style.left = `${ax - vr.left}px`;
+        hint.style.top = `${ay - vr.top}px`;
+        hint.style.setProperty('--dx', `${cx - ax}px`);
+        hint.style.setProperty('--dy', `${cy - ay}px`);
+      });
+    };
     // 원 그리기: 바퀴 수 표시(지금 / 알맞은 바퀴)
     const lapEl = act === 'circle' ? h('b', { class: 'bw-laps', 'aria-hidden': 'true' }) : null;
     if (lapEl) view.append(lapEl);
@@ -1733,10 +1831,22 @@ export async function brew(opts = {}) {
       let finished = false;
       let tick = 0;
       let holding = false; // hold · circle: 누르고 있는 동안만 차오름
-      let dragging = null; // circle: 손가락으로 원 그리기 { a: 지난 각도 }
+      let dragging = null; // circle: 손가락으로 원 그리기 { a: 지난 각도 } · 끌어 붓기 · 끌어 누르기: { y0: 누른 높이, h: 장면 높이 }
+      let pull = 0; // 끌어 붓기: 아래로 끈 만큼(0~1, POUR_AT 부터 부음)
       playing = mode === 'play';
       if (act === 'wait' && !turn && mode === 'play') flow = true; // 기다리는 동안 한 컷이 움직임(갈리는 가루 · 끓는 김 …), 정하면 멈춘 프레임
       const runMs = ((act === 'circle' ? lapsMax * LAP_MS : act === 'wait' ? sk.ms || WAIT_MS : sk.ms || RUN_MS) * k) / tm.speed;
+      if (how === 'play') hintOn();
+      // 끌어 붓기: 끈 만큼 그릇이 기울고(덜 기운 그릇 그림), POUR_AT 을 넘으면 붓기 시작(원래 컷 + 줄기)
+      const setPull = (d) => {
+        pull = d;
+        const pour = pull >= POUR_AT;
+        if (pour && !flow) audio.sfx(sk.sfx);
+        flow = pour || holding;
+        shot?.tilt(Math.floor((pull / POUR_AT) * (shot?.tiltN || 1)));
+        card.classList.toggle('is-pouring', pour);
+        draw();
+      };
       const end = (zone, watched) => {
         if (finished) return;
         finished = true;
@@ -1744,6 +1854,12 @@ export async function brew(opts = {}) {
         holding = false;
         dragging = null;
         flow = false;
+        if (dk === 'tilt') {
+          pull = 0;
+          card.classList.remove('is-pouring');
+          shot?.tilt(0); // 다 부으면 그릇을 다시 세움
+        }
+        hintOff();
         draw();
         stopB.classList.remove('is-holding');
         curLoop?.stop();
@@ -1800,6 +1916,48 @@ export async function brew(opts = {}) {
         view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); stepB?.click(); };
       } else if (act === 'wait') {
         view.onpointerdown = (e) => { if (mode !== 'play' || finished) return; e.preventDefault(); end(zoneOf(p), false); };
+      } else if (dk === 'tilt' || dk === 'press') {
+        // 끌어 붓기: 장면을 누른 채 아래로 끌수록 그릇이 기울고, 많이 끌면 붓기 시작(더 끌수록 빨리, 위로 되돌리면 멈춤). 손을 떼면 정함
+        // 끌어 누르기(탬핑): 누른 채 아래로 끈 만큼 탬퍼가 내려가 가루가 눌림(눌린 가루는 다시 부풀지 않음). 손을 떼면 정함
+        const again = dk === 'tilt' ? SYS.dragTilt : SYS.dragPress;
+        view.onpointerdown = (e) => {
+          if (mode !== 'play' || finished || holding) return;
+          e.preventDefault();
+          view.setPointerCapture?.(e.pointerId);
+          dragging = { y0: e.clientY, h: view.clientHeight || 1 };
+          hintOff();
+          if (dk === 'press') {
+            flow = true;
+            stopB.classList.add('is-holding');
+            audio.sfx(sk.sfx);
+            draw();
+          }
+        };
+        view.onpointermove = (e) => {
+          if (!dragging || finished) return;
+          const d = Math.max(0, Math.min(1, (e.clientY - dragging.y0) / (dragging.h * (dk === 'tilt' ? TILT_PULL : PRESS_PULL))));
+          if (dk === 'tilt') { setPull(d); return; }
+          if (d > p) { p = d; draw(); }
+          if (p >= 1) end('high', false);
+        };
+        view.onpointerup = () => {
+          if (!dragging || finished) return;
+          dragging = null;
+          if (dk === 'tilt') setPull(0);
+          flow = false;
+          stopB.classList.remove('is-holding');
+          if (p < HOLD_MIN) { p = 0; draw(); status.textContent = again; talk(sysV(again)); hintOn(); return; }
+          end(zoneOf(p), false);
+        };
+        view.onpointercancel = () => {
+          if (!dragging || finished) return;
+          dragging = null;
+          if (dk === 'tilt') setPull(0);
+          flow = false;
+          stopB.classList.remove('is-holding');
+          draw();
+        };
+        view.onlostpointercapture = null;
       } else if (act === 'hold') {
         view.onpointerdown = (e) => {
           if (mode !== 'play' || finished) return;
@@ -1875,6 +2033,12 @@ export async function brew(opts = {}) {
           if (p >= center - 1e-6) end('good', true);
           return;
         }
+        if (dk === 'tilt' && dragging && pull >= POUR_AT && !holding) {
+          // 끌어 붓기: 조금 기울이면 천천히(0.55배), 끝까지 기울이면 빨리(1.8배)
+          p = Math.min(1, p + (dt / runMs) * (0.55 + 1.25 * ((pull - POUR_AT) / (1 - POUR_AT))));
+          draw();
+          if (p >= 1) { end('high', false); return; }
+        }
         if (!turn && (act === 'wait' || (holding && !(dragging && dragging.moved >= DRAW_START)))) { // 원을 그리기 시작하면 손가락만큼만
           p = Math.min(1, p + dt / runMs);
           draw();
@@ -1900,7 +2064,7 @@ export async function brew(opts = {}) {
     const ringEl = act === 'beats' ? h('i', { class: 'bw-ring' }) : null;
     const dotsEl = act === 'beats' ? h('span', { class: 'bw-beat-dots', 'aria-hidden': 'true' }) : null;
     const beatWord = act === 'beats' ? h('b', { class: 'bw-beat-word', 'aria-hidden': 'true' }) : null;
-    if (act === 'beats') view.append(h('div', { class: 'bw-beat', 'aria-hidden': 'true', style: { '--band': `${8 * tm.beatWin}px` } }, h('i', { class: 'bw-target' }), ringEl), dotsEl, beatWord); // 판정 띠 굵기 = 판정 칸 배율
+    if (act === 'beats') view.append(dk === 'scoop' ? '' : h('div', { class: 'bw-beat', 'aria-hidden': 'true', style: { '--band': `${8 * tm.beatWin}px` } }, h('i', { class: 'bw-target' }), ringEl), dotsEl, beatWord); // 판정 띠 굵기 = 판정 칸 배율
     let iceTimer = 0; // 얼음 담기 컷: 떨어지는 프레임 → 멈춘 프레임(다시 하기를 빨리 눌러도 앞 시도의 프레임이 늦게 덮지 않게 시도마다 지움)
     const attemptBeats = (how) => new Promise((resolve) => {
       phase = 'skill';
@@ -2022,6 +2186,150 @@ export async function brew(opts = {}) {
       }, () => speed);
     });
 
+    /* ---- 얼음 옮기기(조작법 '드래그 활용' · scoop): 얼음 통을 눌러 국자로 뜨고, 컵 위까지 끌어다 놓기 n 번 ----
+     * 컵 밖에 놓으면 세지 않고 다시(감점 없음). 컵 바로 위에 가까울수록 '딱 좋아요'. [담기] · [보기] · 자동 플레이는 국자가 저절로 옮겨 감 */
+    const attemptScoop = (how) => new Promise((resolve) => {
+      phase = 'skill';
+      const N = sk.n || 2;
+      const ice = shot.ice;
+      const marks = [];
+      let beat = 0;
+      let mode = how;
+      let finished = false;
+      let busy = false; // 국자가 저절로 옮겨 가거나 얼음이 떨어지는 동안
+      let carry = null;
+      let tick = 0;
+      const top = Math.max(1, (shots[shotId]?.levels || 0) - 1);
+      const [sx, sy, sw, sh] = ice.scoop;
+      const [gx, gy] = ice.grip;
+      const [bx, by, bw, bh] = ice.bucket;
+      const [mx, my, mr] = ice.mouth;
+      const [tx, ty] = [mx, my - mr * 0.7]; // 놓으면 국자가 가는 곳: 컵 입구 바로 위
+      view.querySelectorAll('.bw-scoop, .bw-bucket-ring').forEach((el) => el.remove());
+      const scoop = h('img', { class: 'bw-scoop', alt: '', draggable: 'false', src: img.url('shots', `${shotId}_scoop`), hidden: true });
+      scoop.style.transformOrigin = `${((gx - sx) / sw) * 100}% ${((gy - sy) / sh) * 100}%`; // 기울 때 얼음 가운데를 축으로
+      const ring = h('i', { class: 'bw-bucket-ring', 'aria-hidden': 'true' });
+      shot.put(ring, [bx - 20, by - 20, bw + 40, bh + 40]);
+      const place = (px, py) => shot.put(scoop, [sx + (px - gx), sy + (py - gy), sw, sh]); // 쥐는 곳(얼음 가운데)이 px, py 에
+      const onBucket = ([px, py]) => px >= bx - 50 && px <= bx + bw + 50 && py >= by - 80 && py <= by + bh + 30;
+      // 놓은 자리: 컵 입구 가운데 위에 가까울수록 좋음(가로는 입구 반지름으로 잼, 세로는 입구보다 위면 어디든 · 아래는 컵 몸 위쪽까지)
+      const judgeAt = ([px, py]) => {
+        const ax = Math.abs(px - mx) / mr;
+        if (ax > 1.5 || py > my + mr * 2.5) return null;
+        return ax <= 0.55 ? 'perfect' : 'good';
+      };
+      const drawDots = () => {
+        dotsEl.replaceChildren(...Array.from({ length: N }, (_, i) => h('i', { class: marks[i] ? `m-${marks[i]}` : i === beat ? 'now' : '' })));
+        status.textContent = `${Math.min(beat + 1, N)} / ${N}`;
+      };
+      const pop = (t) => { beatWord.textContent = t; beatWord.classList.remove('is-pop'); void beatWord.offsetWidth; beatWord.classList.add('is-pop'); };
+      let hideTok = 0; // 사라지는 동안 다시 뜨면 늦은 숨기기가 새 국자를 숨기지 않게
+      const hide = () => {
+        const t = ++hideTok;
+        scoop.classList.add('is-gone');
+        later(dur(260), () => { if (t === hideTok) { scoop.hidden = true; scoop.classList.remove('is-gone', 'is-drop', 'is-auto'); } });
+      };
+      const finish = () => {
+        finished = true;
+        curLoop?.stop();
+        curLoop = null;
+        hintOff();
+        p = center;
+        draw();
+        resolve({ zone: 'good', watched: mode === 'watch', perfect: mode !== 'watch' && marks.every((x) => x === 'perfect') });
+      };
+      // 컵 위에서 얼음을 떨굼: 국자가 그 자리로 살짝 끌려가 기울고, 얼음이 떨어져 쌓임(얼음 담기 컷의 떨어지는 프레임)
+      const drop = (m) => {
+        busy = true;
+        scoop.classList.add('is-drop');
+        place(tx, ty);
+        later(dur(170), () => {
+          if (finished) return;
+          marks[beat] = m;
+          beat += 1;
+          audio.sfx(sk.sfx);
+          pop(m === 'perfect' ? SYS.perfect : SYS.beatGood);
+          const n = beat >= N ? top : Math.min(top, Math.round((top * beat) / N));
+          shot.set(n / top, true);
+          clearTimeout(iceTimer);
+          iceTimer = later(dur(360), () => shot.set(n / top, false));
+          drawDots();
+          hide();
+          later(dur(420), () => {
+            busy = false;
+            if (!finished && beat >= N) finish();
+          });
+        });
+      };
+      // 저절로 옮김([담기] · [보기] · 자동 플레이): 얼음 통에서 컵 위로
+      const autoCarry = () => {
+        if (busy || finished || carry) return;
+        busy = true;
+        hideTok += 1;
+        hintOff();
+        audio.sfx('ice');
+        scoop.hidden = false;
+        scoop.classList.remove('is-gone', 'is-drop', 'is-auto');
+        place(bx + bw / 2, by + bh * 0.25);
+        void scoop.offsetWidth;
+        scoop.classList.add('is-auto');
+        place(tx, ty);
+        later(dur(560), () => { if (!finished) drop('good'); });
+      };
+      view.onpointerdown = (e) => {
+        if (mode !== 'play' || finished || busy) return;
+        e.preventDefault();
+        const pt = shot.toPlate(e.clientX, e.clientY);
+        if (!onBucket(pt)) {
+          talk(sysV(SYS.scoopHere));
+          ring.classList.remove('is-ping');
+          void ring.offsetWidth;
+          ring.classList.add('is-ping');
+          return;
+        }
+        view.setPointerCapture?.(e.pointerId);
+        carry = true;
+        hideTok += 1;
+        hintOff();
+        audio.sfx('ice');
+        scoop.hidden = false;
+        scoop.classList.remove('is-gone', 'is-drop', 'is-auto');
+        place(...pt);
+      };
+      view.onpointermove = (e) => { if (carry && !finished) place(...shot.toPlate(e.clientX, e.clientY)); };
+      view.onpointerup = (e) => {
+        if (!carry || finished) return;
+        carry = null;
+        const m = judgeAt(shot.toPlate(e.clientX, e.clientY));
+        if (m) { drop(m); return; }
+        hide();
+        status.textContent = SYS.scoopDrop;
+        talk(sysV(SYS.scoopDrop));
+      };
+      view.onpointercancel = () => { if (carry) { carry = null; hide(); } };
+      onTap(stopB, () => { if (mode === 'play') autoCarry(); });
+      onTap(watchB, () => {
+        if (mode !== 'play') return;
+        mode = 'watch';
+        talk(sysV(SYS.watch));
+        stopB.disabled = true;
+        watchB.disabled = true;
+      });
+      stopB.disabled = false;
+      watchB.disabled = false;
+      focusLater(stopB);
+      clearTimeout(iceTimer);
+      shot.set(0, false); // 빈 컵부터
+      if (how === 'watch') talk(sysV(SYS.watch));
+      else hintOn();
+      drawDots();
+      curLoop = loop((dt) => {
+        if (finished) return;
+        tick += dt;
+        if ((mode === 'watch' || robot) && tick > 300 && !busy && !carry) { tick = 0; autoCarry(); }
+      }, () => speed);
+    });
+
     const askRetry = () => {
       phase = 'retry';
       const again = btn('repeat', '다시 하기', 'btn-big btn-main bw-again');
@@ -2045,7 +2353,7 @@ export async function brew(opts = {}) {
       talkAfter([mastered(sk), 'jieun']);
     };
     let how = 'watch';
-    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id)));
+    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk)));
     if (how === 'hand') {
       // 맡기기: 손이 알아서 알맞아요 칸 가운데까지(실패 없음, '딱 좋아요'는 직접 했을 때만)
       talk(sysV(SYS.handoff));
@@ -2072,7 +2380,7 @@ export async function brew(opts = {}) {
       return { skill: id, zone: 'good', watched: false, art: null, handed: true };
     }
     for (;;) {
-      const { zone, watched, perfect } = await w(act === 'beats' ? attemptBeats(how) : attempt(how));
+      const { zone, watched, perfect } = await w(act === 'beats' ? (dk === 'scoop' ? attemptScoop(how) : attemptBeats(how)) : attempt(how));
       phase = 'busy';
       cue(null);
       st[zone] += 1;
@@ -2484,6 +2792,7 @@ export async function brew(opts = {}) {
   let badLeft = 0;    // 남은 '틀리게 고르기'
   let robotMiss = 0;  // 남은 '손 기술을 일부러 넘치게'(__mgAuto({ miss }))
   let robotKeep = false; // 넘친 뒤 [다시 하기] 대신 [이대로 하기](__mgAuto({ keep: true }))
+  let robotGate = null; // 이 손 기술의 시작 창에서 자동 플레이를 멈춤(__mgAuto({ gate: 'pour' }): 손으로 시험할 때)
   let driving = false;
   const clickIf = (b) => { if (b?.isConnected && !b.disabled) b.click(); };
   function robotTarget() {
@@ -2509,7 +2818,10 @@ export async function brew(opts = {}) {
         return;
       }
       case 'order': { const q = ui.asks?.find((b) => b?.isConnected && !b.disabled); if (q) q.click(); else clickIf(ui.confirm); return; }
-      case 'gate': clickIf(ui.gateGo); return;
+      case 'gate':
+        if (robotGate && ui.gateSkill === robotGate) { robot = null; speed = 1; return; }
+        clickIf(ui.gateGo);
+        return;
       case 'retry': { // 일부러 넘친 뒤: [다시 하기](keep 이면 [이대로 하기] → 손님 반응에서 [다시 만들기])
         const b = robotKeep ? ui.goOn : ui.retry;
         if (b?.isConnected && !b.disabled) { robotMiss = Math.max(0, robotMiss - 1); b.click(); }
@@ -2545,11 +2857,12 @@ export async function brew(opts = {}) {
       while (!over && !stopped() && !(phase === 'wrong' && !badLeft)) await sleep(60); // 손님이 '주문한 게 아니네요' 할 때까지
       if (robot === 'bad') robot = null;
     };
-    window.__mgAuto = async ({ miss = 0, keep = false } = {}) => {
+    window.__mgAuto = async ({ miss = 0, keep = false, gate = null } = {}) => {
       if (over) return;
       badLeft = 0;
       robotMiss = miss;
       robotKeep = keep;
+      robotGate = gate;
       robot = 'auto';
       speed = 3;
       drive();

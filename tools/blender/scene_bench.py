@@ -761,7 +761,11 @@ def sprite_setup(cols):
                 ob.hide_render = cname not in cols
 
 
-def render(path, res, samples, transparent=False, fmt='PNG'):
+def render(path, res, samples, transparent=False, fmt='PNG', raw=False):
+    if TILT and not raw:  # 끌어 붓기 렌더(아래 tilt 모드): 배경판 자리에서 그릇 없는 배경판 · 덜 기운 그릇만, 미리 보기는 건너뜀
+        if path.endswith('_plate.png'):
+            tilt_plate(path, samples)
+        return
     r = scene.render
     r.resolution_x, r.resolution_y = res
     r.resolution_percentage = 100
@@ -843,6 +847,9 @@ def frame_rect(pts, pad=28):
 def render_frames(sdir, sid, rect, levels, build, samples=256, plate=None, art=None, same=False):
     """자리만 렌더(나머지는 배경판과 같음, 같은 씨앗값): build(k, p, flow) 가 그 단계의 바뀌는 것을 shot_dyn 에 만듦.
     plate: 다른 컷과 같은 배경판 이름 · art: (단계 목록, build) → {sid}_a{단계}.png(라테아트, 줄기 없음)"""
+    if TILT:
+        tilt_frames(sdir, sid, rect, levels, build, samples, plate)
+        return
     x0, y0, x1, y1 = rect
     W, H = SHOT_RES
     r = scene.render
@@ -3555,8 +3562,221 @@ SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam'
          **MORE_SHOTS}  # 남은 손 동작(원두 갈기 · 꾹 누르기 · 물 끓이기 · 핸드드립 · 컵에 넣기 · 젓기 · 우리기)
 
 
+# ------------------------------------------------------------------ 끌어 다루기(조작법 '드래그 활용', 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라")
+# 끌어 붓기: 붓는 그릇(스팀 피처 · 드립 주전자 · 우유병)을 아래로 끌수록 기울다가 붓기 시작. 붓는 동안(가장 기울었을 때)은 원래 컷 그대로,
+# 붓기 전(덜 기운 그릇)을 그리려고 컷마다 더 렌더하는 것(… tilt [컷,…]):
+#  - {배경판}_bare: 그릇이 카메라에만 안 보이는 배경판(그림자 · 비침은 남아 프레임과 그대로 이어짐)
+#  - {배경판}_v0..3: 덜 기운 그릇(투명 바탕, 주둥이 끝 자리는 그대로) + {배경판}_tilt.json(자리 · 기울기)
+#  - {컷}_p{단계}: 프레임 안에서 굳은 그릇이 보이는 곳만 그릇 없이(단계마다 잔 속이 달라서) + {컷}_tilt.json(조각 자리)
+TILT = False
+TILT_N = 4
+VESSEL = {}
+
+
+def tracked(fn, rest):
+    """붓는 그릇을 만드는 함수를 감싸 마지막에 만든 그릇(함수 · 자리 · 기울기 · 물건)을 기억. rest(theta): 덜 기운 그릇의 처음 기울기"""
+    def wrap(lip, theta, c, *a, **kw):
+        before = {o.name for o in bpy.data.objects}
+        out = fn(lip, theta, c, *a, **kw)
+        VESSEL.clear()
+        VESSEL.update(fn=fn, lip=lip, theta=theta, a=a, kw=kw, rest=rest(theta), objs=[o for o in bpy.data.objects if o.name not in before])
+        return out
+    return wrap
+
+
+build_pour_pitcher = tracked(build_pour_pitcher, lambda th: th - 38.0)
+build_pour_kettle = tracked(build_pour_kettle, lambda th: 2.0)
+build_pour_bottle = tracked(build_pour_bottle, lambda th: 50.0)
+
+
+def px_box(objs, pad=36):
+    """물건들이 화면(SHOT_RES)에서 차지하는 상자 (x0, y0, x1, y1): 테두리 상자 꼭짓점으로(넉넉하게)"""
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    pts = []
+    for ob in objs:
+        ev = ob.evaluated_get(dg)
+        pts += [ob.matrix_world @ Vector(cn) for cn in ev.bound_box]
+    return frame_rect(pts, pad)
+
+
+def border(box_):
+    x0, y0, x1, y1 = box_
+    W, H = SHOT_RES
+    r = scene.render
+    r.use_border = True
+    r.use_crop_to_border = False
+    r.border_min_x, r.border_max_x = x0 / W, x1 / W
+    r.border_min_y, r.border_max_y = (H - y1) / H, (H - y0) / H
+
+
+def cam_only(keep):
+    """keep 만 카메라에 보이게(나머지는 그림자 · 비침에만). 돌려줌: 되돌리기 함수"""
+    keep = {o.name for o in keep}
+    saved = {o.name: o.visible_camera for o in scene.objects}
+    for o in scene.objects:
+        o.visible_camera = o.name in keep
+    def undo():
+        for o in scene.objects:
+            if o.name in saved:
+                o.visible_camera = saved[o.name]
+    return undo
+
+
+def tilt_plate(path, samples):
+    """배경판 자리에서: 그릇 없는 배경판({배경판}_bare) + 덜 기운 그릇 TILT_N 장({배경판}_v0…, 투명 바탕)"""
+    stem = path[:-4]
+    objs = [o for o in VESSEL['objs'] if not o.hide_render]
+    for o in objs:
+        o.visible_camera = False
+    render(stem + '_bare.png', SHOT_RES, samples, raw=True)
+    for o in objs:
+        o.visible_camera = True
+        o.hide_render = True  # 굳은 그릇은 잠깐 빼고
+    lip, th, rest = VESSEL['lip'], VESSEL['theta'], VESSEL['rest']
+    angles = [round(rest + (th - rest) * i / TILT_N, 2) for i in range(TILT_N)]
+    sets, boxes = [], []
+    for ang in angles:
+        before = {o.name for o in bpy.data.objects}
+        VESSEL['fn'](lip, ang, 'tilt_tmp', *VESSEL['a'], **VESSEL['kw'])
+        new = [o for o in bpy.data.objects if o.name not in before]
+        for o in new:  # 피처 안의 우유: 아직 붓지 않아 주둥이 끝보다 조금 아래까지(우유병은 그대로: 낮추면 거꾸로 든 병이 비어 보임)
+            if o.hide_render and o.name.startswith('PITP_cut'):
+                o.location.z = lip[2] - 0.006 - o.dimensions.z / 2
+        vis = [o for o in new if not o.hide_render]
+        boxes.append(px_box(vis))
+        for o in vis:
+            o.hide_render = True
+        sets.append((new, vis))
+    box_ = (min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes))
+    for i, (new, vis) in enumerate(sets):
+        for o in vis:
+            o.hide_render = False
+        undo = cam_only(vis)
+        border(box_)
+        render(f'{stem}_v{i}.png', SHOT_RES, 256, transparent=True, raw=True)
+        undo()
+        for o in vis:
+            o.hide_render = True
+    scene.render.use_border = False
+    for new, vis in sets:
+        for o in new:
+            bpy.data.objects.remove(o, do_unlink=True)
+    for o in objs:
+        o.hide_render = False
+    with open(stem + '_tilt.json', 'w', encoding='utf-8') as fp:
+        json.dump({'rect': [box_[0], box_[1], box_[2] - box_[0], box_[3] - box_[1]], 'angles': angles, 'pour': th}, fp)
+    log('덜 기운 그릇', os.path.basename(stem), angles)
+
+
+def tilt_frames(sdir, sid, rect, levels, build, samples, plate):
+    """프레임 자리에서: 굳은 그릇이 보이는 곳만 그릇 없이 단계마다({컷}_p{단계}, 줄기 없음)"""
+    objs = [o for o in VESSEL['objs'] if not o.hide_render]
+    vx0, vy0, vx1, vy1 = px_box(objs)
+    x0, y0, x1, y1 = rect
+    box_ = (max(x0, vx0), max(y0, vy0), min(x1, vx1), min(y1, vy1))
+    meta = {'plate': plate or f'{sid}_plate', 'levels': levels}
+    if box_[2] > box_[0] and box_[3] > box_[1]:
+        for o in objs:
+            o.visible_camera = False
+        border(box_)
+        for k in range(levels):
+            clear_dyn()
+            build(k, k / (levels - 1), False)
+            render(os.path.join(sdir, f'{sid}_p{k:02d}.png'), SHOT_RES, samples, raw=True)
+        scene.render.use_border = False
+        for o in objs:
+            o.visible_camera = True
+        meta['patch'] = [box_[0], box_[1], box_[2] - box_[0], box_[3] - box_[1]]
+        meta['frame'] = [x0, y0, x1 - x0, y1 - y0]
+    with open(os.path.join(sdir, f'{sid}_tilt.json'), 'w', encoding='utf-8') as fp:
+        json.dump(meta, fp)
+    log('그릇 없는 조각', sid, meta.get('patch'))
+
+
+# 끌어 붓는 컷(… tilt 에서 셋째 인자가 없으면 모두): 붓기 · 물 붓기(잔마다) · 피처에 우유 붓기 · 뜸 붓기
+TILT_SHOTS = ('pour', 'pour_tint', 'pour_glass', 'pour_glass_tint', 'pour_paper', 'pour_plastic',
+              'water', 'water_barley', 'water_yuja', 'water_glass', 'water_glass_barley', 'water_glass_yuja',
+              'water_paper', 'water_paper_mix', 'water_plastic', 'milk_in', 'bloom')
+
+
+# 얼음 담기를 끌어서(… drag_ice): 컵 왼쪽 작업대에 얼음 통, 통을 눌러 국자로 떠서 컵까지 끌어다 놓음
+def build_ice_bucket(at, c, r=0.05, h=0.085):
+    """얼음 통: 작은 스테인리스 통에 얼음이 가득(위로 조금 솟음)"""
+    x, y, z = at
+    prof = [(0.0, 0.0), (r - 0.004, 0.0), (r, 0.004), (r + 0.004, h - 0.002), (r + 0.0055, h), (r + 0.004, h + 0.002),
+            (r + 0.002, h + 0.001), (r - 0.003, 0.006), (0.0, 0.006)]
+    lathe('BKT_body', prof, M['steel'], at, c)
+    rnd = random.Random(3)
+    k = 0
+    for zz, n, rr in ((h - 0.034, 6, 0.024), (h - 0.014, 8, 0.027), (h + 0.004, 5, 0.019)):
+        for i in range(n):
+            a = 2 * math.pi * i / n + rnd.uniform(-0.3, 0.3)
+            q = rr * (0.45 + 0.55 * rnd.random())
+            box(f'BKT_ice{k}', (ICE, ICE, ICE), (x + q * math.cos(a), y + q * math.sin(a), z + zz + rnd.uniform(-0.002, 0.002)), M['ice'], c,
+                bev=0.0045, segs=3, rot=(rnd.uniform(-0.5, 0.5), rnd.uniform(-0.5, 0.5), rnd.uniform(0, math.pi)))
+            k += 1
+
+
+def build_scoop(at, c):
+    """얼음 국자: 작은 스테인리스 컵 + 오른쪽 위로 뻗은 손잡이, 얼음 세 개(뜬 채로)"""
+    x, y, z = at
+    prof = [(0.0, 0.0), (0.019, 0.0), (0.023, 0.003), (0.025, 0.03), (0.026, 0.032), (0.0245, 0.0325), (0.0225, 0.0045), (0.0, 0.003)]
+    lathe('SCP_bowl', prof, M['steel'], at, c)
+    tube('SCP_handle', [(x + 0.023, y, z + 0.022), (x + 0.055, y, z + 0.036), (x + 0.092, y, z + 0.05)], 0.0042, M['steel'], c)
+    for i, (dx, dy, zz, rz) in enumerate(((-0.008, -0.004, 0.014, 20), (0.008, 0.004, 0.016, -25), (0.0, -0.001, 0.034, 50))):
+        box(f'SCP_ice{i}', (ICE, ICE, ICE), (x + dx, y + dy, z + zz), M['ice'], c, bev=0.0045, segs=3, rot=(0.2 * i, -0.15, math.radians(rz)))
+    return (x, y, z + 0.03)  # 쥐는 곳(그림의 기준점): 얼음 가운데
+
+
+def drag_ice(sdir, plastic=False):
+    """얼음 담기를 끌어서: 얼음 통을 둔 배경판(ice_drag_plate · ice_plastic_drag_plate) + 얼음 뜬 국자(투명 바탕) + {컷}_drag.json"""
+    sid = 'ice_plastic' if plastic else 'ice'
+    if plastic:
+        plastic_scene('ice_plastic_static')
+        gx, gy, gz = PLASTIC_AT
+        rim, mouth_r, bx = PLASTIC_RIM, 0.046, -0.135
+    else:
+        glass_scene('ice_static')
+        gx, gy, gz = GLASS_AT
+        rim, mouth_r, bx = 0.1255, 0.037, -0.125
+    c = sid + '_drag_static'
+    fresh(c)
+    build_ice_bucket((gx + bx, gy + 0.03, 0.0), c)
+    show_only((sid + '_static', c, 'shot_dyn'))
+    render(os.path.join(sdir, f'{sid}_drag_plate.png'), SHOT_RES, 384)
+    bucket = px_box(list(coll(c).objects), pad=10)
+    # 국자: 컵 바로 앞 · 컵 높이 가운데쯤에 떠 있는 모습(국자만 렌더해 손가락을 따라 옮기는 그림. 컵 위는 그림 위 끝에 걸려 잘림)
+    sc = sid + '_scoop_static'
+    fresh(sc)
+    grip = build_scoop((gx - 0.004, gy - 0.08, gz + rim * 0.5), sc)
+    for o in coll(sc).objects:
+        o.hide_render = False
+    sbox = px_box(list(coll(sc).objects), pad=16)
+    undo = cam_only(list(coll(sc).objects))
+    border(sbox)
+    render(os.path.join(sdir, f'{sid}_scoop.png'), SHOT_RES, 256, transparent=True)
+    scene.render.use_border = False
+    undo()
+    for o in list(coll(sc).objects):
+        bpy.data.objects.remove(o, do_unlink=True)
+    scene.render.resolution_x, scene.render.resolution_y = SHOT_RES
+    bpy.context.view_layer.update()
+    W, H = SHOT_RES
+
+    def px(q):
+        v = world_to_camera_view(scene, cam, Vector(q))
+        return [round(v.x * W), round((1 - v.y) * H)]
+    a, m0, m1 = px(grip), px((gx, gy, gz + rim)), px((gx + mouth_r, gy, gz + rim))
+    meta = {'plate': f'{sid}_drag_plate', 'scoop': [sbox[0], sbox[1], sbox[2] - sbox[0], sbox[3] - sbox[1]], 'grip': a,
+            'bucket': [bucket[0], bucket[1], bucket[2] - bucket[0], bucket[3] - bucket[1]], 'mouth': [m0[0], m0[1], abs(m1[0] - m0[0])]}
+    with open(os.path.join(sdir, f'{sid}_drag.json'), 'w', encoding='utf-8') as fp:
+        json.dump(meta, fp)
+    log('얼음 끌기', sid, meta)
+
+
 ALL = ('machine', 'mug', 'pitcher', 'tamper', 'shot')
-modes = ['full', 'bg', 'extract', 'sprites'] if MODE == 'all' else [MODE]  # 물건 그림은 보이기 설정을 바꾸므로 맨 끝
+modes =['full', 'bg', 'extract', 'sprites'] if MODE == 'all' else [MODE]  # 물건 그림은 보이기 설정을 바꾸므로 맨 끝
 blend = os.path.join(OUT, 'bench_test.blend')
 bpy.ops.wm.save_as_mainfile(filepath=blend, compress=True)
 log('저장', blend)
@@ -3585,6 +3805,19 @@ for mode in modes:
         os.makedirs(sdir, exist_ok=True)
         for sid in (ARGS[2] if len(ARGS) > 2 else ','.join(SHOTS)).split(','):
             SHOTS[sid](sdir, mode == 'shots_preview')
+    elif mode == 'tilt':
+        # 끌어 붓기의 덜 기운 그릇 · 그릇 없는 배경판 · 조각(셋째 인자: 컷 함수 이름, 없으면 TILT_SHOTS 모두) 예) ... -- assets/_src/blender tilt pour
+        sdir = os.path.join(OUT, 'shots')
+        os.makedirs(sdir, exist_ok=True)
+        TILT = True
+        for sid in (ARGS[2] if len(ARGS) > 2 else ','.join(TILT_SHOTS)).split(','):
+            SHOTS[sid](sdir, False)
+        TILT = False
+    elif mode == 'drag_ice':
+        sdir = os.path.join(OUT, 'shots')
+        os.makedirs(sdir, exist_ok=True)
+        drag_ice(sdir)
+        drag_ice(sdir, plastic=True)
     elif mode == 'sprites':
         os.makedirs(os.path.join(OUT, 'sprites'), exist_ok=True)
         jobs = [('obj_machine', ('machine',), (1600, 1200)), ('cup_mug_americano', ('mug',), (1024, 1024)),
