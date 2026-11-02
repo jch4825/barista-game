@@ -113,13 +113,16 @@ export function showTitle() {
   const menu = h('nav', { class: 'tt-menu', 'aria-label': '처음 화면 메뉴' });
   if (p && cpEp) {
     menu.append(menuBtn('play', '이어하기', `${cpEp.label} · ${cpEp.title}`, () => nav.go('play', cpEp.id, { resume: true }), 'primary'));
-    // 이어 하기가 있을 때만: 봄 1일부터 다시(2026-11-01 사용자). 묻고 나서 이번 해를 처음부터(store.restartYear)
-    menu.append(menuBtn('repeat', '처음부터', `${EPISODES[0].label} · ${EPISODES[0].title}부터 다시`, restartFromTop));
+    // 봄 1일부터 다시(2026-11-01 사용자). 묻고 나서 이번 해를 처음부터(store.restartYear)
+    menu.append(restartBtn());
   } else if (p && firstUndone) {
     const done = EPISODES.some((e) => store.isDone(e.id));
     menu.append(menuBtn('play', done ? '다음 이야기' : '시작하기', `${firstUndone.label} · ${firstUndone.title}`, () => nav.go('play', firstUndone.id), 'primary'));
+    // '다음 이야기'일 때도 처음부터(2026-11-02 사용자: 이어하기가 아닐 때는 처음부터 단추가 없었음)
+    if (done) menu.append(restartBtn());
   } else if (endingWaits) {
     menu.append(menuBtn('star', '엔딩 보기', `${ENDING.label} · ${ENDING.title}`, () => nav.go('play', ENDING.id), 'primary'));
+    menu.append(restartBtn());
   } else if (cleared) {
     menu.append(menuBtn('calendar', '달력', ENDING.notice.title, () => nav.go('hub'), 'primary'));
   } else if (!p) {
@@ -169,10 +172,13 @@ export function showTitle() {
 }
 
 /** 처음부터: 묻고 나서 이번 해를 봄 1일부터(마친 날만 다시, 단골과의 관계 · 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
+/** [처음부터]: 이번 해를 봄 1일부터 다시(관계 · 성장 · 모은 것은 남음) */
+const restartBtn = () => menuBtn('repeat', '처음부터', `${EPISODES[0].label} · ${EPISODES[0].title}부터 다시`, restartFromTop);
+
 async function restartFromTop() {
   const ok = await ov.confirm({
     text: '처음부터 다시 할까요?',
-    detail: `${EPISODES[0].label}부터 다시 시작해요. 단골과의 관계 · 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
+    detail: `${EPISODES[0].label}부터 다시 시작해요. 단골과의 관계 · 지은의 성장 · 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
     yes: '처음부터', no: '아니요',
   });
   if (!ok) return;
