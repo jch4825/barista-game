@@ -3,7 +3,7 @@
  * → "천천히 해도 돼요. 대신 정확하게." → 오후 비, 흠뻑 젖은 도 씨(대응 D2) → 비가 와도 아이스 아메리카노
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, seen, term, motion, face, emote, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, mini, respond, seen, term, motion, face, emote, end, info, cg } from '../../core/dsl.js';
 
 export default {
   id: 'spring_4',
@@ -80,6 +80,15 @@ export default {
         { who: 'do', say: '늘 마시는 걸로요. 여기서 마셔요.', menu: 'americano', temp: 'iced', togo: false, thanks: '이거 마시면 다시 걸을 힘이 나요.' },
       ],
     }),
+    // 도 씨의 의외성(2026-11-02 사용자 "의외성 장면 쓰기": 겉모습과 다른 면, 모든 학생에게 같음): 우편 가방 안쪽 주머니의 사탕
+    narr('창밖으로 노란 우비를 입은 아이들이 지나가다가, 도 씨를 보고 유리창에 얼굴을 붙인다.'),
+    narr('도 씨가 우편 가방 안쪽 주머니에서 사탕을 한 줌 꺼낸다. 문을 열고 아이들 손에 하나씩 쥐여 준다.'),
+    cg('do_candy'),
+    say('do', 'smile', '비 오는 날은 아이들 기분이 가라앉거든요. 이건 규정에는 없는 배달이에요.'),
+    say('jieun', 'surprised', '사탕을 늘 넣고 다니세요?'),
+    say('do', 'smile', '서른 해째예요. 월급에서 가장 꾸준히 나가는 게 사탕 값이에요.'),
+    think('늘 서서 급하게 마시는 도 씨의 가방에는, 편지 말고 아이들 몫도 들어 있었다.'),
+    cg(null),
     leave('do'),
     sfx('door'),
     narr('도 씨가 다시 빗속으로 나간다. 편지가 든 가방을 가슴에 꼭 안고서.'),

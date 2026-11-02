@@ -9,8 +9,8 @@
 
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
-| 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 105장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 37장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
+| 장면 그림(CG) | 새로 109장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
 | 블렌더 한 컷(손 동작) | 3가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
@@ -115,7 +115,7 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 
 ### 1.4 은주 — 아기 엄마 (id `eunju`)
 
-- 처음 나오는 날: 여름 3일 · 표정: normal + sad · smile · surprised · worried
+- 처음 나오는 날: 여름 3일 · 표정: normal + sad · smile · surprised · worried · nervous
 - 임시 초상 색: 옷 #E8B4C4 · 강조 #C2708A
 
 **① 설정화** `eunju_sheet` · 1:1
@@ -144,6 +144,7 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 | `eunju_smile` | smile | warm gentle smile, eyes softened |
 | `eunju_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
 | `eunju_worried` | worried | worried expression, eyebrows drawn together, small frown |
+| `eunju_nervous` | nervous | nervous expression, eyebrows drawn together, small sweat drop, holding something tightly in front of the chest |
 
 ### 1.5 수민 — 고3 학생 (id `sumin`)
 
@@ -379,7 +380,7 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 105장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
+- 새로 요청하는 109장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -492,6 +493,10 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 | 103 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
 | 104 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
 | 105 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
+| 106 | `do_candy` | 봄 · 도 씨의 사탕 주머니 | 봄 4일 | `do_sheet` · `hall_spring` |
+| 107 | `haesun_jar` | 봄 · 한 번에 열린 병뚜껑 | 봄 7일 | `haesun_sheet` · `jieun_sheet` · `hall_spring` |
+| 108 | `sumin_gull` | 가을 · 갈매기와 수민 | 가을 5일 | `jieun_sheet` · `sumin_sheet` · `hall_autumn` |
+| 109 | `kang_peekaboo` | 겨울 · 강 씨의 까꿍 | 겨울 4일 | `kang_sheet` · `eunju_sheet` · `hall_blackout` |
 
 ### 2.1 프롬프트
 
@@ -1618,6 +1623,49 @@ Scene: Early spring morning in front of the cafe: the OWNER (Korean man, 66, nea
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
+#### 106. `do_candy` · 봄 · 도 씨의 사탕 주머니
+
+- 나오는 날: 봄 4일 · 장면: 비 오는 날, 우비 입은 아이들에게 사탕을 · 참조: `do_sheet` · `hall_spring`
+
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
+New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
+Scene: Rainy spring afternoon at the cafe door: DO, the mail carrier, crouches slightly and hands small wrapped candies from the inner pocket of his postal bag to three little children in yellow raincoats; raindrops on the glass, warm light inside, his kind smile.
+Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
+```
+
+#### 107. `haesun_jar` · 봄 · 한 번에 열린 병뚜껑
+
+- 나오는 날: 봄 7일 · 장면: 꿈쩍 않던 딸기청 병뚜껑이 펑 · 참조: `haesun_sheet` · `jieun_sheet` · `hall_spring`
+
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
+Scene: Spring morning at the cafe counter: HAESUN, the small elderly woman, twists open a stubborn jar of strawberry syrup with one easy turn of her wrist and a calm smile, while JIEUN stares in surprise holding a kitchen towel; soft window light, blossoms outside.
+Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
+```
+
+#### 108. `sumin_gull` · 가을 · 갈매기와 수민
+
+- 나오는 날: 가을 5일 · 장면: 유리창의 그 갈매기, 지은 등 뒤로 숨은 수민 · 참조: `jieun_sheet` · `sumin_sheet` · `hall_autumn`
+
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
+New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
+Scene: Autumn afternoon inside the cafe: a chubby white seagull stands on the terrace railing and taps the window glass with its beak; SUMIN hides behind JIEUN at the counter, peeking out with wide nervous eyes, earphones hanging; JIEUN looks surprised. Gentle comedy, no sun rays.
+Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
+```
+
+#### 109. `kang_peekaboo` · 겨울 · 강 씨의 까꿍
+
+- 나오는 날: 겨울 4일 · 장면: 촛불 아래, 아기 앞에 쪼그려 앉은 강 씨 · 참조: `kang_sheet` · `eunju_sheet` · `hall_blackout`
+
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
+New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots; EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
+Scene: Blackout night in the candle-lit cafe: KANG, the big weathered old fisherman, crouches in front of a baby held by EUNJU and plays peekaboo with both rough hands, his face soft and silly; the baby laughs, EUNJU smiles in relief; warm candle and lantern light, snow at the window.
+Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
+```
+
 ## 3. 작업대 물건 시트 3 (`sheet_more`)
 
 - 풀 버전 메뉴(디카페인 · 핸드드립 · 믹스커피 · 보리차 · 유자차 · 딸기우유 · 녹차라테 · 코코아)와 포장 컵에 쓰는 물건입니다. 지금은 임시 그림(SVG)으로 섭니다.
@@ -1685,33 +1733,33 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 6. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2637줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2690줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
 | `sys` | 756 |
-| `narr` | 620 |
-| `think` | 282 |
+| `narr` | 641 |
+| `think` | 290 |
 | `owner` | 178 |
-| `jieun` | 126 |
-| `jian` | 72 |
+| `jieun` | 130 |
+| `jian` | 74 |
+| `do` | 69 |
 | `customer_f` | 69 |
-| `do` | 67 |
-| `haesun` | 63 |
-| `eunju` | 55 |
-| `kang` | 46 |
-| `han` | 46 |
-| `sumin` | 46 |
-| `noh` | 41 |
+| `haesun` | 65 |
+| `eunju` | 58 |
+| `han` | 50 |
+| `kang` | 48 |
+| `sumin` | 48 |
+| `noh` | 43 |
 | `geum` | 34 |
 | `customer` | 26 |
 | `agent` | 23 |
 | `dohyun` | 18 |
 | `han_daughter` | 18 |
 | `yeonwoo` | 16 |
+| `mom2` | 16 |
 | `student` | 15 |
-| `mom2` | 15 |
 | `actor` | 4 |
 | `young_fisher` | 1 |
 

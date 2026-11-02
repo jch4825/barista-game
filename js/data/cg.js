@@ -136,6 +136,11 @@ export const CGS = {
   eye_11: { ep: 'ending', title: '사장의 눈 11 · 먼 창의 불빛', ph: P('alley', 'morning', [], ['window', 'light'], '깜깜한 마을, 불이 켜진 창 하나', { night: true }) },
   // 덤 12번째 컷(재미 개편 3.2 웃음 줄기 '그 갈매기'의 끝): 사장님이 몰래 갈매기에게 빵을 줌
   eye_12: { ep: 'ending', title: '사장의 눈 덤 · 그 갈매기', ph: P('cafe_front', 'morning', ['owner'], ['bread'], '사장님이 몰래 갈매기에게 빵을 준다') },
+  // 단골의 의외성(2026-11-02 사용자 "의외성 장면 쓰기"): 겉모습과 다른 면
+  do_candy: { ep: 'spring_4', title: '봄 · 도 씨의 사탕 주머니', ph: P('hall', 'spring', ['do:smile'], ['hand'], '비 오는 날, 우비 입은 아이들에게 사탕을') },
+  haesun_jar: { ep: 'spring_7', title: '봄 · 한 번에 열린 병뚜껑', ph: P('hall', 'spring', ['haesun:smile', 'jieun:surprised'], ['hand'], '꿈쩍 않던 딸기청 병뚜껑이 펑') },
+  sumin_gull: { ep: 'autumn_5', title: '가을 · 갈매기와 수민', ph: P('hall', 'autumn', ['jieun:surprised', 'sumin:nervous'], ['window'], '유리창의 그 갈매기, 지은 등 뒤로 숨은 수민') },
+  kang_peekaboo: { ep: 'winter_4', title: '겨울 · 강 씨의 까꿍', ph: P('hall', 'blackout', ['kang:smile', 'eunju:smile'], ['light'], '촛불 아래, 아기 앞에 쪼그려 앉은 강 씨', { night: true }) },
   blackout_cafe_lit: { ep: 'winter_4', title: '겨울 · 불 켜진 카페', ph: P('hall', 'blackout', [], ['light'], '마을에서 불이 켜진 곳은 카페뿐', { night: true }) },
   // 해순 할머니: 힌트 장면 · 맞는 대응
   summer_tourist_chair: { ep: 'summer_2', title: '그 의자의 손님', ph: P('hall', 'summer', ['haesun:look', 'customer'], ['chair'], '관광객이 빈 의자에 앉는다') },
