@@ -36,6 +36,8 @@ let autoOn = false;
 let voicing = false; // 지금 줄의 목소리가 아직 나오는 중
 let queued = false;  // 목소리가 나오는 동안 누름: 말이 끝나면 넘김(한 번 더 누르면 바로)
 let lineNo = 0;
+let hiddenEmote = null; // CG 에 가려 무대에서 못 보인 이모트 { who, kind }: 그 사람이 말하는 동안이면 바로, 아니면 바로 다음 대사의 얼굴에
+let lineStarting = false; // 새 대사의 표정을 바꾸는 중(그 이모트는 새 얼굴에 띄움)
 const history = [];
 const lastFace = {}; // 무대에 없는 사람의 마지막 표정(대화창 얼굴 아이콘용)
 
@@ -128,6 +130,11 @@ export const dialogue = {
     autoOn = autoSetting !== 'off';
     refreshAutoBtn();
     bus.on('profile', () => { autoSetting = store.settings().auto; autoOn = autoSetting !== 'off'; refreshAutoBtn(); });
+    // CG 에 가려 무대에서 못 보인 이모트(stage.emote): 그 사람이 지금 말하는 중이면 대화창 얼굴에, 아니면 다음 대사 때
+    bus.on('emote:hidden', ({ who, kind }) => {
+      if (!lineStarting && current?.who === who && !box.classList.contains('is-hidden')) popEmote(faceEl, kind);
+      else hiddenEmote = { who, kind };
+    });
     bus.on('settings', (s) => {
       if (s.auto === autoSetting) return; // 다른 설정을 바꿀 때는 그대로
       autoSetting = s.auto;
@@ -158,7 +165,9 @@ export const dialogue = {
     const kind = b.kind || 'say';
     const who = kind === 'narr' || kind === 'sys' ? null : kind === 'think' ? 'jieun' : b.who;
     const prevFace = who ? (stage.faceOf(who) || lastFace[who] || 'normal') : null;
+    lineStarting = true;
     if (who && b.face) stage.setFace(who, b.face);
+    lineStarting = false;
     stage.focus(kind === 'say' || kind === 'think' ? who : null);
     const myLine = ++lineNo;
     bus.emit('dialogue:line');
@@ -175,9 +184,11 @@ export const dialogue = {
       faceEl.style.setProperty('--accent', CHARS[who]?.color || 'var(--main)');
       // 무대에 없는 사람은 대화창 얼굴 옆에 이모트
       if (b.face && FACE_EMOTE[b.face] && FACE_EMOTE[b.face] !== FACE_EMOTE[prevFace] && !stage.isOnStage(who)) popEmote(faceEl, FACE_EMOTE[b.face]);
+      else if (hiddenEmote?.who === who) popEmote(faceEl, hiddenEmote.kind); // CG 아래에서 못 보인 이모트
     } else {
       faceEl.replaceChildren();
     }
+    hiddenEmote = null; // 바로 다음 대사까지만
     nameEl.textContent = label;
     nameEl.hidden = !label;
     nameEl.style.setProperty('--accent', (who && CHARS[who]?.color) || 'var(--main)');

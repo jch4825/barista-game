@@ -114,6 +114,7 @@ svg { display: block; }
 #screen > div { position: absolute; inset: 0; }
 #layer-bg { z-index: 1; }
 #layer-stage { z-index: 2; }
+#layer-cg { z-index: 3; pointer-events: none; } /* 이벤트 CG · 칠판 글씨 · 가림막(stage.js): 인물 위, 메모 · 미니게임 · 대화창 아래 */
 #layer-memo { z-index: 4; pointer-events: none; }
 #layer-memo > * { pointer-events: auto; }
 #layer-task { z-index: 5; pointer-events: none; }

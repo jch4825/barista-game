@@ -601,14 +601,21 @@ body.theme-calm .lt-memo { background: #F6E3A0; }
 body.theme-calm .st-body, body.reduce-motion .st-body { animation: none; }
 #screen.fx-overload .stand { animation: jitter .18s linear infinite; }
 body.theme-calm #screen.fx-overload .stand, body.reduce-motion #screen.fx-overload .stand { animation: none; }
-#layer-stage.cg-on .pol, #layer-stage.cg-on .stand { opacity: 0; transition: opacity .4s; }
+/* CG 아래 인물: CG 가 다 들어온 뒤(.6초)에 숨김. 그 전에 숨기면 반쯤 들어온 CG 사이로 빈 배경이 비침.
+   새로 서는 인물은 곧바로 숨어 있음(전환이 없으니 등장 움직임도 0 → 0, 검수 13.39 11번). CG 가 나가면 곧바로 보임(CG 아래에서) */
+#layer-stage.cg-on .pol, #layer-stage.cg-on .stand { opacity: 0; transition: opacity 0s linear .6s; }
 
-/* ---------- 이벤트 CG ---------- */
-.bg-cg { position: absolute; inset: 0; z-index: 3; opacity: 0; transition: opacity .6s ease; }
-.bg-cg.is-on { opacity: 1; }
-.bg-cg img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* CG 가 떠 있는 동안은 배경 효과(fx 어둡게·세피아·흐림)와 카메라 확대가 CG 에 먹지 않게(CG 는 배경 층 안에 있음) */
-#layer-bg:has(.bg-cg.is-on) { filter: none !important; transform: none !important; }
+/* ---------- 이벤트 CG (#layer-cg: 무대 위 층이라 배경 · 인물을 함께 덮으며 들어옴. 배경 효과 · 카메라 확대도 먹지 않음) ---------- */
+.cg-pic { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
+.cg-pic.is-on { opacity: 1; }
+.cg-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* 가림막: 미니게임이 끝난 뒤 다음 장면을 이 아래에서 다 바꾼 다음 걷음(앞 장면 · 지난 대사가 다시 비치지 않게, 10번). 색은 미니게임 판과 같음 */
+.cg-cover { position: absolute; inset: 0; z-index: 9; background: #0B1C20; opacity: 0; transition: opacity .4s ease; }
+.cg-cover.is-on { opacity: 1; }
+.cg-cover.is-instant { transition: none; }
+/* 가림막 아래에서는 장면이 곧바로 바뀜(배경 엇갈림 · CG · 인물 등장 · 카메라 움직임 없이): 걷을 때 바뀌는 중인 모습이 보이지 않게 */
+#screen.is-snap :is(#layer-bg, #layer-stage, #layer-cg > :not(.cg-cover)), #screen.is-snap :is(#layer-bg, #layer-stage, #layer-cg > :not(.cg-cover)) * { transition: none !important; animation: none !important; }
+#screen.is-snap .chalk-text i { opacity: 1; }
 
 /* ---------- 감정 이모트 ---------- */
 .emote { position: absolute; z-index: 5; width: 110px; height: 110px; pointer-events: none; animation: emote-pop 1.3s cubic-bezier(.2, .9, .3, 1.4) forwards; }

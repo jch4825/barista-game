@@ -58,8 +58,10 @@ function newSession(ep) {
 /* 상태 저장·복원                                                        */
 /* ------------------------------------------------------------------ */
 function snapshot(s) {
+  const st = stage.getState();
+  if (s.cgOff) { st.cg = null; st.chalk = null; } // 걷기로 한 CG(flushCgOff 전)는 없는 것으로
   return {
-    stage: stage.getState(),
+    stage: st,
     memo: memo.getState(),
     time: hud.getTime(),
     place: hud.getPlace(),
@@ -79,6 +81,7 @@ function clearTask() {
 }
 
 function restore(s, snap) {
+  s.cgOff = false;
   tts.stop();
   ov.clearAll();
   clearTask();
@@ -161,17 +164,85 @@ function defaultHelp(b) {
 /* ------------------------------------------------------------------ */
 /* 비트 실행                                                             */
 /* ------------------------------------------------------------------ */
-async function runSub(s, list, w) {
-  for (const sb of list || []) await w(exec(s, sb, null));
+// 장면만 바꾸는 비트(학생이 누르거나 기다리지 않음). 이어진 것끼리 한 묶음으로 함(quietBatch)
+const QUIET = new Set(['bg', 'bgm', 'amb', 'sfx', 'show', 'enter', 'leave', 'face', 'camera', 'fx', 'earplugs', 'cg', 'time', 'place', 'label', 'set', 'seen', 'secret', 'today', 'memo', 'memoHi', 'term', 'stamp', 'checkpoint']);
+// 무대(배경 · 인물 · 카메라)를 바꾸는 비트. 표정은 넣지 않음(이미 서 있는 사람이라 CG 가 들어오는 동안 바뀌어도 됨)
+const STAGE_MOVE = new Set(['bg', 'show', 'enter', 'leave', 'camera']);
+// 미니게임 뒤 가림막을 걷지 않고 지나가는 비트: 이어지는 미니게임 · 대응(그 안의 비트가 정함) · 갈림길 · 끝
+const COVER_KEEP = new Set(['mini', 'respond', 'branch', 'jump', 'end']);
+// 걷기로 한 CG 를 그대로 두고 지나가는 비트: 대응(그 안의 비트가 정함) · 갈림길
+const CG_KEEP = new Set(['respond', 'branch', 'jump']);
+
+/**
+ * cg(null) 은 곧바로 걷지 않고, 학생이 볼 다음 비트 앞에서 걷음(s.cgOff). 그 사이의 장면 바꾸기(나가는 인물 · 배경 · 새 인물)는
+ * CG 아래에서 끝나서, 걷힐 때 앞 인물 · 앞 배경이 비치지 않음. 대응의 뒤 장면 끝의 cg(null) 처럼 묶음 밖으로 이어져도 같음(검수 13.39 11번)
+ */
+function flushCgOff(s) {
+  if (!s.cgOff) return;
+  s.cgOff = false;
+  stage.settle(); // 등장 · 퇴장 움직임은 끝난 모습으로
+  stage.setCg(null);
 }
 
-async function exec(s, b, index) {
+/** 비트를 기다린 뒤 되감기 · 나가기로 달라졌으면 그만둠(epoch) */
+function guard(s) {
   const E = s.epoch;
-  const w = async (p) => {
+  return async (p) => {
     const r = await p;
     if (s.epoch !== E) throw new Interrupt('stale');
     return r;
   };
+}
+
+/** 조건부 비트(onlyIf)가 돌지: 묶음의 첫 비트가 이미 정한 것은 그대로 */
+function willRun(s, b) {
+  if (!b.if) return true;
+  if (b.ifGroup && !b.ifFirst && s.ifGroups && b.ifGroup in s.ifGroups) return s.ifGroups[b.ifGroup];
+  return checkCond(b.if, (k) => store.flag(k), { album: store.album() });
+}
+
+/**
+ * 장면만 바꾸는 비트 묶음 seq[k..]을 한꺼번에(검수 13.39 11번):
+ *  - 묶음 끝에 CG 가 켜지고 무대도 바뀌면, CG 를 먼저 덮은 뒤 그 아래에서 배경 · 인물을 바꿈(인물이 잠깐 떴다가 CG 에 가려지지 않게)
+ *  - CG 가 꺼지는 것은 묶음이 끝난 뒤 학생이 볼 비트 앞에서(flushCgOff): 그 전의 바꾸기는 CG 아래에서
+ *  - 미니게임 뒤 가림막 아래에서는 그냥 차례로(가림막이 가림)
+ * top: 에피소드의 비트(번호가 저장 지점 · 라벨에 쓰임). 돌려줌: { next: 다음 비트 번호 }
+ */
+async function quietBatch(s, seq, k, top, w) {
+  let j = k;
+  while (j < seq.length && QUIET.has(seq[j].t)) j += 1;
+  const now = s.cgOff ? null : stage.cgId(); // 걷기로 한 CG 는 없는 것으로
+  let cg = now;
+  let moves = false;
+  for (let i = k; i < j; i++) {
+    const b = seq[i];
+    if (!willRun(s, b)) continue;
+    if (b.t === 'cg') cg = b.id || null;
+    else if (b.t === 'bg') cg = null; // 배경을 바꾸면 CG 가 꺼짐(stage.setBg)
+    if (STAGE_MOVE.has(b.t)) moves = true;
+  }
+  const hold = moves && !stage.isCovered() && cg && cg !== now ? cg : null;
+  if (hold) { s.cgOff = false; stage.setCg(cg); await w(stage.cgSettled()); } // CG 를 먼저 덮음(걷기로 한 앞 CG 위로)
+  s.cgHold = hold;
+  try {
+    for (let i = k; i < j; i++) await w(exec(s, seq[i], top ? i : null));
+  } finally {
+    s.cgHold = null;
+  }
+  return { next: j };
+}
+
+async function runSub(s, list, w) {
+  const seq = list || [];
+  for (let k = 0; k < seq.length;) {
+    if (QUIET.has(seq[k].t)) { k = (await quietBatch(s, seq, k, false, w)).next; continue; }
+    await w(exec(s, seq[k], null));
+    k += 1;
+  }
+}
+
+async function exec(s, b, index) {
+  const w = guard(s);
 
   // 조건부 비트(선택 기억). onlyIf 묶음은 첫 비트에서 한 번만 검사
   if (b.if) {
@@ -185,8 +256,12 @@ async function exec(s, b, index) {
     if (!ok) return undefined;
   }
 
+  // 미니게임 뒤 가림막: 학생이 볼 비트가 오면 걷음. 그 전의 장면 바꾸기는 가림막 아래에서 곧바로 됨(검수 13.39 10번)
+  if (stage.isCovered() && !QUIET.has(b.t) && !COVER_KEEP.has(b.t)) await w(stage.uncover());
+  if (s.cgOff && !QUIET.has(b.t) && !CG_KEEP.has(b.t)) flushCgOff(s);
+
   switch (b.t) {
-    case 'bg': await w(stage.setBg(b.id, b.variant)); return undefined;
+    case 'bg': await w(stage.setBg(b.id, b.variant, { keepCg: Boolean(s.cgHold || s.cgOff) })); return undefined;
     case 'bgm': audio.bgm(b.mood); return undefined;
     case 'amb': audio.ambience(b.kind, b.level || 1); return undefined;
     case 'sfx': audio.sfx(b.name); return undefined;
@@ -229,7 +304,16 @@ async function exec(s, b, index) {
     case 'schedule': dialogue.hide(); await w(ov.schedule(s.ep)); dialogue.show(); return undefined;
     case 'check': hud.checkStep(b.n); await w(ov.check(b.n, s.ep.schedule?.[b.n - 1])); return undefined;
     case 'meet': if (store.meet(b.who)) await w(ov.crewCard(b.who)); return undefined;
-    case 'cg': if (stage.setCg(b.id) && b.id) store.unlockPhoto(`cg_${b.id}`); return undefined;
+    case 'cg':
+      if (s.cgHold) { if (b.id && b.id === s.cgHold) store.unlockPhoto(`cg_${b.id}`); return undefined; } // 묶음(quietBatch)이 CG 를 맡음
+      if (!b.id) { // 걷기는 학생이 볼 다음 비트 앞에서(flushCgOff). 가림막 아래에서는 곧바로
+        if (stage.cgId() && !stage.isCovered()) s.cgOff = true;
+        else stage.setCg(null);
+        return undefined;
+      }
+      s.cgOff = false;
+      if (stage.setCg(b.id)) store.unlockPhoto(`cg_${b.id}`);
+      return undefined;
     case 'chalk': stage.chalk(b.text, { shaky: b.shaky }); await w(sleep(b.text ? Math.min(2600, 400 + String(b.text).length * 120) : 0)); return undefined;
     case 'seen': // 사장의 숨은 뒷받침: 알림 없이 기록만(PRD 5.6 ✅)
       store.setFlag('seen', { ...(store.flag('seen') || {}), [b.n]: true });
@@ -446,11 +530,18 @@ async function respondBeat(s, b, index, w) {
       choice: c.id, kind: c.kind, score: c.score, chosen: plain(fill(c.label)), replays, ms: Math.round(performance.now() - t0),
     });
     const fx = REACT[c.score] || REACT[0];
+    // 힌트 CG 가 떠 있으면 잠깐 걷어 그 사람의 반응(끄덕임 · 미소 · 오래 바라봄)이 보이게 함. CG 아래 인물은 숨어 있어 반응이 보이지 않았음(검수 13.39 12번).
+    // 반응 뒤에는 늘 CG 로 돌아감: 맞는 대응은 그 장면만의 CG(after 맨 앞), 나머지는 힌트 CG. 셋 다 같은 모양이라 CG 로 점수가 드러나지 않음(R-25)
+    flushCgOff(s);
+    const hintCg = stage.cgId();
+    const lift = Boolean(hintCg) && stage.isOnStage(b.who);
+    if (lift) { stage.setCg(null); await w(stage.cgSettled()); }
     if (fx.motion) stage.motion(b.who, fx.motion);
     if (fx.face) stage.setFace(b.who, fx.face);
     if (fx.emote) stage.emote(b.who, fx.emote);
     if (fx.sfx) audio.sfx(fx.sfx);
     await w(sleep(fx.ms));
+    if (lift && c.after?.[0]?.t !== 'cg') stage.setCg(hintCg);
     await runSub(s, c.after, w);
     // 지은의 성장(재미 개편 6장): 단골을 만난 것(기억 · 응대) + 기억 카드 '오늘 알게 된 것'.
     // 카드는 고른 대응과 관계없이 늘 받음(점수가 드러나지 않게, 원칙 1). 수첩의 단골 쪽에 남음
@@ -471,6 +562,11 @@ async function miniBeat(s, b, index, w) {
   save(s, index, id, snap);
   const fn = MINIGAMES[b.name];
   if (!fn) { console.warn('[runner] 없는 미니게임', b.name); return undefined; }
+  // 미니게임 판 아래를 가림막으로 덮어 둠(판과 함께 0.25초). 끝나고 판이 걷힐 때 앞 장면 · 지난 대사가 다시 비치지 않고,
+  // 다음 장면은 가림막 아래에서 다 바꾼 뒤 걷음(exec). 대화창은 비우고 다음 대사까지 숨김(big · finish 뒤 dialogue.show 에서도 지난 대사가 나오지 않게, 검수 13.39 10번)
+  dialogue.clear();
+  dialogue.hide();
+  stage.cover({ fade: true });
   // 그 날의 계절 = 손맛 단계(frame.js TIMING) · 오늘의 칠판(today: 같은 날의 미니게임이 함께 씀, 남은 얼음 · 우유가 이어짐)
   const r = await w(fn({ ...b, season: b.season || s.ep.season || null, today: b.today || s.today || null }));
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
@@ -499,7 +595,7 @@ async function loop(s) {
     s.beatSnap = snapshot(s); // 수동 저장(세이브 슬롯)은 '지금 비트가 시작된 순간'을 저장
     let r;
     try {
-      const p = exec(s, b, s.index);
+      const p = QUIET.has(b.t) ? quietBatch(s, s.ep.script, s.index, true, guard(s)) : exec(s, b, s.index);
       p.catch(() => {});
       r = await Promise.race([p, s.interrupt.p]);
     } catch (e) {
@@ -519,6 +615,7 @@ async function loop(s) {
     }
     if (r && r.end) return 'ended';
     if (r && r.jump !== undefined) { s.index = r.jump; continue; }
+    if (r && r.next !== undefined) { s.index = r.next; continue; }
     s.index += 1;
   }
   return 'ended';
