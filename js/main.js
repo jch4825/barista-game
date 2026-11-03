@@ -38,6 +38,7 @@ import * as grow from './core/grow.js';
 import { showSaves } from './screens/saves.js';
 
 let playing = false;
+let playTok = 0; // 이야기 도중 저장 칸을 불러오면 새 이야기가 먼저 시작되고, 끝난 옛 이야기가 뒤늦게 돌아옴
 
 /** resume: 자동 저장(이어하기)부터 · save: 세이브 슬롯에서 불러온 저장 데이터 */
 async function playEpisode(id, { resume = false, save = null } = {}) {
@@ -47,16 +48,21 @@ async function playEpisode(id, { resume = false, save = null } = {}) {
     regs: [...new Set(store.logs().filter((l) => l.type === 'respond').map((l) => l.who))],
     seasons: ['spring', 'summer', 'autumn', 'winter'].filter((x) => store.isDone(`${x}_7`)),
   } : {};
-  const ep = id === 'free' ? freeDay(store.free().day + 1, { album: store.album(), ...early }) : getEpisode(id);
+  // 이어 하기 · 저장 칸은 저장한 그날(free)을 다시 만듦. 다음 날 번호로 만들면 비트 번호가 다른 날과 어긋남(검수 13.39 7번)
+  const from = save || (resume ? store.checkpoint() : null);
+  const day = from?.ep === 'free' && from.free ? from.free : store.free().day + 1;
+  const ep = id === 'free' ? freeDay(day, { album: store.album(), ...early }) : getEpisode(id);
   if (!ep) { console.warn(`없는 이야기: ${id}`); nav.go('hub'); return; } // 빈 화면에 멈추지 않게 근무표로
   if (runner.isRunning()) runner.abort();
   closeAllScreens();
   hideTitle();
   audio.unlock();
+  const tok = ++playTok;
   playing = true;
   grow.markDay(); // 하루 끝 화면의 '오늘 오른 능력치'(지은의 성장)
   await preloadEpisode(ep); // 출근 중 화면: 그날 그림을 미리 받기(웹판)
-  const result = await runner.play(ep, { resume: save || (resume ? store.checkpoint() : null) });
+  const result = await runner.play(ep, { resume: from });
+  if (tok !== playTok) return; // 그사이 시작된 새 이야기의 playing(Esc 멈춤 · R 되감기)을 끄지 않게(검수 13.39 9번)
   playing = false;
   if (result.status !== 'ended') return;
   if (ep.id === ENDING.id) { await afterEnding(); return; }
@@ -76,6 +82,8 @@ async function playEpisode(id, { resume = false, save = null } = {}) {
 
 /** 자유 영업 하루가 끝나면: 날 번호를 올리고 하루 끝 화면 → [다음 날 열기] · 달력 · 처음 화면 */
 async function afterFreeDay(ep, result) {
+  // 마친 날의 자동 저장은 지움(이야기의 markDone 과 같음). 남겨 두면 다음 날 [이어하기]가 그날의 '마감'부터 시작함(검수 13.39 4번)
+  if (store.checkpoint()?.ep === 'free') store.clearCheckpoint();
   const f = store.free();
   const served = store.logs().filter((l) => l.ep === 'free' && l.type === 'mini' && (l.at || 0) >= Date.now() - (result.ms || 0) - 3000)
     .reduce((n, l) => n + (Array.isArray(l.cups) ? l.cups.length : 0), 0);

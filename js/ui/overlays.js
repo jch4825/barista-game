@@ -396,7 +396,8 @@ export const ov = {
 
   /* ---------- 확인 창 ---------- */
   /** say: 읽어 줄 말(기본은 text, '' 이면 읽지 않음) · detail: 화면에만 보이는 한 줄(학생 별명처럼 읽지 않을 것) */
-  confirm({ text, yes = '예', no = '아니요', say = text, detail = '' }) {
+  /** focus: 처음 초점('no' 기본, 지우기처럼 되돌릴 수 없는 일은 '아니요'에) · esc: Esc 로 닫을 때 돌려줄 값(기본 false = 아니요) */
+  confirm({ text, yes = '예', no = '아니요', say = text, detail = '', focus = 'no', esc = false }) {
     return new Promise((resolve) => {
       const y = bigBtn(yes, 'check', 'btn-main');
       const n = bigBtn(no, 'close');
@@ -404,10 +405,10 @@ export const ov = {
         h('div', { class: 'confirm-card' }, h('p', { text }), detail ? h('p', { class: 'confirm-detail', text: detail }) : null, h('div', { class: 'confirm-btns' }, n, y)));
       const close = mount(el, { host: modalLayer() });
       if (say) tts.speak(say, 'sys');
-      n.focus({ preventScroll: true });
+      (focus === 'yes' ? y : n).focus({ preventScroll: true });
       let offEsc = null;
       const done = (v) => { offEsc?.(); tts.stop(); close(); resolve(v); };
-      offEsc = bus.on('escape', () => done(false)); // Esc = 아니요 (아래 창이 닫히지 않게: screen.js)
+      offEsc = bus.on('escape', () => done(esc)); // Esc = 아니요 (아래 창이 닫히지 않게: screen.js)
       y.addEventListener('click', () => done(true), { once: true });
       n.addEventListener('click', () => done(false), { once: true });
     });

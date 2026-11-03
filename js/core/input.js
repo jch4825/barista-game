@@ -89,6 +89,8 @@ export const input = {
     });
 
     bus.on('settings', (s) => input.applyScan(s));
+    // 학생을 바꾸거나 기록을 불러오면 그 학생의 스캔 설정으로(앞 학생 설정으로 돌면 강조 없이 Space/Enter 만 가로챔, 검수 13.39 8번)
+    bus.on('profile', () => input.applyScan(store.settings()));
     input.applyScan(store.settings());
   },
 

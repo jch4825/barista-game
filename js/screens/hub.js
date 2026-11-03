@@ -56,8 +56,9 @@ function epCard(ep, today = false) {
     onclick: async (e) => {
       e.stopPropagation();
       if (resumable) {
-        const r = await ov.confirm({ text: `${ep.title}: 저장된 곳부터 이어서 할까요?`, yes: '이어하기', no: '처음부터' });
-        nav.go('play', ep.id, { resume: r });
+        // 처음 초점은 [이어하기], Esc 는 그만두기: '처음부터'는 저장된 곳을 덮어쓰므로 실수로 고르지 않게(검수 13.39 6번)
+        const r = await ov.confirm({ text: `${ep.title}: 저장된 곳부터 이어서 할까요?`, yes: '이어하기', no: '처음부터', focus: 'yes', esc: null });
+        if (r !== null) nav.go('play', ep.id, { resume: r });
       } else {
         nav.go('play', ep.id);
       }
@@ -107,21 +108,22 @@ function freeCard() {
   const f = store.free();
   const cp = store.checkpoint();
   const resumable = open && cp && cp.ep === 'free';
+  const day = resumable && cp.free ? cp.free : f.day + 1; // 이어 하면 저장한 그날(저장 칸으로 앞날을 불러왔을 수 있음)
   return h('button', {
     class: `hub-ep hub-free ${open ? '' : 'locked'} ${resumable ? 'resume' : ''}`,
     disabled: !open,
-    'aria-label': `자유 영업 ${f.day + 1}번째 날${open ? '' : ', 봄 7일을 마치면 열려요'}`,
+    'aria-label': `자유 영업 ${day}번째 날${open ? '' : ', 봄 7일을 마치면 열려요'}`,
     onclick: async (e) => {
       e.stopPropagation();
       if (resumable) {
-        const r = await ov.confirm({ text: '자유 영업: 저장된 곳부터 이어서 할까요?', yes: '이어하기', no: '처음부터' });
-        nav.go('play', 'free', { resume: r });
+        const r = await ov.confirm({ text: '자유 영업: 저장된 곳부터 이어서 할까요?', yes: '이어하기', no: '처음부터', focus: 'yes', esc: null });
+        if (r !== null) nav.go('play', 'free', { resume: r });
       } else nav.go('play', 'free');
     },
   },
   h('span', { class: `hub-thumb ${open ? '' : 'is-locked'}`, html: renderBg('hall', 'morning') }, open ? null : h('i', { class: 'hub-lock', html: ICON('lock') })),
   h('span', { class: 'hub-label', text: '자유 영업' }),
-  h('b', { class: 'hub-title', text: `${f.day + 1}번째 날` }),
+  h('b', { class: 'hub-title', text: `${day}번째 날` }),
   h('span', { class: 'hub-state', text: open ? (resumable ? '▶ 이어 하기' : f.served ? `▶ 문 열기 · 지금까지 ${f.served}잔` : '▶ 문 열기') : '🔒 봄 7일을 마치면 열려요' }));
 }
 

@@ -50,12 +50,16 @@ export function loop(step, speed = () => 1) {
 /**
  * [시작!] 버튼을 host 위에 띄우고 누를 때까지 기다림.
  * note: 버튼 아래 작은 글(예: '천천히 해도 괜찮아요')
+ * 단추 밖(어둡게 깐 장면)을 눌러도 시작: 대사를 넘기듯 화면을 누르는 학생이 멈춘 줄 알지 않게(작업대의 [시작!] 창과 같음, 검수 13.39 1번).
+ * 앞 대사를 넘기던 손이 바로 시작해 버리지 않게 잠깐(0.7초) 뒤부터. 쟁반은 단추만 누름(css 의 pointer-events)
  */
 export function startGate(host, { label = '시작!', note = '' } = {}) {
   const btn = h('button', { class: 'btn btn-big btn-main mg-go' }, h('i', { html: ICON('play') }), h('span', { text: label }));
   const wrap = h('div', { class: 'mg-gate' }, btn, note ? h('p', { text: note }) : null);
   host.append(wrap);
+  const shownAt = performance.now();
   setTimeout(() => btn.focus({ preventScroll: true }), 60);
+  wrap.addEventListener('click', () => { if (performance.now() - shownAt > 700) btn.click(); }); // 단추는 누름을 위로 보내지 않음
   return new Promise((resolve) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();

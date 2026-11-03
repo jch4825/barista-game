@@ -101,9 +101,14 @@ export async function rush(opts = {}) {
     const e = el.getBoundingClientRect();
     return { x: (e.left + e.width / 2 - r.left) / k2, y: (e.top + e.height / 2 - r.top) / k2 };
   };
+  // 턴 방식: 시계 없이 한 장씩, 이만큼 처리하면 끝(도시 카페도 끝은 와르르). 아래 띠는 시간 대신 처리한 만큼 참
+  const goal = kind === 'city' ? 8 : 6;
   const paint = () => {
     if (kind === 'gull') count.textContent = `맞힌 횟수 ${Math.min(cleared, th.hits)} / ${th.hits}`;
-    else count.textContent = kind === 'cafe' ? `처리한 주문 ${cleared} · 사장님이 받은 주문 ${helped}` : `처리한 주문 ${cleared} · 남은 주문 ${live.size}`;
+    else if (turn) {
+      count.textContent = `처리한 주문 ${cleared} · 남은 주문 ${Math.max(0, goal - cleared)}`;
+      timeBar.style.setProperty('--t', String(Math.min(1, cleared / goal)));
+    } else count.textContent = kind === 'cafe' ? `처리한 주문 ${cleared} · 사장님이 받은 주문 ${helped}` : `처리한 주문 ${cleared} · 남은 주문 ${live.size}`;
   };
 
   /* ---- 주문 종이(city · cafe) ---- */
@@ -150,8 +155,7 @@ export async function rush(opts = {}) {
     cleared += 1;
     paint();
     if (turn) {
-      if (kind === 'city' && cleared >= 8) finish();
-      else if (kind === 'cafe' && cleared >= 6) finish();
+      if (cleared >= goal) finish();
       else addSlip();
     }
     focusNext();
@@ -270,9 +274,9 @@ export async function rush(opts = {}) {
   if (!stopped() && !over) {
     started = true;
     if (kind !== 'gull') { addSlip(); if (!turn) addSlip(); }
-    if (turn && kind === 'gull') {
-      // 턴 방식: 갈매기는 누를 때만 자리를 옮김(시간 제한 없음)
-    } else curLoop = loop(step, () => (auto ? 4 : 1));
+    // 턴 방식은 시계를 돌리지 않음: 종이는 누를 때마다 다음 한 장(tapSlip), 갈매기는 누를 때만 자리를 옮김.
+    // 시계를 돌리면 저절로 생기는 종이 · 사장님이 받아 가는 종이가 겹쳐 남은 주문이 줄지 않음(검수 13.39 3번)
+    if (!turn) curLoop = loop(step, () => (auto ? 4 : 1));
     if (auto && turn) {
       (async () => {
         while (!over && !stopped()) {

@@ -1773,10 +1773,10 @@ export async function brew(opts = {}) {
     // 알맞아요 칸에 들면 장면 위에 큰 표시("지금 떼요!")가 뜨고, 누르는 단추의 글자도 바뀜(넘치면 "넘쳐요!"). 박자(beats)는 원래의 원 표시
     // 2026-11-02 사용자: "지금 글자가 랜덤한 위치에 뜨면 그게 큐가 될 거 같은데!" · "만화나 웹툰의 효과음처럼 디자인" →
     // 알맞아요 칸에 들 때마다 장면 안 아무 곳에 웹툰 효과음 글자 "지금!"이 툭 튀어나옴(글자마다 통통, 반짝이 조금). 넘치면 "넘쳐!"
-    const nowSign = act === 'beats' ? null : h('div', { class: 'bw-now', 'aria-hidden': 'true' });
+    const nowSign = act === 'beats' ? null : h('div', { class: 'bw-pow', 'aria-hidden': 'true' });
     if (nowSign) view.append(nowSign);
     const SIGN = { good: turn ? '멈춰!' : '지금!', high: act === 'wait' ? '늦었어!' : '넘쳐!' };
-    const letters = (text) => [...text].map((ch, i) => h('span', { class: 'bw-now-ch', style: { '--i': String(i) }, text: ch }));
+    const letters = (text) => [...text].map((ch, i) => h('span', { class: 'bw-pow-ch', style: { '--i': String(i) }, text: ch }));
     const CUE = turn ? { good: act === 'wait' ? '지금!' : '지금 멈춰요!', high: '넘쳤어요' }
       : act === 'wait' ? { low: '기다려요…', good: '지금!', high: '늦었어요' }
       : { good: '지금 떼요!', high: '넘쳤어요' };

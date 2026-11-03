@@ -54,7 +54,7 @@ function info(data) {
   const line = data.line ? `${data.line.label ? `${data.line.label}: ` : ''}${data.line.text}` : '';
   return {
     ep,
-    title: ep ? `${ep.label} · ${ep.title}` : data.ep,
+    title: ep ? `${ep.label} · ${ep.title}` : data.ep === 'free' ? `자유 영업${data.free ? ` · ${data.free}번째 날` : ''}` : data.ep,
     where: [snap.place, snap.time].filter(Boolean).join(' · '),
     line: line.length > 44 ? `${line.slice(0, 43)}…` : line,
     bg: snap.stage?.bg ? renderBg(snap.stage.bg, snap.stage.variant) : '',
@@ -140,7 +140,7 @@ export function showSaves(mode = 'load') {
   async function load(data) {
     const running = runner.isRunning();
     if (!(await ov.confirm({ text: running ? SAVE_SAY.loadAsk : SAVE_SAY.loadAskTitle, yes: '불러오기', no: '그만두기' }))) return;
-    if (!getEpisode(data.ep)) return;
+    if (data.ep !== 'free' && !getEpisode(data.ep)) return; // 자유 영업은 그날을 main.js 가 만듦(free)
     reload = false;
     closeAllScreens();
     if (running) runner.abort();

@@ -33,6 +33,8 @@ export function showPause() {
         if (await ov.confirm({ text: '달력으로 나갈까요? 지금까지 한 것은 저장돼요.', yes: '나가기', no: '계속하기' })) {
           scr.close();
           runner.abort();
+          // 달력 아래에 처음 화면을 깔아 둠(하루 끝의 [달력]과 같음). 그냥 열면 달력을 닫을 때 멈춘 이야기 화면에 갇힘(검수 13.39 5번)
+          nav.go('title');
           nav.go('hub');
         }
       }),

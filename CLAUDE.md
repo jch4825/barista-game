@@ -138,8 +138,9 @@ assets/               music/(배경음악 10, 공개) · stand/(61, 지은 6·�
   - **대본**: 날마다 첫 place 뒤 `info('오늘의 칠판', …)`(Q-43). 웃음 줄기(그 갈매기 봄 · 여름 · 가을 · 겨울 + 엔딩 덤 12번째 컷 `EYES_BONUS`, 금 씨의 아아, 푸슉 머신). 단골의 의외성 장면 8(Q-51, `docs/redesign.md` 3.3: 도 씨 봄 4 · 해순 봄 7 · 한 씨 여름 7 · 지안 가을 1 · 수민 가을 5 · 노 씨 겨울 2 · 강 씨 겨울 4 · 은주 겨울 5, 모든 학생에게 같음, 주석 '의외성'). 몰림 시간 봄 5 · 여름 6 · 가을 4 · 겨울 5일. 단골 대응 40개에 기억 카드(`regulars.js` 의 `card`, 대응 뒤 늘 받음). 자유 영업은 봄 7일을 마치면 열림(엔딩 전에는 만난 단골 · 마친 계절만).
   - 웃음은 판을 키우다 뒤집기로만, **사장님의 손떨림 · 지은의 느림은 웃음거리로 쓰지 않음**. 파일로만 있는 효과음(`poof` · `boom` · `squawk` · `bus`)은 `audio.js` 의 `SFX_NAMES` 에 더해야 검사 통과.
 - 화면 가득한 장면 미니게임(`frame({ cls: 'mg-scene …' })`: 쟁반 · 둘러보기 · 순서대로)이 열린 동안은 `body.mg-scene-open`으로 앞 대사의 대화창을 숨김(대화창이 아래 단추를 가리고 누름을 가로채던 버그, 2026-10-31). 작업대는 `body.brew-open`.
+- 몰림 · 버스 · 쟁반의 [시작!]은 `arcade.js` `startGate`(`.mg-gate`, z 5 = 머리글 아래라 [설명 듣기] · [그만하기]는 시작 전에도 눌림. 몰림 · 버스는 장면 가운데에 크게 뜨고 어둡게 깐 장면을 눌러도 시작(0.7초 뒤부터), 쟁반은 길 위에 단추만). 장면 미니게임의 그림 · 판은 absolute 라 새 단추 · 판도 자리와 z-index 를 정해야 그 위에 보임(검수 13.39 1번: 자리가 없어 [시작!]이 장면 아래에 깔렸음). 새 class 이름은 이미 있는지 먼저 찾음('지금!' 글자 `bw-pow` 와 [지금!] 단추 `bw-now` 가 같은 이름이라 단추가 투명했음, 2번).
 - 시간 막대(`js/ui/timer.js`)는 한 번 멈추면 다시 시작하지 않고, 화면에서 사라지면 스스로 멈춥니다. 카드는 `cards.close()`가 막대·숫자키·입력 범위를 정리합니다.
-- Electron에서는 `window.prompt` 대신 `ov.prompt()`. 확인 창(`ov.confirm`·`ov.prompt`)은 맨 위 층 `#layer-modal`.
+- Electron에서는 `window.prompt` 대신 `ov.prompt()`. 확인 창(`ov.confirm`·`ov.prompt`)은 맨 위 층 `#layer-modal`. `ov.confirm` 은 첫 초점 '아니요' · Esc = false 가 기본이고, '아니요'가 되돌릴 수 없는 쪽인 물음(이어 하기 → 처음부터)은 `focus: 'yes', esc: null`(Esc = 그만두기, 검수 13.39 6번).
 - 끝 장면이 투명한 CSS 애니메이션(`forwards`)은 움직임 줄이기에서 아예 안 보입니다. `body.reduce-motion … { animation: none !important; }`로 멈춰 두고 타이머로 지웁니다.
 - 코드에 `tts.speak('새 문장')`을 넣으면 음성 파일이 없어 브라우저 음성으로 읽힙니다. 같은 문장을 `export-lines.mjs`의 `EXTRA`(또는 미니게임 `xxxLines()`)에 넣고 `npm run voices`.
 - 프로필에 목록·기록처럼 합쳐야 하는 새 칸(신뢰·앨범·몇 번째 해 등)을 만들면 `normalizeProfile`·`mergeProfiles`(`store.js`)에도 넣습니다.

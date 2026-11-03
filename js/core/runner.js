@@ -105,8 +105,11 @@ function addPoint(s, index, title, snap) {
   bus.emit('rewind-points', s.points.length);
 }
 
+// 자유 영업은 날마다 id 가 'free' 로 같아서 몇 번째 날인지(free)도 적어 둠: 다른 날의 비트 번호로 이어 가지 않게(검수 13.39 4번 · 7번)
+const dayOf = (ep) => (ep.free ? { free: ep.free } : {});
+
 function save(s, index, name, snap) {
-  store.setCheckpoint({ ep: s.ep.id, index, name, snapshot: snap || snapshot(s) });
+  store.setCheckpoint({ ep: s.ep.id, ...dayOf(s.ep), index, name, snapshot: snap || snapshot(s) });
   hud.saved();
 }
 
@@ -540,7 +543,7 @@ export const runner = {
     hud.setSchedule(ep.schedule, []);
     hud.setRewindEnabled(false);
     hud.show();
-    if (resume && resume.ep === ep.id) {
+    if (resume && resume.ep === ep.id && (resume.free ?? ep.free) === ep.free) {
       restore(s, resume.snapshot);
       s.index = resume.index;
       // 세이브 슬롯에서 불러온 경우: 이 에피소드에서 모은 도장·사진·말도 함께
@@ -569,6 +572,7 @@ export const runner = {
     const last = dialogue.history().slice(-1)[0] || null;
     return {
       ep: s.ep.id,
+      ...dayOf(s.ep),
       index: s.index,
       snapshot: s.beatSnap,
       stamps: [...s.stamps], photos: [...s.photos], terms: [...s.terms],
