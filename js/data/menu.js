@@ -623,6 +623,48 @@ export function skillFor(id, menu = null) {
   return zone || laps ? { ...s, ...(zone ? { zone } : {}), ...(laps ? { laps } : {}) } : s;
 }
 
+/* ------------------------------------------------------------------ */
+/* 블렌더 한 컷의 이름(작업대 brew.js 의 shotIdFor · 요청서 tools/export-requests.mjs 가 함께 씀) */
+/* ------------------------------------------------------------------ */
+const SHOT_CUP = { mug: '', glass: '_glass', paper: '_paper', plastic: '_plastic' };
+const SHOT_CUP_ACTS = new Set(['syrup', 'jam', 'powder', 'whisk', 'stir', 'steep']);
+// 맞는 이름의 컷이 없을 때 같은 손 동작의 컷(레시피에 없는 잔 · 잔과 온도가 어긋난 잔에서도 옛 임시 그림이 나오지 않게, 2026-11-01 사용자)
+const SHOT_FALLBACK = { jam: 'yuja', powder: 'cocoa', stir: 'cocoa' };
+/** 조작법 '드래그 활용'에서 붓는 그릇을 끌어 내려 기울이는 손 동작(그 컷에 shots.json 의 tilt 가 있어야 함, docs/recipes.md 6.11) */
+export const TILT_SKILLS = new Set(['pour', 'water', 'milk_in', 'bloom']);
+
+/**
+ * 손 동작 → 블렌더 한 컷 이름 후보(잔 · 온도 · 안에 든 것으로 고름, docs/recipes.md 6.6 · 6.7 · 6.10). 작업대는 shots.json 에 있는 첫 이름을 씀
+ *  - 붓기 pour{잔}_{latte|milk|색}, 물 붓기 water{잔}(에스프레소가 든 때 = 아메리카노) · water{잔}_{바탕}(보리차 · 유자차 · 믹스커피), 얼음 담기 ice(유리컵) · ice{잔}.
+ *    {잔}은 머그 = 없음, 유리컵 = _glass, 종이컵 = _paper, 플라스틱 컵 = _plastic
+ *  - 커피는 에스프레소와 디카페인(디카페인 라테도 라테 컷). 딸기청 · 말차 · 코코아가 든 잔은 그 색의 컷, 없으면 우유 컷
+ *  - 컵에 넣기 · 젓기 · 우리기(시럽 · 청 · 가루 · 말차 풀기 · 젓기 · 우리기): {동작}[_iced]_{바탕} → {동작}[_iced](따뜻한 잔 = 위에서 본 머그, 아이스 = 앞에서 본 유리컵).
+ *    포장 컵(또는 온도와 어긋난 매장 잔)은 {동작}{잔}_{바탕} 을 먼저 찾고, 없으면 같은 온도의 머그 · 유리컵 컷
+ *  - 잔과 온도가 어긋나거나 레시피에 없는 잔이어도 같은 손 동작의 컷으로(SHOT_FALLBACK). 임시 그림은 컷이 하나도 없을 때만
+ *  - 그 밖의 손 동작(샷 내리기 · 데우기 · 거품 · 갈기 · 누르기 …)은 손 동작 id 와 같은 이름
+ * soFar: 컵에 이미 든 재료. 돌려줌 { ids: 찾을 차례(빈 칸은 null), fit: 앞의 몇 칸이 이 잔 · 이 음료에 꼭 맞는 이름인지(그 뒤는 비슷한 컷으로 대신, 요청서가 셈) }
+ * shots.json 에 이 이름의 컷이 생기면 코드를 고치지 않아도 씁니다.
+ */
+export function shotNames(id, made, soFar = new Set()) {
+  const m = made || {};
+  const suf = SHOT_CUP[m.cup] ?? '';
+  const esp = soFar.has('espresso') || soFar.has('decaf');
+  const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || m.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
+  if (id === 'pour') return { ids: [tint ? `pour${suf}_${tint}` : null, `pour${suf}_${esp ? 'latte' : 'milk'}`, `pour_${esp ? 'latte' : 'milk'}`], fit: tint ? 1 : 2 };
+  if (id === 'water') return { ids: [esp ? `water${suf}` : `water${suf}_${m.base}`, `water${suf}`, 'water'], fit: 1 }; // 에스프레소가 없는 잔은 바탕 이름을 붙여, 없으면 그 잔의 물 붓기
+  if (id === 'ice') return { ids: [m.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'], fit: 1 };
+  if (!SHOT_CUP_ACTS.has(id)) return { ids: [id], fit: 1 };
+  const fam = m.temp === 'iced' ? '_iced' : '';
+  const other = fam ? '' : '_iced';
+  const fb = SHOT_FALLBACK[id];
+  const native = fam ? 'glass' : 'mug'; // {동작}[_iced] 컷의 잔
+  const own = m.cup in SHOT_CUP && m.cup !== native ? `${id}${suf}_${m.base}` : null; // 포장 컵(또는 온도와 어긋난 매장 잔)의 그 잔 컷
+  return {
+    ids: [own, `${id}${fam}_${m.base}`, `${id}${fam}`, `${id}${other}_${m.base}`, `${id}${other}`, fb ? `${id}${fam}_${fb}` : null, fb ? `${id}${other}_${fb}` : null],
+    fit: own ? 1 : 3,
+  };
+}
+
 /** 레시피 수첩·음성이 함께 쓰는 한 줄: '아메리카노. 아이스 또는 따뜻하게. 에스프레소, 물.' */
 export function recipeSpeech(id) {
   const r = RECIPES[id];

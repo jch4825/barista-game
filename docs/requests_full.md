@@ -12,7 +12,8 @@
 | 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 37장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 109장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
-| 블렌더 한 컷(손 동작) | 3가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
+| 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
+| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
@@ -1685,31 +1686,69 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 - 얼음 통(`obj_ice_bucket`) · 레시피 수첩(`obj_recipe_book`)은 `docs/추가 제작.md` 27 · 28번에 있습니다.
 
-## 4. 블렌더 한 컷 (손 동작)
+## 4. 새 놀이의 그림 (재미 개편)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja`. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
-게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7). 이름만 맞으면 코드를 고치지 않아도 됩니다.
+- 몰림 · 그 갈매기 쫓기 · 바닷가로 가는 버스 · 가게 꾸미기 · 앞치마의 그림입니다. 지금은 코드로 그린 임시 그림(SVG · 색 띠 · 아이콘)으로 섭니다.
+- 프롬프트 · 규칙은 `docs/image_requests.md` 8장에 있습니다(시트는 초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움, 버스 창밖은 좌우가 이어지는 그림).
+- 받은 그림은 `assets/flow/`에 두고 알려 주세요. `assets/_src/play/{id}.jpg`로 옮겨 넣으면 이 목록에서 빠집니다.
 
-| 손 동작 id | 이름 | 동작 | 쓰는 메뉴 | 알맞아요 칸 | 제안 장면 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `jam` | 청 떠 넣기 | D 박자 | 유자차 · 딸기우유 | 2번 | 청 병에서 숟가락으로 떠서 컵에 넣음(두 번) |
-| `powder` | 가루 떠 넣기 | D 박자 | 녹차라테 · 코코아 | 2번 | 가루 통에서 숟가락으로 떠서 컵에 넣음(두 번) |
-| `stir` | 젓기 | B 원 그리기 | 믹스커피 · 유자차 · 딸기우유 · 코코아 | 3바퀴 | 컵 속을 숟가락으로 젓기: 가루가 풀리는 정도 |
+| id | 무엇 | 비율 | 프롬프트 |
+| :--- | :--- | :--- | :--- |
+| `sheet_play` | 놀이 시트(그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 지은의 가방) | 1:1 | `docs/image_requests.md` 8.2 |
+| `bus_far` | 버스 창밖 ① 먼 바다(가장 뒤, 좌우가 이어짐) | 16:9 | `docs/image_requests.md` 8.3 |
+| `bus_hills` | 버스 창밖 ② 동산(가운데, 위쪽 절반은 초록 바탕) | 16:9 | `docs/image_requests.md` 8.3 |
+| `bus_window_frame` | 버스 창밖 ③ 버스 창틀(맨 앞, 유리 자리는 초록 바탕) | 16:9 | `docs/image_requests.md` 8.3 |
+| `sheet_deco` | 꾸미기 · 앞치마 시트 | 1:1 | `docs/image_requests.md` 8.4 |
 
-**I-28 포장 컵(종이컵 · 플라스틱 컵)** 🙋
+## 5. 블렌더 한 컷 (손 동작)
 
-- 지금 컷은 매장 잔(머그 · 유리컵)만 있습니다. 포장 주문의 얼음 담기 · 물 붓기 · 붓기는 임시 그림입니다(아이스 아메리카노 포장이 가장 많음).
-- 플라스틱 컵(아이스 포장): 유리컵 컷(`docs/recipes.md` 6.7)과 같은 카메라 · 같은 빛에서 컵만 바꿈 → `ice_plastic` · `water_plastic` · `pour_plastic_latte` · `pour_plastic_milk`.
-- 종이컵(따뜻한 포장): 속이 안 보이므로 위에서 조금 더 내려다본 구도(입구 속 음료 높이)를 먼저 정함 → `water_paper` · `pour_paper_latte` · `pour_paper_milk`.
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`js/data/menu.js`의 `shotNames`, 작업대 `brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7), 컵에 넣기 · 젓기 · 우리기는 `{동작}[_iced]_{바탕}`(포장 컵은 `{동작}{잔}_{바탕}`, 6.10). 이름만 맞으면 코드를 고치지 않아도 됩니다.
+아래 목록은 메뉴마다 온도 · 매장/포장 · 단계를 모두 따라가며 작업대가 고를 컷을 셈한 것입니다.
 
-**I-29 색 있는 우유 음료** 🙋
+### 5.1 컷이 없는 손 동작 (임시 그림으로 섬)
 
-- 딸기우유(분홍) · 녹차라테(초록) · 코코아(갈색)는 지금 하얀 우유 컷(`pour_milk` · `pour_glass_milk`)이 나옵니다.
-- 같은 컷에서 음료 색만 바꿈 → 유리컵(아이스) `pour_glass_strawberry` · `pour_glass_matcha` · `pour_glass_cocoa`, 머그(따뜻하게) `pour_matcha` · `pour_cocoa`(딸기우유는 아이스만).
+- 없습니다. 메뉴판의 모든 잔에서 손 동작마다 블렌더 컷이 나옵니다.
 
-## 5. 소리
+### 5.2 있으면 더 맞는 컷 🙋 (지금은 비슷한 컷이 나옴)
 
-### 5.1 효과음 · 환경음 (사서 쓰는 팩에서 잘라 넣기, `tools/audio/audio_map.mjs`)
+- 이 잔들도 지금 블렌더 컷이 나옵니다. 다만 다른 잔(포장 컵인데 머그 · 유리컵)이나 다른 음료(보리차 · 유자차인데 아메리카노)의 컷이라, 만들면 더 꼭 맞습니다. 급하지 않습니다(`docs/recipes.md` 6.10 🙋).
+- 만드는 법: 지금 나오는 컷과 같은 장면에서 잔만 바꿉니다. 종이컵은 `water_paper`, 플라스틱 컵은 `water_plastic`과 같은 카메라 · 빛(얼음 24개), 물 붓기는 음료 색만 그 바탕으로(보리차 = 호박색 · 티백, 유자차 = 청이 풀림).
+
+| 만들 컷 | 손 동작 | 쓰는 잔 | 지금 나오는 컷 |
+| :--- | :--- | :--- | :--- |
+| `syrup_paper_espresso` | 시럽 넣기 | 바닐라 라테 · 따뜻하게 · 종이컵 | `syrup` |
+| `syrup_plastic_espresso` | 시럽 넣기 | 바닐라 라테 · 아이스 · 플라스틱 컵 | `syrup_iced` |
+| `water_paper_barley` | 물 붓기 | 보리차 · 따뜻하게 · 종이컵 | `water_paper` |
+| `steep_paper_barley` | 우리기 | 보리차 · 따뜻하게 · 종이컵 | `steep` |
+| `water_plastic_barley` | 물 붓기 | 보리차 · 아이스 · 플라스틱 컵 | `water_plastic` |
+| `steep_plastic_barley` | 우리기 | 보리차 · 아이스 · 플라스틱 컵 | `steep_iced` |
+| `jam_paper_yuja` | 청 떠 넣기 | 유자차 · 따뜻하게 · 종이컵 | `jam_yuja` |
+| `water_paper_yuja` | 물 붓기 | 유자차 · 따뜻하게 · 종이컵 | `water_paper` |
+| `stir_paper_yuja` | 젓기 | 유자차 · 따뜻하게 · 종이컵 | `stir_yuja` |
+| `jam_plastic_yuja` | 청 떠 넣기 | 유자차 · 아이스 · 플라스틱 컵 | `jam_iced_yuja` |
+| `water_plastic_yuja` | 물 붓기 | 유자차 · 아이스 · 플라스틱 컵 | `water_plastic` |
+| `stir_plastic_yuja` | 젓기 | 유자차 · 아이스 · 플라스틱 컵 | `stir_iced_yuja` |
+| `powder_plastic_matcha` | 가루 떠 넣기 | 녹차라테 · 아이스 · 플라스틱 컵 | `powder_iced_matcha` |
+| `whisk_plastic_matcha` | 말차 풀기 | 녹차라테 · 아이스 · 플라스틱 컵 | `whisk_iced` |
+| `powder_paper_matcha` | 가루 떠 넣기 | 녹차라테 · 따뜻하게 · 종이컵 | `powder_matcha` |
+| `whisk_paper_matcha` | 말차 풀기 | 녹차라테 · 따뜻하게 · 종이컵 | `whisk` |
+| `jam_plastic_strawberry` | 청 떠 넣기 | 딸기우유 · 플라스틱 컵 | `jam_iced_strawberry` |
+| `stir_plastic_strawberry` | 젓기 | 딸기우유 · 플라스틱 컵 | `stir_iced_strawberry` |
+| `powder_paper_cocoa` | 가루 떠 넣기 | 코코아 · 따뜻하게 · 종이컵 | `powder_cocoa` |
+| `stir_paper_cocoa` | 젓기 | 코코아 · 따뜻하게 · 종이컵 | `stir_cocoa` |
+| `powder_plastic_cocoa` | 가루 떠 넣기 | 코코아 · 아이스 · 플라스틱 컵 | `powder_iced_cocoa` |
+| `stir_plastic_cocoa` | 젓기 | 코코아 · 아이스 · 플라스틱 컵 | `stir_iced_cocoa` |
+
+### 5.3 조작법 '드래그 활용'의 그림 (`docs/recipes.md` 6.11)
+
+- 붓는 컷에 덜 기운 그릇(`… tilt`)이 없으면 끌어 붓기는 되지만 그릇이 기울어 보이지 않고, 얼음 담기 컷에 얼음 통 · 국자(`… drag_ice`)가 없으면 터치 기반처럼 눌러서 담습니다.
+
+- 모두 있습니다.
+
+## 6. 소리
+
+### 6.1 효과음 · 환경음 (사서 쓰는 팩에서 잘라 넣기, `tools/audio/audio_map.mjs`)
 
 | 종류 | id | 쓰는 곳 | 바라는 소리 |
 | :--- | :--- | :--- | :--- |
@@ -1723,7 +1762,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | 환경음 | `kitchen` | 지금 대본에는 없음 | 주방 |
 | 환경음 | `classroom` | 지금 대본에는 없음 | 교실 |
 
-### 5.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)
+### 6.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)
 
 | mood | 쓰는 곳 | 느낌 · 악기 | 길이 |
 | :--- | :--- | :--- | :--- |
@@ -1731,7 +1770,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 - 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.
 
-## 6. 음성 (Supertonic, 내 PC)
+## 7. 음성 (Supertonic, 내 PC)
 
 - 읽어 줄 문장 2690줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
@@ -1763,7 +1802,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `actor` | 4 |
 | `young_fisher` | 1 |
 
-## 7. 넣은 뒤 할 일 (순서)
+## 8. 넣은 뒤 할 일 (순서)
 
 1. 그림: `npm run images`(스탠딩) → `python tools/face-boxes.py` → `npm run objects`(물건 시트) → `npm run assets`(배경 · CG · 컷) → `npm run credits`
 2. 새 그림의 제작 프롬프트를 `tools/credits/image_prompts.mjs`에 한 줄씩(제작 · 저작권 정보)

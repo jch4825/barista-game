@@ -34,7 +34,7 @@
  *    물 붓기(water: 에스프레소가 든 머그에 드립 주전자로 뜨거운 물, 크레마가 흩어짐). 물 붓기는 이 브랜치에서 손 동작(누르고 떼기)이라
  *    띠와 함께 차오르고, 저절로 붓는 경우(autoStep)에는 띠 · 단추 없는 확대 창에서 저절로 차오름(autoShot). 컷이 없으면 임시 그림
  *    유리컵(매장 · 아이스)은 얼음 담기(ice: 박자마다 얼음이 쌓임) · 찬물 붓기(water_glass) · 찬 우유 붓기(pour_glass_milk · pour_glass_latte).
- *    어떤 컷을 쓸지는 shotIdFor(잔 · 온도 · 안에 든 것, 이름 규칙은 그 함수의 주석과 docs/recipes.md 6.7)
+ *    어떤 컷을 쓸지는 shotIdFor(잔 · 온도 · 안에 든 것, 이름 규칙은 menu.js 의 shotNames 주석과 docs/recipes.md 6.7)
  *    만드는 법은 tools/blender/scene_bench.py(shots) → shots_post.py
  * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 동작을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기])
  *  · window.__mgBad(레시피를 한 번 틀리게: 바탕 재료를 바꿈)
@@ -59,7 +59,7 @@ import {
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
   orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
-  TODAY_SAY, todayTags, lackOf, todayLines,
+  TODAY_SAY, todayTags, lackOf, todayLines, shotNames, TILT_SKILLS,
 } from '../../data/menu.js';
 import { REGULARS } from '../../data/regulars.js';
 import * as grow from '../../core/grow.js';
@@ -167,8 +167,7 @@ const thanksOf = (o) => o.thanks || RECIPES[o.menu]?.thanks || SAY.thanks;
 /** 손 동작 설명: 실시간은 누르고 떼기(howto), 턴 방식은 [한 칸]·[멈추기](howtoTurn), 조작법 '드래그 활용'은 끌기(howtoDrag) */
 const howtoOf = (sk, turn, drag = false) => (turn && sk.howtoTurn) || (drag && sk.howtoDrag) || sk.howto;
 const skillSpeech = (sk, turn = false, drag = false) => `${sk.name}. ${howtoOf(sk, turn, drag)}`;
-// 조작법 '드래그 활용'(설정 control, 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라")
-const TILT_SKILLS = new Set(['pour', 'water', 'milk_in', 'bloom']); // 붓는 그릇을 끌어 내려 기울이기
+// 조작법 '드래그 활용'(설정 control, 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라"). 끌어 붓는 손 동작은 menu.js 의 TILT_SKILLS
 const POUR_AT = 0.42;   // 끌어 붓기: 이만큼(장면 높이의 TILT_PULL 에 대한 비율) 끌면 붓기 시작, 더 끌수록 빨리
 const TILT_PULL = 0.5;  // 끌어 붓기: 장면 높이의 이만큼 끌면 가장 많이 기욺
 const PRESS_PULL = 0.55; // 끌어 누르기(탬핑): 장면 높이의 이만큼 끌면 끝까지 눌림
@@ -1217,39 +1216,9 @@ export async function brew(opts = {}) {
     };
   }
 
-  /**
-   * 손 동작 → 블렌더 한 컷 id(잔 · 온도 · 안에 든 것으로 고름, docs/recipes.md 6.6 · 6.7). 맞는 컷이 없으면 null(임시 그림)
-   *  - 컷 이름: 붓기 pour{잔}_{latte|milk|색}, 물 붓기 water{잔}(에스프레소가 든 때 = 아메리카노), 얼음 담기 ice(유리컵) · ice{잔}.
-   *    {잔}은 머그 = 없음, 유리컵 = _glass, 종이컵 = _paper, 플라스틱 컵 = _plastic. 잔과 온도가 맞을 때만(머그 · 종이컵 = 따뜻하게, 유리컵 · 플라스틱 컵 = 아이스)
-   *  - 지금 있는 것: 머그 pour_latte · pour_milk · water, 유리컵 ice · pour_glass_latte · pour_glass_milk · water_glass. 포장 컵은 아직(검수 I-28)
-   *  - 커피는 에스프레소와 디카페인(디카페인 라테도 라테 컷). 딸기청 · 말차 · 코코아가 든 잔은 그 색의 컷(pour_glass_strawberry 등)이 있으면 그것, 없으면 우유 컷(검수 I-29)
-   *  - 잔과 온도가 어긋나거나 레시피에 없는 잔이어도 그 잔(없으면 머그)의 같은 손 동작 컷으로(SHOT_FALLBACK). 임시 그림은 컷이 하나도 없을 때만
-   *  - 컵에 넣기 · 젓기 · 우리기(시럽 · 청 · 가루 · 말차 풀기 · 젓기 · 우리기): {동작}{잔}_{바탕} → {동작}[_iced]_{바탕} → {동작}[_iced]
-   *    (따뜻한 잔 = 위에서 본 머그, 아이스 = 앞에서 본 유리컵. 종이컵 · 플라스틱 컵은 그 컷이 없으면 같은 온도의 머그 · 유리컵 컷, docs/recipes.md 6.10)
-   *  - 그 밖의 손 동작(샷 내리기 · 데우기 · 거품 · 갈기 · 누르기 …)은 손 동작 id 와 같은 이름의 컷이 있으면 그것
-   *  shots.json 에 이 이름의 컷이 생기면 코드를 고치지 않아도 씁니다.
-   */
-  const CUP_ACTS = new Set(['syrup', 'jam', 'powder', 'whisk', 'stir', 'steep']);
-  const SHOT_CUP = { mug: ['', 'hot'], glass: ['_glass', 'iced'], paper: ['_paper', 'hot'], plastic: ['_plastic', 'iced'] };
-  // 맞는 이름의 컷이 없을 때 같은 손 동작의 컷(레시피에 없는 잔 · 잔과 온도가 어긋난 잔에서도 옛 임시 그림이 나오지 않게, 2026-11-01 사용자)
-  const SHOT_FALLBACK = { jam: 'yuja', powder: 'cocoa', stir: 'cocoa' };
+  /** 손 동작 → 블렌더 한 컷 id(이름 규칙은 menu.js 의 shotNames). 맞는 컷이 없으면 null(임시 그림) */
   function shotIdFor(id, soFar) {
-    const [suf0] = SHOT_CUP[made?.cup] || [null];
-    const suf = suf0 ?? '';
-    const esp = soFar.has('espresso') || soFar.has('decaf');
-    const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || made?.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
-    let ids = [id];
-    if (id === 'pour') ids = [tint && `pour${suf}_${tint}`, `pour${suf}_${esp ? 'latte' : 'milk'}`, `pour_${esp ? 'latte' : 'milk'}`];
-    else if (id === 'water') ids = [esp ? `water${suf}` : `water${suf}_${made?.base}`, `water${suf}`, 'water']; // 에스프레소가 없는 잔(보리차 · 유자차 · 믹스커피)은 바탕 이름을 붙여, 없으면 그 잔의 물 붓기
-    else if (id === 'ice') ids = [made?.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'];
-    else if (CUP_ACTS.has(id)) {
-      const fam = made?.temp === 'iced' ? '_iced' : '';
-      const other = fam ? '' : '_iced';
-      const base = made?.base;
-      const fb = SHOT_FALLBACK[id];
-      ids = [suf0 !== null && `${id}${suf}_${base}`, `${id}${fam}_${base}`, `${id}${fam}`, `${id}${other}_${base}`, `${id}${other}`, fb && `${id}${fam}_${fb}`, fb && `${id}${other}_${fb}`];
-    }
-    return ids.find((x) => x && shots[x]) || null;
+    return shotNames(id, made, soFar).ids.find((x) => x && shots[x]) || null;
   }
 
   /* ---- 작업대 물건 ---- */

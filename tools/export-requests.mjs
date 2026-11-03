@@ -14,7 +14,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const imp = (p) => import(pathToFileURL(path.join(root, p)).href);
 const { CGS } = await imp('js/data/cg.js');
 const { CHARS } = await imp('js/data/characters.js');
-const { HAND_SKILLS, RECIPES } = await imp('js/data/menu.js');
+const { HAND_SKILLS, RECIPES, LEVELS, SERVICE_CUP, CUPS, TEMPS, prepSteps, shotNames, TILT_SKILLS } = await imp('js/data/menu.js');
 const { EPISODES, ENDING, getEpisode } = await imp('js/data/episodes/index.js');
 const { REGULARS } = await imp('js/data/regulars.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
@@ -112,11 +112,45 @@ const SHEET_MORE = [
   ['cup_plastic', 'a clear plastic takeaway cup with a flat clear lid and a paper straw, empty'],
 ];
 const objMissing = SHEET_MORE.filter(([id]) => !haveObj.has(id));
-// 4) 블렌더 컷이 없는 손 동작
+// 4) 블렌더 컷: 메뉴 × 온도 × 매장/포장 × 단계마다 작업대가 고를 컷(menu.js 의 shotNames, 컵에 든 것은 brew.js 처럼 그 재료의 마지막 손 동작 뒤에 셈)
+//    컷이 없음(임시 그림) · 비슷한 컷으로 대신(다른 잔이나 다른 음료의 컷) · 드래그 활용 그림(tilt · drag)이 없음 을 모음
 const ACT = { hold: 'A 누르고 떼기', circle: 'B 원 그리기', beats: 'D 박자', wait: 'G 기다렸다 누르기' };
-const usedSkills = new Set(Object.values(RECIPES).flatMap((r) => r.steps || []));
-const noShot = Object.entries(HAND_SKILLS).filter(([id]) => !shots[id] && !['pour'].includes(id) && usedSkills.has(id));
-const menusOf = (id) => Object.entries(RECIPES).filter(([, r]) => (r.steps || []).includes(id)).map(([, r]) => r.name).join(' · ');
+const shotWant = new Map(); // 있으면 꼭 맞는 컷 이름 → { skill, uses, standIn }
+const dragMiss = new Map(); // 컷 이름 → { kind, uses }
+const useOf = (r, made) => `${r.name}${r.temps.length > 1 ? ` · ${TEMPS[made.temp].name}` : ''} · ${CUPS[made.cup]?.name || made.cup}`;
+const note = (map, key, init, use) => { const e = map.get(key) || init; e.uses.add(use); map.set(key, e); };
+for (const r of Object.values(RECIPES)) for (const temp of r.temps) for (const service of Object.keys(SERVICE_CUP)) {
+  const made = { cup: r.cup || SERVICE_CUP[service][temp], base: r.base, adds: [...r.adds], temp };
+  for (const level of LEVELS) {
+    const steps = prepSteps(made, level);
+    const soFar = new Set();
+    steps.forEach((st, i) => {
+      const id = st.skill || (st.auto === 'water' ? 'water' : null); // 저절로 붓는 물도 컷으로 차오름(brew.js autoShot)
+      if (id) {
+        const { ids, fit } = shotNames(id, made, soFar);
+        const at = ids.findIndex((x) => x && shots[x]);
+        if (at < 0 || at >= fit) note(shotWant, ids.slice(0, fit).find(Boolean), { skill: id, uses: new Set(), standIn: at < 0 ? null : ids[at] }, useOf(r, made));
+        const got = at < 0 ? null : ids[at];
+        if (got && st.skill && HAND_SKILLS[id].act === 'hold' && TILT_SKILLS.has(id) && !shots[got].tilt?.patch) note(dragMiss, got, { kind: 'tilt', uses: new Set() }, useOf(r, made));
+        if (got && st.skill === 'ice' && !shots[got].drag) note(dragMiss, got, { kind: 'drag_ice', uses: new Set() }, useOf(r, made));
+      }
+      if (st.auto) soFar.add(st.auto);
+      else if (!steps.slice(i + 1).some((x) => x.ing === st.ing)) soFar.add(st.ing);
+    });
+  }
+}
+const shotNone = [...shotWant].filter(([, e]) => !e.standIn);
+const shotStandIn = [...shotWant].filter(([, e]) => e.standIn);
+// 5) 새 놀이의 그림(docs/image_requests.md 8장): 받은 그림을 assets/_src/play/{id}.jpg 로 옮겨 두면 목록에서 빠짐
+const PLAY_ART = [
+  ['sheet_play', '놀이 시트(그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 지은의 가방)', '1:1', '8.2'],
+  ['bus_far', '버스 창밖 ① 먼 바다(가장 뒤, 좌우가 이어짐)', '16:9', '8.3'],
+  ['bus_hills', '버스 창밖 ② 동산(가운데, 위쪽 절반은 초록 바탕)', '16:9', '8.3'],
+  ['bus_window_frame', '버스 창밖 ③ 버스 창틀(맨 앞, 유리 자리는 초록 바탕)', '16:9', '8.3'],
+  ['sheet_deco', '꾸미기 · 앞치마 시트', '1:1', '8.4'],
+];
+const havePlay = new Set(ls('assets/_src/play').map((f) => f.replace(/\.(jpe?g|png|webp)$/i, '')));
+const playMissing = PLAY_ART.filter(([id]) => !havePlay.has(id));
 
 P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음성)', '',
   '> 생성: `npm run requests`(`tools/export-requests.mjs`) · 이 파일은 직접 고치지 않습니다. 그림이 들어오면 다시 돌리면 목록에서 빠집니다.',
@@ -128,7 +162,8 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   `| 인물 스탠딩(새 인물 ${newPeople.length}명) | 설정화 ${newPeople.length} + 표정 ${standCount - newPeople.length}장 | \`assets/_src/stand/{id}_{표정}.jpg\` | \`npm run images\` → \`python tools/face-boxes.py\` |`,
   `| 장면 그림(CG) | 새로 ${cgNew.length}장 + \`docs/추가 제작.md\`에 이미 있는 ${cgOld.length}장 | \`assets/cg/cg_{id}.jpg\` | \`npm run assets\` |`,
   `| 작업대 물건 시트 3 | ${objMissing.length}개를 시트 1장에 | \`assets/_src/objects/sheet_more.jpg\` | \`npm run objects\` |`,
-  `| 블렌더 한 컷(손 동작) | ${noShot.length}가지 + 포장 컵 · 색 있는 음료(I-28 · I-29) | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
+  `| 새 놀이의 그림 | ${playMissing.length}장(${playMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}) | \`assets/flow/\`에 두고 알려 주기 → \`assets/_src/play/{id}.jpg\` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |`,
+  `| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 ${shotNone.length} · 🙋 있으면 더 맞는 컷 ${shotStandIn.length}(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 ${dragMiss.size} | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
   `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
   '| 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |', '');
@@ -189,11 +224,23 @@ const rows = [SHEET_MORE.slice(0, 4), SHEET_MORE.slice(4, 8), SHEET_MORE.slice(8
 box(`Same art style, angle, lighting and rendering as the reference image (barista equipment sheet): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.\n${rows.map((r, i) => `Row ${i + 1}: ${r.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : ''}.`).join('\n')}\nFlat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, black outlines.`);
 P('', '- 얼음 통(`obj_ice_bucket`) · 레시피 수첩(`obj_recipe_book`)은 `docs/추가 제작.md` 27 · 28번에 있습니다.', '');
 
-/* 4. 블렌더 */
-P('## 4. 블렌더 한 컷 (손 동작)', '',
-  `지금 컷이 있는 것: ${Object.keys(shots).map((k) => `\`${k}\``).join(' · ')}. 아래 손 동작은 컷이 없어 임시 그림(움직이는 SVG)으로 섭니다. 만드는 법은 \`docs/recipes.md\` 6장 · CLAUDE.md 7장(\`scene_bench.py … shots <id>\` → \`shots_post.py\` → \`npm run assets\`).`,
-  '게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7). 이름만 맞으면 코드를 고치지 않아도 됩니다.', '',
-  '| 손 동작 id | 이름 | 동작 | 쓰는 메뉴 | 알맞아요 칸 | 제안 장면 |', '| :--- | :--- | :--- | :--- | :--- | :--- |');
+/* 4. 새 놀이의 그림 */
+P('## 4. 새 놀이의 그림 (재미 개편)', '',
+  '- 몰림 · 그 갈매기 쫓기 · 바닷가로 가는 버스 · 가게 꾸미기 · 앞치마의 그림입니다. 지금은 코드로 그린 임시 그림(SVG · 색 띠 · 아이콘)으로 섭니다.',
+  '- 프롬프트 · 규칙은 `docs/image_requests.md` 8장에 있습니다(시트는 초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움, 버스 창밖은 좌우가 이어지는 그림).',
+  '- 받은 그림은 `assets/flow/`에 두고 알려 주세요. `assets/_src/play/{id}.jpg`로 옮겨 넣으면 이 목록에서 빠집니다.', '');
+if (playMissing.length) {
+  P('| id | 무엇 | 비율 | 프롬프트 |', '| :--- | :--- | :--- | :--- |', ...playMissing.map(([id, what, ratio, sec]) => `| \`${id}\` | ${what} | ${ratio} | \`docs/image_requests.md\` ${sec} |`), '');
+} else P('- 모두 있습니다.', '');
+
+/* 5. 블렌더 */
+P('## 5. 블렌더 한 컷 (손 동작)', '',
+  `지금 컷이 있는 것: ${Object.keys(shots).map((k) => `\`${k}\``).join(' · ')}. 만드는 법은 \`docs/recipes.md\` 6장 · CLAUDE.md 7장(\`scene_bench.py … shots <id>\` → \`shots_post.py\` → \`npm run assets\`).`,
+  '게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`js/data/menu.js`의 `shotNames`, 작업대 `brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7), 컵에 넣기 · 젓기 · 우리기는 `{동작}[_iced]_{바탕}`(포장 컵은 `{동작}{잔}_{바탕}`, 6.10). 이름만 맞으면 코드를 고치지 않아도 됩니다.',
+  '아래 목록은 메뉴마다 온도 · 매장/포장 · 단계를 모두 따라가며 작업대가 고를 컷을 셈한 것입니다.', '',
+  '### 5.1 컷이 없는 손 동작 (임시 그림으로 섬)', '');
+if (!shotNone.length) P('- 없습니다. 메뉴판의 모든 잔에서 손 동작마다 블렌더 컷이 나옵니다.', '');
+else P('| 만들 컷 | 손 동작 | 동작 | 쓰는 잔 | 알맞아요 칸 | 제안 장면 |', '| :--- | :--- | :--- | :--- | :--- | :--- |');
 const SCENE_KO = {
   grind: '그라인더 호퍼의 원두가 줄고, 아래 통에 가루가 쌓임(13단계)',
   tamp: '포터필터 위에서 탬퍼를 누름: 가루가 평평해지는 정도(13단계)',
@@ -210,40 +257,52 @@ const SCENE_KO = {
   hand_grind: '손 그라인더 손잡이를 돌림',
   steep: '보리차가 우러남: 물 색이 진해짐',
 };
-for (const [id, sk] of noShot) P(`| \`${id}\` | ${sk.name} | ${ACT[sk.act] || sk.act} | ${menusOf(id) || '—'} | ${sk.zone ? sk.zone.join('~') : sk.laps ? `${sk.laps}바퀴` : sk.n ? `${sk.n}번` : '—'} | ${SCENE_KO[id] || ''} |`);
-P('', '**I-28 포장 컵(종이컵 · 플라스틱 컵)** 🙋', '',
-  '- 지금 컷은 매장 잔(머그 · 유리컵)만 있습니다. 포장 주문의 얼음 담기 · 물 붓기 · 붓기는 임시 그림입니다(아이스 아메리카노 포장이 가장 많음).',
-  '- 플라스틱 컵(아이스 포장): 유리컵 컷(`docs/recipes.md` 6.7)과 같은 카메라 · 같은 빛에서 컵만 바꿈 → `ice_plastic` · `water_plastic` · `pour_plastic_latte` · `pour_plastic_milk`.',
-  '- 종이컵(따뜻한 포장): 속이 안 보이므로 위에서 조금 더 내려다본 구도(입구 속 음료 높이)를 먼저 정함 → `water_paper` · `pour_paper_latte` · `pour_paper_milk`.', '',
-  '**I-29 색 있는 우유 음료** 🙋', '',
-  '- 딸기우유(분홍) · 녹차라테(초록) · 코코아(갈색)는 지금 하얀 우유 컷(`pour_milk` · `pour_glass_milk`)이 나옵니다.',
-  '- 같은 컷에서 음료 색만 바꿈 → 유리컵(아이스) `pour_glass_strawberry` · `pour_glass_matcha` · `pour_glass_cocoa`, 머그(따뜻하게) `pour_matcha` · `pour_cocoa`(딸기우유는 아이스만).', '');
+const zoneOf = (sk) => (sk.zone ? sk.zone.join('~') : sk.laps ? `${sk.laps}바퀴` : sk.n ? `${sk.n}번` : '—');
+for (const [want, e] of shotNone) { const sk = HAND_SKILLS[e.skill]; P(`| \`${want}\` | ${sk.name} | ${ACT[sk.act] || sk.act} | ${[...e.uses].join(' / ')} | ${zoneOf(sk)} | ${SCENE_KO[e.skill] || ''} |`); }
+if (shotNone.length) P('');
+P('### 5.2 있으면 더 맞는 컷 🙋 (지금은 비슷한 컷이 나옴)', '',
+  '- 이 잔들도 지금 블렌더 컷이 나옵니다. 다만 다른 잔(포장 컵인데 머그 · 유리컵)이나 다른 음료(보리차 · 유자차인데 아메리카노)의 컷이라, 만들면 더 꼭 맞습니다. 급하지 않습니다(`docs/recipes.md` 6.10 🙋).',
+  '- 만드는 법: 지금 나오는 컷과 같은 장면에서 잔만 바꿉니다. 종이컵은 `water_paper`, 플라스틱 컵은 `water_plastic`과 같은 카메라 · 빛(얼음 24개), 물 붓기는 음료 색만 그 바탕으로(보리차 = 호박색 · 티백, 유자차 = 청이 풀림).', '');
+if (!shotStandIn.length) P('- 없습니다.', '');
+else {
+  P('| 만들 컷 | 손 동작 | 쓰는 잔 | 지금 나오는 컷 |', '| :--- | :--- | :--- | :--- |');
+  for (const [want, e] of shotStandIn) P(`| \`${want}\` | ${HAND_SKILLS[e.skill].name} | ${[...e.uses].join(' / ')} | \`${e.standIn}\` |`);
+  P('');
+}
+P('### 5.3 조작법 \'드래그 활용\'의 그림 (`docs/recipes.md` 6.11)', '',
+  '- 붓는 컷에 덜 기운 그릇(`… tilt`)이 없으면 끌어 붓기는 되지만 그릇이 기울어 보이지 않고, 얼음 담기 컷에 얼음 통 · 국자(`… drag_ice`)가 없으면 터치 기반처럼 눌러서 담습니다.', '');
+if (!dragMiss.size) P('- 모두 있습니다.', '');
+else {
+  P('| 컷 | 필요한 그림 | 쓰는 잔 |', '| :--- | :--- | :--- |');
+  for (const [id, e] of dragMiss) P(`| \`${id}\` | ${e.kind === 'tilt' ? '`scene_bench.py … tilt` (덜 기운 그릇)' : '`scene_bench.py … drag_ice` (얼음 통 · 국자)'} | ${[...e.uses].join(' / ')} |`);
+  P('');
+}
 
-/* 5. 소리 */
-P('## 5. 소리', '', '### 5.1 효과음 · 환경음 (사서 쓰는 팩에서 잘라 넣기, `tools/audio/audio_map.mjs`)', '',
+/* 6. 소리 */
+P('## 6. 소리', '', '### 6.1 효과음 · 환경음 (사서 쓰는 팩에서 잘라 넣기, `tools/audio/audio_map.mjs`)', '',
   '| 종류 | id | 쓰는 곳 | 바라는 소리 |', '| :--- | :--- | :--- | :--- |');
 const SFX_KO = { snap: '사진 스냅 연출', bus: '버스가 서는 소리(브레이크 · 문 열림)', espresso: '에스프레소가 나오는 소리', steam: '스팀 노즐(쉬익)', mixer: '그라인더 가는 소리', shutter_phone: '휴대전화 사진 찍는 소리', mug: '머그를 내려놓는 소리', street: '바닷가 골목(갈매기 · 먼 파도 · 발소리)', kitchen: '주방', classroom: '교실' };
 for (const id of MISSING.sfx) P(`| 효과음 | \`${id}\` | ${sfxUse[id] ? [...sfxUse[id]].map(epLabel).join(' · ') : '작업대 · 화면'} | ${SFX_KO[id] || ''} |`);
 for (const id of MISSING.amb) P(`| 환경음 | \`${id}\` | ${ambUse[id] ? [...ambUse[id]].map(epLabel).slice(0, 8).join(' · ') + (ambUse[id].size > 8 ? ` 외 ${ambUse[id].size - 8}일` : '') : '지금 대본에는 없음'} | ${SFX_KO[id] || ''} |`);
-P('', '### 5.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)', '',
+P('', '### 6.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)', '',
   '| mood | 쓰는 곳 | 느낌 · 악기 | 길이 |', '| :--- | :--- | :--- | :--- |');
 const bgmLeft = Object.entries(BGM_KO).filter(([mood]) => !bgmHas(mood));
 if (!bgmLeft.length) P('| 모두 있음 | ✅ 저작자가 AI 음악 모델 Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |');
 for (const [mood, [where, feel, len]] of bgmLeft) P(`| \`${mood}\` | ${where}${bgmUse[mood] ? `(${bgmUse[mood].size}일)` : ''} | ${feel} | ${len} |`);
 P('', '- 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.', '');
 
-/* 6. 음성 */
+/* 7. 음성 */
 let lines = [];
 try { lines = JSON.parse(fs.readFileSync(path.join(root, 'tools/voice/lines.json'), 'utf8')); } catch { /* 없음 */ }
 const byVoice = {};
 for (const l of lines) byVoice[l.voice] = (byVoice[l.voice] || 0) + 1;
-P('## 6. 음성 (Supertonic, 내 PC)', '',
+P('## 7. 음성 (Supertonic, 내 PC)', '',
   `- 읽어 줄 문장 ${lines.length}줄(\`npm run lines\` → \`tools/voice/lines.json\`). \`npm run voices\`가 바뀐 줄만 만듭니다.`,
   '- 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).', '',
   '| 목소리 | 줄 수 |', '| :--- | ---: |', ...Object.entries(byVoice).sort((a, b) => b[1] - a[1]).map(([v, n]) => `| \`${v}\` | ${n} |`), '');
 
-/* 7. 넣은 뒤 */
-P('## 7. 넣은 뒤 할 일 (순서)', '',
+/* 8. 넣은 뒤 */
+P('## 8. 넣은 뒤 할 일 (순서)', '',
   '1. 그림: `npm run images`(스탠딩) → `python tools/face-boxes.py` → `npm run objects`(물건 시트) → `npm run assets`(배경 · CG · 컷) → `npm run credits`',
   '2. 새 그림의 제작 프롬프트를 `tools/credits/image_prompts.mjs`에 한 줄씩(제작 · 저작권 정보)',
   '3. 소리: `tools/audio/audio_map.mjs`에 대응을 적고 `npm run audio` → `assets/audio` 안에서 커밋 · 푸시 → 바깥에서 `git add assets/audio`',
@@ -251,4 +310,4 @@ P('## 7. 넣은 뒤 할 일 (순서)', '',
   '5. `npm run validate` → 자동 플레이 → `npm run requests`(이 문서가 줄어듦)', '');
 
 fs.writeFileSync(path.join(root, 'docs/requests_full.md'), `${L.join('\n')}\n`);
-console.log(`요청서: 인물 ${newPeople.length}명 · 장면 그림 ${cgNew.length}장(+ 추가 제작 ${cgOld.length}) · 물건 ${objMissing.length} · 블렌더 ${noShot.length} → docs/requests_full.md`);
+console.log(`요청서: 인물 ${newPeople.length}명 · 장면 그림 ${cgNew.length}장(+ 추가 제작 ${cgOld.length}) · 물건 ${objMissing.length} · 놀이 그림 ${playMissing.length} · 블렌더 없음 ${shotNone.length} / 대신 ${shotStandIn.length} / 드래그 ${dragMiss.size} → docs/requests_full.md`);
