@@ -18,7 +18,7 @@ export const PEOPLE_EN = {
   agent: "Korean man in his thirties, an actor's manager, messy black hair, a black headset with a small microphone, navy padded vest over a gray hoodie, a walkie-talkie clipped to his belt",
   mom2: 'Korean woman in her early thirties, a shy new mother, long dark brown hair, gentle face, beige knit coat, a baby carrier sling, a small light gray baby stroller',
   young_fisher: 'Korean young man in his twenties, a young fisherman, messy black hair under a mustard yellow knit beanie, orange waterproof work jacket, black rubber boots',
-  han_daughter: 'Korean girl age 14, a middle school student, long straight black hair, bright curious eyes, light blue padded winter jacket, a red knitted scarf',
+  han_daughter: 'the same look as the reference standing image luna_normal: Korean girl with long wavy chestnut-brown hair, a red beret, a pastel pink oversized jacket over a white top, light jeans and a small crossbody bag, bright friendly smile', // 2026-11-04: 손님 루나의 스탠딩을 빌려 씀(characters.js stand)
 };
 
 /** 표정 → '[표정]'에 넣을 문장(docs/image_requests.md 1장과 같은 꼴) */
@@ -110,7 +110,7 @@ export const CG_EN = {
   noh_mix_winter: 'Snowy morning: NOH holds a paper cup of mix coffee made by JIEUN, steam rising, a soft smile.',
   sumin_envelope: 'Winter: SUMIN stands at the counter holding an unopened white university envelope with both hands, looking at JIEUN.',
   sumin_wait: 'Winter: SUMIN sits on the stool right in front of the counter looking at the envelope, while JIEUN quietly wipes cups nearby.',
-  han_with_daughter: 'Winter dawn: HAN comes in with his daughter HAN_DAUGHTER in a padded jacket; the daughter looks at the cocoa on the menu, HAN looks at the clock.',
+  han_with_daughter: 'Winter dawn: HAN comes in with his daughter HAN_DAUGHTER; the daughter looks at the cocoa on the menu, HAN looks at the clock.',
   han_two_cups: 'Winter dawn: HAN and his daughter sit side by side, a sweet latte and a cocoa on the table, snow outside the window, both smiling.',
   sumin_secret: 'Winter: SUMIN at the counter opens the envelope and reads the letter, then smiles at JIEUN with teary eyes; JIEUN smiling back.',
   do_last_day: 'Winter evening, the "closed" sign on the door (no readable text): DO stands outside with a flat empty mailbag, looking at the warm lit counter inside.',

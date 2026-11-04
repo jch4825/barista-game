@@ -108,6 +108,10 @@ export const CHARS = {
   },
   han_daughter: {
     name: '한 씨의 딸', role: '중학생', color: '#C77D8E', voice: 'han_daughter',
+    // 그림을 따로 만들지 못해, 이 게임에서 쓰지 않던 손님 '루나'의 스탠딩을 빌려 씀(stand, 2026-11-04 사용자 "기존 이미지 중 사용하지 않는 젊은 여성 엑스트라 캐릭터를 한 씨의 딸로")
+    stand: 'luna',
+    look: 'right',
+    standAlias: { smile: 'normal', happy: 'normal', surprised: 'worried', sad: 'worried', angry: 'worried' }, // 루나의 그림 2장: 웃는 얼굴(normal) · 당황(worried)
     standScale: 0.85,
     svg: { skin: '#F6D5C0', hair: '#2E2420', style: 'long', outfit: '#8FA7C9', acc: ['scarf'], bg: '#FCE8EE' },
   },
@@ -271,8 +275,9 @@ const STAND_GENERIC = { happy: 'smile', proud: 'smile', bright: 'smile', warm: '
 let costumes = {};
 export function setCostumes(map) { costumes = { ...(map || {}) }; }
 function standKey(id) {
+  const base = CHARS[id]?.stand || id; // 다른 인물의 스탠딩을 빌려 쓰는 인물(stand: 그 인물 id)
   const c = costumes[id];
-  return c && img.has('stand', `${id}-${c}_normal`) ? `${id}-${c}` : id;
+  return c && img.has('stand', `${base}-${c}_normal`) ? `${base}-${c}` : base;
 }
 
 export function hasStand(id) { return img.has('stand', `${standKey(id)}_normal`); }

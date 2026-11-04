@@ -9,7 +9,7 @@
 
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
-| 인물 스탠딩(새 인물 12명) | 설정화 12 + 표정 37장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
+| 인물 스탠딩(새 인물 11명) | 설정화 11 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 110장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
@@ -350,35 +350,6 @@ Same face and outfit as the reference image (character sheet).
 Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
 ```
 
-### 1.12 한 씨의 딸 — 중학생 (id `han_daughter`)
-
-- 처음 나오는 날: 겨울 3일 · 표정: normal + smile
-- 임시 초상 색: 옷 #8FA7C9 · 강조 #C77D8E
-
-**① 설정화** `han_daughter_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of HAN_DAUGHTER, Korean girl age 14, a middle school student, long straight black hair, bright curious eyes, light blue padded winter jacket, a red knitted scarf.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `han_daughter_normal` · 9:16 · 참조: `han_daughter_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean girl age 14, a middle school student, long straight black hair, bright curious eyes, light blue padded winter jacket, a red knitted scarf.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `han_daughter_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `han_daughter_smile` | smile | warm gentle smile, eyes softened |
-
 ## 2. 장면 그림 · 이벤트 CG
 
 - 새로 요청하는 110장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
@@ -463,8 +434,8 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 | 72 | `noh_mix_winter` | 사장 맛이 나 | 겨울 2일 | `noh_sheet` · `hall_winter` |
 | 73 | `sumin_envelope` | 봉투 | 겨울 2일 | `sumin_sheet` · `hall_winter` |
 | 74 | `sumin_wait` | 기다리는 컵 닦기 | 겨울 2일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 75 | `han_with_daughter` | 딸과 함께 온 새벽 | 겨울 3일 | `han_sheet` · `han_daughter_sheet` · `hall_winter` |
-| 76 | `han_two_cups` | 코코아 한 잔 더 | 겨울 3일 | `han_sheet` · `han_daughter_sheet` · `hall_winter` |
+| 75 | `han_with_daughter` | 딸과 함께 온 새벽 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
+| 76 | `han_two_cups` | 코코아 한 잔 더 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
 | 77 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
 | 78 | `do_last_day` | 마지막 배달 | 겨울 3일 | `do_sheet` · `cafe_front_morning` |
 | 79 | `do_last_hook` | 마지막으로 건 가방 | 겨울 3일 | `do_sheet` · `hall_evening` |
@@ -1301,22 +1272,22 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 
 #### 75. `han_with_daughter` · 딸과 함께 온 새벽
 
-- 나오는 날: 겨울 3일 · 장면: 남은 시간 10분 · 참조: `han_sheet` · `han_daughter_sheet` · `hall_winter`
+- 나오는 날: 겨울 3일 · 장면: 남은 시간 10분 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
 
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: Korean girl age 14, a middle school student, long straight black hair, bright curious eyes, light blue padded winter jacket, a red knitted scarf.
-Scene: Winter dawn: HAN comes in with his daughter HAN_DAUGHTER in a padded jacket; the daughter looks at the cocoa on the menu, HAN looks at the clock.
+New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: the same look as the reference standing image luna_normal: Korean girl with long wavy chestnut-brown hair, a red beret, a pastel pink oversized jacket over a white top, light jeans and a small crossbody bag, bright friendly smile.
+Scene: Winter dawn: HAN comes in with his daughter HAN_DAUGHTER; the daughter looks at the cocoa on the menu, HAN looks at the clock.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
 #### 76. `han_two_cups` · 코코아 한 잔 더
 
-- 나오는 날: 겨울 3일 · 장면: 오늘은 아빠도 천천히야 · 참조: `han_sheet` · `han_daughter_sheet` · `hall_winter`
+- 나오는 날: 겨울 3일 · 장면: 오늘은 아빠도 천천히야 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
 
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: Korean girl age 14, a middle school student, long straight black hair, bright curious eyes, light blue padded winter jacket, a red knitted scarf.
+New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: the same look as the reference standing image luna_normal: Korean girl with long wavy chestnut-brown hair, a red beret, a pastel pink oversized jacket over a white top, light jeans and a small crossbody bag, bright friendly smile.
 Scene: Winter dawn: HAN and his daughter sit side by side, a sweet latte and a cocoa on the table, snow outside the window, both smiling.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
@@ -1783,14 +1754,14 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2690줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2706줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 756 |
-| `narr` | 641 |
-| `think` | 290 |
+| `sys` | 770 |
+| `narr` | 642 |
+| `think` | 291 |
 | `owner` | 178 |
 | `jieun` | 130 |
 | `jian` | 74 |

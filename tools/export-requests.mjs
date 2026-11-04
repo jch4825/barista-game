@@ -91,7 +91,8 @@ const KNOWN = { jieun: 'JIEUN', owner: 'OWNER', haesun: 'HAESUN', jian: 'JIAN', 
 const tagOf = (who) => KNOWN[who] || who.toUpperCase();
 
 // 1) 새 인물
-const newPeople = Object.keys(PEOPLE_EN).filter((id) => faces[id] && ![...faces[id]].every((f) => haveStand.has(`${id}_${f}`)));
+// 다른 인물의 스탠딩을 빌려 쓰는 인물(characters.js 의 stand)은 새로 그리지 않음
+const newPeople = Object.keys(PEOPLE_EN).filter((id) => !CHARS[id]?.stand && faces[id] && ![...faces[id]].every((f) => haveStand.has(`${id}_${f}`)));
 const standCount = newPeople.reduce((n, id) => n + 1 + faces[id].size, 0);
 // 2) 장면 그림
 const cgMissing = Object.keys(CGS).filter((id) => !haveCg.has(id));
@@ -200,7 +201,7 @@ const refOf = (id) => {
   const ph = CGS[id].ph || {};
   const people = [...new Set((ph.cast || []).map((v) => String(v).split(':')[0]))].filter((w) => w !== 'customer');
   const bgRef = ph.bg ? `${ph.bg === 'hall' ? 'hall' : ph.bg}_${ph.v || 'morning'}` : '';
-  return [...people.map((w) => `\`${w}_sheet\``), bgRef ? `\`${bgRef}\`` : ''].filter(Boolean).join(' · ');
+  return [...people.map((w) => (CHARS[w]?.stand ? `\`${CHARS[w].stand}_normal\`` : `\`${w}_sheet\``)), bgRef ? `\`${bgRef}\`` : ''].filter(Boolean).join(' · '); // 빌려 쓰는 인물은 그 스탠딩이 참조
 };
 cgNew.forEach((id, i) => P(`| ${i + 1} | \`${id}\` | ${CGS[id].title} | ${epLabel(CGS[id].ep)} | ${refOf(id)} |`));
 P('', '### 2.1 프롬프트', '');
