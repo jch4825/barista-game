@@ -231,15 +231,14 @@ export function portraitHTML(id, face = 'normal') {
   const c = CHARS[id];
   if (!c) return '';
   const f = resolveFace(id, face);
-  if (c.faces) {
-    return `<img class="pol-img" src="./assets/portraits/${id}_${f}.jpg" alt="${c.name}" draggable="false">`;
-  }
-  // 표정 초상이 없는 인물: 스탠딩 그림이 있으면 그 그림에서 머리·어깨를 잘라 씀(문자·수첩·손님 표시 등)
+  // 스탠딩 그림이 있으면 늘 그 그림에서 머리·어깨를 잘라 씀(문자·수첩·손님 표시 등). 대화창 얼굴(faceHTML)과 같은 차례.
+  // 직업 마1스톤의 표정 초상(assets/portraits)은 이 게임에 없어서, 먼저 보면 그림이 깨졌음(검수 13.39 19번)
   if (hasStand(id)) {
     // 손으로 맞춘 값이 없으면 그림마다 잰 값(tools/face-boxes.py, 의상 그림도 따로)
     const [size, x, y] = c.portraitBox || PORTRAIT_BOX[`${standKey(id)}_${standFace(id, face)}`] || [230, 50, 4];
     return `<span class="pol-img pol-stand" role="img" aria-label="${c.name}" style="background-image:url('${standURL(id, face)}');background-size:${size}% auto;background-position:${x}% ${y}%"></span>`;
   }
+  if (c.faces) return `<img class="pol-img" src="./assets/portraits/${id}_${f}.jpg" alt="${c.name}" draggable="false">`;
   return drawPortrait(c.svg, face);
 }
 

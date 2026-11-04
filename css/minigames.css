@@ -358,7 +358,8 @@ body:is(.reduce-motion, .theme-calm) .mg-rush :is(.ru-slip, .ru-gull, .sc-bg) { 
 .mg-bus .bs-sight.s-lighthouse { height: 190px; width: 110px; }
 .mg-bus .bs-sight:focus-visible { outline: 4px solid #FFF4D6; outline-offset: 4px; border-radius: 16px; }
 .mg-bus .bs-sight.is-got { filter: drop-shadow(0 0 14px #FFE08A); opacity: .55; }
-@keyframes bs-pass { to { transform: translateX(-125vw); } }
+/* 게임 화면은 1920px 판을 창에 맞게 줄여 그리므로 거리도 판의 px 로(vw 는 창 너비라 작은 창에서 풍경이 덜 가다 멈췄음, 검수 13.39 18번) */
+@keyframes bs-pass { to { transform: translateX(-2400px); } }
 .mg-bus .bs-window { position: absolute; inset: 0; border: 34px solid #2F3B44; border-radius: 30px; box-shadow: inset 0 0 0 6px #4C5C68; pointer-events: none; }
 .mg-bus .bs-window::after { content: ''; position: absolute; top: -34px; bottom: -34px; left: 50%; width: 26px; transform: translateX(-50%); background: #2F3B44; }
 .mg-bus .bs-bag { position: absolute; left: 70px; bottom: 50px; width: 90px; height: 90px; color: #7A4E2D; }

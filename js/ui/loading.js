@@ -72,7 +72,7 @@ export function episodeImages(ep) {
     const c = ep.costume?.[id];
     const key = c && img.has('stand', `${id}-${c}_normal`) ? `${id}-${c}` : id;
     for (const k of stand) if (k.startsWith(`${key}_`)) urls.push(img.url('stand', k));
-    for (const f of CHARS[id].faces || []) urls.push(`./assets/portraits/${id}_${f}.jpg`);
+    if (!img.has('stand', `${key}_normal`)) for (const f of CHARS[id].faces || []) urls.push(`./assets/portraits/${id}_${f}.jpg`); // 스탠딩이 있으면 초상은 쓰지 않음(characters.js portraitHTML)
   }
   for (const k of bgs) urls.push(img.url('bg', k));
   for (const id of photos) urls.push(img.url('photos', PHOTOS[id]?.file || id));
@@ -95,7 +95,7 @@ export function warmAll(first = null) {
   for (const kind of ['items', 'vfx', 'ui', 'emotes', 'sd', 'objects', 'shots']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
   add(img.url('bg', 'rewind_room'));
   for (const kind of ['bg', 'stand']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
-  for (const [id, c] of Object.entries(CHARS)) for (const f of c.faces || []) add(`./assets/portraits/${id}_${f}.jpg`);
+  for (const [id, c] of Object.entries(CHARS)) if (!img.has('stand', `${id}_normal`)) for (const f of c.faces || []) add(`./assets/portraits/${id}_${f}.jpg`);
   for (const kind of ['photos', 'cg']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
   const list = [...urls];
   let i = 0;
