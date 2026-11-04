@@ -3,6 +3,31 @@
  * { 그림 이름: [background-size %, x %, y %] }
  */
 export const FACE_BOX = {
+ "actor_normal": [
+  260,
+  50.4,
+  7.9
+ ],
+ "actor_smile": [
+  260,
+  50.0,
+  8.2
+ ],
+ "actor_surprised": [
+  260,
+  50.2,
+  8.2
+ ],
+ "agent_angry": [
+  270,
+  50.2,
+  7.8
+ ],
+ "agent_normal": [
+  267,
+  50.7,
+  7.9
+ ],
  "auntie_normal": [
   260,
   50.4,
@@ -78,6 +103,26 @@ export const FACE_BOX = {
   51.4,
   7.7
  ],
+ "do_normal": [
+  281,
+  51.6,
+  7.7
+ ],
+ "do_smile": [
+  281,
+  51.6,
+  7.7
+ ],
+ "do_surprised": [
+  281,
+  51.6,
+  7.7
+ ],
+ "do_worried": [
+  281,
+  51.6,
+  7.7
+ ],
  "dohyun_normal": [
   300,
   51.0,
@@ -92,6 +137,51 @@ export const FACE_BOX = {
   278,
   51.2,
   7.2
+ ],
+ "eunju_normal": [
+  237,
+  51.7,
+  8.6
+ ],
+ "eunju_sad": [
+  237,
+  51.7,
+  8.6
+ ],
+ "eunju_smile": [
+  237,
+  51.7,
+  8.6
+ ],
+ "eunju_surprised": [
+  237,
+  51.7,
+  8.6
+ ],
+ "eunju_worried": [
+  238,
+  51.9,
+  8.5
+ ],
+ "geum_angry": [
+  285,
+  50.3,
+  7.7
+ ],
+ "geum_normal": [
+  284,
+  50.3,
+  7.7
+ ],
+ "geum_smile": [
+  289,
+  51.4,
+  7.7
+ ],
+ "geum_surprised": [
+  292,
+  51.2,
+  7.5
  ],
  "grandma-cardigan_normal": [
   260,
@@ -116,6 +206,26 @@ export const FACE_BOX = {
  "haesun_smile": [
   260,
   50.7,
+  8.2
+ ],
+ "han_normal": [
+  253,
+  50.4,
+  8.2
+ ],
+ "han_smile": [
+  253,
+  50.4,
+  8.2
+ ],
+ "han_surprised": [
+  253,
+  50.4,
+  8.2
+ ],
+ "han_worried": [
+  253,
+  50.4,
   8.2
  ],
  "hiker_angry": [
@@ -178,6 +288,26 @@ export const FACE_BOX = {
   50.2,
   8.6
  ],
+ "kang_angry": [
+  268,
+  50.9,
+  8.1
+ ],
+ "kang_normal": [
+  267,
+  50.9,
+  8.0
+ ],
+ "kang_sad": [
+  266,
+  51.1,
+  7.9
+ ],
+ "kang_smile": [
+  267,
+  50.9,
+  8.0
+ ],
  "luna_normal": [
   277,
   50.2,
@@ -213,10 +343,45 @@ export const FACE_BOX = {
   50.2,
   7.9
  ],
+ "mom2_nervous": [
+  260,
+  50.7,
+  8.0
+ ],
+ "mom2_normal": [
+  260,
+  50.2,
+  8.0
+ ],
+ "mom2_smile": [
+  260,
+  50.0,
+  8.0
+ ],
  "mom_normal": [
   259,
   50.9,
   8.1
+ ],
+ "noh_nervous": [
+  276,
+  51.0,
+  7.6
+ ],
+ "noh_normal": [
+  277,
+  51.0,
+  7.6
+ ],
+ "noh_smile": [
+  277,
+  51.0,
+  7.6
+ ],
+ "noh_surprised": [
+  276,
+  51.0,
+  7.5
  ],
  "owner_normal": [
   280,
@@ -252,6 +417,26 @@ export const FACE_BOX = {
   257,
   51.1,
   8.1
+ ],
+ "sumin_nervous": [
+  260,
+  50.9,
+  8.0
+ ],
+ "sumin_normal": [
+  260,
+  51.1,
+  8.0
+ ],
+ "sumin_smile": [
+  323,
+  50.3,
+  7.1
+ ],
+ "sumin_surprised": [
+  260,
+  50.9,
+  8.0
  ],
  "teacher_normal": [
   260,
@@ -307,10 +492,40 @@ export const FACE_BOX = {
   260,
   50.9,
   8.0
+ ],
+ "young_fisher_normal": [
+  307,
+  51.0,
+  7.3
  ]
 };
 
 export const PORTRAIT_BOX = {
+ "actor_normal": [
+  144,
+  50.7,
+  3.2
+ ],
+ "actor_smile": [
+  144,
+  50.0,
+  3.6
+ ],
+ "actor_surprised": [
+  144,
+  50.4,
+  3.6
+ ],
+ "agent_angry": [
+  149,
+  50.3,
+  3.5
+ ],
+ "agent_normal": [
+  148,
+  51.4,
+  3.4
+ ],
  "auntie_normal": [
   144,
   50.7,
@@ -386,6 +601,26 @@ export const PORTRAIT_BOX = {
   52.4,
   3.8
  ],
+ "do_normal": [
+  155,
+  52.8,
+  3.6
+ ],
+ "do_smile": [
+  155,
+  52.8,
+  3.6
+ ],
+ "do_surprised": [
+  155,
+  52.8,
+  3.6
+ ],
+ "do_worried": [
+  155,
+  52.8,
+  3.6
+ ],
  "dohyun_normal": [
   166,
   51.7,
@@ -400,6 +635,51 @@ export const PORTRAIT_BOX = {
   154,
   52.2,
   2.8
+ ],
+ "eunju_normal": [
+  131,
+  54.2,
+  3.1
+ ],
+ "eunju_sad": [
+  131,
+  54.2,
+  3.1
+ ],
+ "eunju_smile": [
+  131,
+  54.2,
+  3.1
+ ],
+ "eunju_surprised": [
+  131,
+  54.2,
+  3.1
+ ],
+ "eunju_worried": [
+  132,
+  54.6,
+  3.1
+ ],
+ "geum_angry": [
+  157,
+  50.6,
+  3.8
+ ],
+ "geum_normal": [
+  157,
+  50.6,
+  3.8
+ ],
+ "geum_smile": [
+  159,
+  52.4,
+  3.8
+ ],
+ "geum_surprised": [
+  161,
+  52.1,
+  3.6
  ],
  "grandma-cardigan_normal": [
   144,
@@ -425,6 +705,26 @@ export const PORTRAIT_BOX = {
   144,
   51.5,
   3.6
+ ],
+ "han_normal": [
+  140,
+  50.8,
+  3.3
+ ],
+ "han_smile": [
+  140,
+  50.8,
+  3.3
+ ],
+ "han_surprised": [
+  140,
+  50.8,
+  3.3
+ ],
+ "han_worried": [
+  140,
+  50.8,
+  3.3
  ],
  "hiker_angry": [
   139,
@@ -486,6 +786,26 @@ export const PORTRAIT_BOX = {
   50.5,
   3.1
  ],
+ "kang_angry": [
+  148,
+  51.7,
+  3.9
+ ],
+ "kang_normal": [
+  148,
+  51.7,
+  3.7
+ ],
+ "kang_sad": [
+  147,
+  52.1,
+  3.4
+ ],
+ "kang_smile": [
+  148,
+  51.7,
+  3.7
+ ],
  "luna_normal": [
   153,
   50.3,
@@ -521,10 +841,45 @@ export const PORTRAIT_BOX = {
   50.3,
   3.5
  ],
+ "mom2_nervous": [
+  144,
+  51.5,
+  3.4
+ ],
+ "mom2_normal": [
+  144,
+  50.4,
+  3.4
+ ],
+ "mom2_smile": [
+  144,
+  50.0,
+  3.4
+ ],
  "mom_normal": [
   143,
   51.8,
   3.4
+ ],
+ "noh_nervous": [
+  153,
+  51.9,
+  3.3
+ ],
+ "noh_normal": [
+  153,
+  51.9,
+  3.3
+ ],
+ "noh_smile": [
+  153,
+  51.9,
+  3.3
+ ],
+ "noh_surprised": [
+  152,
+  51.9,
+  3.1
  ],
  "owner_normal": [
   155,
@@ -559,6 +914,26 @@ export const PORTRAIT_BOX = {
  "student_normal": [
   142,
   52.3,
+  3.4
+ ],
+ "sumin_nervous": [
+  144,
+  51.8,
+  3.4
+ ],
+ "sumin_normal": [
+  144,
+  52.2,
+  3.4
+ ],
+ "sumin_smile": [
+  179,
+  50.5,
+  3.8
+ ],
+ "sumin_surprised": [
+  144,
+  51.8,
   3.4
  ],
  "teacher_normal": [
@@ -615,5 +990,10 @@ export const PORTRAIT_BOX = {
   144,
   51.8,
   3.4
+ ],
+ "young_fisher_normal": [
+  170,
+  51.6,
+  3.7
  ]
 };

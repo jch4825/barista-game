@@ -9,8 +9,8 @@
 
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
-| 인물 스탠딩(새 인물 11명) | 설정화 11 + 표정 35장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 110장 + `docs/추가 제작.md`에 이미 있는 23장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
+| 장면 그림(CG) | 새로 98장 + `docs/추가 제작.md`에 이미 있는 22장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
@@ -23,336 +23,22 @@
 만드는 순서는 `docs/image_requests.md` 1장과 같습니다: ① 설정화 → ② 보통(설정화를 참조) → ③ 나머지 표정(보통을 참조). 무대에서 오른쪽을 보고 섭니다.
 표정은 대본에 쓰인 것만 적었습니다. 그림이 오기 전에는 임시 초상(SVG)으로 섭니다.
 
-### 1.1 도 씨 — 우체부 (id `do`)
-
-- 처음 나오는 날: 봄 3일 · 표정: normal + smile · surprised · worried
-- 임시 초상 색: 옷 #2F5D8A · 강조 #B0413E
-
-**① 설정화** `do_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of DO, Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `do_normal` · 9:16 · 참조: `do_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `do_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `do_smile` | smile | warm gentle smile, eyes softened |
-| `do_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-| `do_worried` | worried | worried expression, eyebrows drawn together, small frown |
-
-### 1.2 강 씨 — 어부 (id `kang`)
-
-- 처음 나오는 날: 봄 3일 · 표정: normal + smile
-- 임시 초상 색: 옷 #5E7154 · 강조 #3B5E6B
-
-**① 설정화** `kang_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of KANG, Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `kang_normal` · 9:16 · 참조: `kang_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `kang_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `kang_smile` | smile | warm gentle smile, eyes softened |
-
-### 1.3 한 씨 — 버스 기사 (id `han`)
-
-- 처음 나오는 날: 여름 2일 · 표정: normal + smile · surprised · worried
-- 임시 초상 색: 옷 #4A5D8A · 강조 #4A5D8A
-
-**① 설정화** `han_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of HAN, Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `han_normal` · 9:16 · 참조: `han_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `han_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `han_smile` | smile | warm gentle smile, eyes softened |
-| `han_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-| `han_worried` | worried | worried expression, eyebrows drawn together, small frown |
-
-### 1.4 은주 — 아기 엄마 (id `eunju`)
+### 1.1 은주 — 아기 엄마 (id `eunju`)
 
 - 처음 나오는 날: 여름 3일 · 표정: normal + sad · smile · surprised · worried · nervous
+- 이미 있는 것: 설정화 · 보통 · sad · smile · surprised · worried — 아래는 아직 없는 것만
 - 임시 초상 색: 옷 #E8B4C4 · 강조 #C2708A
 
-**① 설정화** `eunju_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of EUNJU, Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `eunju_normal` · 9:16 · 참조: `eunju_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
 
 **③ 나머지 표정** · 9:16 · 참조: `eunju_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
 
 | id | 표정 | `[표정]`에 넣을 문장 |
 | :--- | :--- | :--- |
-| `eunju_sad` | sad | quietly sad expression, eyes lowered, lips pressed together |
-| `eunju_smile` | smile | warm gentle smile, eyes softened |
-| `eunju_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-| `eunju_worried` | worried | worried expression, eyebrows drawn together, small frown |
 | `eunju_nervous` | nervous | nervous expression, eyebrows drawn together, small sweat drop, holding something tightly in front of the chest |
-
-### 1.5 수민 — 고3 학생 (id `sumin`)
-
-- 처음 나오는 날: 여름 3일 · 표정: normal + surprised · nervous · smile
-- 임시 초상 색: 옷 #3E4A7A · 강조 #5B6BB0
-
-**① 설정화** `sumin_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of SUMIN, Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `sumin_normal` · 9:16 · 참조: `sumin_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `sumin_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `sumin_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-| `sumin_nervous` | nervous | nervous expression, eyebrows drawn together, small sweat drop, holding something tightly in front of the chest |
-| `sumin_smile` | smile | warm gentle smile, eyes softened |
-
-### 1.6 노 씨 — 철물점 주인 (id `noh`)
-
-- 처음 나오는 날: 여름 4일 · 표정: normal + smile
-- 임시 초상 색: 옷 #7A6A55 · 강조 #8A5A2B
-
-**① 설정화** `noh_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of NOH, Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `noh_normal` · 9:16 · 참조: `noh_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `noh_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `noh_smile` | smile | warm gentle smile, eyes softened |
-
-### 1.7 금 씨 — 늘 바쁜 손님 (id `geum`)
-
-- 처음 나오는 날: 봄 2일 · 표정: normal + angry · surprised · smile
-- 임시 초상 색: 옷 #3A3A40 · 강조 #9A7A2A
-
-**① 설정화** `geum_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of GEUM, Korean man in his forties, a busy office worker who commutes by ferry, neat short black hair, dark charcoal suit with a slightly loosened tie, a smartphone in hand, a wristwatch.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `geum_normal` · 9:16 · 참조: `geum_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his forties, a busy office worker who commutes by ferry, neat short black hair, dark charcoal suit with a slightly loosened tie, a smartphone in hand, a wristwatch.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `geum_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `geum_angry` | angry | impatient irritated expression, frowning, glancing at a wristwatch |
-| `geum_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-| `geum_smile` | smile | warm gentle smile, eyes softened |
-
-### 1.8 배우 — 유명 배우 (id `actor`)
-
-- 처음 나오는 날: 봄 5일 · 표정: normal + smile · surprised
-- 임시 초상 색: 옷 #EDE6F2 · 강조 #7A4AA0
-
-**① 설정화** `actor_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of ACTOR, Korean woman in her early thirties, an original fictional actress (not resembling any real person), long dark brown wavy hair, large sunglasses pushed up on her head, elegant cream trench coat over a lavender knit, graceful but tired gentle face.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, surprised.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `actor_normal` · 9:16 · 참조: `actor_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean woman in her early thirties, an original fictional actress (not resembling any real person), long dark brown wavy hair, large sunglasses pushed up on her head, elegant cream trench coat over a lavender knit, graceful but tired gentle face.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `actor_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `actor_smile` | smile | warm gentle smile, eyes softened |
-| `actor_surprised` | surprised | surprised expression, eyes wide, eyebrows raised, mouth slightly open |
-
-### 1.9 매니저 — 배우의 매니저 (id `agent`)
-
-- 처음 나오는 날: 봄 5일 · 표정: normal + angry
-- 임시 초상 색: 옷 #2F3A55 · 강조 #5A5F6A
-
-**① 설정화** `agent_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of AGENT, Korean man in his thirties, an actor's manager, messy black hair, a black headset with a small microphone, navy padded vest over a gray hoodie, a walkie-talkie clipped to his belt.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `agent_normal` · 9:16 · 참조: `agent_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean man in his thirties, an actor's manager, messy black hair, a black headset with a small microphone, navy padded vest over a gray hoodie, a walkie-talkie clipped to his belt.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `agent_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `agent_angry` | angry | impatient irritated expression, frowning, glancing at a wristwatch |
-
-### 1.10 처음 온 엄마 — 손님 (id `mom2`)
-
-- 처음 나오는 날: 겨울 5일 · 표정: normal + nervous · smile
-- 임시 초상 색: 옷 #C9B79A · 강조 #B08A5A
-
-**① 설정화** `mom2_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of MOM2, Korean woman in her early thirties, a shy new mother, long dark brown hair, gentle face, beige knit coat, a baby carrier sling, a small light gray baby stroller.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `mom2_normal` · 9:16 · 참조: `mom2_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean woman in her early thirties, a shy new mother, long dark brown hair, gentle face, beige knit coat, a baby carrier sling, a small light gray baby stroller.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
-
-**③ 나머지 표정** · 9:16 · 참조: `mom2_normal` — `docs/image_requests.md` 1장 ③의 상자에 아래 문장을 넣습니다.
-
-| id | 표정 | `[표정]`에 넣을 문장 |
-| :--- | :--- | :--- |
-| `mom2_nervous` | nervous | nervous expression, eyebrows drawn together, small sweat drop, holding something tightly in front of the chest |
-| `mom2_smile` | smile | warm gentle smile, eyes softened |
-
-### 1.11 젊은 어부 — 어부 (id `young_fisher`)
-
-- 처음 나오는 날: 겨울 4일 · 표정: normal
-- 임시 초상 색: 옷 #E0A040 · 강조 #4A7A8A
-
-**① 설정화** `young_fisher_sheet` · 1:1
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution, plain white background.
-character design sheet of YOUNG_FISHER, Korean young man in his twenties, a young fisherman, messy black hair under a mustard yellow knit beanie, orange waterproof work jacket, black rubber boots.
-full-body front view and side view, three expression headshots on the right: calm, warm smile, thoughtful.
-Avoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.
-```
-
-**② 보통** `young_fisher_normal` · 9:16 · 참조: `young_fisher_sheet`
-```
-clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution.
-Korean young man in his twenties, a young fisherman, messy black hair under a mustard yellow knit beanie, orange waterproof work jacket, black rubber boots.
-full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, calm neutral expression, mouth closed, hands relaxed at the sides.
-plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.
-Same face and outfit as the reference image (character sheet).
-Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.
-```
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 110장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 23장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `summer_tourist_chair` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
+- 새로 요청하는 98장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 22장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -360,130 +46,108 @@ Avoid: text, letters, numbers, name tag writing, watermark, logo, extra fingers,
 
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
-| 1 | `memory_city` | 기억 · 도시의 큰 카페 | 봄 1일 | `jieun_sheet` · `hall_busy_summer` |
-| 2 | `spring_bus_window` | 바닷가로 가는 버스 | 봄 1일 | `jieun_sheet` · `bus_terminal_evening` |
-| 3 | `kang_dark_window` | 불 꺼진 창 | 봄 3일 | `kang_sheet` · `cafe_front_morning` |
-| 4 | `kang_light_on` | 불 켜진 창 | 봄 3일 | `kang_sheet` · `cafe_front_morning` |
-| 5 | `do_standing` | 서서 마시는 사람 | 봄 3일 | `do_sheet` · `hall_spring` |
-| 6 | `do_chair_out` | 빼 둔 의자 | 봄 3일 | `do_sheet` · `hall_spring` |
-| 7 | `do_rain_letters` | 젖은 편지 | 봄 4일 | `do_sheet` · `hall_spring` |
-| 8 | `do_towel` | 마른 수건 | 봄 4일 | `do_sheet` · `hall_spring` |
-| 9 | `spring_crew` | 봄 · 벚꽃 주간의 촬영 | 봄 5일 | `actor_sheet` · `agent_sheet` · `alley_morning` |
-| 10 | `actor_quiet` | 조용해서 좋네요 | 봄 5일 | `actor_sheet` · `hall_spring` |
-| 11 | `owner_cup_shake` | 아주 조금 흔들린 잔 | 봄 5일 | `owner_sheet` · `hall_evening` |
-| 12 | `kang_window_sea` | 바다 안 나가요 | 봄 6일 | `kang_sheet` · `harbor_dawn` |
-| 13 | `kang_warm_cup` | 따뜻한 새 잔 | 봄 6일 | `kang_sheet` · `hall_morning` |
-| 14 | `spring_name` | 봄 · 지은 씨 | 봄 7일 | `haesun_sheet` · `jieun_sheet` · `hall_spring` |
-| 15 | `summer_rumor` | 여름 · 사진을 들고 온 사람들 | 여름 1일 | `cafe_front_morning` |
-| 16 | `summer_cameo` | 바다를 보러 온 두 사람 | 여름 1일 | `yeonwoo_sheet` · `dohyun_sheet` · `hall_summer` |
-| 17 | `han_watch` | 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
-| 18 | `han_sits` | 앉아서 마시는 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
-| 19 | `eunju_cold_cup` | 늘 식는 커피 | 여름 3일 | `eunju_sheet` · `hall_summer` |
-| 20 | `eunju_thick_cup` | 두꺼운 컵 | 여름 3일 | `eunju_sheet` · `hall_summer` |
-| 21 | `sumin_corner` | 구석의 이어폰 | 여름 3일 | `sumin_sheet` · `hall_summer` |
-| 22 | `sumin_nod` | 작은 끄덕임 | 여름 3일 | `sumin_sheet` · `hall_summer` |
-| 23 | `noh_spoon` | 떨리는 숟가락 | 여름 4일 | `owner_sheet` · `noh_sheet` · `hall_summer` |
-| 24 | `noh_window_talk` | 바람이 좋네 | 여름 4일 | `noh_sheet` · `hall_summer` |
-| 25 | `owner_apron` | 다시 맨 앞치마 끈 | 여름 4일 | `owner_sheet` · `jieun_sheet` · `hall_evening` |
-| 26 | `do_heavy_bag` | 무거운 가방 | 여름 5일 | `do_sheet` · `hall_summer` |
-| 27 | `do_hook` | 문 옆의 못 | 여름 5일 | `do_sheet` · `hall_summer` |
-| 28 | `eunju_listens` | 옆 탁자의 웃음소리 | 여름 5일 | `eunju_sheet` · `hall_summer` |
-| 29 | `eunju_baby_talk` | 여섯 달 | 여름 5일 | `eunju_sheet` · `hall_summer` |
-| 30 | `owner_pocket` | 주머니 속의 손 | 여름 6일 | `owner_sheet` · `hall_busy_summer` |
-| 31 | `sumin_eave` | 처마 밑의 비 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
-| 32 | `sumin_umbrella` | 세워 둔 우산 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
-| 33 | `summer_chalk_rule` | 여름 · 동네 시간 | 여름 6일 | `owner_sheet` · `hall_evening` |
-| 34 | `han_clock` | 여섯 시 십 분 | 여름 7일 | `jieun_sheet` · `hall_morning` |
-| 35 | `han_cup_ready` | 미리 놓인 컵 | 여름 7일 | `han_sheet` · `hall_morning` |
-| 36 | `kang_returns` | 며칠 만에 온 날 | 여름 7일 | `kang_sheet` · `hall_morning` |
-| 37 | `kang_black_again` | 이 맛이지 | 여름 7일 | `kang_sheet` · `hall_morning` |
-| 38 | `summer_village_time` | 여름 · 동네 시간의 첫 아침 | 여름 7일 | `kang_sheet` · `do_sheet` · `han_sheet` · `noh_sheet` · `haesun_sheet` · `hall_morning` |
-| 39 | `autumn_first_drip` | 처음 내리는 새벽 블랙 | 가을 1일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
-| 40 | `kang_suit` | 양복 | 가을 2일 | `kang_sheet` · `hall_autumn` |
-| 41 | `kang_suit_cup` | 역시 여기가 편하네 | 가을 2일 | `kang_sheet` · `hall_autumn` |
-| 42 | `han_photo` | 딸 사진 | 가을 2일 | `han_sheet` · `hall_autumn` |
-| 43 | `han_memo` | 메모지 한 장 | 가을 2일 | `han_sheet` · `hall_autumn` |
-| 44 | `noh_shelf` | 낮아진 선반 | 가을 3일 | `noh_sheet` · `hall_autumn` |
-| 45 | `noh_wink` | 눈치가 있구먼 | 가을 3일 | `noh_sheet` · `hall_autumn` |
-| 46 | `eunju_door` | 걸리는 유모차 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
-| 47 | `eunju_space` | 창가 자리 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
-| 48 | `festival_rush` | 가을 · 마을 축제 | 가을 4일 | `jieun_sheet` · `festival_alley_autumn` |
-| 49 | `owner_drop` | 손님들 앞에서 놓친 컵 | 가을 4일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
-| 50 | `machine_stop` | 멈춘 머신 | 가을 4일 | `jieun_sheet` · `hall_autumn` |
-| 51 | `haesun_alley_greet` | 골목의 첫 인사 | 가을 5일 | `haesun_sheet` · `jieun_sheet` · `alley_morning` |
-| 52 | `do_notice` | 퇴직 소식 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 53 | `do_cup_chair` | 의자 앞의 잔 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 54 | `do_first_sit` | 서른 해 만에 앉은 의자 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 55 | `sumin_brochure` | 떨어진 안내서 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
-| 56 | `sumin_brochure_back` | 뒤집어 건넨 종이 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
-| 57 | `sumin_exam_morning` | 수능 날 아침 | 가을 6일 | `sumin_sheet` · `hall_morning` |
-| 58 | `sumin_sleeve` | 슬리브의 파도 | 가을 6일 | `sumin_sheet` · `hall_morning` |
-| 59 | `han_fog` | 안개로 늦은 날 | 가을 6일 | `han_sheet` · `bus_terminal_evening` |
-| 60 | `han_cup_hands` | 두 손으로 건넨 잔 | 가을 6일 | `han_sheet` · `hall_morning` |
-| 61 | `jieun_spill` | 혼자 서두른 날 | 가을 6일 | `jieun_sheet` · `hall_autumn` |
-| 62 | `owner_memo` | 선반의 메모 | 가을 6일 | `jieun_sheet` · `hall_evening` |
-| 63 | `noh_empty_mug` | 사장님의 빈 잔 | 가을 7일 | `noh_sheet` · `hall_evening` |
-| 64 | `noh_newspaper` | 펴 놓은 신문 | 가을 7일 | `noh_sheet` · `hall_evening` |
-| 65 | `noh_same` | 가을 · 같네 | 가을 7일 | `noh_sheet` · `jieun_sheet` · `hall_evening` |
-| 66 | `kang_first_snow` | 첫눈과 소문 | 겨울 1일 | `kang_sheet` · `hall_winter` |
-| 67 | `kang_warm_mug` | 잔까지 따뜻하네 | 겨울 1일 | `kang_sheet` · `hall_winter` |
-| 68 | `eunju_tired` | 지친 얼굴 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
-| 69 | `eunju_heard` | 물어봐 준 사람 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
-| 70 | `kang_secret` | 배를 판 날 | 겨울 2일 | `kang_sheet` · `harbor_dawn` |
-| 71 | `noh_heater` | 지나가다 들른 아침 | 겨울 2일 | `noh_sheet` · `hall_winter` |
-| 72 | `noh_mix_winter` | 사장 맛이 나 | 겨울 2일 | `noh_sheet` · `hall_winter` |
-| 73 | `sumin_envelope` | 봉투 | 겨울 2일 | `sumin_sheet` · `hall_winter` |
-| 74 | `sumin_wait` | 기다리는 컵 닦기 | 겨울 2일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 75 | `han_with_daughter` | 딸과 함께 온 새벽 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
-| 76 | `han_two_cups` | 코코아 한 잔 더 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
-| 77 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 78 | `do_last_day` | 마지막 배달 | 겨울 3일 | `do_sheet` · `cafe_front_morning` |
-| 79 | `do_last_hook` | 마지막으로 건 가방 | 겨울 3일 | `do_sheet` · `hall_evening` |
-| 80 | `winter_storm` | 겨울 · 폭설 | 겨울 4일 | `jieun_sheet` · `alley_morning` |
-| 81 | `noh_lantern` | 랜턴 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
-| 82 | `noh_lantern_hung` | 원래 자리 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
-| 83 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
-| 84 | `winter_gathering2` | 겨울 · 천천히 해요 | 겨울 4일 | `han_sheet` · `eunju_sheet` · `sumin_sheet` · `noh_sheet` · `geum_sheet` · `hall_blackout` |
-| 85 | `winter_dawn_power` | 불이 들어온 새벽 | 겨울 4일 | `jieun_sheet` · `hall_winter` |
-| 86 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
-| 87 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
-| 88 | `eunju_friend` | 처음 온 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
-| 89 | `eunju_two_moms` | 두 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
-| 90 | `haesun_secret` | 남편의 마지막 주문 | 겨울 6일 | `haesun_sheet` · `hall_winter` |
-| 91 | `noh_secret` | 처음 떨린 날 | 겨울 6일 | `noh_sheet` · `hall_winter` |
-| 92 | `eunju_secret` | 일주일의 말 | 겨울 6일 | `eunju_sheet` · `hall_winter` |
-| 93 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
-| 94 | `winter_wipe_cups` | 눈 그친 아침 | 겨울 7일 | `jieun_sheet` · `hall_winter` |
-| 95 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 96 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
-| 97 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
-| 98 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 99 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
-| 100 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 101 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
-| 102 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 103 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 104 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
-| 105 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
-| 106 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
-| 107 | `do_candy` | 봄 · 도 씨의 사탕 주머니 | 봄 4일 | `do_sheet` · `hall_spring` |
-| 108 | `haesun_jar` | 봄 · 한 번에 열린 병뚜껑 | 봄 7일 | `haesun_sheet` · `jieun_sheet` · `hall_spring` |
-| 109 | `sumin_gull` | 가을 · 갈매기와 수민 | 가을 5일 | `jieun_sheet` · `sumin_sheet` · `hall_autumn` |
-| 110 | `kang_peekaboo` | 겨울 · 강 씨의 까꿍 | 겨울 4일 | `kang_sheet` · `eunju_sheet` · `hall_blackout` |
+| 1 | `spring_bus_window` | 바닷가로 가는 버스 | 봄 1일 | `jieun_sheet` · `bus_terminal_evening` |
+| 2 | `kang_warm_cup` | 따뜻한 새 잔 | 봄 6일 | `kang_sheet` · `hall_morning` |
+| 3 | `summer_rumor` | 여름 · 사진을 들고 온 사람들 | 여름 1일 | `cafe_front_morning` |
+| 4 | `summer_cameo` | 바다를 보러 온 두 사람 | 여름 1일 | `yeonwoo_sheet` · `dohyun_sheet` · `hall_summer` |
+| 5 | `han_watch` | 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
+| 6 | `han_sits` | 앉아서 마시는 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
+| 7 | `eunju_cold_cup` | 늘 식는 커피 | 여름 3일 | `eunju_sheet` · `hall_summer` |
+| 8 | `eunju_thick_cup` | 두꺼운 컵 | 여름 3일 | `eunju_sheet` · `hall_summer` |
+| 9 | `sumin_corner` | 구석의 이어폰 | 여름 3일 | `sumin_sheet` · `hall_summer` |
+| 10 | `sumin_nod` | 작은 끄덕임 | 여름 3일 | `sumin_sheet` · `hall_summer` |
+| 11 | `noh_spoon` | 떨리는 숟가락 | 여름 4일 | `owner_sheet` · `noh_sheet` · `hall_summer` |
+| 12 | `noh_window_talk` | 바람이 좋네 | 여름 4일 | `noh_sheet` · `hall_summer` |
+| 13 | `owner_apron` | 다시 맨 앞치마 끈 | 여름 4일 | `owner_sheet` · `jieun_sheet` · `hall_evening` |
+| 14 | `do_heavy_bag` | 무거운 가방 | 여름 5일 | `do_sheet` · `hall_summer` |
+| 15 | `do_hook` | 문 옆의 못 | 여름 5일 | `do_sheet` · `hall_summer` |
+| 16 | `eunju_listens` | 옆 탁자의 웃음소리 | 여름 5일 | `eunju_sheet` · `hall_summer` |
+| 17 | `eunju_baby_talk` | 여섯 달 | 여름 5일 | `eunju_sheet` · `hall_summer` |
+| 18 | `owner_pocket` | 주머니 속의 손 | 여름 6일 | `owner_sheet` · `hall_busy_summer` |
+| 19 | `sumin_eave` | 처마 밑의 비 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
+| 20 | `sumin_umbrella` | 세워 둔 우산 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
+| 21 | `summer_chalk_rule` | 여름 · 동네 시간 | 여름 6일 | `owner_sheet` · `hall_evening` |
+| 22 | `han_clock` | 여섯 시 십 분 | 여름 7일 | `jieun_sheet` · `hall_morning` |
+| 23 | `han_cup_ready` | 미리 놓인 컵 | 여름 7일 | `han_sheet` · `hall_morning` |
+| 24 | `kang_returns` | 며칠 만에 온 날 | 여름 7일 | `kang_sheet` · `hall_morning` |
+| 25 | `kang_black_again` | 이 맛이지 | 여름 7일 | `kang_sheet` · `hall_morning` |
+| 26 | `summer_village_time` | 여름 · 동네 시간의 첫 아침 | 여름 7일 | `kang_sheet` · `do_sheet` · `han_sheet` · `noh_sheet` · `haesun_sheet` · `hall_morning` |
+| 27 | `autumn_first_drip` | 처음 내리는 새벽 블랙 | 가을 1일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
+| 28 | `kang_suit` | 양복 | 가을 2일 | `kang_sheet` · `hall_autumn` |
+| 29 | `kang_suit_cup` | 역시 여기가 편하네 | 가을 2일 | `kang_sheet` · `hall_autumn` |
+| 30 | `han_photo` | 딸 사진 | 가을 2일 | `han_sheet` · `hall_autumn` |
+| 31 | `han_memo` | 메모지 한 장 | 가을 2일 | `han_sheet` · `hall_autumn` |
+| 32 | `noh_shelf` | 낮아진 선반 | 가을 3일 | `noh_sheet` · `hall_autumn` |
+| 33 | `noh_wink` | 눈치가 있구먼 | 가을 3일 | `noh_sheet` · `hall_autumn` |
+| 34 | `eunju_door` | 걸리는 유모차 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
+| 35 | `eunju_space` | 창가 자리 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
+| 36 | `festival_rush` | 가을 · 마을 축제 | 가을 4일 | `jieun_sheet` · `festival_alley_autumn` |
+| 37 | `owner_drop` | 손님들 앞에서 놓친 컵 | 가을 4일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
+| 38 | `machine_stop` | 멈춘 머신 | 가을 4일 | `jieun_sheet` · `hall_autumn` |
+| 39 | `haesun_alley_greet` | 골목의 첫 인사 | 가을 5일 | `haesun_sheet` · `jieun_sheet` · `alley_morning` |
+| 40 | `do_notice` | 퇴직 소식 | 가을 5일 | `do_sheet` · `hall_autumn` |
+| 41 | `do_cup_chair` | 의자 앞의 잔 | 가을 5일 | `do_sheet` · `hall_autumn` |
+| 42 | `do_first_sit` | 서른 해 만에 앉은 의자 | 가을 5일 | `do_sheet` · `hall_autumn` |
+| 43 | `sumin_brochure` | 떨어진 안내서 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
+| 44 | `sumin_brochure_back` | 뒤집어 건넨 종이 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
+| 45 | `sumin_exam_morning` | 수능 날 아침 | 가을 6일 | `sumin_sheet` · `hall_morning` |
+| 46 | `sumin_sleeve` | 슬리브의 파도 | 가을 6일 | `sumin_sheet` · `hall_morning` |
+| 47 | `han_fog` | 안개로 늦은 날 | 가을 6일 | `han_sheet` · `bus_terminal_evening` |
+| 48 | `han_cup_hands` | 두 손으로 건넨 잔 | 가을 6일 | `han_sheet` · `hall_morning` |
+| 49 | `jieun_spill` | 혼자 서두른 날 | 가을 6일 | `jieun_sheet` · `hall_autumn` |
+| 50 | `owner_memo` | 선반의 메모 | 가을 6일 | `jieun_sheet` · `hall_evening` |
+| 51 | `noh_empty_mug` | 사장님의 빈 잔 | 가을 7일 | `noh_sheet` · `hall_evening` |
+| 52 | `noh_newspaper` | 펴 놓은 신문 | 가을 7일 | `noh_sheet` · `hall_evening` |
+| 53 | `noh_same` | 가을 · 같네 | 가을 7일 | `noh_sheet` · `jieun_sheet` · `hall_evening` |
+| 54 | `kang_first_snow` | 첫눈과 소문 | 겨울 1일 | `kang_sheet` · `hall_winter` |
+| 55 | `kang_warm_mug` | 잔까지 따뜻하네 | 겨울 1일 | `kang_sheet` · `hall_winter` |
+| 56 | `eunju_tired` | 지친 얼굴 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
+| 57 | `eunju_heard` | 물어봐 준 사람 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
+| 58 | `kang_secret` | 배를 판 날 | 겨울 2일 | `kang_sheet` · `harbor_dawn` |
+| 59 | `noh_heater` | 지나가다 들른 아침 | 겨울 2일 | `noh_sheet` · `hall_winter` |
+| 60 | `noh_mix_winter` | 사장 맛이 나 | 겨울 2일 | `noh_sheet` · `hall_winter` |
+| 61 | `sumin_envelope` | 봉투 | 겨울 2일 | `sumin_sheet` · `hall_winter` |
+| 62 | `sumin_wait` | 기다리는 컵 닦기 | 겨울 2일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
+| 63 | `han_with_daughter` | 딸과 함께 온 새벽 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
+| 64 | `han_two_cups` | 코코아 한 잔 더 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
+| 65 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
+| 66 | `do_last_day` | 마지막 배달 | 겨울 3일 | `do_sheet` · `cafe_front_morning` |
+| 67 | `do_last_hook` | 마지막으로 건 가방 | 겨울 3일 | `do_sheet` · `hall_evening` |
+| 68 | `winter_storm` | 겨울 · 폭설 | 겨울 4일 | `jieun_sheet` · `alley_morning` |
+| 69 | `noh_lantern` | 랜턴 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
+| 70 | `noh_lantern_hung` | 원래 자리 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
+| 71 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
+| 72 | `winter_gathering2` | 겨울 · 천천히 해요 | 겨울 4일 | `han_sheet` · `eunju_sheet` · `sumin_sheet` · `noh_sheet` · `geum_sheet` · `hall_blackout` |
+| 73 | `winter_dawn_power` | 불이 들어온 새벽 | 겨울 4일 | `jieun_sheet` · `hall_winter` |
+| 74 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
+| 75 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
+| 76 | `eunju_friend` | 처음 온 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
+| 77 | `eunju_two_moms` | 두 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
+| 78 | `haesun_secret` | 남편의 마지막 주문 | 겨울 6일 | `haesun_sheet` · `hall_winter` |
+| 79 | `noh_secret` | 처음 떨린 날 | 겨울 6일 | `noh_sheet` · `hall_winter` |
+| 80 | `eunju_secret` | 일주일의 말 | 겨울 6일 | `eunju_sheet` · `hall_winter` |
+| 81 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
+| 82 | `winter_wipe_cups` | 눈 그친 아침 | 겨울 7일 | `jieun_sheet` · `hall_winter` |
+| 83 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 84 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
+| 85 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
+| 86 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 87 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
+| 88 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 89 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
+| 90 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 91 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 92 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
+| 93 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
+| 94 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
+| 95 | `do_candy` | 봄 · 도 씨의 사탕 주머니 | 봄 4일 | `do_sheet` · `hall_spring` |
+| 96 | `haesun_jar` | 봄 · 한 번에 열린 병뚜껑 | 봄 7일 | `haesun_sheet` · `jieun_sheet` · `hall_spring` |
+| 97 | `sumin_gull` | 가을 · 갈매기와 수민 | 가을 5일 | `jieun_sheet` · `sumin_sheet` · `hall_autumn` |
+| 98 | `kang_peekaboo` | 겨울 · 강 씨의 까꿍 | 겨울 4일 | `kang_sheet` · `eunju_sheet` · `hall_blackout` |
 
 ### 2.1 프롬프트
 
-#### 1. `memory_city` · 기억 · 도시의 큰 카페
-
-- 나오는 날: 봄 1일 · 장면: 줄이 길다. "빨리 좀 해 주세요!" · 참조: `jieun_sheet` · `hall_busy_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Memory scene, slightly desaturated: a crowded big chain coffee shop in a city at lunch rush, a long impatient line of office workers, JIEUN behind the counter in a different plain black apron, her hands hurrying, a latte cup tipping over and spilling across the counter, her face tense.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 2. `spring_bus_window` · 바닷가로 가는 버스
+#### 1. `spring_bus_window` · 바닷가로 가는 버스
 
 - 나오는 날: 봄 1일 · 장면: 창밖으로 바다가 보이기 시작한다 · 참조: `jieun_sheet` · `bus_terminal_evening`
 
@@ -493,116 +157,7 @@ Scene: (바닷가로 가는 버스) 창밖으로 바다가 보이기 시작한�
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 3. `kang_dark_window` · 불 꺼진 창
-
-- 나오는 날: 봄 3일 · 장면: 새벽, 깜깜한 카페 앞 · 참조: `kang_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Before dawn, dark blue sky: KANG stands outside the closed glass door of the small old cafe, rubbing his cold hands, looking at the dark unlit window, not touching the door handle.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 4. `kang_light_on` · 불 켜진 창
-
-- 나오는 날: 봄 3일 · 장면: 창에 불이 들어온다 · 참조: `kang_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Before dawn: the cafe window suddenly glows with warm yellow light; KANG outside looks up at the lit window with a small relieved smile, his breath visible in the cold air.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 5. `do_standing` · 서서 마시는 사람
-
-- 나오는 날: 봄 3일 · 장면: 무거운 우편 가방 · 참조: `do_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Morning inside the cafe: DO stands at the counter drinking iced americano from a glass, the heavy mailbag pulling one shoulder down, an empty wooden chair right beside him that he does not look at.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 6. `do_chair_out` · 빼 둔 의자
-
-- 나오는 날: 봄 3일 · 장면: 한 칸 빼 둔 의자 · 참조: `do_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Morning inside the cafe: the wooden chair beside the counter has been pulled out a little, ready to sit; DO looks at the pulled-out chair for a long moment with a soft surprised smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 7. `do_rain_letters` · 젖은 편지
-
-- 나오는 날: 봄 4일 · 장면: 자기보다 편지를 먼저 · 참조: `do_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Rainy afternoon: DO comes in soaking wet with water dripping from his cap, hugging the mailbag to his chest, wiping the letters dry with his wet sleeve before his own face; rain streaks on the window.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 8. `do_towel` · 마른 수건
-
-- 나오는 날: 봄 4일 · 장면: 편지가 안 젖었네 · 참조: `do_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Rainy afternoon: two dry folded towels on the counter; DO carefully wipes the letters one by one with a towel, relieved, his own hair still wet.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 9. `spring_crew` · 봄 · 벚꽃 주간의 촬영
-
-- 나오는 날: 봄 5일 · 장면: 골목에 벚꽃, 촬영 팀 · 참조: `actor_sheet` · `agent_sheet` · `alley_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): ACTOR: Korean woman in her early thirties, an original fictional actress (not resembling any real person), long dark brown wavy hair, large sunglasses pushed up on her head, elegant cream trench coat over a lavender knit, graceful but tired gentle face; AGENT: Korean man in his thirties, an actor's manager, messy black hair, a black headset with a small microphone, navy padded vest over a gray hoodie, a walkie-talkie clipped to his belt.
-Scene: Cherry blossom week in the narrow seaside alley: petals falling, a small TV drama film crew with cameras, a boom microphone and reflectors, curious villagers watching; the ACTOR in sunglasses and the MANAGER with a headset walking toward the cafe.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 10. `actor_quiet` · 조용해서 좋네요
-
-- 나오는 날: 봄 5일 · 장면: 창밖의 벚꽃 · 참조: `actor_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): ACTOR: Korean woman in her early thirties, an original fictional actress (not resembling any real person), long dark brown wavy hair, large sunglasses pushed up on her head, elegant cream trench coat over a lavender knit, graceful but tired gentle face.
-Scene: Inside the cafe by the window: the ACTOR sits alone, sunglasses off, quietly gazing at cherry blossoms outside, an untouched iced coffee with melting ice in front of her, a peaceful tired expression.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 11. `owner_cup_shake` · 아주 조금 흔들린 잔
-
-- 나오는 날: 봄 5일 · 장면: 사장님은 잔을 두 손으로 잡는다 · 참조: `owner_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Evening after closing, only one lamp on: the OWNER holds a white cup of warm milk carefully with both hands, calm and still, looking down into the cup; JIEUN in the background wiping the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 12. `kang_window_sea` · 바다 안 나가요
-
-- 나오는 날: 봄 6일 · 장면: 항구 끝의 빈자리 · 참조: `kang_sheet` · `harbor_dawn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn at the harbor seen through the cafe window: KANG sits at his usual back table beside the side window, holding a cup of black coffee, staring at one empty mooring spot at the end of the pier while the other boats leave.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 13. `kang_warm_cup` · 따뜻한 새 잔
+#### 2. `kang_warm_cup` · 따뜻한 새 잔
 
 - 나오는 날: 봄 6일 · 장면: 두 손으로 감싼 잔 · 참조: `kang_sheet` · `hall_morning`
 
@@ -613,17 +168,7 @@ Scene: Dawn inside the cafe: KANG wraps both big rough hands around a fresh stea
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 14. `spring_name` · 봄 · 지은 씨
-
-- 나오는 날: 봄 7일 · 장면: "지은 씨, 내일 또 봐요." · 참조: `haesun_sheet` · `jieun_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Spring morning by the window: HAESUN stands up from her seat, smiling warmly at JIEUN as she says goodbye; two cups of warm milk on the table, one in front of the empty chair; falling petals outside.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 15. `summer_rumor` · 여름 · 사진을 들고 온 사람들
+#### 3. `summer_rumor` · 여름 · 사진을 들고 온 사람들
 
 - 나오는 날: 여름 1일 · 장면: "배우가 다녀간 카페!" · 참조: `cafe_front_morning`
 
@@ -633,7 +178,7 @@ Scene: Bright summer morning in front of the cafe: tourists in summer clothes li
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 16. `summer_cameo` · 바다를 보러 온 두 사람
+#### 4. `summer_cameo` · 바다를 보러 온 두 사람
 
 - 나오는 날: 여름 1일 · 장면: 쉬는 날, 바닷가 마을 · 참조: `yeonwoo_sheet` · `dohyun_sheet` · `hall_summer`
 
@@ -643,7 +188,7 @@ Scene: Summer inside the cafe by the window: YEONWOO and DOHYUN, two city barist
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 17. `han_watch` · 10분
+#### 5. `han_watch` · 10분
 
 - 나오는 날: 여름 2일 · 장면: 마지막 밤 버스 · 참조: `han_sheet` · `hall_morning`
 
@@ -654,7 +199,7 @@ Scene: Early dawn inside the cafe: HAN stands at the counter in his bus driver u
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 18. `han_sits` · 앉아서 마시는 10분
+#### 6. `han_sits` · 앉아서 마시는 10분
 
 - 나오는 날: 여름 2일 · 장면: 오랜만에 앉은 의자 · 참조: `han_sheet` · `hall_morning`
 
@@ -665,7 +210,7 @@ Scene: Early dawn: HAN sits down on a chair for the first time, watching JIEUN m
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 19. `eunju_cold_cup` · 늘 식는 커피
+#### 7. `eunju_cold_cup` · 늘 식는 커피
 
 - 나오는 날: 여름 3일 · 장면: 한 모금도 못 마신 라테 · 참조: `eunju_sheet` · `hall_summer`
 
@@ -676,7 +221,7 @@ Scene: Summer inside the cafe by the window: EUNJU rocks a baby stroller with on
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 20. `eunju_thick_cup` · 두꺼운 컵
+#### 8. `eunju_thick_cup` · 두꺼운 컵
 
 - 나오는 날: 여름 3일 · 장면: 이건 천천히 식어요 · 참조: `eunju_sheet` · `hall_summer`
 
@@ -687,7 +232,7 @@ Scene: Summer inside the cafe: EUNJU wraps both hands around a thick double-wall
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 21. `sumin_corner` · 구석의 이어폰
+#### 9. `sumin_corner` · 구석의 이어폰
 
 - 나오는 날: 여름 3일 · 장면: 벽 쪽으로 돌린 의자 · 참조: `sumin_sheet` · `hall_summer`
 
@@ -698,7 +243,7 @@ Scene: Summer afternoon: SUMIN sits in the farthest corner seat with her chair t
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 22. `sumin_nod` · 작은 끄덕임
+#### 10. `sumin_nod` · 작은 끄덕임
 
 - 나오는 날: 여름 3일 · 장면: 말없이 놓인 보리차 · 참조: `sumin_sheet` · `hall_summer`
 
@@ -709,7 +254,7 @@ Scene: Summer afternoon in the corner seat: a glass of iced barley tea has been 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 23. `noh_spoon` · 떨리는 숟가락
+#### 11. `noh_spoon` · 떨리는 숟가락
 
 - 나오는 날: 여름 4일 · 장면: 종이컵 안의 숟가락 · 참조: `owner_sheet` · `noh_sheet` · `hall_summer`
 
@@ -720,7 +265,7 @@ Scene: Summer morning at the counter: the OWNER stirs a paper cup of instant mix
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 24. `noh_window_talk` · 바람이 좋네
+#### 12. `noh_window_talk` · 바람이 좋네
 
 - 나오는 날: 여름 4일 · 장면: 창밖의 잔잔한 바다 · 참조: `noh_sheet` · `hall_summer`
 
@@ -731,7 +276,7 @@ Scene: Summer morning: NOH and JIEUN both look out the window at the calm glitte
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 25. `owner_apron` · 다시 맨 앞치마 끈
+#### 13. `owner_apron` · 다시 맨 앞치마 끈
 
 - 나오는 날: 여름 4일 · 장면: 아무 말 없이 · 참조: `owner_sheet` · `jieun_sheet` · `hall_evening`
 
@@ -741,7 +286,7 @@ Scene: Summer evening after closing: JIEUN wipes cups at the counter while the O
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 26. `do_heavy_bag` · 무거운 가방
+#### 14. `do_heavy_bag` · 무거운 가방
 
 - 나오는 날: 여름 5일 · 장면: 소포가 많은 계절 · 참조: `do_sheet` · `hall_summer`
 
@@ -752,7 +297,7 @@ Scene: Hot summer morning: DO hugs a bulging mailbag stuffed with parcels, about
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 27. `do_hook` · 문 옆의 못
+#### 15. `do_hook` · 문 옆의 못
 
 - 나오는 날: 여름 5일 · 장면: 어깨가 가볍네 · 참조: `do_sheet` · `hall_summer`
 
@@ -763,7 +308,7 @@ Scene: Summer morning: a sturdy new hook on the wall beside the door; DO hangs h
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 28. `eunju_listens` · 옆 탁자의 웃음소리
+#### 16. `eunju_listens` · 옆 탁자의 웃음소리
 
 - 나오는 날: 여름 5일 · 장면: 아기랑만 하는 이야기 · 참조: `eunju_sheet` · `hall_summer`
 
@@ -774,7 +319,7 @@ Scene: Summer afternoon: EUNJU sits alone by the window with a sleeping baby in 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 29. `eunju_baby_talk` · 여섯 달
+#### 17. `eunju_baby_talk` · 여섯 달
 
 - 나오는 날: 여름 5일 · 장면: 어제 처음 뒤집기를 했어요 · 참조: `eunju_sheet` · `hall_summer`
 
@@ -785,7 +330,7 @@ Scene: Summer afternoon: EUNJU happily tells JIEUN about her baby, glowing with 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 30. `owner_pocket` · 주머니 속의 손
+#### 18. `owner_pocket` · 주머니 속의 손
 
 - 나오는 날: 여름 6일 · 장면: 컵을 흘린 뒤 · 참조: `owner_sheet` · `hall_busy_summer`
 
@@ -795,7 +340,7 @@ Scene: Very busy summer day: coffee spilled on the counter from a tipped cup; th
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 31. `sumin_eave` · 처마 밑의 비
+#### 19. `sumin_eave` · 처마 밑의 비
 
 - 나오는 날: 여름 6일 · 장면: 우산이 없다 · 참조: `sumin_sheet` · `cafe_front_morning`
 
@@ -806,7 +351,7 @@ Scene: Summer evening heavy rain: SUMIN stands under the cafe's narrow eave in h
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 32. `sumin_umbrella` · 세워 둔 우산
+#### 20. `sumin_umbrella` · 세워 둔 우산
 
 - 나오는 날: 여름 6일 · 장면: 작은 인사 · 참조: `sumin_sheet` · `cafe_front_morning`
 
@@ -817,7 +362,7 @@ Scene: Summer evening rain: a cafe umbrella has been quietly propped next to SUM
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 33. `summer_chalk_rule` · 여름 · 동네 시간
+#### 21. `summer_chalk_rule` · 여름 · 동네 시간
 
 - 나오는 날: 여름 6일 · 장면: 사장님이 칠판에 쓴 한 줄 · 참조: `owner_sheet` · `hall_evening`
 
@@ -827,7 +372,7 @@ Scene: Late summer night after closing: the OWNER stands at the wall chalkboard 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 34. `han_clock` · 여섯 시 십 분
+#### 22. `han_clock` · 여섯 시 십 분
 
 - 나오는 날: 여름 7일 · 장면: 종점의 버스 불빛 · 참조: `jieun_sheet` · `hall_morning`
 
@@ -837,7 +382,7 @@ Scene: Before dawn inside the cafe: the wall clock shows 6:07; through the windo
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 35. `han_cup_ready` · 미리 놓인 컵
+#### 23. `han_cup_ready` · 미리 놓인 컵
 
 - 나오는 날: 여름 7일 · 장면: 내 거예요? · 참조: `han_sheet` · `hall_morning`
 
@@ -848,7 +393,7 @@ Scene: Dawn: a takeaway paper cup already waiting on the counter; HAN, just walk
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 36. `kang_returns` · 며칠 만에 온 날
+#### 24. `kang_returns` · 며칠 만에 온 날
 
 - 나오는 날: 여름 7일 · 장면: 두 손을 탁자 위에 · 참조: `kang_sheet` · `hall_morning`
 
@@ -859,7 +404,7 @@ Scene: Dawn: KANG sits at his usual back table beside the side window after days
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 37. `kang_black_again` · 이 맛이지
+#### 25. `kang_black_again` · 이 맛이지
 
 - 나오는 날: 여름 7일 · 장면: 늘 쓰던 잔 · 참조: `kang_sheet` · `hall_morning`
 
@@ -870,7 +415,7 @@ Scene: Dawn: KANG holds his usual mug of black coffee, looking at it for a long 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 38. `summer_village_time` · 여름 · 동네 시간의 첫 아침
+#### 26. `summer_village_time` · 여름 · 동네 시간의 첫 아침
 
 - 나오는 날: 여름 7일 · 장면: 조용한 새벽, 단골 다섯 · 참조: `kang_sheet` · `do_sheet` · `han_sheet` · `noh_sheet` · `haesun_sheet` · `hall_morning`
 
@@ -881,7 +426,7 @@ Scene: Quiet summer dawn inside the cafe, no tourists: HAESUN at the window seat
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 39. `autumn_first_drip` · 처음 내리는 새벽 블랙
+#### 27. `autumn_first_drip` · 처음 내리는 새벽 블랙
 
 - 나오는 날: 가을 1일 · 장면: 오늘부터 지은 씨가 내려요 · 참조: `owner_sheet` · `jieun_sheet` · `hall_autumn`
 
@@ -891,7 +436,7 @@ Scene: Autumn dawn: JIEUN carefully pours hot water in slow circles over a hand 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 40. `kang_suit` · 양복
+#### 28. `kang_suit` · 양복
 
 - 나오는 날: 가을 2일 · 장면: 낡은 양복과 거친 손 · 참조: `kang_sheet` · `hall_autumn`
 
@@ -902,7 +447,7 @@ Scene: Autumn dawn: KANG walks in wearing an old dark suit and a slightly crooke
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 41. `kang_suit_cup` · 역시 여기가 편하네
+#### 29. `kang_suit_cup` · 역시 여기가 편하네
 
 - 나오는 날: 가을 2일 · 장면: 느슨하게 푼 넥타이 · 참조: `kang_sheet` · `hall_autumn`
 
@@ -913,7 +458,7 @@ Scene: Autumn dawn: KANG in his old suit holds his usual mug, loosening his tie 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 42. `han_photo` · 딸 사진
+#### 30. `han_photo` · 딸 사진
 
 - 나오는 날: 가을 2일 · 장면: 쓸 종이가 없다 · 참조: `han_sheet` · `hall_autumn`
 
@@ -924,7 +469,7 @@ Scene: Autumn dawn: HAN sits with a takeaway cup, looking at a photo of his scho
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 43. `han_memo` · 메모지 한 장
+#### 31. `han_memo` · 메모지 한 장
 
 - 나오는 날: 가을 2일 · 장면: 딸한테요 · 참조: `han_sheet` · `hall_autumn`
 
@@ -935,7 +480,7 @@ Scene: Autumn dawn: a small memo pad and pen beside HAN's cup; he writes a short
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 44. `noh_shelf` · 낮아진 선반
+#### 32. `noh_shelf` · 낮아진 선반
 
 - 나오는 날: 가을 3일 · 장면: 사장님이 없는 사이 · 참조: `noh_sheet` · `hall_autumn`
 
@@ -946,7 +491,7 @@ Scene: Autumn morning, the owner away: NOH with a toolbox lowers a high wooden s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 45. `noh_wink` · 눈치가 있구먼
+#### 33. `noh_wink` · 눈치가 있구먼
 
 - 나오는 날: 가을 3일 · 장면: 입에 댄 손가락 · 참조: `noh_sheet` · `hall_autumn`
 
@@ -957,7 +502,7 @@ Scene: Autumn morning: NOH, holding his toolbox, puts a finger to his lips and g
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 46. `eunju_door` · 걸리는 유모차
+#### 34. `eunju_door` · 걸리는 유모차
 
 - 나오는 날: 가을 3일 · 장면: 좁은 통로 · 참조: `eunju_sheet` · `hall_autumn`
 
@@ -968,7 +513,7 @@ Scene: Autumn: EUNJU tries to push the baby stroller through the narrow aisle be
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 47. `eunju_space` · 창가 자리
+#### 35. `eunju_space` · 창가 자리
 
 - 나오는 날: 가을 3일 · 장면: 아기가 바다를 좋아해요 · 참조: `eunju_sheet` · `hall_autumn`
 
@@ -979,7 +524,7 @@ Scene: Autumn: two chairs moved aside to make a space by the window; EUNJU parks
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 48. `festival_rush` · 가을 · 마을 축제
+#### 36. `festival_rush` · 가을 · 마을 축제
 
 - 나오는 날: 가을 4일 · 장면: 골목 가득한 축제 손님 · 참조: `jieun_sheet` · `festival_alley_autumn`
 
@@ -989,7 +534,7 @@ Scene: Autumn seaside village festival: the alley full of flags, food stalls and
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 49. `owner_drop` · 손님들 앞에서 놓친 컵
+#### 37. `owner_drop` · 손님들 앞에서 놓친 컵
 
 - 나오는 날: 가을 4일 · 장면: 쨍그랑, 그리고 조용함 · 참조: `owner_sheet` · `jieun_sheet` · `hall_autumn`
 
@@ -999,7 +544,7 @@ Scene: Busy festival day inside the cafe: a broken cup on the floor, customers s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 50. `machine_stop` · 멈춘 머신
+#### 38. `machine_stop` · 멈춘 머신
 
 - 나오는 날: 가을 4일 · 장면: 전기가 나갔다 · 참조: `jieun_sheet` · `hall_autumn`
 
@@ -1009,7 +554,7 @@ Scene: Festival day: the espresso machine has gone dark and silent, a few ceilin
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 51. `haesun_alley_greet` · 골목의 첫 인사
+#### 39. `haesun_alley_greet` · 골목의 첫 인사
 
 - 나오는 날: 가을 5일 · 장면: 내가 첫 손님 할게요 · 참조: `haesun_sheet` · `jieun_sheet` · `alley_morning`
 
@@ -1019,7 +564,7 @@ Scene: Autumn dawn in the alley: HAESUN on her morning walk waves warmly to JIEU
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 52. `do_notice` · 퇴직 소식
+#### 40. `do_notice` · 퇴직 소식
 
 - 나오는 날: 가을 5일 · 장면: 소식지의 사진 · 참조: `do_sheet` · `hall_autumn`
 
@@ -1030,7 +575,7 @@ Scene: Autumn morning: DO at the counter puts down a bundle of mail; on top lies
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 53. `do_cup_chair` · 의자 앞의 잔
+#### 41. `do_cup_chair` · 의자 앞의 잔
 
 - 나오는 날: 가을 5일 · 장면: 겨울이면 그만둬요 · 참조: `do_sheet` · `hall_autumn`
 
@@ -1041,7 +586,7 @@ Scene: Autumn morning: DO's usual iced americano placed in front of the chair be
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 54. `do_first_sit` · 서른 해 만에 앉은 의자
+#### 42. `do_first_sit` · 서른 해 만에 앉은 의자
 
 - 나오는 날: 가을 5일 · 장면: 가방은 문 옆 못에 · 참조: `do_sheet` · `hall_autumn`
 
@@ -1052,7 +597,7 @@ Scene: Autumn morning: DO's mailbag hangs on the hook by the door; DO sits down 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 55. `sumin_brochure` · 떨어진 안내서
+#### 43. `sumin_brochure` · 떨어진 안내서
 
 - 나오는 날: 가을 5일 · 장면: 도시의 대학교 · 참조: `sumin_sheet` · `hall_autumn`
 
@@ -1063,7 +608,7 @@ Scene: Autumn: a university admission brochure has fallen on the floor at the co
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 56. `sumin_brochure_back` · 뒤집어 건넨 종이
+#### 44. `sumin_brochure_back` · 뒤집어 건넨 종이
 
 - 나오는 날: 가을 5일 · 장면: 보지 않았어요 · 참조: `sumin_sheet` · `hall_autumn`
 
@@ -1074,7 +619,7 @@ Scene: Autumn: JIEUN hands the brochure back to SUMIN turned face down; SUMIN lo
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 57. `sumin_exam_morning` · 수능 날 아침
+#### 45. `sumin_exam_morning` · 수능 날 아침
 
 - 나오는 날: 가을 6일 · 장면: 떨리는 손 · 참조: `sumin_sheet` · `hall_morning`
 
@@ -1085,7 +630,7 @@ Scene: Autumn dawn on exam day: SUMIN stands at the counter without earphones, h
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 58. `sumin_sleeve` · 슬리브의 파도
+#### 46. `sumin_sleeve` · 슬리브의 파도
 
 - 나오는 날: 가을 6일 · 장면: 다녀올게요 · 참조: `sumin_sheet` · `hall_morning`
 
@@ -1096,7 +641,7 @@ Scene: Exam day dawn: a small hand-drawn wave doodle on the white paper sleeve o
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 59. `han_fog` · 안개로 늦은 날
+#### 47. `han_fog` · 안개로 늦은 날
 
 - 나오는 날: 가을 6일 · 장면: 남은 시간 3분 · 참조: `han_sheet` · `bus_terminal_evening`
 
@@ -1107,7 +652,7 @@ Scene: Thick fog at dawn at the bus terminal: HAN runs from his bus toward the c
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 60. `han_cup_hands` · 두 손으로 건넨 잔
+#### 48. `han_cup_hands` · 두 손으로 건넨 잔
 
 - 나오는 날: 가을 6일 · 장면: 오늘은 이 한 모금이면 돼요 · 참조: `han_sheet` · `hall_morning`
 
@@ -1118,7 +663,7 @@ Scene: Foggy dawn: JIEUN hands HAN a lidded takeaway cup with both hands; HAN ta
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 61. `jieun_spill` · 혼자 서두른 날
+#### 49. `jieun_spill` · 혼자 서두른 날
 
 - 나오는 날: 가을 6일 · 장면: 쏟아진 라테 · 참조: `jieun_sheet` · `hall_autumn`
 
@@ -1128,7 +673,7 @@ Scene: Autumn lunch rush, the owner away: a latte spilled over a tray; JIEUN loo
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 62. `owner_memo` · 선반의 메모
+#### 50. `owner_memo` · 선반의 메모
 
 - 나오는 날: 가을 6일 · 장면: 서두르면 쏟는다 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1138,7 +683,7 @@ Scene: Autumn night after closing: JIEUN finds a small handwritten memo stuck in
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 63. `noh_empty_mug` · 사장님의 빈 잔
+#### 51. `noh_empty_mug` · 사장님의 빈 잔
 
 - 나오는 날: 가을 7일 · 장면: 선반 위의 하얀 잔 · 참조: `noh_sheet` · `hall_evening`
 
@@ -1149,7 +694,7 @@ Scene: Autumn evening: NOH stands at the counter looking at the owner's white cu
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 64. `noh_newspaper` · 펴 놓은 신문
+#### 52. `noh_newspaper` · 펴 놓은 신문
 
 - 나오는 날: 가을 7일 · 장면: 그 잔 줘 · 참조: `noh_sheet` · `hall_evening`
 
@@ -1160,7 +705,7 @@ Scene: Autumn evening: a folded newspaper laid open at NOH's usual seat; NOH loo
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 65. `noh_same` · 가을 · 같네
+#### 53. `noh_same` · 가을 · 같네
 
 - 나오는 날: 가을 7일 · 장면: 사장님 방식의 믹스커피 · 참조: `noh_sheet` · `jieun_sheet` · `hall_evening`
 
@@ -1171,7 +716,7 @@ Scene: Autumn evening: NOH holds a paper cup of instant mix coffee that JIEUN ma
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 66. `kang_first_snow` · 첫눈과 소문
+#### 54. `kang_first_snow` · 첫눈과 소문
 
 - 나오는 날: 겨울 1일 · 장면: 빈 항구 · 참조: `kang_sheet` · `hall_winter`
 
@@ -1182,7 +727,7 @@ Scene: First snow at dawn: KANG brushes snow off his shoulders at the door; thro
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 67. `kang_warm_mug` · 잔까지 따뜻하네
+#### 55. `kang_warm_mug` · 잔까지 따뜻하네
 
 - 나오는 날: 겨울 1일 · 장면: 데운 잔 · 참조: `kang_sheet` · `hall_winter`
 
@@ -1193,7 +738,7 @@ Scene: Snowy dawn: KANG wraps both cold hands around a pre-warmed mug of black c
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 68. `eunju_tired` · 지친 얼굴
+#### 56. `eunju_tired` · 지친 얼굴
 
 - 나오는 날: 겨울 1일 · 장면: 밤새 깬 아기 · 참조: `eunju_sheet` · `hall_winter`
 
@@ -1204,7 +749,7 @@ Scene: First snowy afternoon: EUNJU comes in with red tired eyes and a sniffling
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 69. `eunju_heard` · 물어봐 준 사람
+#### 57. `eunju_heard` · 물어봐 준 사람
 
 - 나오는 날: 겨울 1일 · 장면: 조금 울고, 웃는다 · 참조: `eunju_sheet` · `hall_winter`
 
@@ -1215,7 +760,7 @@ Scene: Snowy afternoon by the window: EUNJU wipes a tear and laughs at the same 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 70. `kang_secret` · 배를 판 날
+#### 58. `kang_secret` · 배를 판 날
 
 - 나오는 날: 겨울 2일 · 장면: 그날 바다가 참 잔잔했어 · 참조: `kang_sheet` · `harbor_dawn`
 
@@ -1226,7 +771,7 @@ Scene: Winter dawn at the harbor: KANG looks at the calm sea where his boat used
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 71. `noh_heater` · 지나가다 들른 아침
+#### 59. `noh_heater` · 지나가다 들른 아침
 
 - 나오는 날: 겨울 2일 · 장면: 덜덜거리는 난로 · 참조: `noh_sheet` · `hall_winter`
 
@@ -1237,7 +782,7 @@ Scene: Snowy morning: NOH stands by an old rattling stove in the cafe, glancing 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 72. `noh_mix_winter` · 사장 맛이 나
+#### 60. `noh_mix_winter` · 사장 맛이 나
 
 - 나오는 날: 겨울 2일 · 장면: 종이컵의 그 잔 · 참조: `noh_sheet` · `hall_winter`
 
@@ -1248,7 +793,7 @@ Scene: Snowy morning: NOH holds a paper cup of mix coffee made by JIEUN, steam r
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 73. `sumin_envelope` · 봉투
+#### 61. `sumin_envelope` · 봉투
 
 - 나오는 날: 겨울 2일 · 장면: 아직 뜯지 않은 봉투 · 참조: `sumin_sheet` · `hall_winter`
 
@@ -1259,7 +804,7 @@ Scene: Winter: SUMIN stands at the counter holding an unopened white university 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 74. `sumin_wait` · 기다리는 컵 닦기
+#### 62. `sumin_wait` · 기다리는 컵 닦기
 
 - 나오는 날: 겨울 2일 · 장면: 내일 열어 볼게요. 여기서요. · 참조: `sumin_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -1270,7 +815,7 @@ Scene: Winter: SUMIN sits on the stool right in front of the counter looking at 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 75. `han_with_daughter` · 딸과 함께 온 새벽
+#### 63. `han_with_daughter` · 딸과 함께 온 새벽
 
 - 나오는 날: 겨울 3일 · 장면: 남은 시간 10분 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
 
@@ -1281,7 +826,7 @@ Scene: Winter dawn: HAN comes in with his daughter HAN_DAUGHTER; the daughter lo
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 76. `han_two_cups` · 코코아 한 잔 더
+#### 64. `han_two_cups` · 코코아 한 잔 더
 
 - 나오는 날: 겨울 3일 · 장면: 오늘은 아빠도 천천히야 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
 
@@ -1292,7 +837,7 @@ Scene: Winter dawn: HAN and his daughter sit side by side, a sweet latte and a c
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 77. `sumin_secret` · 합격 통지서
+#### 65. `sumin_secret` · 합격 통지서
 
 - 나오는 날: 겨울 3일 · 장면: 여기서 열고 싶었어요 · 참조: `sumin_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -1303,7 +848,7 @@ Scene: Winter: SUMIN at the counter opens the envelope and reads the letter, the
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 78. `do_last_day` · 마지막 배달
+#### 66. `do_last_day` · 마지막 배달
 
 - 나오는 날: 겨울 3일 · 장면: 납작한 가방 · 참조: `do_sheet` · `cafe_front_morning`
 
@@ -1314,7 +859,7 @@ Scene: Winter evening, the "closed" sign on the door (no readable text): DO stan
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 79. `do_last_hook` · 마지막으로 건 가방
+#### 67. `do_last_hook` · 마지막으로 건 가방
 
 - 나오는 날: 겨울 3일 · 장면: 서른 해 · 참조: `do_sheet` · `hall_evening`
 
@@ -1325,7 +870,7 @@ Scene: Winter evening: DO hangs his empty mailbag on the hook by the door for th
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 80. `winter_storm` · 겨울 · 폭설
+#### 68. `winter_storm` · 겨울 · 폭설
 
 - 나오는 날: 겨울 4일 · 장면: 마을의 불이 하나씩 꺼진다 · 참조: `jieun_sheet` · `alley_morning`
 
@@ -1335,7 +880,7 @@ Scene: Heavy snowstorm in the evening: the seaside village alley buried knee-dee
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 81. `noh_lantern` · 랜턴
+#### 69. `noh_lantern` · 랜턴
 
 - 나오는 날: 겨울 4일 · 장면: 닳아 반질반질한 손잡이 · 참조: `noh_sheet` · `hall_blackout`
 
@@ -1346,7 +891,7 @@ Scene: Blackout night: NOH comes in out of the snow holding a big old kerosene-s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 82. `noh_lantern_hung` · 원래 자리
+#### 70. `noh_lantern_hung` · 원래 자리
 
 - 나오는 날: 겨울 4일 · 장면: 사장님 자리 위의 못 · 참조: `noh_sheet` · `hall_blackout`
 
@@ -1357,7 +902,7 @@ Scene: Blackout night: the old lantern hangs on the nail above the owner's empty
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 83. `winter_gathering` · 겨울 · 단골 여덟 명
+#### 71. `winter_gathering` · 겨울 · 단골 여덟 명
 
 - 나오는 날: 겨울 4일 · 장면: 각자의 방식으로 돕는 밤 · 참조: `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout`
 
@@ -1368,7 +913,7 @@ Scene: Blackout night inside the candle-lit cafe: villagers gathered; HAESUN tuc
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 84. `winter_gathering2` · 겨울 · 천천히 해요
+#### 72. `winter_gathering2` · 겨울 · 천천히 해요
 
 - 나오는 날: 겨울 4일 · 장면: 줄에서 들려온 한마디 · 참조: `han_sheet` · `eunju_sheet` · `sumin_sheet` · `noh_sheet` · `geum_sheet` · `hall_blackout`
 
@@ -1379,7 +924,7 @@ Scene: Blackout night: a patient line waiting for hand drip coffee by candle lig
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 85. `winter_dawn_power` · 불이 들어온 새벽
+#### 73. `winter_dawn_power` · 불이 들어온 새벽
 
 - 나오는 날: 겨울 4일 · 장면: 눈이 조금 잦아든다 · 참조: `jieun_sheet` · `hall_winter`
 
@@ -1389,7 +934,7 @@ Scene: Dawn after the blackout: the lights come back on in the cafe, people waki
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 86. `do_secret` · 마지막 우편
+#### 74. `do_secret` · 마지막 우편
 
 - 나오는 날: 겨울 5일 · 장면: 지은 씨 앞으로 온 편지 · 참조: `do_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -1400,7 +945,7 @@ Scene: Snowy morning: DO hands JIEUN a letter in an envelope he wrote himself (n
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 87. `han_secret` · 컵 속의 쪽지
+#### 75. `han_secret` · 컵 속의 쪽지
 
 - 나오는 날: 겨울 5일 · 장면: 아빠가 먼저 갈게 · 참조: `han_sheet` · `hall_winter`
 
@@ -1411,7 +956,7 @@ Scene: Snowy morning: HAN shows two small folded notes on the counter, one in hi
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 88. `eunju_friend` · 처음 온 엄마
+#### 76. `eunju_friend` · 처음 온 엄마
 
 - 나오는 날: 겨울 5일 · 장면: 문 앞에서 머뭇거린다 · 참조: `eunju_sheet` · `mom2_sheet` · `hall_winter`
 
@@ -1422,7 +967,7 @@ Scene: Winter: EUNJU comes in with her stroller; behind her another young mother
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 89. `eunju_two_moms` · 두 엄마
+#### 77. `eunju_two_moms` · 두 엄마
 
 - 나오는 날: 겨울 5일 · 장면: 거봐요, 여기 좋다고 했죠 · 참조: `eunju_sheet` · `mom2_sheet` · `hall_winter`
 
@@ -1433,7 +978,7 @@ Scene: Winter by the window: two strollers parked side by side, EUNJU and MOM2 t
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 90. `haesun_secret` · 남편의 마지막 주문
+#### 78. `haesun_secret` · 남편의 마지막 주문
 
 - 나오는 날: 겨울 6일 · 장면: 우유 두 잔 · 참조: `haesun_sheet` · `hall_winter`
 
@@ -1443,7 +988,7 @@ Scene: Winter afternoon by the window: HAESUN tells the story of her late husban
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 91. `noh_secret` · 처음 떨린 날
+#### 79. `noh_secret` · 처음 떨린 날
 
 - 나오는 날: 겨울 6일 · 장면: 가게 불 꺼지면 네가 켜라 · 참조: `noh_sheet` · `hall_winter`
 
@@ -1454,7 +999,7 @@ Scene: Winter: NOH looks up at the lantern above the owner's seat, remembering, 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 92. `eunju_secret` · 일주일의 말
+#### 80. `eunju_secret` · 일주일의 말
 
 - 나오는 날: 겨울 6일 · 장면: 여기서 처음 말했어요 · 참조: `eunju_sheet` · `hall_winter`
 
@@ -1465,7 +1010,7 @@ Scene: Winter: EUNJU sits at the counter talking to JIEUN with a warm grateful s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 93. `jian_secret` · 지은의 손
+#### 81. `jian_secret` · 지은의 손
 
 - 나오는 날: 겨울 6일 · 장면: 커피 내리는 손 · 참조: `jian_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -1475,7 +1020,7 @@ Scene: Winter: JIAN shows JIEUN a sketchbook page with a careful drawing of a ha
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 94. `winter_wipe_cups` · 눈 그친 아침
+#### 82. `winter_wipe_cups` · 눈 그친 아침
 
 - 나오는 날: 겨울 7일 · 장면: 컵을 닦는 아침 · 참조: `jieun_sheet` · `hall_winter`
 
@@ -1485,7 +1030,7 @@ Scene: Bright morning after the snow stopped: JIEUN alone wiping cups one by one
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 95. `eye_1` · 사장의 눈 1 · 컵을 깬 날
+#### 83. `eye_1` · 사장의 눈 1 · 컵을 깬 날
 
 - 나오는 날: 엔딩 · 장면: 빗자루를 두 손으로 꼭 쥔 아이 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -1495,7 +1040,7 @@ Scene: From the OWNER's point of view: JIEUN in her green apron gripping a broom
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 96. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
+#### 84. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
 
 - 나오는 날: 엔딩 · 장면: 새벽, 컵을 한 칸 아래로 옮기는 손 · 참조: `hall_morning`
 
@@ -1505,7 +1050,7 @@ Scene: From the OWNER's point of view before dawn: the owner's calm hands moving
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 97. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
+#### 85. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
 
 - 나오는 날: 엔딩 · 장면: 카운터 앞으로 나가며 본 두 사람 · 참조: `jieun_sheet` · `geum_sheet` · `hall_spring`
 
@@ -1516,7 +1061,7 @@ Scene: From the OWNER's point of view stepping toward the counter: JIEUN behind 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 98. `eye_4` · 사장의 눈 4 · 빈 컵만
+#### 86. `eye_4` · 사장의 눈 4 · 빈 컵만
 
 - 나오는 날: 엔딩 · 장면: 그 아이 뒤에 빈 컵을 놓는 손 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -1526,7 +1071,7 @@ Scene: From the OWNER's point of view: JIEUN focused on making drinks while the 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 99. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
+#### 87. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
 - 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_evening`
 
@@ -1536,7 +1081,7 @@ Scene: From the OWNER's point of view at night: the wall chalkboard with today's
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 100. `eye_7` · 사장의 눈 7 · 앞치마 끈
+#### 88. `eye_7` · 사장의 눈 7 · 앞치마 끈
 
 - 나오는 날: 엔딩 · 장면: 등 뒤에서 다시 매 주는 끈 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1546,7 +1091,7 @@ Scene: From the OWNER's point of view: JIEUN's back as she wipes cups, the owner
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 101. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
+#### 89. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
 
 - 나오는 날: 엔딩 · 장면: 앞치마 주머니에서 손을 꺼내며 · 참조: `jieun_sheet` · `hall_busy_summer`
 
@@ -1556,7 +1101,7 @@ Scene: From the OWNER's point of view during the summer rush: a customer pointin
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 102. `eye_8` · 사장의 눈 8 · 동네 시간
+#### 90. `eye_8` · 사장의 눈 8 · 동네 시간
 
 - 나오는 날: 엔딩 · 장면: 선반의 단골 잔들, 칠판 앞의 분필 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1566,7 +1111,7 @@ Scene: From the OWNER's point of view at night: the regulars' mugs untouched on 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 103. `eye_9` · 사장의 눈 9 · 열쇠
+#### 91. `eye_9` · 사장의 눈 9 · 열쇠
 
 - 나오는 날: 엔딩 · 장면: 주머니에서 꺼낸 낡은 열쇠 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1576,7 +1121,7 @@ Scene: From the OWNER's point of view: an old brass key held out in the owner's 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 104. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
+#### 92. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
 
 - 나오는 날: 엔딩 · 장면: 마감 선반에 붙이는 작은 메모 · 참조: `hall_evening`
 
@@ -1586,7 +1131,7 @@ Scene: From the OWNER's point of view at night: the owner's hand sticking a smal
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 105. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
+#### 93. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
 
 - 나오는 날: 엔딩 · 장면: 깜깜한 마을, 불이 켜진 창 하나 · 참조: `alley_morning`
 
@@ -1596,7 +1141,7 @@ Scene: Night of the blackout from far away: a dark snowy seaside village and one
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 106. `eye_12` · 사장의 눈 덤 · 그 갈매기
+#### 94. `eye_12` · 사장의 눈 덤 · 그 갈매기
 
 - 나오는 날: 엔딩 · 장면: 사장님이 몰래 갈매기에게 빵을 준다 · 참조: `owner_sheet` · `cafe_front_morning`
 
@@ -1606,7 +1151,7 @@ Scene: Early spring morning in front of the cafe: the OWNER (Korean man, 66, nea
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 107. `do_candy` · 봄 · 도 씨의 사탕 주머니
+#### 95. `do_candy` · 봄 · 도 씨의 사탕 주머니
 
 - 나오는 날: 봄 4일 · 장면: 비 오는 날, 우비 입은 아이들에게 사탕을 · 참조: `do_sheet` · `hall_spring`
 
@@ -1617,7 +1162,7 @@ Scene: Rainy spring afternoon at the cafe door: DO, the mail carrier, crouches s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 108. `haesun_jar` · 봄 · 한 번에 열린 병뚜껑
+#### 96. `haesun_jar` · 봄 · 한 번에 열린 병뚜껑
 
 - 나오는 날: 봄 7일 · 장면: 꿈쩍 않던 딸기청 병뚜껑이 펑 · 참조: `haesun_sheet` · `jieun_sheet` · `hall_spring`
 
@@ -1627,7 +1172,7 @@ Scene: Spring morning at the cafe counter: HAESUN, the small elderly woman, twis
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 109. `sumin_gull` · 가을 · 갈매기와 수민
+#### 97. `sumin_gull` · 가을 · 갈매기와 수민
 
 - 나오는 날: 가을 5일 · 장면: 유리창의 그 갈매기, 지은 등 뒤로 숨은 수민 · 참조: `jieun_sheet` · `sumin_sheet` · `hall_autumn`
 
@@ -1638,7 +1183,7 @@ Scene: Autumn afternoon inside the cafe: a chubby white seagull stands on the te
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 110. `kang_peekaboo` · 겨울 · 강 씨의 까꿍
+#### 98. `kang_peekaboo` · 겨울 · 강 씨의 까꿍
 
 - 나오는 날: 겨울 4일 · 장면: 촛불 아래, 아기 앞에 쪼그려 앉은 강 씨 · 참조: `kang_sheet` · `eunju_sheet` · `hall_blackout`
 

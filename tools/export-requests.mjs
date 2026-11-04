@@ -40,6 +40,7 @@ const BGM_KO = {
 const ls = (dir) => { try { return fs.readdirSync(path.join(root, dir)); } catch { return []; } };
 const haveCg = new Set(ls('assets/cg').map((f) => f.replace(/^cg_/, '').replace(/\.jpg$/, '')));
 const haveStand = new Set(ls('assets/stand').map((f) => f.replace(/\.webp$/, '')));
+const haveRef = new Set(ls('assets/_src/ref').map((f) => f.replace(/\.jpg$/, ''))); // 설정화 {id}_sheet
 const haveObj = new Set(ls('assets/objects').map((f) => f.replace(/\.webp$/, '')));
 const shots = JSON.parse(fs.readFileSync(path.join(root, 'assets/shots/shots.json'), 'utf8'));
 const extraDoc = fs.readFileSync(path.join(root, 'docs/추가 제작.md'), 'utf8');
@@ -93,7 +94,14 @@ const tagOf = (who) => KNOWN[who] || who.toUpperCase();
 // 1) 새 인물
 // 다른 인물의 스탠딩을 빌려 쓰는 인물(characters.js 의 stand)은 새로 그리지 않음
 const newPeople = Object.keys(PEOPLE_EN).filter((id) => !CHARS[id]?.stand && faces[id] && ![...faces[id]].every((f) => haveStand.has(`${id}_${f}`)));
-const standCount = newPeople.reduce((n, id) => n + 1 + faces[id].size, 0);
+// 아직 없는 것만: 설정화 · 보통 · 나머지 표정(일부만 온 인물은 빠진 표정만 다시 요청)
+const needOf = (id) => ({
+  sheet: !haveRef.has(`${id}_sheet`),
+  normal: !haveStand.has(`${id}_normal`),
+  faces: [...faces[id]].filter((f) => f !== 'normal' && !haveStand.has(`${id}_${f}`)),
+});
+const sheetCount = newPeople.filter((id) => needOf(id).sheet).length;
+const standCount = newPeople.reduce((n, id) => n + (needOf(id).normal ? 1 : 0) + needOf(id).faces.length, 0);
 // 2) 장면 그림
 const cgMissing = Object.keys(CGS).filter((id) => !haveCg.has(id));
 const cgNew = cgMissing.filter((id) => !inExtra.has(id));
@@ -160,7 +168,7 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   '> 그림 규칙은 `docs/image_requests.md` 0장 · 6.1과 같습니다(글자 없음 · 빛살 금지 · 사장님 손은 떨림 없이 차분하게 · 얼굴과 손은 위쪽 2/3).', '',
   '## 0. 한눈에', '',
   '| 무엇 | 남은 수 | 넣는 곳 | 그다음 |', '| :--- | :--- | :--- | :--- |',
-  `| 인물 스탠딩(새 인물 ${newPeople.length}명) | 설정화 ${newPeople.length} + 표정 ${standCount - newPeople.length}장 | \`assets/_src/stand/{id}_{표정}.jpg\` | \`npm run images\` → \`python tools/face-boxes.py\` |`,
+  `| 인물 스탠딩(새 인물 ${newPeople.length}명) | 설정화 ${sheetCount} + 표정 ${standCount}장 | \`assets/_src/stand/{id}_{표정}.jpg\` | \`npm run images\` → \`python tools/face-boxes.py\` |`,
   `| 장면 그림(CG) | 새로 ${cgNew.length}장 + \`docs/추가 제작.md\`에 이미 있는 ${cgOld.length}장 | \`assets/cg/cg_{id}.jpg\` | \`npm run assets\` |`,
   `| 작업대 물건 시트 3 | ${objMissing.length}개를 시트 1장에 | \`assets/_src/objects/sheet_more.jpg\` | \`npm run objects\` |`,
   `| 새 놀이의 그림 | ${playMissing.length}장(${playMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}) | \`assets/flow/\`에 두고 알려 주기 → \`assets/_src/play/{id}.jpg\` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |`,
@@ -176,17 +184,20 @@ P('## 1. 인물 스탠딩 (새 인물)', '',
 for (const id of newPeople) {
   const c = CHARS[id];
   const fl = [...faces[id]].filter((f) => f !== 'normal');
+  const need = needOf(id);
+  const have = [!need.sheet && '설정화', !need.normal && '보통', ...fl.filter((f) => !need.faces.includes(f))].filter(Boolean);
   P(`### 1.${newPeople.indexOf(id) + 1} ${c.name} — ${c.role} (id \`${id}\`)`, '',
     `- 처음 나오는 날: ${epLabel(firstEp[id])} · 표정: normal${fl.length ? ` + ${fl.join(' · ')}` : ''}`,
-    `- 임시 초상 색: 옷 ${c.svg?.outfit || ''} · 강조 ${c.color}`, '',
-    `**① 설정화** \`${id}_sheet\` · 1:1`);
-  box(`${STYLE}, plain white background.\ncharacter design sheet of ${id.toUpperCase()}, ${PEOPLE_EN[id]}.\nfull-body front view and side view, three expression headshots on the right: calm, warm smile, ${fl.includes('surprised') ? 'surprised' : fl.includes('worried') ? 'worried' : 'thoughtful'}.\nAvoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.`);
-  P('', `**② 보통** \`${id}_normal\` · 9:16 · 참조: \`${id}_sheet\``);
-  box(`${STYLE}.\n${PEOPLE_EN[id]}.\nfull-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, ${FACE_EN.normal}.\nplain pure white background, whole body visible from head to feet with empty space above the head, single character centered.\nSame face and outfit as the reference image (character sheet).\n${AVOID_P}`);
-  if (fl.length) {
+    ...(have.length ? [`- 이미 있는 것: ${have.join(' · ')} — 아래는 아직 없는 것만`] : []),
+    `- 임시 초상 색: 옷 ${c.svg?.outfit || ''} · 강조 ${c.color}`, '');
+  if (need.sheet) P(`**① 설정화** \`${id}_sheet\` · 1:1`);
+  if (need.sheet) box(`${STYLE}, plain white background.\ncharacter design sheet of ${id.toUpperCase()}, ${PEOPLE_EN[id]}.\nfull-body front view and side view, three expression headshots on the right: calm, warm smile, ${fl.includes('surprised') ? 'surprised' : fl.includes('worried') ? 'worried' : 'thoughtful'}.\nAvoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.`);
+  if (need.normal) P('', `**② 보통** \`${id}_normal\` · 9:16 · 참조: \`${id}_sheet\``);
+  if (need.normal) box(`${STYLE}.\n${PEOPLE_EN[id]}.\nfull-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, ${FACE_EN.normal}.\nplain pure white background, whole body visible from head to feet with empty space above the head, single character centered.\nSame face and outfit as the reference image (character sheet).\n${AVOID_P}`);
+  if (need.faces.length) {
     P('', `**③ 나머지 표정** · 9:16 · 참조: \`${id}_normal\` — \`docs/image_requests.md\` 1장 ③의 상자에 아래 문장을 넣습니다.`, '',
       '| id | 표정 | `[표정]`에 넣을 문장 |', '| :--- | :--- | :--- |',
-      ...fl.map((f) => `| \`${id}_${f}\` | ${f} | ${FACE_EN[f] || f} |`));
+      ...need.faces.map((f) => `| \`${id}_${f}\` | ${f} | ${FACE_EN[f] || f} |`));
   }
   P('');
 }

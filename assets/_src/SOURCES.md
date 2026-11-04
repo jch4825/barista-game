@@ -148,3 +148,81 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `stand/jian_normal.jpg` | `Woman_holding_sketchbook_standing_1d9081a1_2K.jpg` (2026-10-30 21:24) |
 | `stand/jian_smile.jpg` | `Woman_holding_sketchbook_standing_c9f174ae_2K.jpg` (2026-10-30 21:25) |
 | `stand/jian_shy.jpg` | `Woman_holding_sketchbook_standing_d7b8c719_2K.jpg` (2026-10-30 21:26) |
+
+## 2026-11-04 새 인물 11명 · 장면 그림 13장(Google Flow, `assets/flow/`로 받은 것)
+
+단골 여섯(도 씨 · 강 씨 · 한 씨 · 은주 · 수민 · 노 씨) · 금 씨 · 조연(배우 · 매니저 · 처음 온 엄마 · 젊은 어부)의 설정화 · 스탠딩과 장면 그림입니다. 스탠딩은 768×1376(업스케일 전), 설정화는 1024×1024, 장면 그림은 1376×768(그 의자의 손님만 2K 2752×1536). 시각은 받은 파일의 시각입니다.
+
+| 원본(ID 이름) | 원래 파일 이름 |
+| :--- | :--- |
+| `ref/do_sheet.jpg` | `Mail_carrier_character_design_sheet_05481a61.jpg` (도 씨 설정화 · 2026-11-01 16:03) |
+| `ref/kang_sheet.jpg` | `Fisherman_character_design_sheet_337dc221.jpg` (강 씨 설정화 · 2026-11-01 16:09) |
+| `ref/han_sheet.jpg` | `Character_design_sheet_for_man_83896f0b.jpg` (한 씨 설정화 · 2026-11-01 16:16) |
+| `ref/eunju_sheet.jpg` | `Character_design_sheet_of_woman_32425e3b.jpg` (은주 설정화 · 2026-11-01 16:24) |
+| `ref/sumin_sheet.jpg` | `Character_design_sheet_of_girl_c957860a.jpg` (수민 설정화 · 2026-11-01 19:28) |
+| `ref/noh_sheet.jpg` | `Character_design_sheet_of_man_8cc34b86.jpg` (노 씨 설정화 · 2026-11-01 19:33) |
+| `ref/geum_sheet.jpg` | `Man_character_design_sheet_41e100d4.jpg` (금 씨 설정화 · 2026-11-01 23:53) |
+| `ref/actor_sheet.jpg` | `Korean_woman_character_design_sheet_bd58b703.jpg` (배우 설정화 · 2026-11-01 23:56) |
+| `ref/agent_sheet.jpg` | `Character_design_sheet_of_agent_363e8afc.jpg` (매니저 설정화 · 2026-11-02 00:13) |
+| `ref/mom2_sheet.jpg` | `Woman_character_design_sheet_2ecfd37d.jpg` (처음 온 엄마 설정화 · 2026-11-02 00:17) |
+| `ref/young_fisher_sheet.jpg` | `Young_fisherman_character_design…_0a498ac0.jpg` (젊은 어부 설정화 · 2026-11-04 19:06) |
+| `stand/do_normal.jpg` | `Older_man_standing_smiling_0c960cf4.jpg` (2026-11-01 16:04) |
+| `stand/do_smile.jpg` | `Korean_man_standing_smiling_3fb878a9.jpg` (2026-11-01 16:07) |
+| `stand/do_surprised.jpg` | `Postal_worker_standing_with_surp…_ed97eeb6.jpg` (2026-11-01 16:07) |
+| `stand/do_worried.jpg` | `Older_man_in_postal_uniform_f634898e.jpg` (2026-11-01 16:07) |
+| `stand/kang_normal.jpg` | `Elderly_man_standing_neutral_exp…_8134daa6.jpg` (2026-11-01 16:12) |
+| `stand/kang_angry.jpg` | `Fisherman_standing_with_angry_ex…_1940ba6d.jpg` (2026-11-01 16:13 · 요청서에 없던 표정, 대본에는 아직 안 씀) |
+| `stand/kang_sad.jpg` | `Fisherman_standing_with_disappoi…_e24bb284.jpg` (2026-11-01 16:13 · 요청서에 없던 표정, 대본에는 아직 안 씀) |
+| `stand/kang_smile.jpg` | `Fisherman_standing_with_gentle_s…_7c18aa45.jpg` (2026-11-01 16:11) |
+| `stand/han_normal.jpg` | `Man_standing_in_uniform_6d4e7e76.jpg` (2026-11-01 16:19) |
+| `stand/han_smile.jpg` | `Bus_driver_standing_and_smiling_ec557ab1.jpg` (2026-11-01 16:22) |
+| `stand/han_surprised.jpg` | `Man_in_uniform_looking_surprised_7b50d9bc.jpg` (2026-11-01 16:22) |
+| `stand/han_worried.jpg` | `Bus_driver_standing_with_worry_52d2cc02.jpg` (2026-11-01 16:22) |
+| `stand/eunju_normal.jpg` | `Woman_standing_in_baby_carrier_e3462f90.jpg` (2026-11-01 16:52) |
+| `stand/eunju_sad.jpg` | `Woman_standing_with_sad_expression_35f53e4f.jpg` (2026-11-01 16:54) |
+| `stand/eunju_smile.jpg` | `Woman_standing_smiling_0f42147a.jpg` (2026-11-01 16:54) |
+| `stand/eunju_surprised.jpg` | `Woman_standing_with_surprised_ex…_d94e62b0.jpg` (2026-11-01 16:53) |
+| `stand/eunju_worried.jpg` | `Woman_standing_with_worried_expr…_5c057fe3.jpg` (2026-11-01 16:54) |
+| `stand/sumin_normal.jpg` | `Korean_girl_standing_neutral_exp…_67ecd896.jpg` (2026-11-01 19:29) |
+| `stand/sumin_nervous.jpg` | `Girl_standing_with_nervous_expre…_aa272dd4.jpg` (2026-11-01 19:31) |
+| `stand/sumin_smile.jpg` | `Young_woman_standing_and_waving_1cd25fef.jpg` (2026-11-01 19:31) |
+| `stand/sumin_surprised.jpg` | `Girl_in_school_uniform_standing_175a71b4.jpg` (2026-11-01 19:31) |
+| `stand/noh_normal.jpg` | `Older_man_standing_calmly_28f2ad66.jpg` (2026-11-01 23:51) |
+| `stand/noh_nervous.jpg` | `Older_man_standing_nervously_99bc4b26.jpg` (2026-11-01 23:52 · 요청서에 없던 표정, 대본에는 아직 안 씀) |
+| `stand/noh_smile.jpg` | `Man_standing_smiling_3d6f5041.jpg` (2026-11-01 23:52) |
+| `stand/noh_surprised.jpg` | `Man_standing_with_surprised_expr…_1bd8fd25.jpg` (2026-11-01 23:52 · 요청서에 없던 표정, 대본에는 아직 안 씀) |
+| `stand/geum_normal.jpg` | `Man_standing_in_suit_d2389f79.jpg` (2026-11-01 23:55) |
+| `stand/geum_angry.jpg` | `Man_checking_wristwatch_02e6be3e.jpg` (2026-11-01 23:55) |
+| `stand/geum_smile.jpg` | `Man_standing_with_smartphone_2c5a8740.jpg` (2026-11-01 23:55) |
+| `stand/geum_surprised.jpg` | `Surprised_man_holding_smartphone…_0e973445.jpg` (2026-11-01 23:55) |
+| `stand/actor_normal.jpg` | `Woman_standing_against_white_bac…_86aeb80a.jpg` (2026-11-02 00:00) |
+| `stand/actor_smile.jpg` | `Woman_standing_in_trench_coat_c8ba92e1.jpg` (2026-11-02 00:00) |
+| `stand/actor_surprised.jpg` | `Woman_standing_with_surprised_ex…_00ff2177.jpg` (2026-11-02 00:00) |
+| `stand/agent_normal.jpg` | `Man_wearing_headset_standing_4a5dfc65.jpg` (2026-11-02 00:15) |
+| `stand/agent_angry.jpg` | `Man_glancing_at_wristwatch_290001f1.jpg` (2026-11-02 00:15) |
+| `stand/mom2_normal.jpg` | `Woman_standing_with_baby_stroller_95032334.jpg` (2026-11-02 00:18) |
+| `stand/mom2_nervous.jpg` | `Woman_standing_with_baby_stroller_95dd7c03.jpg` (2026-11-02 00:18) |
+| `stand/mom2_smile.jpg` | `Woman_standing_with_baby_stroller_ebdbaaad.jpg` (2026-11-02 00:18) |
+| `stand/young_fisher_normal.jpg` | `Young_fisherman_standing_in_outfit_b825023d.jpg` (2026-11-04 19:07) |
+| `cg/cg_actor_quiet.jpg` | `Woman_gazing_at_cherry_blossoms_1347385c.jpg` (2026-11-04 21:26) |
+| `cg/cg_do_chair_out.jpg` | `Man_looking_at_chair_6a8c556b.jpg` (2026-11-04 21:18) |
+| `cg/cg_do_rain_letters.jpg` | `Man_wiping_letters_dry_in_c737ab38.jpg` (2026-11-04 21:20) |
+| `cg/cg_do_standing.jpg` | `Man_drinking_iced_americano_50f9edaf.jpg` (2026-11-04 21:17) |
+| `cg/cg_do_towel.jpg` | `Mail_carrier_wiping_letters_fef68f0b.jpg` (2026-11-04 21:22) |
+| `cg/cg_kang_dark_window.jpg` | `Man_standing_outside_closed_cafe_ab3125cd.jpg` (2026-11-04 21:15) |
+| `cg/cg_kang_light_on.jpg` | `Man_looking_at_glowing_window_80c845bf.jpg` (2026-11-04 21:16) |
+| `cg/cg_kang_window_sea.jpg` | `Man_holding_coffee_in_cafe_63bf8629.jpg` (2026-11-04 21:28) |
+| `cg/cg_memory_city.jpg` | `Woman_spilling_latte_in_cafe_22010e0d.jpg` (2026-11-04 20:55) |
+| `cg/cg_owner_cup_shake.jpg` | `Owner_holding_cup_in_cafe_dbea1295.jpg` (2026-11-04 21:27) |
+| `cg/cg_spring_crew.jpg` | `Actors_walking_toward_seaside_cafe_f1ea0061.jpg` (2026-11-04 21:23) |
+| `cg/cg_spring_name.jpg` | `Woman_smiling_goodbye_in_cafe_6d9c25d9.jpg` (2026-11-04 21:33) |
+| `cg/cg_summer_tourist_chair.jpg` | `Tourist_sits_beside_grandmother_…_2136599a_2K.jpg` (2026-10-31 15:45) |
+| `cg/cg_haesun_two_cups.jpg` | `Woman_holding_tray_in_cafe_c65e8af2_2K.jpg` (2026-10-31 08:04 · 그날 새 그림으로 바꿈, 커밋 1a76166) |
+| `cg/cg_haesun_cup_for_him.jpg` | `Elderly_woman_looking_at_mug_3ecc1748_2K.jpg` (2026-10-31 15:48 · 그날 새 그림으로 바꿈, 커밋 1a76166) |
+
+쓰지 않은 것(`assets/_src/flow_unused/`):
+- `Character_design_sheet_of_barista_20261028002548.jpg`: 지은 설정화의 남색 앞치마 첫 판(2026-10-28). 게임은 초록 앞치마 설정화(`ref/jieun_sheet.jpg`)를 씀
+- `Man_handing_mug_to_woman_af7be145_2K.jpg`: `cg_spring_first_cup`(봄 · 첫 컵)의 다른 판(2026-10-31). 새 홀과 같은 방이지만 지은의 앞치마가 남색이라(검수 I-4 초록) 지금 그림을 그대로 씀
+- `Man_holding_mug_in_cafe_ff250b7e_2K.jpg`: `cg_owner_closing_milk`(봄 · 마감 우유)의 다른 판(2026-10-31, 홀 저녁 배경과 같은 방). 봄 5일 `cg_owner_cup_shake`가 지금 그림과 같은 방이라 그대로 씀
+
+받은 폴더에 함께 있던 `cg_haesun_two_cups.jpg` · `cg_haesun_cup_for_him.jpg` · 위의 두 원래 이름 파일은 게임의 그림과 같은 파일(바이트까지 같음)이라 지웠습니다.

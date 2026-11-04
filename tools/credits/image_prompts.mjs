@@ -27,6 +27,9 @@ const YEONWOO_IV = 'Korean young woman age 20, brown chin-length bob with soft b
 const DOHYUN = 'Korean man age 26, neat black hair, black rectangular glasses, white shirt with rolled sleeves, charcoal grey vest, wine red necktie, black trousers, brown shoes, calm kind face';
 const MANAGER = 'Korean man age 42, short slate grey-green hair, short stubble beard, white shirt with rolled sleeves, black vest, navy necktie, gold pocket watch chain with a small crescent charm, dark grey trousers, small spiral notepad and pen';
 
+/* ---------- 2026-11-04 새 인물 11명 · 장면 그림: 요청서(docs/requests_full.md)와 같은 글 ---------- */
+import { PEOPLE_EN, FACE_EN, CG_EN } from '../requests/prompts_en.mjs';
+
 /* ---------- 새 게임(바닷가 카페) 공통 블록 (docs/image_requests.md 0.3 · 5.2 · 6.2) ---------- */
 const SEA_STYLE = 'clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution';
 const JIEUN = 'Korean young woman age 21, straight black hair tied in a low ponytail with short side bangs, calm round dark brown eyes, gentle slightly serious face, cream long-sleeve henley shirt with sleeves rolled up to the elbows, medium forest green (#25844A) canvas barista apron with a brown leather neck strap and two front pockets, beige cotton trousers, white canvas sneakers, small mustard yellow hair tie on her right wrist';
@@ -151,6 +154,24 @@ export const IMAGE_PROMPTS = {
     ['jian_shy', '지안 · 망설임', 'shy hesitant expression, eyes looking down, hugging the closed sketchbook tightly with both arms'],
   ].map(([id, title, what]) => [id, { title, from: 'doc', prompt: P([SEA_SAME, what + '.', SEA_STYLE + '.']), neg: SEA_SAME_NEG, note: '참조 이미지: jian_normal' }])),
 
+  /* ===== 새 인물 11명 스탠딩 (2026-11-01 ~ 04, Flow 768×1376, 요청서 1장: 보통은 설정화를, 표정은 보통을 참조) ===== */
+  ...Object.fromEntries(Object.entries({
+    do: ['도 씨', 'normal', 'smile', 'surprised', 'worried'], kang: ['강 씨', 'normal', 'smile', 'angry', 'sad'],
+    han: ['한 씨', 'normal', 'smile', 'surprised', 'worried'], eunju: ['은주', 'normal', 'sad', 'smile', 'surprised', 'worried'],
+    sumin: ['수민', 'normal', 'surprised', 'nervous', 'smile'], noh: ['노 씨', 'normal', 'smile', 'surprised', 'nervous'],
+    geum: ['금 씨', 'normal', 'angry', 'surprised', 'smile'], actor: ['배우', 'normal', 'smile', 'surprised'], agent: ['매니저', 'normal', 'angry'],
+    mom2: ['처음 온 엄마', 'normal', 'nervous', 'smile'], young_fisher: ['젊은 어부', 'normal'],
+  }).flatMap(([cid, [name, ...faces]]) => faces.map((f) => {
+    const id = `${cid}_${f}`;
+    const extra = ['kang_angry', 'kang_sad', 'noh_surprised', 'noh_nervous'].includes(id); // 요청서에 없던 표정(사용자가 더 만듦)
+    const ko = { normal: '보통', smile: '웃음', surprised: '놀람', worried: '걱정', angry: '언짢음', sad: '시무룩', nervous: '긴장' }[f];
+    const prompt = f === 'normal'
+      ? P([SEA_STYLE + '.', PEOPLE_EN[cid] + '.', `full-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, ${FACE_EN.normal}.`, 'plain pure white background, whole body visible from head to feet with empty space above the head, single character centered.', 'Same face and outfit as the reference image (character sheet).'])
+      : P([SEA_SAME, FACE_EN[f] + '.', SEA_STYLE + '.']);
+    const note = `참조 이미지: ${f === 'normal' ? `${cid}_sheet` : `${cid}_normal`} · 768×1376${extra ? ' · 요청서에 없던 표정(사용자가 더 만듦, 대본에는 아직 안 씀). 프롬프트는 그림을 보고 복기' : ''}`;
+    return [id, { title: `${name} · ${ko}`, from: extra ? 'look' : 'doc', prompt, neg: f === 'normal' ? SEA_NEG : SEA_SAME_NEG, note }];
+  }))),
+
   /* ===== 배경 (직업 마1스톤 요청서 B, 1376×768): city_cafe_rush 말고는 새 이야기에 쓰지 않아 나중에 지울 것 ===== */
   ...Object.fromEntries([
     // 2026-11-01 사용자: 봄 1일 '도시 카페의 점심시간'(러시)의 배경으로 직업 마1스톤의 counter_peak 를 가져옴(지은이 일하던 도시의 큰 카페)
@@ -199,6 +220,31 @@ export const IMAGE_PROMPTS = {
     ['cg_haesun_cup_for_him', '의자 앞의 잔', 'Close-up event CG framing with softer, more detailed painterly shading than the standing sprites, same character design.\nSoft morning light from the window on the left. HAESUN (Korean grandmother, 80, short neat silver-white hair, no glasses, navy cardigan over a cream blouse, long grey skirt) sits at the small round table by the window and gazes for a long time at the white mug of warm milk placed in front of the empty, slightly older wooden chair beside her. Her eyes are a little moist and she wears a quiet, grateful smile; one hand rests gently on the table near the cup. Seen from a low angle across the table: the steaming cup and the empty chair on the right at middle height, her face in the upper left. Tender and calm.', 'hall_morning'],
     ['cg_summer_line', '여름 · 골목 끝까지 선 줄', 'A hot, bright summer afternoon on the sloping alley: a long line of tourists in summer clothes stretches from the cafe door down to the far end of the alley, holding phones and hand fans, drawn small and simple; the cafe with its faded forest green awning on the right, the sea at the bottom of the slope. Lively but not chaotic.', 'cafe_front_morning'],
   ].map(([id, title, scene, ref]) => [id, { title: `장면 · ${title}`, from: 'doc', prompt: P([CG_STYLE, scene]), neg: CG_NEG, note: `참조 이미지: ${ref}` }])),
+
+  /* ===== 새 장면 그림 (2026-10-31 · 11-04, 요청서 2장 · docs/추가 제작.md): 장면 공통 블록 + 새 인물 설계 + 장면 문장 ===== */
+  ...Object.fromEntries([
+    ['memory_city', '기억 · 도시의 큰 카페', [], 'jieun_sheet · hall_busy_summer'],
+    ['kang_dark_window', '불 꺼진 창', ['kang'], 'kang_sheet · cafe_front_morning'],
+    ['kang_light_on', '불 켜진 창', ['kang'], 'kang_sheet · cafe_front_morning'],
+    ['do_standing', '서서 마시는 사람', ['do'], 'do_sheet · hall_spring'],
+    ['do_chair_out', '빼 둔 의자', ['do'], 'do_sheet · hall_spring'],
+    ['do_rain_letters', '젖은 편지', ['do'], 'do_sheet · hall_spring'],
+    ['do_towel', '마른 수건', ['do'], 'do_sheet · hall_spring'],
+    ['spring_crew', '봄 · 벚꽃 주간의 촬영', ['actor', 'agent'], 'actor_sheet · agent_sheet · alley_morning'],
+    ['actor_quiet', '조용해서 좋네요', ['actor'], 'actor_sheet · hall_spring'],
+    ['owner_cup_shake', '아주 조금 흔들린 잔', [], 'owner_sheet · hall_evening (cg_owner_closing_milk 와 같은 구도에 뒤의 지은을 더한 그림)'],
+    ['kang_window_sea', '바다 안 나가요', ['kang'], 'kang_sheet · harbor_dawn'],
+    ['spring_name', '봄 · 지은 씨', [], 'haesun_sheet · jieun_sheet · hall_spring'],
+  ].map(([id, title, cast, ref]) => [`cg_${id}`, {
+    title: `장면 · ${title}`, from: 'doc',
+    prompt: P([CG_STYLE, cast.length ? `New characters (match their character sheets): ${cast.map((w) => `${w.toUpperCase()}: ${PEOPLE_EN[w]}`).join('; ')}.` : '', `Scene: ${CG_EN[id]}`]),
+    neg: CG_NEG, note: `참조 이미지: ${ref} · 1376×768`,
+  }])),
+  cg_summer_tourist_chair: {
+    title: '장면 · 그 의자의 손님', from: 'doc',
+    prompt: P([CG_STYLE, 'Close-up event CG framing with softer, more detailed painterly shading than the standing sprites, same character design.', 'A busy summer afternoon inside the cafe. At the window table, a young tourist in a sun hat and t-shirt has just sat down on the empty chair beside HAESUN (Korean grandmother, 80, short neat silver-white hair, no glasses, navy cardigan over a cream blouse, long grey skirt), smiling and unaware. HAESUN gently covers the warm milk mug in front of that chair with both hands; she has stopped in the middle of a word, with a small worried look. Other customers in the background are simple and slightly blurred. Medium shot at eye level.']),
+    neg: CG_NEG, note: '참조 이미지: haesun_sheet · hall_summer · docs/추가 제작.md 1번 · 2K 2752×1536',
+  },
 
   /* ===== 작업대 물건 (2026-10-29, Flow 시트 두 장에서 잘라 냄: tools/import-objects.py) ===== */
   ...Object.fromEntries([

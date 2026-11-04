@@ -78,6 +78,27 @@ POCKETS: dict[str, list[tuple[int, int]]] = {
     'customer-coffee_normal': [(704, 622)],
     'seojin_normal': [(715, 566), (700, 593), (507, 528)],
     'hiker_normal': [(614, 137)],   # 2026-10-15 수정본: 머리 뒤로 올린 팔과 머리 사이
+    # 2026-11-04 새 인물(단골 여섯 · 금 씨 · 조연): 팔과 몸 사이 · 다리 사이 · 머리와 어깨 사이 · 유모차 안, 768×1376 원본 좌표
+    'do_normal': [(273, 786)],
+    'do_surprised': [(273, 785)],
+    'eunju_worried': [(389, 1146)],
+    'geum_normal': [(520, 527)],
+    'geum_surprised': [(514, 538)],
+    'han_normal': [(508, 670), (257, 679)],
+    'han_smile': [(505, 560), (500, 636), (257, 679)],
+    'han_surprised': [(508, 670), (257, 679)],
+    'han_worried': [(508, 670), (257, 679)],
+    'mom2_nervous': [(401, 1156)],
+    'mom2_normal': [(429, 716), (572, 1064), (635, 1070), (467, 1180)],
+    'mom2_smile': [(392, 701), (561, 1105), (638, 1113), (434, 1239)],
+    'noh_normal': [(237, 712), (522, 795)],
+    'noh_smile': [(237, 712)],
+    'noh_surprised': [(237, 712)],
+    'sumin_nervous': [(399, 1111)],
+    'sumin_normal': [(339, 357), (399, 1111)],
+    'sumin_smile': [(339, 357), (399, 1111)],
+    'sumin_surprised': [(339, 357)],
+    'young_fisher_normal': [(250, 774)],
     # 직업 마1스톤 소품(item_*) 그림의 자리는 그림과 함께 지움(2026-10-27). 새 소품을 넣으면 같은 방식으로 적음
 }
 # 갇힌 곳이 많을 때 범위 안의 배경 후보를 모두 지움: ('circle', 가운데 x, y, 반지름) · ('rect', x0, y0, x1, y1) (원본 좌표)
@@ -93,6 +114,13 @@ COORD_W: dict[str, int] = {k: 1376 for k in (
     'customer-vest_normal', 'hiker_normal', 'daeri_normal', 'grandma-cardigan_normal', 'daeri_angry', 'student_normal',
     'customer-uniform_normal', 'customer-arms_normal', 'auntie_normal', 'customer-sporty_normal', 'seojin_normal',
     'customer-olive_normal', 'customer-coffee_normal', 'teacher_normal', 'customer-stripe_normal', 'customer-stripe2_normal', 'jiho_normal')}
+# 2026-11-04 새 인물 38장은 768px 원본으로 적음(2K 업스케일로 바꾸면 좌표가 저절로 늘어남)
+COORD_W.update({f'{cid}_{face}': 768 for cid, faces in {
+    'do': ('normal', 'smile', 'surprised', 'worried'), 'kang': ('normal', 'smile', 'angry', 'sad'),
+    'han': ('normal', 'smile', 'surprised', 'worried'), 'eunju': ('normal', 'sad', 'smile', 'surprised', 'worried'),
+    'sumin': ('normal', 'surprised', 'nervous', 'smile'), 'noh': ('normal', 'smile', 'surprised', 'nervous'),
+    'geum': ('normal', 'angry', 'surprised', 'smile'), 'actor': ('normal', 'smile', 'surprised'), 'agent': ('normal', 'angry'),
+    'mom2': ('normal', 'nervous', 'smile'), 'young_fisher': ('normal',)}.items() for face in faces})
 
 
 def coord_k(stem: str, W: int) -> float:
