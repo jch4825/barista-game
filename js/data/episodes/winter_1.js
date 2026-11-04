@@ -1,5 +1,6 @@
 /**
- * 겨울 1일 · 첫눈: 첫눈 새벽, 마을에 퍼진 "배를 팔았대" 소문 속의 강 씨(대응 K5) → 오후, 밤새 아기 곁을 지킨 은주(대응 E4)
+ * 겨울 1일 · 첫눈: 첫눈 새벽, 마을에 퍼진 "배를 팔았대" 소문 속의 강 씨(대응 K5) → 눈사람이 된 금 씨
+ * → 아침, 눈길에 늦은 버스를 기다리는 손님(여기서 마시려다 버스가 와서 가져가기로: 머그컵 → 종이컵에 옮겨 담기) → 오후, 밤새 아기 곁을 지킨 은주(대응 E4)
  */
 
 import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
@@ -51,6 +52,22 @@ export default {
       orders: [{ who: 'geum', say: '아…아… 하나요.', menu: 'americano', temp: 'iced', togo: true, thanks: '으으… 역시 이거죠.' }],
     }),
     leave('geum'),
+
+    // 버스를 기다리는 손님(손님이 마음을 바꿈 2/2, 2026-11-04 사용자, 검수 13.46): 눈길에 늦은 버스 → 여기서 마시며 기다리다 버스가 일찍 옴 → 머그컵 → 종이컵
+    place('겨울 아침 08:30', '눈 오는 아침'),
+    sfx('bell'),
+    show({ left: 'jieun:normal', right: 'customer:normal' }),
+    narr('큰 가방을 멘 손님이 어깨에 쌓인 눈을 털며 들어온다. 종점에서 버스를 기다리다가 손이 너무 시려서 들어왔다고 한다.'),
+    say('customer', 'normal', '길이 미끄러워서 버스가 삼십 분쯤 늦는대요. 여기서 따뜻한 걸 마시면서 기다리려고요.'),
+    mini('brew', {
+      id: 'winter_1_bus', title: '버스를 기다리는 손님', level: 'normal', book: WINTER_BOOK,
+      orders: [{ who: 'customer', say: '따뜻한 라테 하나요. 여기서 마실게요.', menu: 'latte', temp: 'hot', togo: false,
+        change: { sfx: 'bus', say: '어, 버스가 생각보다 빨리 왔네요! 미안해요, 이건 가져갈게요.', thanks: '고마워요. 버스에서 두 손으로 감싸고 마실게요.' } }],
+    }),
+    sfx('door'),
+    leave('customer'),
+    narr('손님은 종이컵을 두 손으로 감싸 쥐고, 미끄러운 눈길을 조심조심 걸어 버스에 오른다.'),
+    think('여기서 마시려던 잔도 사정이 바뀌면 가져가는 잔이 된다. 컵을 바꿔 담아 드리는 것도 손님에게 맞추는 일이구나.'),
 
     // 오후: 은주
     place('겨울 오후 14:00', '눈 오는 오후'),

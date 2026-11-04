@@ -708,5 +708,7 @@ body.contrast .mg.mg-brew .bw-toss-view { background: #000; }
 .mg.mg-brew .bw-move.s2 .bw-move-ice b:nth-child(2) { animation-delay: .6s; }
 .mg.mg-brew .bw-move.s2 .bw-move-ice b:nth-child(3) { animation-delay: .76s; }
 @keyframes bw-ice-in { from { top: 40%; opacity: 1; transform: rotate(0); } 80% { opacity: 1; } to { top: 64%; opacity: 0; transform: rotate(50deg); } }
+.mg.mg-brew .bw-move-to .bw-move-lid { position: absolute; inset: 0; opacity: 0; transform: translateY(-55%); transition: transform .45s cubic-bezier(.3, 1.35, .6, 1), opacity .2s ease; pointer-events: none; } /* 뚜껑: 위에서 내려와 덮음 */
+.mg.mg-brew .bw-move.is-lid .bw-move-lid { opacity: 1; transform: none; }
 body.reduce-motion .mg.mg-brew .bw-move * { transition: none !important; animation: none !important; }
 body.theme-calm .mg.mg-brew .bw-move-from { transition-duration: .9s; }

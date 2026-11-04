@@ -28,7 +28,7 @@
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
  *  - count: 손님이 말한 잔 수(주문 확인이 '두 잔'으로) · more: 앞 주문의 다음 잔(주문 확인이 '한 잔 더'로). 잔은 한 주문에 하나씩 만듦
  *  - miss: 손 동작이 벗어난 잔을 받을 때 그 손님만의 말
- *  - change: { say, thanks? } 매장(togo: false)으로 받은 주문을 드리려는 순간 가져가기로 바꿈(say = 손님이 바꾸는 말, thanks = 받을 때 말)
+ *  - change: { say, thanks?, sfx? } 매장(togo: false)으로 받은 주문을 드리려는 순간 가져가기로 바꿈(say = 손님이 바꾸는 말, thanks = 받을 때 말, sfx = 그 말 바로 앞의 소리: 버스가 들어옴 등)
  * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], cups: [{ who, menu, temp }], watched, skills, art, level, turn, asked(물어본 수) }
  *  - 도중에 정리되면(되감기·나가기) { ok: false, aborted: true, … } · [그만하기]면 { ok: false, quit: true, … }
  * 그림: 물건 그림(assets/objects)이 있으면 쓰고, 없으면 아래 임시 그림(SVG, 대체 요망: docs/requests_full.md). 작업대 배경은 bg/workbench_morning
@@ -47,7 +47,7 @@
 
 import { h, sleep, dur } from '../../core/dom.js';
 import { ICON } from '../../data/icons.js';
-import { audio } from '../../av/audio.js';
+import { audio, SFX_NAMES } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { img } from '../../core/assets.js';
 import { input } from '../../core/input.js';
@@ -160,7 +160,7 @@ const SYS = {
   remake: '이제 다시 만들어요. 주문 메모를 보고 컵부터 골라요.',
   // 손님이 마음을 바꿈: 매장 → 가져가기(2026-11-04 사용자 "Add that scene")
   changeTell: '손님이 가져가신대요. 가져가는 컵을 골라 옮겨 담아요.',
-  move: '새 컵에 옮겨 담고, 쓴 컵은 씻어요.',
+  move: '새 컵에 옮겨 담고 뚜껑을 덮어요. 쓴 컵은 씻어요.',
   moveServe: '다 옮겨 담았어요. 손님에게 드려요.',
 };
 /** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
@@ -295,6 +295,7 @@ export function brewProblems(opts = {}) {
     if (o.who && !CHARS[o.who]) errs.push(`orders[${i}] 없는 인물: ${o.who} (js/data/characters.js)`);
     if (o.usual && REGULARS[o.who]?.usual?.menu !== o.menu) errs.push(`orders[${i}] usual: ${o.who} 의 평소 주문(regulars.js usual.menu)과 메뉴가 다름`);
     if (o.change && !o.change.say) errs.push(`orders[${i}] change: say(손님이 가져가기로 바꾸는 말)가 없음`);
+    if (o.change?.sfx && !SFX_NAMES.includes(o.change.sfx)) errs.push(`orders[${i}] change: 없는 효과음 ${o.change.sfx} (js/av/audio.js SFX_NAMES)`);
     if (o.change && (o.togo !== false || o.cup || RECIPES[o.menu]?.cup || o.count > 1 || o.more)) errs.push(`orders[${i}] change: 매장(togo: false)에서 받은 한 잔에만(정해진 컵 · 여러 잔은 안 됨)`);
   });
   for (const id of opts.book || []) if (!RECIPES[id]) errs.push(`book: 없는 메뉴 ${id}`);
@@ -383,6 +384,40 @@ function paperSVG({ steam = 0 } = {}) {
     <ellipse cx="69" cy="26" rx="4" ry="1.6" fill="#8C8478"/>
     <path d="M42 40 L47 98" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
     ${steamLines(steam, 60, 18)}`);
+}
+
+/**
+ * 뚜껑을 연 포장 컵(옮겨 담기 · 버리기 장면, 2026-11-05): 닫힌 뚜껑에 붓거나 쏟지 않게. 그림은 paperSVG · plasticSVG 에서 뚜껑만 뺀 것(자리가 같아 뚜껑을 덮으면 그대로 이어짐)
+ * drink: { color, level, ice, foam, steam } 든 음료(없으면 빈 컵)
+ */
+function openCupSVG(cup, drink = null) {
+  const color = drink?.color || null;
+  if (cup === 'plastic') {
+    const c = gid('po');
+    const yl = 104 - (drink?.level || 0.74) * 70;
+    return svgT(`<defs><clipPath id="${c}"><path d="M38 36 L44 102 Q45 107 60 107 Q75 107 76 102 L82 36 Z"/></clipPath></defs>${SHADOW}
+      <g clip-path="url(#${c})">${color ? `<rect x="30" y="${yl}" width="60" height="${110 - yl}" fill="${color}" opacity=".9"/>` : ''}
+        ${color && drink.ice ? `${iceCube(46, yl - 4, -12)}${iceCube(61, yl + 2, 10)}${iceCube(50, yl + 16, 4)}` : ''}</g>
+      <path d="M38 36 L44 102 Q45 107 60 107 Q75 107 76 102 L82 36" fill="rgba(226,240,248,.32)" stroke="#8FB3C7" stroke-width="2.5"/>
+      <ellipse cx="60" cy="36" rx="22" ry="3.6" fill="none" stroke="#8FB3C7" stroke-width="2.5"/>
+      <path d="M44 44 L48 98" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/>`);
+  }
+  const g = gid('po');
+  return svg(`<defs>${grad(g, ['#FFFFFF', '#F1EEE8', '#CFC8BC'])}</defs>${SHADOW}
+    <path d="M36 34 L44 102 Q45 107 60 107 Q75 107 76 102 L84 34 Z" fill="url(#${g})" stroke="#9D958A" stroke-width="2.5"/>
+    <path d="M38.6 56 L81.4 56 L79 82 L41 82 Z" fill="#C9A47A" stroke="#A88458" stroke-width="2"/>
+    <ellipse cx="60" cy="34" rx="24" ry="4.6" fill="${color ? drink.foam || color : '#6E5A48'}" stroke="#9D958A" stroke-width="2.5"/>
+    <path d="M42 40 L47 98" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+    ${steamLines(color ? drink.steam || 0 : 0, 60, 24)}`);
+}
+/** 포장 컵의 뚜껑만(옮겨 담은 뒤 위에서 내려와 덮음): paperSVG · plasticSVG 의 뚜껑과 같은 자리 */
+function lidSVG(cup) {
+  if (cup === 'plastic') return svgT(`<path d="M36 35 Q60 8 84 35 Z" fill="rgba(235,247,255,.55)" stroke="#8FB3C7" stroke-width="2.5"/>
+    <rect x="33" y="32" width="54" height="7" rx="3" fill="rgba(240,250,255,.85)" stroke="#8FB3C7" stroke-width="2"/>
+    <path d="M65 24 L77 2" stroke="#2E8B57" stroke-width="5" stroke-linecap="round"/>`);
+  return svg(`<rect x="32" y="27" width="56" height="9" rx="4" fill="#FAF9F6" stroke="#9D958A" stroke-width="2.5"/>
+    <ellipse cx="60" cy="27" rx="25" ry="5" fill="#FFFFFF" stroke="#9D958A" stroke-width="2"/>
+    <ellipse cx="69" cy="26" rx="4" ry="1.6" fill="#8C8478"/>`);
 }
 
 function shotSVG({ color = INGREDIENTS.espresso.color, level = 0.8 } = {}) {
@@ -807,6 +842,11 @@ function drinkArt(made, res = {}, soFar = null, cls = '') {
   el.innerHTML = drinkSVG(spec);
   return el;
 }
+
+/** 뚜껑이 있는 포장 컵(종이컵 · 플라스틱 컵) */
+const LIDDED = new Set(['paper', 'plastic']);
+/** 뚜껑을 연 포장 컵 그림(drink 가 있으면 그 음료가 든 모습) */
+const openArt = (cup, drink = null, cls = 'toss') => h('span', { class: `bw-art bw-drink ${cls}`.trim(), 'data-art': `open_${cup}`, html: openCupSVG(cup, drink) });
 
 /* ================================================================== */
 /* 레시피 수첩: 작업대 안의 [레시피 수첩]과 위쪽 띠·멈춤의 [레시피]가 같은 칸을 씀  */
@@ -2701,7 +2741,8 @@ export async function brew(opts = {}) {
     }
     // 그림 움직임: 단계 class(s1 ~ s5)마다 CSS 전환
     const spec = drinkSpec(made);
-    const cupBox = h('div', { class: 'bw-toss-cup' }, drinkArt(made, {}, null, 'toss'));
+    const lidded = LIDDED.has(made.cup); // 포장 컵은 뚜껑을 열고 쏟음(닫힌 뚜껑으로 쏟지 않게)
+    const cupBox = h('div', { class: 'bw-toss-cup' }, lidded ? openArt(made.cup, spec) : drinkArt(made, {}, null, 'toss'));
     const stream = h('i', { class: 'bw-toss-stream', style: { '--c': spec.color || '#B98A5E' } });
     const ice = spec.ice ? h('i', { class: 'bw-toss-ice' }, h('b'), h('b'), h('b')) : null;
     const sink = h('span', { class: 'bw-toss-sink', html: sinkSVG() }, h('i', { class: 'bw-toss-drain' }));
@@ -2715,7 +2756,7 @@ export async function brew(opts = {}) {
     audio.sfx('pour');
     await w(pauseMs(900));
     audio.sfx('water');
-    cupBox.replaceChildren(objArt(cupArtId(made.cup), 'toss'));
+    cupBox.replaceChildren(lidded ? openArt(made.cup) : objArt(cupArtId(made.cup), 'toss'));
     await w(pauseMs(700));
     stage.classList.add('s3'); // 세움
     await w(pauseMs(500));
@@ -2785,6 +2826,10 @@ export async function brew(opts = {}) {
     const want = orderTarget(cur).cup;
     phase = 'busy';
     setPanel();
+    if (ch.sfx) { // 바꾸는 까닭이 먼저 들림(버스가 들어옴 등)
+      audio.sfx(ch.sfx);
+      await w(pauseMs(700));
+    }
     showGuest('surprised');
     setReact(ch.say);
     renderTicket(new Set(['temp', 'togo']), 'togo'); // 주문 메모도 '가져가요'로
@@ -2817,7 +2862,7 @@ export async function brew(opts = {}) {
     await serve(res, { again: true });
   }
 
-  /** 옮겨 담는 장면: 든 잔을 새 컵 위로 → 기울여 부음(얼음도) → 새 컵이 참 → 쓴 컵은 식기 건조대에 엎어 둠 */
+  /** 옮겨 담는 장면: 든 잔을 새 컵 위로 → 기울여 부음(얼음도) → 새 컵이 참 → 뚜껑을 덮음(가져가는 컵) → 쓴 컵은 식기 건조대에 엎어 둠 */
   async function moveScene(toCup, res) {
     setPanel();
     const view = h('div', { class: 'bw-close-view bw-toss-view' });
@@ -2831,8 +2876,10 @@ export async function brew(opts = {}) {
     setScene({ mode: 'toss', keep: true });
     talkAfter(sysV(SYS.move));
     const spec = drinkSpec(made, res);
+    const lidded = LIDDED.has(toCup); // 가져가는 컵: 뚜껑을 연 채로 붓고, 다 부으면 뚜껑을 덮음
     const fromBox = h('div', { class: 'bw-move-from' }, drinkArt(made, res, null, 'toss'));
-    const toBox = h('div', { class: 'bw-move-to' }, objArt(cupArtId(toCup), 'toss'));
+    const lid = lidded ? h('span', { class: 'bw-art bw-move-lid', html: lidSVG(toCup) }) : null;
+    const toBox = h('div', { class: 'bw-move-to' }, lidded ? openArt(toCup) : objArt(cupArtId(toCup), 'toss'), lid);
     const stream = h('i', { class: 'bw-move-stream', style: { '--c': spec.color || '#B98A5E' } });
     const ice = spec.ice ? h('i', { class: 'bw-move-ice' }, h('b'), h('b'), h('b')) : null;
     const rack = h('span', { class: 'bw-toss-dest is-rack', html: rackSVG() });
@@ -2844,11 +2891,18 @@ export async function brew(opts = {}) {
     stage.classList.add('s2'); // 기울여 부음
     audio.sfx('pour');
     await w(pauseMs(900));
-    toBox.replaceChildren(drinkArt({ ...made, cup: toCup }, res, null, 'toss'));
+    const full = drinkArt({ ...made, cup: toCup }, res, null, 'toss');
+    toBox.replaceChildren(...[lidded ? openArt(toCup, spec) : full, lid].filter(Boolean));
     fromBox.replaceChildren(objArt(cupArtId(made.cup), 'toss'));
     await w(pauseMs(600));
     stage.classList.add('s3'); // 세움
     await w(pauseMs(450));
+    if (lidded) { // 뚜껑을 덮음 → 뚜껑이 있는 그림으로(같은 자리라 그대로 이어짐)
+      stage.classList.add('is-lid');
+      audio.sfx('tap');
+      await w(pauseMs(650));
+      toBox.replaceChildren(full);
+    }
     stage.classList.add('s4'); // 건조대 쪽으로
     await w(pauseMs(650));
     stage.classList.add('s5');

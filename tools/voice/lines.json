@@ -738,9 +738,9 @@
   "ep": "spring_1"
  },
  {
-  "key": "ca9d008e",
+  "key": "a371046a",
   "voice": "sys",
-  "text": "새 컵에 옮겨 담고, 쓴 컵은 씻어요.",
+  "text": "새 컵에 옮겨 담고 뚜껑을 덮어요. 쓴 컵은 씻어요.",
   "ep": "spring_1"
  },
  {
@@ -12093,6 +12093,84 @@
   "key": "34b1e2b5",
   "voice": "geum",
   "text": "으으… 역시 이거죠.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "83dd8576",
+  "voice": "narr",
+  "text": "큰 가방을 멘 손님이 어깨에 쌓인 눈을 털며 들어온다. 종점에서 버스를 기다리다가 손이 너무 시려서 들어왔다고 한다.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "d902255e",
+  "voice": "customer",
+  "text": "길이 미끄러워서 버스가 삼십 분쯤 늦는대요. 여기서 따뜻한 걸 마시면서 기다리려고요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "dc49a2d8",
+  "voice": "sys",
+  "text": "버스를 기다리는 손님. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "d136ea17",
+  "voice": "customer",
+  "text": "따뜻한 라테 하나요. 여기서 마실게요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "3309f0c1",
+  "voice": "customer",
+  "text": "부드러워요. 고마워요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "55271b68",
+  "voice": "customer",
+  "text": "어, 버스가 생각보다 빨리 왔네요! 미안해요, 이건 가져갈게요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "7a95ec16",
+  "voice": "customer",
+  "text": "고마워요. 버스에서 두 손으로 감싸고 마실게요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "eeffd3eb",
+  "voice": "customer",
+  "text": "조금 미지근하네요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "4187d757",
+  "voice": "customer",
+  "text": "조금 뜨겁네요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "8105658a",
+  "voice": "customer",
+  "text": "양이 조금 적네요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "eb32a16b",
+  "voice": "customer",
+  "text": "조금 넘쳤네요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "acf77a3e",
+  "voice": "narr",
+  "text": "손님은 종이컵을 두 손으로 감싸 쥐고, 미끄러운 눈길을 조심조심 걸어 버스에 오른다.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "6b951b14",
+  "voice": "think",
+  "text": "여기서 마시려던 잔도 사정이 바뀌면 가져가는 잔이 된다. 컵을 바꿔 담아 드리는 것도 손님에게 맞추는 일이구나.",
   "ep": "winter_1"
  },
  {
