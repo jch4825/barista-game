@@ -17,6 +17,7 @@ import { store } from '../core/store.js';
 import { input } from '../core/input.js';
 import { ICON } from '../data/icons.js';
 import { bus } from '../core/bus.js';
+import { tutor } from './tutor.js';
 
 const SPEED = { slow: 55, normal: 30, fast: 14, instant: 0 };
 const AUTO = { slow: [2600, 70], normal: [1300, 40] };
@@ -98,9 +99,13 @@ function waitAdvance(voiceP, len) {
     };
     if (autoOn) {
       const [base, per] = AUTO[store.settings().auto] || AUTO.normal;
-      voiceP.then(() => sleep(base + per * len)).then(() => {
-        if (token === waitToken && advanceResolve) advanceResolve();
-      });
+      // 쪽지(버튼 알려 주기)가 떠 있으면 학생이 눌러 닫을 때까지 넘기지 않음
+      const go = () => {
+        if (token !== waitToken || !advanceResolve) return;
+        if (tutor.holding()) { setTimeout(go, 300); return; }
+        advanceResolve();
+      };
+      voiceP.then(() => sleep(base + per * len)).then(go);
     }
   });
 }
@@ -147,6 +152,7 @@ export const dialogue = {
   advance() {
     if (document.querySelector('#layer-screen .scr, #layer-modal .ov, #layer-overlay .ov')) return false;
     if (typing) { skipReq = true; bus.emit('dialogue:tap'); return true; }
+    if (tutor.consumeTap()) return true; // 알려 주기만 하는 쪽지가 떠 있으면 이 누름은 쪽지를 닫음(읽기 전에 넘어가지 않게)
     if (advanceResolve) {
       bus.emit('dialogue:tap');
       // 글자는 목소리보다 먼저 다 나옴: 목소리가 나오는 동안의 누름은 말을 자르지 않고 끝난 뒤 넘김. 한 번 더 누르면 바로 넘김(2026-10-31 고침)
@@ -261,6 +267,7 @@ export const dialogue = {
     current = null;
     typing = false;
     advanceResolve = null;
+    nextEl.classList.remove('on');
     voicing = false;
     setQueued(false);
     waitToken += 1;

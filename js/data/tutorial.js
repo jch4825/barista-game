@@ -60,7 +60,7 @@ export const TUT = [
   { key: 'bw-cup', sel: '.mg-brew .bw-hot[data-hot^="cup:"]', when: '.mg-brew .bw-make', need: true, hand: 'group', tip: '손님에게 맞는 컵을 눌러요' },
   { key: 'bw-ing', sel: '.mg-brew .bw-hot[data-hot^="ing:"]', when: '.mg-brew .bw-make', after: 'bw-cup', need: true, hand: 'group', tip: '수첩을 보고 재료를 눌러 넣어요' },
   { key: 'bw-make', sel: '.mg-brew .bw-make', after: 'bw-ing', need: true, hand: 'on', tip: '다 넣으면 눌러요' },
-  { key: 'bw-hold', sel: '.mg-brew .bw-hold:not(:disabled)', need: true, hand: 'on', tip: '꾹 누르고, 알맞아요 칸에서 떼요' },
+  { key: 'bw-hold', sel: '.mg-brew .bw-hold:not(:disabled)', need: true, hand: 'on', tip: '꾹 누르다가 "지금!"이 뜨면 떼요' },
   { key: 'bw-beat', sel: '.mg-brew .bw-now:not(:disabled)', need: true, hand: 'on', tip: '동그라미가 겹칠 때 눌러요' },
   { key: 'bw-serve', sel: '.mg-brew .bw-serve', need: true, hand: 'on', tip: '다 만들면 손님께 드려요' },
   { key: 'wk-mag', sel: '.wk-board .wk-pool .wk-mag', need: true, hand: 'group', tip: '붙일 자석을 눌러요' },
@@ -74,7 +74,7 @@ export const TUT = [
   { key: 'rs-next', sel: '.scr-result .btn-big.btn-main', need: true, hand: 'on', tip: '눌러서 넘어가요' },
 
   /* ---------- 안 눌러도 되는 것(두 번 보여 주면 배운 것으로) ---------- */
-  { key: 'term', sel: '#layer-dock .dlg .term', max: 2, hand: 'on', tip: '눌러 보면 뜻을 알려 줘요' },
+  { key: 'term', sel: '#layer-dock .dlg .term', max: 2, tip: '눌러 보면 뜻을 알려 줘요' }, // 손가락 없음: 대사 글 한가운데라 손가락이 늘 대사를 가림
   { key: 'help', sel: '#layer-task .cards-wrap.is-in .btn-help', after: 'card', max: 2, hand: 'on', tip: '모르겠으면 눌러요' },
   { key: 'alt', sel: '.ov-oops .oops-btns .btn-soft', after: 'rewind', max: 2, tip: '이대로 이어 갈 수도 있어요' },
   { key: 'listen', sel: '.ov-gloss .gloss-btns .btn-small, .ov-crew .btn-small, .mg .mg-say', after: 'ok', max: 2, tip: '누르면 읽어 줘요' },

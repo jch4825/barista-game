@@ -825,13 +825,16 @@ body.tasking .hud-saved { display: none; }
   animation: tut-tap 1.1s ease-in-out infinite;
 }
 .tut-hand .h > svg, .tut-hand .h > img { display: block; width: 100%; height: 100%; }
-/* fx: 왼쪽 아래에서 · sr: 오른쪽 옆에서 · sl: 왼쪽 옆에서 (화면 아래쪽 버튼) */
+/* fx: 왼쪽 아래에서 · sr: 오른쪽 옆에서 · sl: 왼쪽 옆에서 (화면 아래쪽 버튼) · st: 위에서 */
 .tut-hand.fx { --dx: -12px; }
 .tut-hand.fx .h { scale: -1 1; rotate: 24deg; }
 .tut-hand.sr { --dx: 18px; --dy: 4px; }
 .tut-hand.sr .h { rotate: -84deg; }
 .tut-hand.sl { --dx: -18px; --dy: 4px; }
 .tut-hand.sl .h { scale: -1 1; rotate: 84deg; }
+/* st: 위에서 아래로(화면 맨 아래 줄 단추). 위아래로 뒤집은 그림이라 그림자도 뒤집어 아래로 */
+.tut-hand.st { --dx: 12px; --dy: -14px; }
+.tut-hand.st .h { scale: 1 -1; rotate: 24deg; filter: drop-shadow(0 -6px 0 rgba(0, 0, 0, .28)); }
 /* 누르는 순간 손끝에 퍼지는 작은 동그라미(흰색) */
 .tut-hand::before {
   content: ''; position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%;
@@ -865,6 +868,8 @@ body.tasking .hud-saved { display: none; }
   background: rgba(255, 255, 255, .72); border: 2px solid rgba(23, 20, 28, .18);
 }
 @keyframes tut-bob { 0%, 100% { margin-top: 0; } 50% { margin-top: -6px; } }
+/* 대사를 기다리는 동안 뜬 '알려 주기만 하는' 쪽지: 다음 누름이 쪽지를 닫음(대사는 그다음 누름에 넘어감) */
+.tut-tip.hold::after { content: '톡 누르면 닫혀요'; display: block; margin-top: 4px; font-size: 20px; font-weight: 700; opacity: .8; }
 
 /* 차분 모드: 천천히, 은은하게 */
 body.theme-calm .tut-ring { animation-duration: 6s; }
