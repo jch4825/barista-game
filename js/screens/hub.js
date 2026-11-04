@@ -2,7 +2,7 @@
  * 달력(옛 근무표): 계절마다 한 줄, 하루가 한 칸(봄 · 여름 · 가을 · 겨울 × 7일) + 이야기 뒤(엔딩 · 자유 영업 · 새 해)
  *  - 칸마다 그날의 첫 장소 그림, 날 번호와 제목, 상태(마침 · 오늘 · 이어 하기 · 잠김). 다음에 할 날은 '오늘'로 빛남
  *  - 이번 해의 엔딩을 본 뒤에는 모든 날이 열림. 자유 영업은 봄 7일을 마치면 열림(재미 개편 Q-47, js/data/episodes/free.js)
- *  - 새 해(PRD 5.9 · Q-14): 단골과의 관계와 마친 날은 처음부터, 앨범 · 메뉴 도감 · 자유 영업은 남음(store.newYear)
+ *  - 새 해(PRD 5.9 · Q-14): 단골과의 관계와 마친 날은 처음부터, 앨범 · 메뉴 도감 · 지은의 성장 · 자유 영업은 남음(store.newYear)
  */
 
 import { h } from '../core/dom.js';
@@ -102,9 +102,9 @@ function clearNote() {
     listen);
 }
 
-/** 자유 영업 칸: 봄 7일을 마치면 열림(재미 개편 Q-47, 전에는 엔딩 뒤). 다음 날 번호를 보여 줌 */
+/** 자유 영업 칸: 봄 7일을 마치면 열림(재미 개편 Q-47, 전에는 엔딩 뒤). 처음부터 다시 해도 열린 채(검수 13.39 24번). 다음 날 번호를 보여 줌 */
 function freeCard() {
-  const open = Boolean(store.ending()) || store.isDone('spring_7') || store.unlockedAll();
+  const open = Boolean(store.ending()) || store.everDone('spring_7') || store.unlockedAll();
   const f = store.free();
   const cp = store.checkpoint();
   const resumable = open && cp && cp.ep === 'free';
@@ -137,7 +137,7 @@ function yearCard() {
       e.stopPropagation();
       const ok = await ov.confirm({
         text: `${yearName(next)}를 시작할까요?`,
-        detail: '같은 마을에서 봄부터 다시 일해요. 단골과의 관계와 마친 날은 처음부터 다시 쌓아요. 앨범 · 메뉴 도감 · 자유 영업은 그대로 남아요.',
+        detail: '같은 마을에서 봄부터 다시 일해요. 단골과의 관계와 마친 날은 처음부터 다시 쌓아요. 앨범 · 메뉴 도감 · 지은의 성장 · 자유 영업은 그대로 남아요.',
         yes: '시작하기', no: '아니요',
       });
       if (!ok) return;

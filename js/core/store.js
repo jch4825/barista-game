@@ -45,7 +45,7 @@ function newProfile(name) {
     settings: { ...CONFIG.DEFAULT_SETTINGS },
     settingsLocked: false,
     path: 'normal',
-    progress: { done: {}, checkpoint: null, unlockedAll: false, year: 1 },
+    progress: { done: {}, ever: {}, checkpoint: null, unlockedAll: false, year: 1 },
     flags: {},
     stamps: {},      // skill -> { best, count, last }
     log: [],         // 과제 기록
@@ -133,6 +133,7 @@ function normalizeProfile(raw) {
     progress: {
       ...pr,
       done: obj(pr.done),
+      ever: Object.fromEntries(Object.entries(obj(pr.ever)).filter(([, at]) => Number.isFinite(at))),
       checkpoint: isObj(pr.checkpoint) ? pr.checkpoint : null,
       unlockedAll: Boolean(pr.unlockedAll),
       ending: isObj(pr.ending) ? pr.ending : undefined,
@@ -237,12 +238,13 @@ function mergeProfiles(a, b) {
   const free = f1 && f2 ? (num(f2.day) >= num(f1.day) ? f2 : f1) : f2 || f1;
   const album = { ...cur.album };
   for (const [k, y] of Object.entries(old.album || {})) album[k] = album[k] ? Math.min(num(album[k], 1), num(y, 1)) : y;
+  const ever = { ...obj(old.progress.ever), ...obj(cur.progress.ever) };
   return {
     ...cur,
     ...onlyIn(old, cur),
     createdAt: Math.min(num(old.createdAt, Date.now()), num(cur.createdAt, Date.now())),
     updatedAt: Math.max(num(old.updatedAt), num(cur.updatedAt)),
-    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily, free, year: Math.max(num(old.progress.year, 1), num(cur.progress.year, 1)) },
+    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, ever, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily, free, year: Math.max(num(old.progress.year, 1), num(cur.progress.year, 1)) },
     album,
     book: union(cur.book || [], old.book || []),
     stamps,
@@ -260,9 +262,20 @@ function mergeProfiles(a, b) {
   };
 }
 
-/** 새 해 · 처음부터: 마친 이야기 · 이어 하기 · 선택 기억(신뢰 · 본 숨은 장면)을 비움. 단골의 평소 주문 · 메뉴 도감 표시는 남음 */
+/**
+ * 마친 적이 있는 이야기(ever: { 이야기 id: 처음 마친 때 }): 처음부터 · 새 해에 마친 날을 비워도 남음.
+ * 단계(grow.rank) · 자유 영업 열림이 이것을 봄(검수 13.39 24번, 2026-11-04 사용자 결정: 둘 다 남김)
+ */
+function keepEver(p) {
+  const ever = { ...obj(p.progress.ever) };
+  for (const [ep, v] of Object.entries(p.progress.done)) if (!ever[ep]) ever[ep] = num(v?.at, Date.now());
+  p.progress.ever = ever;
+}
+
+/** 새 해: 마친 이야기 · 이어 하기 · 선택 기억(신뢰 · 본 숨은 장면)을 비움. 단골의 평소 주문 · 메뉴 도감 표시 · 마친 적이 있는 이야기는 남음 */
 function restartRun(p) {
   const keep = { usuals: p.flags.usuals, menuBook: p.flags.menuBook };
+  keepEver(p);
   p.progress.done = {};
   p.progress.checkpoint = null;
   p.flags = Object.fromEntries(Object.entries(keep).filter(([, v]) => v !== undefined));
@@ -359,11 +372,17 @@ export const store = {
 
   /* ---------- 진행 ---------- */
   isDone(epId) { return Boolean(active()?.progress.done[epId]); },
+  /** 이번 해 · 이번 판이 아니어도 마친 적이 있음(처음부터 · 새 해 앞의 것까지): 단계 · 자유 영업 */
+  everDone(epId) {
+    const pr = active()?.progress;
+    return Boolean(pr && (pr.done[epId] || pr.ever?.[epId]));
+  },
   markDone(epId) {
     const p = active();
     if (!p) return;
     const prev = p.progress.done[epId];
     p.progress.done[epId] = { at: Date.now(), times: (prev?.times || 0) + 1 };
+    keepEver(p);
     if (p.progress.checkpoint?.ep === epId) p.progress.checkpoint = null;
     touch(p);
     saveNow();
@@ -391,7 +410,7 @@ export const store = {
   year() { return Math.max(1, active()?.progress.year || 1); },
   /**
    * 두 번째 해(PRD 5.9 · Q-14): 같은 마을에서 다시. 마친 이야기 · 이어 하기 · 선택 기억(신뢰 · 본 숨은 장면)은 처음부터,
-   * 앨범 · 메뉴 도감 · 단골 수첩 · 엔딩을 본 기록(자유 영업)은 남음. 기록(log)에는 해마다 year 가 붙음
+   * 앨범 · 메뉴 도감 · 단골 수첩 · 엔딩을 본 기록(자유 영업) · 지은의 성장(단계: 마친 적이 있는 계절)은 남음. 기록(log)에는 해마다 year 가 붙음
    */
   newYear() {
     const p = active();
@@ -401,11 +420,13 @@ export const store = {
   },
   /**
    * 처음부터(처음 화면, 2026-11-01 사용자 "관계는 남겨"): 이번 해를 봄 1일부터 다시. 마친 이야기 · 이어 하기만 처음부터,
-   * 단골과의 관계(선택 기억 · 신뢰 · 본 숨은 장면) · 몇 번째 해 · 앨범 · 메뉴 도감 · 저장한 장면 · 기록(log)은 남음
+   * 단골과의 관계(선택 기억 · 신뢰 · 본 숨은 장면) · 몇 번째 해 · 앨범 · 메뉴 도감 · 저장한 장면 · 기록(log)은 남음.
+   * 지은의 단계 · 자유 영업 열림도 남음(마친 적이 있는 이야기 ever, 검수 13.39 24번 2026-11-04 사용자 결정: 둘 다 남김)
    */
   restartYear() {
     const p = active();
     if (!p) return;
+    keepEver(p);
     p.progress.done = {};
     p.progress.checkpoint = null;
     touch(p);

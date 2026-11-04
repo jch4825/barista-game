@@ -175,14 +175,13 @@ export function showTitle() {
   tts.speakSeq(TITLE_SAY(), 'sys');
 }
 
-/** 처음부터: 묻고 나서 이번 해를 봄 1일부터(마친 날만 다시, 단골과의 관계 · 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
-/** [처음부터]: 이번 해를 봄 1일부터 다시(관계 · 성장 · 모은 것은 남음) */
+/** [처음부터]: 묻고 나서 이번 해를 봄 1일부터 다시(마친 날만 다시. 단골과의 관계 · 지은의 성장(단계) · 자유 영업 · 저장한 장면 · 앨범 · 메뉴 도감 · 기록은 남음) */
 const restartBtn = () => menuBtn('repeat', '처음부터', `${EPISODES[0].label} · ${EPISODES[0].title}부터 다시`, restartFromTop);
 
 async function restartFromTop() {
   const ok = await ov.confirm({
     text: '처음부터 다시 할까요?',
-    detail: `${EPISODES[0].label}부터 다시 시작해요. 단골과의 관계 · 지은의 성장 · 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
+    detail: `${EPISODES[0].label}부터 다시 시작해요. 단골과의 관계 · 지은의 성장 · 자유 영업 · 저장한 장면 · 앨범 · 메뉴 도감은 그대로 남아요.`,
     yes: '처음부터', no: '아니요',
   });
   if (!ok) return;

@@ -110,9 +110,9 @@ export function dayRise() {
   return out;
 }
 
-/** 단계: 마친 계절 수(계절의 마지막 날) */
+/** 단계: 마친 적이 있는 계절 수(계절의 마지막 날). 처음부터 · 새 해에도 떨어지지 않음(검수 13.39 24번) */
 export function rank() {
-  const n = SEASON_LAST.filter((ep) => store.isDone(ep)).length;
+  const n = SEASON_LAST.filter((ep) => store.everDone(ep)).length;
   return { index: n, name: RANKS[n] };
 }
 

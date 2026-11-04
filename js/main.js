@@ -43,10 +43,10 @@ let playTok = 0; // 이야기 도중 저장 칸을 불러오면 새 이야기가
 /** resume: 자동 저장(이어하기)부터 · save: 세이브 슬롯에서 불러온 저장 데이터 */
 async function playEpisode(id, { resume = false, save = null } = {}) {
   // 자유 영업: 다음 날 번호로 그날을 만듦(같은 날은 늘 같은 하루, js/data/episodes/free.js)
-  // 자유 영업: 엔딩 전(봄 7일 뒤 일찍 연 것, 재미 개편 Q-47)은 만난 단골 · 마친 계절만
+  // 자유 영업: 엔딩 전(봄 7일 뒤 일찍 연 것, 재미 개편 Q-47)은 만난 단골 · 마친 계절만(처음부터 다시 하기 전에 마친 계절도)
   const early = !store.ending() ? {
     regs: [...new Set(store.logs().filter((l) => l.type === 'respond').map((l) => l.who))],
-    seasons: ['spring', 'summer', 'autumn', 'winter'].filter((x) => store.isDone(`${x}_7`)),
+    seasons: ['spring', 'summer', 'autumn', 'winter'].filter((x) => store.everDone(`${x}_7`)),
   } : {};
   // 이어 하기 · 저장 칸은 저장한 그날(free)을 다시 만듦. 다음 날 번호로 만들면 비트 번호가 다른 날과 어긋남(검수 13.39 7번)
   const from = save || (resume ? store.checkpoint() : null);
