@@ -546,6 +546,24 @@
   "ep": "spring_1"
  },
  {
+  "key": "38e51fdc",
+  "voice": "sys",
+  "text": "잘 봐요. 화면에 \"지금!\"이 뜨면 멈춰요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f19d4a0e",
+  "voice": "sys",
+  "text": "잘 봐요. 동그라미가 가운데 원에 겹칠 때 눌러요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "adda2dec",
+  "voice": "sys",
+  "text": "잘 봐요. 얼음을 떠서 컵 위에 놓아요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "85ec4ea0",
   "voice": "sys",
   "text": "[한 칸]을 누르면 띠가 한 칸 움직여요.",

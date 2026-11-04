@@ -124,7 +124,10 @@ const CUP_HINT = {
 const TEMP_HINT = { hot: '손님은 따뜻한 걸 주문했어요.', iced: '손님은 아이스를 주문했어요.' };
 const SYS = {
   book: '레시피 수첩이에요. 메뉴를 누르면 읽어 줘요.',
-  watch: '잘 봐요. 알맞아요 칸에서 멈춰요.',
+  watch: '잘 봐요. 알맞아요 칸에서 멈춰요.', // [보기]: 띠가 보일 때(턴 방식 · 도움 많이 · 쉬운 길)
+  watchCue: '잘 봐요. 화면에 "지금!"이 뜨면 멈춰요.', // 띠가 숨겨져 있을 때(실시간 기본, 2026-11-05 사용자 "설명이 게이지가 나오는 것처럼")
+  watchBeat: '잘 봐요. 동그라미가 가운데 원에 겹칠 때 눌러요.', // 박자(얼음 · 시럽 · 청 · 가루 · 톡톡)
+  watchScoop: '잘 봐요. 얼음을 떠서 컵 위에 놓아요.', // 드래그 활용의 얼음 담기
   turn: '[한 칸]을 누르면 띠가 한 칸 움직여요.',
   turnWait: '[기다리기]를 누르면 띠가 한 칸 움직여요.',
   full: '재료는 세 가지까지 넣을 수 있어요.',
@@ -1801,6 +1804,7 @@ export async function brew(opts = {}) {
     const showBar = turn || act === 'beats' || store.settings().help === 'many' || store.settings().helpBar === true || path === 'easy'; // 쉬운 길은 띠를 늘 보임
     if (!showBar) gauge.classList.add('is-quiet');
     const saysNow = !showBar; // 설명도 띠 대신 "지금!"으로(howtoOf 의 cue)
+    const watchLine = dk === 'scoop' ? SYS.watchScoop : act === 'beats' ? SYS.watchBeat : saysNow ? SYS.watchCue : SYS.watch; // [보기]의 말도 보이는 것에 맞춤
     const status = h('p', { class: 'bw-status', 'aria-live': 'polite' });
     // 단추: 한 번 해 볼 때마다 새로 만듦([다시 하기] 때 앞의 손잡이가 남지 않게)
     // hold · circle: [누르고 있기](턴 방식 [한 칸] + [멈추기]) · wait: [지금!](턴 방식 [기다리기] + [지금!]) · beats: [담기] 같은 이름(턴 방식 [한 칸] + 그 단추)
@@ -1948,7 +1952,7 @@ export async function brew(opts = {}) {
       phase = 'skill';
       if (turn || how === 'watch' || act === 'wait') audio.sfx(sk.sfx);
       focusLater(turn ? stepB : stopB);
-      if (how === 'watch') talk(sysV(SYS.watch));
+      if (how === 'watch') talk(sysV(watchLine));
       else if (act === 'circle' && !turn) talk(sysV(SYS.drag));
       let mode = how;
       let finished = false;
@@ -2142,7 +2146,7 @@ export async function brew(opts = {}) {
         flow = false;
         stopB.classList.remove('is-holding');
         if (p > center) p = 0;
-        talk(sysV(SYS.watch));
+        talk(sysV(watchLine));
         setButtons();
         draw();
       });
@@ -2276,12 +2280,12 @@ export async function brew(opts = {}) {
       onTap(watchB, () => {
         if (mode !== 'play') return;
         mode = 'watch';
-        talk(sysV(SYS.watch));
+        talk(sysV(watchLine));
         setButtons();
       });
       setButtons();
       focusLater(turn ? stepB : stopB);
-      if (how === 'watch') talk(sysV(SYS.watch));
+      if (how === 'watch') talk(sysV(watchLine));
       drawBeat();
       curLoop = loop((dt) => {
         if (finished) return;
@@ -2434,7 +2438,7 @@ export async function brew(opts = {}) {
       onTap(watchB, () => {
         if (mode !== 'play') return;
         mode = 'watch';
-        talk(sysV(SYS.watch));
+        talk(sysV(watchLine));
         stopB.disabled = true;
         watchB.disabled = true;
       });
@@ -2443,7 +2447,7 @@ export async function brew(opts = {}) {
       focusLater(stopB);
       clearTimeout(iceTimer);
       shot.set(0, false); // 빈 컵부터
-      if (how === 'watch') talk(sysV(SYS.watch));
+      if (how === 'watch') talk(sysV(watchLine));
       else hintOn();
       drawDots();
       curLoop = loop((dt) => {
