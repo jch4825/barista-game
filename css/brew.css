@@ -620,3 +620,59 @@ body.contrast .mg.mg-brew .bw-drag-hint i svg { color: #FFE14D; }
 .mg.mg-brew .bw-lack-say i svg { width: 28px; height: 28px; color: #C99A2E; flex: none; }
 body.contrast .mg.mg-brew .bw-today { background: #000; border-color: #FFE14D; }
 body.contrast .mg.mg-brew .bw-lack-say { background: #000; color: #fff; border-color: #FFE14D; }
+
+/* ---------- 레시피와 다르게 골랐을 때(2026-11-04 사용자): 휘리릭 → 만든 잔 + [버리기] → 버리는 장면 ----------
+   휘리릭은 크림색 회오리 선(빛살 아님) + 웹툰 글자, 끝에 퐁 하고 고른 대로 만든 잔. 버리는 장면은 확대 창 안: 개수대 위로 → 기울여 쏟음 → 건조대(엎어 둠) · 쓰레기통 */
+.mg.mg-brew .bw-scene:is([data-mode="whirl"], [data-mode="wrong"]) .bw-spot.s-center { left: 8%; width: 38%; top: 20%; bottom: 8%; }
+.mg.mg-brew .bw-scene:is([data-mode="whirl"], [data-mode="wrong"]) ~ .bw-panel { left: auto; right: 24px; transform: none; width: min(880px, 45%); max-height: 72%; }
+.mg.mg-brew :is(.bw-whirl, .bw-made-wrong) { position: relative; width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.mg.mg-brew :is(.bw-whirl, .bw-made-wrong) > .bw-art.big { position: relative; z-index: 1; height: 62%; width: auto; aspect-ratio: 1; margin-bottom: 8%; filter: drop-shadow(0 12px 10px rgba(30, 18, 8, .45)); }
+.mg.mg-brew .bw-whirl-ring { position: absolute; left: 50%; top: 58%; width: 84%; aspect-ratio: 1; border-radius: 50%; border: 12px solid transparent; border-top-color: rgba(255, 244, 214, .95); border-right-color: rgba(255, 244, 214, .35); transform: translate(-50%, -50%); animation: bw-whirl-spin .5s linear infinite; pointer-events: none; }
+.mg.mg-brew .bw-whirl-ring.r2 { width: 60%; border-width: 9px; border-top-color: rgba(240, 217, 162, .95); border-right-color: rgba(240, 217, 162, .3); animation-duration: .36s; animation-direction: reverse; }
+.mg.mg-brew .bw-whirl-ring.r3 { width: 104%; border-width: 6px; border-top-color: rgba(255, 255, 255, .6); border-right-color: transparent; animation-duration: .72s; }
+.mg.mg-brew .bw-whirl:not(.is-done) > .bw-art.big { animation: bw-whirl-wobble .2s ease-in-out infinite alternate; }
+.mg.mg-brew .bw-whirl.is-done .bw-whirl-ring { animation: bw-whirl-out .35s ease-out forwards; }
+.mg.mg-brew .bw-whirl.is-done > .bw-art.big { animation: bw-whirl-pop .4s cubic-bezier(.3, 1.6, .5, 1); }
+.mg.mg-brew .bw-whirl-word { --x: 76%; --y: 16%; --rot: -8deg; opacity: 1; z-index: 2; }
+.mg.mg-brew .bw-whirl-word .bw-pow-ch { font-size: 88px; animation: bw-ch-pop .22s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 45ms); }
+.mg.mg-brew .bw-whirl.is-done .bw-whirl-word { opacity: 0; transition: opacity .3s ease; }
+@keyframes bw-whirl-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes bw-whirl-wobble { from { transform: rotate(-7deg) translateY(0); } to { transform: rotate(7deg) translateY(-4%); } }
+@keyframes bw-whirl-out { to { opacity: 0; transform: translate(-50%, -50%) scale(1.25); } }
+@keyframes bw-whirl-pop { from { transform: scale(.72); } to { transform: scale(1); } }
+body:is(.reduce-motion, .theme-calm) .mg.mg-brew :is(.bw-whirl, .bw-whirl *) { animation: none !important; }
+body.reduce-motion .mg.mg-brew .bw-whirl-ring { display: none; }
+
+.mg.mg-brew .bw-toss-view { background: linear-gradient(180deg, #24474F 0, #1D3A41 60%, #7A5634 60%, #5E3F24 100%); }
+.mg.mg-brew .bw-toss { position: absolute; inset: 0; overflow: hidden; }
+.mg.mg-brew .bw-toss-sink { position: absolute; left: 24%; bottom: 9%; width: 40%; }
+.mg.mg-brew .bw-toss-dest { position: absolute; right: 6%; bottom: 9%; width: 22%; }
+.mg.mg-brew .bw-toss-dest.is-bin { width: 16%; }
+.mg.mg-brew :is(.bw-toss-sink, .bw-toss-dest) svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mg.mg-brew .bw-toss-cup { position: absolute; z-index: 2; left: 4%; bottom: 46%; width: 17%; aspect-ratio: 1; transition: left .6s ease, bottom .6s ease, transform .5s ease, opacity .45s ease; }
+.mg.mg-brew .bw-toss-cup .bw-art { display: block; width: 100%; height: 100%; }
+.mg.mg-brew .bw-toss.s1 .bw-toss-cup { left: 31%; bottom: 52%; }
+.mg.mg-brew .bw-toss.s2 .bw-toss-cup { transform: rotate(118deg); }
+.mg.mg-brew .bw-toss.s3 .bw-toss-cup { transform: none; }
+.mg.mg-brew .bw-toss.s4 .bw-toss-cup { left: 74%; bottom: 50%; }
+.mg.mg-brew .bw-toss:is(.k-mug, .k-glass).s5 .bw-toss-cup { bottom: 20%; transform: rotate(180deg) scale(.8); } /* 건조대에 엎어 둠 */
+.mg.mg-brew .bw-toss:is(.k-paper, .k-plastic).s5 .bw-toss-cup { left: 76%; bottom: 20%; transform: rotate(24deg) scale(.6); opacity: 0; } /* 쓰레기통 속으로 */
+.mg.mg-brew .bw-toss-stream { position: absolute; z-index: 1; left: 46%; top: 38%; bottom: 14%; width: 16px; margin-left: -8px; border-radius: 8px; background: var(--c); opacity: .92; transform-origin: top; transform: scaleY(0); transition: transform .3s ease; }
+.mg.mg-brew .bw-toss.s2 .bw-toss-stream { transform: scaleY(1); transition-delay: .35s; }
+.mg.mg-brew .bw-toss.s3 .bw-toss-stream { transform: scaleY(0); transform-origin: bottom; transition-delay: 0s; }
+.mg.mg-brew .bw-toss-ice { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.mg.mg-brew .bw-toss-ice b { position: absolute; left: 45%; top: 38%; width: 3.4%; aspect-ratio: 1; border-radius: 6px; background: rgba(230, 246, 255, .92); border: 3px solid #2A1D12; opacity: 0; }
+.mg.mg-brew .bw-toss-ice b:nth-child(2) { left: 43%; }
+.mg.mg-brew .bw-toss-ice b:nth-child(3) { left: 47.5%; }
+.mg.mg-brew .bw-toss.s2 .bw-toss-ice b { animation: bw-ice-fall .7s ease-in forwards; animation-delay: .45s; }
+.mg.mg-brew .bw-toss.s2 .bw-toss-ice b:nth-child(2) { animation-delay: .62s; }
+.mg.mg-brew .bw-toss.s2 .bw-toss-ice b:nth-child(3) { animation-delay: .8s; }
+@keyframes bw-ice-fall { from { top: 38%; opacity: 1; transform: rotate(0); } to { top: 80%; opacity: 1; transform: rotate(140deg); } }
+.mg.mg-brew .bw-toss-drain { position: absolute; left: 50%; bottom: 6%; width: 18%; aspect-ratio: 1; margin-left: -9%; border-radius: 50%; border: 5px solid transparent; border-top-color: rgba(255, 255, 255, .75); border-left-color: rgba(255, 255, 255, .35); opacity: 0; transform: scaleY(.36); }
+.mg.mg-brew .bw-toss.s2 .bw-toss-drain { opacity: 1; animation: bw-drain .5s linear infinite; }
+@keyframes bw-drain { from { transform: scaleY(.36) rotate(0); } to { transform: scaleY(.36) rotate(360deg); } }
+.mg.mg-brew .bw-toss-movie { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+body.reduce-motion .mg.mg-brew .bw-toss * { transition: none !important; animation: none !important; }
+body.reduce-motion .mg.mg-brew .bw-toss-drain { display: none; }
+body.theme-calm .mg.mg-brew .bw-toss-cup { transition-duration: .9s; }
+body.contrast .mg.mg-brew .bw-toss-view { background: #000; }

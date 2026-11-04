@@ -6,7 +6,8 @@
  *    손님이 말하지 않은 칸은 '?'이고, 학생이 묻는 말 단추를 누르면 지은이 묻고 손님이 대답함. 다 채우면 [주문 확인] = 지은이 주문을 되풀이
  *    컵은 매장/포장 × 온도(menu.js 의 SERVICE_CUP): 드시고 가요 = 머그컵 · 유리컵, 가져가요 = 종이컵 · 플라스틱 컵
  *  - 손님은 왼쪽 위 말풍선, 작업대는 카운터 한 장면. 대화창은 가려 둠(body.brew-open)
- *  - 레시피가 틀려도 고른 대로 만들고, 드릴 때 손님이 차분히 말함("이건 제가 주문한 게 아니네요.") → [다시 만들기](실수로 셈)
+ *  - 레시피와 다르게 고르면 손 동작 없이: 휘리릭 고른 대로 만든 잔 → 무엇이 다른지 + [버리기] → 버리는 장면 → 처음부터 다시(실수로 셈, 2026-11-04 사용자).
+ *    손 동작(블렌더 한 컷)은 레시피대로 고른 잔에만: 틀린 잔에 쓰면 고른 컵과 다른 장면이 나왔음(흰 머그를 골랐는데 아이스 유리컵)
  *  - 손 동작이 칸을 벗어나면 그 자리에서 학생이 고름: [다시 하기](그 동작만 다시) / [이대로 하기]
  *  - 감점·실패 화면·무서운 소리 없음. [레시피 수첩](오픈북: 컵 고르기 규칙 · 메뉴 · 단골의 평소 주문)은 언제든 열 수 있고, 열려 있는 동안 멈춤
  * 손 동작(menu.js 의 HAND_SKILLS.act, docs/recipes.md 2장):
@@ -147,7 +148,17 @@ const SYS = {
   taste: '사장님이 한 모금 맛보세요.',
   odd: '엉뚱한 잔 도감에 올렸어요.',
   oddAgain: '이 잔은 전에도 맛보셨어요.',
+  // 레시피와 다르게 골랐을 때(2026-11-04 사용자): 휘리릭 만든 뒤 버리고 다시
+  making: '고른 대로 만들어요.',
+  wrongMade: '앗, 주문과 다르게 만들었어요.',
+  toss: '이 잔은 버리고 다시 만들어요. [버리기]를 눌러요.',
+  tossWash: '개수대에 쏟고, 컵은 씻어요.',
+  tossBin: '개수대에 쏟고, 다 쓴 컵은 쓰레기통에 버려요.',
+  remake: '이제 다시 만들어요. 주문 메모를 보고 컵부터 골라요.',
 };
+/** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
+const WHIRL_WORD = '휘리릭!';
+const TOSS_KIND = { mug: 'mug', thick: 'mug', shot: 'glass', glass: 'glass', paper: 'paper', plastic: 'plastic' };
 /** 손 기술에 처음 익숙해졌을 때 지은의 말(재미 개편 6.2) */
 const mastered = (sk) => `이제 ${josa(sk.name, '은/는')} 눈 감고도 할 수 있겠다.`;
 /** 박자 동작의 단추 이름 */
@@ -622,6 +633,34 @@ const ART = {
 };
 
 /** 얼음 통(그림 파일 obj_ice_bucket 이 오기 전 임시) */
+/* 버리는 장면(2026-11-04): 개수대 · 식기 건조대 · 쓰레기통 */
+function sinkSVG() {
+  return `<svg viewBox="0 0 360 170" aria-hidden="true">
+    <defs><linearGradient id="bwSinkG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7E878D"/><stop offset="1" stop-color="#DCE1E4"/></linearGradient></defs>
+    <rect x="4" y="18" width="352" height="20" rx="6" fill="#C5CBCF" stroke="#2A1D12" stroke-width="4"/>
+    <path d="M34 38 H326 L308 150 Q306 160 296 160 H64 Q54 160 52 150 Z" fill="url(#bwSinkG)" stroke="#2A1D12" stroke-width="4"/>
+    <ellipse cx="180" cy="142" rx="24" ry="8" fill="#4F575D" stroke="#2A1D12" stroke-width="3"/>
+    <path d="M168 142 h24 M180 136 v12" stroke="#2A1D12" stroke-width="2.5"/>
+    <path d="M300 18 V-8 Q300 -24 284 -24 H262 V-14" fill="none" stroke="#2A1D12" stroke-width="12" stroke-linecap="round"/>
+    <path d="M300 18 V-8 Q300 -24 284 -24 H262 V-14" fill="none" stroke="#C5CBCF" stroke-width="6" stroke-linecap="round"/>
+  </svg>`;
+}
+function rackSVG() {
+  return `<svg viewBox="0 0 220 150" aria-hidden="true">
+    <rect x="10" y="118" width="200" height="22" rx="8" fill="#E8E3D8" stroke="#2A1D12" stroke-width="4"/>
+    <path d="M24 118 V40 M52 118 V40 M80 118 V40 M108 118 V40 M136 118 V40 M164 118 V40 M192 118 V40" stroke="#8C949A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M18 70 H202 M18 100 H202" stroke="#2A1D12" stroke-width="4" stroke-linecap="round"/>
+  </svg>`;
+}
+function binSVG() {
+  return `<svg viewBox="0 0 170 210" aria-hidden="true">
+    <rect x="20" y="30" width="130" height="20" rx="8" fill="#3F7A57" stroke="#2A1D12" stroke-width="4"/>
+    <path d="M70 30 Q85 14 100 30" fill="none" stroke="#2A1D12" stroke-width="5"/>
+    <path d="M28 50 H142 L132 196 Q131 204 122 204 H48 Q39 204 38 196 Z" fill="#4E8F68" stroke="#2A1D12" stroke-width="4"/>
+    <path d="M62 74 V182 M85 74 V182 M108 74 V182" stroke="#3B7253" stroke-width="6" stroke-linecap="round"/>
+  </svg>`;
+}
+
 function iceBucketSVG() {
   const g = gid('ib');
   const cube = (x, y, r) => `<g transform="rotate(${r} ${x + 9} ${y + 9})"><rect x="${x}" y="${y}" width="18" height="18" rx="4" fill="#E8F6FD" stroke="#6FA7C6" stroke-width="2"/><path d="M${x + 4} ${y + 5} l6 0" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>`;
@@ -2530,6 +2569,139 @@ export async function brew(opts = {}) {
   }
 
   /** 고른 레시피대로 만들기(틀린 레시피도 고른 대로) */
+  /** 레시피가 다를 때 다시 볼 곳: 컵 규칙 · 온도 · 빠진 재료와 뺄 재료의 이름(다른 곳이 여럿이면 앞의 둘) + 수첩(단골의 평소 주문이면 단골 쪽) */
+  function wrongHint(target, diff) {
+    const want = [target.base, ...(target.adds || [])].filter(Boolean);
+    const have = [made.base, ...(made.adds || [])].filter(Boolean);
+    const miss = { missing: want.filter((x) => !have.includes(x)), extra: have.filter((x) => !want.includes(x)) };
+    const names = (ids) => ids.map((x) => INGREDIENTS[x]?.name || x).join(' · ');
+    const ingSay = [miss.missing.length ? `${josa(names(miss.missing), '이/가')} 빠졌어요.` : '', miss.extra.length ? `${josa(names(miss.extra), '은/는')} 빼요.` : ''].filter(Boolean).join(' ');
+    const hintOf = (d) => (d === 'cup' ? cupHintOf(cur) : d === 'temp' ? TEMP_HINT[orderTemp(cur)] : ingSay || HINT[d]);
+    const hint = [...new Set(diff.map(hintOf))].slice(0, 2).join(' ');
+    const hint2 = cur.usual && diff.some((d) => d === 'base' || d === 'adds') ? HINT.usual : HINT.book;
+    return { hint, hint2, miss: miss.missing.length || miss.extra.length ? miss : null };
+  }
+
+  /* ---- 레시피와 다르게 골랐을 때(2026-11-04 사용자 "휘리릭 무언가 만드는 듯한 애니메이션 → 잘못 만들었다고 버리고 다시 하라는 요청 → 버리는 장면") ----
+   * 손 동작 · 블렌더 한 컷은 쓰지 않음(고른 컵과 다른 장면이 나왔음). 휘리릭(고른 빈 컵 + 회오리 · 퐁) → 고른 대로 만든 잔 →
+   * 무엇이 다른지(손 띠에 표시) + [버리기](레시피에 없는 엉뚱한 잔이면 [사장님께 맛보이기]도) → 버리는 장면 → 처음부터 다시. 감점 · 실패 화면 없음(원칙 2) */
+  async function wrongMade(target, diff) {
+    phase = 'busy';
+    R.mistakes += 1;
+    showGuest('normal');
+    setReact('');
+    await whirl();
+    const { hint, hint2, miss } = wrongHint(target, diff);
+    const toss = btn('trash', '버리기', 'btn-big btn-main bw-toss-btn');
+    ui.toss = toss;
+    const odd = !findMenu(made) && opts.maker !== 'owner' && today?.owner !== false ? btn('coffee', '사장님께 맛보이기', 'btn-big btn-soft bw-taste') : null; // 엉뚱한 잔 도감(재미 개편 3.2)
+    ui.taste = odd;
+    const more = cur.usual && hint2 === HINT.usual ? hint2 : '';
+    setScene({ center: h('div', { class: 'bw-made-wrong' }, drinkArt(made, {}, null, 'big')), mode: 'wrong' });
+    setPanel(askRow('', `${SYS.wrongMade} ${hint}${more ? ` ${more}` : ''}`), handRow({ hint: diff, lock: true, miss }), resultBox({ checks: [] }),
+      askRow('', SYS.toss), h('div', { class: 'bw-row' }, odd, toss));
+    phase = 'wrong';
+    audio.sfx('miss_sulk');
+    talk(sysV(SYS.wrongMade), sysV(hint), more ? sysV(more) : null, sysV(SYS.toss));
+    focusLater(toss);
+    if (odd && (await w(waitTap(toss, odd))) === 1) {
+      odd.remove();
+      ui.taste = null;
+      toss.disabled = true;
+      await ownerTaste();
+      toss.disabled = false;
+      setReact('');
+      phase = 'wrong';
+      focusLater(toss);
+      await w(waitTap(toss));
+    } else if (!odd) await w(waitTap(toss));
+    phase = 'busy';
+    audio.sfx('tap');
+    await tossScene();
+    R.remakes += 1;
+  }
+
+  /** 휘리릭: 고른 빈 컵 둘레에 회오리 · 웹툰 글자, 끝에 퐁 하고 고른 대로 만든 잔으로 바뀜 */
+  async function whirl() {
+    const cupEl = objArt(cupArtId(made.cup), 'big');
+    const word = h('div', { class: 'bw-pow bw-whirl-word', 'aria-hidden': 'true' },
+      ...[...WHIRL_WORD].map((ch, i) => h('span', { class: 'bw-pow-ch', style: { '--i': String(i) }, text: ch })));
+    const box = h('div', { class: 'bw-whirl' }, h('i', { class: 'bw-whirl-ring r1' }), h('i', { class: 'bw-whirl-ring r2' }), h('i', { class: 'bw-whirl-ring r3' }), cupEl, word);
+    setScene({ center: box, mode: 'whirl' });
+    setPanel(askRow('', SYS.making));
+    audio.sfx('whoosh');
+    await w(pauseMs(1150));
+    audio.sfx('poof');
+    cupEl.replaceWith(drinkArt(made, {}, null, 'big'));
+    box.classList.add('is-done');
+    await w(pauseMs(700));
+  }
+
+  /**
+   * 버리는 장면: 개수대 위로 → 기울여 쏟음(얼음이면 얼음도) → 머그 · 유리컵은 식기 건조대에 엎어 둠, 종이컵 · 플라스틱 컵은 쓰레기통에.
+   * 영상(assets/movies/discard_{mug|glass|paper|plastic}, 요청서 docs/image_requests.md 9장)이 오면 그 영상을 틀고, 움직임 줄이기면 마지막 장면만
+   */
+  async function tossScene() {
+    const kind = TOSS_KIND[made.cup] || 'mug';
+    const wash = kind === 'mug' || kind === 'glass';
+    const text = wash ? SYS.tossWash : SYS.tossBin;
+    setPanel();
+    const view = h('div', { class: 'bw-close-view bw-toss-view' });
+    const card = h('section', { class: 'bw-close is-auto is-toss', role: 'group', 'aria-label': '잔 버리기' },
+      h('header', { class: 'bw-close-head' }, h('h3', { text: '잔 버리기' }), h('p', { text })),
+      h('div', { class: 'bw-close-body' }, view));
+    closeUpOff();
+    closeEl = card;
+    bench.append(card);
+    bench.classList.add('is-close');
+    setScene({ mode: 'toss', keep: true });
+    talkAfter(sysV(text));
+    const still = document.body.classList.contains('reduce-motion');
+    const movie = img.url('movies', `discard_${kind}`);
+    if (movie && !still) {
+      const v = h('video', { class: 'bw-toss-movie', src: movie, muted: '', playsinline: '', autoplay: '', preload: 'auto' });
+      v.muted = true;
+      view.append(v);
+      audio.sfx('pour');
+      await w(Promise.race([new Promise((r) => { v.addEventListener('ended', r, { once: true }); v.addEventListener('error', r, { once: true }); }), sleep(robot ? 300 : 12000)]));
+      await w(pauseMs(300));
+      closeUpOff();
+      return;
+    }
+    if (movie && img.url('movies', `discard_${kind}_end`)) {
+      view.append(h('img', { class: 'bw-toss-movie', src: img.url('movies', `discard_${kind}_end`), alt: '' }));
+      await w(pauseMs(2200));
+      closeUpOff();
+      return;
+    }
+    // 그림 움직임: 단계 class(s1 ~ s5)마다 CSS 전환
+    const spec = drinkSpec(made);
+    const cupBox = h('div', { class: 'bw-toss-cup' }, drinkArt(made, {}, null, 'toss'));
+    const stream = h('i', { class: 'bw-toss-stream', style: { '--c': spec.color || '#B98A5E' } });
+    const ice = spec.ice ? h('i', { class: 'bw-toss-ice' }, h('b'), h('b'), h('b')) : null;
+    const sink = h('span', { class: 'bw-toss-sink', html: sinkSVG() }, h('i', { class: 'bw-toss-drain' }));
+    const dest = h('span', { class: `bw-toss-dest ${wash ? 'is-rack' : 'is-bin'}`, html: wash ? rackSVG() : binSVG() });
+    const stage = h('div', { class: `bw-toss k-${kind}` }, sink, dest, stream, ice, cupBox);
+    view.append(stage);
+    await w(pauseMs(350));
+    stage.classList.add('s1'); // 개수대 위로
+    await w(pauseMs(650));
+    stage.classList.add('s2'); // 기울여 쏟음
+    audio.sfx('pour');
+    await w(pauseMs(900));
+    audio.sfx('water');
+    cupBox.replaceChildren(objArt(cupArtId(made.cup), 'toss'));
+    await w(pauseMs(700));
+    stage.classList.add('s3'); // 세움
+    await w(pauseMs(500));
+    stage.classList.add('s4'); // 건조대 · 쓰레기통 쪽으로
+    await w(pauseMs(650));
+    stage.classList.add('s5');
+    audio.sfx(wash ? 'clink' : 'stack');
+    await w(pauseMs(900));
+    closeUpOff();
+  }
+
   async function makeDrink() {
     phase = 'busy';
     const menu = findMenu(made);
@@ -2588,22 +2760,14 @@ export async function brew(opts = {}) {
       showGuest('surprised');
       const wrongSay = cur.usual ? SAY.usualWrong : SAY.wrong;
       setReact(wrongSay);
-      // 재료가 다르면 무엇이 빠졌고 무엇이 넘치는지 이름으로(손 띠에도 빈 칸 · '빼요')
-      const want = [target.base, ...(target.adds || [])].filter(Boolean);
-      const have = [made.base, ...(made.adds || [])].filter(Boolean);
-      const miss = { missing: want.filter((x) => !have.includes(x)), extra: have.filter((x) => !want.includes(x)) };
-      const names = (ids) => ids.map((x) => INGREDIENTS[x]?.name || x).join(' · ');
-      const ingSay = [miss.missing.length ? `${josa(names(miss.missing), '이/가')} 빠졌어요.` : '', miss.extra.length ? `${josa(names(miss.extra), '은/는')} 빼요.` : ''].filter(Boolean).join(' ');
-      const hintOf = (d) => (d === 'cup' ? cupHintOf(cur) : d === 'temp' ? TEMP_HINT[orderTemp(cur)] : ingSay || HINT[d]);
-      const hint = [...new Set(diff.map(hintOf))].slice(0, 2).join(' '); // 다른 곳이 여럿이면 앞의 둘(컵 · 재료 · 온도 차례)
-      const hint2 = cur.usual && diff.some((d) => d === 'base' || d === 'adds') ? HINT.usual : HINT.book;
+      const { hint, hint2, miss } = wrongHint(target, diff);
       const again = btn('repeat', '다시 만들기', 'btn-big btn-main bw-remake');
       ui.remake = again;
       // 레시피에 없는 엉뚱한 잔이면 [사장님께 맛보이기](재미 개편 3.2): 사장님의 한마디 + 엉뚱한 잔 도감. 손님 잔은 그다음에 다시 만듦
       const odd = !findMenu(made) && opts.maker !== 'owner' && today?.owner !== false ? btn('coffee', '사장님께 맛보이기', 'btn-big btn-soft bw-taste') : null; // 사장님이 자리를 비운 날은 맛보기 없음
       ui.taste = odd;
       const rowEl = h('div', { class: 'bw-row' }, odd, again);
-      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss: miss.missing.length || miss.extra.length ? miss : null }), resultBox(res), rowEl);
+      setPanel(askRow('', `${hint} ${hint2}`), handRow({ hint: diff, lock: true, miss }), resultBox(res), rowEl);
       phase = 'wrong';
       talk(guestV(wrongSay), sysV(hint), sysV(hint2));
       focusLater(again);
@@ -2891,7 +3055,7 @@ export async function brew(opts = {}) {
         return;
       }
       case 'serve': clickIf(ui.serve); return;
-      case 'wrong': if (robot === 'auto') clickIf(ui.remake); return;
+      case 'wrong': if (robot === 'auto') clickIf(ui.toss?.isConnected ? ui.toss : ui.remake); return; // 다르게 만든 잔은 [버리기]
       case 'mild': clickIf(ui.remake); return; // 알맞게 다시 만듦
       case 'good': clickIf(ui.next); return;
       default:
@@ -2917,7 +3081,7 @@ export async function brew(opts = {}) {
       robot = 'bad';
       speed = 3;
       drive();
-      while (!over && !stopped() && !(phase === 'wrong' && !badLeft)) await sleep(60); // 손님이 '주문한 게 아니네요' 할 때까지
+      while (!over && !stopped() && !(phase === 'wrong' && !badLeft)) await sleep(60); // 다르게 만든 잔의 [버리기]가 뜰 때까지
       if (robot === 'bad') robot = null;
     };
     window.__mgAuto = async ({ miss = 0, keep = false, gate = null } = {}) => {
@@ -2988,6 +3152,14 @@ export async function brew(opts = {}) {
             continue;
           }
           fix = null;
+        }
+        // 레시피와 다르게 골랐으면 손 동작 없이: 휘리릭 → [버리기] → 버리는 장면 → 처음부터 다시(2026-11-04 사용자)
+        const diff = compareRecipe(made, target);
+        if (diff.length) {
+          await wrongMade(target, diff);
+          pending = pickRecipe(false);
+          talk(sysV(SYS.remake));
+          continue;
         }
         const res = await makeDrink();
         await serve(res);

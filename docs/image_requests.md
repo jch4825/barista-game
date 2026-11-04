@@ -798,3 +798,23 @@ Avoid: text, letters, numbers, logos, writing on the chalkboard, people, sun, su
 - 자동차 · 버스는 창밖을 지나가는 것으로만 씁니다(버스 놀이). 더 넣고 싶은 것(자전거 · 경운기 등)이 있으면 알려 주세요.
 - 도시 카페의 점심시간은 직업 마1스톤의 `counter_peak` 그림을 그대로 씁니다(2026-11-01 사용자). 색을 많이 빼서 지은의 기억처럼 보이게 했습니다.
 
+## 9. 잔 버리기 영상 (2026-11-04, 검수 13.43)
+
+- 사용자(2026-11-04): "레시피와 다른 것들을 골랐을 때, 틀렸음에도 만드는 다음 활동이 제공된다 … 잘못 선택했을 시, 휘리릭 무언가 만드는 듯한 에니메이션이 나오고 … 잘못 만들었다고 버리고 다시 하라는 요청이 나와야 한다. 버리는 장면이 매우 중요하므로 에니메이션이 있으면 좋겠다. 필요 시 버리는 동영상이라도 만들 의향이 있다."
+- 쓰는 곳: 작업대에서 레시피와 다르게 만든 잔을 [버리기] 했을 때, 확대 창 '잔 버리기'(16:9에 가까운 가로 칸)에 틉니다.
+  - 영상이 없으면 지금처럼 그림 움직임(개수대 위로 → 기울여 쏟음 → 건조대 · 쓰레기통)이 나옵니다. 그래서 급하지 않습니다.
+- 규격: mp4 · 16:9(1920×1080 또는 1280×720) · 4~6초 · 소리 없음(효과음은 게임이 냄) · 카메라 고정 · 글자 · 로고 · 얼굴 없음
+- 넣는 곳: `assets/_src/movies/discard_mug.mp4` · `discard_glass.mp4` · `discard_paper.mp4` · `discard_plastic.mp4` → 알려 주시면 영상 넣는 설정(`tools/import-movies.mjs` 의 `MOVIES`)을 만들어 `npm run movies` → `assets/movies/discard_*.webm` + 마지막 장면 그림(움직임 줄이기용)
+- 컵 모양은 게임의 컵 그림과 같게: 하얀 머그 · 투명한 유리컵(얼음) · 흰 뚜껑과 갈색 띠가 있는 크라프트 종이컵 · 길쭉한 투명 플라스틱 컵(얼음 · 빨대)
+
+**공통 앞부분**
+```
+Short 5-second video clip, 16:9, fixed camera at counter height. A small cozy cafe in a quiet seaside village: a stainless steel sink set into a warm oak wood counter, teal wall tiles behind it, soft warm morning light. A barista's hand in a cream long-sleeve shirt (no face visible) works calmly and carefully. Clean, gentle, slightly stylized look like a cozy game cutscene. No text, no logos, no faces, no splashing mess.
+```
+
+| 파일 | 장면(공통 앞부분 뒤에 붙임) |
+| :--- | :--- |
+| `discard_mug` | The hand holds a plain white ceramic mug of warm cafe latte over the sink, gently tilts it and pours the drink into the drain, then turns the empty mug upside down and sets it on a wire dish drying rack to the right. |
+| `discard_glass` | The hand holds a clear glass of iced latte with ice cubes over the sink, tilts it and pours out the drink; the ice cubes tumble into the basin. Then the empty glass is set upside down on a wire dish drying rack to the right. |
+| `discard_paper` | The hand holds a kraft paper takeaway cup with a white lid and a brown sleeve, takes off the lid, pours the hot coffee into the sink, then drops the empty cup and lid into a green trash bin to the right. |
+| `discard_plastic` | The hand holds a tall clear plastic takeaway cup of iced americano with ice and a straw, takes off the lid, pours the drink and ice into the sink, then drops the empty cup into a recycling bin to the right. |

@@ -696,6 +696,42 @@
   "ep": "spring_1"
  },
  {
+  "key": "d378239e",
+  "voice": "sys",
+  "text": "고른 대로 만들어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "161ae1dc",
+  "voice": "sys",
+  "text": "앗, 주문과 다르게 만들었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "b5dda86f",
+  "voice": "sys",
+  "text": "이 잔은 버리고 다시 만들어요. [버리기]를 눌러요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e4473eaf",
+  "voice": "sys",
+  "text": "개수대에 쏟고, 컵은 씻어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "72eadef2",
+  "voice": "sys",
+  "text": "개수대에 쏟고, 다 쓴 컵은 쓰레기통에 버려요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "74ba7cd1",
+  "voice": "sys",
+  "text": "이제 다시 만들어요. 주문 메모를 보고 컵부터 골라요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "88516882",
   "voice": "sys",
   "text": "드시고 가는 따뜻한 음료는 머그컵에 담아요.",
