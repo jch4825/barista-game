@@ -207,10 +207,11 @@ export async function bus(opts = {}) {
   f.onAbort(() => { over = true; curLoop?.stop(); doneRes('abort'); });
 
   paint();
-  tts.speak(SAY.start, 'sys');
-  await Promise.race([startGate(f.body, { note: turn ? '[다음 풍경]을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.' }), doneP]);
+  // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(검수 13.39 15번)
+  await Promise.race([startGate(f.body, { note: turn ? '[다음 풍경]을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.', ready: f.told }), doneP]);
   if (!stopped() && !over) {
     started = true;
+    tts.speak(SAY.start, 'sys');
     if (turn) {
       nextB.focus({ preventScroll: true });
       if (auto) {
@@ -235,5 +236,6 @@ export async function bus(opts = {}) {
   if (how === 'abort') return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms };
   if (how === 'quit') return { ok: false, quit: true, attempts: 1, mistakes: 0, ms };
   await sleep(dur(150));
-  return { ok: true, attempts: 1, mistakes: 0, seen, held, ms };
+  // 창밖을 보며 가는 길(이기고 지는 놀이가 아님): '한 번에 해냈어요!' 연출 없이 도착 장면으로(🙋 검수 13.39 14번)
+  return { ok: true, attempts: 1, mistakes: 0, seen, held, ms, noCheer: true };
 }

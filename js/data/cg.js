@@ -13,6 +13,7 @@ const P = (bg, v, cast = [], props = [], desc = '', extra = {}) => ({ bg, v, cas
 export const CGS = {
   /* ---------- 봄 ---------- */
   memory_city: { ep: 'spring_1', title: '기억 · 도시의 큰 카페', ph: P('hall', 'busy_summer', ['jieun:nervous'], ['clock'], '줄이 길다. "빨리 좀 해 주세요!"') },
+  spring_bus_window: { ep: 'spring_1', title: '바닷가로 가는 버스', ph: P('bus_terminal', 'evening', ['jieun:nervous'], ['bus', 'bag'], '창밖으로 바다가 보이기 시작한다') }, // 버스 놀이 앞(검수 13.39 16번)
   spring_first_cup: { ep: 'spring_1', title: '봄 · 첫 컵', ph: P('hall', 'evening', ['owner', 'jieun:nervous'], ['milk'], '사장님이 건네는 따뜻한 우유') },
   owner_closing_milk: { ep: 'spring_2', title: '봄 · 마감 우유', ph: P('hall', 'evening', ['owner'], ['milk'], '마감 뒤 혼자 마시는 우유', { night: true }) },
   haesun_two_cups: { ep: 'spring_2', title: '우유 두 잔과 빈 의자', ph: P('hall', 'spring', ['haesun'], ['chair', 'milk'], '창가 자리, 빈 의자') },

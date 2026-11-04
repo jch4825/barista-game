@@ -165,8 +165,9 @@ const levelOf = (opts) => (LEVELS.includes(opts.level) ? opts.level : 'normal');
 const speechOf = (opts) => opts.speech || `${opts.title || TITLE}. ${HOWTO}`;
 const thanksOf = (o) => o.thanks || RECIPES[o.menu]?.thanks || SAY.thanks;
 /** 손 동작 설명: 실시간은 누르고 떼기(howto), 턴 방식은 [한 칸]·[멈추기](howtoTurn), 조작법 '드래그 활용'은 끌기(howtoDrag) */
-const howtoOf = (sk, turn, drag = false) => (turn && sk.howtoTurn) || (drag && sk.howtoDrag) || sk.howto;
-const skillSpeech = (sk, turn = false, drag = false) => `${sk.name}. ${howtoOf(sk, turn, drag)}`;
+// cue: 실시간 손 기술의 띠가 숨겨져 있음(기본). 그때는 띠의 '알맞아요 칸' 대신 화면에 뜨는 "지금!"을 말함(menu.js 의 howtoCue, 검수 13.39 17번)
+const howtoOf = (sk, turn, drag = false, cue = false) => (turn && sk.howtoTurn) || (drag && ((cue && sk.howtoDragCue) || sk.howtoDrag)) || (cue && sk.howtoCue) || sk.howto;
+const skillSpeech = (sk, turn = false, drag = false, cue = false) => `${sk.name}. ${howtoOf(sk, turn, drag, cue)}`;
 // 조작법 '드래그 활용'(설정 control, 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라"). 끌어 붓는 손 동작은 menu.js 의 TILT_SKILLS
 const POUR_AT = 0.42;   // 끌어 붓기: 이만큼(장면 높이의 TILT_PULL 에 대한 비율) 끌면 붓기 시작, 더 끌수록 빨리
 const TILT_PULL = 0.5;  // 끌어 붓기: 장면 높이의 이만큼 끌면 가장 많이 기욺
@@ -228,6 +229,8 @@ export function brewLines(opts = {}) {
   for (const sk of Object.values(HAND_SKILLS)) {
     out.push(line.sys(skillSpeech(sk)), line.sys(skillSpeech(sk, true)));
     if (sk.howtoDrag) out.push(line.sys(skillSpeech(sk, false, true)));
+    if (sk.howtoCue) out.push(line.sys(skillSpeech(sk, false, false, true)));
+    if (sk.howtoDragCue) out.push(line.sys(skillSpeech(sk, false, true, true)));
     if (sk.safety) out.push(line.sys(sk.safety));
     for (const t of Object.values(sk.labels)) out.push(line.sys(t));
   }
@@ -1579,7 +1582,7 @@ export async function brew(opts = {}) {
   }
 
   /* ---- 손 기술: 띠 ---- */
-  function gate(sk, turn, canHand = false, drag = false) {
+  function gate(sk, turn, canHand = false, drag = false, cue = false) {
     phase = 'gate';
     // 쉬운 길(선생님이 정함): 아직 두 번도 안 해 본 손 기술은 [보기]를 앞에(먼저 보고 따라 하게). [시작!]도 그대로 있음
     const seeFirst = path === 'easy' && !turn && grow.skillCount(sk.id || '') < 2;
@@ -1590,7 +1593,7 @@ export async function brew(opts = {}) {
     const wrap = h('div', { class: 'bw-gate', role: 'group', 'aria-label': `${sk.name} 시작` },
       h('div', { class: 'bw-gate-card' },
         h('h3', {}, h('i', { html: ICON(sk.icon) }), sk.name),
-        h('p', { text: howtoOf(sk, turn, drag) }),
+        h('p', { text: howtoOf(sk, turn, drag, cue) }),
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
         seeFirst ? h('p', { class: 'bw-hand-note' }, h('i', { html: EYE }), SYS.seeFirst) : null,
@@ -1600,7 +1603,11 @@ export async function brew(opts = {}) {
     ui.gateGo = go;
     ui.gateSee = see;
     ui.gateSkill = sk.id;
-    talkAfter(sysV(skillSpeech(sk, turn, drag)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null);
+    // 카드 밖을 눌러 시작하는 것은 설명을 다 들은 뒤부터(대사를 넘기듯 누르던 손에 설명이 끊기지 않게, 검수 13.39 17번). [시작!]은 늘 됨
+    const shownAt = performance.now();
+    let told = false;
+    talkAfter(sysV(skillSpeech(sk, turn, drag, cue)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null)
+      .then(() => { told = true; });
     if (sk.safety) safetySaid = true;
     focusLater(seeFirst ? see : go);
     return new Promise((resolve) => {
@@ -1618,7 +1625,15 @@ export async function brew(opts = {}) {
       onTap(go, () => done('play'));
       onTap(see, () => done('watch'));
       if (hand) onTap(hand, () => done('hand'));
-      wrap.addEventListener('click', (e) => { if (e.target === wrap) done('play'); }); // 카드 밖 장면을 눌러도 [시작!](2026-10-31 사용자 "화면을 눌러도")
+      // 카드 밖 장면을 눌러도 [시작!](2026-10-31 사용자 "화면을 눌러도"). 설명 중이면 [시작!]만 살짝 흔들어 알려 줌
+      wrap.addEventListener('click', (e) => {
+        if (e.target !== wrap) return;
+        if (told && performance.now() - shownAt > 1200) { done('play'); return; }
+        go.classList.remove('is-nudge');
+        void go.offsetWidth;
+        go.classList.add('is-nudge');
+        go.focus({ preventScroll: true });
+      });
     });
   }
 
@@ -1694,6 +1709,7 @@ export async function brew(opts = {}) {
     // 도움 많이 · 설정 helpBar · 턴 방식 · 박자는 띠를 그대로 보임
     const showBar = turn || act === 'beats' || store.settings().help === 'many' || store.settings().helpBar === true || path === 'easy'; // 쉬운 길은 띠를 늘 보임
     if (!showBar) gauge.classList.add('is-quiet');
+    const saysNow = !showBar; // 설명도 띠 대신 "지금!"으로(howtoOf 의 cue)
     const status = h('p', { class: 'bw-status', 'aria-live': 'polite' });
     // 단추: 한 번 해 볼 때마다 새로 만듦([다시 하기] 때 앞의 손잡이가 남지 않게)
     // hold · circle: [누르고 있기](턴 방식 [한 칸] + [멈추기]) · wait: [지금!](턴 방식 [기다리기] + [지금!]) · beats: [담기] 같은 이름(턴 방식 [한 칸] + 그 단추)
@@ -1720,8 +1736,8 @@ export async function brew(opts = {}) {
       h('header', { class: 'bw-close-head' },
         total > 1 ? h('b', { class: 'bw-close-n', text: `${n}/${total}` }) : null,
         h('h3', { text: sk.name }),
-        h('p', { text: howtoOf(sk, turn, Boolean(dk)) }),
-        sayBtn(skillSpeech(sk, turn, Boolean(dk))), bookMini),
+        h('p', { text: howtoOf(sk, turn, Boolean(dk), saysNow) }),
+        sayBtn(skillSpeech(sk, turn, Boolean(dk), saysNow)), bookMini),
       h('div', { class: 'bw-close-body' }, view, gauge),
       h('footer', { class: 'bw-close-foot' }, status, ctrl));
     closeUpOff();
@@ -2354,7 +2370,7 @@ export async function brew(opts = {}) {
       talkAfter([mastered(sk), 'jieun']);
     };
     let how = 'watch';
-    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk)));
+    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk), saysNow));
     if (how === 'hand') {
       // 맡기기: 손이 알아서 알맞아요 칸 가운데까지(실패 없음, '딱 좋아요'는 직접 했을 때만)
       talk(sysV(SYS.handoff));

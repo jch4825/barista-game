@@ -434,6 +434,7 @@ P0 = 시험판(M1)과 이야기의 첫인상에 바로 필요 · P1 = 계절 이
 | P0 | `jian_color_menu` | 여름 · 메뉴판의 색 동그라미를 보는 지안 | 여름 지안 1번째 기회: 힌트 장면("오늘은 무슨 색을 마실지 모르겠어요.", 메뉴판의 색 동그라미를 하나씩 봄) · Q-9 | `jian_sheet` · `hall_morning`(여름 빛) |
 | P0 | `blackout_cafe_lit` | 겨울 · 정전 밤, 불이 켜진 곳은 카페뿐 | 겨울 정전 밤의 첫 장면("불이 켜진 곳은 우리 카페뿐이다.") · 사람 없음이라 인물 설정화 없이도 만들 수 있음 | `cafe_front_morning` |
 | P0 | `haesun_cup_for_him` | 봄 · 의자 앞의 잔 | 봄 해순 할머니 1번째 기회: 맞는 대응 뒤("…고마워요.") | `haesun_sheet` · `hall_morning` |
+| P0 | `spring_bus_window` | 봄 첫날 · 바닷가로 가는 버스 | 🙋 봄 1일 버스 놀이 바로 앞("아침 일찍, 큰 가방 하나를 들고 바닷가 마을로 가는 버스에 탔다."). 도시 카페에서 버스 놀이로 갑자기 넘어가지 않게(검수 13.39 16번, 2026-11-04) | `jieun_sheet` · `bus_terminal_evening`(바닷가 길) |
 | P1 | `summer_line` | 여름 · 골목 끝까지 선 줄 | 여름 큰 사건(휴가철에 카페가 명소가 되어 줄이 골목 끝까지 섬) | `cafe_front_morning` |
 | P1 | `summer_tourist_chair` | 여름 · 그 의자에 앉은 관광객 | 여름 해순 할머니 2번째 기회: 힌트 장면(말을 멈추고 의자 앞의 잔을 두 손으로 감쌈). 고르기 전 | `haesun_sheet` · `hall_summer` |
 | P1 | `autumn_window_haesun` | 가을 · 창가에서 기다리는 할머니 | 가을 해순 할머니 3번째 기회: 힌트 장면(두 손을 무릎에 모으고 창밖을 봄) | `haesun_sheet` · `hall_autumn` |
@@ -528,6 +529,14 @@ Cinematic story-game event illustration (CG) in clean modern anime cel-shading w
 Close-up event CG framing with softer, more detailed painterly shading than the standing sprites, same character design.
 Soft morning light from the window on the left. HAESUN (Korean grandmother, 80, short neat silver-white hair, no glasses, navy cardigan over a cream blouse, long grey skirt) sits at the small round table by the window and gazes for a long time at the white mug of warm milk placed in front of the empty, slightly older wooden chair beside her. Her eyes are a little moist and she wears a quiet, grateful smile; one hand rests gently on the table near the cup. Seen from a low angle across the table: the steaming cup and the empty chair on the right at middle height, her face in the upper left. Tender and calm.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast.
+```
+
+**`spring_bus_window`** · 봄 첫날 · 바닷가로 가는 버스 🙋 · 참조: `jieun_sheet` · `bus_terminal_evening`(창밖의 바닷가 길)
+```
+Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same face, hairstyle and body proportions as the character sheet, and the same seaside road as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. Palette of deep sea teal and navy shadows, soft morning gold, cream and warm wood. 16:9, high resolution. Composition: her face, hands and the window view stay in the upper two thirds; the lower third is calm and a little darker (seat backs and the bus floor) because a translucent dialogue box will cover it.
+Close-up event CG framing with softer, more detailed painterly shading than the standing sprites, same character design.
+Early spring morning inside an old, quiet intercity bus with worn seats and a few empty rows. JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves under a light grey knit cardigan, NO apron, mustard hair tie on her right wrist) sits in a window seat, hugging a big worn canvas travel bag on her lap with both arms. She looks out of the window with a slightly nervous, hopeful face. Outside the window, the grey city buildings fall away behind and the calm sea opens up along the coast road: a few seagulls in the sky and one small fishing boat on the water. Soft morning light comes through the window onto her face and hands.
+Avoid: text, letters, numbers, readable signs, bus route numbers, logos, watermark, extra people looking at the camera, distorted hands, extra fingers, trembling lines, sickly look, red awning, harsh contrast.
 ```
 
 ### 6.5 프롬프트 (P1) — 상자를 그대로 복사

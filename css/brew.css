@@ -565,9 +565,9 @@ body.contrast .mg.mg-brew .bw-close.is-in-zone .bw-close-view { box-shadow: inse
 .mg.mg-brew .bw-pow { position: absolute; left: var(--x, 50%); top: var(--y, 40%); z-index: 6; display: flex; align-items: flex-end; gap: 0; transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg); opacity: 0; pointer-events: none; }
 .mg.mg-brew .bw-pow.is-on, .mg.mg-brew .bw-pow.is-over { opacity: 1; animation: bw-pow-wobble .9s ease-in-out .4s infinite alternate; }
 .mg.mg-brew .bw-pow-ch { display: inline-block; font-family: 'Pretendard', sans-serif; font-size: 118px; font-weight: 900; line-height: 1; letter-spacing: -4px; color: #FFE14D; -webkit-text-stroke: 9px #2A1D12; paint-order: stroke fill; text-shadow: 7px 7px 0 #F0812E, 12px 12px 0 rgba(42, 29, 18, .45); transform: translateY(calc(var(--i) * -10px)) rotate(calc(var(--i) * 5deg - 5deg)); }
-.mg.mg-brew .bw-pow.is-on .bw-pow-ch, .mg.mg-brew .bw-pow.is-over .bw-pow-ch { animation: bw-ch-pop .34s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 70ms); }
+.mg.mg-brew .bw-pow.is-on .bw-pow-ch, .mg.mg-brew .bw-pow.is-over .bw-pow-ch { animation: bw-ch-pop .22s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 20ms); } /* 글자가 거의 한꺼번에(0.1초 안에) 다 보이게: 알맞아요 칸은 겨울에 0.6초뿐(검수 13.39 17번) */
 .mg.mg-brew .bw-pow.is-over .bw-pow-ch { color: #BDE6FF; text-shadow: 7px 7px 0 #3D8BD9, 12px 12px 0 rgba(42, 29, 18, .45); font-size: 100px; }
-@keyframes bw-ch-pop { 0% { opacity: 0; transform: translateY(40px) scale(.3); } 70% { opacity: 1; } }
+@keyframes bw-ch-pop { 0% { opacity: 0; transform: translateY(30px) scale(.4); } 35% { opacity: 1; } }
 @keyframes bw-pow-wobble { from { transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg) scale(1); } to { transform: translate(-50%, -50%) rotate(calc(var(--rot, -6deg) * -0.4)) skewX(-8deg) scale(1.07); } }
 body .mg.mg-brew .btn.is-cue, body.skin-sea .mg.mg-brew .btn-main.is-cue:not(:disabled) { box-shadow: 0 0 0 7px #FFE08A, 0 0 34px rgba(255, 214, 110, .95); background: linear-gradient(180deg, #F2C230, #C99A2E); color: #2A1D12; }
 body .mg.mg-brew .btn.is-cue i svg { color: #2A1D12; }

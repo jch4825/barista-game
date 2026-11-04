@@ -74,7 +74,8 @@ export async function rush(opts = {}) {
   const title = opts.title || th.title;
   const { turn, k } = pace();
   const [bgId, bgVar] = opts.bg || th.bg;
-  const f = frame({ title, instruction: opts.today?.owner === false && th.howtoAlone ? th.howtoAlone : th.howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit) });
+  const howto = opts.today?.owner === false && th.howtoAlone ? th.howtoAlone : th.howto;
+  const f = frame({ title, instruction: howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit) });
 
   let over = false;
   let started = false;
@@ -238,9 +239,11 @@ export async function rush(opts = {}) {
     if (tAcc >= total) finish();
   }
 
+  let endHow = ''; // 갈매기: 'got'(빵을 되찾음) · 'fled'(날아감)
   async function finish(how = '') {
     if (over) return;
     over = true;
+    endHow = how;
     curLoop?.stop();
     for (const s of live.values()) s.el.disabled = true;
     if (gull) gull.disabled = true;
@@ -269,10 +272,11 @@ export async function rush(opts = {}) {
   f.onAbort(() => { over = true; curLoop?.stop(); doneRes('abort'); });
 
   paint();
-  tts.speak(th.say.start, 'sys');
-  await Promise.race([startGate(f.body, { note: turn ? '하나씩 차례로 나와요.' : '' }), doneP]);
+  // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(같은 말이 할 일에 들어 있으면 생략, 검수 13.39 15번)
+  await Promise.race([startGate(f.body, { note: turn ? '하나씩 차례로 나와요.' : '', ready: f.told }), doneP]);
   if (!stopped() && !over) {
     started = true;
+    if (!howto.includes(th.say.start)) tts.speak(th.say.start, 'sys');
     if (kind !== 'gull') { addSlip(); if (!turn) addSlip(); }
     // 턴 방식은 시계를 돌리지 않음: 종이는 누를 때마다 다음 한 장(tapSlip), 갈매기는 누를 때만 자리를 옮김.
     // 시계를 돌리면 저절로 생기는 종이 · 사장님이 받아 가는 종이가 겹쳐 남은 주문이 줄지 않음(검수 13.39 3번)
@@ -297,5 +301,6 @@ export async function rush(opts = {}) {
   if (how === 'abort') return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms };
   if (how === 'quit') return { ok: false, quit: true, attempts: 1, mistakes: 0, ms };
   await sleep(dur(150));
-  return { ok: true, attempts: 1, mistakes: 0, cleared, helped, ms };
+  // 도시 카페(늘 와르르로 끝나는 기억) · 갈매기가 빵을 물고 날아감: '한 번에 해냈어요!' 연출 없이 다음 장면으로(검수 13.39 14번)
+  return { ok: true, attempts: 1, mistakes: 0, cleared, helped, ms, noCheer: kind === 'city' || (kind === 'gull' && endHow !== 'got') };
 }

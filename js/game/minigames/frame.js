@@ -93,11 +93,13 @@ export function frame({ title, instruction, icon = 'star', cls = '', speech = ''
   document.body.classList.toggle('mg-scene-open', cls.split(/\s+/).includes('mg-scene'));
   requestAnimationFrame(() => el.classList.add('is-in'));
   input.pushScope(el);
-  tts.speak(speech || `${title}. ${instruction}`, 'sys');
+  const told = tts.speak(speech || `${title}. ${instruction}`, 'sys'); // 다 읽거나 끊기면 풀림
   let closed = false;
   const api = {
     el,
     body,
+    /** 처음 설명(제목. 할 일)을 다 읽었을 때: 시작 말 · 단추 밖 시작은 이 뒤에(설명이 끊기지 않게, 검수 13.39 15번) */
+    told,
     aborts: [],
     /** 도중에 정리될 때 부를 것(실시간 미니게임: 고리 멈춤·방향키 풀기·끝 약속 풀기) */
     onAbort(fn) { api.aborts.push(fn); },
