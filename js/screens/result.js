@@ -27,7 +27,7 @@ export const metSpeech = (who, score) => `${REGULARS[who]?.name || ''}, ${REACT_
 
 /** 이번 판의 기록(store.log): 대응(같은 기회는 마지막 것) · 커피 만들기에서 드린 잔 */
 function todayOf(ep, result) {
-  // 그날을 시작한 때부터(이어 하기로 마친 날도 아침의 단골 · 잔 · 팁까지, runner 의 dayAt, 검수 13.39 27번)
+  // 그날을 시작한 때부터(이어 하기로 마친 날도 아침의 단골 · 잔까지, runner 의 dayAt, 검수 13.39 27번)
   const since = (result.dayAt || Date.now() - (result.ms || 0)) - 3000;
   const logs = store.logs().filter((l) => l.ep === ep.id && (l.at || 0) >= since);
   const met = [];
@@ -72,15 +72,15 @@ function cupsView(cups) {
     h('div', { class: 'rs-cup-list' }, ...[...count].map(([name, n]) => h('span', { class: 'chip', text: n > 1 ? `${name} ${n}잔` : name }))));
 }
 
-/** 지은의 성장(재미 개편 6장): 오늘 받은 돈(시급 × 시간 + 팁, 같은 날은 한 번만) · 오른 능력치 · 새 단계. say 에 읽을 말을 더함 */
-function growView(ep, today, say) {
-  const pay = grow.payFor(ep.free ? `free:${ep.free}` : ep.id, today.cups.length);
+/** 지은의 성장(재미 개편 6장): 오늘 받은 돈(일급 = 시급 × 시간, 같은 날은 한 번만, 팁은 없음) · 오른 능력치 · 새 단계. say 에 읽을 말을 더함 */
+function growView(ep, say) {
+  const pay = grow.payFor(ep.free ? `free:${ep.free}` : ep.id);
   grow.receive(pay);
   const rise = grow.dayRise();
   const rows = [];
   if (pay) {
     rows.push(h('p', { class: 'rs-pay' }, h('i', { html: ICON('coin') }),
-      h('span', { text: `시급 ${grow.won(pay.hourly)} × ${pay.hours}시간 = ${grow.won(pay.wage)}${pay.tips ? ` · 팁 ${grow.won(pay.tips)}` : ''}` })));
+      h('span', { text: `시급 ${grow.won(pay.hourly)} × ${pay.hours}시간 = ${grow.won(pay.wage)}` })));
     say.push(`오늘 받은 돈은 ${grow.won(pay.total)}이에요.`);
   }
   rows.push(h('p', { class: 'rs-pay-total' }, h('b', { text: pay ? `오늘 받은 돈 ${grow.won(pay.total)}` : '오늘 받은 돈은 이미 받았어요' }), h('span', { text: `모은 돈 ${grow.won(grow.money())}` })));
@@ -144,7 +144,7 @@ export async function showResult(ep, result, { ending = false, again = '' } = {}
 
   const say = [`${ep.title}. 오늘 하루를 돌아봐요.`];
   if (today.met.length) say.push('오늘 만난 사람.', ...today.met.map((l) => metSpeech(l.who, l.score)));
-  nextBtn.before(growView(ep, today, say));
+  nextBtn.before(growView(ep, say));
   for (const [skill, lv] of best) {
     const sk = SKILLS[skill];
     stampWrap.append(h('div', { class: 'rs-stamp', style: { '--c': sk.color } },

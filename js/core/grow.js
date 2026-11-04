@@ -3,7 +3,7 @@
  *  - 능력치 넷(손맛 · 기억 · 응대 · 차분함): 한 일만큼 오르고(잘한 만큼이 아니라), 떨어지지 않고, 이야기를 막지 않음
  *  - 익숙함: 같은 손 기술을 MASTER_AT 번 하면 '익숙해짐' → 작업대에서 [맡기기](저절로 딱 좋게)를 고를 수 있음
  *  - 단계(배지): 계절의 마지막 날을 마칠 때마다 한 단계(사장님이 앞치마에 달아 줌)
- *  - 시급과 팁: 하루 끝 결과 화면에서 받음(같은 날을 다시 해도 한 번만). 받은 돈으로 가게 꾸미기 · 앞치마
+ *  - 일급(시급 × 6시간): 하루 끝 결과 화면에서 받음(같은 날을 다시 해도 한 번만). 팁은 없음(2026-11-04 사용자). 받은 돈으로 가게 꾸미기 · 앞치마
  * 단골 신뢰(원칙 1)는 여기에 섞지 않습니다. 이것은 지은 자신의 기록이라 학생 화면에 보이고, 반 친구와 견주는 화면은 없습니다(원칙 14).
  * 저장 칸은 store 의 grow(newGrow · normalizeGrow · mergeGrow).
  */
@@ -27,7 +27,6 @@ export const UNLOCK = { memoryUsual: 3, serviceAsk: 3 };
 
 /** 하루에 일한 시간(결과 화면의 시급 계산). 가게는 아침 8시에 열고, 지은은 손님이 많은 6시간을 일함 */
 export const PAY_HOURS = 6;
-export const TIP = 500; // 손님에게 드린 잔 하나마다
 
 export const RANKS = ['견습 바리스타', '새내기 바리스타', '바리스타', '마을의 바리스타', '우리 카페의 바리스타'];
 const SEASON_LAST = ['spring_7', 'summer_7', 'autumn_7', 'winter_7'];
@@ -116,14 +115,13 @@ export function rank() {
   return { index: n, name: RANKS[n] };
 }
 
-/** 오늘의 시급과 팁. 이미 받은 날이면 null */
-export function payFor(key, cups = 0) {
+/** 오늘의 일급(시급 × 6시간, 팁은 없음). 이미 받은 날이면 null */
+export function payFor(key) {
   const k = `${store.year()}:${key}`;
   if (store.grow().paid[k] !== undefined) return null;
   const { hourly } = currentWage();
   const wage = hourly * PAY_HOURS;
-  const tips = TIP * Math.max(0, cups);
-  return { key: k, hourly, hours: PAY_HOURS, wage, tips, total: wage + tips };
+  return { key: k, hourly, hours: PAY_HOURS, wage, total: wage };
 }
 
 export function receive(pay) {
