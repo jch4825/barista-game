@@ -70,6 +70,8 @@ function miniExtra(l) {
   if (l.watched) parts.push(`보기 ${l.watched}`);
   for (const [id, st] of Object.entries(l.skills || {})) parts.push(`${HAND_SKILLS[id]?.name || id} 알맞음 ${st.good}/${st.tries}${st.perfect ? `(딱 좋아요 ${st.perfect})` : ''}`);
   if (l.art) parts.push(`라테아트 ${l.art}`);
+  // 손님이 가져가기로 바꿔 옮겨 담은 잔(잘못 고른 컵)
+  if (l.moved) parts.push(`가져가기로 옮겨 담기 ${l.moved.n}${l.moved.miss ? `(잘못 고른 컵 ${l.moved.miss})` : ''}`);
   // 몰림(처리한 주문 · 사장님이 받은 주문) · 버스(본 것 · 손잡이, 검수 13.39 33번)
   if (l.cleared !== undefined) parts.push(`처리한 주문 ${l.cleared}${l.helped ? ` · 사장님이 받음 ${l.helped}` : ''}`);
   if (l.seen) parts.push(`본 것 ${Object.values(l.seen).reduce((a, n) => a + n, 0)}${l.held !== undefined ? ` · 손잡이 ${l.held}` : ''}`);

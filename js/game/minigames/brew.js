@@ -8,6 +8,8 @@
  *  - 손님은 왼쪽 위 말풍선, 작업대는 카운터 한 장면. 대화창은 가려 둠(body.brew-open)
  *  - 레시피와 다르게 고르면 손 동작 없이: 휘리릭 고른 대로 만든 잔 → 무엇이 다른지 + [버리기] → 버리는 장면 → 처음부터 다시(실수로 셈, 2026-11-04 사용자).
  *    손 동작(블렌더 한 컷)은 레시피대로 고른 잔에만: 틀린 잔에 쓰면 고른 컵과 다른 장면이 나왔음(흰 머그를 골랐는데 아이스 유리컵)
+ *  - 손님이 마음을 바꿈(orders[].change, 2026-11-04 사용자): [드리기] 순간 "가져갈게요" → 가져가는 컵을 고름(틀리면 컵 규칙 · 다시) → 옮겨 담는 장면 → 그 컵으로 [드리기].
+ *    음료는 같아 버리지 않고 옮김: 옮겨 담기는 '내 실수 고치기'가 아니라 '손님 요청에 맞추기'(검수 13.43 · 13.45)
  *  - 손 동작이 칸을 벗어나면 그 자리에서 학생이 고름: [다시 하기](그 동작만 다시) / [이대로 하기]
  *  - 감점·실패 화면·무서운 소리 없음. [레시피 수첩](오픈북: 컵 고르기 규칙 · 메뉴 · 단골의 평소 주문)은 언제든 열 수 있고, 열려 있는 동안 멈춤
  * 손 동작(menu.js 의 HAND_SKILLS.act, docs/recipes.md 2장):
@@ -26,6 +28,7 @@
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
  *  - count: 손님이 말한 잔 수(주문 확인이 '두 잔'으로) · more: 앞 주문의 다음 잔(주문 확인이 '한 잔 더'로). 잔은 한 주문에 하나씩 만듦
  *  - miss: 손 동작이 벗어난 잔을 받을 때 그 손님만의 말
+ *  - change: { say, thanks? } 매장(togo: false)으로 받은 주문을 드리려는 순간 가져가기로 바꿈(say = 손님이 바꾸는 말, thanks = 받을 때 말)
  * 돌려줌: { ok, attempts(엔진 약속: 늘 1), served(드린 잔), mistakes(레시피가 틀린 잔), remakes, kept, ms, made: [메뉴 id], cups: [{ who, menu, temp }], watched, skills, art, level, turn, asked(물어본 수) }
  *  - 도중에 정리되면(되감기·나가기) { ok: false, aborted: true, … } · [그만하기]면 { ok: false, quit: true, … }
  * 그림: 물건 그림(assets/objects)이 있으면 쓰고, 없으면 아래 임시 그림(SVG, 대체 요망: docs/requests_full.md). 작업대 배경은 bg/workbench_morning
@@ -37,7 +40,7 @@
  *    유리컵(매장 · 아이스)은 얼음 담기(ice: 박자마다 얼음이 쌓임) · 찬물 붓기(water_glass) · 찬 우유 붓기(pour_glass_milk · pour_glass_latte).
  *    어떤 컷을 쓸지는 shotIdFor(잔 · 온도 · 안에 든 것, 이름 규칙은 menu.js 의 shotNames 주석과 docs/recipes.md 6.7)
  *    만드는 법은 tools/blender/scene_bench.py(shots) → shots_post.py
- * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 동작을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기])
+ * 자동 플레이(?debug): window.__mgAuto(모두 알맞게, { miss: n } 이면 손 동작을 n 번 넘치게 → [다시 하기], keep: true 면 [이대로 하기], stopAt: 단계 이름이면 거기서 멈춤)
  *  · window.__mgBad(레시피를 한 번 틀리게: 바탕 재료를 바꿈)
  * 데이터(메뉴·재료·손 동작·손님 반응)는 js/data/menu.js
  */
@@ -155,6 +158,10 @@ const SYS = {
   tossWash: '개수대에 쏟고, 컵은 씻어요.',
   tossBin: '개수대에 쏟고, 다 쓴 컵은 쓰레기통에 버려요.',
   remake: '이제 다시 만들어요. 주문 메모를 보고 컵부터 골라요.',
+  // 손님이 마음을 바꿈: 매장 → 가져가기(2026-11-04 사용자 "Add that scene")
+  changeTell: '손님이 가져가신대요. 가져가는 컵을 골라 옮겨 담아요.',
+  move: '새 컵에 옮겨 담고, 쓴 컵은 씻어요.',
+  moveServe: '다 옮겨 담았어요. 손님에게 드려요.',
 };
 /** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
 const WHIRL_WORD = '휘리릭!';
@@ -208,6 +215,7 @@ function pantryOf(opts) {
     const t = orderTarget(o);
     if (!t) continue;
     put(p.cups, t.cup);
+    if (o.change) put(p.cups, orderTarget({ ...o, togo: true }).cup); // 가져가기로 바뀌는 주문의 포장 컵
     put(p.bases, t.base);
     t.adds.forEach((a) => put(p.adds, a));
     put(p.temps, t.temp);
@@ -262,6 +270,7 @@ export function brewLines(opts = {}) {
     for (const k of orderAsk(o)) out.push(line.say('jieun', ASK_SAY[k]), line.say(o.who, replyOf(o, k)));
     out.push(line.say('jieun', repeatBack(o)), line.sys(cupHintOf(o)), line.sys(TEMP_HINT[orderTemp(o)]));
     if (o.miss) out.push(line.say(o.who, o.miss));
+    if (o.change) out.push(line.say(o.who, o.change.say), line.say(o.who, o.change.thanks || thanksOf(o)), line.sys(cupHintOf({ ...o, togo: true })));
     if (!r) continue;
     if (level === 'barista' && r.artThanks) out.push(line.say(o.who, r.artThanks));
     for (const s of orderSkills(o, level)) for (const t of Object.values(HAND_SKILLS[s].react)) out.push(line.say(o.who, t));
@@ -285,6 +294,8 @@ export function brewProblems(opts = {}) {
     for (const e of orderProblems(o)) errs.push(`orders[${i}] ${e}`);
     if (o.who && !CHARS[o.who]) errs.push(`orders[${i}] 없는 인물: ${o.who} (js/data/characters.js)`);
     if (o.usual && REGULARS[o.who]?.usual?.menu !== o.menu) errs.push(`orders[${i}] usual: ${o.who} 의 평소 주문(regulars.js usual.menu)과 메뉴가 다름`);
+    if (o.change && !o.change.say) errs.push(`orders[${i}] change: say(손님이 가져가기로 바꾸는 말)가 없음`);
+    if (o.change && (o.togo !== false || o.cup || RECIPES[o.menu]?.cup || o.count > 1 || o.more)) errs.push(`orders[${i}] change: 매장(togo: false)에서 받은 한 잔에만(정해진 컵 · 여러 잔은 안 됨)`);
   });
   for (const id of opts.book || []) if (!RECIPES[id]) errs.push(`book: 없는 메뉴 ${id}`);
   const table = { cups: CUPS, bases: INGREDIENTS, adds: INGREDIENTS, temps: TEMPS };
@@ -931,12 +942,12 @@ export async function brew(opts = {}) {
   document.body.classList.add('brew-open');
 
   /* ---- 기록 ---- */
-  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {}, adapted: [] };
+  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {}, adapted: [], moved: 0, moveMiss: 0 };
   const result = (extra = {}) => ({
     ok: !extra.aborted && !extra.quit,
     attempts: 1, served: R.attempts, mistakes: R.mistakes, remakes: R.remakes, kept: R.kept, // runner 의 별·선생님 화면의 되감기는 attempts 로 셈
     ms: performance.now() - t0, made: [...R.made], cups: [...R.cups], watched: R.watched, skills: R.skills, art: R.art, asked: R.asked,
-    adapted: [...R.adapted], level, turn: pace().turn, ...extra,
+    adapted: [...R.adapted], moved: R.moved ? { n: R.moved, miss: R.moveMiss } : undefined, level, turn: pace().turn, ...extra,
   });
 
   /* ---- 도중 정리(되감기·나가기·[그만하기]) ---- */
@@ -2750,18 +2761,100 @@ export async function brew(opts = {}) {
         res.art ? h('li', { class: 'z-good z-art' }, h('i', { html: ICON('heart') }), h('span', { text: '라테아트' }), h('b', { text: LATTE_ART[res.art]?.name || '' })) : null) : null);
   }
 
-  async function serve(res) {
+  async function serve(res, { again = false } = {}) {
     phase = 'serve';
     setScene({ center: h('div', { class: 'bw-served' }, drinkArt(made, res, null, 'big'), objArt('obj_tray', 'tray')), mode: 'serve' });
     const give = btn('tray', '드리기', 'btn-big btn-main bw-serve');
     ui.serve = give;
-    setPanel(askRow('', PROMPT.serve), resultBox(res), h('div', { class: 'bw-row' }, give));
-    talkAfter(sysV(PROMPT.serve));
+    const say = again ? SYS.moveServe : PROMPT.serve;
+    setPanel(askRow('', say), resultBox(res), h('div', { class: 'bw-row' }, give));
+    talkAfter(sysV(say));
     focusLater(give);
     await w(waitTap(give));
     phase = 'busy';
     audio.sfx('tray');
-    R.attempts += 1;
+    if (!again) R.attempts += 1; // 옮겨 담고 다시 드린 것은 같은 잔
+  }
+
+  /* ---- 손님이 마음을 바꿈: 매장 → 가져가기(2026-11-04 사용자 "Add that scene", 검수 13.43 🙋 · 13.45) ----
+   * [드리기]를 누르는 순간 손님이 "가져갈게요" → 가져가는 컵을 고름(틀리면 컵 규칙 한 줄 · 그 컵은 흐리게 · 다시) → 옮겨 담는 장면 → 그 컵으로 [드리기].
+   * 음료는 같으니 버리지 않고 옮김. 감점 없음(잘못 고른 컵은 선생님 기록에만) */
+  async function changeToGo(res) {
+    const ch = cur.change;
+    cur = { ...cur, togo: true, change: null, thanks: ch.thanks || cur.thanks }; // 주문을 고치지 않고 새로(되감기 · 다시 하기에서 처음 주문 그대로)
+    const want = orderTarget(cur).cup;
+    phase = 'busy';
+    setPanel();
+    showGuest('surprised');
+    setReact(ch.say);
+    renderTicket(new Set(['temp', 'togo']), 'togo'); // 주문 메모도 '가져가요'로
+    await w(robot ? sleep(60) : talk(guestV(ch.say)));
+    showGuest('normal');
+    const cups = pantry.cups.filter((id) => id !== made.cup);
+    const picks = cups.map((id) => h('button', { class: 'btn btn-soft bw-cup-pick', 'data-cup': id }, objArt(cupArtId(id), 'pick'), h('span', { text: CUPS[id].name })));
+    ui.movePicks = new Map(cups.map((id, i) => [id, picks[i]]));
+    ui.moveWant = want;
+    let note = SYS.changeTell;
+    for (;;) {
+      setPanel(askRow('', note), h('div', { class: 'bw-row bw-cup-picks' }, ...picks));
+      phase = 'change';
+      talk(sysV(note));
+      focusLater(picks.find((b) => !b.disabled));
+      const i = await w(waitTap(...picks));
+      audio.sfx('tap');
+      if (cups[i] === want) break;
+      // 다른 컵: 컵 규칙 한 줄(가져가는 차가운 음료는 플라스틱 컵 …) + 그 컵은 흐리게
+      R.moveMiss += 1;
+      picks[i].disabled = true;
+      picks[i].classList.add('is-wrong');
+      note = cupHintOf(cur);
+    }
+    phase = 'busy';
+    R.moved += 1;
+    setReact(SAY.wait); // 옮겨 담는 동안 손님은 "네, 기다릴게요."
+    await moveScene(want, res);
+    made.cup = want;
+    await serve(res, { again: true });
+  }
+
+  /** 옮겨 담는 장면: 든 잔을 새 컵 위로 → 기울여 부음(얼음도) → 새 컵이 참 → 쓴 컵은 식기 건조대에 엎어 둠 */
+  async function moveScene(toCup, res) {
+    setPanel();
+    const view = h('div', { class: 'bw-close-view bw-toss-view' });
+    const card = h('section', { class: 'bw-close is-auto is-toss', role: 'group', 'aria-label': '옮겨 담기' },
+      h('header', { class: 'bw-close-head' }, h('h3', { text: '옮겨 담기' }), h('p', { text: SYS.move })),
+      h('div', { class: 'bw-close-body' }, view));
+    closeUpOff();
+    closeEl = card;
+    bench.append(card);
+    bench.classList.add('is-close');
+    setScene({ mode: 'toss', keep: true });
+    talkAfter(sysV(SYS.move));
+    const spec = drinkSpec(made, res);
+    const fromBox = h('div', { class: 'bw-move-from' }, drinkArt(made, res, null, 'toss'));
+    const toBox = h('div', { class: 'bw-move-to' }, objArt(cupArtId(toCup), 'toss'));
+    const stream = h('i', { class: 'bw-move-stream', style: { '--c': spec.color || '#B98A5E' } });
+    const ice = spec.ice ? h('i', { class: 'bw-move-ice' }, h('b'), h('b'), h('b')) : null;
+    const rack = h('span', { class: 'bw-toss-dest is-rack', html: rackSVG() });
+    const stage = h('div', { class: 'bw-move' }, rack, toBox, stream, ice, fromBox);
+    view.append(stage);
+    await w(pauseMs(350));
+    stage.classList.add('s1'); // 새 컵 위로
+    await w(pauseMs(650));
+    stage.classList.add('s2'); // 기울여 부음
+    audio.sfx('pour');
+    await w(pauseMs(900));
+    toBox.replaceChildren(drinkArt({ ...made, cup: toCup }, res, null, 'toss'));
+    fromBox.replaceChildren(objArt(cupArtId(made.cup), 'toss'));
+    await w(pauseMs(600));
+    stage.classList.add('s3'); // 세움
+    await w(pauseMs(450));
+    stage.classList.add('s4'); // 건조대 쪽으로
+    await w(pauseMs(650));
+    stage.classList.add('s5');
+    audio.sfx('clink');
+    await w(pauseMs(800));
+    closeUpOff();
   }
 
   /** 손님 반응 → 'next'(다음 주문) · 'fresh'(처음부터 다시) · 'keep'(같은 레시피로 다시) */
@@ -2867,16 +2960,16 @@ export async function brew(opts = {}) {
    * 다 채우면 [주문 확인]: 지은이 주문을 되풀이하고("아이스 아메리카노 한 잔, 가져가시는 거죠?") 손님이 "네, 맞아요." */
   const hasTempChoice = (o) => (RECIPES[o.menu]?.temps.length || 0) > 1;
   const fixedCup = (o) => o.cup || RECIPES[o.menu]?.cup || null;
-  function renderTicket(know) {
+  function renderTicket(know, fresh = null) { // fresh: 방금 바뀐 칸('togo' = 손님이 가져가기로 바꿈)을 잠깐 밝게
     const o = cur;
-    const row = (label, value, icon) => h('span', { class: `bw-tk ${value ? '' : 'is-q'}`.trim() },
+    const row = (label, value, icon, key) => h('span', { class: ['bw-tk', value ? '' : 'is-q', key && key === fresh ? 'is-new' : ''].filter(Boolean).join(' ') },
       h('i', { html: ICON(icon) }), h('small', { text: label }), h('b', { text: value || '?' }));
     const t = orderTemp(o);
     ticket.replaceChildren(...[
       h('b', { class: 'bw-tk-t', text: '주문 메모' }),
       row('메뉴', o.usual ? '늘 드시던 것' : o.ticket || RECIPES[o.menu]?.name || '', 'menu'), // ticket: 손님이 말로 설명한 주문("달게 한 잔")
       hasTempChoice(o) || o.usual ? row('온도', know.has('temp') && !o.usual ? TEMPS[t].name : o.usual ? '늘 드시던 대로' : null, t === 'iced' && know.has('temp') ? 'ice' : 'coffee') : null,
-      fixedCup(o) ? row('컵', CUPS[fixedCup(o)].name, 'cup') : row('매장/포장', know.has('togo') ? SERVICES[orderService(o)].name : null, o.togo && know.has('togo') ? 'bag' : 'chair'),
+      fixedCup(o) ? row('컵', CUPS[fixedCup(o)].name, 'cup') : row('매장/포장', know.has('togo') ? SERVICES[orderService(o)].name : null, o.togo && know.has('togo') ? 'bag' : 'chair', 'togo'),
     ].filter(Boolean));
   }
   /** 지은이 하는 말(아래 띠 위쪽 한 줄 + 지은 목소리) */
@@ -3033,6 +3126,7 @@ export async function brew(opts = {}) {
   let robotMiss = 0;  // 남은 '손 기술을 일부러 넘치게'(__mgAuto({ miss }))
   let robotKeep = false; // 넘친 뒤 [다시 하기] 대신 [이대로 하기](__mgAuto({ keep: true }))
   let robotGate = null; // 이 손 기술의 시작 창에서 자동 플레이를 멈춤(__mgAuto({ gate: 'pour' }): 손으로 시험할 때)
+  let robotStop = null; // 시험: 이 단계(phase)에 오면 자동 플레이를 멈춤
   let driving = false;
   const clickIf = (b) => { if (b?.isConnected && !b.disabled) b.click(); };
   function robotTarget() {
@@ -3043,6 +3137,7 @@ export async function brew(opts = {}) {
   }
   function robotAct() {
     const t = robotTarget();
+    if (robotStop && phase === robotStop) { robot = null; return; } // 시험: 이 단계부터는 손으로(__mgAuto({ stopAt }))
     switch (phase) {
       case 'recipe': {
         // 카운터 물건: 컵 → 재료(넘치거나 빠진 것) → 얼음 → [만들기 시작]
@@ -3069,6 +3164,7 @@ export async function brew(opts = {}) {
         return;
       }
       case 'serve': clickIf(ui.serve); return;
+      case 'change': clickIf(ui.movePicks?.get(ui.moveWant)); return; // 가져가는 컵
       case 'wrong': if (robot === 'auto') clickIf(ui.toss?.isConnected ? ui.toss : ui.remake); return; // 다르게 만든 잔은 [버리기]
       case 'mild': clickIf(ui.remake); return; // 알맞게 다시 만듦
       case 'good': clickIf(ui.next); return;
@@ -3098,8 +3194,9 @@ export async function brew(opts = {}) {
       while (!over && !stopped() && !(phase === 'wrong' && !badLeft)) await sleep(60); // 다르게 만든 잔의 [버리기]가 뜰 때까지
       if (robot === 'bad') robot = null;
     };
-    window.__mgAuto = async ({ miss = 0, keep = false, gate = null } = {}) => {
+    window.__mgAuto = async ({ miss = 0, keep = false, gate = null, stopAt = null } = {}) => {
       if (over) return;
+      robotStop = stopAt;
       badLeft = 0;
       robotMiss = miss;
       robotKeep = keep;
@@ -3177,6 +3274,10 @@ export async function brew(opts = {}) {
         }
         const res = await makeDrink();
         await serve(res);
+        if (cur.change) { // 손님이 마음을 바꿈: 가져가는 컵에 옮겨 담아 다시 드림
+          await changeToGo(res);
+          target = orderTarget(cur);
+        }
         const how = await react(target, res);
         if (how === 'next') {
           // 오늘의 칠판: 드린 잔만큼 얼음 · 우유가 줄어듦(0 이면 다음 손님에게 사정을 말함)

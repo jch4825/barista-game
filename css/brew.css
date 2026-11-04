@@ -486,6 +486,9 @@ body.contrast .ov-brew-temp .bw-temp-opt.is-on { border-color: #FFE14D; }
 .mg.mg-brew .bw-tk b { font-size: 21px; font-weight: 900; color: #2A1D12; }
 .mg.mg-brew .bw-tk.is-q { border-style: dashed; border-color: var(--red); background: #FFF1F0; }
 .mg.mg-brew .bw-tk.is-q b { color: var(--red); }
+.mg.mg-brew .bw-tk.is-new { border-color: var(--main); background: #EAF6EE; box-shadow: 0 0 0 3px rgba(37, 132, 74, .35); animation: bw-tk-new .8s ease-out 2; } /* 손님이 바꾼 칸(가져가기로): 색 + 테두리 둘레로 */
+@keyframes bw-tk-new { 40% { transform: scale(1.12); } }
+body:is(.reduce-motion, .theme-calm) .mg.mg-brew .bw-tk.is-new { animation: none; }
 /* 주문 받기 띠: 지은의 말 + 묻는 말 단추 + [주문 확인] */
 .mg.mg-brew .bw-panel[data-kind="order"] { display: flex; flex-direction: column; gap: 10px; }
 .mg.mg-brew .bw-asks { flex-wrap: wrap; justify-content: center; gap: 14px; }
@@ -661,7 +664,7 @@ body.reduce-motion .mg.mg-brew .bw-whirl-ring { display: none; }
 .mg.mg-brew .bw-toss.s2 .bw-toss-stream { transform: scaleY(1); transition-delay: .35s; }
 .mg.mg-brew .bw-toss.s3 .bw-toss-stream { transform: scaleY(0); transform-origin: bottom; transition-delay: 0s; }
 .mg.mg-brew .bw-toss-ice { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.mg.mg-brew .bw-toss-ice b { position: absolute; left: 45%; top: 38%; width: 3.4%; aspect-ratio: 1; border-radius: 6px; background: rgba(230, 246, 255, .92); border: 3px solid #2A1D12; opacity: 0; }
+.mg.mg-brew .bw-toss-ice b { position: absolute; left: 45%; top: 38%; width: 3.4%; aspect-ratio: 1; border-radius: 28%; background: linear-gradient(135deg, rgba(255, 255, 255, .98) 0 30%, rgba(206, 236, 250, .9) 31%); border: 2px solid rgba(70, 120, 150, .85); opacity: 0; }
 .mg.mg-brew .bw-toss-ice b:nth-child(2) { left: 43%; }
 .mg.mg-brew .bw-toss-ice b:nth-child(3) { left: 47.5%; }
 .mg.mg-brew .bw-toss.s2 .bw-toss-ice b { animation: bw-ice-fall .7s ease-in forwards; animation-delay: .45s; }
@@ -676,3 +679,34 @@ body.reduce-motion .mg.mg-brew .bw-toss * { transition: none !important; animati
 body.reduce-motion .mg.mg-brew .bw-toss-drain { display: none; }
 body.theme-calm .mg.mg-brew .bw-toss-cup { transition-duration: .9s; }
 body.contrast .mg.mg-brew .bw-toss-view { background: #000; }
+
+/* ---------- 손님이 마음을 바꿈(2026-11-04 사용자): 가져가는 컵 고르기 · 옮겨 담기 ----------
+   컵 단추는 그림 + 이름, 잘못 고른 컵은 흐리게 + 점선(색만이 아니라 모양으로도). 옮겨 담기는 버리는 장면과 같은 확대 창 */
+.mg.mg-brew .bw-cup-picks { flex-wrap: wrap; justify-content: center; gap: 14px; }
+.mg.mg-brew .bw-cup-pick { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 150px; padding: 10px 16px; }
+.mg.mg-brew .bw-cup-pick .bw-art { width: 96px; height: 96px; }
+.mg.mg-brew .bw-cup-pick span { font-size: 24px; font-weight: 800; }
+.mg.mg-brew .bw-cup-pick.is-wrong { opacity: .45; border-style: dashed; }
+.mg.mg-brew .bw-move { position: absolute; inset: 0; overflow: hidden; }
+.mg.mg-brew :is(.bw-move-to, .bw-move-from) { position: absolute; bottom: 12%; width: 15%; aspect-ratio: 1; }
+.mg.mg-brew :is(.bw-move-to, .bw-move-from) .bw-art { display: block; width: 100%; height: 100%; }
+.mg.mg-brew .bw-move-to { left: 44%; }
+.mg.mg-brew .bw-move-from { z-index: 2; left: 10%; transition: left .6s ease, bottom .6s ease, transform .5s ease; }
+.mg.mg-brew .bw-move.s1 .bw-move-from { left: 31%; bottom: 46%; }
+.mg.mg-brew .bw-move.s2 .bw-move-from { transform: rotate(110deg); }
+.mg.mg-brew .bw-move.s3 .bw-move-from { transform: none; }
+.mg.mg-brew .bw-move.s4 .bw-move-from { left: 74%; bottom: 44%; }
+.mg.mg-brew .bw-move.s5 .bw-move-from { bottom: 20%; transform: rotate(180deg) scale(.8); } /* 건조대에 엎어 둠 */
+.mg.mg-brew .bw-move-stream { position: absolute; z-index: 1; left: 50.5%; top: 40%; bottom: 26%; width: 14px; margin-left: -7px; border-radius: 7px; background: var(--c); opacity: .92; transform-origin: top; transform: scaleY(0); transition: transform .3s ease; }
+.mg.mg-brew .bw-move.s2 .bw-move-stream { transform: scaleY(1); transition-delay: .35s; }
+.mg.mg-brew .bw-move.s3 .bw-move-stream { transform: scaleY(0); transform-origin: bottom; transition-delay: 0s; }
+.mg.mg-brew .bw-move-ice { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.mg.mg-brew .bw-move-ice b { position: absolute; left: 49.5%; top: 40%; width: 3.2%; aspect-ratio: 1; border-radius: 28%; background: linear-gradient(135deg, rgba(255, 255, 255, .98) 0 30%, rgba(206, 236, 250, .9) 31%); border: 2px solid rgba(70, 120, 150, .85); opacity: 0; }
+.mg.mg-brew .bw-move-ice b:nth-child(2) { left: 48%; }
+.mg.mg-brew .bw-move-ice b:nth-child(3) { left: 51%; }
+.mg.mg-brew .bw-move.s2 .bw-move-ice b { animation: bw-ice-in .6s ease-in forwards; animation-delay: .45s; }
+.mg.mg-brew .bw-move.s2 .bw-move-ice b:nth-child(2) { animation-delay: .6s; }
+.mg.mg-brew .bw-move.s2 .bw-move-ice b:nth-child(3) { animation-delay: .76s; }
+@keyframes bw-ice-in { from { top: 40%; opacity: 1; transform: rotate(0); } 80% { opacity: 1; } to { top: 64%; opacity: 0; transform: rotate(50deg); } }
+body.reduce-motion .mg.mg-brew .bw-move * { transition: none !important; animation: none !important; }
+body.theme-calm .mg.mg-brew .bw-move-from { transition-duration: .9s; }

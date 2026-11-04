@@ -68,11 +68,13 @@ export default {
       book: ['warm_milk', 'americano', 'latte', 'hand_drip', 'strawberry_milk'],
       orders: [
         { who: 'customer', say: '딸기우유 하나요.', menu: 'strawberry_milk', temp: 'iced', togo: false, ask: ['togo'], reply: { togo: '여기서 사진 찍고 마실게요.' }, thanks: '예쁘다! 분홍색이 사진에 잘 나오겠어요.' },
-        { who: 'customer', say: '아아도 하나요. 이것도 여기서요.', menu: 'americano', temp: 'iced', togo: false, thanks: '시원해요. 고마워요.' },
+        { who: 'customer', say: '아아도 하나요. 이것도 여기서요.', menu: 'americano', temp: 'iced', togo: false, thanks: '시원해요. 고마워요.',
+          // 손님이 마음을 바꿈(2026-11-04 사용자 "Add that scene"): 유리컵 → 플라스틱 컵에 옮겨 담기
+          change: { say: '아, 잠깐만요! 친구가 밖에서 기다린대요. 아아는 가져갈게요.', thanks: '고마워요. 친구가 좋아하겠어요.' } },
       ],
     }),
     sfx('shutter_phone'),
-    narr('손님이 창가 자리에서 이리저리 자리를 옮기며 사진을 여러 장 찍는다.'),
+    narr('손님은 밖에서 기다리던 친구에게 아아를 건네고 와서, 창가 자리에서 이리저리 자리를 옮기며 사진을 찍는다.'),
     leave('customer'),
     sfx('door'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),

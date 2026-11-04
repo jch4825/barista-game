@@ -138,7 +138,7 @@ function lines(list, depth = 0) {
       case 'mini':
         out.push('', `${pad}### 🎮 미니게임: ${b.title ? `${t(b.title)} (${b.name})` : b.name}${skill(b.skill)}`);
         // 커피 만들기: 손님마다 주문 · 무엇을 묻는지 / 둘러보기: 눌러 볼 곳과 그 말 / 순서대로 · 쟁반: 할 일
-        for (const o of b.orders || []) out.push(`${pad}- **${name(o.who)}**: "${t(o.say)}" → ${o.usual ? '늘 먹던 것 · ' : ''}${o.menu}${o.temp ? ` · ${o.temp === 'iced' ? '아이스' : '따뜻하게'}` : ''}${o.togo === undefined ? '' : o.togo ? ' · 포장' : ' · 매장'}${o.ask?.length ? ` · 지은이 물어볼 것: ${o.ask.map((k) => (k === 'temp' ? '온도' : '매장/포장')).join(', ')}` : ''}${o.thanks ? ` · 받으면: "${t(o.thanks)}"` : ''}`);
+        for (const o of b.orders || []) out.push(`${pad}- **${name(o.who)}**: "${t(o.say)}" → ${o.usual ? '늘 먹던 것 · ' : ''}${o.menu}${o.temp ? ` · ${o.temp === 'iced' ? '아이스' : '따뜻하게'}` : ''}${o.togo === undefined ? '' : o.togo ? ' · 포장' : ' · 매장'}${o.ask?.length ? ` · 지은이 물어볼 것: ${o.ask.map((k) => (k === 'temp' ? '온도' : '매장/포장')).join(', ')}` : ''}${o.change ? ` · 드리려는 순간 마음을 바꿈: "${t(o.change.say)}" → 가져가는 컵에 옮겨 담기` : ''}${o.change?.thanks || o.thanks ? ` · 받으면: "${t(o.change?.thanks || o.thanks)}"` : ''}`);
         for (const sp of b.spots || []) out.push(`${pad}- 👀 **${sp.name}**${sp.seen ? ` (숨은 장면 ${sp.seen})` : ''}: ${sp.lines.map((l) => (typeof l === 'string' ? t(l) : `*${t(l.text)}*`)).join(' ')}`);
         for (const st of b.steps || []) out.push(`${pad}- 🔁 ${st.name}: ${t(st.done)}`);
         if (b.items) out.push(`${pad}- 🫖 나를 것: ${b.items.map((it) => it.name).join(', ')} → ${b.to || ''}`);
