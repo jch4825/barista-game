@@ -145,6 +145,9 @@ export const CG_EN = {
   eye_9: 'From the OWNER\'s point of view: an old brass key held out in the owner\'s calm hand toward JIEUN, who looks nervous but brave.',
   eye_10: 'From the OWNER\'s point of view at night: the owner\'s hand sticking a small paper memo inside the closing shelf with upside-down cups (no readable text).',
   eye_11: 'Night of the blackout from far away: a dark snowy seaside village and one warm lit cafe window glowing in the middle, seen from another house\'s window.',
+  // 계절 사이(2026-11-05): 이야기가 비어 있는 동안 열심히 일함
+  pass_summer: 'Pale early dawn in late summer inside the small seaside cafe: JIEUN stands at the counter beside the OWNER, carefully pouring hot water from a gooseneck kettle into a ceramic dripper while he watches quietly; many used paper filters and a tall stack of clean cups beside her show weeks of practice; through the window the calm summer sea under a soft pale sky. No sun rays.',
+  pass_autumn: 'Late autumn before dawn: JIEUN alone switches on the warm lights of the small seaside cafe, the alley outside still dark blue and cold, a few fallen yellow ginkgo leaves at the door; on the counter the owner\'s white mug sits in its usual place and a small handwritten note is stuck to the shelf. Quiet, steady, a little lonely but determined.',
   // 단골의 의외성(2026-11-02): 겉모습과 다른 면
   do_candy: 'Rainy spring afternoon at the cafe door: DO, the mail carrier, crouches slightly and hands small wrapped candies from the inner pocket of his postal bag to three little children in yellow raincoats; raindrops on the glass, warm light inside, his kind smile.',
   haesun_jar: 'Spring morning at the cafe counter: HAESUN, the small elderly woman, twists open a stubborn jar of strawberry syrup with one easy turn of her wrist and a calm smile, while JIEUN stares in surprise holding a kitchen towel; soft window light, blossoms outside.',

@@ -3,7 +3,7 @@
  * → 아침, 눈길에 늦은 버스를 기다리는 손님(여기서 마시려다 버스가 와서 가져가기로: 머그컵 → 종이컵에 옮겨 담기) → 오후, 밤새 아기 곁을 지킨 은주(대응 E4)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
 
 const WINTER_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa', 'mix_coffee'];
 
@@ -19,6 +19,16 @@ export default {
   standards: ['[12진로04-05]', '[12진로03-02]'],
   diary: '첫눈이 왔다. 강 씨에 대한 소문을 들었지만 묻지 않았다. 은주 씨는 밤새 한숨도 못 잤다고 했다.',
   script: [
+    // 계절 사이 (2026-11-05 사용자: 계절마다 이야기는 일주일뿐이라, 그 사이 비어 있는 시간 동안 열심히 일했음을 서술로 알려 줌): 가을이 끝나고 첫눈이 오기까지
+    bg('alley', 'morning'),
+    amb('street'),
+    bgm('morning'),
+    cg('pass_autumn'),
+    narr('사장님이 손을 쉬러 가신 뒤로, 가게 문은 날마다 내가 열고 닫았다.'),
+    narr('새벽 다섯 시 오십 분에 불을 켜고, 사장님 수첩에 적힌 대로 한 잔씩 내렸다. 강 씨의 블랙도, 할머니의 우유 두 잔도 그대로였다.'),
+    narr('혼자라서 서두르고 싶어지는 날도 있었다. 그럴 때마다 선반의 메모 "서두르면 쏟는다"를 보고, 숨을 한 번 고르고 다시 했다.'),
+    narr('그렇게 가을이 끝나고 몇 주가 지났다. 바닷바람이 하루하루 차가워졌다.'),
+    cg(null),
     big('겨울 · 1일', '첫눈'),
     bg('alley', 'morning'),
     amb('street'),

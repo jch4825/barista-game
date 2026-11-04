@@ -59,6 +59,9 @@ export const CGS = {
   summer_village_time: { ep: 'summer_7', title: '여름 · 동네 시간의 첫 아침', ph: P('hall', 'morning', ['kang', 'do:smile', 'han', 'noh', 'haesun:smile'], ['sign_open'], '조용한 새벽, 단골 다섯') },
 
   /* ---------- 가을 ---------- */
+  // 계절 사이(2026-11-05 사용자): 이야기가 비어 있는 동안 열심히 일함
+  pass_summer: { ep: 'autumn_1', title: '계절 사이 · 남은 여름', ph: P('hall', 'busy_summer', ['jieun:determined', 'owner'], ['coffee', 'cup'], '새벽의 핸드드립 연습, 낮의 긴 줄') },
+  pass_autumn: { ep: 'winter_1', title: '계절 사이 · 혼자 지킨 가게', ph: P('hall', 'evening', ['jieun:determined'], ['light', 'note'], '혼자 불을 켜는 새벽, 선반의 메모', { night: true }) },
   autumn_first_drip: { ep: 'autumn_1', title: '처음 내리는 새벽 블랙', ph: P('hall', 'autumn', ['owner', 'jieun:determined'], ['coffee'], '오늘부터 지은 씨가 내려요') },
   kang_suit: { ep: 'autumn_2', title: '양복', ph: P('hall', 'autumn', ['kang'], ['badge'], '낡은 양복과 거친 손') },
   kang_suit_cup: { ep: 'autumn_2', title: '역시 여기가 편하네', ph: P('hall', 'autumn', ['kang:smile'], ['coffee'], '느슨하게 푼 넥타이') },
