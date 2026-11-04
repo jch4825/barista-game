@@ -215,9 +215,9 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_memory_city.jpg` | `Woman_spilling_latte_in_cafe_22010e0d.jpg` (2026-11-04 20:55) |
 | `cg/cg_owner_cup_shake.jpg` | `Owner_holding_cup_in_cafe_dbea1295.jpg` (2026-11-04 21:27) |
 | `cg/cg_spring_crew.jpg` | `Actors_walking_toward_seaside_cafe_f1ea0061.jpg` (2026-11-04 21:23) |
-| `cg/cg_spring_name.jpg` | `Woman_smiling_goodbye_in_cafe_6d9c25d9.jpg` (2026-11-04 21:33) |
+| `cg/cg_spring_name.jpg` | `Woman_smiling_goodbye_in_cafe_6d9c25d9.jpg` (2026-11-04 21:33 · 지은의 남색 앞치마를 초록으로 바꿈: `tools/recolor-apron.py`) |
 | `cg/cg_summer_tourist_chair.jpg` | `Tourist_sits_beside_grandmother_…_2136599a_2K.jpg` (2026-10-31 15:45) |
-| `cg/cg_haesun_two_cups.jpg` | `Woman_holding_tray_in_cafe_c65e8af2_2K.jpg` (2026-10-31 08:04 · 그날 새 그림으로 바꿈, 커밋 1a76166) |
+| `cg/cg_haesun_two_cups.jpg` | `Woman_holding_tray_in_cafe_c65e8af2_2K.jpg` (2026-10-31 08:04 · 그날 새 그림으로 바꿈, 커밋 1a76166 · 2026-11-04 지은의 남색 앞치마를 초록으로 바꿈: `tools/recolor-apron.py`) |
 | `cg/cg_haesun_cup_for_him.jpg` | `Elderly_woman_looking_at_mug_3ecc1748_2K.jpg` (2026-10-31 15:48 · 그날 새 그림으로 바꿈, 커밋 1a76166) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):
