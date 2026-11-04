@@ -1840,12 +1840,26 @@ export async function brew(opts = {}) {
     const cue = (z) => {
       if (!nowSign) return;
       if (z === 'good' || z === 'high') {
-        // 자리 · 기울기는 그때그때 다르게(같은 자리를 외우지 않고 글자를 보고 떼게)
-        const rnd = (a, b) => a + Math.random() * (b - a);
-        nowSign.style.setProperty('--x', `${rnd(22, 78).toFixed(1)}%`);
-        nowSign.style.setProperty('--y', `${rnd(20, 68).toFixed(1)}%`);
-        nowSign.style.setProperty('--rot', `${rnd(-14, 14).toFixed(1)}deg`);
+        // 자리 · 기울기는 그때그때 다르게(같은 자리를 외우지 않고 글자를 보고 떼게). 글자가 커서(2026-11-04 사용자 "2배") 기운 글자 전체가 장면 안에 드는 범위에서 고름
+        const rnd = (a, b) => (a < b ? a + Math.random() * (b - a) : (a + b) / 2);
         nowSign.replaceChildren(...letters(SIGN[z]));
+        nowSign.classList.remove('is-on', 'is-over');
+        nowSign.classList.add(z === 'good' ? 'is-on' : 'is-over');
+        const rot = rnd(-14, 14);
+        const t = (Math.abs(rot) * Math.PI) / 180;
+        const sw = nowSign.offsetWidth * 1.08; // 흔들림(1.07배)까지
+        const sh = (nowSign.offsetHeight + 40) * 1.08; // 글자마다 위로 올라간 만큼
+        const bw = sw * Math.cos(t) + sh * Math.sin(t);
+        const bh = sw * Math.sin(t) + sh * Math.cos(t);
+        const vw = view.clientWidth || 1;
+        const vh = view.clientHeight || 1;
+        const fit = Math.min(1, (vw * 0.94) / bw, (vh * 0.94) / bh); // 아주 작은 창에서만 줄임
+        const hx = Math.min(50, ((bw * fit) / 2 + 10) / vw * 100);
+        const hy = Math.min(50, ((bh * fit) / 2 + 10) / vh * 100);
+        nowSign.style.setProperty('--x', `${rnd(hx, 100 - hx).toFixed(1)}%`);
+        nowSign.style.setProperty('--y', `${rnd(hy, 100 - hy).toFixed(1)}%`);
+        nowSign.style.setProperty('--rot', `${rot.toFixed(1)}deg`);
+        nowSign.style.setProperty('--fit', fit.toFixed(3));
         nowSign.classList.remove('is-on', 'is-over');
         void nowSign.offsetWidth;
         nowSign.classList.add(z === 'good' ? 'is-on' : 'is-over');

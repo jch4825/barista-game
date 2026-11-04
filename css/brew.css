@@ -562,17 +562,17 @@ body.contrast .mg.mg-brew .bw-close.is-in-zone .bw-close-view { box-shadow: inse
 
 /* 성공 타이밍 표시(2026-11-02 사용자, class bw-pow: [지금!] 단추의 bw-now 와 다른 이름. 같은 이름이면 단추가 투명해짐, 검수 13.39 2번): 알맞아요 칸에 들면 장면 안 아무 곳에 웹툰 효과음 글자 "지금!"(넘치면 "넘쳐!") + 누르는 단추가 금색으로.
    노란 글자 + 굵은 갈색 테두리 + 주황 그림자, 글자마다 통통 튀어나옴. 빛살 · 가시 터짐 모양은 쓰지 않음(욱일기 연상 금지) */
-.mg.mg-brew .bw-pow { position: absolute; left: var(--x, 50%); top: var(--y, 40%); z-index: 6; display: flex; align-items: flex-end; gap: 0; transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg); opacity: 0; pointer-events: none; }
+.mg.mg-brew .bw-pow { position: absolute; left: var(--x, 50%); top: var(--y, 40%); z-index: 6; display: flex; align-items: flex-end; gap: 0; transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg) scale(var(--fit, 1)); opacity: 0; pointer-events: none; }
 .mg.mg-brew .bw-pow.is-on, .mg.mg-brew .bw-pow.is-over { opacity: 1; animation: bw-pow-wobble .9s ease-in-out .4s infinite alternate; }
-.mg.mg-brew .bw-pow-ch { display: inline-block; font-family: 'Pretendard', sans-serif; font-size: 118px; font-weight: 900; line-height: 1; letter-spacing: -4px; color: #FFE14D; -webkit-text-stroke: 9px #2A1D12; paint-order: stroke fill; text-shadow: 7px 7px 0 #F0812E, 12px 12px 0 rgba(42, 29, 18, .45); transform: translateY(calc(var(--i) * -10px)) rotate(calc(var(--i) * 5deg - 5deg)); }
+.mg.mg-brew .bw-pow-ch { display: inline-block; font-family: 'Pretendard', sans-serif; font-size: 236px; font-weight: 900; line-height: 1; letter-spacing: -8px; color: #FFE14D; -webkit-text-stroke: 16px #2A1D12; paint-order: stroke fill; text-shadow: 13px 13px 0 #F0812E, 22px 22px 0 rgba(42, 29, 18, .45); transform: translateY(calc(var(--i) * -18px)) rotate(calc(var(--i) * 5deg - 5deg)); } /* 2026-11-04 사용자 "2배"(118 → 236px) */
 .mg.mg-brew .bw-pow.is-on .bw-pow-ch, .mg.mg-brew .bw-pow.is-over .bw-pow-ch { animation: bw-ch-pop .22s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 20ms); } /* 글자가 거의 한꺼번에(0.1초 안에) 다 보이게: 알맞아요 칸은 겨울에 0.6초뿐(검수 13.39 17번) */
-.mg.mg-brew .bw-pow.is-over .bw-pow-ch { color: #BDE6FF; text-shadow: 7px 7px 0 #3D8BD9, 12px 12px 0 rgba(42, 29, 18, .45); font-size: 100px; }
+.mg.mg-brew .bw-pow.is-over .bw-pow-ch { color: #BDE6FF; text-shadow: 13px 13px 0 #3D8BD9, 22px 22px 0 rgba(42, 29, 18, .45); font-size: 200px; }
 @keyframes bw-ch-pop { 0% { opacity: 0; transform: translateY(30px) scale(.4); } 35% { opacity: 1; } }
-@keyframes bw-pow-wobble { from { transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg) scale(1); } to { transform: translate(-50%, -50%) rotate(calc(var(--rot, -6deg) * -0.4)) skewX(-8deg) scale(1.07); } }
+@keyframes bw-pow-wobble { from { transform: translate(-50%, -50%) rotate(var(--rot, -6deg)) skewX(-8deg) scale(var(--fit, 1)); } to { transform: translate(-50%, -50%) rotate(calc(var(--rot, -6deg) * -0.4)) skewX(-8deg) scale(calc(var(--fit, 1) * 1.07)); } }
 body .mg.mg-brew .btn.is-cue, body.skin-sea .mg.mg-brew .btn-main.is-cue:not(:disabled) { box-shadow: 0 0 0 7px #FFE08A, 0 0 34px rgba(255, 214, 110, .95); background: linear-gradient(180deg, #F2C230, #C99A2E); color: #2A1D12; }
 body .mg.mg-brew .btn.is-cue i svg { color: #2A1D12; }
 body:is(.reduce-motion, .theme-calm) .mg.mg-brew .bw-pow, body:is(.reduce-motion, .theme-calm) .mg.mg-brew .bw-pow-ch { animation: none !important; }
-body.contrast .mg.mg-brew .bw-pow-ch { color: #FFE14D; -webkit-text-stroke: 9px #000; text-shadow: none; }
+body.contrast .mg.mg-brew .bw-pow-ch { color: #FFE14D; -webkit-text-stroke: 16px #000; text-shadow: none; }
 
 /* 조작법 '드래그 활용'(2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라"): 끌어 붓기 · 끌어 누르기 · 얼음 옮기기 */
 .mg.mg-brew .bw-shot-box img[hidden] { display: none; }
@@ -634,7 +634,7 @@ body.contrast .mg.mg-brew .bw-lack-say { background: #000; color: #fff; border-c
 .mg.mg-brew .bw-whirl.is-done .bw-whirl-ring { animation: bw-whirl-out .35s ease-out forwards; }
 .mg.mg-brew .bw-whirl.is-done > .bw-art.big { animation: bw-whirl-pop .4s cubic-bezier(.3, 1.6, .5, 1); }
 .mg.mg-brew .bw-whirl-word { --x: 76%; --y: 16%; --rot: -8deg; opacity: 1; z-index: 2; }
-.mg.mg-brew .bw-whirl-word .bw-pow-ch { font-size: 88px; animation: bw-ch-pop .22s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 45ms); }
+.mg.mg-brew .bw-whirl-word .bw-pow-ch { font-size: 88px; letter-spacing: -3px; -webkit-text-stroke: 7px #2A1D12; text-shadow: 5px 5px 0 #F0812E, 9px 9px 0 rgba(42, 29, 18, .45); transform: translateY(calc(var(--i) * -8px)) rotate(calc(var(--i) * 5deg - 5deg)); animation: bw-ch-pop .22s cubic-bezier(.3, 1.7, .5, 1) backwards; animation-delay: calc(var(--i) * 45ms); }
 .mg.mg-brew .bw-whirl.is-done .bw-whirl-word { opacity: 0; transition: opacity .3s ease; }
 @keyframes bw-whirl-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes bw-whirl-wobble { from { transform: rotate(-7deg) translateY(0); } to { transform: rotate(7deg) translateY(-4%); } }
