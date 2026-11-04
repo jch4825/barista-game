@@ -1051,9 +1051,10 @@ def build_vapor(at, base_z, amount, seed, c='shot_dyn', scale=1.0):
     return ob
 
 
-def shot_steam(sdir, preview):
+def shot_steam(sdir, preview, zone=(0.56, 0.81), sid='steam'):
     """우유 데우기: 물받이 위 우유 담은 스팀 피처에 노즐을 넣고, 피처 왼쪽 뒤 가장자리에 집게 온도계. 바늘 25단계 × 김 있음(스팀 켬)/옅음.
-    우유는 데울수록 조금 부풀고, 스팀을 켜면 노즐 둘레가 돎(2026-10-31 사용자: 빈 피처가 물처럼 보임)"""
+    우유는 데울수록 조금 부풀고, 스팀을 켜면 노즐 둘레가 돎(2026-10-31 사용자: 빈 피처가 물처럼 보임)
+    zone · sid: 온도계의 초록 칸(= 띠의 알맞아요 칸)과 컷 이름. 아이 잔은 steam_kid(초록 칸이 낮음, js/data/menu.js KID_CUP)"""
     X = GX[0] + 0.155
     px, py, pz = X + 0.235, FY - 0.08, 0.0635
     rim = pz + 0.1062
@@ -1081,7 +1082,7 @@ def shot_steam(sdir, preview):
         build_pitcher_milk((px, py, pz), 0.090 + 0.006 * p, flow, tip, M['milk'])
     ta = math.radians(228)  # 피처 왼쪽 앞 가장자리(노즐에 가리지 않게)
     tcen = (px + 0.031 * math.cos(ta), py + 0.031 * math.sin(ta), rim + THERMO_R + 0.006)
-    emp = build_thermo(tcen, cam.location, (0.56, 0.81))
+    emp = build_thermo(tcen, cam.location, zone)
     vat = (px + 0.012, py + 0.018)  # 김은 노즐 쪽(오른쪽 뒤)에서 올라옴: 다이얼을 가리지 않게
     show_only(('machine', 'tamper', 'steam_static', 'shot_dyn'))
     cam.data.dof.use_dof = True
@@ -1092,11 +1093,11 @@ def shot_steam(sdir, preview):
         build_needle(emp, 0.68)
         build_vapor(vat, rim, 0.8, 1.0)
         milk(0.68, True)
-        render(os.path.join(sdir, 'preview_steam.jpg'), (1472, 400), 64, fmt='JPEG')
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
         return
     clear_dyn()
     milk(0.0, False)  # 배경판에도 우유(프레임 자리 밖으로 겉면이 나가도 비어 보이지 않게)
-    render(os.path.join(sdir, 'steam_plate.png'), SHOT_RES, 384)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
     pts = [Vector(tcen) + Vector((dx, dy, dz)) for dx in (-0.032, 0.032) for dy in (-0.032, 0.032) for dz in (-0.032, 0.032)]
     pts += [Vector((vat[0] + dx, vat[1] + dy, zz)) for dx in (-0.045, 0.045) for dy in (-0.045, 0.045) for zz in (rim - 0.004, rim + 0.14)]
     pts += [Vector((px + dx, py + dy, pz + 0.085)) for dx in (-0.04, 0.04) for dy in (-0.04, 0.04)]  # 우유 겉면
@@ -1106,7 +1107,7 @@ def shot_steam(sdir, preview):
         milk(p, flow)
         amount = (0.55 + 0.45 * p) if flow else (0.35 * p if p > 0.15 else 0.0)  # 스팀을 끄면 뜨거운 만큼만 옅게
         build_vapor(vat, rim, amount, k * 0.37 + (0.13 if flow else 0.0))
-    render_frames(sdir, 'steam', frame_rect(pts), 25, build)
+    render_frames(sdir, sid, frame_rect(pts), 25, build)
 
 
 MUG_INNER = [(0.0108, 0.028), (0.0125, 0.0335), (0.018, 0.0362), (0.03, 0.0376), (0.05, 0.0385), (0.07, 0.0392), (0.085, 0.0398), (0.089, 0.0402)]
@@ -3552,7 +3553,8 @@ MORE_SHOTS.update({
 })
 
 
-SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour, 'foam': shot_foam, 'water': shot_water,
+SHOTS = {'extract': shot_extract, 'steam': shot_steam, 'pour': shot_pour,
+         'steam_kid': lambda d, pv: shot_steam(d, pv, (0.31, 0.56), 'steam_kid'),  # 아이 잔: 온도계의 초록 칸이 낮음(덜 데움) 'foam': shot_foam, 'water': shot_water,
          'ice': shot_ice, 'water_glass': shot_water_glass, 'pour_glass': shot_pour_glass,
          'pour_latte': lambda sdir, preview: shot_pour(sdir, preview, only='latte'),  # 라테 프레임만(배경판·우유는 그대로)
          'pour_tint': shot_pour_tint, 'pour_glass_tint': shot_pour_glass_tint,  # 음료 색(녹차라테 · 코코아 · 딸기우유)

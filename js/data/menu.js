@@ -460,8 +460,22 @@ export function repeatBack(order = {}) {
   const cupFixed = order.cup || RECIPES[order.menu]?.cup;
   const tail = cupFixed ? '맞으시죠?' : order.togo ? '가져가시는 거죠?' : '드시고 가시는 거죠?';
   const n = order.more ? '한 잔 더' : `${CUP_COUNT[order.count || 1]} 잔`;
-  return `${drinkName(order.menu, orderTemp(order))} ${n}, ${tail}`;
+  return `${drinkName(order.menu, orderTemp(order))} ${n}, ${order.kid ? `${KID_CUP.repeat} ` : ''}${tail}`;
 }
+
+/**
+ * 아이 잔(orders[].kid, 2026-11-05 자유 영업 칠판 '아이 손님'): 아이가 마시는 따뜻한 잔은 우유를 평소보다 덜 데움.
+ * 우유 데우기(steam)의 알맞아요 칸이 낮아지고(zone), 블렌더 컷은 온도계의 초록 칸이 낮은 steam_kid. 주문 메모에 '아이 잔' 줄
+ */
+export const KID_CUP = {
+  zone: [0.31, 0.56],
+  ticket: '아이 잔',
+  ticketValue: '덜 뜨겁게',
+  repeat: '너무 뜨겁지 않게 데울게요.',
+  note: '아이가 마시는 잔이에요. 우유를 평소보다 덜 데워요.',
+  react: { low: '조금 미지근하네요.', high: '아이가 마시기엔 조금 뜨겁네요.' },
+  thanks: '아이가 마시기 딱 좋아요. 고마워요.',
+};
 
 /** 고른 재료·온도와 같은 메뉴(컵은 보지 않음). 없으면 null */
 export function findMenu(made = {}) {
@@ -507,7 +521,7 @@ export function todayTags(t) {
 /** 메뉴가 바뀐 주문(손님이 권한 것을 받음): 늘 먹던 것 · 손님이 정한 말(고마움 · 메모 글)은 원래 메뉴의 것이라 뺌 */
 function swapOrder(o, menu, temp) {
   const same = menu === o.menu;
-  return { ...o, menu, temp, usual: same && o.usual, ticket: same ? o.ticket : undefined, thanks: same ? o.thanks : undefined, miss: same ? o.miss : undefined, cup: same ? o.cup : undefined };
+  return { ...o, menu, temp, kid: o.kid && RECIPES[menu].steps.includes('steam') && temp === 'hot' ? true : undefined, usual: same && o.usual, ticket: same ? o.ticket : undefined, thanks: same ? o.thanks : undefined, miss: same ? o.miss : undefined, cup: same ? o.cup : undefined };
 }
 
 /** 이 주문을 오늘 만들 수 있나. 못 만들면 { kind, notice(알림), say(지은), reply(손님), order(바뀐 주문) }, 만들 수 있으면 null */
@@ -705,6 +719,7 @@ export function orderProblems(order = {}) {
   if (order.togo !== undefined && typeof order.togo !== 'boolean') errs.push('togo 는 true · false');
   if (order.count !== undefined && !(Number.isInteger(order.count) && order.count >= 1 && order.count < CUP_COUNT.length)) errs.push(`count 는 1~${CUP_COUNT.length - 1}`);
   if (order.count > 1 && order.more) errs.push('count 와 more 는 함께 쓰지 않음');
+  if (order.kid && !(r.steps.includes('steam') && orderTemp(order) === 'hot')) errs.push('kid(아이 잔): 우유를 데우는 따뜻한 잔에만');
   return errs;
 }
 

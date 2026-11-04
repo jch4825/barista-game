@@ -1,9 +1,10 @@
 /**
- * 가을 3일 · 손잡이: 사장님이 은행에 간 사이, 노 씨가 몰래 선반을 낮춤(대응 N2) → 사장님은 말없이 그 선반을 씀
+ * 가을 3일 · 손잡이: 사장님이 은행에 간 사이, 혼자 손님 둘을 받음(오늘의 칠판 '사장님 외출': 엉뚱한 잔을 맛봐 줄 사람이 없음)
+ * → 노 씨가 몰래 선반을 낮춤(대응 N2) → 사장님은 말없이 그 선반을 씀
  * → 유모차가 걸린 은주(대응 E3) → (은주 신뢰 4 이상) 처음 끝까지 마심 · 사장님이 의자를 치워 유모차 자리를 만듦
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, mini, respond, onlyIf, motion, face, end, info, today } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -27,14 +28,31 @@ export default {
     info('오늘의 칠판', '사장님이 은행에 가요. 잠깐 혼자 가게를 봐요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     say('owner', 'normal', '은행에 좀 다녀올게요. 한 시간쯤 걸려요.'),
+    say('owner', 'normal', '손님이 오면 평소대로, 한 잔씩 해요. 지은 씨는 혼자서도 할 수 있어요.'),
     leave('owner'),
     sfx('door'),
+    // 칠판이 일을 바꿈(2026-11-05 사용자 "칠판 빈 곳부터": 칠판 글만 있고 일은 그대로였음): 사장님이 안 계신 동안의 손님(엉뚱한 잔 맛보기 없음, 작업대 칠판에 '사장님 외출')
+    today({ owner: false }),
+    think('사장님이 안 계신 가게는 조금 넓어 보인다. 맛을 봐 주실 분도 없으니, 수첩을 보며 하나씩 정확하게 하자.'),
+    show({ left: 'jieun:determined', right: 'customer:normal' }),
+    sfx('bell'),
+    narr('출근길 손님이 들어온다. 뒤이어 산책을 마친 손님도 들어와 창가에 앉는다.'),
+    mini('brew', {
+      id: 'autumn_3_alone', title: '혼자 보는 가게', level: 'normal', book: AUTUMN_BOOK,
+      orders: [
+        { who: 'customer', say: '아아 하나요. 출근길이라 가져갈게요.', menu: 'americano', temp: 'iced', togo: true, thanks: '고마워요. 오늘도 힘내 볼게요.' },
+        { who: 'customer', say: '따뜻한 바닐라 라테 하나 주세요.', menu: 'vanilla_latte', temp: 'hot', togo: false, ask: ['togo'], reply: { togo: '여기서 바다 보면서 마실게요.' }, thanks: '달고 따뜻하네요. 고마워요.' },
+      ],
+    }),
+    leave('customer'),
+    think('혼자서도 두 잔을 끝까지 만들었다. 가슴이 조금 두근거렸지만, 순서는 하나도 빠뜨리지 않았다.'),
     show({ left: 'jieun:normal', right: 'noh:normal' }),
     sfx('bell'),
     respond('noh', 'autumn_shelf'),
     leave('noh'),
 
     sfx('door'),
+    today({}), // 사장님이 돌아옴
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('사장님이 돌아와 원두 통을 꺼내려다, 한 칸 낮아진 선반을 한 번 본다. 바뀐 수도꼭지 손잡이도 본다.'),
     narr('사장님은 아무 말 없이 원두 통을 꺼낸다. 통을 내리는 손이 전보다 편해 보인다.'),

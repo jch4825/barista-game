@@ -298,6 +298,12 @@
 - **꾹 누르기 · 원 그리기**는 원래 컷 그대로(끈 만큼 탬퍼가 내려감 · 손가락으로 원).
 - 다시 만들기: `… scene_bench.py -- C:/AI/game3/assets/_src/blender tilt [pour,water,…]` · `… drag_ice` → `python -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots [컷,…]` → `npm run assets` → `npm run credits`.
 
+### 6.12 아이 잔의 우유 데우기 컷 (✅ 2026-11-05 렌더, 사용자 "칠판 빈 곳부터")
+자유 영업의 칠판 카드 '아이 손님'에서 아이가 마시는 따뜻한 잔(`orders[].kid`, `js/data/menu.js` `KID_CUP`)은 우유를 평소보다 덜 데웁니다. 우유 데우기의 알맞아요 칸이 0.56~0.81 에서 **0.31~0.56** 으로 내려갑니다.
+- 온도계 다이얼의 초록 칸이 그림에 박혀 있어서, 같은 장면을 초록 칸만 낮게 다시 렌더했습니다: `steam_kid`(배경판 + 바늘 25단계 × 김 있음/옅음). 주황 칸(뜨거워요)은 0.56부터라, 평소처럼 데우면 '뜨거워요'가 됩니다.
+- 게임(`brew.js` `shotIdFor`): 아이 잔의 우유 데우기면 `steam_kid`, 없으면 `steam`.
+- 다시 만들기: `… scene_bench.py -- C:/AI/game3/assets/_src/blender shots steam_kid` → `python -X utf8 tools/blender/shots_post.py assets/_src/blender/shots assets/shots steam_kid` → `npm run assets` → `npm run credits`.
+
 ## 7. 학생에게 보이는 말 (쉬운 한국어)
 - 동작 안내는 한 줄입니다.
   - 지금 쓰는 말(A): "[누르고 있기]를 꾹 누르면 샷이 나와요. 알맞아요 칸에서 손을 떼요." · 턴 방식은 "띠가 알맞아요 칸에 오면 [멈추기]를 눌러요."

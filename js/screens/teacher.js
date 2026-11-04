@@ -71,6 +71,7 @@ function miniExtra(l) {
   for (const [id, st] of Object.entries(l.skills || {})) parts.push(`${HAND_SKILLS[id]?.name || id} 알맞음 ${st.good}/${st.tries}${st.perfect ? `(딱 좋아요 ${st.perfect})` : ''}`);
   if (l.art) parts.push(`라테아트 ${l.art}`);
   // 손님이 가져가기로 바꿔 옮겨 담은 잔(잘못 고른 컵)
+  if (l.kid) parts.push(`아이 잔(덜 뜨겁게) 알맞음 ${l.kid.good}/${l.kid.n}`); // 자유 영업 칠판 '아이 손님'
   if (l.moved) parts.push(`가져가기로 옮겨 담기 ${l.moved.n}${l.moved.miss ? `(잘못 고른 컵 ${l.moved.miss})` : ''}`);
   // 몰림(처리한 주문 · 사장님이 받은 주문) · 버스(본 것 · 손잡이, 검수 13.39 33번)
   if (l.cleared !== undefined) parts.push(`처리한 주문 ${l.cleared}${l.helped ? ` · 사장님이 받음 ${l.helped}` : ''}`);

@@ -6,12 +6,13 @@
  *  - 이야기 뒤 단골들의 근황(앨범 액자가 열린 단골은 그 뒤의 이야기) · 직업 마1스톤 손님의 한두 마디 · 오늘의 도전 하나
  *  - 대응 기회가 없어서 단골 신뢰는 바뀌지 않음. 하루 끝 화면에는 '오늘 만든 잔'이 나옴
  *  - 오늘의 칠판 카드(2026-11-02 사용자 "칠판이 일을 바꾸기"): 날마다 하나(BOARD 차례). 우유 · 얼음이 모자람 · 머신이 늦게 데워짐 ·
- *    비(포장 손님이 많음) · 사장님 외출(혼자 몰림 시간) · 행사(손님이 많고 몰림 시간) · 추천 메뉴. 모자람은 오전만(점심때 채워짐)
+ *    비(포장 손님이 많음) · 사장님 외출(혼자 몰림 시간) · 행사(손님이 많고 몰림 시간) · 추천 메뉴 · 아이 손님(아이 잔은 우유를 덜 데움, 2026-11-05).
+ *    모자람은 오전만(점심때 채워짐)
  * main.js 가 store.free().day + 1 로 만들어 틀고, 마치면 날 번호를 올립니다. 검사기는 1~28일을 모두 검사합니다.
  */
 
 import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, memo, mini, end, info, today } from '../../core/dsl.js';
-import { RECIPES } from '../menu.js';
+import { RECIPES, KID_CUP } from '../menu.js';
 import { REGULARS } from '../regulars.js';
 
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
@@ -51,21 +52,33 @@ const BOARD = [
   { id: 'owner', text: '사장님이 장 보러 가요. 오전에는 혼자 가게를 봐요.', mods: { owner: false }, until: '점심때 사장님이 장바구니를 들고 돌아왔다.', rush: true,
     owner: '장 보러 다녀올게요. 손님이 몰려도 한 잔씩, 천천히 해요.' },
   { id: 'busy', text: '마을에 행사가 있어요. 손님이 평소보다 많이 몰려와요.', more: 2, rush: true, owner: '오늘은 손님이 많아요. 그래도 한 잔씩, 순서대로 해요.' },
+  // 아이 손님(2026-11-05 사용자 "칠판 빈 곳부터", docs/redesign.md 5장의 예): 아이가 마시는 따뜻한 잔은 우유를 덜 데움(menu.js KID_CUP). 뒤에 더해 앞 날들의 카드는 그대로
+  { id: 'kids', text: '아이와 함께 오는 손님이 많을 거예요. 아이 잔은 너무 뜨겁지 않게 해요.', need: 'kids',
+    owner: '아이가 마시는 따뜻한 잔은 우유를 평소보다 덜 데워요. 너무 뜨거우면 아이 입이 데어요.' },
 ];
+/** 아이 잔 주문(부모가 말함): 따뜻한 우유 · 코코아. 여름에는 에어컨 바람에 추워하는 아이의 따뜻한 우유 */
+function kidOrder(season, nth, togo) {
+  const where = togo ? '가져갈게요.' : '여기서 마실게요.';
+  const [menu, say] = season === 'summer'
+    ? ['warm_milk', nth % 2 ? '아이가 에어컨 바람에 추워해요. 따뜻한 우유 하나, 너무 뜨겁지 않게 주세요.' : '아이가 찬 걸 마시면 배가 아파서요. 따뜻한 우유, 너무 뜨겁지 않게 주세요.']
+    : nth % 2 ? ['cocoa', '아이가 마실 코코아 하나요. 따뜻하게, 너무 뜨겁지 않게요.'] : ['warm_milk', '아이가 마실 따뜻한 우유 하나요. 너무 뜨겁지 않게 해 주세요.'];
+  return { who: 'customer', say, menu, temp: 'hot', kid: true, togo, ask: ['togo'], reply: { togo: where }, thanks: KID_CUP.thanks };
+}
 /** 추천 메뉴(계절마다): 이름이 모두 받침 없이 끝나 '예요' */
 const SPECIAL = { spring: 'strawberry_milk', summer: 'greentea_latte', autumn: 'vanilla_latte', winter: 'yuja_tea' };
 const SPECIAL_TEMP = { spring: 'iced', summer: 'iced', autumn: 'hot', winter: 'hot' };
 
-/** 칠판 카드가 일을 바꾸도록 오전 주문을 맞춤: 우유 잔 · 아이스가 세 잔 넘게 · 커피가 하나는(단골 주문은 그대로, 이름 없는 손님만) */
+/** 칠판 카드가 일을 바꾸도록 오전 주문을 맞춤: 우유 잔 · 아이스가 세 잔 넘게 · 커피가 하나는 · 아이 잔이 둘(단골 주문은 그대로, 이름 없는 손님만) */
 function fitOrders(orders, need, season) {
   const uses = (o) => [RECIPES[o.menu].base, ...RECIPES[o.menu].adds];
-  const count = { milk: (o) => uses(o).includes('milk'), iced: (o) => o.temp === 'iced', coffee: (o) => uses(o).includes('espresso') || uses(o).includes('decaf') }[need];
-  const want = { milk: 3, iced: 3, coffee: 1 }[need];
+  const count = { milk: (o) => uses(o).includes('milk'), iced: (o) => o.temp === 'iced', coffee: (o) => uses(o).includes('espresso') || uses(o).includes('decaf'), kids: (o) => o.kid }[need];
+  const want = { milk: 3, iced: 3, coffee: 1, kids: 2 }[need];
   if (!count) return orders;
   let have = orders.filter(count).length;
   return orders.map((o) => {
     if (have >= want || o.who !== 'customer' || count(o)) return o;
     have += 1;
+    if (need === 'kids') return kidOrder(season, have, o.togo);
     const where = o.togo ? '가져갈게요.' : '여기서 마실게요.';
     if (need === 'milk') {
       const iced = season === 'summer' || (season !== 'winter' && o.temp === 'iced');

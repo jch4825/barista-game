@@ -1,9 +1,10 @@
 /**
- * 가을 1일 · 노란 잎: 새벽, "오늘부터 강 씨 블랙은 지은 씨가 내려요"(지은의 첫 핸드드립) → 창밖의 노란 잎을 보는 지안(대응 J3, 고른 것에 따라 음료)
- * → 우유가 한 잔뿐인 날의 해순 할머니(대응 H3) → 마감, 사장님은 잔을 두 손으로 든다
+ * 가을 1일 · 노란 잎: 새벽, "오늘부터 강 씨 블랙은 지은 씨가 내려요"(지은의 첫 핸드드립) → 문을 열자마자 온 해순 할머니, 우유가 한 잔뿐(대응 H3)
+ * → 창밖의 노란 잎을 보는 지안(대응 J3, 고른 것에 따라 음료. 우유가 떨어져 코코아는 유자차로 권함) → 마감, 사장님은 잔을 두 손으로 든다
+ * 오늘의 칠판: 우유가 한 잔 몫(today milk 1 → 할머니의 잔으로 0 → 오후 배달로 채워짐)
  */
 
-import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, cg, mini, respond, onlyIf, term, motion, face, end, info, today } from '../../core/dsl.js';
 
 const AUTUMN_BOOK = ['americano', 'latte', 'warm_milk', 'hand_drip', 'strawberry_milk', 'yuja_tea', 'greentea_latte', 'vanilla_latte', 'decaf_latte', 'barley_tea', 'cocoa'];
 
@@ -17,7 +18,7 @@ export default {
   schedule: [],
   skills: [],
   standards: ['[12진로03-02]', '[12진로04-05]'],
-  diary: '처음으로 강 씨의 블랙을 내 손으로 내렸다. 지안 씨는 창밖의 노란 잎을 보았다. 우유가 한 잔뿐인 날, 할머니는 서두르지 않았다.',
+  diary: '처음으로 강 씨의 블랙을 내 손으로 내렸다. 우유가 한 잔뿐인 날, 할머니는 서두르지 않았다. 지안 씨는 창밖의 노란 잎을 보았다.',
   script: [
     // 계절 사이 (2026-11-05 사용자: 계절마다 이야기는 일주일뿐이라, 그 사이 비어 있는 시간 동안 열심히 일했음을 서술로 알려 줌): 동네 시간이 생긴 주 뒤로 가을이 오기까지
     bg('cafe_front', 'morning'),
@@ -36,6 +37,7 @@ export default {
     bgm('morning'),
     place('가을 새벽 06:00', '바닷가 마을 카페'),
     info('오늘의 칠판', '우유 배달이 늦어요. 우유가 한 잔 몫뿐이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
+    today({ milk: 1 }), // 칠판이 일을 바꿈(2026-11-05 사용자 "칠판 빈 곳부터": 칠판 글만 있고 일은 그대로였음): 할머니의 잔으로 떨어지고, 그 뒤 우유가 든 주문은 손님에게 사정을 말함
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('여름이 지나자 관광객이 줄었다. 창밖의 은행나무는 어느새 노랗게 물들었다.'),
     say('owner', 'normal', '지은 씨, 오늘부터 강 씨의 새벽 블랙은 지은 씨가 내려요.'),
@@ -58,6 +60,19 @@ export default {
     think('{{뜸}}을 들이는 동안 손이 근질거렸다. 사장님이 왜 기다리는 것도 커피라고 하셨는지 이제 알 것 같다.'),
     term('bloom'),
     leave('kang'),
+
+    // 해순 할머니: 문을 열자마자, 우유가 한 잔뿐인 날
+    place('가을 아침 07:00', '바닷가 마을 카페'),
+    show({ left: 'jieun:normal', right: 'haesun:normal' }),
+    sfx('bell'),
+    respond('haesun', 'autumn_one_milk'),
+    // 모두에게: 빈 의자의 주인(첫 실마리, 2026-11-01 사용자 '두 잔의 까닭이 서야 한다' → 검수 13.25)
+    narr('할머니가 빈 의자 쪽을 보며, 혼잣말처럼 작게 말한다.'),
+    say('haesun', 'normal', '여보, 오늘은 우유가 늦게 왔대요. 그래도 지은 씨가 따뜻하게 데워 줬어요.'),
+    think('할머니가 빈 의자에게 "여보"라고 하셨다. 그 의자는 한 번도 오신 적 없는 할머니 남편분의 자리였구나.'),
+    leave('haesun'),
+    today({ milk: 0 }), // 할머니의 잔으로 우유가 다 떨어짐
+    narr('할머니의 잔으로 냉장고의 우유가 다 떨어졌다. 오후에 배달이 올 때까지, 우유가 드는 잔은 만들 수 없다.'),
 
     // 오전: 지안
     place('가을 오전 10:00', '바닷가 마을 카페'),
@@ -89,17 +104,8 @@ export default {
     say('jian', 'shy', '그림이 안 될 때는 노래를 해요. 색 대신 소리로요.'),
     think('그림을 못 그리는 동안에도, 지안은 무언가를 계속 그리고 있었다. 색 대신 소리로.'),
     leave('jian'),
-
-    // 해순 할머니: 우유가 한 잔뿐인 날
-    show({ left: 'jieun:normal', right: 'haesun:normal' }),
-    sfx('bell'),
-    respond('haesun', 'autumn_one_milk'),
-    // 모두에게: 빈 의자의 주인(첫 실마리, 2026-11-01 사용자 '두 잔의 까닭이 서야 한다' → 검수 13.25)
-    narr('할머니가 빈 의자 쪽을 보며, 혼잣말처럼 작게 말한다.'),
-    say('haesun', 'normal', '여보, 오늘은 우유가 늦게 왔대요. 그래도 지은 씨가 따뜻하게 데워 줬어요.'),
-    think('할머니가 빈 의자에게 "여보"라고 하셨다. 그 의자는 한 번도 오신 적 없는 할머니 남편분의 자리였구나.'),
     narr('오후 늦게 우유 배달이 왔다. 텅 비었던 냉장고가 다시 가득 찬다.'),
-    leave('haesun'),
+    today({}), // 우유가 다시 채워짐
 
     bg('hall', 'evening'),
     bgm('warm'),

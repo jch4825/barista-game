@@ -63,7 +63,7 @@ import {
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
   orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
-  TODAY_SAY, todayTags, lackOf, todayLines, shotNames, TILT_SKILLS,
+  TODAY_SAY, todayTags, lackOf, todayLines, shotNames, TILT_SKILLS, KID_CUP,
 } from '../../data/menu.js';
 import { REGULARS } from '../../data/regulars.js';
 import * as grow from '../../core/grow.js';
@@ -189,6 +189,11 @@ const thanksOf = (o) => o.thanks || RECIPES[o.menu]?.thanks || SAY.thanks;
 // cue: 실시간 손 기술의 띠가 숨겨져 있음(기본). 그때는 띠의 '알맞아요 칸' 대신 화면에 뜨는 "지금!"을 말함(menu.js 의 howtoCue, 검수 13.39 17번)
 const howtoOf = (sk, turn, drag = false, cue = false) => (turn && sk.howtoTurn) || (drag && ((cue && sk.howtoDragCue) || sk.howtoDrag)) || (cue && sk.howtoCue) || sk.howto;
 const skillSpeech = (sk, turn = false, drag = false, cue = false) => `${sk.name}. ${howtoOf(sk, turn, drag, cue)}`;
+/** 아이 잔(orders[].kid, menu.js KID_CUP): 우유 데우기의 알맞아요 칸을 낮추고, 설명마다 앞에 '아이가 마시는 잔이에요…' 한 줄 */
+function kidSkill(s) {
+  const pre = (t) => (t ? `${KID_CUP.note} ${t}` : t);
+  return { ...s, zone: KID_CUP.zone, react: KID_CUP.react, howto: pre(s.howto), howtoTurn: pre(s.howtoTurn), howtoCue: pre(s.howtoCue), howtoDrag: pre(s.howtoDrag), howtoDragCue: pre(s.howtoDragCue) };
+}
 // 조작법 '드래그 활용'(설정 control, 2026-11-02 사용자 "물건을 직접 끌어 다루는 조작부터, 블랜더도 활용하라"). 끌어 붓는 손 동작은 menu.js 의 TILT_SKILLS
 const POUR_AT = 0.42;   // 끌어 붓기: 이만큼(장면 높이의 TILT_PULL 에 대한 비율) 끌면 붓기 시작, 더 끌수록 빨리
 const TILT_PULL = 0.5;  // 끌어 붓기: 장면 높이의 이만큼 끌면 가장 많이 기욺
@@ -214,7 +219,15 @@ function pantryOf(opts) {
   const src = { ...PANTRY, ...(opts.pantry || {}) };
   const p = { cups: [...src.cups], bases: [...src.bases], adds: [...src.adds], temps: [...src.temps] };
   const put = (list, id) => { if (!list.includes(id)) list.push(id); };
-  for (const o of ordersOf(opts)) {
+  // 오늘의 칠판(얼음 · 우유가 모자람): 떨어지면 손님에게 권하는 메뉴의 재료 · 컵도 미리 놓아 둠
+  // (2026-11-05: 우유가 떨어져 코코아 대신 유자차를 권했는데 카운터에 유자청이 없어 만들 수 없었음)
+  const t0 = opts.today;
+  const swaps = (o) => (!t0 ? [] : [
+    t0.milk !== undefined && lackOf(o, { milk: 0 }),
+    t0.ice !== undefined && lackOf(o, { ice: 0 }),
+    t0.milk !== undefined && t0.ice !== undefined && lackOf(o, { milk: 0, ice: 0 }),
+  ].filter(Boolean).map((l) => l.order));
+  for (const o of ordersOf(opts).flatMap((x) => [x, ...swaps(x)])) {
     const t = orderTarget(o);
     if (!t) continue;
     put(p.cups, t.cup);
@@ -255,6 +268,12 @@ export function brewLines(opts = {}) {
     if (sk.howtoDragCue) out.push(line.sys(skillSpeech(sk, false, true, true)));
     if (sk.safety) out.push(line.sys(sk.safety));
     for (const t of Object.values(sk.labels)) out.push(line.sys(t));
+  }
+  // 아이 잔(자유 영업 칠판 '아이 손님'): 우유 데우기 설명 · 손님 반응 · 주문 메모
+  if (opts.orders?.some((o) => o.kid)) {
+    const kid = kidSkill(HAND_SKILLS.steam);
+    out.push(line.sys(skillSpeech(kid)), line.sys(skillSpeech(kid, true)), line.sys(skillSpeech(kid, false, false, true)), line.sys(KID_CUP.ticket), line.sys(KID_CUP.ticketValue));
+    for (const t of Object.values(KID_CUP.react)) out.push(line.say('customer', t));
   }
   for (const ing of Object.values(INGREDIENTS)) for (const t of Object.values(ing.auto || {})) out.push(line.sys(t));
   for (const t of Object.values(TEMPS)) if (t.auto) out.push(line.sys(t.auto));
@@ -985,12 +1004,12 @@ export async function brew(opts = {}) {
   document.body.classList.add('brew-open');
 
   /* ---- 기록 ---- */
-  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {}, adapted: [], moved: 0, moveMiss: 0 };
+  const R = { attempts: 0, mistakes: 0, remakes: 0, kept: 0, watched: 0, art: 0, asked: 0, made: [], cups: [], skills: {}, adapted: [], moved: 0, moveMiss: 0, kid: { n: 0, good: 0 } };
   const result = (extra = {}) => ({
     ok: !extra.aborted && !extra.quit,
     attempts: 1, served: R.attempts, mistakes: R.mistakes, remakes: R.remakes, kept: R.kept, // runner 의 별·선생님 화면의 되감기는 attempts 로 셈
     ms: performance.now() - t0, made: [...R.made], cups: [...R.cups], watched: R.watched, skills: R.skills, art: R.art, asked: R.asked,
-    adapted: [...R.adapted], moved: R.moved ? { n: R.moved, miss: R.moveMiss } : undefined, level, turn: pace().turn, ...extra,
+    adapted: [...R.adapted], moved: R.moved ? { n: R.moved, miss: R.moveMiss } : undefined, kid: R.kid.n ? { ...R.kid } : undefined, level, turn: pace().turn, ...extra,
   });
 
   /* ---- 도중 정리(되감기·나가기·[그만하기]) ---- */
@@ -1314,6 +1333,7 @@ export async function brew(opts = {}) {
 
   /** 손 동작 → 블렌더 한 컷 id(이름 규칙은 menu.js 의 shotNames). 맞는 컷이 없으면 null(임시 그림) */
   function shotIdFor(id, soFar) {
+    if (id === 'steam' && cur?.kid && shots.steam_kid) return 'steam_kid'; // 아이 잔: 온도계의 초록 칸이 낮은 컷
     return shotNames(id, made, soFar).ids.find((x) => x && shots[x]) || null;
   }
 
@@ -1736,7 +1756,7 @@ export async function brew(opts = {}) {
    * menu: 이 잔의 메뉴(메뉴마다 다른 칸 · 바퀴 수, skillFor) · ing: 이 동작이 다루는 재료
    */
   async function runSkill(id, n, total, soFar, res, menu) {
-    const base = skillFor(id, menu);
+    const base = id === 'steam' && cur?.kid ? kidSkill(skillFor(id, menu)) : skillFor(id, menu); // 아이 잔은 덜 데움
     const act = base.act || 'hold';
     const tm = timingOf(opts); // 계절 손맛 단계: 봄 · 여름은 박자 띠 2배, 가을 · 겨울은 띠가 1.5 · 2배 빠르게
     const st = (R.skills[id] ||= { tries: 0, good: 0, low: 0, high: 0, watched: 0 });
@@ -2959,7 +2979,7 @@ export async function brew(opts = {}) {
     let words;
     if (miss) {
       // 레시피는 맞고 손 동작이 칸을 벗어남: 그 잔의 결과로 말함(그 손님만의 말 orders[].miss) → [다시 만들기] / [그대로 드리기]
-      words = cur.miss || HAND_SKILLS[miss.skill].react[miss.zone];
+      words = cur.miss || (cur.kid && miss.skill === 'steam' ? KID_CUP.react[miss.zone] : null) || HAND_SKILLS[miss.skill].react[miss.zone];
       showGuest('normal');
       setReact(words);
       const again = btn('repeat', '다시 만들기', 'btn-big btn-soft bw-remake');
@@ -3028,6 +3048,7 @@ export async function brew(opts = {}) {
       row('메뉴', o.usual ? '늘 드시던 것' : o.ticket || RECIPES[o.menu]?.name || '', 'menu'), // ticket: 손님이 말로 설명한 주문("달게 한 잔")
       hasTempChoice(o) || o.usual ? row('온도', know.has('temp') && !o.usual ? TEMPS[t].name : o.usual ? '늘 드시던 대로' : null, t === 'iced' && know.has('temp') ? 'ice' : 'coffee') : null,
       fixedCup(o) ? row('컵', CUPS[fixedCup(o)].name, 'cup') : row('매장/포장', know.has('togo') ? SERVICES[orderService(o)].name : null, o.togo && know.has('togo') ? 'bag' : 'chair', 'togo'),
+      o.kid ? row(KID_CUP.ticket, KID_CUP.ticketValue, 'milk') : null, // 아이 잔: 우유를 덜 데움
     ].filter(Boolean));
   }
   /** 지은이 하는 말(아래 띠 위쪽 한 줄 + 지은 목소리) */
@@ -3342,6 +3363,10 @@ export async function brew(opts = {}) {
           if (today?.ice !== undefined && made.temp === 'iced') today.ice = Math.max(0, today.ice - 1);
           if (today?.milk !== undefined && [made.base, ...made.adds].includes('milk')) today.milk = Math.max(0, today.milk - 1);
           showToday();
+          if (cur.kid) { // 아이 잔: 드린 잔 수 · 우유를 알맞게(덜 뜨겁게) 데운 잔 수(선생님 화면 비고)
+            R.kid.n += 1;
+            if (res.checks.find((c) => c.skill === 'steam')?.zone === 'good') R.kid.good += 1;
+          }
           break;
         }
         // 다시 만들기: 레시피가 틀렸으면 처음부터, 손 기술만 벗어났으면 같은 레시피로(고친 것만 다시 고를 수 있음)

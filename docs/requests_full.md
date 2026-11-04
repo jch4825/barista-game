@@ -1251,7 +1251,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 5. 블렌더 한 컷 (손 동작)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja` · `steam_kid`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
 게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`js/data/menu.js`의 `shotNames`, 작업대 `brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7), 컵에 넣기 · 젓기 · 우리기는 `{동작}[_iced]_{바탕}`(포장 컵은 `{동작}{잔}_{바탕}`, 6.10). 이름만 맞으면 코드를 고치지 않아도 됩니다.
 아래 목록은 메뉴마다 온도 · 매장/포장 · 단계를 모두 따라가며 작업대가 고를 컷을 셈한 것입니다.
 
@@ -1321,16 +1321,16 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2742줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 2754줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 783 |
-| `narr` | 652 |
-| `think` | 293 |
-| `owner` | 178 |
-| `jieun` | 130 |
+| `sys` | 784 |
+| `narr` | 654 |
+| `think` | 295 |
+| `owner` | 179 |
+| `jieun` | 131 |
 | `jian` | 74 |
 | `customer_f` | 71 |
 | `do` | 69 |
@@ -1340,7 +1340,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `kang` | 48 |
 | `sumin` | 48 |
 | `noh` | 43 |
-| `customer` | 35 |
+| `customer` | 40 |
 | `geum` | 34 |
 | `agent` | 23 |
 | `dohyun` | 18 |
