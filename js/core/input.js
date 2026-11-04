@@ -23,7 +23,13 @@ function visible(el) {
   if (!el || el.disabled) return false;
   if (el.closest('[hidden], .is-hidden')) return false;
   const r = el.getBoundingClientRect();
-  return r.width > 0 && r.height > 0;
+  if (!(r.width > 0 && r.height > 0)) return false;
+  // 투명해진 창 안의 단추(작업대에서 물러난 손님 창의 [다시 듣기] 등)는 건너뜀(검수 13.39 28번)
+  for (let n = el; n && n !== document.body; n = n.parentElement) {
+    const cs = getComputedStyle(n);
+    if (cs.visibility === 'hidden' || Number(cs.opacity) < 0.05) return false;
+  }
+  return true;
 }
 
 function scanTargets() {
@@ -54,6 +60,21 @@ function reveal(el) {
   }
 }
 
+/** 스캔 빠르기(초) */
+const scanPeriod = () => Math.max(0.8, Number(store.settings().scanSpeed) || 1.8) * 1000;
+
+/**
+ * 스위치로 누른 단추에 한 박자 더 머묾: 같은 단추를 잇달아 누르는 일([한 칸] · [톡] · 주문 종이)을 처음부터 다시 돌지 않고 함.
+ * 그 단추가 사라졌으면 처음부터(검수 13.39 28번: [한 칸]을 한 번 누르는 데 약 25초가 걸렸음)
+ */
+function stayOn(el) {
+  clearInterval(scanTimer);
+  scanTimer = setInterval(scanStep, scanPeriod());
+  const list = scanTargets();
+  scanIndex = list.indexOf(el);
+  if (scanIndex >= 0) { clearScanMark(); el.classList.add('scan-on'); }
+}
+
 function scanStep() {
   const list = scanTargets();
   if (!list.length) { clearScanMark(); return; }
@@ -76,7 +97,7 @@ export const input = {
       if (store.settings().scan && (e.key === ' ' || e.key === 'Enter')) {
         const on = document.querySelector('.scan-on');
         e.preventDefault();
-        if (on && document.contains(on) && visible(on)) { on.click(); scanIndex = -1; }
+        if (on && document.contains(on) && visible(on)) { on.click(); setTimeout(() => { if (store.settings().scan) stayOn(on); }, 0); }
         else if (advanceHandler) advanceHandler('key');
         return;
       }
@@ -131,7 +152,7 @@ export const input = {
     clearInterval(scanTimer);
     clearScanMark();
     scanIndex = -1;
-    if (s.scan) scanTimer = setInterval(scanStep, Math.max(0.8, Number(s.scanSpeed) || 1.8) * 1000);
+    if (s.scan) scanTimer = setInterval(scanStep, scanPeriod());
   },
 
   /**

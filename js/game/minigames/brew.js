@@ -1229,6 +1229,7 @@ export async function brew(opts = {}) {
   let closeEl = null; // 손 기술의 확대 창(그 손 기술이 끝나도 다음 단계까지 남음)
   function closeUpOff() {
     if (!closeEl) return;
+    input.popScope(closeEl);
     closeEl.remove();
     closeEl = null;
     bench.classList.remove('is-close');
@@ -1744,6 +1745,7 @@ export async function brew(opts = {}) {
     closeEl = card;
     bench.append(card);
     bench.classList.add('is-close');
+    input.pushScope(card); // 자동 스캔은 확대 창 안의 단추만 돎(시작 창 · [한 칸] · 결과 단추). 닫으면 작업대 전체로(검수 13.39 28번)
 
     // 장면: 블렌더 한 컷이 있으면 그것(샷 · 데우기 · 거품 · 붓기 · 물 붓기 · 얼음 담기), 없으면 동작에 맞는 임시 그림(움직임은 set 으로)
     const art = shot ? null : actView(id, act, soFar, res);

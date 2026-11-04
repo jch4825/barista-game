@@ -203,7 +203,8 @@ export async function rush(opts = {}) {
   // 오늘의 칠판 '사장님 외출'(today.owner === false): 받아 주는 사람이 없어 주문이 기다림(실패 없음, 시간이 끝나면 마침)
   const pk = store.path() === 'deep' ? 0.85 : 1;
   const alone = opts.today?.owner === false;
-  const life = alone ? Infinity : th.life ? th.life * k * pk * Math.max(0.6, 1 - (grow.level('calm') - 1) * 0.05) : 0;
+  // 사장님이 받아 주는 때에는 깊은 길 배율(pk)을 곱하지 않음: 곱하면 더 일찍 받아 줘서 깊은 길이 오히려 쉬웠음(검수 13.39 31번)
+  const life = alone ? Infinity : th.life ? th.life * k * Math.max(0.6, 1 - (grow.level('calm') - 1) * 0.05) : 0;
   function step(dt) {
     if (over || !started) return;
     tAcc += dt;

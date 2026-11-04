@@ -398,7 +398,8 @@ export const ov = {
   /** say: 읽어 줄 말(기본은 text, '' 이면 읽지 않음) · detail: 화면에만 보이는 한 줄(학생 별명처럼 읽지 않을 것) */
   /** focus: 처음 초점('no' 기본, 지우기처럼 되돌릴 수 없는 일은 '아니요'에) · esc: Esc 로 닫을 때 돌려줄 값(기본 false = 아니요) */
   confirm({ text, yes = '예', no = '아니요', say = text, detail = '', focus = 'no', esc = false }) {
-    return new Promise((resolve) => {
+    let cancel = null;
+    const asked = new Promise((resolve) => {
       const y = bigBtn(yes, 'check', 'btn-main');
       const n = bigBtn(no, 'close');
       const el = h('section', { class: 'ov ov-confirm', role: 'alertdialog', 'aria-label': detail ? `${text} ${detail}` : text },
@@ -407,11 +408,16 @@ export const ov = {
       if (say) tts.speak(say, 'sys');
       (focus === 'yes' ? y : n).focus({ preventScroll: true });
       let offEsc = null;
-      const done = (v) => { offEsc?.(); tts.stop(); close(); resolve(v); };
+      let fin = false;
+      const done = (v) => { if (fin) return; fin = true; offEsc?.(); tts.stop(); close(); resolve(v); };
       offEsc = bus.on('escape', () => done(esc)); // Esc = 아니요 (아래 창이 닫히지 않게: screen.js)
       y.addEventListener('click', () => done(true), { once: true });
       n.addEventListener('click', () => done(false), { once: true });
+      cancel = () => done(false);
     });
+    /** 물은 쪽이 먼저 끝났을 때 닫음('아니요'로): 미니게임의 [그만하기] 물음 등(frame.js) */
+    asked.cancel = () => cancel?.();
+    return asked;
   },
 
   /* ---------- 글자 입력 창 (Electron 은 window.prompt 를 지원하지 않음) ---------- */

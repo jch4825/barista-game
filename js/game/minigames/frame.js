@@ -76,11 +76,16 @@ export function abortMinigame() {
  */
 export function frame({ title, instruction, icon = 'star', cls = '', speech = '', quit = false }) {
   const say = h('button', { class: 'mg-say', 'aria-label': '설명 듣기', html: ICON('volume'), onclick: (e) => { e.stopPropagation(); tts.speak(instruction, 'sys', { force: true }); } });
+  // [그만하기] 물음: 미니게임이 그사이 끝나면 함께 닫고, 늦게 '그만하기'를 눌러도 다음 미니게임을 그만두지 않음(검수 13.39 29번)
+  let quitAsk = null;
   const quitBtn = quit ? h('button', {
     class: 'btn btn-soft mg-quit',
     onclick: async (e) => {
       e.stopPropagation();
-      if (await ov.confirm({ text: QUIT_ASK, yes: '그만하기', no: '계속하기' })) bus.emit('mg:quit');
+      quitAsk = ov.confirm({ text: QUIT_ASK, yes: '그만하기', no: '계속하기' });
+      const yes = await quitAsk;
+      quitAsk = null;
+      if (yes && !closed) bus.emit('mg:quit');
     },
   }, h('i', { html: ICON('close') }), h('span', { text: '그만하기' })) : null;
   const body = h('div', { class: 'mg-body' });
@@ -106,6 +111,7 @@ export function frame({ title, instruction, icon = 'star', cls = '', speech = ''
     close() {
       if (closed) return;
       closed = true;
+      quitAsk?.cancel();
       if (active === api) active = null;
       tts.stop();
       input.popScope(el);

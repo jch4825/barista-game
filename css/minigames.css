@@ -318,6 +318,7 @@ body.contrast .mg-routine .rt-obj, body.contrast .mg-look .lk-name { background:
 .mg-rush .ru-slip i svg { width: 30px; height: 30px; flex: none; color: #8E6C33; }
 .mg-rush .ru-slip:focus-visible { outline: 4px solid #F0D9A2; outline-offset: 4px; }
 .mg-rush .ru-slip.is-done { animation: ru-done .38s ease-in forwards; }
+.mg-rush .ru-slip:is(.is-done, .is-owner) { pointer-events: none; } /* 사라지며 커지는 동안 옆 종이의 누름을 막지 않게(검수 13.39 32번) */
 .mg-rush .ru-slip.is-owner { animation: ru-owner .38s ease-in forwards; }
 @keyframes ru-in { from { opacity: 0; transform: translate(-50%, -30%) scale(.8); } }
 @keyframes ru-done { 0% { transform: translate(-50%, -50%) scale(1); } 35% { opacity: 1; transform: translate(-50%, -50%) scale(1.25) rotate(-4deg); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); filter: blur(4px); } }

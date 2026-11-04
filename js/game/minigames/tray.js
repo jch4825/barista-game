@@ -128,7 +128,7 @@ export async function tray(opts = {}) {
     draw();
     audio.sfx('tray');
     status.textContent = SAY.arrive;
-    await tts.speak(SAY.arrive, 'sys');
+    await Promise.race([Promise.all([tts.speak(SAY.arrive, 'sys'), sleep(dur(900))]), sleep(9000)]); // 말이 멈춰도 닫힘(검수 13.39 30번)
     doneRes('done');
   };
 
