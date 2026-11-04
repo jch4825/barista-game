@@ -106,9 +106,12 @@ export function showTitle() {
   const cp = store.checkpoint();
   const cpEp = cp ? getEpisode(cp.ep) : null;
   const firstUndone = EPISODES.find((e) => !store.isDone(e.id));
-  // 마지막 이야기를 마쳤는데 엔딩을 아직 못 봤으면 엔딩부터 · 엔딩을 본 뒤에는 근무표에서 골라 하기
-  const endingWaits = p && !firstUndone && store.isDone(FINALE) && !store.ending();
-  const cleared = p && !firstUndone && Boolean(store.ending());
+  // 마지막 이야기를 마쳤는데 이번 해의 엔딩을 아직 못 봤으면 엔딩부터 · 본 뒤에는 근무표에서 골라 하기
+  // (몇 번째 해인지 봄: 둘째 해부터 결과 화면에서 [엔딩 보기]를 건너뛰어도 여기서 다시 권함, 검수 13.39 26번)
+  const end = store.ending();
+  const seenThisYear = Boolean(end && (end.year || 1) === store.year());
+  const endingWaits = p && !firstUndone && store.isDone(FINALE) && !seenThisYear;
+  const cleared = p && !firstUndone && seenThisYear;
 
   const menu = h('nav', { class: 'tt-menu', 'aria-label': '처음 화면 메뉴' });
   if (p && cpEp) {
@@ -167,7 +170,8 @@ export function showTitle() {
         h('p', { class: 'tt-foot', text: `v${CONFIG.VERSION} · 화면을 누르거나 Space 키로 대사를 넘겨요` }))));
   $('#layer-screen').append(titleEl);
   input.pushScope(titleEl);
-  setTimeout(() => input.focusFirst(menu), 80);
+  // 달력 같은 화면이 바로 위에 열렸으면(하루 끝 → [달력]) 그 아래의 단추에 초점을 두지 않음: Enter 가 보이지 않는 단추를 누름(검수 13.39 20번)
+  setTimeout(() => { if (!document.querySelector('#layer-screen .scr')) input.focusFirst(menu); }, 80);
   tts.speakSeq(TITLE_SAY(), 'sys');
 }
 

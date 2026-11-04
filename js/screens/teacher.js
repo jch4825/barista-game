@@ -18,6 +18,9 @@ import { CONFIG, isElectron } from '../config.js';
 import { tts } from '../av/tts.js';
 import { ov } from '../ui/overlays.js';
 import { openScreen, segmented, row } from './screen.js';
+import { bus } from '../core/bus.js';
+import { nav } from '../core/nav.js';
+import { runner } from '../core/runner.js';
 import { showCredits } from './credits.js';
 import { saveRecordFile, loadRecordFiles } from './records.js';
 
@@ -185,7 +188,14 @@ function printReport(p) {
 }
 
 function dashboard() {
-  const scr = openScreen({ cls: 'scr-teacher', title: '선생님 모드', icon: 'teacher' });
+  // 학생을 바꾸거나 · 만들거나 · 지우거나 · 진행 기록을 지웠으면 닫을 때 처음 화면을 새로 그림(앞 학생의 이름 · 단추가 남지 않게, 검수 13.39 21번)
+  const startProfile = store.active()?.id || null;
+  let changed = false;
+  const offProfile = bus.on('profile', () => { changed = true; });
+  const scr = openScreen({
+    cls: 'scr-teacher', title: '선생님 모드', icon: 'teacher',
+    onClose: () => { offProfile(); if ((changed || store.active()?.id !== startProfile) && !runner.isRunning()) nav.go('title'); },
+  });
   const side = h('aside', { class: 'tc-side' });
   const main = h('div', { class: 'tc-main' });
   let selId = store.active()?.id || store.profiles()[0]?.id || null;

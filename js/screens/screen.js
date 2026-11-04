@@ -39,6 +39,7 @@ export function openScreen({ cls = '', title = '', icon = 'star', closable = tru
       setTimeout(() => el.remove(), dur(220));
       audio.sfx('close');
       onClose?.();
+      setTimeout(() => input.refocus(), 70);
     },
     closable,
   };

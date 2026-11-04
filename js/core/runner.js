@@ -80,7 +80,8 @@ function clearTask() {
   document.body.classList.remove('tasking', 'mg-open', 'mg-scene-open');
 }
 
-function restore(s, snap) {
+/** keepFlags: 선택 기억은 그대로(다른 해에 저장한 칸을 불러올 때) */
+function restore(s, snap, { keepFlags = false } = {}) {
   s.cgOff = false;
   tts.stop();
   ov.clearAll();
@@ -97,7 +98,7 @@ function restore(s, snap) {
   s.today = snap.today ? { ...snap.today } : null;
   audio.setEarplugs(s.earplugs);
   stage.effect('earplugs', s.earplugs);
-  store.restoreFlags(snap.flags);
+  if (!keepFlags) store.restoreFlags(snap.flags);
 }
 
 function addPoint(s, index, title, snap) {
@@ -112,7 +113,8 @@ function addPoint(s, index, title, snap) {
 const dayOf = (ep) => (ep.free ? { free: ep.free } : {});
 
 function save(s, index, name, snap) {
-  store.setCheckpoint({ ep: s.ep.id, ...dayOf(s.ep), index, name, snapshot: snap || snapshot(s) });
+  // dayAt: 이 날을 처음부터 시작한 때(이어 하기로 마쳐도 하루 끝 화면이 아침의 기록까지 셈, 검수 13.39 27번)
+  store.setCheckpoint({ ep: s.ep.id, ...dayOf(s.ep), year: store.year(), index, name, dayAt: s.dayAt, snapshot: snap || snapshot(s) });
   hud.saved();
 }
 
@@ -640,8 +642,13 @@ export const runner = {
     hud.setSchedule(ep.schedule, []);
     hud.setRewindEnabled(false);
     hud.show();
+    s.dayAt = Date.now();
     if (resume && resume.ep === ep.id && (resume.free ?? ep.free) === ep.free) {
-      restore(s, resume.snapshot);
+      // 다른 해에 저장한 칸: 선택 기억(신뢰 · 고른 대응 · 숨은 장면)은 되살리지 않음. 새해는 관계가 처음부터(store.newYear, 검수 13.39 23번).
+      // 해가 적히기 전의 저장 칸(note 가 있음)은 첫해에만 되살림. 자동 저장은 새해에 지워지므로 늘 이번 해
+      const sameYear = (resume.year ?? ('note' in resume ? 1 : store.year())) === store.year();
+      restore(s, resume.snapshot, { keepFlags: !sameYear });
+      if (resume.dayAt) s.dayAt = resume.dayAt; // 자동 저장(이어 하기): 그날을 시작한 때 그대로
       s.index = resume.index;
       // 세이브 슬롯에서 불러온 경우: 이 에피소드에서 모은 도장·사진·말도 함께
       if (Array.isArray(resume.stamps)) s.stamps = [...resume.stamps];
@@ -657,7 +664,7 @@ export const runner = {
     store.addPlayTime(Date.now() - t0);
     if (session === s) { session = null; tutor.setEpisode(null); }
     tts.stop();
-    return { status, stamps: s.stamps, photos: s.photos, terms: s.terms, ms: Date.now() - t0 };
+    return { status, stamps: s.stamps, photos: s.photos, terms: s.terms, ms: Date.now() - t0, dayAt: s.dayAt };
   },
 
   rewindPoints() { return session ? session.points.slice().reverse() : []; },
@@ -670,6 +677,7 @@ export const runner = {
     return {
       ep: s.ep.id,
       ...dayOf(s.ep),
+      year: store.year(), // 다른 해에 불러오면 선택 기억을 되살리지 않음(검수 13.39 23번)
       index: s.index,
       snapshot: s.beatSnap,
       stamps: [...s.stamps], photos: [...s.photos], terms: [...s.terms],

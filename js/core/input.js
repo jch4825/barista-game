@@ -37,6 +37,23 @@ function clearScanMark() {
   document.querySelectorAll('.scan-on').forEach((el) => el.classList.remove('scan-on'));
 }
 
+/**
+ * 강조한 단추가 스크롤 상자(설정 · 달력 · 수첩 목록) 밖이면 그 상자만 굴려 보이게(검수 13.39 25번).
+ * scrollIntoView 는 쓰지 않음: 넘침을 숨긴 게임 판까지 밀어 버림. 판이 줄어 그려져 있어 화면 좌표를 상자의 px 로 바꿈
+ */
+function reveal(el) {
+  for (let box = el.parentElement; box && box !== document.body; box = box.parentElement) {
+    const st = getComputedStyle(box);
+    if (!/(auto|scroll)/.test(st.overflowY) || box.scrollHeight <= box.clientHeight + 1) continue;
+    const r = el.getBoundingClientRect();
+    const br = box.getBoundingClientRect();
+    const k = box.offsetHeight ? br.height / box.offsetHeight : 1;
+    const pad = 16 * k;
+    if (r.top < br.top + pad) box.scrollTop -= (br.top + pad - r.top) / k;
+    else if (r.bottom > br.bottom - pad) box.scrollTop += (r.bottom - (br.bottom - pad)) / k;
+  }
+}
+
 function scanStep() {
   const list = scanTargets();
   if (!list.length) { clearScanMark(); return; }
@@ -45,6 +62,7 @@ function scanStep() {
   const el = list[scanIndex];
   el.classList.add('scan-on');
   el.focus({ preventScroll: true });
+  reveal(el);
   bus.emit('scan-focus', el);
 }
 
@@ -114,6 +132,16 @@ export const input = {
     clearScanMark();
     scanIndex = -1;
     if (s.scan) scanTimer = setInterval(scanStep, Math.max(0.8, Number(s.scanSpeed) || 1.8) * 1000);
+  },
+
+  /**
+   * 창을 닫은 뒤: 초점이 맨 위 범위(처음 화면 · 아래 창) 밖에 남았으면 그 범위의 첫 단추로(방향키 · Enter 가 이어지게, 검수 13.39 20번).
+   * 이야기 화면(#screen)이 맨 위면 그대로: Space 가 대사를 넘겨야 함
+   */
+  refocus() {
+    const top = topScope();
+    if (!top || top.id === 'screen' || top.contains(document.activeElement)) return;
+    input.focusFirst(top);
   },
 
   /** 새 버튼 묶음이 나타났을 때 첫 버튼에 초점 */

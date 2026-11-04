@@ -292,7 +292,8 @@ export const store = {
   selectProfile(id) {
     if (!db.profiles[id]) return null;
     db.activeId = id;
-    touch(db.profiles[id]);
+    // 고르기만 한 것은 기록을 바꾼 것이 아님: updatedAt 을 올리면 기록 파일 합치기에서 이 기기의 낡은 기록이 '최근'이 되어
+    // 다른 컴퓨터의 새 기록(돈 · 신뢰 · 늘 마시는 것)을 덮었음(검수 13.39 22번)
     saveNow();
     bus.emit('profile', db.profiles[id]);
     return db.profiles[id];

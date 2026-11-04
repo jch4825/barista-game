@@ -27,7 +27,8 @@ export const metSpeech = (who, score) => `${REGULARS[who]?.name || ''}, ${REACT_
 
 /** 이번 판의 기록(store.log): 대응(같은 기회는 마지막 것) · 커피 만들기에서 드린 잔 */
 function todayOf(ep, result) {
-  const since = Date.now() - (result.ms || 0) - 3000;
+  // 그날을 시작한 때부터(이어 하기로 마친 날도 아침의 단골 · 잔 · 팁까지, runner 의 dayAt, 검수 13.39 27번)
+  const since = (result.dayAt || Date.now() - (result.ms || 0)) - 3000;
   const logs = store.logs().filter((l) => l.ep === ep.id && (l.at || 0) >= since);
   const met = [];
   for (const l of logs) {

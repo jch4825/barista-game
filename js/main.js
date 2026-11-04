@@ -85,7 +85,7 @@ async function afterFreeDay(ep, result) {
   // 마친 날의 자동 저장은 지움(이야기의 markDone 과 같음). 남겨 두면 다음 날 [이어하기]가 그날의 '마감'부터 시작함(검수 13.39 4번)
   if (store.checkpoint()?.ep === 'free') store.clearCheckpoint();
   const f = store.free();
-  const served = store.logs().filter((l) => l.ep === 'free' && l.type === 'mini' && (l.at || 0) >= Date.now() - (result.ms || 0) - 3000)
+  const served = store.logs().filter((l) => l.ep === 'free' && l.type === 'mini' && (l.at || 0) >= (result.dayAt || Date.now() - (result.ms || 0)) - 3000)
     .reduce((n, l) => n + (Array.isArray(l.cups) ? l.cups.length : 0), 0);
   store.setFree({ ...f, day: Math.max(f.day, ep.free || 0), served: (f.served || 0) + served, best: Math.max(f.best || 0, served) });
   hud.hide();
