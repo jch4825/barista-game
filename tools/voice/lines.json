@@ -15780,6 +15780,1830 @@
   "ep": "ending"
  },
  {
+  "key": "caf753e6",
+  "voice": "sys",
+  "text": "오늘의 칠판. 평소와 같은 하루예요.",
+  "ep": "free"
+ },
+ {
+  "key": "9cbf0254",
+  "voice": "narr",
+  "text": "오늘도 가게 문을 연다. 봄 아침의 바닷가 마을은 조용하다.",
+  "ep": "free"
+ },
+ {
+  "key": "c122773b",
+  "voice": "owner",
+  "text": "오늘도 평소대로 해요. 손님은 평소대로 오니까요.",
+  "ep": "free"
+ },
+ {
+  "key": "5334d842",
+  "voice": "sys",
+  "text": "오늘의 도전. 일번, 주문을 받으면, 메뉴와 온도를 한 번 되풀이해서 확인해요.",
+  "ep": "free"
+ },
+ {
+  "key": "90abcc69",
+  "voice": "narr",
+  "text": "지안은 오늘도 메뉴판의 색 동그라미를 하나씩 보며, 그날의 색을 고른다.",
+  "ep": "free"
+ },
+ {
+  "key": "8c39a0a3",
+  "voice": "sys",
+  "text": "오전 손님. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "free"
+ },
+ {
+  "key": "51a6dd24",
+  "voice": "jian",
+  "text": "오늘은 분홍색이요.",
+  "ep": "free"
+ },
+ {
+  "key": "854b2c7f",
+  "voice": "jian",
+  "text": "오늘 색이다. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "f37e4a06",
+  "voice": "customer_f",
+  "text": "아이스 라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "2d324830",
+  "voice": "customer_f",
+  "text": "가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "be376226",
+  "voice": "customer_f",
+  "text": "아메리카노 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "2974df72",
+  "voice": "customer_f",
+  "text": "아이스로요. 겨울에도 아아죠.",
+  "ep": "free"
+ },
+ {
+  "key": "70524413",
+  "voice": "customer_f",
+  "text": "달게 한 잔이요.",
+  "ep": "free"
+ },
+ {
+  "key": "04caa7a6",
+  "voice": "customer_f",
+  "text": "딱 좋게 다네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "1f44dc45",
+  "voice": "customer_f",
+  "text": "따뜻하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "35da736d",
+  "voice": "teacher",
+  "text": "학생들이랑 바다 보러 왔어요. 여기 분위기가 참 좋네요.",
+  "ep": "free"
+ },
+ {
+  "key": "8ce243f0",
+  "voice": "sys",
+  "text": "바다를 보러 온 손님. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "free"
+ },
+ {
+  "key": "9e8b21b9",
+  "voice": "teacher",
+  "text": "따뜻한 라테 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "827ce695",
+  "voice": "teacher",
+  "text": "부드러워요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "cf34ff2b",
+  "voice": "teacher",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "f8715dfd",
+  "voice": "teacher",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5fbe3719",
+  "voice": "teacher",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "e286a601",
+  "voice": "teacher",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "e30b15de",
+  "voice": "teacher",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "c8dad03a",
+  "voice": "teacher",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "e8a3d872",
+  "voice": "teacher",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "5a7c1806",
+  "voice": "teacher",
+  "text": "조금 쓰네요.",
+  "ep": "free"
+ },
+ {
+  "key": "4253815f",
+  "voice": "teacher",
+  "text": "조금 미지근하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "9485d5bb",
+  "voice": "teacher",
+  "text": "조금 뜨겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "d5007e16",
+  "voice": "teacher",
+  "text": "양이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "0522ac2f",
+  "voice": "teacher",
+  "text": "조금 넘쳤네요.",
+  "ep": "free"
+ },
+ {
+  "key": "82ad4811",
+  "voice": "narr",
+  "text": "여섯 시 십 분, 한 씨의 버스가 오늘도 종점에 들어온다.",
+  "ep": "free"
+ },
+ {
+  "key": "91c9d65f",
+  "voice": "sys",
+  "text": "오후 손님. 주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.",
+  "ep": "free"
+ },
+ {
+  "key": "cc942a5e",
+  "voice": "customer_f",
+  "text": "여기서 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "32bfb2be",
+  "voice": "han",
+  "text": "딱 좋게 다네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "1139df38",
+  "voice": "narr",
+  "text": "손님이 모두 갔다. 컵을 닦고, 내일 쓸 우유를 냉장고에 채운다.",
+  "ep": "free"
+ },
+ {
+  "key": "e980efc5",
+  "voice": "think",
+  "text": "오늘도 한 잔씩, 천천히. 내일도 평소대로 문을 열자.",
+  "ep": "free"
+ },
+ {
+  "key": "9a560fcb",
+  "voice": "narr",
+  "text": "지안의 그림이 벽에 하나 더 걸렸다. 이번에는 창밖의 바다 그림이다.",
+  "ep": "free"
+ },
+ {
+  "key": "94b4c111",
+  "voice": "narr",
+  "text": "방학이 되면, 한 씨의 딸이 아빠의 마지막 버스를 타고 함께 온다.",
+  "ep": "free"
+ },
+ {
+  "key": "cda43c31",
+  "voice": "sys",
+  "text": "오늘의 칠판. 우유 배달이 늦어요. 오전에는 우유가 두 잔 몫뿐이에요.",
+  "ep": "free"
+ },
+ {
+  "key": "5a60e4d4",
+  "voice": "owner",
+  "text": "우유가 떨어지면 손님께 사정을 말하고, 다른 걸 권해 봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "27520ec4",
+  "voice": "sys",
+  "text": "오늘의 도전. 일번, 매장에서 마실지, 가져갈지 꼭 물어봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "7620599a",
+  "voice": "narr",
+  "text": "퇴직한 도 씨가 산책길에 들러, 문 옆 못을 한 번 보고 웃는다.",
+  "ep": "free"
+ },
+ {
+  "key": "170b13cd",
+  "voice": "do",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "5ba886bd",
+  "voice": "customer_f",
+  "text": "아이스 라테 하나요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "972acb59",
+  "voice": "customer_f",
+  "text": "아이스 라테 하나요. 여기서 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5c395799",
+  "voice": "narr",
+  "text": "점심때 우유 배달이 왔다. 냉장고가 다시 가득 찼다.",
+  "ep": "free"
+ },
+ {
+  "key": "071c0d9e",
+  "voice": "narr",
+  "text": "노 씨는 오늘도 \"지나가다\" 들러서, 그 잔을 마시고 간다.",
+  "ep": "free"
+ },
+ {
+  "key": "7624abd4",
+  "voice": "customer_f",
+  "text": "카페인 없는 라테 있어요?",
+  "ep": "free"
+ },
+ {
+  "key": "7310eed9",
+  "voice": "customer_f",
+  "text": "이거면 마음 놓고 마셔요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "1069ae28",
+  "voice": "customer_f",
+  "text": "따뜻한 걸로요.",
+  "ep": "free"
+ },
+ {
+  "key": "2ce9e90a",
+  "voice": "jieun",
+  "text": "따뜻한 디카페인 라테 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "dd3b6dbe",
+  "voice": "noh",
+  "text": "늘 먹던 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "773924b8",
+  "voice": "narr",
+  "text": "도 씨는 이제 매일 카운터 옆 의자에 앉아, 동네 아이들에게 옛날 편지 이야기를 들려준다.",
+  "ep": "free"
+ },
+ {
+  "key": "53de1876",
+  "voice": "narr",
+  "text": "노 씨는 랜턴을 깨끗이 닦아서, 다시 사장님 자리 위에 걸어 두었다.",
+  "ep": "free"
+ },
+ {
+  "key": "18d89781",
+  "voice": "sys",
+  "text": "오늘의 칠판. 비가 와요. 가져가는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "8e684753",
+  "voice": "owner",
+  "text": "비 오는 날은 가져가는 손님이 많아요. 드시고 가는지 꼭 물어봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "80c18784",
+  "voice": "sys",
+  "text": "오늘의 도전. 일번, 서두르지 말고, 한 잔씩 순서대로 만들어요.",
+  "ep": "free"
+ },
+ {
+  "key": "3e72fae4",
+  "voice": "narr",
+  "text": "강 씨는 오늘도 새벽 블랙을 마시며 항구를 오래 본다.",
+  "ep": "free"
+ },
+ {
+  "key": "d00a4af6",
+  "voice": "kang",
+  "text": "늘 먹던 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "f3340290",
+  "voice": "kang",
+  "text": "깊네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "a8c0e86b",
+  "voice": "customer",
+  "text": "카페인 없는 라테 있어요?",
+  "ep": "free"
+ },
+ {
+  "key": "40f899b6",
+  "voice": "customer",
+  "text": "이거면 마음 놓고 마셔요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "a8f9cb9b",
+  "voice": "customer",
+  "text": "따뜻한 걸로요.",
+  "ep": "free"
+ },
+ {
+  "key": "3b99f38b",
+  "voice": "customer",
+  "text": "가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "ba9c8e76",
+  "voice": "customer",
+  "text": "유자차, 차갑게요.",
+  "ep": "free"
+ },
+ {
+  "key": "9f2a9f17",
+  "voice": "jieun",
+  "text": "아이스 유자차 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "e95f4c75",
+  "voice": "customer",
+  "text": "아이스 라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "4da5420e",
+  "voice": "customer",
+  "text": "아이스 라테 하나요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "8c347682",
+  "voice": "customer",
+  "text": "아아 한 잔이요.",
+  "ep": "free"
+ },
+ {
+  "key": "35dff479",
+  "voice": "narr",
+  "text": "강 씨는 요즘 새벽마다 젊은 어부들과 함께 와서, 바다 이야기를 한다.",
+  "ep": "free"
+ },
+ {
+  "key": "31a79c58",
+  "voice": "sys",
+  "text": "오늘의 칠판. 아침에 머신이 늦게 데워져요. 첫 커피 손님께는 조금 기다려 달라고 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "d816f116",
+  "voice": "owner",
+  "text": "머신이 데워질 때까지는 손님께 조금 기다려 달라고 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "045165f2",
+  "voice": "sys",
+  "text": "오늘의 도전. 일번, 단골이 \"늘 먹던 거\"라고 하면, 수첩의 단골 쪽을 떠올려요.",
+  "ep": "free"
+ },
+ {
+  "key": "fbb996a3",
+  "voice": "customer_f",
+  "text": "아이스 아메리카노 하나 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "9e352ddc",
+  "voice": "narr",
+  "text": "은주 씨는 오늘 아기와 함께, 따뜻한 라테를 끝까지 마셨다.",
+  "ep": "free"
+ },
+ {
+  "key": "db1f6d53",
+  "voice": "eunju",
+  "text": "이거면 마음 놓고 마셔요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "62e5edde",
+  "voice": "narr",
+  "text": "은주 씨가 만든 엄마들 모임이, 일주일에 한 번 이 카페에서 열린다.",
+  "ep": "free"
+ },
+ {
+  "key": "4da52eec",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘의 추천 메뉴는 딸기우유예요. 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "28613202",
+  "voice": "owner",
+  "text": "오늘은 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "1465c84a",
+  "voice": "sys",
+  "text": "오늘의 도전. 일번, 손님이 따뜻한지 아이스인지 말하지 않으면, 먼저 물어봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "1fa8ba00",
+  "voice": "customer_f",
+  "text": "칠판에 적힌 추천 메뉴로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "bf70a278",
+  "voice": "sora",
+  "text": "사진 찍으러 왔다가, 커피가 맛있어서 또 왔어요.",
+  "ep": "free"
+ },
+ {
+  "key": "20b9eb86",
+  "voice": "sora",
+  "text": "딸기우유 하나요. 사진 찍고 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5d70141d",
+  "voice": "sora",
+  "text": "달콤해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "f342cf7c",
+  "voice": "sora",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "9280b58a",
+  "voice": "sora",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "9bdd16ae",
+  "voice": "sora",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "46cefe46",
+  "voice": "sora",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "ce3c4297",
+  "voice": "sora",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "dea7222d",
+  "voice": "sora",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "34d56f95",
+  "voice": "sora",
+  "text": "얼음이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "200b5a04",
+  "voice": "sora",
+  "text": "얼음이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "21769b9e",
+  "voice": "sora",
+  "text": "조금 덜 다네요.",
+  "ep": "free"
+ },
+ {
+  "key": "f8c523ab",
+  "voice": "sora",
+  "text": "조금 많이 다네요.",
+  "ep": "free"
+ },
+ {
+  "key": "c49a02fb",
+  "voice": "sora",
+  "text": "양이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "96f7595e",
+  "voice": "sora",
+  "text": "조금 넘쳤네요.",
+  "ep": "free"
+ },
+ {
+  "key": "87171284",
+  "voice": "sora",
+  "text": "가루가 조금 남았네요.",
+  "ep": "free"
+ },
+ {
+  "key": "3116506b",
+  "voice": "sora",
+  "text": "조금 흘렀네요.",
+  "ep": "free"
+ },
+ {
+  "key": "8e6a18f7",
+  "voice": "narr",
+  "text": "해순 할머니는 오늘도 창가에서 우유 두 잔을 앞에 두고, 천천히 바다를 본다.",
+  "ep": "free"
+ },
+ {
+  "key": "bf65ee4b",
+  "voice": "customer_f",
+  "text": "아아 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "7d8de461",
+  "voice": "narr",
+  "text": "해순 할머니는 요즘 방학마다 손녀와 함께 온다. 창가에는 늘 우유 세 잔이 놓인다.",
+  "ep": "free"
+ },
+ {
+  "key": "bf604661",
+  "voice": "sys",
+  "text": "오늘의 칠판. 얼음 기계가 쉬어요. 오전에는 얼음이 두 잔 몫뿐이에요.",
+  "ep": "free"
+ },
+ {
+  "key": "a090d3b4",
+  "voice": "owner",
+  "text": "얼음이 떨어지면 따뜻하게 드려도 되는지 여쭤 봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "2cb2b898",
+  "voice": "narr",
+  "text": "방학을 맞은 수민이 잠깐 들러, 구석 자리에서 창밖을 본다.",
+  "ep": "free"
+ },
+ {
+  "key": "6cdd602f",
+  "voice": "sumin",
+  "text": "…늘 먹던 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "657561e3",
+  "voice": "sumin",
+  "text": "구수하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "9fab829a",
+  "voice": "sumin",
+  "text": "이건 제가 늘 먹던 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "95d96eec",
+  "voice": "minjae",
+  "text": "공부하다가 머리 좀 식히러 왔어요.",
+  "ep": "free"
+ },
+ {
+  "key": "212ef8ce",
+  "voice": "minjae",
+  "text": "아아 하나요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "fd9ee2e0",
+  "voice": "minjae",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "8ba4a5eb",
+  "voice": "minjae",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "a9d31cbd",
+  "voice": "minjae",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "ee5e8259",
+  "voice": "minjae",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "83a67bc1",
+  "voice": "minjae",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "401dbf1e",
+  "voice": "minjae",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "d8d5677a",
+  "voice": "minjae",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "801fab2e",
+  "voice": "minjae",
+  "text": "얼음이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "bdb24083",
+  "voice": "minjae",
+  "text": "얼음이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "484d2cb2",
+  "voice": "minjae",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "e8611246",
+  "voice": "minjae",
+  "text": "조금 쓰네요.",
+  "ep": "free"
+ },
+ {
+  "key": "b3b748c6",
+  "voice": "minjae",
+  "text": "조금 진하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "79a70cb6",
+  "voice": "minjae",
+  "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "36ea72bb",
+  "voice": "narr",
+  "text": "점심때 얼음 기계가 다시 얼음을 만들었다.",
+  "ep": "free"
+ },
+ {
+  "key": "aecec807",
+  "voice": "customer_f",
+  "text": "먹고 갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "dd08367f",
+  "voice": "customer_f",
+  "text": "커피 말고, 따뜻한 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "8e3c46d8",
+  "voice": "customer_f",
+  "text": "따뜻하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "90def120",
+  "voice": "jieun",
+  "text": "따뜻한 우유 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "2f9980d0",
+  "voice": "narr",
+  "text": "도시로 간 수민이 엽서를 보냈다. \"거기는 바다가 없어서, 가끔 보리차를 마셔요.\"",
+  "ep": "free"
+ },
+ {
+  "key": "32e87bf3",
+  "voice": "sys",
+  "text": "오늘의 칠판. 사장님이 장 보러 가요. 오전에는 혼자 가게를 봐요.",
+  "ep": "free"
+ },
+ {
+  "key": "c6e5ba62",
+  "voice": "owner",
+  "text": "장 보러 다녀올게요. 손님이 몰려도 한 잔씩, 천천히 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "4ed0e9b3",
+  "voice": "sys",
+  "text": "혼자 맞는 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "free"
+ },
+ {
+  "key": "d1726074",
+  "voice": "customer_f",
+  "text": "따뜻한 라테 하나요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "0dafc207",
+  "voice": "narr",
+  "text": "점심때 사장님이 장바구니를 들고 돌아왔다.",
+  "ep": "free"
+ },
+ {
+  "key": "dfb5f31e",
+  "voice": "owner",
+  "text": "혼자서도 잘했네요. 오후는 같이 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "2c579dc3",
+  "voice": "customer_f",
+  "text": "아아 한 잔이요.",
+  "ep": "free"
+ },
+ {
+  "key": "f627ec48",
+  "voice": "sys",
+  "text": "오늘의 칠판. 마을에 행사가 있어요. 손님이 평소보다 많이 몰려와요.",
+  "ep": "free"
+ },
+ {
+  "key": "e8ac5247",
+  "voice": "narr",
+  "text": "오늘도 가게 문을 연다. 여름 아침의 바닷가 마을은 조용하다.",
+  "ep": "free"
+ },
+ {
+  "key": "127b2fc2",
+  "voice": "owner",
+  "text": "오늘은 손님이 많아요. 그래도 한 잔씩, 순서대로 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "4232115d",
+  "voice": "sys",
+  "text": "행사 날의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "free"
+ },
+ {
+  "key": "bd032eff",
+  "voice": "customer",
+  "text": "여기서 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "ae33be66",
+  "voice": "customer",
+  "text": "아아 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "58055420",
+  "voice": "customer",
+  "text": "녹차라테, 차갑게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "805cfb75",
+  "voice": "customer",
+  "text": "쌉쌀하고 시원해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "4bdf975c",
+  "voice": "jieun",
+  "text": "아이스 녹차라테 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "85a1d5d2",
+  "voice": "customer",
+  "text": "거품이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "d915b090",
+  "voice": "daeri",
+  "text": "출장 왔다가 들렀어요. 회의 전에 한 잔 해야죠.",
+  "ep": "free"
+ },
+ {
+  "key": "a1807fc7",
+  "voice": "daeri",
+  "text": "아이스 아메리카노요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "32d30c99",
+  "voice": "daeri",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "961f39d6",
+  "voice": "daeri",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "9bfa62c0",
+  "voice": "daeri",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "a9d491dc",
+  "voice": "daeri",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "2533619c",
+  "voice": "daeri",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "36dbd85d",
+  "voice": "daeri",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "25f56913",
+  "voice": "daeri",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "74bd1d27",
+  "voice": "daeri",
+  "text": "얼음이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "b9e9b60a",
+  "voice": "daeri",
+  "text": "얼음이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "026353ad",
+  "voice": "daeri",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "4b16de4b",
+  "voice": "daeri",
+  "text": "조금 쓰네요.",
+  "ep": "free"
+ },
+ {
+  "key": "ffba0c59",
+  "voice": "daeri",
+  "text": "조금 진하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "aca48375",
+  "voice": "daeri",
+  "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "d33ef525",
+  "voice": "customer",
+  "text": "아메리카노 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "e5050561",
+  "voice": "customer",
+  "text": "아이스로요. 겨울에도 아아죠.",
+  "ep": "free"
+ },
+ {
+  "key": "3389b942",
+  "voice": "customer",
+  "text": "먹고 갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "25d3b1f4",
+  "voice": "customer",
+  "text": "커피 말고, 따뜻한 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "2b54269b",
+  "voice": "customer",
+  "text": "따뜻하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "b372b6d7",
+  "voice": "customer",
+  "text": "양이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "012aa67c",
+  "voice": "customer",
+  "text": "거품이 조금 거칠네요.",
+  "ep": "free"
+ },
+ {
+  "key": "66e6beff",
+  "voice": "customer",
+  "text": "거품이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "44598fec",
+  "voice": "customer",
+  "text": "아이스 라테 하나요. 여기서 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "14a2fb13",
+  "voice": "jian",
+  "text": "오늘은 초록색이요.",
+  "ep": "free"
+ },
+ {
+  "key": "fe2abb7f",
+  "voice": "sys",
+  "text": "오늘의 칠판. 아이와 함께 오는 손님이 많을 거예요. 아이 잔은 너무 뜨겁지 않게 해요.",
+  "ep": "free"
+ },
+ {
+  "key": "b74dec58",
+  "voice": "owner",
+  "text": "아이가 마시는 따뜻한 잔은 우유를 평소보다 덜 데워요. 너무 뜨거우면 아이 입이 데어요.",
+  "ep": "free"
+ },
+ {
+  "key": "1648b799",
+  "voice": "sys",
+  "text": "우유 데우기. 아이가 마시는 잔이에요. 우유를 평소보다 덜 데워요. [누르고 있기]를 꾹 누르면 우유가 데워져요. 알맞아요 칸에서 손을 떼요.",
+  "ep": "free"
+ },
+ {
+  "key": "522be685",
+  "voice": "sys",
+  "text": "우유 데우기. 아이가 마시는 잔이에요. 우유를 평소보다 덜 데워요. 온도가 알맞아요 칸에 오면 [멈추기]를 눌러요.",
+  "ep": "free"
+ },
+ {
+  "key": "f65ba92c",
+  "voice": "sys",
+  "text": "우유 데우기. 아이가 마시는 잔이에요. 우유를 평소보다 덜 데워요. [누르고 있기]를 꾹 누르면 우유가 데워져요. 화면에 \"지금!\"이 뜨면 손을 떼요.",
+  "ep": "free"
+ },
+ {
+  "key": "9b77cc1e",
+  "voice": "sys",
+  "text": "아이 잔",
+  "ep": "free"
+ },
+ {
+  "key": "76e97bf6",
+  "voice": "sys",
+  "text": "덜 뜨겁게",
+  "ep": "free"
+ },
+ {
+  "key": "131aa67c",
+  "voice": "customer_f",
+  "text": "아이가 마시기엔 조금 뜨겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "3600bf7b",
+  "voice": "customer_f",
+  "text": "아이가 에어컨 바람에 추워해요. 따뜻한 우유 하나, 너무 뜨겁지 않게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "56b74cfd",
+  "voice": "customer_f",
+  "text": "아이가 마시기 딱 좋아요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "94701adc",
+  "voice": "jieun",
+  "text": "따뜻한 우유 한 잔, 너무 뜨겁지 않게 데울게요. 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "d8d60783",
+  "voice": "customer_f",
+  "text": "아이가 찬 걸 마시면 배가 아파서요. 따뜻한 우유, 너무 뜨겁지 않게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "2e51dc4c",
+  "voice": "jieun",
+  "text": "따뜻한 우유 한 잔, 너무 뜨겁지 않게 데울게요. 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "66e7ecd5",
+  "voice": "manager",
+  "text": "다른 카페를 둘러보는 것도 공부예요. 손이 참 정확하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "723a4df6",
+  "voice": "manager",
+  "text": "핸드드립 한 잔 부탁해요.",
+  "ep": "free"
+ },
+ {
+  "key": "9a5fd58a",
+  "voice": "manager",
+  "text": "깊네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "cb873d2a",
+  "voice": "manager",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "7bceb4ac",
+  "voice": "manager",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "cc6c4c60",
+  "voice": "manager",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "beea22c0",
+  "voice": "manager",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "ae2f8d79",
+  "voice": "manager",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "51a8f46f",
+  "voice": "manager",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "36974ea1",
+  "voice": "manager",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "4c51017f",
+  "voice": "manager",
+  "text": "조금 쓰네요.",
+  "ep": "free"
+ },
+ {
+  "key": "73e00c76",
+  "voice": "manager",
+  "text": "물이 조금 미지근하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "b72ab6cc",
+  "voice": "manager",
+  "text": "물이 조금 졸았네요.",
+  "ep": "free"
+ },
+ {
+  "key": "a85ff9d5",
+  "voice": "manager",
+  "text": "조금 진하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "cc9e7f36",
+  "voice": "customer_f",
+  "text": "딸기우유요!",
+  "ep": "free"
+ },
+ {
+  "key": "88f7dedc",
+  "voice": "customer_f",
+  "text": "아이스로요.",
+  "ep": "free"
+ },
+ {
+  "key": "9c139d7b",
+  "voice": "jieun",
+  "text": "아이스 디카페인 라테 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "7b61ae28",
+  "voice": "customer_f",
+  "text": "시원하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "7bcf4398",
+  "voice": "jieun",
+  "text": "아이스 바닐라 라테 한 잔, 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "0552ad93",
+  "voice": "customer_f",
+  "text": "녹차라테, 차갑게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "41f04e8a",
+  "voice": "customer_f",
+  "text": "쌉쌀하고 시원해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "85925557",
+  "voice": "customer_f",
+  "text": "거품이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "aeb75036",
+  "voice": "customer_f",
+  "text": "시원한 유자차요.",
+  "ep": "free"
+ },
+ {
+  "key": "bf70878c",
+  "voice": "customer_f",
+  "text": "상큼해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "c3f0d218",
+  "voice": "grandma",
+  "text": "우리 동네에도 이런 카페가 있으면 좋겠네.",
+  "ep": "free"
+ },
+ {
+  "key": "10a4ccfa",
+  "voice": "grandma",
+  "text": "따뜻한 우유 한 잔 줘요.",
+  "ep": "free"
+ },
+ {
+  "key": "9efb10a5",
+  "voice": "grandma",
+  "text": "따뜻하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "725b77ed",
+  "voice": "grandma",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "0355af43",
+  "voice": "grandma",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "2200fc3f",
+  "voice": "grandma",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "b3d3862f",
+  "voice": "grandma",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "ab65beb4",
+  "voice": "grandma",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "7a5d23b0",
+  "voice": "grandma",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "b3176bbc",
+  "voice": "grandma",
+  "text": "양이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "29d9ccdd",
+  "voice": "grandma",
+  "text": "양이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "0e09c015",
+  "voice": "grandma",
+  "text": "조금 미지근하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "76192849",
+  "voice": "grandma",
+  "text": "조금 뜨겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "c48ef686",
+  "voice": "grandma",
+  "text": "거품이 조금 거칠네요.",
+  "ep": "free"
+ },
+ {
+  "key": "1786f189",
+  "voice": "grandma",
+  "text": "거품이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "a5376401",
+  "voice": "grandma",
+  "text": "조금 넘쳤네요.",
+  "ep": "free"
+ },
+ {
+  "key": "29b753db",
+  "voice": "customer",
+  "text": "아이스로요.",
+  "ep": "free"
+ },
+ {
+  "key": "e7d333d4",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘의 추천 메뉴는 녹차라테예요. 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "ac140f96",
+  "voice": "narr",
+  "text": "오늘도 가게 문을 연다. 가을 아침의 바닷가 마을은 조용하다.",
+  "ep": "free"
+ },
+ {
+  "key": "66fcf01a",
+  "voice": "customer_f",
+  "text": "따뜻한 바닐라 라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "420a8b02",
+  "voice": "dohyun",
+  "text": "여기 샷이 정확해서 또 왔어요. 천천히 해 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "9b627765",
+  "voice": "dohyun",
+  "text": "아메리카노요.",
+  "ep": "free"
+ },
+ {
+  "key": "b41a8f99",
+  "voice": "dohyun",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "1ebf0eae",
+  "voice": "dohyun",
+  "text": "아이스요. 저는 늘 아아예요.",
+  "ep": "free"
+ },
+ {
+  "key": "2898a45e",
+  "voice": "customer_f",
+  "text": "따뜻한 녹차라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "deb8219b",
+  "voice": "jieun",
+  "text": "따뜻한 녹차라테 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "44e734a7",
+  "voice": "jian",
+  "text": "오늘은 노란색이요.",
+  "ep": "free"
+ },
+ {
+  "key": "9586221d",
+  "voice": "customer_f",
+  "text": "제일 싼 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "d58cde26",
+  "voice": "customer_f",
+  "text": "구수하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "659c7b43",
+  "voice": "jieun",
+  "text": "따뜻한 녹차라테 한 잔, 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "a5f33a49",
+  "voice": "customer",
+  "text": "아이가 마시기엔 조금 뜨겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "28e20597",
+  "voice": "customer",
+  "text": "아이가 마실 코코아 하나요. 따뜻하게, 너무 뜨겁지 않게요.",
+  "ep": "free"
+ },
+ {
+  "key": "0a1e1b2a",
+  "voice": "customer",
+  "text": "아이가 마시기 딱 좋아요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "bf5bc6d5",
+  "voice": "jieun",
+  "text": "따뜻한 코코아 한 잔, 너무 뜨겁지 않게 데울게요. 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "26c54207",
+  "voice": "customer",
+  "text": "아이가 마실 따뜻한 우유 하나요. 너무 뜨겁지 않게 해 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "a5350a3a",
+  "voice": "customer",
+  "text": "아이스 아메리카노 하나 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "0992c057",
+  "voice": "customer",
+  "text": "코코아, 따뜻하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "958ae83f",
+  "voice": "customer",
+  "text": "달고 따뜻해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "768f488e",
+  "voice": "customer_f",
+  "text": "코코아, 따뜻하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5edb5ebc",
+  "voice": "customer_f",
+  "text": "달고 따뜻해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "3d7b436d",
+  "voice": "yeonwoo",
+  "text": "쉬는 날이라 또 바다 보러 왔어요. 여기 오면 마음이 느긋해져요.",
+  "ep": "free"
+ },
+ {
+  "key": "14b89ee1",
+  "voice": "yeonwoo",
+  "text": "부드러워요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "9f16b523",
+  "voice": "narr",
+  "text": "오늘도 가게 문을 연다. 겨울 아침의 바닷가 마을은 조용하다.",
+  "ep": "free"
+ },
+ {
+  "key": "6b5b1f54",
+  "voice": "customer_f",
+  "text": "따뜻한 코코아요.",
+  "ep": "free"
+ },
+ {
+  "key": "6bf8188d",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘의 추천 메뉴는 유자차예요. 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "fe6d6703",
+  "voice": "customer",
+  "text": "따뜻한 라테 하나요. 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "db9a9fb7",
+  "voice": "customer",
+  "text": "칠판에 적힌 추천 메뉴로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "ddf3a51e",
+  "voice": "customer",
+  "text": "제일 싼 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "c2ba4455",
+  "voice": "customer",
+  "text": "구수하네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "073972a6",
+  "voice": "customer",
+  "text": "따뜻하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "811db40f",
+  "voice": "customer",
+  "text": "오늘은 따뜻한 걸로요.",
+  "ep": "free"
+ },
+ {
+  "key": "0ced13b5",
+  "voice": "jiho",
+  "text": "바다 보고 왔더니 목말라요!",
+  "ep": "free"
+ },
+ {
+  "key": "2e1f936c",
+  "voice": "jiho",
+  "text": "아아요! 가져갈게요.",
+  "ep": "free"
+ },
+ {
+  "key": "6e3b977c",
+  "voice": "jiho",
+  "text": "향이 좋네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "7f5514af",
+  "voice": "jiho",
+  "text": "이건 제가 주문한 게 아니네요.",
+  "ep": "free"
+ },
+ {
+  "key": "3f37fa49",
+  "voice": "jiho",
+  "text": "네, 기다릴게요.",
+  "ep": "free"
+ },
+ {
+  "key": "e80b284d",
+  "voice": "jiho",
+  "text": "괜찮아요. 잘 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "fdb86755",
+  "voice": "jiho",
+  "text": "네, 맞아요.",
+  "ep": "free"
+ },
+ {
+  "key": "afd3f82a",
+  "voice": "jiho",
+  "text": "네, 따뜻하게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "0e34f426",
+  "voice": "jiho",
+  "text": "좋아요, 그걸로 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "62efbd4a",
+  "voice": "jiho",
+  "text": "얼음이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "58c9d797",
+  "voice": "jiho",
+  "text": "얼음이 조금 많네요.",
+  "ep": "free"
+ },
+ {
+  "key": "6ba2ae36",
+  "voice": "jiho",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "f6e4d7ca",
+  "voice": "jiho",
+  "text": "조금 쓰네요.",
+  "ep": "free"
+ },
+ {
+  "key": "9c6acb62",
+  "voice": "jiho",
+  "text": "조금 진하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "0c6858e2",
+  "voice": "jiho",
+  "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "63d01c34",
+  "voice": "jian",
+  "text": "오늘은 갈색이요.",
+  "ep": "free"
+ },
+ {
+  "key": "343054bc",
+  "voice": "customer_f",
+  "text": "따뜻한 우유 한 잔이요.",
+  "ep": "free"
+ },
+ {
+  "key": "11a796a0",
+  "voice": "customer_f",
+  "text": "오늘은 따뜻한 걸로요.",
+  "ep": "free"
+ },
+ {
+  "key": "82060137",
+  "voice": "jieun",
+  "text": "따뜻한 아메리카노 한 잔, 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "d77e6ad1",
+  "voice": "jieun",
+  "text": "따뜻한 코코아 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "43461d2e",
+  "voice": "customer_f",
+  "text": "아이가 마실 코코아 하나요. 따뜻하게, 너무 뜨겁지 않게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5f3f474d",
+  "voice": "jieun",
+  "text": "따뜻한 코코아 한 잔, 너무 뜨겁지 않게 데울게요. 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "c068ec42",
+  "voice": "customer_f",
+  "text": "아이가 마실 따뜻한 우유 하나요. 너무 뜨겁지 않게 해 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "7b568fa5",
+  "voice": "customer",
+  "text": "딸기우유요!",
+  "ep": "free"
+ },
+ {
+  "key": "f8809a92",
+  "voice": "customer",
+  "text": "달콤해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "2e4f1217",
+  "voice": "customer_f",
+  "text": "차갑게요.",
+  "ep": "free"
+ },
+ {
+  "key": "9d13d258",
+  "voice": "jieun",
+  "text": "아이스 보리차 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "95eb0163",
+  "voice": "jieun",
+  "text": "아이스 디카페인 라테 한 잔, 드시고 가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "019240aa",
+  "voice": "customer",
+  "text": "달게 한 잔이요.",
+  "ep": "free"
+ },
+ {
+  "key": "32aa3637",
+  "voice": "customer",
+  "text": "딱 좋게 다네요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "b9c34649",
+  "voice": "customer",
+  "text": "따뜻한 녹차라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "c95d265e",
+  "voice": "customer_f",
+  "text": "따뜻한 유자차 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "93ed912d",
+  "voice": "customer",
+  "text": "따뜻한 유자차 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "e6498039",
+  "voice": "customer",
+  "text": "딸기우유 하나요.",
+  "ep": "free"
+ },
+ {
+  "key": "d0feec75",
+  "voice": "customer_f",
+  "text": "유자차, 차갑게요.",
+  "ep": "free"
+ },
+ {
+  "key": "9568f128",
+  "voice": "jieun",
+  "text": "아이스 바닐라 라테 한 잔, 가져가시는 거죠?",
+  "ep": "free"
+ },
+ {
+  "key": "2f97de90",
+  "voice": "sys",
+  "text": "오늘의 칠판. 오늘의 추천 메뉴는 바닐라 라테예요. 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "5f678a19",
+  "voice": "customer",
+  "text": "따뜻한 코코아요.",
+  "ep": "free"
+ },
+ {
+  "key": "96bdfca6",
+  "voice": "customer",
+  "text": "차갑게요.",
+  "ep": "free"
+ },
+ {
+  "key": "17cd92f9",
+  "voice": "customer",
+  "text": "따뜻한 바닐라 라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "929431fb",
+  "voice": "customer",
+  "text": "시원한 유자차요.",
+  "ep": "free"
+ },
+ {
+  "key": "f3e901df",
+  "voice": "customer",
+  "text": "시원하게요.",
+  "ep": "free"
+ },
+ {
+  "key": "5f0696d6",
+  "voice": "customer",
+  "text": "아이가 에어컨 바람에 추워해요. 따뜻한 우유 하나, 너무 뜨겁지 않게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "18b61f2e",
+  "voice": "customer",
+  "text": "아이가 찬 걸 마시면 배가 아파서요. 따뜻한 우유, 너무 뜨겁지 않게 주세요.",
+  "ep": "free"
+ },
+ {
+  "key": "9f66309d",
+  "voice": "customer",
+  "text": "따뜻한 우유 한 잔이요.",
+  "ep": "free"
+ },
+ {
   "key": "ed868263",
   "voice": "sys",
   "text": "미니게임을 그만할까요? 남은 일은 지은이 알아서 해요.",

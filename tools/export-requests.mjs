@@ -310,7 +310,8 @@ const byVoice = {};
 for (const l of lines) byVoice[l.voice] = (byVoice[l.voice] || 0) + 1;
 P('## 7. 음성 (Supertonic, 내 PC)', '',
   `- 읽어 줄 문장 ${lines.length}줄(\`npm run lines\` → \`tools/voice/lines.json\`). \`npm run voices\`가 바뀐 줄만 만듭니다.`,
-  '- 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).', '',
+  '- 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).',
+  '- 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).', '',
   '| 목소리 | 줄 수 |', '| :--- | ---: |', ...Object.entries(byVoice).sort((a, b) => b[1] - a[1]).map(([v, n]) => `| \`${v}\` | ${n} |`), '');
 
 /* 8. 넣은 뒤 */

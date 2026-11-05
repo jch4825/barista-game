@@ -1321,33 +1321,41 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 2754줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 3058줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
+- 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 784 |
-| `narr` | 654 |
-| `think` | 295 |
-| `owner` | 179 |
-| `jieun` | 131 |
-| `jian` | 74 |
-| `customer_f` | 71 |
-| `do` | 69 |
+| `sys` | 811 |
+| `narr` | 678 |
+| `think` | 296 |
+| `owner` | 189 |
+| `jieun` | 148 |
+| `customer_f` | 118 |
+| `customer` | 91 |
+| `jian` | 79 |
+| `do` | 70 |
 | `haesun` | 65 |
-| `eunju` | 58 |
-| `han` | 50 |
-| `kang` | 48 |
-| `sumin` | 48 |
-| `noh` | 43 |
-| `customer` | 40 |
+| `eunju` | 59 |
+| `han` | 51 |
+| `sumin` | 51 |
+| `kang` | 50 |
+| `noh` | 44 |
 | `geum` | 34 |
 | `agent` | 23 |
-| `dohyun` | 18 |
+| `dohyun` | 22 |
+| `yeonwoo` | 18 |
 | `han_daughter` | 18 |
-| `yeonwoo` | 16 |
+| `sora` | 17 |
 | `mom2` | 16 |
+| `grandma` | 16 |
 | `student` | 15 |
+| `teacher` | 15 |
+| `minjae` | 15 |
+| `daeri` | 15 |
+| `jiho` | 15 |
+| `manager` | 14 |
 | `actor` | 4 |
 | `young_fisher` | 1 |
 

@@ -23,7 +23,7 @@ npm run requests     # 아직 없는 그림 · 물건 · 블렌더 컷 · 소리
 npm run assets       # 소리 assets/audio/{sfx,amb}/ → assets/audio/manifest.json, 배경음악 assets/music/ → assets/music/manifest.json, 그림 → assets/images.json
 npm run images       # assets/_src/{stand,vfx,…} 원본 → 게임용 그림(tools/import-images.py) + 목록
 npm run objects      # 작업대 물건 시트 assets/_src/objects/sheet_*.jpg → assets/objects/{id}.webp(초록 바탕 지우기·자르기) + 목록. --check 는 python tools/import-objects.py --check
-npm run lines        # 읽어 줄 문장 목록 → tools/voice/lines.json
+npm run lines        # 읽어 줄 문장 목록(이야기 · 엔딩 · 자유 영업 · 화면) → tools/voice/lines.json + 사람별 대본 docs/voice_lines.md · tools/voice/people.json (자동 생성물)
 npm run voices       # 목록 + Supertonic 3 로컬 TTS로 음성 생성(바뀐 줄만)
 npm run credits      # 선생님 모드 '제작·저작권 정보' 자료 → assets/credits/credits.json
 npm run build:web    # 웹판 배포용 폴더(dist/). 웹판은 새 Vercel 프로젝트로만, 공개(정식 배포)는 사용자 허락 뒤에만
@@ -160,7 +160,7 @@ assets/               music/(배경음악 10, 공개) · stand/(99, 지은 6·�
 - **배경·장면 그림**: 배경은 `assets/bg/{id}.jpg`, CG는 `assets/cg/cg_{id}.jpg`에 2K 그대로 두고 `npm run assets`(원래 이름은 `assets/bg/SOURCES.md`). 대본은 `bg('hall', 'spring')` → `hall_spring.jpg`. 새 장소 id는 `js/data/backgrounds.js`의 `PHOTO_SCENES`에 더합니다(검사기가 id를 알고, 그림이 없을 때 비슷한 임시 그림으로 섬). 메뉴 뒤 그림은 `skin-sea.css`의 `.scr`(밤바다 `ui_sea_night`, 멈춤·지난 대화·되감기는 `ui_cafe_dim`). Flow가 2026-10-29부터 파일 이름에 시각을 넣지 않아 받은 시각을 SOURCES 표의 비고에 적습니다(`export-credits`가 읽음).
 - 새 그림을 넣으면 `tools/credits/image_prompts.mjs`에 제작 프롬프트를 한 줄 더하고 `npm run credits`.
 - **소리**: 사용자가 Humble Bundle에서 산 팩(`C:\AI\sound effect assets`, 환경 변수 `SOUND_SRC`)에서 `tools/audio/audio_map.mjs` 대응표대로 잘라 넣습니다(`npm run audio`). 원본 WAV는 프로젝트에 복사하지 않습니다. 판매 페이지에 AI 관련 금지 조건이 있는 팩은 쓰지 않습니다.
-- **음성**: `tools/voice/voice_cast.json`(인물 → Supertonic 목소리) → `npm run voices`. Supertonic 위치 `C:\AI\supertonic3-local-tts-20260520-r2\supertonic3-local-tts`(`SUPERTONIC_DIR`). 새 인물에게는 새 목소리를 배정합니다(2026-10-28 임시: 지은 F3 · 사장님 M3 · 해순 F4 · 지안 F5. Supertonic 목소리가 10개뿐이라 옛 인물과 겹치고 속도로 구분하므로 들어 보고 정합니다).
+- **음성**: `tools/voice/voice_cast.json`(인물 → Supertonic 목소리) → `npm run voices`. Supertonic 위치 `C:\AI\supertonic3-local-tts-20260520-r2\supertonic3-local-tts`(`SUPERTONIC_DIR`). 새 인물에게는 새 목소리를 배정합니다(2026-10-28 임시: 지은 F3 · 사장님 M3 · 해순 F4 · 지안 F5. Supertonic 목소리가 10개뿐이라 옛 인물과 겹치고 속도로 구분하므로 들어 보고 정합니다). 말하는 사람은 36명(나레이션 · 속마음은 지은의 목소리라 목소리로는 34명: 지은 · 사장님 · 단골 8 · 이야기의 다른 인물 7 · 직업 마1스톤 인물 10 · 이름 없는 손님 옷차림 6 · 안내, 2026-11-05 검수 13.50). 사람별 대본은 `docs/voice_lines.md`. 이름 없는 손님은 같은 id `customer`라도 그 날의 옷차림(`costume`)마다 다른 사람으로 셈(`customer-olive` 등). 이 컴퓨터의 Qwen3 TTS는 영어 음성 프로그램(`C:\AI\Voice Generator-Local`, Breeze TTS 2: 영어 · 중국어 · 비상업)의 부품 코드뿐이고 모델 파일은 없음.
 - **글꼴**: 게임에 넣은 OFL 글꼴만. 본문 Pretendard, 제목 **함렛 Hahmlet**(가변 100~900, 2026-10-28 사용자 결정, `assets/fonts/HahmletVariable.ttf`). 함렛의 한글은 2,788자(KS X 1001 2,350자 모두)라 없는 글자는 Pretendard로 나옵니다. 새 글꼴은 받기 전에 파일 이름·출처·크기를 말하고 허락을 받고, 받은 뒤 cmap으로 글자 범위를 확인합니다(Google Fonts 목록의 unicode-range는 실제 글자 수가 아님).
 - 처음 화면의 'AI로 만든 그림·음성·음악을 씁니다'(`AI_NOTICE`)는 지우지 않습니다. 학생 이름은 본명 대신 별명을 쓰도록 안내합니다.
 
