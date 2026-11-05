@@ -1,209 +1,291 @@
 {
-  "_comment": "Qwen3 TTS로 다시 만들 목소리(사용자 결정 2026-11-05 '새 ②', 검수 13.52 ~ 13.55). 사람(tools/voice/people.json 의 id)마다 목소리 설명(ko: 사람이 읽는 것 · en: VoiceDesign 에 주는 것)과 본보기 문장(ref: 평소 목소리 본보기를 만들 문장). 본보기(VoiceDesign 이 en 으로 ref 를 읽음)를 들어 보고 고른 것이 그 사람의 목소리가 되고, 줄마다는 Base 가 그 본보기 소리를 듣고 그 줄의 감정 지시와 함께 읽음. covers: 같은 목소리를 쓰는 사람(속마음 · 나레이션은 지은). keep: 지금 목소리(Supertonic)를 이어 받는 후보도 만들 사람(직업 마1스톤 인물, 알아보게, 🙋 검수 13.55). 설명은 그림 · 대본(js/data/characters.js · docs/story.md 2장)에 맞춘 초안이며 진단명 · 병명은 쓰지 않음.",
+  "_comment": "Qwen3 TTS로 다시 만들 목소리(사용자 결정 2026-11-05 '새 ②', 검수 13.52 ~ 13.55). 사람(tools/voice/people.json 의 id)마다 목소리 설명(ko: 사람이 읽는 것 · en: VoiceDesign 에 주는 것)과 본보기 문장(ref: 평소 목소리 본보기를 만들 문장). 본보기(VoiceDesign 이 en 으로 ref 를 읽음)를 들어 보고 고른 것이 그 사람의 목소리가 되고, 줄마다는 Base 가 그 본보기 소리를 듣고 그 줄의 감정 지시와 함께 읽음. covers: 같은 목소리를 쓰는 사람(속마음 · 나레이션은 지은). pick: 사용자가 고른 후보(2026-11-05, 검수 13.56, 본보기 소리는 assets/_src/voice_ref/{id}.flac · 그 소리가 읽은 문장은 ref). keep: 지금 목소리(Supertonic)를 이어 받는 후보도 만들 사람(직업 마1스톤 인물, 알아보게, 🙋 검수 13.55). 설명은 그림 · 대본(js/data/characters.js · docs/story.md 2장)에 맞춘 초안이며 진단명 · 병명은 쓰지 않음.",
   "people": {
     "jieun": {
-      "name": "지은", "covers": ["think", "narr"],
+      "name": "지은",
+      "covers": [
+        "think",
+        "narr"
+      ],
       "ko": "바닷가 작은 카페에서 일을 막 시작한 스물한 살 여성. 부드럽고 또렷한 목소리, 조금 수줍지만 진심이 담긴 따뜻한 말투. 조금 느리고 차분하게, 낱말 하나하나를 분명하게 말한다.",
       "en": "A 21-year-old Korean woman who just started working as a barista at a small seaside cafe. Soft, clear, gentle voice with a slightly bright tone; a little shy but sincere and warm. Speaks calmly at a slightly slow pace, articulating every word clearly.",
-      "ref": "안녕하세요. 저는 이 카페의 새 바리스타, 지은이에요. 조금 느려도, 한 잔씩 정확하게 만들어 드릴게요."
+      "ref": "안녕하세요. 저는 이 카페의 새 바리스타, 지은이에요. 조금 느려도, 한 잔씩 정확하게 만들어 드릴게요.",
+      "pick": "지안 후보 3의 목소리로 다시(지은 후보에 중국인 말투)",
+      "refFile": "assets/_src/voice_ref/jieun.flac"
     },
     "owner": {
       "name": "사장님",
       "ko": "바닷가 작은 카페를 삼십 년 동안 지켜 온 육십 대 후반의 남성. 낮고 따뜻하며 조금 허스키한 목소리. 말수가 적고 천천히, 차분하게 말한다. 다정하고 담담하며 조용한 유머가 있다.",
       "en": "A Korean man in his late sixties who has run a small seaside cafe for thirty years. Low, warm, slightly husky voice. A man of few words who speaks slowly and calmly, kind and steady, with a quiet dry sense of humor.",
-      "ref": "어서 와요. 오늘은 바람이 차네요. 따뜻한 우유 한 잔 데워 줄 테니, 천천히 마시고 가요."
+      "ref": "어서 와요. 오늘은 바람이 차네요. 따뜻한 우유 한 잔 데워 줄 테니, 천천히 마시고 가요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/owner.flac"
     },
     "haesun": {
       "name": "해순 할머니",
       "ko": "여든 살쯤 된 할머니. 부드럽고 조금 가늘고 나이 든 목소리. 아주 다정하고 따뜻하지만 조금 쓸쓸함이 묻어난다. 소중한 사람에게 말하듯 천천히, 쉬어 가며 말한다.",
       "en": "A Korean grandmother in her early eighties. Soft, slightly thin, aged voice; very gentle and warm with a hint of loneliness. Speaks slowly with natural pauses, as if talking to someone dear.",
-      "ref": "고마워요. 나는 늘 이 창가 자리에 앉아요. 바다를 보면서, 천천히 마실게요."
+      "ref": "고마워요. 나는 늘 이 창가 자리에 앉아요. 바다를 보면서, 천천히 마실게요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/haesun.flac"
     },
     "jian": {
       "name": "지안",
       "ko": "스물여덟쯤 된 여성 화가. 낮고 부드러우며 살짝 허스키한 목소리. 짧고 조용하게 말하고, 생각이 많아 말끝을 흐리며 잠깐씩 멈춘다. 조금 지쳐 있지만 상냥하다.",
       "en": "A Korean woman in her late twenties, a painter. Low, soft, slightly husky voice; speaks briefly and quietly, often trailing off at the end of sentences with small thoughtful pauses. A little tired, but gentle.",
-      "ref": "…아무거나요. 오늘은 무슨 색이 좋을지 잘 모르겠어요. 천천히 생각해 볼게요."
+      "ref": "…아무거나요. 오늘은 무슨 색이 좋을지 잘 모르겠어요. 천천히 생각해 볼게요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/jian.flac"
     },
     "do": {
       "name": "도 씨",
       "ko": "예순 가까운 남성 우체부. 밝고 힘 있으며 조금 거친 목소리. 시원시원하게 말하고 '허허' 하고 잘 웃는다. 늘 바빠 조금 빠르지만 다정하다.",
       "en": "A Korean man around sixty, a mailman. Bright, hearty, slightly raspy voice full of energy; speaks briskly and cheerfully, warm and friendly, often with a good-natured chuckle.",
-      "ref": "우편이요! 허허, 오늘도 돌릴 편지가 많네요. 아이스 아메리카노 한 잔, 서서 마시고 갈게요."
+      "ref": "우편이요! 허허, 오늘도 돌릴 편지가 많네요. 아이스 아메리카노 한 잔, 서서 마시고 갈게요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/do.flac"
     },
     "kang": {
       "name": "강 씨",
       "ko": "예순 넘은 남성 어부. 낮고 굵으며 바닷바람에 쉰 듯 거친 목소리. 말이 아주 적고, 느리게 툭툭 짧게 말한다. 무뚝뚝하지만 차분하다.",
       "en": "A Korean man in his sixties, a fisherman. Deep, rough, gravelly voice weathered by the sea wind; speaks very little, slowly and bluntly in short phrases, reserved and calm.",
-      "ref": "…새벽 바다가 아직 차네. 블랙으로 한 잔. 천천히 내려 줘요."
+      "ref": "…새벽 바다가 아직 차네. 블랙으로 한 잔. 천천히 내려 줘요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/kang.flac"
     },
     "han": {
       "name": "한 씨",
       "ko": "마흔다섯쯤 된 남성 버스 기사. 보통 높이의 차분한 목소리, 밤 근무로 조금 피곤하다. 예의 바르고 또박또박 말하지만, 시간을 신경 써 조금 서두른다.",
       "en": "A Korean man in his mid-forties, a bus driver. Mid-pitched, calm, slightly tired voice from night shifts; polite and clear, a little hurried as he keeps an eye on the time.",
-      "ref": "달게 한 잔이요. 십 분 쉬었다가 다시 버스를 몰아야 해요. 오늘 밤도 길겠네요."
+      "ref": "달게 한 잔이요. 십 분 쉬었다가 다시 버스를 몰아야 해요. 오늘 밤도 길겠네요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/han.flac"
     },
     "eunju": {
       "name": "은주",
       "ko": "서른쯤 된 여성, 아기를 키우는 새내기 엄마. 부드럽고 조금 작은 목소리, 아기가 깰까 봐 조심스럽게 말한다. 지쳐 있지만 상냥하다.",
       "en": "A Korean woman around thirty, a new mother. Soft, gentle, slightly quiet voice, speaking carefully so as not to wake her baby; tired but kind and polite.",
-      "ref": "디카페인 라테 하나 주세요. 아기가 막 잠들어서, 조용히 마시고 갈게요."
+      "ref": "디카페인 라테 하나 주세요. 아기가 막 잠들어서, 조용히 마시고 갈게요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/eunju.flac"
     },
     "sumin": {
       "name": "수민",
       "ko": "열여덟 살 여고생(고3). 맑지만 작고 낮은 목소리, 말수가 적고 짧게 웅얼거리듯 말한다. 낯을 가리고 조금 무뚝뚝하다.",
       "en": "An 18-year-old Korean high school girl. Clear but small, low voice; speaks very briefly and quietly, a little mumbled, shy and somewhat flat, keeping her distance.",
-      "ref": "…제일 싼 거요. 보리차, 따뜻하게요. 구석에 앉아 있을게요."
+      "ref": "…제일 싼 거요. 보리차, 따뜻하게요. 구석에 앉아 있을게요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/sumin.flac"
     },
     "noh": {
       "name": "노 씨",
       "ko": "일흔 가까운 남성 철물점 주인. 낮고 걸걸한 목소리, 반말 섞인 짧은 말투로 무뚝뚝하게 말한다. 속은 다정하고 느긋하다.",
       "en": "A Korean man near seventy who runs a hardware store. Low, husky, gruff voice; speaks in short, curt casual phrases, blunt on the surface but warm and easygoing underneath.",
-      "ref": "그래, 늘 먹던 거. 믹스커피 한 잔. 허, 지나가다 들른 거니까 신경 쓰지 마."
+      "ref": "그래, 늘 먹던 거. 믹스커피 한 잔. 허, 지나가다 들른 거니까 신경 쓰지 마.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/noh.flac"
     },
     "geum": {
       "name": "금 씨",
       "ko": "마흔쯤 된 남성 회사원. 또렷하고 조금 높은 목소리, 늘 바빠서 빠르게 말하고 재촉한다. 속은 나쁘지 않고 가끔 농담도 한다.",
       "en": "A Korean man around forty, a busy office worker. Clear, slightly high-pitched voice; talks fast and impatiently, always in a hurry, but not unkind, with a hint of humor.",
-      "ref": "아이스 아메리카노요, 가져갈 거예요. 배 시간이 있어서, 조금만 빨리 부탁해요."
+      "ref": "아이스 아메리카노요, 가져갈 거예요. 배 시간이 있어서, 조금만 빨리 부탁해요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/geum.flac"
     },
     "actor": {
       "name": "배우",
       "ko": "서른쯤 된 여성 배우. 맑고 고운 목소리, 발음이 정확하고 차분하다. 조용한 곳을 찾아온 사람이라 작고 부드럽게 말한다.",
       "en": "A Korean actress around thirty. Clear, refined, pleasant voice with precise pronunciation; calm and graceful, speaking softly and quietly like someone looking for a peaceful place.",
-      "ref": "여기, 조용해서 좋네요. 저쪽 자리에 잠깐 앉아도 될까요? 따뜻한 라테로 주세요."
+      "ref": "여기, 조용해서 좋네요. 저쪽 자리에 잠깐 앉아도 될까요? 따뜻한 라테로 주세요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/actor.flac"
     },
     "agent": {
       "name": "매니저",
       "ko": "스물여덟쯤 된 남성 매니저. 밝고 빠른 목소리, 일정에 쫓겨 급하게 말한다. 예의는 바르지만 늘 바쁘다.",
       "en": "A Korean man in his late twenties, a celebrity's manager. Bright, quick voice; speaks fast and urgently, pressed by the schedule, polite but always rushing.",
-      "ref": "배우님 쉬는 시간이 얼마 없어요. 커피 여러 잔 부탁해요! 가져가는 컵으로 주세요."
+      "ref": "배우님 쉬는 시간이 얼마 없어요. 커피 여러 잔 부탁해요! 가져가는 컵으로 주세요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/agent.flac"
     },
     "granddaughter": {
       "name": "손녀",
       "ko": "열 살쯤 된 여자아이(해순 할머니의 손녀). 높고 맑은 아이 목소리, 신이 나서 또랑또랑하게 말한다. 할머니를 잘 따르는 귀여운 아이.",
       "en": "A Korean girl about ten years old. High, clear, bright child's voice; cheerful and lively, speaking crisply and excitedly, sweet and affectionate toward her grandmother.",
-      "ref": "할머니, 여기가 할머니가 늘 오는 카페예요? 저도 따뜻한 우유요! 할머니 거랑 똑같이요."
+      "ref": "할머니, 여기가 할머니가 늘 오는 카페예요? 저도 따뜻한 우유요! 할머니 거랑 똑같이요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/granddaughter.flac"
     },
     "han_daughter": {
       "name": "한 씨의 딸",
       "ko": "열네 살쯤 된 여자 중학생. 맑고 조금 높은 목소리, 아빠에게는 편하게 반말하고 처음 보는 사람에게는 조금 쑥스러워한다.",
       "en": "A Korean girl around fourteen, a middle school student. Clear, slightly high young voice; casual and relaxed with her father, a little shy with strangers.",
-      "ref": "아빠, 여기가 아빠가 쉬는 카페야? 저는 코코아요. 따뜻하게 주세요."
+      "ref": "아빠, 여기가 아빠가 쉬는 카페야? 저는 코코아요. 따뜻하게 주세요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/han_daughter.flac"
     },
     "mom2": {
       "name": "처음 온 엄마",
       "ko": "서른 초반의 여성, 아기를 안고 처음 온 엄마. 조금 높고 여린 목소리, 낯선 곳이라 머뭇거리며 조심스럽게 말한다.",
       "en": "A Korean woman in her early thirties holding her baby, visiting for the first time. Slightly high, delicate voice; hesitant and careful in an unfamiliar place, polite and a little nervous.",
-      "ref": "아… 네. 따뜻한 걸로요. 혹시 디카페인도 있어요? 아기랑 잠깐 앉아 있어도 될까요?"
+      "ref": "아… 네. 따뜻한 걸로요. 혹시 디카페인도 있어요? 아기랑 잠깐 앉아 있어도 될까요?",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/mom2.flac"
     },
     "young_fisher": {
       "name": "젊은 어부",
       "ko": "스물다섯쯤 된 남성 어부. 씩씩하고 조금 거친 젊은 목소리, 솔직하고 꾸밈없이 말한다. 어른 앞에서는 조금 수줍어한다.",
       "en": "A Korean man around twenty-five, a young fisherman. Sturdy, slightly rough young voice; speaks plainly and honestly, a bit shy in front of elders.",
-      "ref": "강 씨가 불 켜진 데 가 있으라고 해서요. 잠깐 몸 좀 녹이고 가도 될까요?"
+      "ref": "강 씨가 불 켜진 데 가 있으라고 해서요. 잠깐 몸 좀 녹이고 가도 될까요?",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/young_fisher.flac"
     },
     "yeonwoo": {
-      "name": "연우", "keep": true,
+      "name": "연우",
+      "keep": true,
       "ko": "스무 살 여성. 맑고 단정한 목소리, 또박또박 정확하게 말한다. 순서를 좋아하는 차분한 사람이고, 반가울 때는 밝아진다.",
       "en": "A 20-year-old Korean young woman. Clear, neat voice; articulates each word precisely and steadily, calm and orderly, brightening up when she is happy.",
-      "ref": "저는 아이스 라테요. 바다 보면서 여기서 마시고 갈게요. 컵은 유리컵이면 좋겠어요."
+      "ref": "저는 아이스 라테요. 바다 보면서 여기서 마시고 갈게요. 컵은 유리컵이면 좋겠어요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/yeonwoo.flac"
     },
     "dohyun": {
-      "name": "도현", "keep": true,
+      "name": "도현",
+      "keep": true,
       "ko": "스물여섯쯤 된 남성 바리스타. 부드럽고 따뜻한 중저음, 친절하고 여유 있게 말한다. 후배를 잘 챙기는 다정한 선배.",
       "en": "A Korean man around twenty-six, a barista. Soft, warm mid-low voice; kind, relaxed and reassuring, like a caring senior colleague.",
-      "ref": "쉬는 날이라 바다 보러 왔어요. 저는 늘 아이스 아메리카노예요. 천천히 하셔도 괜찮아요."
+      "ref": "쉬는 날이라 바다 보러 왔어요. 저는 늘 아이스 아메리카노예요. 천천히 하셔도 괜찮아요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/dohyun.flac"
     },
     "manager": {
-      "name": "점장님", "keep": true,
+      "name": "점장님",
+      "keep": true,
       "ko": "쉰쯤 된 남성 카페 점장. 낮고 단단한 목소리, 분명하고 반듯하게 말한다. 규칙을 지키는 엄한 면이 있지만 따뜻하다.",
       "en": "A Korean man around fifty, a cafe manager. Low, firm, steady voice; speaks clearly and properly, a bit strict about rules but warm underneath.",
-      "ref": "다른 카페를 둘러보는 것도 공부예요. 따뜻한 아메리카노 한 잔 주세요. 손이 참 정확하네요."
+      "ref": "다른 카페를 둘러보는 것도 공부예요. 따뜻한 아메리카노 한 잔 주세요. 손이 참 정확하네요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/manager.flac"
     },
     "sora": {
-      "name": "소라", "keep": true,
+      "name": "소라",
+      "keep": true,
       "ko": "스물두 살 여대생. 밝고 높은 목소리, 말이 빠르고 생기 있다. 잘 웃는다.",
       "en": "A 22-year-old Korean female college student. Bright, high, lively voice; talks fast and cheerfully, full of energy, often laughing.",
-      "ref": "사진 찍으러 왔다가, 커피가 맛있어서 또 왔어요! 오늘은 딸기우유로 할게요."
+      "ref": "사진 찍으러 왔다가, 커피가 맛있어서 또 왔어요! 오늘은 딸기우유로 할게요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/sora.flac"
     },
     "minjae": {
-      "name": "민재", "keep": true,
+      "name": "민재",
+      "keep": true,
       "ko": "스물여덟쯤 된 남성 제빵사. 조용하고 부드러운 목소리, 천천히 담담하게 말한다. 시끄러운 것을 싫어하는 차분한 사람.",
       "en": "A Korean man in his late twenties, a baker. Quiet, soft, mellow voice; speaks slowly and calmly in an even tone, a gentle person who prefers quiet places.",
-      "ref": "머리 좀 식히러 왔어요. 따뜻한 라테 한 잔 주세요. 여기 조용해서 좋네요."
+      "ref": "머리 좀 식히러 왔어요. 따뜻한 라테 한 잔 주세요. 여기 조용해서 좋네요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/minjae.flac"
     },
     "teacher": {
-      "name": "선생님", "keep": true,
+      "name": "선생님",
+      "keep": true,
       "ko": "서른다섯쯤 된 여성 선생님. 밝고 따뜻한 목소리, 또렷하고 친절하게 말한다. 학생을 다정하게 챙기는 말투.",
       "en": "A Korean woman in her mid-thirties, a teacher. Bright, warm voice; speaks clearly and kindly at an easy pace, caring and encouraging.",
-      "ref": "학생들이랑 바다 보러 왔어요. 여기 분위기가 참 좋네요. 따뜻한 라테로 주세요."
+      "ref": "학생들이랑 바다 보러 왔어요. 여기 분위기가 참 좋네요. 따뜻한 라테로 주세요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/teacher.flac"
     },
     "jiho": {
-      "name": "지호", "keep": true,
+      "name": "지호",
+      "keep": true,
       "ko": "열아홉 살 남성. 밝고 힘찬 젊은 목소리, 씩씩하게 말하지만 긴장하면 조금 빨라진다.",
       "en": "A 19-year-old Korean young man. Bright, energetic, youthful voice; speaks eagerly and cheerfully, getting a little fast when nervous.",
-      "ref": "바다 보고 왔더니 목말라요! 아이스 아메리카노 하나 주세요. 시원한 걸로요."
+      "ref": "바다 보고 왔더니 목말라요! 아이스 아메리카노 하나 주세요. 시원한 걸로요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/jiho.flac"
     },
     "grandma": {
-      "name": "봉순 할머니", "keep": true,
+      "name": "봉순 할머니",
+      "keep": true,
       "ko": "여든쯤 된 할머니. 해순 할머니보다 밝고 말이 많은 편. 정겹고 구수한 노인의 목소리로, 느리고 다정하게 반말을 섞어 말한다.",
       "en": "A Korean grandmother around eighty, cheerful and talkative. Warm, folksy elderly voice; speaks slowly and affectionately in a friendly, homely way.",
-      "ref": "우리 동네에도 이런 카페가 있으면 좋겠네. 따뜻한 우유 한 잔 줘요. 천천히 해도 돼."
+      "ref": "우리 동네에도 이런 카페가 있으면 좋겠네. 따뜻한 우유 한 잔 줘요. 천천히 해도 돼.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/grandma.flac"
     },
     "student": {
-      "name": "대학생 손님", "keep": true,
+      "name": "대학생 손님",
+      "keep": true,
       "ko": "스물한 살 남자 대학생. 편안하고 조금 나른한 젊은 목소리, 짧고 무심하게 말한다.",
       "en": "A 21-year-old Korean male college student. Relaxed, slightly lazy young voice; speaks briefly and casually, laid-back.",
-      "ref": "아아 하나요. 가져갈게요. 아, 얼음은 조금만 넣어 주세요."
+      "ref": "아아 하나요. 가져갈게요. 아, 얼음은 조금만 넣어 주세요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/student.flac"
     },
     "daeri": {
-      "name": "최 대리", "keep": true,
+      "name": "최 대리",
+      "keep": true,
       "ko": "서른둘쯤 된 남성 회사원. 깔끔하고 또렷한 목소리, 예의 바르고 사무적으로 말한다. 회의 전이라 조금 바쁘다.",
       "en": "A Korean man in his early thirties, an office worker. Clean, crisp voice; polite and businesslike, slightly busy before a meeting.",
-      "ref": "출장 왔다가 들렀어요. 회의 전에 한 잔 해야죠. 따뜻한 아메리카노 하나 주세요."
+      "ref": "출장 왔다가 들렀어요. 회의 전에 한 잔 해야죠. 따뜻한 아메리카노 하나 주세요.",
+      "pick": "지금 목소리 이어 받기",
+      "refFile": "assets/_src/voice_ref/daeri.flac"
     },
     "customer": {
       "name": "손님 · 회색 머리 중년 남성",
       "ko": "쉰다섯쯤 된 남성, 회색 머리에 남색 재킷. 보통 높이의 점잖은 목소리, 평소에는 차분하지만 바쁠 때는 목소리가 커진다.",
       "en": "A Korean man in his mid-fifties with gray hair. Mid-pitched, dignified voice; usually calm and polite, but gets louder and pushy when in a hurry.",
-      "ref": "따뜻한 라테 하나 주세요. 가져갈게요. 버스에서 두 손으로 감싸고 마시려고요."
+      "ref": "따뜻한 라테 하나 주세요. 가져갈게요. 버스에서 두 손으로 감싸고 마시려고요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/customer.flac"
     },
     "customer-olive": {
       "name": "손님 · 올리브 블라우스 여성",
       "ko": "서른쯤 된 여성. 밝고 상냥한 목소리, 수다스럽고 들뜬 말투로 잘 웃는다.",
       "en": "A Korean woman around thirty. Bright, friendly voice; chatty and excited, smiling as she talks.",
-      "ref": "여기 맞죠? 사진으로 본 그 카페! 아이스 아메리카노 하나요. 여기서 마시고 갈게요."
+      "ref": "여기 맞죠? 사진으로 본 그 카페! 아이스 아메리카노 하나요. 여기서 마시고 갈게요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/customer-olive.flac"
     },
     "customer-coffee": {
       "name": "손님 · 커피를 든 여성",
       "ko": "서른 중반의 여성 직장인. 차분하고 단정한 목소리, 짧고 깔끔하게 말한다.",
       "en": "A Korean woman in her mid-thirties, an office worker. Calm, neat, composed voice; speaks briefly and efficiently.",
-      "ref": "딸기우유 하나 주세요. 가져갈게요. 출근길이라 조금 바빠서요."
+      "ref": "딸기우유 하나 주세요. 가져갈게요. 출근길이라 조금 바빠서요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/customer-coffee.flac"
     },
     "customer-sporty": {
       "name": "손님 · 운동복 여성",
       "ko": "스물다섯쯤 된 여성 여행객, 운동복 차림. 힘차고 시원한 목소리, 활발하고 크게 말한다.",
       "en": "A Korean woman in her mid-twenties, a tourist in sportswear. Energetic, fresh, lively voice; speaks loudly and cheerfully, full of vigor.",
-      "ref": "아아 두 잔이요! 가져갈게요. 바닷가를 달리고 왔더니 너무 목말라요."
+      "ref": "아아 두 잔이요! 가져갈게요. 바닷가를 달리고 왔더니 너무 목말라요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/customer-sporty.flac"
     },
     "customer-arms": {
       "name": "손님 · 팔짱 낀 여성",
       "ko": "마흔다섯쯤 된 여성, 팔짱을 끼고 있다. 낮고 또렷한 목소리, 짧고 딱 부러지게 말하며 조금 깐깐하다.",
       "en": "A Korean woman in her mid-forties with her arms crossed. Low, sharp, clear voice; speaks curtly and decisively, a bit strict and impatient.",
-      "ref": "아이스로요. 유자차, 차갑게. 얼음은 너무 많지 않게 해 주세요."
+      "ref": "아이스로요. 유자차, 차갑게. 얼음은 너무 많지 않게 해 주세요.",
+      "pick": "후보 2",
+      "refFile": "assets/_src/voice_ref/customer-arms.flac"
     },
     "customer-stripe": {
       "name": "손님 · 안경 · 헤드폰 청년",
       "ko": "스물네 살쯤 된 남성, 안경에 헤드폰. 조금 낮고 조용한 목소리, 수줍게 짧게 말한다.",
       "en": "A Korean man around twenty-four with glasses and headphones. Slightly low, quiet voice; speaks briefly and shyly, a bit introverted.",
-      "ref": "따뜻한 라테 하나요. 가져갈게요. 아, 뚜껑도 꼭 덮어 주세요."
+      "ref": "따뜻한 라테 하나요. 가져갈게요. 아, 뚜껑도 꼭 덮어 주세요.",
+      "pick": "후보 1",
+      "refFile": "assets/_src/voice_ref/customer-stripe.flac"
     },
     "sys": {
       "name": "안내",
       "ko": "서른쯤 된 여성의 안내 목소리. 맑고 따뜻하며 또렷하다. 천천히 쉬운 말로 친절하게 알려 주고, 등장인물과 겹치지 않는 차분한 목소리.",
       "en": "A Korean woman around thirty, a friendly guide voice. Clear, warm and articulate; speaks slowly and kindly in simple words, calm and neutral, like a gentle instructor.",
-      "ref": "화면의 단추를 눌러 보세요. 천천히 해도 괜찮아요. 모르는 말이 나오면 말 사전을 열어 보세요."
+      "ref": "화면의 단추를 눌러 보세요. 천천히 해도 괜찮아요. 모르는 말이 나오면 말 사전을 열어 보세요.",
+      "pick": "후보 3",
+      "refFile": "assets/_src/voice_ref/sys.flac"
     }
   }
 }

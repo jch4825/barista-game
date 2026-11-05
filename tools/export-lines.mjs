@@ -267,7 +267,7 @@ for (const [g, ids] of groups) {
     md.push(`#### ${nameOf(id)} (\`${id}\`) · ${arr.length}줄`, '');
     const qid = qOwner[id];
     if (qid && qid !== id) md.push(`> 목소리: ${nameOf(qid)}의 목소리를 함께 씀`, '');
-    else if (qid) md.push(`> 목소리: ${qcast[qid].ko}${qcast[qid].keep ? ' (직업 마1스톤의 지금 목소리를 이어 받을지는 검수 13.55)' : ''}`, '>', `> 본보기 문장: “${qcast[qid].ref}”`, '');
+    else if (qid) md.push(`> 목소리: ${qcast[qid].ko}`, '>', `> 본보기 문장: “${qcast[qid].ref}”${qcast[qid].pick ? ` · 고른 목소리: ${qcast[qid].pick}(\`${qcast[qid].refFile}\`)` : ''}`, '');
     md.push('| # | 대사 | 나오는 곳 |', '| ---: | :--- | :--- |');
     arr.forEach((x, i) => {
       const where = [...new Set(x.eps.map(placeName))];
