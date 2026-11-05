@@ -3,7 +3,7 @@
  *   node tools/voice/qwen-listen.mjs [--dir 음성 폴더] [--per N] [--all]
  * 음성 폴더(기본 assets/voice, 시험은 --dir assets/_src/_check/voice_qwen/run_test)의 qwen_made.json · manifest.json 을 읽어,
  * 사람마다 '들어 볼 줄'(목소리 · 길이 표시) 모두 + 감정이 큰 줄 몇 개(--per, 기본 6, --all 이면 모두)를 골라
- * assets/_src/_check/voice_qwen/listen/(index.html · a/*.ogg)에 둡니다. claude.ai 비공개 페이지로 올리면
+ * assets/_src/_check/voice_qwen/listen2/(index.html · a/*.ogg)에 둡니다. claude.ai 비공개 페이지로 올리면
  * 줄마다 [다시 만들기]를 눌러 둘 수 있고(db 'redo/{key}'), Claude 가 읽어 그 줄만 다시 만듭니다(--keys).
  */
 
@@ -16,7 +16,7 @@ const arg = (n, d) => { const i = process.argv.indexOf(n); return i > 0 ? proces
 const dir = path.resolve(root, arg('--dir', 'assets/voice'));
 const per = Number(arg('--per', 6));
 const all = process.argv.includes('--all');
-const OUT = path.join(root, 'assets', '_src', '_check', 'voice_qwen', 'listen');
+const OUT = path.join(root, 'assets', '_src', '_check', 'voice_qwen', 'listen2');
 const rd = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const made = rd(path.join(dir, fs.existsSync(path.join(dir, 'qwen_made.json')) ? 'qwen_made.json' : '../../tools/voice/qwen_made.json'));
 const manifest = rd(path.join(dir, 'manifest.json')).lines;
@@ -51,7 +51,7 @@ const people = order.map((id) => {
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const total = Object.values(byWho).reduce((n, a) => n + a.length, 0);
 const nflag = Object.values(byWho).reduce((n, a) => n + a.filter((x) => x.flag).length, 0);
-const html = `<title>바리스타3 음성 듣기</title>
+const html = `<title>바리스타3 음성 듣기 2</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=Noto+Sans+KR:wght@400;600&display=swap">
@@ -98,6 +98,12 @@ button { font: inherit; cursor: pointer; }
 .playing .ic { width: 9px; height: 11px; border: 0; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
 button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .num { font-variant-numeric: tabular-nums; }
+.bar { position: sticky; bottom: 0; z-index: 2; background: var(--plate); border-top: 1px solid var(--gold-dim); margin: 0 -16px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.bar .save { font-size: 14px; }
+.bar button { background: transparent; color: var(--gold); border: 1px solid var(--gold-dim); border-radius: 999px; padding: 6px 14px; min-height: 36px; }
+.bar button[disabled] { opacity: .45; cursor: default; }
+#list { display: none; width: 100%; min-height: 9em; box-sizing: border-box; background: var(--parch); color: var(--ink); border-radius: 10px; border: 0; padding: 10px; font: 13px/1.5 var(--font-body); }
+#list.on { display: block; }
 @media (max-width: 600px) { li { grid-template-columns: auto minmax(0, 1fr); } .redo-b { grid-column: 1 / -1; justify-self: start; } .meta { grid-column: 1 / -1; } }
 </style>
 <div class="wrap">
@@ -105,7 +111,7 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
     <h1>바리스타3 음성 듣기</h1>
     <p class="lede">Qwen3로 만든 대사를 사람마다 몇 줄씩 들어 봅니다. 노란 테두리는 도구가 '들어 볼 줄'로 표시한 것(목소리가 덜 닮았거나 길이가 어긋남)이고, 나머지는 감정이 큰 줄입니다. 다르게 들리는 줄은 [다시 만들기]를 눌러 두세요.</p>
   </header>
-  <div class="sum"><span>만든 줄 <b>${total.toLocaleString('en-US')}</b></span><span>들어 볼 줄 <b>${nflag}</b></span><span>이 화면의 줄 <b>${people.reduce((n, p) => n + p.rows.length, 0)}</b></span><span class="save" id="save" aria-live="polite"></span></div>
+  <div class="sum"><span>만든 줄 <b>${total.toLocaleString('en-US')}</b></span><span>들어 볼 줄 <b>${nflag}</b></span><span>이 화면의 줄 <b>${people.reduce((n, p) => n + p.rows.length, 0)}</b></span></div>
   ${people.map((p) => `
   <section class="person" aria-labelledby="h-${p.id}">
     <div class="head">
@@ -121,6 +127,7 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
       </li>`).join('')}
     </ol>
   </section>`).join('')}
+  <div class="bar"><span>다시 만들 줄 <b id="cnt">0</b></span><span class="save" id="save" aria-live="polite">표시를 불러오는 중이에요.</span><button type="button" id="show" disabled>표시한 줄 모아 보기</button><button type="button" id="copy" hidden>복사하기</button><textarea id="list" readonly aria-label="다시 만들 줄 목록"></textarea></div>
 </div>
 <script>
 (() => {
@@ -131,28 +138,69 @@ button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
   const endSeq = () => { queue = []; if (seqBtn) seqBtn.classList.remove('playing'); seqBtn = null; };
   const play = (b) => { stop(); cur = b; b.classList.add('playing'); audio.src = b.dataset.src; audio.play().catch(stop); };
   audio.addEventListener('ended', () => { if (cur) cur.classList.remove('playing'); cur = null; const n = queue.shift(); if (n) setTimeout(() => play(n), 400); else endSeq(); });
+  // 표시는 이 브라우저에도 기억하고(localStorage, 다시 열어도 남음), 페이지 db 'redo/{key}'에 저장해 Claude 가 읽음.
+  // db 가 늦게 오거나 저장이 안 되는 화면이어도 표시가 사라지지 않고, [표시한 줄 모아 보기]로 글로 옮길 수 있음.
+  const LS = 'b3listen.redo';
   const redo = {};
-  const paint = () => document.querySelectorAll('li[data-key]').forEach((li) => { const on = !!redo[li.dataset.key]; li.classList.toggle('redo', on); li.querySelector('.redo-b').setAttribute('aria-pressed', String(on)); });
-  let db = null;
+  const pending = new Set();
+  try { for (const k of JSON.parse(localStorage.getItem(LS) || '[]')) redo[k] = true; } catch (e) {}
+  const keep = () => { try { localStorage.setItem(LS, JSON.stringify(Object.keys(redo))); } catch (e) {} };
+  const say = (t, bad) => { $('#save').textContent = t; $('#save').classList.toggle('bad', !!bad); };
+  const rowOf = (k) => document.querySelector('li[data-key="' + k + '"]');
+  const marked = () => Object.keys(redo).filter((k) => rowOf(k));
+  const listText = () => marked().map((k) => { const li = rowOf(k); return li.dataset.who + ' | ' + k + ' | ' + li.querySelector('.say').lastChild.textContent; }).join(String.fromCharCode(10));
+  const paint = () => {
+    document.querySelectorAll('li[data-key]').forEach((li) => { const on = !!redo[li.dataset.key]; li.classList.toggle('redo', on); li.querySelector('.redo-b').setAttribute('aria-pressed', String(on)); });
+    const n = marked().length;
+    $('#cnt').textContent = n; $('#show').disabled = n === 0;
+    if ($('#list').classList.contains('on')) $('#list').value = listText();
+  };
+  let db = null, dbState = 'wait';
   const writing = {};
+  const NOSAVE = '이 화면에서는 저장되지 않아요. [표시한 줄 모아 보기]를 복사해 대화창에 붙여 주세요.';
   const save = (key, who, on) => {
-    if (!db) { $('#save').textContent = '이 화면에서는 저장되지 않아요. 다시 만들 줄을 대화창에 알려 주세요.'; $('#save').classList.add('bad'); return; }
+    keep();
+    if (!db) { if (dbState === 'none') say(NOSAVE, true); return; }
+    pending.add(key);
     const ref = db.collection('redo').doc(key);
     writing[key] = (writing[key] || Promise.resolve()).then(() => (on ? ref.set({ who, at: new Date().toISOString() }) : ref.delete()))
-      .then(() => { $('#save').textContent = '저장했어요'; $('#save').classList.remove('bad'); })
-      .catch(() => { $('#save').textContent = '저장하지 못했어요. 다시 만들 줄을 대화창에 알려 주세요.'; $('#save').classList.add('bad'); });
+      .then(() => { pending.delete(key); say('저장했어요'); })
+      .catch(() => { pending.delete(key); say('저장하지 못했어요. [표시한 줄 모아 보기]를 복사해 대화창에 붙여 주세요.', true); });
   };
   document.addEventListener('click', (e) => {
     const b = e.target.closest('button');
     if (!b) return;
     if (b.classList.contains('seq')) { const was = seqBtn === b; endSeq(); stop(); if (was) return; seqBtn = b; b.classList.add('playing'); queue = [...document.querySelectorAll('li[data-who="' + b.dataset.seq + '"] .play')]; play(queue.shift()); return; }
     if (b.classList.contains('play')) { endSeq(); if (cur === b) { stop(); return; } play(b); return; }
-    if (b.classList.contains('redo-b')) { const k = b.dataset.key; redo[k] = !redo[k]; paint(); save(k, b.closest('li').dataset.who, redo[k]); }
+    if (b.classList.contains('redo-b')) { const k = b.dataset.key; if (redo[k]) delete redo[k]; else redo[k] = true; paint(); save(k, b.closest('li').dataset.who, !!redo[k]); return; }
+    if (b.id === 'show') { const on = !$('#list').classList.contains('on'); $('#list').classList.toggle('on', on); $('#copy').hidden = !on; b.textContent = on ? '목록 닫기' : '표시한 줄 모아 보기'; paint(); return; }
+    if (b.id === 'copy') {
+      const t = $('#list'); t.select();
+      const ok = () => say('복사했어요. 대화창에 붙여 주세요.');
+      const old = () => { try { document.execCommand('copy'); ok(); } catch (e) { say('목록을 길게 눌러 복사해 주세요.', true); } };
+      if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(ok, old); else old();
+    }
   });
+  paint();
   (async () => {
     db = window.claude && window.claude.use ? await window.claude.use('db') : null;
-    if (!db) { $('#save').textContent = '[다시 만들기]는 claude.ai 페이지에서 저장돼요.'; return; }
-    db.collection('redo').onSnapshot((snap) => { for (const k of Object.keys(redo)) delete redo[k]; for (const d of snap.docs) redo[d.id] = true; paint(); }, () => { $('#save').textContent = '저장된 표시를 불러오지 못했어요.'; $('#save').classList.add('bad'); });
+    if (!db) { dbState = 'none'; say(marked().length ? NOSAVE : '이 화면에서는 표시가 이 브라우저에만 남아요. 다 고른 뒤 [표시한 줄 모아 보기]를 복사해 대화창에 붙여 주세요.', true); return; }
+    dbState = 'ok';
+    let first = true;
+    db.collection('redo').onSnapshot((snap) => {
+      const there = new Set(snap.docs.map((d) => d.id));
+      if (first) {
+        // 처음: 저장되기 전에 누른 표시(이 브라우저에만 있던 것)를 db 에 올리고, db 에 있는 것은 더함
+        first = false;
+        for (const k of Object.keys(redo)) if (!there.has(k) && rowOf(k)) save(k, rowOf(k).dataset.who, true);
+        for (const k of there) redo[k] = true;
+        if (!pending.size) say('표시하면 바로 저장돼요');
+      } else {
+        for (const k of Object.keys(redo)) if (!there.has(k) && !pending.has(k)) delete redo[k];
+        for (const k of there) if (!pending.has(k)) redo[k] = true;
+      }
+      keep(); paint();
+    }, () => say('저장된 표시를 불러오지 못했어요. [표시한 줄 모아 보기]를 복사해 대화창에 붙여 주세요.', true));
   })();
 })();
 </script>
