@@ -45,7 +45,7 @@ export const CHARS = {
     svg: { skin: '#F2D0B4', hair: '#4A3528', style: 'long', outfit: '#D9B44A', acc: [], bg: '#F6EED6' },
   },
   granddaughter: {
-    name: '손녀', role: '해순 할머니의 손녀', color: '#C77D8E', voice: 'customer_f',
+    name: '손녀', role: '해순 할머니의 손녀', color: '#C77D8E', voice: 'granddaughter', // 2026-11-05 자기 목소리(Qwen3, 검수 13.58): 전에는 여자 손님(customer_f)과 나눠 씀
     standScale: 0.85,
     svg: { skin: '#F6D5C0', hair: '#2E2420', style: 'ponytail', outfit: '#E8A9B8', acc: [], bg: '#FCE8EE' },
   },
@@ -254,14 +254,16 @@ export function voiceOf(who, kind) {
 }
 
 /**
- * 의상(그림)에 따라 목소리가 다른 인물: 이름 없는 손님은 에피소드마다 다른 사람이라 여성 그림이면 여성 목소리.
- * 음성 목록 도구(export-lines)도 에피소드의 costume 으로 같은 규칙을 씀
+ * 의상(그림)에 따라 목소리가 다른 인물: 이름 없는 손님은 에피소드마다 다른 사람이라 옷차림(그림)마다 자기 목소리.
+ * 음성 파일 이름이 '목소리 | 문장'이라, 목소리 id 가 같으면 같은 문장을 한 파일로 나눠 씀 → 옷차림마다 id 를 따로(2026-11-05, 검수 13.58.
+ * 전에는 여자 손님 넷이 customer_f, 줄무늬 청년이 customer 를 나눠 씀). 음성 목록 도구(export-lines)도 에피소드의 costume 으로 같은 규칙을 씀
  */
 export const COSTUME_VOICE = {
-  'customer-olive': 'customer_f', // 올리브 블라우스 여성 손님
-  'customer-coffee': 'customer_f', // 커피를 든 여성 손님
-  'customer-sporty': 'customer_f', // 물병을 든 운동복 여성 손님(여름 관광객)
-  'customer-arms': 'customer_f', // 팔짱 낀 여성 손님
+  'customer-olive': 'customer-olive', // 올리브 블라우스 여성 손님
+  'customer-coffee': 'customer-coffee', // 커피를 든 여성 손님
+  'customer-sporty': 'customer-sporty', // 물병을 든 운동복 여성 손님(여름 관광객)
+  'customer-arms': 'customer-arms', // 팔짱 낀 여성 손님
+  'customer-stripe': 'customer-stripe', // 안경 · 줄무늬 셔츠 · 헤드폰 청년
 };
 export function costumeVoice(who, map) {
   const c = map?.[who];

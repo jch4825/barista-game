@@ -145,12 +145,6 @@
    "ko": "공손하게 확인하듯",
    "en": "Politely double-checking the order."
   },
-  "83616728": {
-   "who": "granddaughter",
-   "text": "조금 미지근하네요.",
-   "ko": "가볍게 한마디, 탓하지 않고",
-   "en": "A light remark, without blame."
-  },
   "92172317": {
    "who": "owner",
    "text": "도 씨예요. 서른 해 동안 이 골목의 편지를 다 나른 우체부예요.",
@@ -174,6 +168,12 @@
    "text": "괜찮아요. 잘 마실게요.",
    "ko": "작고 조용하게",
    "en": "Small and quiet."
+  },
+  "ccb28d2b": {
+   "who": "granddaughter",
+   "text": "조금 미지근하네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
   },
   "873140f3": {
    "who": "think",
@@ -2083,37 +2083,37 @@
    "ko": "신기해하며 궁금해서",
    "en": "Curious and amused."
   },
-  "3796d0fa": {
+  "e8c7ea7f": {
    "who": "granddaughter",
    "text": "이건 제가 주문한 게 아니네요.",
    "ko": "가볍고 상냥하게 알려 줌",
    "en": "Light and friendly, pointing it out."
   },
-  "a740e0fc": {
+  "60480f59": {
    "who": "granddaughter",
    "text": "네, 기다릴게요.",
    "ko": "상냥하게",
    "en": "Friendly."
   },
-  "0dcc1cd0": {
+  "16f8effd": {
    "who": "granddaughter",
    "text": "괜찮아요. 잘 마실게요.",
    "ko": "상냥하게, 괜찮다고",
    "en": "Friendly and easygoing."
   },
-  "cb17de10": {
+  "446397e5": {
    "who": "granddaughter",
    "text": "네, 맞아요.",
    "ko": "평소",
    "en": ""
   },
-  "28829d09": {
+  "8b1f847a": {
    "who": "granddaughter",
    "text": "네, 따뜻하게 주세요.",
    "ko": "평소",
    "en": ""
   },
-  "87189a3f": {
+  "dcb901b6": {
    "who": "granddaughter",
    "text": "좋아요, 그걸로 주세요.",
    "ko": "평소",
@@ -2125,13 +2125,13 @@
    "ko": "공손하게 확인하듯",
    "en": "Politely double-checking the order."
   },
-  "6ab9045d": {
+  "d0e3aa4a": {
    "who": "granddaughter",
    "text": "양이 조금 적네요.",
    "ko": "가볍게 한마디, 탓하지 않고",
    "en": "A light remark, without blame."
   },
-  "f9872824": {
+  "1971beab": {
    "who": "granddaughter",
    "text": "조금 넘쳤네요.",
    "ko": "가볍게 한마디, 탓하지 않고",
@@ -3631,7 +3631,7 @@
    "ko": "바쁘지만 공손하게 확인",
    "en": "Busy but polite, double-checking."
   },
-  "698307b8": {
+  "94dfbc97": {
    "who": "granddaughter",
    "text": "조금 뜨겁네요.",
    "ko": "가볍게 한마디, 탓하지 않고",
@@ -6493,7 +6493,7 @@
    "ko": "미소 지으며 자랑스럽고 기쁘게",
    "en": "Smiling, proud and happy."
   },
-  "e6f3731e": {
+  "5e344f43": {
    "who": "granddaughter",
    "text": "안녕하세요! 할머니가 여기 우유가 제일 맛있대요.",
    "ko": "밝고 신나게 또랑또랑",
@@ -6505,7 +6505,7 @@
    "ko": "조심스럽게 궁리하는 혼잣말",
    "en": "Carefully thinking it over."
   },
-  "018407b8": {
+  "041b5fd5": {
    "who": "granddaughter",
    "text": "할아버지 것도 있네!",
    "ko": "신나서 반갑게",
@@ -6517,7 +6517,7 @@
    "ko": "미소 지으며 다정하고 애틋하게",
    "en": "Smiling, tender and loving."
   },
-  "3d90e4a1": {
+  "351cfebc": {
    "who": "granddaughter",
    "text": "한 잔 더 주세요. 할아버지 거요.",
    "ko": "또랑또랑하게, 진지하고 귀엽게",
@@ -6547,31 +6547,31 @@
    "ko": "조금 아쉽지만 배우는 혼잣말",
    "en": "A little regretful, learning."
   },
-  "0cb450d8": {
+  "3644fd1d": {
    "who": "granddaughter",
    "text": "저도 따뜻한 우유요!",
    "ko": "신나서 밝게",
    "en": "Excited and bright."
   },
-  "adc02e0a": {
+  "cc6ef4f7": {
    "who": "granddaughter",
    "text": "할머니 거랑 똑같다!",
    "ko": "신나서 기쁘게",
    "en": "Delighted and excited."
   },
-  "8b93c9dc": {
+  "c6bdc497": {
    "who": "granddaughter",
    "text": "양이 조금 많네요.",
    "ko": "가볍게 한마디, 아이답게",
    "en": "A light, childlike remark."
   },
-  "fcc1d9d7": {
+  "8ca6983c": {
    "who": "granddaughter",
    "text": "거품이 조금 거칠네요.",
    "ko": "가볍게 한마디, 아이답게",
    "en": "A light, childlike remark."
   },
-  "b0092c0a": {
+  "db33a1bf": {
    "who": "granddaughter",
    "text": "거품이 조금 적네요.",
    "ko": "가볍게 한마디, 아이답게",
@@ -6583,7 +6583,7 @@
    "ko": "다정하게, 조용히",
    "en": "Kind and quiet."
   },
-  "5221151a": {
+  "e8a9e43f": {
    "who": "granddaughter",
    "text": "할아버지는 제가 아기 때 돌아가셨대요. 그래도 할머니는 여기 오면 할아버지 우유를 꼭 시킨대요.",
    "ko": "속삭이듯 조용히, 아이답게 진지하게",

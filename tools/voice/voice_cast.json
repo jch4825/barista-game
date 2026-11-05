@@ -113,7 +113,7 @@
   },
   "eunju": {
     "voice": "F1",
-    "speed": 1.0
+    "speed": 1
   },
   "sumin": {
     "voice": "F2",
@@ -146,5 +146,29 @@
   "han_daughter": {
     "voice": "F2",
     "speed": 1.15
+  },
+  "granddaughter": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "customer-olive": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "customer-coffee": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "customer-sporty": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "customer-arms": {
+    "voice": "F5",
+    "speed": 1.05
+  },
+  "customer-stripe": {
+    "voice": "M1",
+    "speed": 1
   }
 }

@@ -329,7 +329,7 @@ const sounds = AUDIO_MAP.filter((e) => e.kind !== 'bgm').map((e) => ({
 
 /* ---------------- 5. 음성 ---------------- */
 // 목소리 ID → 보일 이름: 인물은 js/data/characters.js 의 이름, 인물이 아닌 목소리만 여기에
-const VOICE_LABEL = { think: '속마음', narr: '서술', sys: '안내 목소리', customer: '손님(남자)', customer_f: '손님(여자)' };
+const VOICE_LABEL = { think: '속마음', narr: '서술', sys: '안내 목소리', customer: '손님(회색 머리 남자)', customer_f: '손님(여자)', granddaughter: '손녀', 'customer-olive': '손님(올리브 블라우스)', 'customer-coffee': '손님(커피를 든 여자)', 'customer-sporty': '손님(운동복 여자)', 'customer-arms': '손님(팔짱 낀 여자)', 'customer-stripe': '손님(줄무늬 셔츠 청년)' };
 const cast = JSON.parse(read('tools/voice/voice_cast.json'));
 const voiceManifest = JSON.parse(read('assets/voice/manifest.json'));
 const voices = {
