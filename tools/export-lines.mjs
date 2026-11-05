@@ -34,6 +34,8 @@ const { freeDay } = await imp('js/data/episodes/free.js');
 const cast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'voice_cast.json'), 'utf8'));
 // 다시 만들 목소리(Qwen3, 검수 13.55): 사람마다 목소리 설명 · 본보기 문장. 속마음 · 나레이션은 지은의 목소리(covers)
 const qcast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'qwen_cast.json'), 'utf8')).people;
+// 줄마다 감정 메모(검수 13.57): key → { ko, en }. 사람별 대본의 '감정' 칸
+const emo = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'emotions.json'), 'utf8')).lines;
 const qOwner = Object.fromEntries(Object.entries(qcast).flatMap(([id, v]) => [[id, id], ...(v.covers || []).map((c) => [c, id])]));
 
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째']; // overlays.js 와 같음
@@ -44,12 +46,16 @@ const voiceOf = (who) => costumeVoice(who, epCostume) || CHARS[who]?.voice || 'n
 /** 말하는 사람: 인물 id. 의상이 있는 인물(이름 없는 손님)은 옷차림까지 → 'customer-olive' */
 const spk = (who) => (epCostume?.[who] ? `${who}-${epCostume[who]}` : who);
 const by = new Map(); // key → Map(말하는 사람 → Set(나오는 곳))
+// 말한 차례(감정 메모를 쓸 때 앞뒤 대사를 보려고, --context 파일): 모든 줄을 나온 순서대로 · 줄마다 처음 나온 자리
+const stream = [];
+const firstAt = new Map();
 
-function add(voice, text, ep, who = voice) {
+function add(voice, text, ep, who = voice, face = '') {
   if (!text || /\{player/.test(text)) return; // 이름이 들어가는 줄은 실행할 때 브라우저 음성으로
   const spoken = speakable(text).trim();
   if (!spoken) return;
   const key = hashKey(`${voice}|${spoken}`);
+  if (ep !== 'free' || !firstAt.has(key)) { if (!firstAt.has(key)) firstAt.set(key, stream.length); stream.push({ key, who, face, ep, text }); }
   if (!lines.has(key)) { lines.set(key, { key, voice, text: spoken, ep }); by.set(key, new Map()); }
   const m = by.get(key);
   if (!m.has(who)) m.set(who, new Set());
@@ -59,7 +65,7 @@ function add(voice, text, ep, who = voice) {
 function walk(list, ep) {
   for (const b of list || []) {
     switch (b.t) {
-      case 'say': add(voiceOf(b.who), b.text, ep, spk(b.who)); break;
+      case 'say': add(voiceOf(b.who), b.text, ep, spk(b.who), b.face || ''); break;
       case 'narr': add('narr', b.text, ep); break;
       case 'think': add('think', b.text, ep); break;
       case 'sys': add('sys', b.text, ep); break;
@@ -248,6 +254,7 @@ md.push('## 1. 모아 보기', '');
 md.push(`- 말하는 사람 **${nPeople}명**(나레이션 · 속마음 · 안내 포함), 문장 **${out.length}줄**(같은 문장을 두 사람이 말하면 사람마다 셈: ${groups.reduce((n, [, ids]) => n + ids.reduce((m, id) => m + per.get(id).length, 0), 0)}줄)`);
 md.push(`- 지금 쓰는 Supertonic 목소리 **${voicesUsed.size}개**(M1~M5 · F1~F5)를 빠르기로 나눠 씀(\`tools/voice/voice_cast.json\`)`);
 md.push(`- 다시 만들 목소리(Qwen3, 검수 13.52 ~ 13.55): 사람마다 목소리 **${Object.keys(qcast).length}개**. 목소리 설명 · 본보기 문장은 \`tools/voice/qwen_cast.json\`(2장의 사람마다 '목소리'에 옮겨 적음)`);
+md.push(`- 줄마다 감정 메모(검수 13.57): **${out.filter((l) => emo[l.key]).length}줄**(\`tools/voice/emotions.json\`, 2장의 '감정' 칸). 감정 메모가 없는 줄은 감정 지시 없이 그 사람의 본보기 목소리대로 읽음`);
 if (silent.length) md.push(`- 이 게임에서 말하지 않는 인물(목소리가 필요 없음): ${silent.map((id) => `${nameOf(id)}(\`${id}\`)`).join(' · ')}`);
 md.push('');
 md.push('| 묶음 | 사람 | id | 하는 일 | 지금 목소리 · 빠르기 | 줄 | 글자 |', '| :--- | :--- | :--- | :--- | :--- | ---: | ---: |');
@@ -268,10 +275,12 @@ for (const [g, ids] of groups) {
     const qid = qOwner[id];
     if (qid && qid !== id) md.push(`> 목소리: ${nameOf(qid)}의 목소리를 함께 씀`, '');
     else if (qid) md.push(`> 목소리: ${qcast[qid].ko}`, '>', `> 본보기 문장: “${qcast[qid].ref}”${qcast[qid].pick ? ` · 고른 목소리: ${qcast[qid].pick}(\`${qcast[qid].refFile}\`)` : ''}`, '');
-    md.push('| # | 대사 | 나오는 곳 |', '| ---: | :--- | :--- |');
+    const emoOf = (x) => emo[hashKey(`${x.voice}|${x.text}`)]?.ko || '';
+    const hasEmo = arr.some(emoOf);
+    md.push(hasEmo ? '| # | 대사 | 감정 | 나오는 곳 |' : '| # | 대사 | 나오는 곳 |', hasEmo ? '| ---: | :--- | :--- | :--- |' : '| ---: | :--- | :--- |');
     arr.forEach((x, i) => {
       const where = [...new Set(x.eps.map(placeName))];
-      md.push(`| ${i + 1} | ${x.text.replace(/\|/g, '\\|')} | ${where.slice(0, 3).join(', ')}${where.length > 3 ? ` 외 ${where.length - 3}곳` : ''} |`);
+      md.push(`| ${i + 1} | ${x.text.replace(/\|/g, '\\|')} |${hasEmo ? ` ${emoOf(x)} |` : ''} ${where.slice(0, 3).join(', ')}${where.length > 3 ? ` 외 ${where.length - 3}곳` : ''} |`);
     });
     md.push('');
   }
@@ -284,3 +293,9 @@ for (const [g, ids] of groups) for (const id of ids) {
 }
 fs.writeFileSync(path.join(root, 'tools', 'voice', 'people.json'), `${JSON.stringify(people)}\n`);
 console.log(`사람별 목록 ${nPeople}명 → docs/voice_lines.md · tools/voice/people.json`);
+// 말한 차례(--context 파일 경로): 감정 메모 작업용. 자유 영업은 줄마다 처음 나온 곳만
+const ci = process.argv.indexOf('--context');
+if (ci > 0 && process.argv[ci + 1]) {
+  fs.writeFileSync(process.argv[ci + 1], JSON.stringify({ stream, firstAt: Object.fromEntries(firstAt) }));
+  console.log(`말한 차례 ${stream.length}줄 → ${process.argv[ci + 1]}`);
+}

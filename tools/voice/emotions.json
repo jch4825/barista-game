@@ -1,0 +1,7307 @@
+{
+ "_comment": "줄마다 감정 메모(2026-11-05, 검수 13.57): Qwen3 로 만들 때 Base 가 그 사람의 본보기 소리를 듣고 en 을 감정 지시로 함께 받아 읽음(새 ②). ko 는 사람이 읽는 것. 평소(en 빈칸)는 감정 지시 없이 본보기대로. key 는 tools/voice/lines.json 의 key(목소리 | 문장), 같은 사람의 같은 문장은 한 줄이라 처음 나오는 장면을 보고 정함. who · text 는 읽기 편하게 옮겨 둔 것. 범위: 지은(속마음 포함) · 사장님 · 단골 8명 · 이야기의 다른 인물 7명(1,217줄). 나레이션 · 직업 마1스톤 인물 · 이름 없는 손님 · 안내는 아직 없음(평소로 읽음).",
+ "lines": {
+  "11612034": {
+   "who": "think",
+   "text": "수민은 봉투를 혼자 열기 무서운 것 같다. 어떻게 할까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering."
+  },
+  "14076083": {
+   "who": "do",
+   "text": "우편이요! 아, 새 사람이 왔네요, 반가워요.",
+   "ko": "밝고 반갑게, 힘차게",
+   "en": "Bright and hearty, glad to meet her."
+  },
+  "24610438": {
+   "who": "jian",
+   "text": "거품이 조금 많네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "26903279": {
+   "who": "jieun",
+   "text": "이제 물 끓이기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "28574495": {
+   "who": "sumin",
+   "text": "물이 조금 미지근하네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "28613202": {
+   "who": "owner",
+   "text": "오늘은 추천 메뉴를 찾는 손님이 많을 거예요.",
+   "ko": "미소 지으며 담담하게, 살짝 기대감",
+   "en": "Smiling, calm, a little anticipation."
+  },
+  "29723467": {
+   "who": "jian",
+   "text": "네, 딸기우유로 할게요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "35296930": {
+   "who": "noh",
+   "text": "허, 지나가다 들렀다니까.",
+   "ko": "헛기침하듯 무뚝뚝하게 둘러대며",
+   "en": "Gruffly brushing it off."
+  },
+  "35630280": {
+   "who": "geum",
+   "text": "얼음이 조금 적네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "46457417": {
+   "who": "owner",
+   "text": "농담이다.",
+   "ko": "무뚝뚝하게, 목소리에 살짝 웃음",
+   "en": "Deadpan, revealing it was a joke; a faint smile in the voice."
+  },
+  "47505748": {
+   "who": "think",
+   "text": "혼자서도 두 잔을 끝까지 만들었다. 가슴이 조금 두근거렸지만, 순서는 하나도 빠뜨리지 않았다.",
+   "ko": "두근거렸지만 뿌듯한 혼잣말",
+   "en": "Heart racing, but proud."
+  },
+  "48564309": {
+   "who": "geum",
+   "text": "얼음이 조금 많네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "54741829": {
+   "who": "jian",
+   "text": "구석에서 마실게요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "54803338": {
+   "who": "do",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "허허 웃으며 너그럽게",
+   "en": "Chuckling, easygoing."
+  },
+  "55370159": {
+   "who": "do",
+   "text": "조금 연하네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "56478032": {
+   "who": "kang",
+   "text": "…괜찮아요. 블랙이나 줘요.",
+   "ko": "무뚝뚝하게 툭, 낮게",
+   "en": "Gruff and low, brushing it off."
+  },
+  "57062717": {
+   "who": "think",
+   "text": "누가 고쳤는지, 사장님도 아실 것이다. 그래도 사장님도 노 씨도 서로 아무 말 하지 않는다.",
+   "ko": "조용히 알아차리며 마음이 따뜻해짐",
+   "en": "Quietly understanding, warmed."
+  },
+  "62195731": {
+   "who": "agent",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "바쁘게 짧게",
+   "en": "Brief and busy."
+  },
+  "62776629": {
+   "who": "kang",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "66328933": {
+   "who": "owner",
+   "text": "컵 잘 닦고.",
+   "ko": "작게 미소 지으며 무뚝뚝한 다정함",
+   "en": "A small smile, gruff tenderness."
+  },
+  "67356082": {
+   "who": "kang",
+   "text": "…여름에 배를 팔았어. 서른 해 동안 탄 배였지.",
+   "ko": "한참 쉬고 낮고 무겁게, 처음 털어놓듯",
+   "en": "After a long pause, low and heavy, confessing for the first time."
+  },
+  "72963229": {
+   "who": "do",
+   "text": "배달이 하나 남았어요. 이건 내가 쓴 편지예요.",
+   "ko": "미소 지으며 쑥스럽고 설레게",
+   "en": "Smiling, shy and a little excited."
+  },
+  "79657901": {
+   "who": "jian",
+   "text": "달고 따뜻하다. 고마워요.",
+   "ko": "작게 감탄하며 고마워함",
+   "en": "Quietly delighted, thankful."
+  },
+  "82060137": {
+   "who": "jieun",
+   "text": "따뜻한 아메리카노 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "83616728": {
+   "who": "granddaughter",
+   "text": "조금 미지근하네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "92172317": {
+   "who": "owner",
+   "text": "도 씨예요. 서른 해 동안 이 골목의 편지를 다 나른 우체부예요.",
+   "ko": "차분하게 소개, 살짝 정겹게",
+   "en": "Calmly introducing, with warmth."
+  },
+  "92675047": {
+   "who": "jian",
+   "text": "고마워요.",
+   "ko": "작고 조용하게 고마워함",
+   "en": "Small and quiet, thankful."
+  },
+  "97122314": {
+   "who": "sumin",
+   "text": "얼음이 조금 적네요.",
+   "ko": "작고 무뚝뚝하게 한마디",
+   "en": "A small, flat remark."
+  },
+  "98302317": {
+   "who": "jian",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "873140f3": {
+   "who": "think",
+   "text": "나는 서두르면 꼭 쏟는다. 천천히 하면 누구보다 정확하게 만들 수 있는데.",
+   "ko": "스스로를 탓하듯 조용히, 조금 씁쓸하게",
+   "en": "Quietly blaming herself, a little bitter."
+  },
+  "358f16b0": {
+   "who": "think",
+   "text": "그 카페에는 천천히 할 시간이 없었다. 그래서 석 달 만에 앞치마를 벗었다.",
+   "ko": "담담하지만 쓸쓸하게 지난 일을 떠올림",
+   "en": "Calmly recalling the past, with a quiet sadness."
+  },
+  "7f42a234": {
+   "who": "think",
+   "text": "서두르지 않는 사람을 찾는 카페도 있구나. 나는 그 한 줄을 몇 번이나 다시 읽고, 다음 날 짐을 쌌다.",
+   "ko": "작은 설렘과 결심이 묻어나게",
+   "en": "With a small flutter of hope and quiet resolve."
+  },
+  "d551d41e": {
+   "who": "think",
+   "text": "가슴이 두근거려서 가만히 앉아 있을 수가 없다. 창밖으로 지나가는 갈매기랑 고깃배를 하나씩 세어 보면, 마음이 조금 가라앉을 것 같다.",
+   "ko": "두근거리고 설레서 조금 들뜬 혼잣말",
+   "en": "Excited and nervous, a little breathless, talking to herself."
+  },
+  "00b1aee7": {
+   "who": "think",
+   "text": "여기 사람들은 기다려 주는구나. 그것만으로도 마음이 조금 놓인다.",
+   "ko": "마음이 놓여 살짝 안도하며",
+   "en": "Softly relieved, feeling a little reassured."
+  },
+  "900f1847": {
+   "who": "owner",
+   "text": "…밖에 바람이 차요. 추운데, 일단 들어와요.",
+   "ko": "낯선 이를 걱정하듯 담담하고 다정하게, 첫마디 앞에 잠깐 쉼",
+   "en": "Gently concerned for a stranger in the cold; a brief pause first, then calm and kind."
+  },
+  "99324ce6": {
+   "who": "owner",
+   "text": "큰 가방을 메고 왔네요. 혹시 문에 붙인 그 구인 글 보고 왔어요?",
+   "ko": "짐작하듯 천천히, 담담하게 묻기",
+   "en": "Slowly and calmly asking, as if he already guesses."
+  },
+  "be588feb": {
+   "who": "jieun",
+   "text": "네, 저는 지은이라고 해요. 직업 학교에서 바리스타 일을 배웠어요.",
+   "ko": "처음 만난 사람 앞에서 긴장해 조금 머뭇거리며 공손하게",
+   "en": "Nervous and a little timid, introducing herself politely; slightly hesitant."
+  },
+  "1c402d0a": {
+   "who": "owner",
+   "text": "전에 카페에서 일해 본 적은 있어요?",
+   "ko": "담담하고 차분하게 묻기",
+   "en": "Calm, plain question."
+  },
+  "46bb11cc": {
+   "who": "jieun",
+   "text": "도시의 큰 카페에서 석 달 일했어요. 그런데 저는 손이 느려서, 서두르면 자꾸 쏟았어요.",
+   "ko": "부끄러운 일을 털어놓듯 조용히, 끝으로 갈수록 작아짐",
+   "en": "Quietly confessing something embarrassing; a little ashamed, voice growing softer toward the end."
+  },
+  "62ae2a8a": {
+   "who": "think",
+   "text": "말해 버렸다. 숨기고 싶었는데, 처음부터 다 말해 버렸다.",
+   "ko": "후회와 놀람이 섞인 작은 혼잣말",
+   "en": "A small, flustered inner voice, regretful and surprised at herself."
+  },
+  "4f9a4169": {
+   "who": "owner",
+   "text": "이야기는 나중에 해요. 손이 차니까, 이것부터 마셔요.",
+   "ko": "말을 돌리며 다정하게, 따뜻하게 챙김",
+   "en": "Kindly changing the subject, warm and caring."
+  },
+  "b63cb82c": {
+   "who": "think",
+   "text": "따뜻하다. 도시에서는 무엇이든 한 번도 천천히 마셔 본 적이 없었다.",
+   "ko": "따뜻함에 마음이 풀리며 조용히 감동",
+   "en": "Gently moved by the warmth, quiet and soft."
+  },
+  "ba94e8c2": {
+   "who": "owner",
+   "text": "다 마셨으면, 이번에는 나한테 한 잔 만들어 줘요.",
+   "ko": "담담하게, 살짝 시험하듯",
+   "en": "Calm and plain, as if quietly testing her."
+  },
+  "502d8414": {
+   "who": "owner",
+   "text": "방금 마신 그 따뜻한 우유요. 빨리 말고, 천천히.",
+   "ko": "차분하지만 단단하게, 마지막 말에 힘을 줌",
+   "en": "A calm, kind but firm request; slow, gentle emphasis on the last word."
+  },
+  "69f2feb5": {
+   "who": "think",
+   "text": "시험이구나. 손이 떨리면 안 되는데.",
+   "ko": "긴장해서 스스로에게 다짐하듯",
+   "en": "Tense, steeling herself under her breath."
+  },
+  "6ca7436a": {
+   "who": "think",
+   "text": "천천히 하라고 하셨다. 순서대로 하나씩 하면 된다.",
+   "ko": "숨을 고르며 차분히 스스로를 다독임",
+   "en": "Taking a breath, calmly reassuring herself."
+  },
+  "fde626e7": {
+   "who": "owner",
+   "text": "작업대는 처음이죠? 순서만 알려 줄게요.",
+   "ko": "담담하고 친절하게 알려 줌",
+   "en": "Calm and kind, explaining simply."
+  },
+  "3f72611f": {
+   "who": "owner",
+   "text": "틀려도 괜찮아요. 천천히 해요.",
+   "ko": "긴장한 젊은이를 달래듯 아주 따뜻하고 부드럽게",
+   "en": "Reassuring and soothing, very warm, as if calming a nervous young person."
+  },
+  "2365c93b": {
+   "who": "jieun",
+   "text": "이제 원두 갈기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "de149580": {
+   "who": "jieun",
+   "text": "이제 꾹 누르기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "39f8fd36": {
+   "who": "jieun",
+   "text": "이제 샷 내리기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "a58ac0d1": {
+   "who": "jieun",
+   "text": "이제 얼음 담기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "416d23c2": {
+   "who": "jieun",
+   "text": "이제 시럽 넣기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "e42bd8ba": {
+   "who": "jieun",
+   "text": "이제 청 떠 넣기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "644cdff7": {
+   "who": "jieun",
+   "text": "이제 가루 떠 넣기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "511da82b": {
+   "who": "jieun",
+   "text": "이제 말차 풀기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "06391c0c": {
+   "who": "jieun",
+   "text": "이제 우유 데우기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "905485b3": {
+   "who": "jieun",
+   "text": "이제 거품 내기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "99ae3b14": {
+   "who": "jieun",
+   "text": "이제 피처에 우유 붓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "466e0e1b": {
+   "who": "jieun",
+   "text": "이제 피처 톡톡은 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "9c266322": {
+   "who": "jieun",
+   "text": "이제 붓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "c8693605": {
+   "who": "jieun",
+   "text": "이제 물 붓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "4f3e32b9": {
+   "who": "jieun",
+   "text": "이제 우리기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "83d8e771": {
+   "who": "jieun",
+   "text": "이제 손으로 원두 갈기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "d6496e69": {
+   "who": "jieun",
+   "text": "이제 뜸 붓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "4e9523fe": {
+   "who": "jieun",
+   "text": "이제 뜸 들이기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "a52d086f": {
+   "who": "jieun",
+   "text": "이제 나선 붓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "bccd779b": {
+   "who": "jieun",
+   "text": "이제 젓기는 눈 감고도 할 수 있겠다.",
+   "ko": "뿌듯해서 작게 혼잣말하듯",
+   "en": "Quietly pleased and proud, murmuring to herself."
+  },
+  "b5239b61": {
+   "who": "owner",
+   "text": "…새 메뉴로 하자.",
+   "ko": "무뚝뚝하게, 진지한 척",
+   "en": "Deadpan, pretending to be serious."
+  },
+  "eddfc961": {
+   "who": "jieun",
+   "text": "네?!",
+   "ko": "깜짝 놀라 당황해서",
+   "en": "Startled and flustered."
+  },
+  "5ab1b80e": {
+   "who": "owner",
+   "text": "…싱겁다. 바다가 조금 들어갔나.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "36f011a8": {
+   "who": "owner",
+   "text": "…커피에서 딸기 맛이 나네. 봄이구나.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "0760aa0e": {
+   "who": "owner",
+   "text": "…시큼하고 쓰네. 정신이 번쩍 든다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "94a30a0f": {
+   "who": "owner",
+   "text": "…눈이 번쩍 떠지네. 오늘 밤엔 못 자겠다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "2f68ba2b": {
+   "who": "owner",
+   "text": "…구수하네. 시골 할머니 댁 맛이다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "ad16f101": {
+   "who": "owner",
+   "text": "…우유가 몽글몽글해졌네. 유자가 놀랐나 보다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "8c2a98cd": {
+   "who": "owner",
+   "text": "…초록인지 갈색인지 모르겠다. 맛은 괜찮네.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "550d0fca": {
+   "who": "owner",
+   "text": "…달다. 이건 그 갈매기한테 줘야겠다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "eb6a2320": {
+   "who": "owner",
+   "text": "…색이 다섯 가지쯤 보이네. 맛은 하나도 모르겠다.",
+   "ko": "무뚝뚝한 농담, 웃음을 참으며",
+   "en": "Dry deadpan humor after tasting a strange drink, holding back a smile."
+  },
+  "1be68495": {
+   "who": "owner",
+   "text": "…무슨 맛인지 모르겠다. 그래도 따뜻하네.",
+   "ko": "무뚝뚝한 농담, 끝은 조금 따뜻하게",
+   "en": "Dry deadpan humor, softening warmly at the end."
+  },
+  "a4e0547d": {
+   "who": "jieun",
+   "text": "죄송해요, 머신이 아직 데워지는 중이에요. 조금만 기다려 주시겠어요?",
+   "ko": "미안해하며 공손하게 양해를 구함",
+   "en": "Apologetic and polite, asking for patience."
+  },
+  "a430eb01": {
+   "who": "jieun",
+   "text": "죄송해요, 얼음이 다 떨어졌어요. 따뜻하게 드려도 될까요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "07914e3d": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 아메리카노는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "f6307fec": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 아메리카노는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "7a41b317": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 보리차는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "0f5b002a": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 보리차는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "d7e6c5e8": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 따뜻한 유자차는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "83f17445": {
+   "who": "jieun",
+   "text": "죄송해요, 우유가 다 떨어졌어요. 아이스 유자차는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "da35b8b8": {
+   "who": "jieun",
+   "text": "죄송해요, 얼음이 다 떨어졌어요. 따뜻한 유자차는 어떠세요?",
+   "ko": "미안해하며 공손하게 다른 것을 권함",
+   "en": "Apologetic and polite, gently suggesting an alternative."
+  },
+  "a8af1dda": {
+   "who": "owner",
+   "text": "따뜻한 우유 한 잔이요. 여기서 마실게요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "b7940302": {
+   "who": "owner",
+   "text": "…따뜻하네.",
+   "ko": "한 모금 마시고 조용히 만족해서",
+   "en": "Quietly content after a sip."
+  },
+  "4855a272": {
+   "who": "owner",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "탓하지 않고 부드럽게 알려 줌",
+   "en": "Gently pointing it out, without blame."
+  },
+  "3f492e64": {
+   "who": "owner",
+   "text": "네, 기다릴게요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "ec997ef8": {
+   "who": "owner",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "너그럽게, 괜찮다고 다독이듯",
+   "en": "Generous and kind, reassuring."
+  },
+  "63ccc138": {
+   "who": "owner",
+   "text": "네, 맞아요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "e6dde331": {
+   "who": "owner",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "9e734217": {
+   "who": "owner",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "66313b20": {
+   "who": "jieun",
+   "text": "따뜻한 우유 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "cc6e1915": {
+   "who": "owner",
+   "text": "양이 조금 적네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "85964f84": {
+   "who": "owner",
+   "text": "양이 조금 많네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "ead49d20": {
+   "who": "owner",
+   "text": "조금 미지근하네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "c264da90": {
+   "who": "owner",
+   "text": "조금 뜨겁네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "fe22990f": {
+   "who": "owner",
+   "text": "거품이 조금 거칠네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "2a35ee72": {
+   "who": "owner",
+   "text": "거품이 조금 적네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "9f35f0ac": {
+   "who": "owner",
+   "text": "조금 넘쳤네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "ca2d997b": {
+   "who": "owner",
+   "text": "…느리네.",
+   "ko": "잔을 오래 바라본 뒤 낮고 느리게, 속을 알 수 없게",
+   "en": "After a long look, low and slow, hard to read."
+  },
+  "4fa0ca94": {
+   "who": "think",
+   "text": "역시 안 되는구나. 여기서도 느리다는 말을 듣는구나.",
+   "ko": "실망해서 풀이 죽은 혼잣말",
+   "en": "Disappointed and dejected, quietly to herself."
+  },
+  "dd9c54f4": {
+   "who": "owner",
+   "text": "그래서 좋아요. 우유는 서두르면 끓어 넘쳐요.",
+   "ko": "미소를 띠고 따뜻하게, 다독이듯",
+   "en": "Warmly, with a smile, reassuring."
+  },
+  "7180fa6e": {
+   "who": "owner",
+   "text": "빨리 만드는 사람은 많아요. 그런데 끝까지 천천히 만드는 사람은 드물어요.",
+   "ko": "진심을 담아 천천히, 담담하게 칭찬",
+   "en": "Slowly and sincerely, calm praise."
+  },
+  "e1eddd82": {
+   "who": "owner",
+   "text": "내일 아침 여덟 시에 와요. 가게 여는 것부터 같이 해요.",
+   "ko": "담담하지만 따뜻하게, 일을 맡기듯",
+   "en": "Calm but warm, simply offering her the job."
+  },
+  "b2417bf0": {
+   "who": "jieun",
+   "text": "네? 저… 정말 여기서 일해도 돼요?",
+   "ko": "깜짝 놀라 믿기지 않아 조심스럽게 되묻기",
+   "en": "Surprised and unbelieving, asking back carefully."
+  },
+  "9ea7b245": {
+   "who": "owner",
+   "text": "뒷골목에 빈방이 하나 있어요. 오래 비어 있어서 조금 춥지만, 이불은 새것이에요.",
+   "ko": "무심한 듯 다정하게 챙김",
+   "en": "Offhand but caring."
+  },
+  "3c211d0b": {
+   "who": "owner",
+   "text": "바다 소리가 좀 클 거예요. 처음 며칠만 그래요.",
+   "ko": "살짝 미안한 듯 다정하게",
+   "en": "Kindly, a little apologetic."
+  },
+  "e2d17cd2": {
+   "who": "think",
+   "text": "사장님은 내가 올 줄 아셨을까. 이불을 미리 널어 두신 것 같다.",
+   "ko": "고마움에 마음이 따뜻해진 혼잣말",
+   "en": "A warm inner thought, touched and grateful."
+  },
+  "de5a248e": {
+   "who": "think",
+   "text": "오늘 처음으로, 느리다는 말이 좋은 말로 들렸다.",
+   "ko": "따뜻한 안도감에 살짝 뭉클하게",
+   "en": "A warm feeling of relief, gently moved."
+  },
+  "b3507202": {
+   "who": "think",
+   "text": "내일은 아침 여덟 시. 서두르지 말고, 천천히 정확하게.",
+   "ko": "차분하게 다짐하듯",
+   "en": "Calmly making a promise to herself."
+  },
+  "24bc3433": {
+   "who": "jieun",
+   "text": "버스를 세 시간 타고 바닷가 마을에 왔다. 사장님이 따뜻한 우유를 주었다. 느리다는 말이 처음으로 좋은 말로 들렸다.",
+   "ko": "하루를 돌아보며 차분하고 따뜻하게 일기를 읽듯",
+   "en": "Calm and warm, like reading her diary aloud at the end of the day."
+  },
+  "9f8bede3": {
+   "who": "think",
+   "text": "첫 출근이라 십 분 일찍 나왔다. 늦어서 허둥대는 것보다, 일찍 와서 기다리는 게 낫다.",
+   "ko": "조금 긴장했지만 차분하게 스스로를 다독임",
+   "en": "A little nervous but calm, steadying herself."
+  },
+  "3690fe3b": {
+   "who": "owner",
+   "text": "왔어요. 일찍 왔네요.",
+   "ko": "담담하게, 살짝 반가운 기색",
+   "en": "Plain and calm, a hint of being glad."
+  },
+  "adcb02d5": {
+   "who": "owner",
+   "text": "가게 여는 순서부터 해요. 매일 아침 똑같은 순서로 해요.",
+   "ko": "담담하고 차분하게 알려 줌",
+   "en": "Calm, plain instruction."
+  },
+  "09c678dc": {
+   "who": "owner",
+   "text": "잘했어요. 순서를 지키면, 바쁜 날에도 손이 먼저 기억해요.",
+   "ko": "미소를 띠고 따뜻하게 칭찬",
+   "en": "Warm praise with a smile."
+  },
+  "bc3efe02": {
+   "who": "owner",
+   "text": "이 카페는 서른 해 됐어요. 손님은 거의 다 이 동네 사람이에요.",
+   "ko": "지난 세월을 떠올리듯 담담하게",
+   "en": "Calmly, as if looking back on the years."
+  },
+  "131eab74": {
+   "who": "owner",
+   "text": "단골들은 말을 많이 안 해요. 그 대신 손이랑 눈이 말을 해요.",
+   "ko": "조용히 일러 주듯, 살짝 웃음기",
+   "en": "Quietly advising, a slight smile."
+  },
+  "2db15819": {
+   "who": "owner",
+   "text": "얼굴과 늘 마시는 것을 기억해 둬요. 그리고 그 사람이 무엇을 보는지 잘 봐요.",
+   "ko": "차분하게, 중요한 것을 일러 주듯",
+   "en": "Calmly, passing on something important."
+  },
+  "cf4e9cbe": {
+   "who": "haesun",
+   "text": "새 사람이네. 사장님이 드디어 사람을 구했구나.",
+   "ko": "반갑고 궁금해서 따뜻하고 조금 장난스럽게, 천천히",
+   "en": "Pleasantly surprised and curious, warm and a little playful, speaking slowly."
+  },
+  "54416a1e": {
+   "who": "jieun",
+   "text": "안녕하세요. 오늘부터 여기서 일하는 지은이에요.",
+   "ko": "처음 인사라 긴장해서 공손하게",
+   "en": "Nervous first greeting, polite and careful."
+  },
+  "649e5058": {
+   "who": "haesun",
+   "text": "그래요. 따뜻한 우유 두 잔 줘요.",
+   "ko": "미소 지으며 다정하게 주문",
+   "en": "Warm and smiling, ordering kindly."
+  },
+  "b96931fb": {
+   "who": "think",
+   "text": "두 잔. 혼자 오셨는데, 누가 오시기로 했을까.",
+   "ko": "궁금해서 조용히 혼잣말",
+   "en": "Curious, a quiet inner thought."
+  },
+  "af73ba7e": {
+   "who": "haesun",
+   "text": "따뜻한 우유 두 잔 줘요.",
+   "ko": "평소처럼 다정하게, 천천히",
+   "en": "Gentle and slow, as usual."
+  },
+  "5cdc0bb3": {
+   "who": "haesun",
+   "text": "따뜻하네요. 고마워요.",
+   "ko": "고마워하며 다정하게",
+   "en": "Warm and thankful."
+  },
+  "29cff347": {
+   "who": "haesun",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "탓하지 않고 부드럽게, 천천히",
+   "en": "Gently pointing it out, slowly and without blame."
+  },
+  "19831f11": {
+   "who": "haesun",
+   "text": "네, 기다릴게요.",
+   "ko": "느긋하고 다정하게",
+   "en": "Unhurried and kind."
+  },
+  "62049e35": {
+   "who": "haesun",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "너그럽고 다정하게",
+   "en": "Generous and kind."
+  },
+  "c274f6bd": {
+   "who": "haesun",
+   "text": "네, 맞아요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "2a7e1832": {
+   "who": "haesun",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "eee1aede": {
+   "who": "haesun",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "cff11075": {
+   "who": "jieun",
+   "text": "드시고 가세요, 가져가세요?",
+   "ko": "공손하게 묻기",
+   "en": "Polite question."
+  },
+  "1059cacd": {
+   "who": "haesun",
+   "text": "여기서 마셔요. 늘 앉는 창가에서.",
+   "ko": "다정하게, 늘 앉는 자리를 떠올리며",
+   "en": "Kindly, thinking of her usual seat."
+  },
+  "3eab7972": {
+   "who": "jieun",
+   "text": "따뜻한 우유 두 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "0ce655f2": {
+   "who": "haesun",
+   "text": "양이 조금 적네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "1d0131ef": {
+   "who": "haesun",
+   "text": "양이 조금 많네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "869e8713": {
+   "who": "haesun",
+   "text": "조금 미지근하네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "6e2b423f": {
+   "who": "haesun",
+   "text": "조금 뜨겁네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "056df264": {
+   "who": "haesun",
+   "text": "거품이 조금 거칠네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "136fa657": {
+   "who": "haesun",
+   "text": "거품이 조금 적네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "ee13cba3": {
+   "who": "haesun",
+   "text": "조금 넘쳤네요.",
+   "ko": "탓하지 않고 부드럽게 한마디",
+   "en": "A mild, gentle comment, without blame."
+  },
+  "8e13b47f": {
+   "who": "haesun",
+   "text": "한 잔 더, 똑같이요.",
+   "ko": "다정하게, 천천히",
+   "en": "Gentle and slow."
+  },
+  "cb531fbc": {
+   "who": "jieun",
+   "text": "따뜻한 우유 한 잔 더, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "d993f6e8": {
+   "who": "owner",
+   "text": "할머니 자리는 창가예요. 쟁반에 담아서 가져다드려요.",
+   "ko": "담담하게 일러 줌",
+   "en": "Calmly telling her what to do."
+  },
+  "b74f7b5d": {
+   "who": "owner",
+   "text": "천천히 걸어요. 우유가 출렁이면 넘쳐요.",
+   "ko": "차분하게 조심시키듯",
+   "en": "Calm, gently cautioning."
+  },
+  "17bb2c34": {
+   "who": "haesun",
+   "text": "한 잔은 내 앞에, 한 잔은 저기 놓아 줘요. 저 의자 앞에요.",
+   "ko": "살짝 머뭇거리며 부탁, 조용히 숨은 슬픔이 묻어남, 천천히",
+   "en": "A gentle request with slight hesitation and a quiet, hidden sadness; slow."
+  },
+  "f8f7a9d4": {
+   "who": "think",
+   "text": "혼자 오셨는데 우유는 두 잔이다. 두 번째 잔은 어디에 놓을까?",
+   "ko": "어찌해야 할지 몰라 조심스럽게 생각함",
+   "en": "Unsure, thinking carefully to herself."
+  },
+  "ab8f9fd1": {
+   "who": "haesun",
+   "text": "…고마워요. 거기가 늘 그 자리예요.",
+   "ko": "마음이 움직여 고마워하며 부드럽고 느리게, 조금 뭉클하게",
+   "en": "Touched and grateful, soft and slow, a little emotional."
+  },
+  "8ecce379": {
+   "who": "haesun",
+   "text": "고마워요.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "c54305bc": {
+   "who": "think",
+   "text": "할머니는 저 의자 앞에 놓아 달라고 하셨는데. 다음에는 말씀하신 대로 해야겠다.",
+   "ko": "아쉬워하며 조용히 배우듯",
+   "en": "Quietly regretful, learning from it."
+  },
+  "65d7766d": {
+   "who": "haesun",
+   "text": "…아니에요, 올 사람은 없어요. 괜찮아요.",
+   "ko": "애써 담담하게, 쓸쓸함을 감추며",
+   "en": "Trying to sound calm, hiding loneliness."
+  },
+  "2fccf7c9": {
+   "who": "think",
+   "text": "할머니는 대답 대신 잔을 옮기셨다. 다음에는 할머니가 하시는 대로 따라 봐야겠다.",
+   "ko": "조용히 반성하며 다짐",
+   "en": "Quietly reflecting, making a resolution."
+  },
+  "06eef49f": {
+   "who": "think",
+   "text": "빈 의자는 누구의 자리일까. 사장님은 알고 계실 것 같다.",
+   "ko": "궁금하고 조심스러운 혼잣말",
+   "en": "Curious and careful inner thought."
+  },
+  "b13c6cc8": {
+   "who": "owner",
+   "text": "할머니 이야기는, 할머니가 하고 싶을 때 하실 거예요.",
+   "ko": "조용하고 단단하게, 배려를 담아",
+   "en": "Quiet and firm, with consideration."
+  },
+  "8b787262": {
+   "who": "owner",
+   "text": "우리는 묻지 않고, 우유를 따뜻하게 하면 돼요.",
+   "ko": "차분하고 다정하게",
+   "en": "Calm and gentle."
+  },
+  "6e81616b": {
+   "who": "geum",
+   "text": "아이스 아메리카노요. 가져갈 거예요.",
+   "ko": "바쁘고 급하게, 빠르게",
+   "en": "Busy and hurried, speaking fast."
+  },
+  "f87be5da": {
+   "who": "geum",
+   "text": "빨리요! 아홉 시 배를 타야 해요.",
+   "ko": "짜증 섞인 재촉, 크게 빠르게",
+   "en": "Impatient and irritated, loud and fast."
+  },
+  "cd92f1d2": {
+   "who": "geum",
+   "text": "아이고, 참. 이러다 배 놓치겠네.",
+   "ko": "놀라고 난감해서 투덜거림",
+   "en": "Startled and exasperated, grumbling."
+  },
+  "6ab2bc16": {
+   "who": "think",
+   "text": "또다. 여기서도, 그것도 첫날에.",
+   "ko": "절망스럽게 풀이 죽은 혼잣말",
+   "en": "Crushed and dejected, inner voice."
+  },
+  "3f7985e4": {
+   "who": "owner",
+   "text": "컵은 깨지라고 있어요.",
+   "ko": "담담하게, 아무 일 아니라는 듯 다정하게",
+   "en": "Calm and matter-of-fact, kindly as if it's nothing."
+  },
+  "f80655df": {
+   "who": "owner",
+   "text": "손 다치지 않게 조심해서 쓸어요. 그리고 천천히, 다시 만들어요.",
+   "ko": "차분하고 다정하게 다독이며",
+   "en": "Calm and caring, reassuring."
+  },
+  "a38dee67": {
+   "who": "think",
+   "text": "천천히, 다시. 서두르면 또 깨니까, 하나씩 순서대로 하자.",
+   "ko": "숨을 고르며 차분하게 다짐",
+   "en": "Taking a breath, calmly resolving."
+  },
+  "a1be04ed": {
+   "who": "geum",
+   "text": "…늦었지만, 맛은 괜찮네요.",
+   "ko": "툴툴대면서도 조금 누그러져서",
+   "en": "Grumbling a little but softened."
+  },
+  "b9f34d95": {
+   "who": "geum",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "바쁜 듯 빠르게, 짜증은 없이",
+   "en": "Quick and busy, but not angry."
+  },
+  "fc531a5b": {
+   "who": "geum",
+   "text": "네, 기다릴게요.",
+   "ko": "조금 마지못해, 빠르게",
+   "en": "A little reluctantly, quickly."
+  },
+  "26b76437": {
+   "who": "geum",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "바쁜 듯 짧게, 너그럽게",
+   "en": "Brief and busy, but okay with it."
+  },
+  "4d91dba7": {
+   "who": "geum",
+   "text": "네, 맞아요.",
+   "ko": "바쁜 듯 짧고 빠르게",
+   "en": "Short and quick."
+  },
+  "ecd85d8c": {
+   "who": "geum",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "바쁜 듯 짧고 빠르게",
+   "en": "Short and quick."
+  },
+  "f4ee1258": {
+   "who": "geum",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "바쁜 듯 짧고 빠르게",
+   "en": "Short and quick."
+  },
+  "016eca02": {
+   "who": "jieun",
+   "text": "아이스 아메리카노 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "6f023ca0": {
+   "who": "geum",
+   "text": "조금 연하네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "86ea3e18": {
+   "who": "geum",
+   "text": "조금 쓰네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "190229c4": {
+   "who": "geum",
+   "text": "조금 진하네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "f5a6e6a4": {
+   "who": "geum",
+   "text": "조금 싱겁네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "a92a4bb6": {
+   "who": "geum",
+   "text": "내일은 좀 빨리 해요. 나는 매일 아침 이 시간이에요.",
+   "ko": "툴툴대지만 악의 없이, 빠르게",
+   "en": "Grumbling but not mean, quick."
+  },
+  "385906c5": {
+   "who": "think",
+   "text": "내일도 오신다. 빨리 하려다 깨지 않게, 미리 컵을 꺼내 둘까.",
+   "ko": "살짝 걱정하며 궁리하는 혼잣말",
+   "en": "Slightly worried, planning to herself."
+  },
+  "15c23ae2": {
+   "who": "owner",
+   "text": "닫기 전에 가게를 한 번 둘러봐요.",
+   "ko": "차분하게 일러 줌",
+   "en": "Calm instruction."
+  },
+  "2abe4006": {
+   "who": "owner",
+   "text": "무엇이 어디 있는지 알아 두면, 바쁠 때 손이 덜 헤매요.",
+   "ko": "담담하게 이유를 일러 줌",
+   "en": "Calmly explaining why."
+  },
+  "4dc0bdb4": {
+   "who": "think",
+   "text": "빈 자리에 우유를 두신 까닭이 무엇일까.",
+   "ko": "궁금해서 조용히",
+   "en": "Quietly wondering."
+  },
+  "b3506584": {
+   "who": "think",
+   "text": "종소리가 나면 고개를 들고 먼저 인사하자.",
+   "ko": "차분하게 다짐",
+   "en": "Calmly making a note to herself."
+  },
+  "2265cbda": {
+   "who": "think",
+   "text": "사장님 글씨는 자로 잰 것처럼 곧다.",
+   "ko": "감탄하며 살짝 미소",
+   "en": "Admiring, with a slight smile."
+  },
+  "cec63af9": {
+   "who": "think",
+   "text": "사장님도 처음에는 컵을 많이 깨 보셨을까.",
+   "ko": "궁금하고 조금 위로받는 혼잣말",
+   "en": "Wondering, a little comforted."
+  },
+  "e84a7f28": {
+   "who": "think",
+   "text": "어제 저녁, 사장님이 혼자 들고 계시던 그 잔이다.",
+   "ko": "조용히 알아보며",
+   "en": "Quietly recognizing it."
+  },
+  "2ebe4f23": {
+   "who": "jieun",
+   "text": "사장님은 왜 마감 뒤에 우유를 드세요? 어제도 드시던데요.",
+   "ko": "조심스럽게 궁금해서 묻기",
+   "en": "Carefully asking out of curiosity."
+  },
+  "15fc479a": {
+   "who": "owner",
+   "text": "…하루를 닫는 잔이에요. 무슨 일이 있었든, 이걸 다 마시면 오늘은 끝난 거예요.",
+   "ko": "잠깐 쉬고 조용하고 담담하게, 따뜻한 무게",
+   "en": "After a pause, quiet and calm, with a warm weight."
+  },
+  "bb7f823d": {
+   "who": "think",
+   "text": "하루를 닫는 잔. 컵을 깬 오늘도, 이제 끝났다.",
+   "ko": "마음이 놓여 조용히 되새김",
+   "en": "Relieved, quietly repeating it to herself."
+  },
+  "196003ab": {
+   "who": "owner",
+   "text": "수고했어요. 내일도 여덟 시예요.",
+   "ko": "담담하고 따뜻하게",
+   "en": "Plain and warm."
+  },
+  "bfd938ff": {
+   "who": "think",
+   "text": "사장님은 오늘 한 번도 화내지 않으셨다. 내일은 서두르지 않고 해 보자.",
+   "ko": "고마움과 다짐이 섞인 차분한 혼잣말",
+   "en": "Calm, grateful and resolved."
+  },
+  "6c0e77b0": {
+   "who": "jieun",
+   "text": "첫 출근. 할머니는 우유 두 잔을 시켰다. 서두르다 컵을 깼다. 사장님은 \"컵은 깨지라고 있다\"고 했다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "d974c31a": {
+   "who": "think",
+   "text": "해도 안 뜬 새벽에 커피를 마시러 오는 사람이 있구나. 누굴까.",
+   "ko": "새벽의 고요 속에서 궁금해하는 혼잣말",
+   "en": "A quiet, curious inner thought in the stillness of dawn."
+  },
+  "ea9427a3": {
+   "who": "kang",
+   "text": "…아직 불이 안 켜졌네. 불이 켜져 있으면, 들어가는데.",
+   "ko": "혼잣말처럼 낮고 느리게, 조금 쓸쓸하게",
+   "en": "Low and slow, almost to himself, a little lonely."
+  },
+  "3e12b186": {
+   "who": "think",
+   "text": "아저씨는 문 앞에서 기다리고 계신다. 어떻게 하면 마음 편히 들어오실까?",
+   "ko": "조심스럽게 어떻게 할지 궁리하는 혼잣말",
+   "en": "Carefully wondering what to do, to herself."
+  },
+  "a5727b79": {
+   "who": "kang",
+   "text": "…고마워. 불 켜진 걸 보니 좋네.",
+   "ko": "짧게, 작은 미소를 머금고 조용히 고마워함",
+   "en": "Brief and quiet, a small smile, grateful."
+  },
+  "41ee540f": {
+   "who": "kang",
+   "text": "…아, 그래.",
+   "ko": "짧고 무뚝뚝하게, 조금 멋쩍게",
+   "en": "Short and gruff, a little awkward."
+  },
+  "1031531b": {
+   "who": "think",
+   "text": "아저씨는 불부터 켜셨다. 불이 켜져 있어야 마음이 놓이시나 보다.",
+   "ko": "깨달은 듯 조용히",
+   "en": "Quietly realizing."
+  },
+  "6dffb9e1": {
+   "who": "think",
+   "text": "새벽에는 말보다 불빛이 먼저였나 보다.",
+   "ko": "조용히 알아차리며",
+   "en": "Quietly noticing."
+  },
+  "baec6072": {
+   "who": "owner",
+   "text": "강 씨, 오셨어요.",
+   "ko": "담담하고 반갑게, 낮게",
+   "en": "Calm and low, a quiet welcome."
+  },
+  "31ce4415": {
+   "who": "kang",
+   "text": "…블랙.",
+   "ko": "아주 짧고 낮게, 무뚝뚝하게",
+   "en": "Very short and low, gruff."
+  },
+  "22ee974b": {
+   "who": "owner",
+   "text": "지은 씨, 강 씨는 어부예요. 서른 해 동안 배가 나가기 전에 여기서 한 잔을 마셔요.",
+   "ko": "차분하게 소개하듯",
+   "en": "Calmly introducing."
+  },
+  "d940fce2": {
+   "who": "owner",
+   "text": "새벽 블랙은 기계 말고 손으로 내려요. 내리는 건 내가 할게요.",
+   "ko": "담담하게, 조용한 자부심",
+   "en": "Calm, with quiet pride."
+  },
+  "a3c168fb": {
+   "who": "owner",
+   "text": "지은 씨는 도구만 좀 챙겨 줘요. 그리고 옆에서 잘 봐요.",
+   "ko": "차분하게 일러 줌",
+   "en": "Calm instruction."
+  },
+  "85caa794": {
+   "who": "kang",
+   "text": "…좋네.",
+   "ko": "낮고 짧게, 조용히 만족해서",
+   "en": "Low and brief, quietly satisfied."
+  },
+  "4d64ce50": {
+   "who": "kang",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "무뚝뚝하게 짧게",
+   "en": "Short and gruff."
+  },
+  "e5a02b96": {
+   "who": "kang",
+   "text": "네, 기다릴게요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "bc295482": {
+   "who": "kang",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "낮고 짧게, 너그럽게",
+   "en": "Low and brief, okay with it."
+  },
+  "03feaeba": {
+   "who": "kang",
+   "text": "네, 맞아요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "345edb43": {
+   "who": "kang",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "5bff2b37": {
+   "who": "jieun",
+   "text": "핸드드립 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "5e9322b3": {
+   "who": "kang",
+   "text": "조금 연하네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "b3c0b705": {
+   "who": "kang",
+   "text": "조금 쓰네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "90e78358": {
+   "who": "kang",
+   "text": "물이 조금 미지근하네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "fb522f32": {
+   "who": "kang",
+   "text": "물이 조금 졸았네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "409f7a1f": {
+   "who": "kang",
+   "text": "조금 진하네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "3f14cba7": {
+   "who": "owner",
+   "text": "원두를 갈고, 물이 끓기를 기다리고, 뜸을 들이고. 하나도 건너뛰면 안 돼요.",
+   "ko": "차분하고 단단하게, 하나씩 짚어 가며",
+   "en": "Calm and firm, going through each step."
+  },
+  "172978f0": {
+   "who": "owner",
+   "text": "기다리는 시간도 커피예요. 서두르면 맛이 먼저 알아요.",
+   "ko": "조용하고 깊게, 일러 주듯",
+   "en": "Quiet and deep, passing on a lesson."
+  },
+  "155a9ba7": {
+   "who": "owner",
+   "text": "다음 손님이 오기 전에 가게를 한 번 둘러봐요. 아침마다 조금씩 달라요.",
+   "ko": "차분하게 일러 줌",
+   "en": "Calm instruction."
+  },
+  "c00e6bf9": {
+   "who": "think",
+   "text": "어제는 까치발을 했는데. 밤사이에 누가 옮겨 두었을까.",
+   "ko": "놀라고 궁금해서 조용히",
+   "en": "Surprised and curious, quietly."
+  },
+  "57b62f60": {
+   "who": "think",
+   "text": "강 씨는 배가 나가기 전에, 꼭 바다부터 보시는구나.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly noticing."
+  },
+  "3c3eaaec": {
+   "who": "think",
+   "text": "메뉴판 맨 위에 둘 만큼, 오래된 손님이구나.",
+   "ko": "알아차리며 조금 감탄",
+   "en": "Noticing, a little impressed."
+  },
+  "e5452cf8": {
+   "who": "do",
+   "text": "아이스 아메리카노 하나 줘요. 오늘도 갈 데가 많아요.",
+   "ko": "밝고 시원시원하게",
+   "en": "Bright and brisk."
+  },
+  "1b4aade2": {
+   "who": "do",
+   "text": "아이스 아메리카노 하나요.",
+   "ko": "밝고 시원시원하게",
+   "en": "Bright and brisk."
+  },
+  "ee5a93ee": {
+   "who": "do",
+   "text": "캬, 시원하다. 고마워요.",
+   "ko": "시원해서 기분 좋게, 고마워함",
+   "en": "Refreshed and happy, thankful."
+  },
+  "73f96e32": {
+   "who": "do",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "웃으며 대수롭지 않게",
+   "en": "Laughing it off, good-natured."
+  },
+  "70bf6e24": {
+   "who": "do",
+   "text": "네, 기다릴게요.",
+   "ko": "시원시원하게",
+   "en": "Brisk and cheerful."
+  },
+  "c04f10f8": {
+   "who": "do",
+   "text": "네, 맞아요.",
+   "ko": "시원시원하게",
+   "en": "Brisk and cheerful."
+  },
+  "1f925771": {
+   "who": "do",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "시원시원하게",
+   "en": "Brisk and cheerful."
+  },
+  "c0b9b357": {
+   "who": "do",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "시원시원하게",
+   "en": "Brisk and cheerful."
+  },
+  "845d87b3": {
+   "who": "do",
+   "text": "여기서요. 서서 금방 마시고 갈게요.",
+   "ko": "바쁜 듯 밝게",
+   "en": "Bright and busy."
+  },
+  "ef8e3a6a": {
+   "who": "jieun",
+   "text": "아이스 아메리카노 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "0aaaa51b": {
+   "who": "do",
+   "text": "얼음이 조금 적네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "3e8fdfc6": {
+   "who": "do",
+   "text": "얼음이 조금 많네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "9cfe6f27": {
+   "who": "do",
+   "text": "조금 쓰네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "318cefcd": {
+   "who": "do",
+   "text": "조금 진하네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "c58f1399": {
+   "who": "do",
+   "text": "조금 싱겁네요.",
+   "ko": "웃으며 가볍게 한마디",
+   "en": "A light, cheerful remark."
+  },
+  "6f1d3804": {
+   "who": "do",
+   "text": "허허, 앉으면 다시 못 일어나요. 오늘 돌릴 편지가 산더미거든요.",
+   "ko": "허허 웃으며 밝게, 너스레를 떨듯",
+   "en": "Laughing heartily, joking it off."
+  },
+  "09555bfc": {
+   "who": "think",
+   "text": "도 씨는 웃으며 서 계시지만, 눈은 의자로 갔다. 어떻게 할까?",
+   "ko": "조심스럽게 살피며 고민하는 혼잣말",
+   "en": "Carefully observing, wondering what to do."
+  },
+  "60c8452d": {
+   "who": "do",
+   "text": "…다음에 앉을게요. 허허.",
+   "ko": "잠깐 머뭇거리다 쑥스럽게 웃으며",
+   "en": "After a pause, laughing a little shyly."
+  },
+  "8a1fc586": {
+   "who": "do",
+   "text": "천천히는 못 해요. 편지가 기다리거든요.",
+   "ko": "웃으며 밝게, 조금 바쁘게",
+   "en": "Cheerful and a little rushed."
+  },
+  "788daba2": {
+   "who": "think",
+   "text": "도 씨는 의자를 보셨다. 앉을 자리를 준비해 둘 걸 그랬나.",
+   "ko": "조금 아쉬워하는 혼잣말",
+   "en": "A little regretful, to herself."
+  },
+  "272d2a79": {
+   "who": "do",
+   "text": "아이고, 괜찮아요. 괜찮아요.",
+   "ko": "당황해서 손사래 치듯, 빠르게",
+   "en": "Flustered, waving it off quickly."
+  },
+  "da5551ab": {
+   "who": "think",
+   "text": "앉으라고 하니 오히려 서두르셨다. 도 씨가 앉고 싶을 때까지 기다려야 하나 보다.",
+   "ko": "조용히 반성하며 깨달음",
+   "en": "Quietly reflecting and realizing."
+  },
+  "b894f91f": {
+   "who": "owner",
+   "text": "도 씨는 서른 해 동안 여기서 한 번도 안 앉았어요.",
+   "ko": "담담하게, 조금 무게 있게",
+   "en": "Calm, with a little weight."
+  },
+  "3c1444ac": {
+   "who": "jieun",
+   "text": "서른 해 동안 서서요? 무거운 가방을 메고, 다리가 아프지 않으실까요.",
+   "ko": "놀라고 걱정되어서",
+   "en": "Surprised and worried."
+  },
+  "4b3091b9": {
+   "who": "owner",
+   "text": "사람마다 앉는 때가 있어요. 그때까지는, 앉을 자리만 비워 두면 돼요.",
+   "ko": "차분하고 깊게, 일러 주듯",
+   "en": "Calm and deep, passing on wisdom."
+  },
+  "b6223e16": {
+   "who": "think",
+   "text": "오늘 만난 두 분은 모두 말이 적었다. 그 대신 눈과 손이 많은 것을 말해 주었다.",
+   "ko": "하루를 되새기며 차분하게, 조금 감탄",
+   "en": "Calmly reflecting on the day, a little moved."
+  },
+  "cbf19ac0": {
+   "who": "jieun",
+   "text": "새벽 여섯 시. 불 꺼진 카페 앞에 강 씨가 서 있었다. 사장님이 손으로 커피를 내렸다. 도 씨는 서서 커피를 마신다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "26956ef1": {
+   "who": "think",
+   "text": "아아는 아이스 아메리카노를 줄인 말이다. 도시 카페에서도 제일 많이 듣던 주문이다.",
+   "ko": "차분하게 떠올리며 설명하듯",
+   "en": "Calmly recalling, explaining to herself."
+  },
+  "800de68f": {
+   "who": "think",
+   "text": "봄이든 겨울이든, 사람들은 아아를 제일 많이 시킨다. 얼음 컵부터 넉넉히 꺼내 두자.",
+   "ko": "차분하게 준비하듯 혼잣말",
+   "en": "Calm, planning ahead to herself."
+  },
+  "9f473b58": {
+   "who": "geum",
+   "text": "아직이에요? 나 배 시간 있다니까, 빨리 좀 해요.",
+   "ko": "짜증 내며 재촉, 크고 빠르게",
+   "en": "Irritated and pushy, loud and fast."
+  },
+  "057366c7": {
+   "who": "think",
+   "text": "그저께처럼 손끝이 떨리기 시작한다. 빨리 해야 하는데, 빨리 하면 또 쏟을 텐데.",
+   "ko": "초조하고 불안해서 빠르게 떨리듯",
+   "en": "Anxious and jittery, a little shaky."
+  },
+  "93afce9f": {
+   "who": "owner",
+   "text": "맛은 시간이 만듭니다.",
+   "ko": "크지 않지만 단호하고 무게 있게",
+   "en": "Not loud, but firm and weighty."
+  },
+  "822cbcb6": {
+   "who": "owner",
+   "text": "기다리시거나, 다음에 오세요.",
+   "ko": "조용하지만 단호하게",
+   "en": "Quiet but firm."
+  },
+  "c1636be7": {
+   "who": "geum",
+   "text": "…기다리죠, 뭐. 대신 맛없으면 다시는 안 와요.",
+   "ko": "투덜대며 마지못해 수긍",
+   "en": "Grumbling, grudgingly giving in."
+  },
+  "24a10b1d": {
+   "who": "think",
+   "text": "천천히, 정확하게. 한 잔씩 순서대로 만들면 된다.",
+   "ko": "숨을 고르며 차분하게 다짐",
+   "en": "Taking a breath, calmly resolving."
+  },
+  "129e538b": {
+   "who": "geum",
+   "text": "나도 아아. 가져갈 거예요.",
+   "ko": "툴툴대며 짧게",
+   "en": "Short and grumbly."
+  },
+  "3e5e912f": {
+   "who": "geum",
+   "text": "…흠. 맛은 좋네요.",
+   "ko": "마지못해 인정하듯, 살짝 놀라며",
+   "en": "Grudgingly admitting, slightly surprised."
+  },
+  "8186a6d7": {
+   "who": "jieun",
+   "text": "사장님, 죄송해요. 저 때문에 손님들이 오래 기다리셨어요.",
+   "ko": "미안하고 풀이 죽어 작게",
+   "en": "Sorry and downcast, quiet."
+  },
+  "2432634c": {
+   "who": "owner",
+   "text": "천천히 해도 돼요. 그 대신 정확하게 해요.",
+   "ko": "차분하고 다정하게 다독임",
+   "en": "Calm and kind, reassuring."
+  },
+  "2d8387e3": {
+   "who": "owner",
+   "text": "정확한 잔은 손님이 기억해요. 금 씨도 내일 또 올 거예요.",
+   "ko": "미소를 띠고 따뜻하게, 믿음을 담아",
+   "en": "Warm and smiling, confident in her."
+  },
+  "fe45c754": {
+   "who": "think",
+   "text": "천천히, 정확하게. 첫날 밤에 마음먹은 말을, 사장님이 지켜 주셨다.",
+   "ko": "고마움에 뭉클한 혼잣말",
+   "en": "A grateful, moved inner thought."
+  },
+  "17e89c18": {
+   "who": "do",
+   "text": "편지가 젖으면 안 되는데… 오늘은 중요한 등기도 있는데.",
+   "ko": "비에 젖어 걱정스럽고 다급하게",
+   "en": "Soaked and worried, anxious."
+  },
+  "3ab30228": {
+   "who": "think",
+   "text": "도 씨는 자기보다 편지를 먼저 걱정하신다. 무엇을 해 드리면 좋을까?",
+   "ko": "걱정하며 무엇을 할지 궁리",
+   "en": "Concerned, wondering how to help."
+  },
+  "4fa3ad76": {
+   "who": "do",
+   "text": "고마워요. 편지가 하나도 안 젖었네.",
+   "ko": "안도하며 고마워함, 밝게",
+   "en": "Relieved and thankful, brightening."
+  },
+  "a378f5af": {
+   "who": "do",
+   "text": "그러게요. 고마워요.",
+   "ko": "웃으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "9ac1af8f": {
+   "who": "think",
+   "text": "도 씨에게는 커피보다 편지가 먼저였다. 닦을 것을 드릴 걸 그랬다.",
+   "ko": "아쉬워하며 조용히 배우듯",
+   "en": "Quietly regretful, learning from it."
+  },
+  "fedfa70e": {
+   "who": "do",
+   "text": "아, 가방은 괜찮아요. 괜찮아요.",
+   "ko": "당황해서 손사래 치듯",
+   "en": "Flustered, politely refusing."
+  },
+  "bfda0718": {
+   "who": "think",
+   "text": "남의 편지가 든 가방이다. 도 씨는 그 가방을 남의 손에 맡기지 않으신다.",
+   "ko": "깨달으며 조용히",
+   "en": "Quietly understanding."
+  },
+  "6f267863": {
+   "who": "jieun",
+   "text": "비를 맞아서 추우시죠? 오늘은 따뜻한 걸로 드릴까요?",
+   "ko": "걱정하며 다정하게 묻기",
+   "en": "Kindly concerned, asking."
+  },
+  "74da2cb0": {
+   "who": "do",
+   "text": "아니요, 나는 비가 와도 아이스예요. 서른 해 동안 한 번도 안 바꿨어요.",
+   "ko": "웃으며 고집스럽게, 자랑하듯",
+   "en": "Laughing, stubborn and a little proud."
+  },
+  "5b86f92f": {
+   "who": "think",
+   "text": "비가 와도 아이스 아메리카노. 도 씨가 늘 드시는 것은 잊지 말고 기억해 두자.",
+   "ko": "다짐하며 기억해 두듯",
+   "en": "Making a mental note."
+  },
+  "a67209c0": {
+   "who": "do",
+   "text": "늘 마시는 걸로요. 여기서 마셔요.",
+   "ko": "밝고 시원시원하게",
+   "en": "Bright and brisk."
+  },
+  "cf7e2e09": {
+   "who": "do",
+   "text": "이거 마시면 다시 걸을 힘이 나요.",
+   "ko": "기운을 되찾아 밝게",
+   "en": "Perking up, cheerful."
+  },
+  "aa784c8f": {
+   "who": "do",
+   "text": "비 오는 날은 아이들 기분이 가라앉거든요. 이건 규정에는 없는 배달이에요.",
+   "ko": "다정하고 장난스럽게, 살짝 비밀 이야기하듯",
+   "en": "Warm and playful, like sharing a little secret."
+  },
+  "611b496d": {
+   "who": "jieun",
+   "text": "사탕을 늘 넣고 다니세요?",
+   "ko": "놀라고 신기해서",
+   "en": "Surprised and delighted."
+  },
+  "a1123951": {
+   "who": "do",
+   "text": "서른 해째예요. 월급에서 가장 꾸준히 나가는 게 사탕 값이에요.",
+   "ko": "허허 웃으며 쑥스럽게 자랑",
+   "en": "Chuckling, a little shy but proud."
+  },
+  "32a41180": {
+   "who": "think",
+   "text": "늘 서서 급하게 마시는 도 씨의 가방에는, 편지 말고 아이들 몫도 들어 있었다.",
+   "ko": "감동해서 조용히 되새김",
+   "en": "Quietly moved, reflecting."
+  },
+  "fd810d46": {
+   "who": "owner",
+   "text": "한 잔은 지은 씨 거예요. 오늘 하루, 잘 버텼어요.",
+   "ko": "담담하지만 따뜻하게 다독임",
+   "en": "Plain but warm, comforting."
+  },
+  "ff9a665a": {
+   "who": "jieun",
+   "text": "고맙습니다. 잘 마실게요.",
+   "ko": "고마워하며 미소",
+   "en": "Smiling, grateful."
+  },
+  "6c09b99d": {
+   "who": "think",
+   "text": "오늘 사장님은 줄 선 손님들 앞에서 나를 지켜 주셨다. 나도 언젠가 누군가를 그렇게 지켜 줄 수 있을까.",
+   "ko": "고마움과 다짐이 섞인 조용한 혼잣말",
+   "en": "A quiet thought, grateful and hopeful."
+  },
+  "1ff73956": {
+   "who": "jieun",
+   "text": "금 씨가 줄에서 재촉했다. 사장님이 \"맛은 시간이 만듭니다\"라고 했다. 비 오는 날, 도 씨는 편지부터 닦았다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "b9b90ca7": {
+   "who": "think",
+   "text": "평소보다 손님이 훨씬 많겠다. 그래도 서두르지 말자, 서두르면 쏟으니까.",
+   "ko": "바쁠 하루를 앞두고 조금 긴장하며 다짐",
+   "en": "A little tense before a busy day, steadying herself."
+  },
+  "c15dcf7e": {
+   "who": "think",
+   "text": "도시 카페와 다르다. 놓친 주문은 사장님이 받아 주셨다.",
+   "ko": "안도하며 고마워하는 혼잣말",
+   "en": "Relieved and grateful, to herself."
+  },
+  "6e4feeaa": {
+   "who": "agent",
+   "text": "배우님 쉬는 시간이 십오 분이에요. 커피 여러 잔 부탁해요!",
+   "ko": "급하고 바쁘게, 빠르게",
+   "en": "Urgent and rushed, talking fast."
+  },
+  "c6c4a5d3": {
+   "who": "agent",
+   "text": "아아 둘, 아이스 라테 하나요. 전부 가져갈 거예요.",
+   "ko": "급하게 빠르게 주문",
+   "en": "Ordering quickly in a hurry."
+  },
+  "ea6f9571": {
+   "who": "think",
+   "text": "사장님이 컵을 꺼내 주셨다. 나는 순서대로 만들기만 하면 된다.",
+   "ko": "안도하며 차분하게",
+   "en": "Relieved and calm."
+  },
+  "7414f743": {
+   "who": "agent",
+   "text": "아아 하나요. 가져갈게요.",
+   "ko": "바쁘게 빠르게",
+   "en": "Busy and quick."
+  },
+  "f75bbbab": {
+   "who": "agent",
+   "text": "향이 좋네요. 고마워요.",
+   "ko": "잠깐 숨을 돌리며 고마워함",
+   "en": "Catching a breath, thankful."
+  },
+  "f9d978b8": {
+   "who": "agent",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "바쁘게, 짜증은 없이",
+   "en": "Busy, but not annoyed."
+  },
+  "2de3922e": {
+   "who": "agent",
+   "text": "네, 기다릴게요.",
+   "ko": "조금 초조하게",
+   "en": "A little impatient."
+  },
+  "57ec33da": {
+   "who": "agent",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "바쁘게 짧게",
+   "en": "Brief and busy."
+  },
+  "0a171ab2": {
+   "who": "agent",
+   "text": "네, 맞아요.",
+   "ko": "바쁘게 짧게",
+   "en": "Brief and busy."
+  },
+  "b05799bb": {
+   "who": "agent",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "바쁘게 짧게",
+   "en": "Brief and busy."
+  },
+  "5416dc29": {
+   "who": "agent",
+   "text": "얼음이 조금 적네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "239a9f50": {
+   "who": "agent",
+   "text": "얼음이 조금 많네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "5a3515ab": {
+   "who": "agent",
+   "text": "조금 연하네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "03482cad": {
+   "who": "agent",
+   "text": "조금 쓰네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "e1d3ae77": {
+   "who": "agent",
+   "text": "조금 진하네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "e9f3e61b": {
+   "who": "agent",
+   "text": "조금 싱겁네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "75dea79d": {
+   "who": "agent",
+   "text": "아아 하나 더요.",
+   "ko": "급하게",
+   "en": "Hurried."
+  },
+  "dc03775c": {
+   "who": "agent",
+   "text": "라테는 차갑게요. 이것도 가져가요.",
+   "ko": "급하게 빠르게",
+   "en": "Hurried and quick."
+  },
+  "b00ea502": {
+   "who": "agent",
+   "text": "와, 생각보다 빠르네요. 고마워요!",
+   "ko": "놀라고 기뻐서 밝게",
+   "en": "Surprised and pleased, bright."
+  },
+  "29ff4633": {
+   "who": "jieun",
+   "text": "아이스 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "096387c7": {
+   "who": "agent",
+   "text": "양이 조금 적네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "8a417bf2": {
+   "who": "agent",
+   "text": "조금 넘쳤네요.",
+   "ko": "바쁜 듯 짧게 한마디",
+   "en": "A brief, busy remark."
+  },
+  "5de2f4ed": {
+   "who": "agent",
+   "text": "배우님, 사람 없는 조용한 자리 찾으셨죠? 저기 창가 어떠세요?",
+   "ko": "굽실거리듯 상냥하게, 빠르게",
+   "en": "Eager to please, quick and polite."
+  },
+  "030f2478": {
+   "who": "think",
+   "text": "곧 할머니가 오실 시간이다. 할머니는 매일 그 자리에 앉고, 빈 의자 앞에 잔을 하나 두신다.",
+   "ko": "걱정하며 조용히",
+   "en": "Quietly worried."
+  },
+  "dc08e77c": {
+   "who": "think",
+   "text": "그런데 배우님도 쉬러 오신 손님이다. 누구의 자리를 먼저 생각해야 할까.",
+   "ko": "고민하며 조심스럽게",
+   "en": "Torn, thinking it over carefully."
+  },
+  "aa05aea3": {
+   "who": "think",
+   "text": "할머니가 오시기 전에, 배우가 그 자리에 앉으려 한다. 어떻게 할까?",
+   "ko": "다급하게 고민하는 혼잣말",
+   "en": "Anxiously deciding, to herself."
+  },
+  "fbb7c1ac": {
+   "who": "jieun",
+   "text": "죄송해요. 그 자리는 매일 아침 오시는 분이 앉으세요.",
+   "ko": "긴장해서 떨리지만 공손하고 분명하게",
+   "en": "Nervous and shaky, but polite and clear."
+  },
+  "e034cacb": {
+   "who": "jieun",
+   "text": "저쪽 창가도 조용해요. 거기서는 벚꽃이 더 잘 보여요.",
+   "ko": "조심스럽게 다정하게 권함",
+   "en": "Carefully and kindly suggesting."
+  },
+  "88f9f843": {
+   "who": "agent",
+   "text": "배우님이 앉으시겠다는데요? 잠깐인데 안 될까요?",
+   "ko": "불만스럽게 밀어붙이듯",
+   "en": "Displeased, pushing back."
+  },
+  "cd65f251": {
+   "who": "owner",
+   "text": "그 자리는 예약이 있습니다.",
+   "ko": "조용하지만 단호하게",
+   "en": "Quiet but firm."
+  },
+  "823b368b": {
+   "who": "actor",
+   "text": "괜찮아요. 저쪽 자리가 좋겠네요.",
+   "ko": "미소를 띠고 너그럽게",
+   "en": "Smiling and gracious."
+  },
+  "8e79d651": {
+   "who": "actor",
+   "text": "자리를 지켜 주는 가게네요. 그런 가게, 요즘 드물어요.",
+   "ko": "미소를 띠고 감탄하며 다정하게",
+   "en": "Smiling, admiring and kind."
+  },
+  "760ca4ad": {
+   "who": "actor",
+   "text": "할머니 자리였군요. 몰랐어요, 죄송해요.",
+   "ko": "놀라고 미안해서 진심으로 사과",
+   "en": "Surprised and sincerely apologetic."
+  },
+  "b9ee1b56": {
+   "who": "haesun",
+   "text": "아이고, 괜찮아요. 쉬러 왔을 텐데.",
+   "ko": "너그럽고 다정하게, 상대를 이해하듯",
+   "en": "Gracious and kind, understanding."
+  },
+  "5977e2cf": {
+   "who": "haesun",
+   "text": "늘 먹던 거요.",
+   "ko": "평소처럼 다정하게",
+   "en": "Gentle, as usual."
+  },
+  "06ecb3c9": {
+   "who": "think",
+   "text": "늘 먹던 것. 할머니는 따뜻한 우유 두 잔이다.",
+   "ko": "기억해 내며 차분하게",
+   "en": "Calmly remembering."
+  },
+  "c019d54c": {
+   "who": "haesun",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "탓하지 않고 부드럽게, 천천히",
+   "en": "Gently pointing it out, slowly and without blame."
+  },
+  "d8f63c89": {
+   "who": "jieun",
+   "text": "늘 드시던 걸로 준비할게요.",
+   "ko": "다정하고 자신 있게",
+   "en": "Kind and confident."
+  },
+  "0ccdd04f": {
+   "who": "haesun",
+   "text": "한 잔 더, 똑같이.",
+   "ko": "다정하게, 천천히",
+   "en": "Gentle and slow."
+  },
+  "6600571c": {
+   "who": "actor",
+   "text": "여기, 조용해서 좋네요. 다들 자기 속도로 있어서요.",
+   "ko": "편안하게 미소 지으며 조용히",
+   "en": "Relaxed and smiling, quietly."
+  },
+  "88a712ab": {
+   "who": "owner",
+   "text": "아까, 할머니 자리를 지킨 거.",
+   "ko": "담담하게 말을 꺼냄, 잠깐 쉼",
+   "en": "Calmly bringing it up, a brief pause."
+  },
+  "2f872548": {
+   "who": "owner",
+   "text": "…잘했어요. 단골의 자리는 그 사람의 하루예요.",
+   "ko": "잠깐 쉬고 미소 지으며 따뜻하게 칭찬",
+   "en": "After a pause, warm praise with a smile."
+  },
+  "85d32536": {
+   "who": "owner",
+   "text": "아까, 배우가 스스로 일어난 거요.",
+   "ko": "담담하게 말을 꺼냄",
+   "en": "Calmly bringing it up."
+  },
+  "e6bafea1": {
+   "who": "owner",
+   "text": "할머니가 말없이 기다려 줘서예요. 지은 씨도 할머니가 어떻게 하시는지 잘 봤어요.",
+   "ko": "미소를 띠고 차분하게 일러 줌",
+   "en": "Smiling, calmly explaining."
+  },
+  "6d8c3116": {
+   "who": "think",
+   "text": "오늘 손님이 많아서 많이 피곤하신가 보다.",
+   "ko": "걱정스럽게 조용히",
+   "en": "Quietly concerned."
+  },
+  "1c9fbe32": {
+   "who": "jieun",
+   "text": "벚꽃이 핀 날, 배우가 왔다. 할머니의 자리 앞에서 나는 선택을 했다. 사장님의 잔이 아주 조금 흔들렸다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "20b844ad": {
+   "who": "kang",
+   "text": "…오늘은 바다 안 나가요.",
+   "ko": "낮고 짧게, 무거운 마음을 숨기듯",
+   "en": "Low and brief, hiding a heavy heart."
+  },
+  "4287a175": {
+   "who": "think",
+   "text": "강 씨는 바다에 안 나간다는 말만 하셨다. 무슨 일인지 몰라도, 지금 강 씨에게 필요한 것은 무엇일까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering what he needs."
+  },
+  "95bfd24a": {
+   "who": "kang",
+   "text": "…따뜻하네. 고마워.",
+   "ko": "작게 미소 지으며 조용히 고마워함",
+   "en": "A small smile, quietly thankful."
+  },
+  "8c467dcb": {
+   "who": "kang",
+   "text": "잘 마셨어.",
+   "ko": "낮고 짧게, 담담하게",
+   "en": "Low, brief and plain."
+  },
+  "d88dfbb6": {
+   "who": "think",
+   "text": "커피가 다 식어 있었다. 따뜻한 잔으로 바꿔 드릴 걸 그랬나.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "c0f8145a": {
+   "who": "kang",
+   "text": "…아니. 괜찮아요.",
+   "ko": "머뭇거리다 짧게 막듯이, 낮게",
+   "en": "A pause, then a short low brush-off."
+  },
+  "2606b3d7": {
+   "who": "think",
+   "text": "말하고 싶지 않은 일이었나 보다. 묻는 대신 곁을 따뜻하게 해 드릴 걸.",
+   "ko": "조용히 반성하며 배우듯",
+   "en": "Quietly reflecting, learning from it."
+  },
+  "fbdfe75f": {
+   "who": "jieun",
+   "text": "사장님, 강 씨가 오늘은 바다에 안 나가신대요. 배가 나가는 걸 보기만 하셨어요.",
+   "ko": "걱정스럽게 조심스레 전함",
+   "en": "Worried, carefully reporting."
+  },
+  "9956d10d": {
+   "who": "owner",
+   "text": "…그렇군요. 바다 사람이 바다에 안 나갈 때는, 다 이유가 있어요.",
+   "ko": "잠깐 쉬고 낮고 무게 있게",
+   "en": "After a pause, low and weighty."
+  },
+  "0dcdd81e": {
+   "who": "owner",
+   "text": "말하고 싶어지면 말할 거예요. 그때까지는 늘 하던 대로 해요.",
+   "ko": "차분하고 다정하게",
+   "en": "Calm and gentle."
+  },
+  "bb2dc1a4": {
+   "who": "think",
+   "text": "사장님은 무언가 아시는 것 같다. 그래도 강 씨에게 묻지 않으신다.",
+   "ko": "조용히 알아차리며",
+   "en": "Quietly noticing."
+  },
+  "17f62298": {
+   "who": "jieun",
+   "text": "앗, 그건 손님 빵이야!",
+   "ko": "깜짝 놀라 다급하게, 조금 우습게",
+   "en": "Startled and urgent, a little comical."
+  },
+  "72b513cc": {
+   "who": "owner",
+   "text": "…또 왔네. 저 녀석은 해마다 봄이면 와요.",
+   "ko": "심드렁하게, 살짝 웃음기",
+   "en": "Unbothered and dry, a hint of amusement."
+  },
+  "25989ef9": {
+   "who": "think",
+   "text": "해마다? 사장님은 저 갈매기를 잘 아시는 것 같다.",
+   "ko": "신기해하며 궁금해서",
+   "en": "Curious and amused."
+  },
+  "3796d0fa": {
+   "who": "granddaughter",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "가볍고 상냥하게 알려 줌",
+   "en": "Light and friendly, pointing it out."
+  },
+  "a740e0fc": {
+   "who": "granddaughter",
+   "text": "네, 기다릴게요.",
+   "ko": "상냥하게",
+   "en": "Friendly."
+  },
+  "0dcc1cd0": {
+   "who": "granddaughter",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "상냥하게, 괜찮다고",
+   "en": "Friendly and easygoing."
+  },
+  "cb17de10": {
+   "who": "granddaughter",
+   "text": "네, 맞아요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "28829d09": {
+   "who": "granddaughter",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "87189a3f": {
+   "who": "granddaughter",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "평소",
+   "en": ""
+  },
+  "0ce140cc": {
+   "who": "jieun",
+   "text": "딸기우유 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "6ab9045d": {
+   "who": "granddaughter",
+   "text": "양이 조금 적네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "f9872824": {
+   "who": "granddaughter",
+   "text": "조금 넘쳤네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "e42e9571": {
+   "who": "owner",
+   "text": "사진 보고 오는 손님이 늘었네요.",
+   "ko": "담담하게, 속을 알 수 없게",
+   "en": "Plain and hard to read."
+  },
+  "907b7e66": {
+   "who": "think",
+   "text": "손님이 느는 건 좋은 일이다. 그런데 사장님은 왜 저 의자를 보실까.",
+   "ko": "의아해하며 조용히",
+   "en": "Quietly puzzled."
+  },
+  "fa2a8316": {
+   "who": "owner",
+   "text": "오늘도 닫기 전에 한 번 둘러봐요. 낮이랑 밤은 가게가 달라 보여요.",
+   "ko": "차분하게 일러 줌",
+   "en": "Calm instruction."
+  },
+  "f810763e": {
+   "who": "think",
+   "text": "무엇을 쓰려고 비워 두셨을까.",
+   "ko": "궁금해서 조용히",
+   "en": "Quietly wondering."
+  },
+  "921e1194": {
+   "who": "think",
+   "text": "사장님이 내일 아침 할머니가 오시기 전에 돌려 놓으셨구나.",
+   "ko": "알아차리며 따뜻하게",
+   "en": "Noticing, warmly."
+  },
+  "4d963684": {
+   "who": "think",
+   "text": "강 씨는 내일 바다에 나가실까. 그래도 불은 켜 두어야지.",
+   "ko": "걱정하며 조용히 다짐",
+   "en": "Quietly worried, resolving."
+  },
+  "16d7ce31": {
+   "who": "owner",
+   "text": "내일이면 벚꽃도 다 지겠네요. 그러면 손님도 조금 줄 거예요.",
+   "ko": "조금 아쉬운 듯 담담하게",
+   "en": "Calm, a little wistful."
+  },
+  "a5348994": {
+   "who": "think",
+   "text": "여기 온 지 일주일이 다 되어 간다. 이제 단골들의 얼굴이 하나씩 보이기 시작한다.",
+   "ko": "조금 뿌듯하고 따뜻하게",
+   "en": "A little proud and warm."
+  },
+  "89e85008": {
+   "who": "jieun",
+   "text": "강 씨는 오늘 바다에 나가지 않았다. 처음 보는 손님들이 사진을 찍으러 왔다. 칠판 구석은 늘 비어 있다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "76f1d38e": {
+   "who": "think",
+   "text": "이 마을에 온 지 일주일이다. 처음에는 골목도 헷갈렸는데, 이제는 카페 가는 길이 손에 익었다.",
+   "ko": "조금 뿌듯하고 편안하게",
+   "en": "A little proud and at ease."
+  },
+  "32247f42": {
+   "who": "do",
+   "text": "우편이요! 오늘도 늘 먹던 거 줘요.",
+   "ko": "밝고 반갑게",
+   "en": "Bright and glad."
+  },
+  "9a58b4ac": {
+   "who": "think",
+   "text": "늘 먹던 것. 도 씨는 비가 와도 아이스 아메리카노, 유리컵에 담아 서서 드신다.",
+   "ko": "기억해 내며 자신 있게",
+   "en": "Remembering, confident."
+  },
+  "b12c59ec": {
+   "who": "do",
+   "text": "늘 먹던 거요.",
+   "ko": "밝고 시원시원하게",
+   "en": "Bright and brisk."
+  },
+  "0175d55b": {
+   "who": "do",
+   "text": "이거지! 말 안 해도 아네요.",
+   "ko": "반가워서 기분 좋게, 칭찬하듯",
+   "en": "Delighted, praising her."
+  },
+  "5661480b": {
+   "who": "do",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "웃으며 대수롭지 않게",
+   "en": "Laughing it off, good-natured."
+  },
+  "5525f31d": {
+   "who": "do",
+   "text": "허허, 아직은 서서 마실게요. 그래도 의자가 거기 있으니 좋네요.",
+   "ko": "쑥스럽게 웃으며, 살짝 고마워함",
+   "en": "Laughing shyly, a little grateful."
+  },
+  "11375ff8": {
+   "who": "think",
+   "text": "오늘도 서서 드셨다. 언젠가는 앉아서 쉬실 수 있으면 좋겠다.",
+   "ko": "조용히 바라며 따뜻하게",
+   "en": "Quietly hopeful and warm."
+  },
+  "b9b0a1a4": {
+   "who": "haesun",
+   "text": "줘 봐요.",
+   "ko": "짧고 담담하게, 시원스럽게",
+   "en": "Short and plain, matter-of-fact."
+  },
+  "9ae68e5a": {
+   "who": "jieun",
+   "text": "할머니, 어떻게 한 번에 여셨어요?",
+   "ko": "깜짝 놀라 감탄하며",
+   "en": "Amazed and impressed."
+  },
+  "62631f7a": {
+   "who": "haesun",
+   "text": "나는 사십 년 동안 바닷속에 들어가 일한 해녀예요. 이 정도는 아무것도 아니에요.",
+   "ko": "미소 지으며 담담하게, 살짝 자랑스럽게",
+   "en": "Smiling, calm and a little proud."
+  },
+  "0b0997b2": {
+   "who": "think",
+   "text": "늘 조용히 기다리시는 할머니의 손에, 바다를 사십 년 견딘 힘이 있었다.",
+   "ko": "감탄하며 조용히 되새김",
+   "en": "Quietly impressed, reflecting."
+  },
+  "bec5acb2": {
+   "who": "think",
+   "text": "할머니의 늘 먹던 것은 따뜻한 우유 두 잔이다. 이제는 묻지 않아도 안다.",
+   "ko": "뿌듯하게 조용히",
+   "en": "Quietly pleased."
+  },
+  "42d76058": {
+   "who": "haesun",
+   "text": "일주일 동안 매일 봤는데, 이름을 아직 몰랐네. 새 사람, 이름이 뭐예요?",
+   "ko": "다정하고 궁금해서, 천천히",
+   "en": "Kind and curious, slow."
+  },
+  "c6b61c40": {
+   "who": "jieun",
+   "text": "지은이에요.",
+   "ko": "쑥스럽고 긴장해서 작게",
+   "en": "Shy and nervous, small voice."
+  },
+  "969160c5": {
+   "who": "haesun",
+   "text": "지은, 예쁜 이름이네. 부르기도 좋고.",
+   "ko": "미소 지으며 다정하게, 천천히",
+   "en": "Smiling and warm, slow."
+  },
+  "ab9a28b3": {
+   "who": "haesun",
+   "text": "지은 씨, 내일 또 봐요.",
+   "ko": "미소 지으며 다정하게 작별 인사",
+   "en": "Smiling, a warm goodbye."
+  },
+  "7ac66dd0": {
+   "who": "think",
+   "text": "지은 씨. 이 마을에서 처음으로, 누군가 내 이름을 불러 주었다.",
+   "ko": "가슴이 벅차 조용히 감동한 혼잣말",
+   "en": "Deeply touched, a quiet moved inner voice."
+  },
+  "0c070af5": {
+   "who": "think",
+   "text": "도시 카페에서는 늘 \"저기요\"라고만 불렸다. 내 이름을 아는 손님은 한 명도 없었다.",
+   "ko": "지난날을 떠올리며 조금 쓸쓸하게",
+   "en": "Recalling the past, a little lonely."
+  },
+  "b2abaaf7": {
+   "who": "owner",
+   "text": "아까 할머니가 이름을 부르셨죠.",
+   "ko": "담담하게 말을 꺼냄",
+   "en": "Calmly bringing it up."
+  },
+  "a5008800": {
+   "who": "jieun",
+   "text": "네. 사장님도 들으셨어요?",
+   "ko": "기뻐서 미소 지으며",
+   "en": "Happy and smiling."
+  },
+  "207c948b": {
+   "who": "owner",
+   "text": "할머니는 이름을 쉽게 안 불러요. 일주일 동안 지은 씨를 지켜보신 거예요.",
+   "ko": "미소를 띠고 따뜻하게 일러 줌",
+   "en": "Smiling, warmly explaining."
+  },
+  "2893e1aa": {
+   "who": "owner",
+   "text": "봄 동안 수고했어요. 이제 여름이 오면, 바다 보러 오는 손님들로 훨씬 바빠질 거예요.",
+   "ko": "담담하게 다독이며 앞날을 일러 줌",
+   "en": "Calm and encouraging, looking ahead."
+  },
+  "87ed60f6": {
+   "who": "think",
+   "text": "바빠지는 건 아직 무섭다. 그래도 이제 이 마을에는 내 이름을 불러 주는 사람이 있다.",
+   "ko": "조금 겁나지만 따뜻한 다짐",
+   "en": "A little scared, but warm and hopeful."
+  },
+  "fdaca08e": {
+   "who": "owner",
+   "text": "봄을 다 했으니, 이제 견습은 아니에요. 새내기 바리스타.",
+   "ko": "담담하지만 따뜻하게, 축하하듯",
+   "en": "Plain but warm, quietly congratulating."
+  },
+  "36f24ae1": {
+   "who": "jieun",
+   "text": "벚꽃이 다 졌다. 해순 할머니가 처음으로 내 이름을 불렀다. \"지은 씨, 내일 또 봐요.\"",
+   "ko": "벅찬 하루를 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm and moved, like reading her diary aloud at the end of the day."
+  },
+  "2e49fecb": {
+   "who": "owner",
+   "text": "오늘은 손님이 많겠네요. 여름 메뉴가 수첩에 늘었으니, 모르면 언제든 펴 봐요.",
+   "ko": "담담하게, 살짝 웃음기 섞어 일러 줌",
+   "en": "Calm, with a hint of a smile, advising."
+  },
+  "4be82b7a": {
+   "who": "owner",
+   "text": "여름에는 거의 다 아이스를 시켜요. 그래도 따뜻한 걸 찾는 사람도 있으니, 꼭 물어봐요.",
+   "ko": "차분하게 일러 줌",
+   "en": "Calm instruction."
+  },
+  "a952e920": {
+   "who": "think",
+   "text": "따뜻한지 차가운지, 여기서 마시는지 가져가는지. 주문을 받을 때 그 두 가지는 꼭 확인하자.",
+   "ko": "차분하게 다짐하듯 되새김",
+   "en": "Calmly reminding herself."
+  },
+  "9182498b": {
+   "who": "jieun",
+   "text": "아이스 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "cdb2ee55": {
+   "who": "jieun",
+   "text": "따뜻한 걸로 드릴까요, 아이스로 드릴까요?",
+   "ko": "공손하게 묻기",
+   "en": "Polite question."
+  },
+  "371e12f7": {
+   "who": "think",
+   "text": "도시에서 일하는 바리스타도 쏟아 봤구나. 나만 그런 게 아니었다.",
+   "ko": "위로받아 마음이 놓인 혼잣말",
+   "en": "Comforted and relieved, to herself."
+  },
+  "704c3d6c": {
+   "who": "jieun",
+   "text": "어서 오세요. 무엇으로 드릴까요?",
+   "ko": "밝고 공손하게 맞이함",
+   "en": "Bright and polite welcome."
+  },
+  "0941296b": {
+   "who": "jian",
+   "text": "…아무거나요.",
+   "ko": "작고 힘없이, 말끝을 흐리며",
+   "en": "Small and listless, trailing off."
+  },
+  "2486c8a8": {
+   "who": "jian",
+   "text": "요즘은 무슨 색을 마셔야 할지, 잘 모르겠어요.",
+   "ko": "수줍고 조금 쓸쓸하게, 머뭇거리며",
+   "en": "Shy and a little sad, hesitant."
+  },
+  "e1e947ce": {
+   "who": "think",
+   "text": "\"아무거나\"라고 하셨지만, 메뉴판의 색을 하나씩 보고 계신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering what to do."
+  },
+  "2ccf1608": {
+   "who": "jian",
+   "text": "…노란색이요. 유자차 주세요.",
+   "ko": "잠깐 생각하다 살짝 밝아지며",
+   "en": "After a pause, brightening slightly."
+  },
+  "84874b57": {
+   "who": "jian",
+   "text": "색을 물어봐 준 사람은 처음이에요.",
+   "ko": "작게 미소 지으며 조금 놀라고 고마워함",
+   "en": "A small smile, surprised and grateful."
+  },
+  "712f534e": {
+   "who": "jian",
+   "text": "네, 그거 좋아요.",
+   "ko": "작게 미소 지으며",
+   "en": "A small smile."
+  },
+  "a4c07913": {
+   "who": "think",
+   "text": "정말 아무거나 좋으셨을까. 계속 색을 보고 계셨는데.",
+   "ko": "조금 아쉬워하며 의아해함",
+   "en": "A little regretful, wondering."
+  },
+  "43b80bd8": {
+   "who": "jian",
+   "text": "…그냥 물 주세요. 괜찮아요.",
+   "ko": "힘없이 포기하듯, 작게",
+   "en": "Listlessly giving up, quietly."
+  },
+  "c231caff": {
+   "who": "think",
+   "text": "기다리기만 하니 더 고르기 힘드셨나 보다. 다음에는 먼저 물어봐야겠다.",
+   "ko": "반성하며 조용히 배우듯",
+   "en": "Reflecting, learning from it."
+  },
+  "9977f1de": {
+   "who": "jian",
+   "text": "노란색이요. 유자차 주세요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "f47e5940": {
+   "who": "jian",
+   "text": "정말 노랗다. 고마워요.",
+   "ko": "작게 감탄하며 고마워함",
+   "en": "Quietly delighted, thankful."
+  },
+  "32e0b235": {
+   "who": "jian",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "8955af7b": {
+   "who": "jian",
+   "text": "네, 기다릴게요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "9a1af107": {
+   "who": "jian",
+   "text": "네, 맞아요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "213a512c": {
+   "who": "jian",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "b9c28578": {
+   "who": "jian",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "359cbfd5": {
+   "who": "jian",
+   "text": "차갑게요. 오늘은 더워서요.",
+   "ko": "조용하게, 조금 나른하게",
+   "en": "Quiet, a little drowsy from the heat."
+  },
+  "cc81858f": {
+   "who": "jieun",
+   "text": "아이스 유자차 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "636d30a0": {
+   "who": "jian",
+   "text": "얼음이 조금 적네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "a9cb6229": {
+   "who": "jian",
+   "text": "얼음이 조금 많네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "9a5a2333": {
+   "who": "jian",
+   "text": "조금 덜 다네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "43d8a7e0": {
+   "who": "jian",
+   "text": "조금 많이 다네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "62e84a64": {
+   "who": "jian",
+   "text": "조금 진하네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "7e3c3884": {
+   "who": "jian",
+   "text": "조금 싱겁네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "1a94a6c3": {
+   "who": "jian",
+   "text": "가루가 조금 남았네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "9093cadc": {
+   "who": "jian",
+   "text": "조금 흘렀네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "e14d44eb": {
+   "who": "jian",
+   "text": "네, 그걸로 주세요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "6d3c0940": {
+   "who": "jian",
+   "text": "조금 연하네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "db4d9338": {
+   "who": "jian",
+   "text": "조금 쓰네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "96b99860": {
+   "who": "owner",
+   "text": "저 손님, 요즘 자주 와요. 그림 그리는 사람이래요.",
+   "ko": "담담하게 알려 줌",
+   "en": "Calmly telling her."
+  },
+  "a0e4dac3": {
+   "who": "jieun",
+   "text": "그런데 스케치북을 한 번도 안 펴셨어요.",
+   "ko": "의아하고 조금 걱정스럽게",
+   "en": "Puzzled and a little concerned."
+  },
+  "43d04ec8": {
+   "who": "owner",
+   "text": "…그림이 안 그려지는 날도 있겠지요. 사람마다 그런 계절이 있어요.",
+   "ko": "잠깐 쉬고 조용하고 깊게, 이해하듯",
+   "en": "After a pause, quiet and deep, understanding."
+  },
+  "7f29dbc7": {
+   "who": "owner",
+   "text": "오늘 많이 팔았네요. 수고했어요.",
+   "ko": "담담하지만 따뜻하게, 조금 지쳐서",
+   "en": "Plain but warm, a little tired."
+  },
+  "7de30c8c": {
+   "who": "jieun",
+   "text": "여름이 왔다. 배우의 사진 때문에 손님이 늘었다. 스케치북을 안은 손님은 \"아무거나요\" 하고 메뉴판의 색을 보았다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "0bd4372c": {
+   "who": "han",
+   "text": "십분 있어요. 이 차를 차고에 다시 넣으러 가야 해서요.",
+   "ko": "밤샘 근무로 피곤하지만 공손하게, 조금 서둘러",
+   "en": "Tired from the night shift, polite but a little hurried."
+  },
+  "0bc7b6f8": {
+   "who": "think",
+   "text": "기사님에게는 십분밖에 없다. 어떻게 해 드리면 좋을까?",
+   "ko": "배려하며 어떻게 할지 궁리",
+   "en": "Considerate, thinking how to help."
+  },
+  "fe64b002": {
+   "who": "han",
+   "text": "덕분에 앉아서 마시겠네요. 십분이 길게 느껴져요.",
+   "ko": "미소 지으며 마음이 놓여서, 천천히",
+   "en": "Smiling, relieved, slowing down."
+  },
+  "d652b5ba": {
+   "who": "han",
+   "text": "…아무거나 달게요. 빨리 되는 걸로.",
+   "ko": "피곤하고 급하게, 짧게",
+   "en": "Tired and hurried, brief."
+  },
+  "bf325499": {
+   "who": "think",
+   "text": "천천히 고를 시간이 없으셨구나. 기사님에게는 시간이 제일 귀하다.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "716972a9": {
+   "who": "han",
+   "text": "네, 네. 괜찮아요.",
+   "ko": "조급하게 건성으로",
+   "en": "Impatient, half-listening."
+  },
+  "540e1b57": {
+   "who": "think",
+   "text": "이야기하는 사이에 십분이 줄어들었다. 오늘은 말보다 빠른 손이 필요했다.",
+   "ko": "아쉬워하며 조용히 배우듯",
+   "en": "Regretful, learning from it."
+  },
+  "8924201d": {
+   "who": "han",
+   "text": "달게 한 잔이요. 따뜻한 걸로, 가져갈게요.",
+   "ko": "피곤하지만 공손하게, 조금 서둘러",
+   "en": "Tired but polite, a little hurried."
+  },
+  "2d5a3d35": {
+   "who": "han",
+   "text": "아, 달다. 이제 좀 살겠네.",
+   "ko": "한 모금 마시고 지친 몸이 풀리듯 안도",
+   "en": "After a sip, relieved, tension melting away."
+  },
+  "1437f182": {
+   "who": "han",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "피곤하지만 공손하게 알려 줌",
+   "en": "Tired but polite, pointing it out."
+  },
+  "a51a29b4": {
+   "who": "han",
+   "text": "네, 기다릴게요.",
+   "ko": "조금 초조하게",
+   "en": "A little anxious about time."
+  },
+  "806a6fa8": {
+   "who": "han",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "피곤하지만 너그럽게",
+   "en": "Tired but easygoing."
+  },
+  "5ea5c0c8": {
+   "who": "han",
+   "text": "네, 맞아요.",
+   "ko": "피곤하게 짧게",
+   "en": "Tired and brief."
+  },
+  "f7c6ae41": {
+   "who": "han",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "피곤하게 짧게",
+   "en": "Tired and brief."
+  },
+  "6e75eda7": {
+   "who": "han",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "피곤하게 짧게",
+   "en": "Tired and brief."
+  },
+  "780700cf": {
+   "who": "jieun",
+   "text": "따뜻한 바닐라 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "278ec304": {
+   "who": "han",
+   "text": "조금 덜 다네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "2076fb9d": {
+   "who": "han",
+   "text": "조금 많이 다네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "b26b8589": {
+   "who": "han",
+   "text": "조금 연하네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "48e68ef7": {
+   "who": "han",
+   "text": "조금 쓰네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "f9f6bc30": {
+   "who": "han",
+   "text": "조금 미지근하네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "98b8b300": {
+   "who": "han",
+   "text": "조금 뜨겁네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "f6919905": {
+   "who": "han",
+   "text": "양이 조금 적네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "6597eb9c": {
+   "who": "han",
+   "text": "조금 넘쳤네요.",
+   "ko": "피곤하지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "04c84c56": {
+   "who": "han",
+   "text": "어, 봄에 큰 가방 메고 종점에서 내린 사람이죠? 여기서 일하는구나.",
+   "ko": "알아보고 반가워서 미소",
+   "en": "Recognizing her, pleasantly surprised."
+  },
+  "bc9a6b29": {
+   "who": "think",
+   "text": "그때 내가 짐을 다 내릴 때까지 문을 열고 기다려 주신 기사님이다.",
+   "ko": "기억이 나서 반갑고 고마운 혼잣말",
+   "en": "Remembering, glad and grateful."
+  },
+  "36dc7246": {
+   "who": "han",
+   "text": "내일도 이 시간에 와요. 여섯 시 십 분.",
+   "ko": "미소 지으며 다정하게 약속하듯",
+   "en": "Smiling, a warm promise."
+  },
+  "0a62c64d": {
+   "who": "owner",
+   "text": "한 씨예요. 밤새 버스를 몰고, 새벽에 차를 넣기 전에 여기서 십분 쉬어요.",
+   "ko": "차분하게 소개",
+   "en": "Calmly introducing."
+  },
+  "e369282c": {
+   "who": "owner",
+   "text": "집에 가면 딸이 벌써 학교에 가 있대요. 서로 얼굴 볼 시간이 없는 거죠.",
+   "ko": "담담하지만 조금 안쓰럽게",
+   "en": "Plain, with quiet sympathy."
+  },
+  "02c56cb2": {
+   "who": "think",
+   "text": "밤새 일하고, 십분 쉬고, 집에 가면 딸과 엇갈린다. 그 십분이 한 씨에게는 아주 귀한 시간이겠다.",
+   "ko": "안쓰러움과 다짐이 섞인 조용한 혼잣말",
+   "en": "Quiet sympathy and resolve."
+  },
+  "35c44c03": {
+   "who": "owner",
+   "text": "…날씨 좋네.",
+   "ko": "얼굴이 새까매진 채 아무 일 없다는 듯 무뚝뚝하게",
+   "en": "Deadpan, as if nothing happened, face covered in coffee grounds."
+  },
+  "821c915f": {
+   "who": "think",
+   "text": "사장님은 얼굴을 닦지도 않고 신문을 넘긴다. 웃으면 안 되는데, 입술을 꾹 깨물었다.",
+   "ko": "웃음을 꾹 참으며 떨리는 혼잣말",
+   "en": "Desperately holding back laughter."
+  },
+  "181a846f": {
+   "who": "haesun",
+   "text": "지은 씨, 늘 먹던 거요.",
+   "ko": "미소 지으며 다정하게",
+   "en": "Smiling and kind."
+  },
+  "9315502f": {
+   "who": "think",
+   "text": "할머니는 여름에도 따뜻한 우유 두 잔이다. 한 잔은 빈 의자 앞에 놓는다.",
+   "ko": "기억해 내며 차분하게",
+   "en": "Calmly remembering."
+  },
+  "4ffeda38": {
+   "who": "haesun",
+   "text": "아, 거기는… 아니, 아니에요. 괜찮아요.",
+   "ko": "당황해서 말을 삼키며 머뭇거림",
+   "en": "Flustered, swallowing her words, hesitant."
+  },
+  "5c8e5eeb": {
+   "who": "think",
+   "text": "할머니는 말을 하다 마셨고, 관광객도 그저 쉬고 싶었을 뿐이다. 어떻게 할까?",
+   "ko": "난처해서 조심스럽게 궁리",
+   "en": "Torn, carefully thinking what to do."
+  },
+  "da55c68c": {
+   "who": "jieun",
+   "text": "손님, 선풍기 앞자리가 방금 비었어요. 거기가 훨씬 시원해요.",
+   "ko": "밝고 상냥하게 권함",
+   "en": "Bright and friendly, suggesting."
+  },
+  "e7159459": {
+   "who": "haesun",
+   "text": "괜찮아요. 잠깐 앉았다 갈 거예요.",
+   "ko": "애써 미소 지으며 괜찮다고",
+   "en": "Forcing a smile, saying it's fine."
+  },
+  "e408b740": {
+   "who": "think",
+   "text": "괜찮다고 하셨지만, 할머니는 끝까지 잔을 놓지 못하셨다.",
+   "ko": "마음이 아파 조용히",
+   "en": "Quietly heartbroken for her."
+  },
+  "4409490b": {
+   "who": "haesun",
+   "text": "아이고, 괜찮아요. 앉아요, 앉아요.",
+   "ko": "당황해서 손사래 치듯 빠르게",
+   "en": "Flustered, waving it off quickly."
+  },
+  "b1187053": {
+   "who": "think",
+   "text": "할머니는 자리보다, 사람들이 쳐다보는 게 더 힘드셨나 보다.",
+   "ko": "알아차리며 조용히 반성",
+   "en": "Quietly realizing, reflecting."
+  },
+  "54434f72": {
+   "who": "owner",
+   "text": "여름에는 그 의자가 제일 인기예요. 바다가 제일 잘 보이는 자리니까.",
+   "ko": "담담하게, 속을 알 수 없게",
+   "en": "Plain and hard to read."
+  },
+  "99ee61cc": {
+   "who": "think",
+   "text": "할머니에게는 바다보다 그 의자가 더 소중한 것 같다. 여름 내내 그 자리를 어떻게 지켜 드릴 수 있을까.",
+   "ko": "걱정하며 다짐하듯",
+   "en": "Concerned, making a resolution."
+  },
+  "c4f60d44": {
+   "who": "jieun",
+   "text": "새벽 버스 기사님은 십분만 쉰다. 관광객이 할머니의 빈 의자에 앉았다. 할머니는 말을 멈추고 잔을 감쌌다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "333a106a": {
+   "who": "eunju",
+   "text": "디카페인 라테 하나 주세요.",
+   "ko": "지쳐서 작고 조심스럽게",
+   "en": "Exhausted, small and careful."
+  },
+  "351cb2b2": {
+   "who": "think",
+   "text": "디카페인은 카페인을 뺀 커피다. 아기를 돌보는 엄마들이 많이 찾는다고 배웠다.",
+   "ko": "차분하게 떠올리며 설명하듯",
+   "en": "Calmly recalling, explaining to herself."
+  },
+  "ef408b6d": {
+   "who": "eunju",
+   "text": "디카페인 라테 하나요.",
+   "ko": "지쳐서 작고 조심스럽게",
+   "en": "Exhausted, small and careful."
+  },
+  "386f573b": {
+   "who": "eunju",
+   "text": "고마워요. 이따 마실게요.",
+   "ko": "지쳤지만 상냥하게, 작게",
+   "en": "Tired but kind, quietly."
+  },
+  "d51922cc": {
+   "who": "eunju",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "지쳐서 작고 미안한 듯",
+   "en": "Tired, small and a little apologetic."
+  },
+  "ea0f895a": {
+   "who": "eunju",
+   "text": "네, 기다릴게요.",
+   "ko": "지쳐서 작게",
+   "en": "Tired and quiet."
+  },
+  "52d8039e": {
+   "who": "eunju",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "지쳤지만 상냥하게",
+   "en": "Tired but kind."
+  },
+  "33bd2696": {
+   "who": "eunju",
+   "text": "네, 맞아요.",
+   "ko": "지쳐서 작게",
+   "en": "Tired and quiet."
+  },
+  "ded1cce7": {
+   "who": "eunju",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "지쳐서 작게",
+   "en": "Tired and quiet."
+  },
+  "d9d0267d": {
+   "who": "eunju",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "지쳐서 작게",
+   "en": "Tired and quiet."
+  },
+  "c6aba112": {
+   "who": "eunju",
+   "text": "따뜻한 걸로요. 찬 건 배가 아파서요.",
+   "ko": "작고 조심스럽게 이유를 말함",
+   "en": "Small and careful, explaining why."
+  },
+  "1d406088": {
+   "who": "eunju",
+   "text": "여기서 마실게요.",
+   "ko": "지쳐서 작게",
+   "en": "Tired and quiet."
+  },
+  "f5f78202": {
+   "who": "jieun",
+   "text": "따뜻한 디카페인 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "768a426f": {
+   "who": "eunju",
+   "text": "조금 연하네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "d642b451": {
+   "who": "eunju",
+   "text": "조금 쓰네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "65456b0e": {
+   "who": "eunju",
+   "text": "조금 미지근하네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "f29ec076": {
+   "who": "eunju",
+   "text": "조금 뜨겁네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "486ba32b": {
+   "who": "eunju",
+   "text": "양이 조금 적네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "2817df4e": {
+   "who": "eunju",
+   "text": "조금 넘쳤네요.",
+   "ko": "지쳤지만 부드럽게 한마디",
+   "en": "A tired but gentle remark."
+  },
+  "f082f2a1": {
+   "who": "eunju",
+   "text": "커피는 늘 식어요. 아기 낳고 나서는, 끝까지 마셔 본 적이 없어요.",
+   "ko": "한숨 섞인 쓸쓸한 목소리, 작게",
+   "en": "Sighing, lonely and quiet."
+  },
+  "4591949f": {
+   "who": "think",
+   "text": "커피는 식었고, 아기 엄마는 누군가와 이야기하고 싶은 얼굴이다. 어떻게 할까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering."
+  },
+  "59cb6151": {
+   "who": "eunju",
+   "text": "…따뜻하다. 고마워요.",
+   "ko": "따뜻함에 마음이 풀려 작게 감동",
+   "en": "Soft and moved by the warmth."
+  },
+  "f8bc311a": {
+   "who": "eunju",
+   "text": "누가 나한테 말 걸어 준 거, 정말 오랜만이에요.",
+   "ko": "작게 웃으며 울컥하듯, 진심으로",
+   "en": "A small smile, a little choked up, sincere."
+  },
+  "5c88f851": {
+   "who": "eunju",
+   "text": "아, 고마워요.",
+   "ko": "작게 웃으며 고마워함",
+   "en": "A small smile, thankful."
+  },
+  "1b3b9df5": {
+   "who": "think",
+   "text": "데워 드렸지만 또 식겠다. 그리고 무언가 말하고 싶어 하셨는데.",
+   "ko": "안쓰러워하며 아쉬운 혼잣말",
+   "en": "Sympathetic and a little regretful."
+  },
+  "d5642000": {
+   "who": "eunju",
+   "text": "아, 아니에요. 괜찮아요.",
+   "ko": "놀라서 당황하며 손사래",
+   "en": "Startled and flustered, declining."
+  },
+  "6340c94a": {
+   "who": "think",
+   "text": "처음 보는 사람이 아기를 데려가려 하니 놀라셨겠다.",
+   "ko": "깨달으며 조용히 반성",
+   "en": "Quietly realizing, reflecting."
+  },
+  "405c8dbe": {
+   "who": "eunju",
+   "text": "저 은주예요. 아기 낳고 이 마을로 이사 왔는데, 아는 사람이 아무도 없어요.",
+   "ko": "조금 쑥스럽지만 마음을 열고, 조금 쓸쓸하게",
+   "en": "A little shy but opening up, slightly lonely."
+  },
+  "5a994142": {
+   "who": "jieun",
+   "text": "저는 지은이에요. 저도 봄에 이 마을에 와서, 그 마음 조금 알아요.",
+   "ko": "미소 지으며 다정하게 공감",
+   "en": "Smiling, warmly empathizing."
+  },
+  "2408aa66": {
+   "who": "sumin",
+   "text": "…제일 싼 거요.",
+   "ko": "작고 낮게 웅얼거리듯",
+   "en": "Small and low, mumbling."
+  },
+  "1aab5bdf": {
+   "who": "think",
+   "text": "메뉴판 맨 아래, 제일 싼 것은 보리차다. 레시피 수첩에서 다시 확인하자.",
+   "ko": "차분하게 확인하듯",
+   "en": "Calmly checking."
+  },
+  "9545da7f": {
+   "who": "sumin",
+   "text": "제일 싼 거요. 차갑게요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "b93841fe": {
+   "who": "sumin",
+   "text": "…감사합니다.",
+   "ko": "작고 쑥스럽게",
+   "en": "Small and shy."
+  },
+  "baf556f1": {
+   "who": "sumin",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "4504a60f": {
+   "who": "sumin",
+   "text": "네, 기다릴게요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "cf6b8c43": {
+   "who": "sumin",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "5b5e9713": {
+   "who": "sumin",
+   "text": "네, 맞아요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "304b6d60": {
+   "who": "sumin",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "782a794c": {
+   "who": "sumin",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "267dee90": {
+   "who": "sumin",
+   "text": "…여기서요.",
+   "ko": "작게 웅얼거리듯",
+   "en": "Small, mumbling."
+  },
+  "8b55bdc8": {
+   "who": "jieun",
+   "text": "아이스 보리차 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "f6644ec8": {
+   "who": "sumin",
+   "text": "조금 진하네요.",
+   "ko": "작고 무뚝뚝하게 한마디",
+   "en": "A small, flat remark."
+  },
+  "1e5096c8": {
+   "who": "sumin",
+   "text": "조금 싱겁네요.",
+   "ko": "작고 무뚝뚝하게 한마디",
+   "en": "A small, flat remark."
+  },
+  "3491da6c": {
+   "who": "sumin",
+   "text": "조금 연하네요.",
+   "ko": "작고 무뚝뚝하게 한마디",
+   "en": "A small, flat remark."
+  },
+  "3d260505": {
+   "who": "sumin",
+   "text": "얼음이 조금 많네요.",
+   "ko": "작고 무뚝뚝하게 한마디",
+   "en": "A small, flat remark."
+  },
+  "d79fa320": {
+   "who": "sumin",
+   "text": "…여기, 조용해서 좋아요.",
+   "ko": "작게, 조금 편안하게",
+   "en": "Quietly, a little at ease."
+  },
+  "786c53cf": {
+   "who": "think",
+   "text": "보리차가 다 됐다. 구석에서 공부하는 학생에게 어떻게 드릴까?",
+   "ko": "배려하며 조심스럽게 궁리",
+   "en": "Considerate, carefully wondering."
+  },
+  "2f5a15c6": {
+   "who": "sumin",
+   "text": "…네.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "25ed0a2f": {
+   "who": "think",
+   "text": "공부하던 흐름을 끊어 버렸다. 가져다 드려도 됐는데.",
+   "ko": "아쉬워하며 조용히 반성",
+   "en": "Regretful, quietly reflecting."
+  },
+  "6b5374a2": {
+   "who": "sumin",
+   "text": "…고삼이요. 괜찮아요.",
+   "ko": "작고 짧게 선을 긋듯",
+   "en": "Short and quiet, keeping her distance."
+  },
+  "0fd49953": {
+   "who": "think",
+   "text": "조용해서 온 사람에게 말을 걸어 버렸다.",
+   "ko": "미안해하며 조용히 반성",
+   "en": "Sorry, quietly reflecting."
+  },
+  "216bf427": {
+   "who": "owner",
+   "text": "저 학생은 수민이에요. 고삼인데, 매일 학교가 끝나면 저 구석에서 공부해요.",
+   "ko": "차분하게 알려 줌",
+   "en": "Calmly telling her."
+  },
+  "7a946696": {
+   "who": "owner",
+   "text": "사람마다 편한 거리가 있어요. 가까이 와 주길 바라는 사람도 있고, 조금 떨어져 있어 주길 바라는 사람도 있어요.",
+   "ko": "조용하고 깊게 일러 줌",
+   "en": "Quiet and deep, passing on wisdom."
+  },
+  "468e6198": {
+   "who": "think",
+   "text": "은주 씨에게는 말을 걸어 주는 사람이 필요했고, 수민에게는 조용히 두는 사람이 필요했다.",
+   "ko": "깨달음을 차분하게 되새김",
+   "en": "Calmly reflecting on what she learned."
+  },
+  "b64da89b": {
+   "who": "think",
+   "text": "맞는 친절은 사람마다 다르다. 그 사람이 무엇을 말하고, 무엇을 하는지 잘 봐야 한다.",
+   "ko": "차분하게 마음에 새기듯",
+   "en": "Calmly taking it to heart."
+  },
+  "ca89554b": {
+   "who": "jieun",
+   "text": "아기 엄마의 커피는 늘 식는다고 했다. 구석의 학생은 이어폰을 끼고 제일 싼 음료를 시켰다. 한 사람에게는 말이, 한 사람에게는 조용함이 필요했다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "a0662691": {
+   "who": "owner",
+   "text": "노 씨, 오셨어요.",
+   "ko": "오랜 친구를 맞듯 담담하고 편하게",
+   "en": "Calm and easy, greeting an old friend."
+  },
+  "6805798b": {
+   "who": "noh",
+   "text": "그래. 그 잔.",
+   "ko": "짧고 무뚝뚝하게, 편하게",
+   "en": "Short and gruff, at ease."
+  },
+  "bbf2f4ca": {
+   "who": "owner",
+   "text": "지은 씨, 철물점 하는 노 씨예요. 나랑 서른 해 된 친구예요.",
+   "ko": "차분하게 소개, 살짝 정겹게",
+   "en": "Calmly introducing, with warmth."
+  },
+  "b189fc96": {
+   "who": "owner",
+   "text": "노 씨 커피는 늘 내가 타요. 메뉴판에도 없는, 종이컵 믹스커피예요.",
+   "ko": "담담하게, 조용한 정",
+   "en": "Plain, with quiet fondness."
+  },
+  "7e925303": {
+   "who": "noh",
+   "text": "오늘 바람이 좋네. 바다가 아주 잔잔해.",
+   "ko": "일부러 가볍게 딴 이야기를 하듯, 느긋하게",
+   "en": "Deliberately casual, changing the subject, easygoing."
+  },
+  "4f1563c8": {
+   "who": "think",
+   "text": "사장님의 숟가락이 떨리는데, 노 씨는 못 본 척 창밖 이야기를 하신다. 어떻게 할까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering."
+  },
+  "8bf41741": {
+   "who": "jieun",
+   "text": "정말 잔잔하네요. 배들이 벌써 다 나갔어요.",
+   "ko": "가볍고 자연스럽게 맞장구",
+   "en": "Light and natural, playing along."
+  },
+  "f61f09a0": {
+   "who": "noh",
+   "text": "그래. 오늘 같은 날은 바다가 착하지.",
+   "ko": "작게 웃으며 흐뭇하게",
+   "en": "A small, pleased smile."
+  },
+  "692428cd": {
+   "who": "noh",
+   "text": "고맙네.",
+   "ko": "짧고 무뚝뚝하지만 따뜻하게",
+   "en": "Short and gruff, but warm."
+  },
+  "94fbc69f": {
+   "who": "think",
+   "text": "노 씨는 일부러 다른 이야기를 하셨다. 나도 함께 이야기했으면 사장님이 덜 불편하셨을까.",
+   "ko": "되돌아보며 조용히 궁리",
+   "en": "Quietly reflecting."
+  },
+  "fde7e871": {
+   "who": "owner",
+   "text": "…괜찮아요.",
+   "ko": "잠깐 쉬고 짧게, 애써 담담하게",
+   "en": "After a pause, short, trying to sound calm."
+  },
+  "3505f995": {
+   "who": "noh",
+   "text": "괜찮아요, 괜찮아. 바람이 참 좋네.",
+   "ko": "일부러 가볍게 넘기듯, 느긋하게",
+   "en": "Deliberately casual, smoothing it over."
+  },
+  "7748fb40": {
+   "who": "think",
+   "text": "손님 앞에서 사장님 손 이야기를 꺼내 버렸다. 노 씨가 왜 창밖 이야기를 하셨는지 알 것 같다.",
+   "ko": "미안해하며 조용히 깨달음",
+   "en": "Sorry, quietly realizing."
+  },
+  "0200b167": {
+   "who": "noh",
+   "text": "역시 이 맛이야. 다른 데서는 이 맛이 안 나.",
+   "ko": "만족스럽게 무뚝뚝하게",
+   "en": "Satisfied, in a gruff way."
+  },
+  "3f7fef1e": {
+   "who": "owner",
+   "text": "믹스커피도 다 같은 맛이 아니에요. 물은 컵 안쪽 선까지, 숟가락으로 열 바퀴.",
+   "ko": "담담하게, 조용한 자부심",
+   "en": "Plain, with quiet pride."
+  },
+  "52e00709": {
+   "who": "think",
+   "text": "요즘 사장님이 손목을 주무르시는 걸 자주 본다. 그래도 사장님은 아무 말씀도 하지 않으신다.",
+   "ko": "걱정스럽게 조용히",
+   "en": "Quietly worried."
+  },
+  "26f5e414": {
+   "who": "jian",
+   "text": "시원한 거, 아무거나요.",
+   "ko": "힘없이 작게",
+   "en": "Listless and quiet."
+  },
+  "1b515031": {
+   "who": "jian",
+   "text": "더워서 그런가, 오늘은 색이 다 똑같아 보여요.",
+   "ko": "수줍고 조금 지쳐서, 머뭇거리며",
+   "en": "Shy and a little tired, hesitant."
+  },
+  "e5a8cdb5": {
+   "who": "think",
+   "text": "시원한 것이라고만 하셨지만, 이번에도 음료의 색을 보고 계신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "3a023a66": {
+   "who": "jian",
+   "text": "음… 초록색이요. 녹차라테, 차갑게요.",
+   "ko": "잠깐 생각하다 조금 밝아지며",
+   "en": "After a pause, brightening slightly."
+  },
+  "a18afe1d": {
+   "who": "jian",
+   "text": "초록색은 보기만 해도 좀 시원해요.",
+   "ko": "작게 미소 지으며",
+   "en": "A small smile."
+  },
+  "f9392ccc": {
+   "who": "jian",
+   "text": "네, 그걸로 할게요.",
+   "ko": "작게 미소 지으며",
+   "en": "A small smile."
+  },
+  "3b643647": {
+   "who": "think",
+   "text": "내가 고른 색이었다. 지안 씨가 고른 색은 아니었다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "7278bb1f": {
+   "who": "jian",
+   "text": "아… 아직 아무것도 없어요. 괜찮아요, 아무거나 주세요.",
+   "ko": "당황해서 숨기듯, 작게 머뭇거리며",
+   "en": "Flustered and hiding it, small and hesitant."
+  },
+  "9a32f0ca": {
+   "who": "think",
+   "text": "빈 종이를 보여 달라고 했구나. 그림 이야기는 지안 씨가 먼저 할 때까지 기다려야겠다.",
+   "ko": "미안해하며 조용히 다짐",
+   "en": "Sorry, quietly resolving."
+  },
+  "0fdb8ff9": {
+   "who": "jian",
+   "text": "초록색이요. 녹차라테, 차갑게요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "82f9df2b": {
+   "who": "jian",
+   "text": "시원한 초록이다. 고마워요.",
+   "ko": "작게 감탄하며 고마워함",
+   "en": "Quietly delighted, thankful."
+  },
+  "ae447bcc": {
+   "who": "jieun",
+   "text": "아이스 녹차라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "97f164e4": {
+   "who": "jian",
+   "text": "양이 조금 적네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "43fdc259": {
+   "who": "jian",
+   "text": "조금 넘쳤네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "43de948b": {
+   "who": "jian",
+   "text": "아무거나 주세요. 시원한 걸로요.",
+   "ko": "힘없이 작게",
+   "en": "Listless and quiet."
+  },
+  "73c9f895": {
+   "who": "jian",
+   "text": "…고마워요.",
+   "ko": "작게 머뭇거리며 고마워함",
+   "en": "Small and hesitant, thankful."
+  },
+  "04881aa4": {
+   "who": "think",
+   "text": "고맙다고 말하려고 돌아보니, 사장님은 벌써 돌아서서 컵을 닦고 계신다.",
+   "ko": "고마워하며 조용히",
+   "en": "Quietly grateful."
+  },
+  "99744c41": {
+   "who": "jieun",
+   "text": "철물점 노 씨는 사장님이 타 주는 믹스커피만 마신다. 사장님의 숟가락이 조금 떨렸다. 마감 때 사장님이 내 앞치마 끈을 다시 매 주었다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "53e5559f": {
+   "who": "do",
+   "text": "우편이요! 아이고 더워라, 오늘은 소포가 산더미예요.",
+   "ko": "더위에 지쳤지만 밝고 너스레 떨듯",
+   "en": "Hot and tired but cheerful, joking."
+  },
+  "4d0fcd44": {
+   "who": "do",
+   "text": "늘 먹던 거 줘요.",
+   "ko": "밝고 시원시원하게",
+   "en": "Bright and brisk."
+  },
+  "5c41573e": {
+   "who": "think",
+   "text": "도 씨는 늘 아이스 아메리카노다. 오늘처럼 더운 날에는 얼음을 넉넉히 넣어 드리자.",
+   "ko": "배려하며 다정하게 준비하듯",
+   "en": "Thoughtful, planning kindly."
+  },
+  "50c19f8c": {
+   "who": "do",
+   "text": "캬, 살겠다.",
+   "ko": "시원해서 살 것 같다는 듯 크게 안도",
+   "en": "A big relieved sigh, refreshed."
+  },
+  "cc9282e4": {
+   "who": "think",
+   "text": "도 씨는 무거운 가방을 내려놓을 곳이 없다. 어떻게 할까?",
+   "ko": "걱정하며 궁리",
+   "en": "Concerned, wondering what to do."
+  },
+  "42d4e0ef": {
+   "who": "do",
+   "text": "허허, 어깨가 다 가볍네. 고마워요.",
+   "ko": "허허 웃으며 홀가분하고 고마워함",
+   "en": "Chuckling, relieved and grateful."
+  },
+  "45f50538": {
+   "who": "do",
+   "text": "고마워요.",
+   "ko": "웃으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "c415e088": {
+   "who": "think",
+   "text": "카운터는 손님 자리라서 마음이 불편하셨나 보다. 걸어 둘 곳이 따로 있으면 좋을 텐데.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "a0585309": {
+   "who": "do",
+   "text": "허허, 그게 내 마음대로 되나요. 괜찮아요.",
+   "ko": "허허 웃으며 체념하듯 너그럽게",
+   "en": "Chuckling, resigned but easygoing."
+  },
+  "4d4aa42d": {
+   "who": "think",
+   "text": "도 씨의 일을 내가 바꿀 수는 없다. 대신 내가 할 수 있는 일을 찾아야겠다.",
+   "ko": "조용히 다짐",
+   "en": "Quietly resolving."
+  },
+  "f7d12137": {
+   "who": "owner",
+   "text": "아침에 못 박는 소리가 나더니, 그거였군요.",
+   "ko": "담담하게, 살짝 웃음기",
+   "en": "Plain, with a hint of amusement."
+  },
+  "48390b7a": {
+   "who": "eunju",
+   "text": "지은 씨, 늘 먹던 거 그 두꺼운 컵에 주세요. 그 컵이면 끝까지 따뜻하더라고요.",
+   "ko": "미소 지으며 다정하고 조금 들뜨게",
+   "en": "Smiling, warm and a little excited."
+  },
+  "de42d6b3": {
+   "who": "eunju",
+   "text": "늘 먹던 거요. 두꺼운 컵에요.",
+   "ko": "다정하게",
+   "en": "Gentle and kind."
+  },
+  "699c2c6e": {
+   "who": "eunju",
+   "text": "아, 이 컵. 고마워요.",
+   "ko": "반가워하며 고마워함",
+   "en": "Pleased and thankful."
+  },
+  "ba614279": {
+   "who": "eunju",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "탓하지 않고 부드럽게",
+   "en": "Gently pointing it out, without blame."
+  },
+  "9995d057": {
+   "who": "eunju",
+   "text": "지은 씨, 늘 먹던 거요. 오늘은 아기가 자니까, 따뜻할 때 마셔 볼래요.",
+   "ko": "미소 지으며 설레듯 다정하게",
+   "en": "Smiling, hopeful and warm."
+  },
+  "5441a6b2": {
+   "who": "eunju",
+   "text": "늘 먹던 거요.",
+   "ko": "다정하게",
+   "en": "Gentle and kind."
+  },
+  "c68f0d2c": {
+   "who": "eunju",
+   "text": "고마워요. 오늘은 식기 전에 마셔야지.",
+   "ko": "기대에 차서 밝게, 작게 다짐하듯",
+   "en": "Bright and hopeful, a small promise to herself."
+  },
+  "44785f77": {
+   "who": "eunju",
+   "text": "요즘은 아기랑만 이야기해요. 아기는 대답을 안 하지만요, 하하.",
+   "ko": "웃으며 말하지만 조금 쓸쓸하게",
+   "en": "Laughing, but a little lonely underneath."
+  },
+  "f120e70a": {
+   "who": "think",
+   "text": "은주 씨는 웃으셨지만, 다른 사람들의 이야기 소리를 부러운 듯 보신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "8e286a34": {
+   "who": "eunju",
+   "text": "여섯 달이요. 어제 처음으로 뒤집기를 했어요.",
+   "ko": "환하게 웃으며 신나서 자랑",
+   "en": "Beaming, excited and proud."
+  },
+  "862728b5": {
+   "who": "eunju",
+   "text": "이 얘기, 누구한테 꼭 하고 싶었어요.",
+   "ko": "진심으로 기뻐하며, 살짝 울컥",
+   "en": "Sincerely happy, a little choked up."
+  },
+  "2354b28a": {
+   "who": "eunju",
+   "text": "고마워요.",
+   "ko": "웃으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "90ae1b49": {
+   "who": "think",
+   "text": "물보다, 이야기를 나눌 사람이 필요하셨던 것 같다.",
+   "ko": "아쉬워하며 깨달음",
+   "en": "Regretful, realizing."
+  },
+  "a629fa30": {
+   "who": "eunju",
+   "text": "아, 네…",
+   "ko": "맥 빠진 듯 작게",
+   "en": "Deflated, quiet."
+  },
+  "bc74e3c4": {
+   "who": "eunju",
+   "text": "괜찮아요. 다음에 또 올게요.",
+   "ko": "애써 괜찮은 척 조금 서운하게",
+   "en": "Pretending it's fine, a little disappointed."
+  },
+  "9d75e125": {
+   "who": "think",
+   "text": "은주 씨의 이야기를 들어야 했는데, 내 이야기만 했다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "3f6ce022": {
+   "who": "owner",
+   "text": "은주 씨, 처음 왔을 때보다 오래 앉아 있다 가네요.",
+   "ko": "담담하지만 흐뭇하게",
+   "en": "Plain but pleased."
+  },
+  "7e895cd7": {
+   "who": "think",
+   "text": "누군가에게는 이 카페가, 하루에 한 번 어른과 이야기하는 곳이다.",
+   "ko": "깨달음에 마음이 따뜻해진 혼잣말",
+   "en": "A warm realization, to herself."
+  },
+  "986bd895": {
+   "who": "owner",
+   "text": "내일은 각오해요. 그래도 서두르지는 말고요.",
+   "ko": "담담하게, 살짝 웃음기 섞어 일러 둠",
+   "en": "Calm, a hint of a smile, warning her."
+  },
+  "9cd458ba": {
+   "who": "jieun",
+   "text": "도 씨의 가방은 여름에 더 무겁다. 은주 씨는 요즘 아기하고만 이야기한다고 했다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "764d614e": {
+   "who": "think",
+   "text": "봄에 빵을 물고 간 그 갈매기다. 설마 주문하려고 줄을 선 건 아니겠지.",
+   "ko": "어이없어 웃음이 나는 혼잣말",
+   "en": "Amused disbelief, to herself."
+  },
+  "94876c70": {
+   "who": "owner",
+   "text": "열어요. 많아도 한 잔씩, 순서대로.",
+   "ko": "차분하고 단단하게",
+   "en": "Calm and steady."
+  },
+  "cefdf0c6": {
+   "who": "think",
+   "text": "도시 카페의 줄이 떠오른다. 그래도 여기서는 사장님이 옆에 계신다.",
+   "ko": "긴장되지만 마음을 다잡는 혼잣말",
+   "en": "Tense but steadying herself."
+  },
+  "5b94c1e4": {
+   "who": "owner",
+   "text": "좋아요. 이제 한 잔씩 만들어요.",
+   "ko": "차분하게 다독이며",
+   "en": "Calm and encouraging."
+  },
+  "edb42e88": {
+   "who": "jieun",
+   "text": "아이스 아메리카노 두 잔, 가져가시는 거죠?",
+   "ko": "바쁘지만 공손하게 확인",
+   "en": "Busy but polite, double-checking."
+  },
+  "8f09f8b2": {
+   "who": "jieun",
+   "text": "아이스 아메리카노 한 잔 더, 가져가시는 거죠?",
+   "ko": "바쁘지만 공손하게 확인",
+   "en": "Busy but polite, double-checking."
+  },
+  "490a0c5c": {
+   "who": "jieun",
+   "text": "딸기우유 한 잔, 가져가시는 거죠?",
+   "ko": "바쁘지만 공손하게 확인",
+   "en": "Busy but polite, double-checking."
+  },
+  "1f3eb100": {
+   "who": "jieun",
+   "text": "따뜻한 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "바쁘지만 공손하게 확인",
+   "en": "Busy but polite, double-checking."
+  },
+  "698307b8": {
+   "who": "granddaughter",
+   "text": "조금 뜨겁네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "90b639a0": {
+   "who": "think",
+   "text": "늘 오던 사람들이 오늘은 한 명도 들어오지 못했다.",
+   "ko": "마음이 무거운 혼잣말",
+   "en": "A heavy-hearted inner thought."
+  },
+  "286f6804": {
+   "who": "think",
+   "text": "우유가 다 떨어졌는데, 사장님도 무척 바쁘시다. 어떻게 할까?",
+   "ko": "다급하고 걱정스럽게 궁리",
+   "en": "Anxious and worried, deciding what to do."
+  },
+  "a63d151e": {
+   "who": "jieun",
+   "text": "사장님, 바쁘신데 죄송해요. 우유가 다 떨어졌어요.",
+   "ko": "긴장하고 미안해하며 빠르게",
+   "en": "Nervous and apologetic, quick."
+  },
+  "ea114144": {
+   "who": "owner",
+   "text": "말해 줘서 고마워요. 그런 건 바로 말해 주는 게 제일 좋아요.",
+   "ko": "미소 지으며 따뜻하게 칭찬",
+   "en": "Smiling, warm praise."
+  },
+  "32660dad": {
+   "who": "noh",
+   "text": "마트 앞에서 마침 만났지. 받아.",
+   "ko": "무뚝뚝하게 툭, 대수롭지 않게",
+   "en": "Gruff and offhand, as if it's nothing."
+  },
+  "03433722": {
+   "who": "owner",
+   "text": "지은 씨.",
+   "ko": "크지 않게 차분히 부름",
+   "en": "Calling her name, calm and not loud."
+  },
+  "15a631ef": {
+   "who": "owner",
+   "text": "가게는 같이 하는 거예요. 힘들 때는 혼자 뛰지 말고, 먼저 말해 줘요.",
+   "ko": "조용하지만 단단하게, 다정하게 일러 줌",
+   "en": "Quiet but firm, kindly teaching."
+  },
+  "4eb4e0ba": {
+   "who": "owner",
+   "text": "오늘의 커피는 저 친구가 내립니다.",
+   "ko": "차분하고 단단하게, 믿음을 담아",
+   "en": "Calm and firm, full of trust."
+  },
+  "93d58a9e": {
+   "who": "think",
+   "text": "저 친구. 사장님이 처음으로 손님 앞에서 나를 그렇게 부르셨다.",
+   "ko": "놀라고 벅차서 조용히 감동",
+   "en": "Surprised and deeply moved, quietly."
+  },
+  "b018b0b7": {
+   "who": "think",
+   "text": "떨면 안 된다. 사장님이 믿고 맡겨 주신 커피다.",
+   "ko": "떨리지만 결심하듯",
+   "en": "Nervous but determined."
+  },
+  "aece7d6d": {
+   "who": "owner",
+   "text": "…괜찮아요. 계속해요.",
+   "ko": "잠깐 쉬고 애써 담담하게",
+   "en": "After a pause, trying to sound calm."
+  },
+  "4cf7cb76": {
+   "who": "think",
+   "text": "요즘 사장님은 말이 줄었다. 그리고 손을 자주 주머니에 넣으신다.",
+   "ko": "걱정스럽게 조용히",
+   "en": "Quietly worried."
+  },
+  "aa3ba3d9": {
+   "who": "think",
+   "text": "할머니는 아침에도 오셨다가 그냥 돌아가셨다. 줄 끝에서 기다리시면 한 시간은 걸릴 것이다.",
+   "ko": "걱정하며 조용히",
+   "en": "Quietly concerned."
+  },
+  "a3e97bc7": {
+   "who": "think",
+   "text": "하지만 줄 선 손님들도 오래 기다렸다. 누구의 잔을 먼저 만들어야 할까.",
+   "ko": "고민하며 망설이는 혼잣말",
+   "en": "Torn, hesitating."
+  },
+  "c5b64c7e": {
+   "who": "think",
+   "text": "줄은 길고, 단골은 들어오지 못한다. 어떻게 할까?",
+   "ko": "다급하게 고민하는 혼잣말",
+   "en": "Anxiously deciding, to herself."
+  },
+  "b555c44f": {
+   "who": "haesun",
+   "text": "아이고, 지은 씨. 이렇게 바쁜데.",
+   "ko": "놀라고 고마워서 미소, 미안해하듯",
+   "en": "Surprised and grateful, a little apologetic."
+  },
+  "fc095792": {
+   "who": "owner",
+   "text": "저분은 서른 해째 오시는 분입니다. 조금만 기다려 주세요.",
+   "ko": "정중하지만 단호하게",
+   "en": "Polite but firm."
+  },
+  "ada900b6": {
+   "who": "sumin",
+   "text": "…비 그치면 갈게요. 여기 잠깐만 서 있을게요.",
+   "ko": "작게, 미안해하며",
+   "en": "Quiet and a little apologetic."
+  },
+  "66cfdf29": {
+   "who": "think",
+   "text": "수민은 비가 그치기를 기다리지만, 시간에 쫓기는 것 같다. 어떻게 할까?",
+   "ko": "걱정하며 궁리",
+   "en": "Concerned, wondering."
+  },
+  "dbf06a9a": {
+   "who": "sumin",
+   "text": "…네. 고마워요.",
+   "ko": "작게 쑥스러워하며 고마워함",
+   "en": "Small and shy, thankful."
+  },
+  "51e2c497": {
+   "who": "think",
+   "text": "기다릴 시간이 없어 보였다. 기다리라는 말보다 우산이 필요했을까.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "75a5e524": {
+   "who": "sumin",
+   "text": "아, 괜찮아요. 혼자 갈 수 있어요.",
+   "ko": "놀라서 당황하며 거절",
+   "en": "Startled and flustered, declining."
+  },
+  "22402f0e": {
+   "who": "think",
+   "text": "따라나서니 오히려 뛰어가 버렸다. 수민에게는 거리가 필요했다.",
+   "ko": "반성하며 조용히 깨달음",
+   "en": "Reflecting, quietly realizing."
+  },
+  "1360bf1d": {
+   "who": "owner",
+   "text": "줄을 지킨 건 잘했어요. 그런데 오늘은 줄이 이겼네요.",
+   "ko": "담담하게, 조금 쓸쓸한 웃음",
+   "en": "Plain, with a slightly wistful smile."
+  },
+  "afa94b0b": {
+   "who": "owner",
+   "text": "잘했어요. 할머니가 웃으면서 가셨어요.",
+   "ko": "미소 지으며 따뜻하게 칭찬",
+   "en": "Smiling, warm praise."
+  },
+  "dc4c81f2": {
+   "who": "owner",
+   "text": "지은 씨, 이 가게는 원래 동네 사람들 거예요.",
+   "ko": "차분하고 깊게",
+   "en": "Calm and deep."
+  },
+  "fbac5a59": {
+   "who": "owner",
+   "text": "손님이 많아진 건 고마운 일이에요. 그래도 동네 사람이 못 들어오면 안 돼요.",
+   "ko": "차분하지만 단호하게",
+   "en": "Calm but firm."
+  },
+  "40a2f290": {
+   "who": "owner",
+   "text": "내일부터 아침 일곱 시 전에는 동네 사람만 받아요.",
+   "ko": "단단하게, 결심을 담아",
+   "en": "Firm and resolved."
+  },
+  "b723d097": {
+   "who": "owner",
+   "text": "관광객은 일곱 시부터 받아요. 조금 늦게 와도 맛은 같으니까요.",
+   "ko": "차분하게, 살짝 웃음기",
+   "en": "Calm, with a hint of a smile."
+  },
+  "b4bca4de": {
+   "who": "think",
+   "text": "동네 시간. 새벽의 강 씨도, 여섯 시 십 분의 한 씨도, 이제 다시 들어올 수 있다.",
+   "ko": "기쁘고 안도하며 조용히",
+   "en": "Glad and relieved, quietly."
+  },
+  "3babf0a3": {
+   "who": "jieun",
+   "text": "줄이 골목 끝까지 섰다. 단골들은 들어오지 못했다. 사장님이 칠판에 썼다. \"일곱 시 전은 동네 시간.\"",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "d17de597": {
+   "who": "think",
+   "text": "오늘이 첫 동네 시간이다. 단골들이 다시 와 주실까.",
+   "ko": "설레고 조금 걱정되는 혼잣말",
+   "en": "Hopeful and a little anxious."
+  },
+  "89004f8e": {
+   "who": "owner",
+   "text": "오늘은 지은 씨가 가게를 열어 봐요. 늘 하던 순서대로.",
+   "ko": "담담하게, 믿고 맡기듯",
+   "en": "Calm, trusting her with it."
+  },
+  "65609f17": {
+   "who": "think",
+   "text": "버스가 들어오고, 한 씨가 오시기까지 삼분 남았다. 무엇을 할까?",
+   "ko": "서두르지 않게 차분하게 궁리",
+   "en": "Calmly planning, unhurried."
+  },
+  "323498c3": {
+   "who": "han",
+   "text": "…이거, 내 거예요?",
+   "ko": "깜짝 놀라 감동해서",
+   "en": "Surprised and touched."
+  },
+  "bb6891c0": {
+   "who": "jieun",
+   "text": "네. 여섯 시 십 분이라서요.",
+   "ko": "미소 지으며 다정하게",
+   "en": "Smiling and kind."
+  },
+  "bfc6460b": {
+   "who": "han",
+   "text": "달게 한 잔이요.",
+   "ko": "피곤하지만 공손하게",
+   "en": "Tired but polite."
+  },
+  "7ca93280": {
+   "who": "think",
+   "text": "만드는 동안 쉬는 시간이 줄었다. 오시는 시간을 아니까, 미리 해 둘 수도 있었는데.",
+   "ko": "아쉬워하며 조용히 배우듯",
+   "en": "Regretful, learning from it."
+  },
+  "295edf2a": {
+   "who": "han",
+   "text": "아이고, 여기까지 나왔어요? 괜찮아요.",
+   "ko": "놀라고 쑥스러워하며 손사래",
+   "en": "Surprised and a little embarrassed, waving it off."
+  },
+  "ceed7533": {
+   "who": "think",
+   "text": "쫓아가지 않아도 됐다. 한 씨는 늘 같은 시간에, 같은 것을 드신다.",
+   "ko": "깨달으며 조용히",
+   "en": "Quietly realizing."
+  },
+  "9a099e65": {
+   "who": "han",
+   "text": "달게 한 잔이요. 가져갈게요.",
+   "ko": "피곤하지만 공손하게, 조금 서둘러",
+   "en": "Tired but polite, a little hurried."
+  },
+  "35e97abf": {
+   "who": "han",
+   "text": "고마워요. 오늘도 살았네.",
+   "ko": "안도하며 고마워함",
+   "en": "Relieved and thankful."
+  },
+  "7d609d3e": {
+   "who": "han",
+   "text": "버스에서 문에 붙은 글씨를 봤어요. 동네 시간이라니, 참 좋네요.",
+   "ko": "미소 지으며 흐뭇하게",
+   "en": "Smiling, pleased."
+  },
+  "ab095dff": {
+   "who": "jieun",
+   "text": "열쇠고리가 귀여워요. 누가 만들어 줬어요?",
+   "ko": "밝고 다정하게 묻기",
+   "en": "Bright and friendly question."
+  },
+  "6e8c091c": {
+   "who": "han",
+   "text": "딸이요. 중학교 이학년인데, 가정 시간에 처음 바느질을 해서 만들었대요.",
+   "ko": "딸 이야기에 얼굴이 환해지며 자랑스럽게",
+   "en": "Lighting up, proud of his daughter."
+  },
+  "b262cb71": {
+   "who": "han",
+   "text": "그림도 잘 그리고 노래도 잘해요. 수학은 싫어하는데, 그건 나를 닮아서 그래요.",
+   "ko": "신나서 자랑하듯, 살짝 웃음",
+   "en": "Excited and proud, laughing a little."
+  },
+  "1adf589e": {
+   "who": "han",
+   "text": "아침엔 딸기잼 토스트만 먹고, 요즘은 고양이를 키우고 싶어 해요. 그리고 지난주에는….",
+   "ko": "말이 멈추지 않을 만큼 신나서, 점점 빨라짐",
+   "en": "So excited he can't stop, getting faster."
+  },
+  "f22c5d4b": {
+   "who": "han",
+   "text": "…내가 원래 이렇게 말이 많은 사람이 아닌데.",
+   "ko": "멋쩍게 웃으며 쑥스러워함",
+   "en": "Laughing sheepishly, embarrassed."
+  },
+  "40ec80cf": {
+   "who": "think",
+   "text": "말수 적은 한 씨가 딸 이야기만은 멈추지 못했다. 그만큼 딸이 보고 싶은 거겠지.",
+   "ko": "마음이 찡해서 조용히",
+   "en": "Quietly touched."
+  },
+  "ee0ec063": {
+   "who": "think",
+   "text": "며칠 만에 오신 강 씨에게 무슨 일이 있으셨던 것 같다. 어떻게 맞이할까?",
+   "ko": "조심스럽게 걱정하며 궁리",
+   "en": "Carefully concerned, wondering."
+  },
+  "4328837e": {
+   "who": "kang",
+   "text": "…이 맛이지. 며칠 동안 이 맛이 생각났어.",
+   "ko": "작게 미소 지으며 그리웠다는 듯 조용히",
+   "en": "A small smile, quietly nostalgic."
+  },
+  "8f579032": {
+   "who": "kang",
+   "text": "…허허. 그래.",
+   "ko": "쑥스럽게 낮게 웃으며",
+   "en": "A shy, low chuckle."
+  },
+  "5b2b5c7b": {
+   "who": "think",
+   "text": "반가웠지만, 강 씨는 조용히 있고 싶으셨나 보다.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "5e411110": {
+   "who": "kang",
+   "text": "…괜찮아요. 블랙.",
+   "ko": "머뭇거리다 짧게 막듯이, 낮게",
+   "en": "A pause, then a short low brush-off."
+  },
+  "47855c88": {
+   "who": "think",
+   "text": "강 씨는 대답하지 않으셨다. 묻지 않아도 되는 일이었다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "04d1adef": {
+   "who": "do",
+   "text": "허허, 동네 시간이라면서요? 늘 먹던 거 줘요.",
+   "ko": "허허 웃으며 반갑게",
+   "en": "Chuckling, glad."
+  },
+  "527bbd07": {
+   "who": "noh",
+   "text": "나는 그 잔.",
+   "ko": "짧고 무뚝뚝하게, 편하게",
+   "en": "Short and gruff, at ease."
+  },
+  "b8576e90": {
+   "who": "do",
+   "text": "이 시간에 여기 있으니 좋네.",
+   "ko": "느긋하고 흐뭇하게",
+   "en": "Relaxed and content."
+  },
+  "8a3be441": {
+   "who": "haesun",
+   "text": "어제는 못 들어왔는데. 오늘은 앉을 자리가 있네요.",
+   "ko": "미소 지으며 안도하고 기쁘게",
+   "en": "Smiling, relieved and happy."
+  },
+  "ab93cf4d": {
+   "who": "haesun",
+   "text": "어제 뒷문 계단에서 마신 우유도 참 따뜻했어요.",
+   "ko": "미소 지으며 다정하고 고마운 듯",
+   "en": "Smiling, warm and grateful."
+  },
+  "584ac475": {
+   "who": "think",
+   "text": "어제의 시끄러운 줄과는 전혀 다르다. 이 조용함이 이 가게의 진짜 모습인 것 같다.",
+   "ko": "평온해서 조용히 감탄",
+   "en": "Peaceful, quietly appreciating."
+  },
+  "c29c2506": {
+   "who": "owner",
+   "text": "여름은 이제 시작이에요. 낮에는 줄이 길어도, 아침마다 이렇게 동네 시간을 지켜 가요.",
+   "ko": "차분하고 단단하게, 앞날을 일러 줌",
+   "en": "Calm and steady, looking ahead."
+  },
+  "09da627e": {
+   "who": "owner",
+   "text": "그 줄을 끝까지 버텼으니, 이제 그냥 바리스타라고 해도 되겠네요.",
+   "ko": "미소를 띠고 따뜻하게 축하",
+   "en": "Smiling, warmly congratulating."
+  },
+  "ce4caf7b": {
+   "who": "jieun",
+   "text": "동네 시간의 첫 아침. 단골 다섯 명이 한 방에 있었다. 아무도 크게 말하지 않았다. 조용해서 좋았다.",
+   "ko": "편안한 하루를 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm and peaceful, like reading her diary aloud."
+  },
+  "36b61377": {
+   "who": "think",
+   "text": "여름 내내 같은 일을 날마다 했다. 그런데 신기하게도, 같은 날은 하루도 없었다.",
+   "ko": "지난 계절을 돌아보며 담담하고 조금 신기하게",
+   "en": "Calmly looking back on the season, a little amazed."
+  },
+  "4f07ba4c": {
+   "who": "owner",
+   "text": "지은 씨, 오늘부터 강 씨의 새벽 블랙은 지은 씨가 내려요.",
+   "ko": "담담하게, 믿고 맡기듯",
+   "en": "Calm, entrusting her with it."
+  },
+  "b89c46a9": {
+   "who": "jieun",
+   "text": "제가요? 그건 사장님이 서른 해 동안 하신 일이잖아요.",
+   "ko": "깜짝 놀라 믿기지 않아서",
+   "en": "Surprised and unbelieving."
+  },
+  "372a9da3": {
+   "who": "owner",
+   "text": "지금은 지은 씨 손이 더 정확해요. 봄부터 옆에서 다 봤잖아요.",
+   "ko": "담담하지만 따뜻하게, 믿음을 담아",
+   "en": "Plain but warm, full of trust."
+  },
+  "d3b77459": {
+   "who": "think",
+   "text": "원두를 갈고, 물이 끓기를 기다리고, 뜸을 들이고, 세 번에 나눠 붓는다. 사장님이 하던 그대로 하자.",
+   "ko": "긴장 속에 차분하게 순서를 되새김",
+   "en": "Nervous but calm, going over the steps."
+  },
+  "0337a14f": {
+   "who": "kang",
+   "text": "…괜찮네.",
+   "ko": "낮고 짧게, 조용히 인정하듯",
+   "en": "Low and brief, quietly approving."
+  },
+  "fa5f5044": {
+   "who": "think",
+   "text": "뜸을 들이는 동안 손이 근질거렸다. 사장님이 왜 기다리는 것도 커피라고 하셨는지 이제 알 것 같다.",
+   "ko": "깨달음에 조용히 미소 짓는 혼잣말",
+   "en": "A quiet, smiling realization."
+  },
+  "dee93ff5": {
+   "who": "haesun",
+   "text": "늘 먹던 거요. 우유 두 잔.",
+   "ko": "평소처럼 다정하게",
+   "en": "Gentle, as usual."
+  },
+  "e757020f": {
+   "who": "jieun",
+   "text": "할머니, 죄송해요. 우유가 늦게 와서, 지금은 한 잔만 만들 수 있어요.",
+   "ko": "미안해하며 조심스럽게",
+   "en": "Apologetic and careful."
+  },
+  "6e352e4f": {
+   "who": "think",
+   "text": "할머니는 늘 두 잔을 드셨다. 한 잔뿐인 오늘, 할머니는 어떻게 하고 싶으실까?",
+   "ko": "조심스럽게 할머니 마음을 헤아림",
+   "en": "Carefully thinking about how she feels."
+  },
+  "0af7fe9c": {
+   "who": "haesun",
+   "text": "오늘은 내가 마실게요. 그 사람도 그러라고 할 거예요.",
+   "ko": "잠깐 생각하다 미소 지으며 담담하게, 조금 그립게",
+   "en": "After a pause, smiling, calm and a little wistful."
+  },
+  "a34fab78": {
+   "who": "haesun",
+   "text": "재촉하지 않고 기다려 줘서 고마워요.",
+   "ko": "미소 지으며 진심으로 고마워함",
+   "en": "Smiling, sincerely grateful."
+  },
+  "a44e277b": {
+   "who": "haesun",
+   "text": "반씩 했네요. 고마워요.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "f32b776d": {
+   "who": "think",
+   "text": "두 잔을 맞춰 드렸지만, 할머니가 어떻게 하고 싶으신지 먼저 기다려 볼 걸 그랬나.",
+   "ko": "조금 아쉬워하며 조용히",
+   "en": "Quietly, a little regretful."
+  },
+  "acf401f1": {
+   "who": "haesun",
+   "text": "아니에요, 가지 마요. 가게를 비우면 안 돼요.",
+   "ko": "다급하게 말리듯, 다정하게",
+   "en": "Quickly stopping her, kindly."
+  },
+  "87d73a91": {
+   "who": "haesun",
+   "text": "괜찮아요. 오늘은 한 잔이면 돼요.",
+   "ko": "담담하게 괜찮다고",
+   "en": "Calmly saying it's okay."
+  },
+  "8195d363": {
+   "who": "think",
+   "text": "할머니를 위해서였는데, 오히려 할머니 마음을 바쁘게 해 드렸다.",
+   "ko": "미안해하며 조용히 반성",
+   "en": "Sorry, quietly reflecting."
+  },
+  "3ed6ae6b": {
+   "who": "haesun",
+   "text": "여보, 오늘은 우유가 늦게 왔대요. 그래도 지은 씨가 따뜻하게 데워 줬어요.",
+   "ko": "빈 의자에게 혼잣말하듯 다정하고 애틋하게, 담담하게",
+   "en": "Talking tenderly to her late husband's empty chair; bittersweet, loving and calm."
+  },
+  "5e91b3e7": {
+   "who": "think",
+   "text": "할머니가 빈 의자에게 \"여보\"라고 하셨다. 그 의자는 한 번도 오신 적 없는 할머니 남편분의 자리였구나.",
+   "ko": "깨달음에 가슴이 먹먹해지는 혼잣말",
+   "en": "A heartfelt realization, quietly stunned."
+  },
+  "5b47667a": {
+   "who": "jian",
+   "text": "음…",
+   "ko": "말을 고르지 못해 머뭇거리며",
+   "en": "Hesitating, unable to find words."
+  },
+  "bcd6b5bc": {
+   "who": "think",
+   "text": "지안 씨는 말이 없지만, 창밖과 메뉴판의 색을 번갈아 보신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "fca5cc50": {
+   "who": "jian",
+   "text": "창밖이랑 같은 색이요. 노란색.",
+   "ko": "창밖을 보다 조금 밝아지며",
+   "en": "Brightening slightly, looking outside."
+  },
+  "cad724d2": {
+   "who": "jian",
+   "text": "네, 그걸로요.",
+   "ko": "작게 미소 지으며",
+   "en": "A small smile."
+  },
+  "047f424c": {
+   "who": "think",
+   "text": "코코아도 좋아하셨지만, 오늘 보고 계신 색은 노란색이었다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "a2f563d5": {
+   "who": "jian",
+   "text": "…아메리카노요. 괜찮아요.",
+   "ko": "힘없이 포기하듯, 작게",
+   "en": "Listlessly giving up, quietly."
+  },
+  "7bd48dfa": {
+   "who": "think",
+   "text": "지안 씨는 색으로 고르는 사람이다. 기다리기보다, 색을 먼저 물어봐 드려야 했다.",
+   "ko": "반성하며 조용히 배우듯",
+   "en": "Reflecting, learning from it."
+  },
+  "9a7cc413": {
+   "who": "jian",
+   "text": "창밖이랑 같은 색이다. 고마워요.",
+   "ko": "작게 감탄하며 고마워함",
+   "en": "Quietly delighted, thankful."
+  },
+  "b46bc0bc": {
+   "who": "jian",
+   "text": "이제 쌀쌀하니까, 따뜻하게요.",
+   "ko": "조용하게",
+   "en": "Quiet."
+  },
+  "ebea58de": {
+   "who": "jieun",
+   "text": "따뜻한 유자차 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "e9d9fd41": {
+   "who": "jian",
+   "text": "물이 조금 미지근하네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "a2e210d7": {
+   "who": "jian",
+   "text": "물이 조금 졸았네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "4e2e639d": {
+   "who": "jian",
+   "text": "코코아요. 따뜻하게요.",
+   "ko": "조용하게",
+   "en": "Quiet."
+  },
+  "0c91a889": {
+   "who": "jieun",
+   "text": "따뜻한 코코아 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "81fd4dfd": {
+   "who": "jian",
+   "text": "조금 미지근하네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "290def71": {
+   "who": "jian",
+   "text": "조금 뜨겁네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "4049d150": {
+   "who": "jian",
+   "text": "…아메리카노요.",
+   "ko": "힘없이 작게",
+   "en": "Listless and quiet."
+  },
+  "0e8d53b7": {
+   "who": "jian",
+   "text": "…아이스로요.",
+   "ko": "힘없이 작게",
+   "en": "Listless and quiet."
+  },
+  "ee401629": {
+   "who": "jian",
+   "text": "…들렸어요?",
+   "ko": "들켜서 수줍고 당황하며 작게",
+   "en": "Caught, shy and flustered, very quiet."
+  },
+  "833802e5": {
+   "who": "jian",
+   "text": "그림이 안 될 때는 노래를 해요. 색 대신 소리로요.",
+   "ko": "수줍게 털어놓듯, 조금 쓸쓸하게",
+   "en": "Shyly confiding, a little sad."
+  },
+  "1d7406bb": {
+   "who": "think",
+   "text": "그림을 못 그리는 동안에도, 지안은 무언가를 계속 그리고 있었다. 색 대신 소리로.",
+   "ko": "감동해서 조용히 되새김",
+   "en": "Quietly moved, reflecting."
+  },
+  "4ec9da2d": {
+   "who": "think",
+   "text": "봄에는 한 손으로 드셨는데. 언제부터 두 손으로 드셨을까.",
+   "ko": "걱정스럽게 조용히",
+   "en": "Quietly worried."
+  },
+  "6220376c": {
+   "who": "owner",
+   "text": "강 씨 블랙, 좋았어요. 강 씨가 아무 말도 안 했다면, 그게 강 씨의 칭찬이에요.",
+   "ko": "담담하게, 살짝 웃음기 섞어 칭찬",
+   "en": "Plain, with a hint of a smile, praising."
+  },
+  "a7680bb3": {
+   "who": "jieun",
+   "text": "고맙습니다. 내일도 제가 내릴게요.",
+   "ko": "기뻐서 미소 지으며 다짐하듯",
+   "en": "Happy and smiling, a little determined."
+  },
+  "dbfd0030": {
+   "who": "jieun",
+   "text": "처음으로 강 씨의 블랙을 내 손으로 내렸다. 우유가 한 잔뿐인 날, 할머니는 서두르지 않았다. 지안 씨는 창밖의 노란 잎을 보았다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "484e6e08": {
+   "who": "think",
+   "text": "처음 보는 양복 차림의 강 씨가 어색해 보이신다. 어떻게 할까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering."
+  },
+  "81e8bacc": {
+   "who": "kang",
+   "text": "…역시 여기가 편하네. 오늘 좀 낯선 데를 가야 해서.",
+   "ko": "작게 미소 지으며 마음이 놓여서, 조금 무겁게",
+   "en": "A small smile, relieved, but a little heavy."
+  },
+  "d378877d": {
+   "who": "kang",
+   "text": "…허허. 그런가.",
+   "ko": "멋쩍게 낮게 웃으며",
+   "en": "A low, awkward chuckle."
+  },
+  "d656746f": {
+   "who": "think",
+   "text": "칭찬해 드렸는데 더 어색해 보이신다. 평소처럼 해 드릴 걸 그랬나.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "d134211f": {
+   "who": "think",
+   "text": "강 씨는 늘 앉던 자리부터 보셨다. 평소처럼 해 드리는 게 나았겠다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "0baa2ed5": {
+   "who": "kang",
+   "text": "블랙.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "0b8be445": {
+   "who": "think",
+   "text": "어디에 가시는 걸까. 늘 항구로 가시던 분인데.",
+   "ko": "걱정스럽게 궁금해함",
+   "en": "Worried and wondering."
+  },
+  "743b1ebc": {
+   "who": "han",
+   "text": "늘 먹던 거요.",
+   "ko": "피곤하지만 편안하게",
+   "en": "Tired but at ease."
+  },
+  "c079d9cb": {
+   "who": "han",
+   "text": "고마워요. 딱 이거야.",
+   "ko": "흐뭇하게 고마워함",
+   "en": "Pleased and thankful."
+  },
+  "117cf95b": {
+   "who": "han",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "피곤하지만 부드럽게",
+   "en": "Tired but gentle."
+  },
+  "cf844d7d": {
+   "who": "think",
+   "text": "한 씨는 딸에게 무언가 남기고 싶으신 것 같다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "f7d9eee8": {
+   "who": "han",
+   "text": "고마워요. 딸한테 쓸 말이 있었어요.",
+   "ko": "미소 지으며 고맙고 조금 쑥스럽게",
+   "en": "Smiling, grateful and a little shy."
+  },
+  "2c9ac4ab": {
+   "who": "han",
+   "text": "네, 중학생이에요.",
+   "ko": "미소 지으며 자랑스럽게",
+   "en": "Smiling, proud."
+  },
+  "799d419a": {
+   "who": "think",
+   "text": "사진 이야기는 좋아하셨다. 그런데 꺼내신 펜은 끝내 쓰지 못하셨다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "d83b9b22": {
+   "who": "han",
+   "text": "아니요, 그런 거 아니에요. 괜찮아요.",
+   "ko": "당황해서 서둘러 부인하며",
+   "en": "Flustered, quickly denying."
+  },
+  "c4bb088c": {
+   "who": "think",
+   "text": "짐작으로 물어서 당황하게 해 드렸다. 한 씨는 그저 쓸 종이가 필요하셨던 것 같은데.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "5816373e": {
+   "who": "geum",
+   "text": "아아… 하나요.",
+   "ko": "추위에 움츠러들어 조금 망설이며, 그래도 아아",
+   "en": "Shivering a little, hesitating, but still ordering iced."
+  },
+  "282574ee": {
+   "who": "geum",
+   "text": "으, 손 시려. 그래도 이거죠.",
+   "ko": "손이 시려 투덜대지만 만족스럽게",
+   "en": "Grumbling about cold hands, but satisfied."
+  },
+  "66f25740": {
+   "who": "jieun",
+   "text": "따뜻한 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "cc9d4b14": {
+   "who": "jieun",
+   "text": "사장님, 날이 쌀쌀한데도 아이스를 많이 찾으시네요.",
+   "ko": "신기해하며 묻듯",
+   "en": "Curious, a little amused."
+  },
+  "bbdfcd46": {
+   "who": "owner",
+   "text": "겨울에도 찾아요. 이 동네 사람들한테 아아는 계절이 없어요.",
+   "ko": "미소 지으며 담담하게, 살짝 농담조",
+   "en": "Smiling, calm, slightly joking."
+  },
+  "c60990bd": {
+   "who": "jieun",
+   "text": "그런데 사장님, 강 씨가 오늘 양복을 입고 오셨어요. 항구 말고 버스 쪽으로 가셨고요.",
+   "ko": "걱정스럽게 조심스레 전함",
+   "en": "Worried, carefully reporting."
+  },
+  "cd5aaaaf": {
+   "who": "owner",
+   "text": "…사람마다 말하지 않는 사정이 있어요. 강 씨가 말할 때까지는, 늘 그 잔이면 돼요.",
+   "ko": "잠깐 쉬고 조용하고 깊게",
+   "en": "After a pause, quiet and deep."
+  },
+  "1733a6a2": {
+   "who": "think",
+   "text": "사장님은 무언가 알고 계신 것 같다. 그래도 끝까지 말하지 않으신다.",
+   "ko": "조용히 알아차리며 궁금해함",
+   "en": "Quietly noticing, wondering."
+  },
+  "ece98cf3": {
+   "who": "jieun",
+   "text": "강 씨가 양복을 입고 왔다. 한 씨는 딸 사진을 보다가 펜을 꺼냈다. 사람마다 말하지 않는 사정이 있다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "55113ff8": {
+   "who": "owner",
+   "text": "은행에 좀 다녀올게요. 한 시간쯤 걸려요.",
+   "ko": "담담하게 알려 줌",
+   "en": "Calmly telling her."
+  },
+  "094aa34e": {
+   "who": "owner",
+   "text": "손님이 오면 평소대로, 한 잔씩 해요. 지은 씨는 혼자서도 할 수 있어요.",
+   "ko": "차분하고 믿음을 담아 다독임",
+   "en": "Calm and encouraging, full of trust."
+  },
+  "fdfa1f6a": {
+   "who": "think",
+   "text": "사장님이 안 계신 가게는 조금 넓어 보인다. 맛을 봐 주실 분도 없으니, 수첩을 보며 하나씩 정확하게 하자.",
+   "ko": "조금 긴장하며 스스로 다독이는 혼잣말",
+   "en": "A little nervous, steadying herself."
+  },
+  "35856cd7": {
+   "who": "jieun",
+   "text": "따뜻한 바닐라 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "5ab5d89c": {
+   "who": "noh",
+   "text": "높은 데서 무거운 통 내리다가 떨어뜨리면 큰일이야. 손이 편해야지.",
+   "ko": "무뚝뚝하게 툭, 속은 걱정하며",
+   "en": "Gruff and offhand, but caring underneath."
+  },
+  "d0fac6d0": {
+   "who": "think",
+   "text": "노 씨는 사장님이 안 계실 때 몰래 고치시며, 입에 손가락을 대셨다. 어떻게 할까?",
+   "ko": "알아차리며 조심스럽게 궁리",
+   "en": "Noticing, carefully wondering."
+  },
+  "50e5a56e": {
+   "who": "noh",
+   "text": "눈치가 있구먼.",
+   "ko": "작게 웃으며 흐뭇하게 칭찬",
+   "en": "A small chuckle, pleased."
+  },
+  "b2c5f538": {
+   "who": "noh",
+   "text": "쉿. 그냥 고장 난 거 고친 거야.",
+   "ko": "속삭이듯 서둘러 둘러대며",
+   "en": "Whispering, hurriedly covering it up."
+  },
+  "94189bef": {
+   "who": "think",
+   "text": "고마운 마음은 맞았지만, 노 씨는 조용히 하고 싶으셨다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "e84078f4": {
+   "who": "noh",
+   "text": "…그냥 고장 난 거야. 괜찮아.",
+   "ko": "잠깐 쉬고 짧게 둘러대며, 낮게",
+   "en": "After a pause, a short low cover story."
+  },
+  "43358f91": {
+   "who": "think",
+   "text": "노 씨가 말하지 않는 데는 이유가 있었다. 나도 모른 척해 드려야 했다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "d4057ecf": {
+   "who": "think",
+   "text": "유모차가 들어갈 길이 없어서, 은주 씨는 입구에서 머뭇거리신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "263d1aab": {
+   "who": "eunju",
+   "text": "창가요. 아기가 바다 보는 걸 좋아해요.",
+   "ko": "미소 지으며 반갑게",
+   "en": "Smiling, glad."
+  },
+  "b1ea9cb1": {
+   "who": "eunju",
+   "text": "물어봐 줘서 고마워요. 어디가 편한지 묻는 사람, 잘 없거든요.",
+   "ko": "미소 지으며 진심으로 고마워함, 조금 울컥",
+   "en": "Smiling, sincerely grateful, a little choked up."
+  },
+  "33f83ace": {
+   "who": "think",
+   "text": "은주 씨가 앉고 싶으셨던 곳은 창가였구나. 물어볼 걸 그랬다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "197e63c5": {
+   "who": "eunju",
+   "text": "아, 괜찮아요. 아기가 낯을 가려서요.",
+   "ko": "놀라서 당황하며 거절",
+   "en": "Startled and flustered, declining."
+  },
+  "d8b9c9df": {
+   "who": "think",
+   "text": "도와드리고 싶었는데, 은주 씨가 바라신 건 아기를 맡기는 일이 아니었다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "5d6846c0": {
+   "who": "eunju",
+   "text": "늘 먹던 거요. 그 두꺼운 컵에요.",
+   "ko": "다정하게",
+   "en": "Gentle and kind."
+  },
+  "23d1fdda": {
+   "who": "eunju",
+   "text": "고마워요. 오늘은 따뜻할 때 마셔 볼게요.",
+   "ko": "기대에 차서 밝게",
+   "en": "Bright and hopeful."
+  },
+  "1e09876e": {
+   "who": "eunju",
+   "text": "지은 씨, 이거 봐요. 아기 낳고 처음으로 끝까지 다 마셨어요.",
+   "ko": "신나고 뿌듯해서 자랑",
+   "en": "Excited and proud, showing off."
+  },
+  "935d360b": {
+   "who": "owner",
+   "text": "이제 여기는 유모차 자리예요. 다음부터는 문에서 바로 들어와요.",
+   "ko": "담담하지만 따뜻하게",
+   "en": "Plain but warm."
+  },
+  "1ec64624": {
+   "who": "think",
+   "text": "은주 씨가 끝까지 마신 첫 잔이다. 사장님도 그걸 보고 계셨나 보다.",
+   "ko": "흐뭇하고 따뜻한 혼잣말",
+   "en": "A warm, pleased inner thought."
+  },
+  "c3dda81b": {
+   "who": "eunju",
+   "text": "또 올게요. 다음에는 다 마셔 볼게요.",
+   "ko": "조금 아쉽지만 밝게 약속하듯",
+   "en": "A little disappointed, but brightly promising."
+  },
+  "910fe1d4": {
+   "who": "owner",
+   "text": "내일은 바다 축제예요. 일 년에 한 번, 골목이 사람으로 가득 차는 날이에요.",
+   "ko": "담담하게 알려 줌, 살짝 기대감",
+   "en": "Calmly telling her, with a hint of anticipation."
+  },
+  "f381b98e": {
+   "who": "owner",
+   "text": "오늘은 일찍 자요. 내일은 하루 종일 서 있어야 해요.",
+   "ko": "다정하게 챙기며",
+   "en": "Kind and caring."
+  },
+  "256eec96": {
+   "who": "think",
+   "text": "요즘은 사장님 잔이 흔들리는 날이 많다. 내일은 내가 더 많이 해야겠다.",
+   "ko": "걱정하며 다짐",
+   "en": "Worried, making a resolution."
+  },
+  "6cc5c29d": {
+   "who": "jieun",
+   "text": "노 씨가 몰래 선반을 낮췄다. 사장님은 아무 말 없이 그 선반을 썼다. 은주 씨의 유모차 자리가 생겼다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "2203a191": {
+   "who": "think",
+   "text": "여름에는 사장님이 옆에서 컵을 놓아 주셨다. 오늘도 함께라면 괜찮을 거야.",
+   "ko": "조금 긴장했지만 믿음으로 다독이는 혼잣말",
+   "en": "A little nervous, reassuring herself with trust."
+  },
+  "ef511c96": {
+   "who": "jieun",
+   "text": "따뜻한 유자차 한 잔, 가져가시는 거죠?",
+   "ko": "바쁘지만 공손하게 확인",
+   "en": "Busy but polite, double-checking."
+  },
+  "f4fd34bb": {
+   "who": "think",
+   "text": "천천히, 정확하게. 봄에는 그게 칭찬이었는데, 오늘은 약점이 된다.",
+   "ko": "초조하고 서글픈 혼잣말",
+   "en": "Anxious and a little sad."
+  },
+  "0694498a": {
+   "who": "jieun",
+   "text": "사장님. 컵은… 깨지라고 있대요.",
+   "ko": "조심스럽게, 떨리지만 다정하게 돌려 드리듯",
+   "en": "Carefully, a little shaky but tender, giving his words back to him."
+  },
+  "1c697b10": {
+   "who": "owner",
+   "text": "…그렇지. 내가 한 말이었지.",
+   "ko": "잠깐 쉬고 아주 작게 웃으며, 뭉클하게",
+   "en": "After a pause, a very small smile, touched."
+  },
+  "5c7aba64": {
+   "who": "jieun",
+   "text": "제가 쓸게요. 그리고 천천히, 다시 할게요.",
+   "ko": "떨림을 누르고 단단하게 결심",
+   "en": "Steadying her voice, firm and determined."
+  },
+  "e4a820e9": {
+   "who": "think",
+   "text": "봄에 사장님이 나에게 해 주신 말을, 오늘은 내가 사장님께 돌려드렸다.",
+   "ko": "벅차고 뭉클한 혼잣말",
+   "en": "A full-hearted, moved inner thought."
+  },
+  "a68327a6": {
+   "who": "owner",
+   "text": "머신은 안 돼요. 오늘은 손으로 만드는 것만 해요.",
+   "ko": "차분하고 단호하게",
+   "en": "Calm and decisive."
+  },
+  "58ea2810": {
+   "who": "owner",
+   "text": "따뜻한 우유, 유자차, 핸드드립. 작은 불 하나로 데우고 내리는 것만요.",
+   "ko": "차분하게 하나씩 짚어 일러 줌",
+   "en": "Calmly listing what they can make."
+  },
+  "ff35b167": {
+   "who": "think",
+   "text": "에스프레소가 없으니, 아아도 라테도 못 만든다. 그런데 줄은 그대로다.",
+   "ko": "걱정스럽고 막막한 혼잣말",
+   "en": "Worried and at a loss."
+  },
+  "34406a64": {
+   "who": "think",
+   "text": "늘 먹던 것은 따뜻한 우유 두 잔이다. 그건 머신 없이도 만들 수 있다.",
+   "ko": "깨달아 조금 마음이 놓인 혼잣말",
+   "en": "Realizing, a little relieved."
+  },
+  "33d47136": {
+   "who": "kang",
+   "text": "블랙, 천천히 해. 나는 안 바빠.",
+   "ko": "낮고 느긋하게, 다독이듯",
+   "en": "Low and unhurried, reassuring."
+  },
+  "c11fa4c8": {
+   "who": "kang",
+   "text": "블랙. 천천히 해.",
+   "ko": "낮고 느긋하게",
+   "en": "Low and unhurried."
+  },
+  "c20f6c09": {
+   "who": "kang",
+   "text": "…그래, 이거지.",
+   "ko": "낮고 짧게, 만족해서",
+   "en": "Low and brief, satisfied."
+  },
+  "6891d0c8": {
+   "who": "think",
+   "text": "단골들은 돕겠다고 나서지 않았다. 그냥 평소대로 주문했을 뿐인데, 그게 가장 큰 힘이 되었다.",
+   "ko": "고마움에 뭉클한 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "8402bf41": {
+   "who": "owner",
+   "text": "지은아.",
+   "ko": "처음으로 다정하게 이름을 부름, 조용히",
+   "en": "Softly calling her name for the first time, tender."
+  },
+  "e3f5b5e3": {
+   "who": "think",
+   "text": "사장님이 처음으로 말을 놓으셨다. 이름을 부르는 목소리가 다정하다.",
+   "ko": "놀라고 마음이 따뜻해진 혼잣말",
+   "en": "Surprised and warmed."
+  },
+  "581ba119": {
+   "who": "owner",
+   "text": "내일은 네가 연다.",
+   "ko": "조용하지만 단단하게, 믿고 맡기듯",
+   "en": "Quiet but firm, entrusting her."
+  },
+  "29f1b3e3": {
+   "who": "owner",
+   "text": "손님은 평소대로 온다.",
+   "ko": "담담하게, 안심시키듯",
+   "en": "Plain, reassuring."
+  },
+  "112e7138": {
+   "who": "owner",
+   "text": "손을 좀 쉬게 하려고 해. 겨울에 다시 올게.",
+   "ko": "담담하게 애써 가볍게, 속마음은 감추며",
+   "en": "Plain, trying to sound light, hiding his feelings."
+  },
+  "444e18ae": {
+   "who": "jieun",
+   "text": "…네. 제가 열게요.",
+   "ko": "긴장하지만 결심하듯, 조금 떨리며",
+   "en": "Nervous but resolved, a little shaky."
+  },
+  "5aeb039e": {
+   "who": "think",
+   "text": "오늘 모두가 사장님의 손을 보았다. 사장님은 그래서 쉬러 가시는 걸까.",
+   "ko": "걱정과 서운함이 섞인 혼잣말",
+   "en": "Worried and a little sad."
+  },
+  "09ccd1f2": {
+   "who": "think",
+   "text": "내일은 내가 연다. 손님은 평소대로 오실 것이다.",
+   "ko": "마음을 다잡으며 차분하게 다짐",
+   "en": "Steadying herself, calmly resolving."
+  },
+  "6b4ab0aa": {
+   "who": "jieun",
+   "text": "축제 날, 모든 게 한꺼번에 왔다. 사장님이 컵을 놓쳤고, 머신이 멈췄다. 마감 때 사장님이 열쇠를 주셨다. \"내일은 네가 연다.\"",
+   "ko": "벅찬 하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm but full of feeling, like reading her diary aloud."
+  },
+  "c7f4ee95": {
+   "who": "think",
+   "text": "오늘은 사장님이 안 계신다. 무엇이 어디 있는지, 순서가 어떻게 되는지 머릿속으로 한 번 더 떠올린다.",
+   "ko": "긴장해서 차근차근 되새기는 혼잣말",
+   "en": "Nervous, carefully going over things to herself."
+  },
+  "8aedd142": {
+   "who": "haesun",
+   "text": "지은 씨, 오늘은 혼자 열어요? 사장님이 쉬러 가셨다면서요.",
+   "ko": "미소 지으며 다정하고 조금 걱정하듯",
+   "en": "Smiling, kind and a little concerned."
+  },
+  "e19c5af2": {
+   "who": "haesun",
+   "text": "그럼 오늘은 내가 첫 손님 할게요. 서두르지 말고 천천히 열어요.",
+   "ko": "미소 지으며 다정하게 다독임, 천천히",
+   "en": "Smiling, warmly encouraging, slow."
+  },
+  "f426eefd": {
+   "who": "think",
+   "text": "할머니가 먼저 인사해 주셨다. 봄에는 내 이름도 모르셨는데.",
+   "ko": "고맙고 뭉클한 혼잣말",
+   "en": "Grateful and touched."
+  },
+  "145ae27d": {
+   "who": "think",
+   "text": "…오늘은 손님이 일찍 왔네. 사장님 없이 여는 첫날인데, 혼자는 아니구나.",
+   "ko": "웃음이 나면서 마음이 놓이는 혼잣말",
+   "en": "Amused and comforted."
+  },
+  "e25d63e3": {
+   "who": "kang",
+   "text": "불, 잘 켜 놨네.",
+   "ko": "작게 미소 지으며 먼저 말을 거는, 낮고 따뜻하게",
+   "en": "A small smile, speaking first, low and warm."
+  },
+  "65131a11": {
+   "who": "kang",
+   "text": "사장은 손 쉬러 갔다며. 블랙은 천천히 해, 나는 기다릴 수 있어.",
+   "ko": "낮고 느긋하게, 다독이듯",
+   "en": "Low and unhurried, reassuring."
+  },
+  "c20caab9": {
+   "who": "think",
+   "text": "강 씨가 먼저 말을 걸어 주셨다. \"블랙\" 말고 다른 말은 처음 들어 본다.",
+   "ko": "놀라고 기쁜 혼잣말",
+   "en": "Surprised and happy."
+  },
+  "7771ff45": {
+   "who": "kang",
+   "text": "…사장 맛이랑 같네.",
+   "ko": "낮고 짧게, 조용히 인정하듯",
+   "en": "Low and brief, quietly approving."
+  },
+  "eda2af9d": {
+   "who": "kang",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "낮고 무뚝뚝하게",
+   "en": "Low and gruff."
+  },
+  "e7d7b7b9": {
+   "who": "do",
+   "text": "늘 먹던 거요. 사장님 없어도 되는 거죠?",
+   "ko": "밝게, 조금 장난스럽게 걱정하는 척",
+   "en": "Bright, playfully pretending to worry."
+  },
+  "ae72e663": {
+   "who": "think",
+   "text": "단골의 늘 먹던 것은 수첩의 단골 쪽에 적어 두었다. 헷갈리면 수첩을 펴 보면 된다.",
+   "ko": "차분하게 떠올리며",
+   "en": "Calmly remembering."
+  },
+  "24ff4f9d": {
+   "who": "do",
+   "text": "이거지. 혼자서도 잘하네.",
+   "ko": "흐뭇하게 칭찬",
+   "en": "Pleased, praising her."
+  },
+  "6a60b16f": {
+   "who": "think",
+   "text": "도 씨는 퇴직 이야기를 피하고 싶어 보이지만, 의자는 오래 보신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "0da1faa8": {
+   "who": "do",
+   "text": "…겨울이면 그만둬요. 서른 해 했으니까.",
+   "ko": "잠깐 쉬고 미소 지으며 담담하게, 조금 쓸쓸하게",
+   "en": "After a pause, smiling, calm but a little wistful."
+  },
+  "d05160dc": {
+   "who": "jieun",
+   "text": "…그러시구나. 그동안 정말 수고 많으셨어요.",
+   "ko": "조용하고 진심으로",
+   "en": "Quiet and sincere."
+  },
+  "f5db5874": {
+   "who": "think",
+   "text": "도 씨는 의자를 한참 보셨다. 잔을 그 앞에 놓아 드릴 걸 그랬나.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "9348e0d9": {
+   "who": "do",
+   "text": "…글쎄요. 괜찮아요.",
+   "ko": "머뭇거리다 짧게 넘기듯",
+   "en": "A pause, then brushing it off."
+  },
+  "9768c5c2": {
+   "who": "think",
+   "text": "도 씨도 아직 모르시는 일이었다. 묻지 말고 쉴 자리를 드릴 걸.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "be3fd9dc": {
+   "who": "do",
+   "text": "허허. 서른 해 만에 여기 앉아 보네.",
+   "ko": "허허 웃으며 쑥스럽고 감격스럽게",
+   "en": "Chuckling, shy and moved."
+  },
+  "1e1776cf": {
+   "who": "do",
+   "text": "앉아서 마시니까, 같은 커피인데도 맛이 다르네요.",
+   "ko": "미소 지으며 편안하고 신기하게",
+   "en": "Smiling, relaxed and amazed."
+  },
+  "90f78115": {
+   "who": "think",
+   "text": "도 씨가 처음 앉으셨다. 앉으라고 재촉하지 않고, 자리만 비워 둔 날들 덕분일까.",
+   "ko": "뭉클하고 기쁜 혼잣말",
+   "en": "Touched and happy."
+  },
+  "8bd71e73": {
+   "who": "sumin",
+   "text": "…저 눈이요. 저 눈이 무서워요.",
+   "ko": "겁에 질려 작게 떨리는 목소리",
+   "en": "Frightened, a small trembling voice."
+  },
+  "624cc188": {
+   "who": "sumin",
+   "text": "…아무한테도 말하지 마세요.",
+   "ko": "창피해서 작게 웅얼거리듯",
+   "en": "Embarrassed, mumbling quietly."
+  },
+  "9d7c3069": {
+   "who": "think",
+   "text": "늘 이어폰 너머에서 조용하던 수민도, 그 갈매기 앞에서는 나처럼 놀란다. 조금 가까워진 것 같다.",
+   "ko": "웃음이 나고 조금 가까워진 것 같아 따뜻한 혼잣말",
+   "en": "Amused, feeling a little closer, warm."
+  },
+  "3f97e8db": {
+   "who": "sumin",
+   "text": "…보리차요. 오늘은 따뜻하게요.",
+   "ko": "작게, 조금 부드러워진 말투",
+   "en": "Quiet, a little softer than usual."
+  },
+  "d39a181c": {
+   "who": "think",
+   "text": "여름 내내 차가운 보리차였는데. 수민에게도 가을이 왔나 보다.",
+   "ko": "계절이 바뀐 걸 느끼며 따뜻한 혼잣말",
+   "en": "Noticing the season change, warm."
+  },
+  "b3c8d17e": {
+   "who": "sumin",
+   "text": "보리차요. 따뜻하게, 여기서요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "68806af8": {
+   "who": "sumin",
+   "text": "…고맙습니다.",
+   "ko": "작고 쑥스럽게 고마워함",
+   "en": "Small and shy, thankful."
+  },
+  "c0780f39": {
+   "who": "jieun",
+   "text": "따뜻한 보리차 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "d61f111b": {
+   "who": "sumin",
+   "text": "물이 조금 졸았네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "981b0925": {
+   "who": "think",
+   "text": "수민은 안내서를 들킨 게 부끄러운 것 같다. 어떻게 돌려줄까?",
+   "ko": "배려하며 조심스럽게 궁리",
+   "en": "Considerate, carefully wondering."
+  },
+  "9958d082": {
+   "who": "think",
+   "text": "내가 안내서를 본 걸 아셨을까. 보지 않은 척 돌려드릴 걸 그랬다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "9b8dbfec": {
+   "who": "sumin",
+   "text": "…아직 몰라요. 괜찮아요.",
+   "ko": "작고 짧게 선을 긋듯",
+   "en": "Short and quiet, keeping her distance."
+  },
+  "e8a1c816": {
+   "who": "think",
+   "text": "수민이 아직 정하지 못한 일이었다. 내가 먼저 말할 일이 아니었다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "3af6980e": {
+   "who": "think",
+   "text": "손님들은 정말 평소대로 오셨다. \"손님은 평소대로 온다.\" 사장님 말씀이 맞았다.",
+   "ko": "안도하고 고마운 혼잣말",
+   "en": "Relieved and grateful."
+  },
+  "5a8254de": {
+   "who": "jieun",
+   "text": "처음으로 혼자 문을 열었다. 손님들은 평소대로 왔다. 평소 주문을 기억한 것이 오늘 나를 도왔다.",
+   "ko": "뿌듯한 하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm and quietly proud, like reading her diary aloud."
+  },
+  "2064fe27": {
+   "who": "sumin",
+   "text": "…보리차요. 따뜻하게, 가져갈게요.",
+   "ko": "작지만 또렷하게, 조금 긴장해서",
+   "en": "Quiet but clear, a little nervous."
+  },
+  "e7f0d47d": {
+   "who": "sumin",
+   "text": "보리차요. 따뜻하게, 가져갈게요.",
+   "ko": "작지만 또렷하게",
+   "en": "Quiet but clear."
+  },
+  "38b16d41": {
+   "who": "jieun",
+   "text": "따뜻한 보리차 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "47101cfd": {
+   "who": "think",
+   "text": "오늘은 수민에게 아주 큰 날이다. 말없이 응원할 방법이 있을까?",
+   "ko": "걱정하며 조심스럽게 응원할 방법을 궁리",
+   "en": "Concerned, wondering how to cheer her on."
+  },
+  "8c728bbd": {
+   "who": "sumin",
+   "text": "…다녀올게요.",
+   "ko": "작게 미소 지으며 용기를 내듯",
+   "en": "A small smile, finding courage."
+  },
+  "d0fd1371": {
+   "who": "sumin",
+   "text": "…네. 고맙습니다.",
+   "ko": "작고 쑥스럽게 고마워함",
+   "en": "Small and shy, thankful."
+  },
+  "f7febca0": {
+   "who": "think",
+   "text": "응원은 했지만, 오늘 아침 수민에게는 말이 조금 무거웠을지도 모른다.",
+   "ko": "조금 아쉬워하며 조용히",
+   "en": "Quietly, a little regretful."
+  },
+  "d1e406cd": {
+   "who": "sumin",
+   "text": "…모르겠어요. 괜찮아요.",
+   "ko": "긴장해서 작고 짧게",
+   "en": "Nervous, small and brief."
+  },
+  "fcbc2c48": {
+   "who": "think",
+   "text": "시험 날 아침에 점수를 물었다. 걱정만 더해 드렸다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "3da902b8": {
+   "who": "think",
+   "text": "오늘은 삼분뿐이다. 한 씨에게 지금 가장 필요한 것은 무엇일까?",
+   "ko": "배려하며 차분하게 궁리",
+   "en": "Considerate, calmly thinking."
+  },
+  "544a024b": {
+   "who": "han",
+   "text": "…고마워요. 오늘은 이 한 모금이면 돼요.",
+   "ko": "미소 지으며 진심으로 고마워함, 조금 서둘러",
+   "en": "Smiling, sincerely grateful, a little hurried."
+  },
+  "2e4a48a4": {
+   "who": "han",
+   "text": "아, 시간이… 괜찮아요.",
+   "ko": "급하고 당황해서",
+   "en": "Hurried and flustered."
+  },
+  "b4ffdc6b": {
+   "who": "think",
+   "text": "천천히 드시라고 했지만, 오늘은 천천히 할 시간이 없으셨다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "f4ba7a36": {
+   "who": "think",
+   "text": "삼분 가운데 일분을 내 질문이 써 버렸다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "0293f2e7": {
+   "who": "jian",
+   "text": "오늘은 갈색이요. 코코아를 따뜻하게 주세요.",
+   "ko": "미소 지으며 스스로, 조금 밝게",
+   "en": "Smiling, speaking up on her own, a little brighter."
+  },
+  "adcf75c8": {
+   "who": "think",
+   "text": "지안 씨가 스스로 색을 골랐다. 색을 물어봐 드린 날들이 쌓여서일까.",
+   "ko": "기쁘고 뭉클한 혼잣말",
+   "en": "Happy and touched."
+  },
+  "02102a06": {
+   "who": "jieun",
+   "text": "오늘은 어떤 색이에요?",
+   "ko": "밝고 다정하게 묻기",
+   "en": "Bright and friendly question."
+  },
+  "cc570f41": {
+   "who": "jian",
+   "text": "…갈색이요. 코코아요.",
+   "ko": "잠깐 생각하다 조용히",
+   "en": "After a pause, quietly."
+  },
+  "bcea1f16": {
+   "who": "jian",
+   "text": "갈색이요. 코코아, 따뜻하게요.",
+   "ko": "조금 밝게",
+   "en": "A little brighter."
+  },
+  "56f2adbd": {
+   "who": "think",
+   "text": "봄에도 서두르다 컵을 깼다. 그때는 사장님이 옆에 계셨는데.",
+   "ko": "서글프고 외로운 혼잣말",
+   "en": "Sad and lonely, to herself."
+  },
+  "b4e1759d": {
+   "who": "think",
+   "text": "사장님 글씨다. 가게를 맡기기 전에 붙여 두셨나 보다.",
+   "ko": "알아보고 뭉클해서",
+   "en": "Recognizing it, touched."
+  },
+  "b4e0ebfa": {
+   "who": "think",
+   "text": "오늘 같은 날이 올 줄 아셨던 걸까.",
+   "ko": "궁금하고 먹먹한 혼잣말",
+   "en": "Wondering, a little choked up."
+  },
+  "c8e5a1d8": {
+   "who": "think",
+   "text": "사장님은 그 칸에 무엇을 쓰시려는 걸까.",
+   "ko": "궁금해서 조용히",
+   "en": "Quietly wondering."
+  },
+  "a1cf9118": {
+   "who": "think",
+   "text": "겨울에 오신다고 하셨다. 그때까지 이 잔도 잘 닦아 두자.",
+   "ko": "그리움을 담아 차분하게 다짐",
+   "en": "Missing him, calmly resolving."
+  },
+  "5aefa028": {
+   "who": "think",
+   "text": "서두르면 쏟는다. 그러니까, 천천히 해도 된다.",
+   "ko": "스스로를 다독이며 차분하게",
+   "en": "Calmly comforting herself."
+  },
+  "cf1c828d": {
+   "who": "think",
+   "text": "내 손은 느린 대신 정확하다. 사장님은 그걸 알고 나에게 가게를 맡기셨다.",
+   "ko": "조용한 자신감과 고마움",
+   "en": "Quiet confidence and gratitude."
+  },
+  "514e6800": {
+   "who": "jieun",
+   "text": "수능 날 아침, 슬리브에 작은 파도를 그렸다. 혼자 서두르다 쏟았다. 선반에서 사장님의 메모를 찾았다. \"서두르면 쏟는다.\"",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "22f0cd88": {
+   "who": "han",
+   "text": "고마워요.",
+   "ko": "편안하게 고마워함",
+   "en": "At ease, thankful."
+  },
+  "5cadaefc": {
+   "who": "han",
+   "text": "여기 오면 십분이 길어요. 이상하죠?",
+   "ko": "미소 지으며 느긋하고 신기하게",
+   "en": "Smiling, relaxed and amazed."
+  },
+  "f8709042": {
+   "who": "han",
+   "text": "요즘은 버스에서 내리면, 여기 불빛부터 찾게 돼요.",
+   "ko": "미소 지으며 따뜻하게 털어놓듯",
+   "en": "Smiling, warmly confiding."
+  },
+  "9d979839": {
+   "who": "think",
+   "text": "한 씨가 시계를 보지 않으신다. 시간을 아껴 드린 날들이 쌓여서일까.",
+   "ko": "뭉클하고 기쁜 혼잣말",
+   "en": "Touched and happy."
+  },
+  "7c75de54": {
+   "who": "sumin",
+   "text": "시험 끝났어요. 슬리브의 파도 그림, 시험 보는 내내 책상 위에 두었어요.",
+   "ko": "미소 지으며 홀가분하고 고마워함",
+   "en": "Smiling, relieved and grateful."
+  },
+  "5d22dcda": {
+   "who": "sumin",
+   "text": "시험 끝났어요. 그날 아침 보리차, 따뜻해서 좋았어요.",
+   "ko": "미소 지으며 홀가분하고 고마워함",
+   "en": "Smiling, relieved and grateful."
+  },
+  "3b58ce77": {
+   "who": "sumin",
+   "text": "오늘은… 구석 말고, 여기 앞자리에서 마실게요.",
+   "ko": "조금 쑥스럽지만 용기를 내듯",
+   "en": "A little shy, but brave."
+  },
+  "9efc2d24": {
+   "who": "think",
+   "text": "수민이 처음으로 이어폰을 뺐다. 거리를 지켜 드린 날들이 쌓여서일까.",
+   "ko": "뭉클하고 기쁜 혼잣말",
+   "en": "Touched and happy."
+  },
+  "0e94977a": {
+   "who": "sumin",
+   "text": "늘 먹던 거요. 오늘은 따뜻하게요.",
+   "ko": "작지만 편안하게",
+   "en": "Quiet but relaxed."
+  },
+  "f019eed1": {
+   "who": "think",
+   "text": "사장님이 없는 가게에서, 노 씨는 무엇을 마셔야 할지 망설이신다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "c5018c0b": {
+   "who": "noh",
+   "text": "…그 잔 줘. 네가 타 봐.",
+   "ko": "잠깐 쉬고 낮게, 믿고 맡기듯",
+   "en": "After a pause, low, trusting her with it."
+  },
+  "f8edf551": {
+   "who": "noh",
+   "text": "…그 잔 줘.",
+   "ko": "망설이다 낮고 짧게",
+   "en": "A pause, then low and brief."
+  },
+  "1a9df7d1": {
+   "who": "think",
+   "text": "노 씨에게는 고를 것이 없었다. 늘 마시던 그 잔뿐이었다.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "68c26a37": {
+   "who": "noh",
+   "text": "…괜찮아질 거야. 그 잔 줘.",
+   "ko": "한참 쉬고 낮게, 걱정을 누르며",
+   "en": "After a long pause, low, holding back worry."
+  },
+  "a366575f": {
+   "who": "think",
+   "text": "노 씨도 걱정하고 계셨다. 그 걱정을 내가 먼저 꺼내 버렸다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "9b172b94": {
+   "who": "think",
+   "text": "그 잔은 사장님이 서른 해 동안 노 씨에게 타 드린 믹스커피다. 나는 한 번도 타 본 적이 없다.",
+   "ko": "긴장해서 조심스러운 혼잣말",
+   "en": "Nervous and careful."
+  },
+  "a3a03104": {
+   "who": "think",
+   "text": "사장님은 이날을 미리 준비해 두셨구나.",
+   "ko": "뭉클하고 고마운 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "ac81e781": {
+   "who": "noh",
+   "text": "그 잔 줘.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "c7960256": {
+   "who": "noh",
+   "text": "…같네.",
+   "ko": "한 모금 마시고 낮게, 뭉클함을 감추듯",
+   "en": "After a sip, low, hiding that he's moved."
+  },
+  "ba055e25": {
+   "who": "noh",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "무뚝뚝하게 짧게",
+   "en": "Short and gruff."
+  },
+  "32bad1be": {
+   "who": "noh",
+   "text": "네, 기다릴게요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "3462060a": {
+   "who": "noh",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "낮고 짧게, 너그럽게",
+   "en": "Low and brief, okay with it."
+  },
+  "bba492c2": {
+   "who": "noh",
+   "text": "네, 맞아요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "4d3ecc0b": {
+   "who": "noh",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "3ddcc141": {
+   "who": "noh",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "20dd345b": {
+   "who": "noh",
+   "text": "…조금 다르네. 그래도 고맙네.",
+   "ko": "낮게, 그래도 고마운 마음을 담아",
+   "en": "Low, but with gratitude."
+  },
+  "a1d902a7": {
+   "who": "noh",
+   "text": "조금 진하네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "aa2c998b": {
+   "who": "noh",
+   "text": "조금 싱겁네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "eed14dd0": {
+   "who": "noh",
+   "text": "가루가 조금 남았네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "b27adb07": {
+   "who": "noh",
+   "text": "조금 흘렀네요.",
+   "ko": "낮고 무뚝뚝하게 한마디",
+   "en": "A low, gruff remark."
+  },
+  "bf2b87d6": {
+   "who": "noh",
+   "text": "사장한테 전해. 가게는 걱정 말라고.",
+   "ko": "작게 웃으며 무뚝뚝하지만 다정하게",
+   "en": "A small smile, gruff but kind."
+  },
+  "8147cae5": {
+   "who": "think",
+   "text": "\"같네.\" 가을 내내 들은 말 가운데 제일 좋은 말이다.",
+   "ko": "벅차고 기쁜 혼잣말",
+   "en": "Overjoyed, quietly to herself."
+  },
+  "f1c4220a": {
+   "who": "noh",
+   "text": "사장이 맡기고 갔어. 가을이 끝나면 달아 주라더라.",
+   "ko": "무뚝뚝하게, 살짝 정겹게",
+   "en": "Gruff, with quiet warmth."
+  },
+  "ef8019c5": {
+   "who": "think",
+   "text": "곧 겨울이다. 사장님이 돌아오신다고 한 계절이다.",
+   "ko": "그리움과 기대가 섞인 혼잣말",
+   "en": "Missing him, hopeful."
+  },
+  "ce436631": {
+   "who": "jieun",
+   "text": "노 씨가 \"그 잔\"을 시켰다. 수첩에 사장님 손글씨가 있었다. 물은 선까지, 열 바퀴. 노 씨가 말했다. \"같네.\"",
+   "ko": "하루를 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm, like reading her diary aloud at the end of the day."
+  },
+  "53cfbfb6": {
+   "who": "think",
+   "text": "사장님은 겨울에 오신다고 하셨다. 이제 정말 겨울이다.",
+   "ko": "그리움과 기대가 섞인 혼잣말",
+   "en": "Missing him, hopeful."
+  },
+  "d0dc11a6": {
+   "who": "think",
+   "text": "소문이 정말인지, 강 씨는 아무 말도 하지 않으신다. 지금 강 씨에게 필요한 것은 무엇일까?",
+   "ko": "걱정하며 조심스럽게 궁리",
+   "en": "Concerned, carefully wondering."
+  },
+  "ff581048": {
+   "who": "kang",
+   "text": "…잔까지 따뜻하네.",
+   "ko": "작게 미소 지으며 조용히 고마워함",
+   "en": "A small smile, quietly thankful."
+  },
+  "9f6368e8": {
+   "who": "kang",
+   "text": "…그래. 춥네.",
+   "ko": "낮고 짧게, 조금 무겁게",
+   "en": "Low and brief, a little heavy."
+  },
+  "9f1ac133": {
+   "who": "think",
+   "text": "강 씨의 손이 많이 얼어 있었다. 말보다 따뜻한 잔이 먼저였을까.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "db80768f": {
+   "who": "think",
+   "text": "강 씨가 직접 말하지 않은 이야기였다. 소문으로 묻지 말 걸.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "8821d040": {
+   "who": "kang",
+   "text": "…좋네. 사장 맛이야.",
+   "ko": "낮고 짧게, 조용히 인정하듯",
+   "en": "Low and brief, quietly approving."
+  },
+  "e1f3f17e": {
+   "who": "geum",
+   "text": "아…아… 하나요.",
+   "ko": "추위에 이가 덜덜 떨리며, 그래도 아아",
+   "en": "Teeth chattering from the cold, still ordering iced."
+  },
+  "26795dbf": {
+   "who": "think",
+   "text": "눈사람이 아니라 금 씨였다. 눈썹까지 하얗다.",
+   "ko": "웃음이 나는 혼잣말",
+   "en": "Amused, to herself."
+  },
+  "34b1e2b5": {
+   "who": "geum",
+   "text": "으으… 역시 이거죠.",
+   "ko": "덜덜 떨면서도 만족스럽게, 우습게",
+   "en": "Shivering but satisfied, comical."
+  },
+  "6b951b14": {
+   "who": "think",
+   "text": "여기서 마시려던 잔도 사정이 바뀌면 가져가는 잔이 된다. 컵을 바꿔 담아 드리는 것도 손님에게 맞추는 일이구나.",
+   "ko": "깨달아 마음에 새기는 혼잣말",
+   "en": "Realizing, taking it to heart."
+  },
+  "81439fc5": {
+   "who": "think",
+   "text": "은주 씨는 무언가 말하고 싶은데, 먼저 꺼내지 못하시는 것 같다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "234ffa91": {
+   "who": "eunju",
+   "text": "…아기가 아파서 한숨도 못 잤어요. 그걸 물어봐 준 사람, 지은 씨가 처음이에요.",
+   "ko": "지치고 서러워 작게, 끝에는 울컥",
+   "en": "Exhausted and sad, quiet, choked up at the end."
+  },
+  "97a319d8": {
+   "who": "think",
+   "text": "따뜻한 잔은 드렸지만, 하고 싶으셨던 말은 듣지 못했다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "2a470598": {
+   "who": "eunju",
+   "text": "…다녀왔어요. 괜찮아요.",
+   "ko": "지쳐서 애써 괜찮은 척",
+   "en": "Exhausted, pretending to be fine."
+  },
+  "7db6a593": {
+   "who": "think",
+   "text": "은주 씨도 이미 다 하셨을 텐데. 지친 마음부터 물어봐 드릴 걸.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "96f529ab": {
+   "who": "eunju",
+   "text": "늘 먹던 거요. 오늘은 아주 따뜻하게요.",
+   "ko": "지쳤지만 다정하게",
+   "en": "Tired but kind."
+  },
+  "424629d0": {
+   "who": "think",
+   "text": "사장님은 잘 지내실까. 가을에 떠나신 뒤로 연락이 한 번도 없다.",
+   "ko": "그리움과 걱정이 섞인 혼잣말",
+   "en": "Missing him, a little worried."
+  },
+  "469ad686": {
+   "who": "think",
+   "text": "사장님은 원래 말이 적으시니까. 소식이 없는 것도 사장님다운 일이다.",
+   "ko": "스스로를 달래며 살짝 미소",
+   "en": "Comforting herself, a faint smile."
+  },
+  "f84fca2f": {
+   "who": "jieun",
+   "text": "첫눈이 왔다. 강 씨에 대한 소문을 들었지만 묻지 않았다. 은주 씨는 밤새 한숨도 못 잤다고 했다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "0343da14": {
+   "who": "kang",
+   "text": "…고마워.",
+   "ko": "낮고 조용하게 고마워함",
+   "en": "Low and quiet, thankful."
+  },
+  "bef57f80": {
+   "who": "kang",
+   "text": "그날 바다가 참 잔잔했어. 그래서 더 아무한테도 못 말했지.",
+   "ko": "조용하고 쓸쓸하게, 담담하려 애쓰며",
+   "en": "Quiet and lonely, trying to stay calm."
+  },
+  "284ab0c8": {
+   "who": "kang",
+   "text": "그 뒤로도 매일 새벽 여기 와서, 바다에 나가는 척했어.",
+   "ko": "쓸쓸하게 작게 웃으며",
+   "en": "A small, lonely smile."
+  },
+  "1f1a4adb": {
+   "who": "kang",
+   "text": "불을 켜 놓고 기다려 줘서, 그 척이 덜 외로웠어.",
+   "ko": "작게 미소 지으며 진심으로 고마워함, 뭉클하게",
+   "en": "A small smile, sincerely grateful, moved."
+  },
+  "559c8601": {
+   "who": "think",
+   "text": "강 씨가 처음으로 이야기를 꺼내셨다. 한 번도 묻지 않고, 늘 불을 켜 둔 날들 덕분일까.",
+   "ko": "뭉클하고 고마운 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "f49f524e": {
+   "who": "noh",
+   "text": "춥지? 여기 있으면 금방 따뜻해진다.",
+   "ko": "아기에게 말하듯 낮고 부드럽게, 다정하게",
+   "en": "Low and soft, tender, like talking to a baby."
+  },
+  "2191ad12": {
+   "who": "noh",
+   "text": "…철물점에 화분이 스무 개야. 말을 걸어 줘야 잎이 서.",
+   "ko": "헛기침하고 쑥스러워 무뚝뚝하게 둘러대며",
+   "en": "Clearing his throat, embarrassed, gruffly explaining."
+  },
+  "25ccc38a": {
+   "who": "think",
+   "text": "못과 망치만 만지시는 줄 알았다. 노 씨의 가게에는 말을 들어 주는 화분이 스무 개나 있었다.",
+   "ko": "놀라고 웃음이 나는 따뜻한 혼잣말",
+   "en": "Surprised and amused, warm."
+  },
+  "62f79455": {
+   "who": "think",
+   "text": "\"지나가다\"라고 하시지만, 노 씨는 가게와 나를 살피러 오신 것 같다. 어떻게 할까?",
+   "ko": "알아차리며 조심스럽게 궁리",
+   "en": "Noticing, carefully wondering."
+  },
+  "311a7816": {
+   "who": "noh",
+   "text": "…사장 맛이 나.",
+   "ko": "작게 미소 지으며 낮고 따뜻하게",
+   "en": "A small smile, low and warm."
+  },
+  "606876bf": {
+   "who": "think",
+   "text": "고마운 건 맞지만, 노 씨는 그 마음을 들키고 싶지 않으셨나 보다.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "ccc5f18f": {
+   "who": "noh",
+   "text": "…아니. 괜찮아, 지나가다 들렀어.",
+   "ko": "잠깐 쉬고 짧게 둘러대며, 낮게",
+   "en": "After a pause, a short, low cover story."
+  },
+  "32a4f4eb": {
+   "who": "think",
+   "text": "노 씨는 말하지 않는 방식으로 챙겨 주신다. 그걸 굳이 확인할 필요는 없었다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "1ab27557": {
+   "who": "noh",
+   "text": "고장 난 거 고친 거야. 지나가는 김에.",
+   "ko": "무뚝뚝하게 툭, 대수롭지 않은 척",
+   "en": "Gruff and offhand, pretending it's nothing."
+  },
+  "4cc8dd9e": {
+   "who": "think",
+   "text": "노 씨는 늘 \"고장 난 거\"라고만 하신다. 모른 척해 드린 날들이 쌓여서, 이렇게 챙겨 주시는 걸까.",
+   "ko": "고맙고 따뜻한 혼잣말",
+   "en": "Grateful and warm."
+  },
+  "1d50c674": {
+   "who": "sumin",
+   "text": "…내일, 여기서 열어 볼게요. 그때도 여기 계셔 주세요.",
+   "ko": "떨리지만 용기를 내어 작게 부탁",
+   "en": "Shaky but brave, a quiet request."
+  },
+  "feaddd52": {
+   "who": "think",
+   "text": "수민은 오늘 구석이 아니라 카운터 앞을 보고 있었는데.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "b1e93b20": {
+   "who": "sumin",
+   "text": "아… 아직요. 괜찮아요.",
+   "ko": "놀라서 당황하며 작게",
+   "en": "Startled and flustered, quietly."
+  },
+  "6fe68264": {
+   "who": "think",
+   "text": "언제 열지는 수민이 정할 일이었다. 재촉하지 말 걸.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "d5589579": {
+   "who": "sumin",
+   "text": "보리차요. 따뜻하게요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "af2f6228": {
+   "who": "think",
+   "text": "눈이 많이 오면 정전이 될 수도 있다. 뒷방 선반에 사장님이 모아 둔 초가 있었던 것 같다.",
+   "ko": "걱정하며 차분하게 준비를 떠올림",
+   "en": "Worried, calmly thinking ahead."
+  },
+  "dd6c8a68": {
+   "who": "jieun",
+   "text": "노 씨는 오늘도 지나가다 들렀다고 했다. 수민이 뜯지 않은 봉투를 들고 왔다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "b1e3c0bb": {
+   "who": "han",
+   "text": "늘 먹던 거요. 오늘은 가져가지 않고 여기서 마실게요.",
+   "ko": "편안하고 조금 들뜨게",
+   "en": "Relaxed and a little excited."
+  },
+  "8eec39a2": {
+   "who": "think",
+   "text": "두 사람에게는 십분뿐이다. 그 십분을 어떻게 아껴 드릴까?",
+   "ko": "배려하며 차분하게 궁리",
+   "en": "Considerate, calmly thinking."
+  },
+  "0a0b41c0": {
+   "who": "han_daughter",
+   "text": "아빠, 이거 나 먹어도 돼?",
+   "ko": "신나서 조르듯 밝게",
+   "en": "Excited, asking brightly."
+  },
+  "68b2c2c6": {
+   "who": "han",
+   "text": "그럼, 천천히 마셔. 오늘은 아빠도 천천히야.",
+   "ko": "미소 지으며 다정하게, 느긋하게",
+   "en": "Smiling, warm and unhurried."
+  },
+  "e657bf28": {
+   "who": "han_daughter",
+   "text": "…코코아요.",
+   "ko": "조금 수줍게 작게",
+   "en": "A little shy, quiet."
+  },
+  "0f78a30e": {
+   "who": "think",
+   "text": "딸은 이미 코코아를 보고 있었다. 묻는 동안 십분이 조금 줄었다.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "345e74eb": {
+   "who": "han",
+   "text": "아, 그런 얘기를… 허허. 괜찮아요.",
+   "ko": "당황하고 쑥스러워 허허 웃으며",
+   "en": "Flustered and embarrassed, laughing it off."
+  },
+  "a0c1eed1": {
+   "who": "think",
+   "text": "두 사람이 나눌 이야기를, 내가 먼저 해 버렸다.",
+   "ko": "미안해하며 반성",
+   "en": "Sorry, reflecting."
+  },
+  "abe77ef7": {
+   "who": "han_daughter",
+   "text": "코코아요. 따뜻하게요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "4a6af14f": {
+   "who": "han_daughter",
+   "text": "맛있어요!",
+   "ko": "신나서 밝게",
+   "en": "Delighted and bright."
+  },
+  "af76ec9b": {
+   "who": "han_daughter",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "조금 수줍게, 밝게",
+   "en": "A little shy, but bright."
+  },
+  "060e8dad": {
+   "who": "han_daughter",
+   "text": "네, 기다릴게요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "7c9b9b69": {
+   "who": "han_daughter",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "540c44b1": {
+   "who": "han_daughter",
+   "text": "네, 맞아요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "51ceeace": {
+   "who": "han_daughter",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "e6c5c7aa": {
+   "who": "han_daughter",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "밝고 또랑또랑하게",
+   "en": "Bright and clear."
+  },
+  "be7163c2": {
+   "who": "han_daughter",
+   "text": "조금 연하네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "46a04bd6": {
+   "who": "han_daughter",
+   "text": "조금 진하네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "0afbc6cf": {
+   "who": "han_daughter",
+   "text": "조금 미지근하네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "2f5fd4cb": {
+   "who": "han_daughter",
+   "text": "조금 뜨겁네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "673ee726": {
+   "who": "han_daughter",
+   "text": "양이 조금 적네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "c611e1bf": {
+   "who": "han_daughter",
+   "text": "조금 넘쳤네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "6c637e59": {
+   "who": "han_daughter",
+   "text": "가루가 조금 남았네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "d5438206": {
+   "who": "han_daughter",
+   "text": "조금 흘렀네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "df940fdf": {
+   "who": "han",
+   "text": "사실 오늘은 동료가 버스를 대신 넣어 준대요. 딸이랑 천천히 가도 돼요.",
+   "ko": "미소 지으며 조금 쑥스럽고 기쁘게",
+   "en": "Smiling, a little shy and happy."
+  },
+  "e81f1266": {
+   "who": "think",
+   "text": "한 씨가 처음으로 십분보다 오래 앉아 계신다. 딸과 함께하는 아침이라서일까.",
+   "ko": "뭉클하고 기쁜 혼잣말",
+   "en": "Touched and happy."
+  },
+  "ad2385a2": {
+   "who": "sumin",
+   "text": "여기서 열고 싶었어요. 혼자 열면 무서울 것 같아서.",
+   "ko": "긴장해서 떨리지만 진심으로",
+   "en": "Nervous and shaky, but sincere."
+  },
+  "7caa6757": {
+   "who": "sumin",
+   "text": "…합격이에요.",
+   "ko": "숨을 고르고 작게, 벅찬 기쁨",
+   "en": "After a breath, quietly overjoyed."
+  },
+  "a9ccb0fb": {
+   "who": "jieun",
+   "text": "축하해요, 수민 씨. 정말 축하해요.",
+   "ko": "진심으로 기뻐하며 따뜻하게 축하",
+   "en": "Sincerely happy, warmly congratulating."
+  },
+  "e0737cd8": {
+   "who": "sumin",
+   "text": "봄이 되면 떠나요. 바다가 없는 도시로요.",
+   "ko": "담담하지만 조금 쓸쓸하게",
+   "en": "Plain, but a little sad."
+  },
+  "485627a0": {
+   "who": "sumin",
+   "text": "무서웠는데, 여기서 열어서 다행이에요.",
+   "ko": "미소 지으며 안도하고 고마워함",
+   "en": "Smiling, relieved and grateful."
+  },
+  "b63cbdde": {
+   "who": "think",
+   "text": "수민이 내 앞에서 봉투를 열었다. 조용히 거리를 지켜 드린 날들 덕분일까.",
+   "ko": "벅차고 뭉클한 혼잣말",
+   "en": "Full-hearted and moved."
+  },
+  "bdba36ab": {
+   "who": "haesun",
+   "text": "지은 씨, 그 고삼 학생 있잖아요. 대학에 붙어서 봄에 떠난대요.",
+   "ko": "미소 지으며 기쁜 소식을 전하듯",
+   "en": "Smiling, sharing good news."
+  },
+  "0ef3031c": {
+   "who": "think",
+   "text": "수민은 집에서 봉투를 열었구나, 정말 잘됐다. 떠나기 전에 한 번 더 들러 주면 좋겠다.",
+   "ko": "기뻐하며 조금 아쉬운 혼잣말",
+   "en": "Happy, but a little wistful."
+  },
+  "9969b589": {
+   "who": "think",
+   "text": "가게는 이미 닫았고, 도 씨는 들어와도 될지 망설이신다. 어떻게 할까?",
+   "ko": "배려하며 조심스럽게 궁리",
+   "en": "Considerate, carefully wondering."
+  },
+  "35280c30": {
+   "who": "do",
+   "text": "오늘이 마지막 배달이었어요. 서른 해 동안 매일.",
+   "ko": "미소 지으며 담담하게, 조금 뭉클하게",
+   "en": "Smiling, calm, a little moved."
+  },
+  "2e056b5a": {
+   "who": "do",
+   "text": "마지막에는 여기 들르고 싶었어요. 문이 열려 있어서 다행이네요.",
+   "ko": "미소 지으며 안도하고 고마워함",
+   "en": "Smiling, relieved and grateful."
+  },
+  "5da6b00e": {
+   "who": "do",
+   "text": "아, 닫았는데. 고마워요.",
+   "ko": "미소 지으며 미안하고 고마워함",
+   "en": "Smiling, apologetic and grateful."
+  },
+  "ffa1f41e": {
+   "who": "think",
+   "text": "들어오시라고 하니 반가워하셨다. 그래도 도 씨는 끝까지 서 계셨다.",
+   "ko": "조금 아쉬워하며 조용히",
+   "en": "Quietly, a little regretful."
+  },
+  "5ba9b3ac": {
+   "who": "do",
+   "text": "허허, 축하는 무슨. 괜찮아요.",
+   "ko": "허허 웃으며 쑥스럽게 손사래",
+   "en": "Chuckling, shyly waving it off."
+  },
+  "f0c9b60e": {
+   "who": "think",
+   "text": "도 씨에게는 축하보다, 조용히 하루를 끝낼 자리가 필요하셨나 보다.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "3846f6e3": {
+   "who": "do",
+   "text": "늘 먹던 거 줄래요? 겨울에도 아이스로.",
+   "ko": "미소 지으며 조금 장난스럽게",
+   "en": "Smiling, a little playful."
+  },
+  "48ece9f9": {
+   "who": "do",
+   "text": "늘 먹던 거요. 겨울에도 아이스.",
+   "ko": "밝게, 조금 쓸쓸함을 감추며",
+   "en": "Bright, hiding a little loneliness."
+  },
+  "76aa81fc": {
+   "who": "do",
+   "text": "이거지. 서른 해 동안 이걸로 버텼어요.",
+   "ko": "흐뭇하고 뭉클하게",
+   "en": "Pleased and moved."
+  },
+  "4ba25bf1": {
+   "who": "do",
+   "text": "내일부터는 갈 데가 없네. 허허.",
+   "ko": "웃으며 말하지만 쓸쓸함이 묻어나게",
+   "en": "Laughing, but loneliness shows through."
+  },
+  "8fe6cdb5": {
+   "who": "think",
+   "text": "내일도 오시면 좋겠다. 우편이 없어도, 앉으실 의자는 늘 그 자리에 있다.",
+   "ko": "따뜻하게 바라는 혼잣말",
+   "en": "A warm, hopeful inner thought."
+  },
+  "5bd17cfc": {
+   "who": "jieun",
+   "text": "한 씨가 딸과 함께 왔다. 마감 무렵, 도 씨가 마지막 배달을 마치고 왔다. 빈 가방을 못에 걸었다.",
+   "ko": "하루를 돌아보며 차분하게 일기를 읽듯",
+   "en": "Calm, like reading her diary aloud at the end of the day."
+  },
+  "d91465f4": {
+   "who": "think",
+   "text": "침착하자. 사장님이라면 어떻게 하셨을까.",
+   "ko": "떨리지만 스스로를 다잡는 혼잣말",
+   "en": "Shaky, but steadying herself."
+  },
+  "f2290185": {
+   "who": "think",
+   "text": "노 씨는 랜턴을 꼭 사장님 자리 위에 걸고 싶으신 것 같다. 어떻게 할까?",
+   "ko": "알아차리며 조심스럽게 궁리",
+   "en": "Noticing, carefully wondering."
+  },
+  "6b93e85b": {
+   "who": "noh",
+   "text": "…이 랜턴, 저기가 원래 자리야.",
+   "ko": "작게 미소 지으며 낮고 그립게",
+   "en": "A small smile, low and nostalgic."
+  },
+  "3fa5ccc9": {
+   "who": "noh",
+   "text": "…그래, 고맙네.",
+   "ko": "낮고 짧게 고마워함",
+   "en": "Low and brief, thankful."
+  },
+  "1b49cc76": {
+   "who": "think",
+   "text": "노 씨에게는 걸어 둘 자리가 따로 정해져 있었구나.",
+   "ko": "알아차리며 조용히",
+   "en": "Quietly realizing."
+  },
+  "e8b3945a": {
+   "who": "noh",
+   "text": "…나중에 얘기하자. 괜찮아, 일단 불부터.",
+   "ko": "짧고 단호하게, 다급함을 누르며",
+   "en": "Short and firm, holding back urgency."
+  },
+  "de846360": {
+   "who": "think",
+   "text": "사연은 나중에 들어도 된다. 지금은 불이 먼저였다.",
+   "ko": "차분하게 깨달음",
+   "en": "Calmly realizing."
+  },
+  "3da28be7": {
+   "who": "kang",
+   "text": "배에서 쓰던 거야. 이걸로 물은 끓일 수 있어.",
+   "ko": "낮고 든든하게, 대수롭지 않게",
+   "en": "Low and reassuring, matter-of-fact."
+  },
+  "fd497a05": {
+   "who": "young_fisher",
+   "text": "강 씨가 불 켜진 데 가 있으라고 해서요.",
+   "ko": "조금 수줍고 공손하게",
+   "en": "A little shy and polite."
+  },
+  "ad432307": {
+   "who": "kang",
+   "text": "이따 매듭 묶는 거 알려 줄게. 불 켜진 데서 배워야 잘 보이지.",
+   "ko": "미소 지으며 든든하고 따뜻하게",
+   "en": "Smiling, warm and steady."
+  },
+  "e16a1be4": {
+   "who": "kang",
+   "text": "전기가 없으니, 오늘은 손으로 내리는 커피뿐이네.",
+   "ko": "낮고 담담하게",
+   "en": "Low and plain."
+  },
+  "24f97eed": {
+   "who": "think",
+   "text": "핸드드립은 사장님이 강 씨에게 늘 내리던 커피다. 가을 내내 내가 이어서 내린 커피이기도 하다.",
+   "ko": "차분하고 조금 뿌듯한 혼잣말",
+   "en": "Calm and a little proud."
+  },
+  "f453c5b3": {
+   "who": "do",
+   "text": "불빛 보고 왔어요. 뭐 도울 거 없어요?",
+   "ko": "밝고 힘차게, 돕고 싶어서",
+   "en": "Bright and eager to help."
+  },
+  "1200e19c": {
+   "who": "do",
+   "text": "컵은 내가 나를게요. 서른 해 동안 편지를 날랐는데, 컵이라고 못 나르겠어요?",
+   "ko": "허허 웃으며 신나서 너스레",
+   "en": "Chuckling, cheerful and joking."
+  },
+  "0faaa42c": {
+   "who": "han",
+   "text": "전조등을 켜 둘게요. 눈길이 잘 보이게요.",
+   "ko": "든든하고 차분하게",
+   "en": "Calm and dependable."
+  },
+  "03b70971": {
+   "who": "do",
+   "text": "블랙 한 잔이요. 몸 좀 녹이게요.",
+   "ko": "추위에 몸을 녹이고 싶어서",
+   "en": "Cold, wanting to warm up."
+  },
+  "737cd836": {
+   "who": "do",
+   "text": "아, 살겠다. 손으로 내리니까 더 맛있네.",
+   "ko": "몸이 녹아 안도하며 기분 좋게",
+   "en": "Warmed up, relieved and happy."
+  },
+  "2f95edfe": {
+   "who": "do",
+   "text": "물이 조금 미지근하네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "308b3e14": {
+   "who": "do",
+   "text": "물이 조금 졸았네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "fabd38b9": {
+   "who": "haesun",
+   "text": "집에 두면 뭐 해요. 이런 날은 다 같이 덮어야지.",
+   "ko": "미소 지으며 정겹고 다정하게",
+   "en": "Smiling, warm and homely."
+  },
+  "62c7f117": {
+   "who": "think",
+   "text": "담요는 두 장인데, 할머니 눈이 자꾸 빈 의자로 간다. 담요를 어떻게 놓을까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "fce9d1db": {
+   "who": "haesun",
+   "text": "이 의자도 따뜻하네요. 고마워요, 지은 씨.",
+   "ko": "미소 지으며 뭉클하게 고마워함",
+   "en": "Smiling, moved and grateful."
+  },
+  "3b48a7af": {
+   "who": "haesun",
+   "text": "고마워요. 따뜻하네요.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "892e7432": {
+   "who": "think",
+   "text": "할머니는 빈 의자까지 따뜻하게 해 두고 싶으셨구나.",
+   "ko": "알아차리며 따뜻한 혼잣말",
+   "en": "Understanding, warm."
+  },
+  "50a4c913": {
+   "who": "haesun",
+   "text": "나는 괜찮아요. 아이들 먼저 줘요.",
+   "ko": "다정하게 사양하듯",
+   "en": "Kindly declining."
+  },
+  "fbbf3c29": {
+   "who": "think",
+   "text": "묻는 대신, 할머니 눈이 가는 곳을 봤어야 했나 보다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "f016d074": {
+   "who": "think",
+   "text": "지안 씨는 그리고 싶은데, 첫 선을 긋지 못하고 계신 것 같다. 어떻게 할까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "ee654d2e": {
+   "who": "jian",
+   "text": "주황색이요. 촛불 색.",
+   "ko": "미소 지으며 설레듯 조용히",
+   "en": "Smiling, quietly excited."
+  },
+  "8eec225f": {
+   "who": "think",
+   "text": "지안 씨가 그림을 그리는 모습은 처음 본다.",
+   "ko": "놀랍고 기쁜 혼잣말",
+   "en": "Amazed and happy."
+  },
+  "4be56365": {
+   "who": "think",
+   "text": "몸은 따뜻해지셨지만, 종이는 아직 비어 있다. 색을 묻는 말이 필요하셨을까.",
+   "ko": "아쉬워하며 조용히",
+   "en": "Quietly regretful."
+  },
+  "57fcb4ef": {
+   "who": "jian",
+   "text": "아… 오늘은 괜찮아요.",
+   "ko": "수줍게 머뭇거리며 사양",
+   "en": "Shy and hesitant, declining."
+  },
+  "87fad273": {
+   "who": "think",
+   "text": "그려 달라고 하니, 오히려 더 그리기 어려워지셨나 보다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "a1bf2fb5": {
+   "who": "sumin",
+   "text": "물, 다 끓었어요. 뜨거우니까 조심하세요.",
+   "ko": "작지만 또렷하게, 조심시키듯",
+   "en": "Quiet but clear, careful."
+  },
+  "157454e2": {
+   "who": "kang",
+   "text": "까꿍! 까꿍!",
+   "ko": "아기를 달래듯 높고 우스꽝스럽게, 다정하게",
+   "en": "High-pitched and silly, tenderly playing peekaboo with a baby."
+  },
+  "14eefc05": {
+   "who": "kang",
+   "text": "…바다 사람은 원래 애를 잘 봐. 배에서 막내들은 다 내가 키웠어.",
+   "ko": "헛기침하고 무뚝뚝하게 둘러대며, 살짝 자랑",
+   "en": "Clearing his throat, gruffly explaining, a little proud."
+  },
+  "b3764b84": {
+   "who": "think",
+   "text": "무뚝뚝한 강 씨의 목소리가, 아기 앞에서는 저렇게 높아질 수 있구나.",
+   "ko": "놀랍고 웃음이 나는 따뜻한 혼잣말",
+   "en": "Surprised and amused, warm."
+  },
+  "08a39cac": {
+   "who": "think",
+   "text": "빨리 해야 하나. 줄이 점점 길어진다.",
+   "ko": "초조해서 흔들리는 혼잣말",
+   "en": "Anxious and wavering."
+  },
+  "61095db0": {
+   "who": "geum",
+   "text": "천천히 해요.",
+   "ko": "미소 지으며 부드럽고 따뜻하게",
+   "en": "Smiling, soft and warm."
+  },
+  "c5302163": {
+   "who": "geum",
+   "text": "오늘은 다들 기다릴 수 있어요. 불 켜 줘서 고마워요.",
+   "ko": "미소 지으며 진심으로 고마워함",
+   "en": "Smiling, sincerely grateful."
+  },
+  "7a3f193e": {
+   "who": "think",
+   "text": "천천히, 정확하게.",
+   "ko": "마음을 다잡으며 조용히 되새김",
+   "en": "Steadying herself, quietly repeating it."
+  },
+  "d46809a7": {
+   "who": "think",
+   "text": "가을 축제 때는 약점이던 내 느린 손이, 오늘 밤에는 모두를 기다리게 하고 따뜻하게 한다.",
+   "ko": "벅차고 뭉클한 혼잣말",
+   "en": "Full-hearted and moved."
+  },
+  "9e375c1c": {
+   "who": "geum",
+   "text": "블랙이요. 천천히 해요.",
+   "ko": "느긋하고 부드럽게",
+   "en": "Unhurried and gentle."
+  },
+  "0e29caa0": {
+   "who": "geum",
+   "text": "…빨리 마시는 것보다 낫네요.",
+   "ko": "한 모금 마시고 조용히 깨닫듯",
+   "en": "After a sip, quietly realizing."
+  },
+  "28cc7161": {
+   "who": "geum",
+   "text": "물이 조금 미지근하네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "3abb9737": {
+   "who": "geum",
+   "text": "물이 조금 졸았네요.",
+   "ko": "가볍게 한마디, 탓하지 않고",
+   "en": "A light remark, without blame."
+  },
+  "4ce1682e": {
+   "who": "think",
+   "text": "밤새 몇 잔을 내렸는지 모르겠다. 그래도 한 잔도 쏟지 않았다.",
+   "ko": "지쳤지만 뿌듯한 혼잣말",
+   "en": "Tired but proud."
+  },
+  "153cc64a": {
+   "who": "jieun",
+   "text": "폭설로 마을의 불이 모두 꺼졌다. 불이 켜진 곳은 우리 카페뿐이었다. 단골들이 모두 와서 도왔다. 느린 내 손이 오늘 밤에는 필요했다.",
+   "ko": "벅찬 밤을 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm and moved, like reading her diary aloud."
+  },
+  "39028c5b": {
+   "who": "think",
+   "text": "밤새 북적이던 가게가 다시 조용하다. 오늘은 다시 평소의 하루다.",
+   "ko": "차분하고 평온한 혼잣말",
+   "en": "Calm and peaceful."
+  },
+  "14d40910": {
+   "who": "do",
+   "text": "서른 해 동안 남의 편지만 날랐어요. 마지막은 내 편지를 날라 보고 싶었어요.",
+   "ko": "진심을 담아 담담하게, 조금 뭉클하게",
+   "en": "Sincere and calm, a little moved."
+  },
+  "8c23253b": {
+   "who": "do",
+   "text": "사실, 그만두는 게 무서웠어요. 내일부터 갈 데가 없을까 봐.",
+   "ko": "잠깐 쉬고 조용히 털어놓듯, 떨리게",
+   "en": "After a pause, quietly confessing, a little shaky."
+  },
+  "15071f34": {
+   "who": "do",
+   "text": "그런데 내가 앉을 자리를 늘 비워 둔 데가 있더라고요. 여기요.",
+   "ko": "미소 지으며 안도하고 고마워함, 울컥하듯",
+   "en": "Smiling, relieved and grateful, a little choked up."
+  },
+  "60988ed0": {
+   "who": "think",
+   "text": "도 씨가 무서웠다고 말씀하셨다. 앉을 자리를 만들어 두고 기다린 날들 덕분일까.",
+   "ko": "뭉클하고 고마운 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "0d051282": {
+   "who": "do",
+   "text": "늘 먹던 거요. 오늘은 앉아서 천천히.",
+   "ko": "편안하고 느긋하게",
+   "en": "Relaxed and unhurried."
+  },
+  "7f817947": {
+   "who": "do",
+   "text": "이제 매일 앉아서 마실 수 있겠네.",
+   "ko": "흐뭇하고 편안하게",
+   "en": "Pleased and at ease."
+  },
+  "bf9dfb18": {
+   "who": "han",
+   "text": "컵 받침 뒤에 이렇게 써서, 식탁에 두고 왔어요. \"아빠가 먼저 갈게. 아침 꼭 먹어.\"",
+   "ko": "미소 지으며 쑥스럽게 자랑하듯",
+   "en": "Smiling, shyly proud."
+  },
+  "d8fd2f66": {
+   "who": "han",
+   "text": "그리고 이건 딸의 답장이에요. 오늘 아침에 받았어요.",
+   "ko": "미소 지으며 기쁨을 감추지 못하고",
+   "en": "Smiling, unable to hide his joy."
+  },
+  "3e4ab478": {
+   "who": "think",
+   "text": "한 씨가 쪽지를 보여 주셨다. 십분을 아껴 드린 날들 덕분일까.",
+   "ko": "뭉클하고 기쁜 혼잣말",
+   "en": "Touched and happy."
+  },
+  "1e0cc360": {
+   "who": "jieun",
+   "text": "어서 오세요. 눈 오는데 오셨네요.",
+   "ko": "밝고 다정하게 맞이함",
+   "en": "Bright and warm welcome."
+  },
+  "1023fa02": {
+   "who": "think",
+   "text": "지안 씨는 무언가 말하고 싶어 보인다. 어떻게 하면 편하게 말할 수 있을까?",
+   "ko": "살피며 조심스럽게 궁리",
+   "en": "Observing, carefully wondering."
+  },
+  "19885d0f": {
+   "who": "jian",
+   "text": "오늘은 여러 색이요. 그래서 하얀 걸로 할래요.",
+   "ko": "웃으며 설레듯, 조금 장난스럽게",
+   "en": "Laughing, excited and a little playful."
+  },
+  "0ac16ac1": {
+   "who": "jian",
+   "text": "네. 기억해 줘서 고마워요.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "2434683c": {
+   "who": "think",
+   "text": "기억해 드려서 기뻐하셨다. 그런데 오늘은 하고 싶은 말이 있으신 것 같았는데.",
+   "ko": "조금 아쉬워하며 조용히",
+   "en": "Quietly, a little regretful."
+  },
+  "717f7c5d": {
+   "who": "jian",
+   "text": "아… 다음에요. 괜찮아요.",
+   "ko": "수줍게 머뭇거리며 미룸",
+   "en": "Shy and hesitant, putting it off."
+  },
+  "5b493e6b": {
+   "who": "think",
+   "text": "보여 줄지는 지안 씨가 정할 일이었다. 늘 하던 대로 색을 물어볼 걸.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "782ac6c6": {
+   "who": "jian",
+   "text": "따뜻한 우유 주세요. 하얀색은 모든 색을 담을 수 있대요.",
+   "ko": "조용하지만 조금 설레게",
+   "en": "Quiet but a little excited."
+  },
+  "19f4c3a0": {
+   "who": "jian",
+   "text": "여러 색이 다 들어갈 것 같아요. 고마워요.",
+   "ko": "작게 미소 지으며 고마워함",
+   "en": "A small smile, thankful."
+  },
+  "929b5f95": {
+   "who": "jian",
+   "text": "양이 조금 많네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "dfc2a8ee": {
+   "who": "jian",
+   "text": "거품이 조금 거칠네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "a109a8a1": {
+   "who": "jian",
+   "text": "거품이 조금 적네요.",
+   "ko": "작고 조용하게 한마디",
+   "en": "A small, quiet remark."
+  },
+  "bf56ac0e": {
+   "who": "jian",
+   "text": "유자차요. 따뜻하게요.",
+   "ko": "조용하게",
+   "en": "Quiet."
+  },
+  "5dd7c923": {
+   "who": "think",
+   "text": "여름의 은주 씨처럼, 처음 온 엄마도 문 앞에서 머뭇거린다. 어떻게 할까?",
+   "ko": "배려하며 조심스럽게 궁리",
+   "en": "Considerate, carefully wondering."
+  },
+  "18456d6a": {
+   "who": "mom2",
+   "text": "아… 네. 따뜻한 걸로요.",
+   "ko": "머뭇거리다 조심스럽게 미소",
+   "en": "Hesitant, then a careful smile."
+  },
+  "05707ba4": {
+   "who": "eunju",
+   "text": "거봐요. 여기 좋다고 했죠?",
+   "ko": "미소 지으며 신나서 자랑하듯",
+   "en": "Smiling, excited and proud."
+  },
+  "15e35206": {
+   "who": "eunju",
+   "text": "고마워요, 지은 씨.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "c6608f29": {
+   "who": "think",
+   "text": "자리는 생겼지만, 처음 온 엄마에게 아직 아무도 말을 걸지 않았다.",
+   "ko": "살피며 조용히",
+   "en": "Quietly observing."
+  },
+  "39cae6dd": {
+   "who": "eunju",
+   "text": "네. 아, 이분은…",
+   "ko": "머뭇거리며 소개하려다 말을 흐림",
+   "en": "Hesitating, trailing off while introducing."
+  },
+  "395b8443": {
+   "who": "eunju",
+   "text": "괜찮아요. 이리 와요, 같이 앉아요.",
+   "ko": "미소 지으며 다정하게 부름",
+   "en": "Smiling, warmly inviting her over."
+  },
+  "96ef4a7d": {
+   "who": "think",
+   "text": "은주 씨가 대신 불러 주셨다. 처음 온 사람에게는 내가 먼저 말을 걸었어야 했다.",
+   "ko": "반성하며 조용히",
+   "en": "Quietly reflecting."
+  },
+  "82e297da": {
+   "who": "mom2",
+   "text": "따뜻한 걸로요. 아, 디카페인도 있어요?",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "1131e12e": {
+   "who": "mom2",
+   "text": "정말 따뜻하다. 고마워요.",
+   "ko": "따뜻함에 마음이 놓여 고마워함",
+   "en": "Relieved by the warmth, thankful."
+  },
+  "285d1600": {
+   "who": "mom2",
+   "text": "이건 제가 주문한 게 아니네요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "a1d2db46": {
+   "who": "mom2",
+   "text": "네, 기다릴게요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "50025a12": {
+   "who": "mom2",
+   "text": "괜찮아요. 잘 마실게요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "e81ed0ea": {
+   "who": "mom2",
+   "text": "네, 맞아요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "da8e7873": {
+   "who": "mom2",
+   "text": "네, 따뜻하게 주세요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "1006ead9": {
+   "who": "mom2",
+   "text": "좋아요, 그걸로 주세요.",
+   "ko": "조심스럽게 공손하게",
+   "en": "Careful and polite."
+  },
+  "565e4f03": {
+   "who": "mom2",
+   "text": "조금 연하네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "60fc2f35": {
+   "who": "mom2",
+   "text": "조금 쓰네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "7fc7894a": {
+   "who": "mom2",
+   "text": "조금 미지근하네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "3bb112c2": {
+   "who": "mom2",
+   "text": "조금 뜨겁네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "e11f3f6f": {
+   "who": "mom2",
+   "text": "양이 조금 적네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "fc83da4a": {
+   "who": "mom2",
+   "text": "조금 넘쳤네요.",
+   "ko": "조심스럽게 한마디, 탓하지 않고",
+   "en": "A careful remark, without blame."
+  },
+  "15a4749e": {
+   "who": "eunju",
+   "text": "나는 늘 먹던 거요. 그 두꺼운 컵에요.",
+   "ko": "편안하고 다정하게",
+   "en": "Relaxed and kind."
+  },
+  "277f4df4": {
+   "who": "eunju",
+   "text": "나는 늘 먹던 거요.",
+   "ko": "편안하고 다정하게",
+   "en": "Relaxed and kind."
+  },
+  "8aa3d524": {
+   "who": "eunju",
+   "text": "지은 씨, 아까 우유 부을 때 피처를 조금 높이 들었다가 끝에서 낮춰 보세요. 하트가 더 동그래져요.",
+   "ko": "다정하게 일러 주듯, 조금 신나서",
+   "en": "Kindly giving a tip, a little excited."
+  },
+  "be951e98": {
+   "who": "jieun",
+   "text": "그걸 어떻게 아세요?",
+   "ko": "깜짝 놀라 신기해서",
+   "en": "Surprised and amazed."
+  },
+  "a9e7f393": {
+   "who": "eunju",
+   "text": "아기 낳기 전에, 도시 카페에서 삼 년 일했어요. 우유 데우는 소리만 들어도 손이 근질거려요.",
+   "ko": "미소 지으며 쑥스럽게 털어놓듯, 반짝이며",
+   "en": "Smiling, shyly confiding, lighting up."
+  },
+  "4d081e76": {
+   "who": "mom2",
+   "text": "어머, 그런 얘기는 처음 들어요.",
+   "ko": "놀라고 반가워서",
+   "en": "Surprised and delighted."
+  },
+  "dc66780c": {
+   "who": "eunju",
+   "text": "그동안은 말할 사람이 없었으니까요. 오늘은 생겼네요.",
+   "ko": "미소 지으며 따뜻하게, 조금 뭉클하게",
+   "en": "Smiling, warm, a little moved."
+  },
+  "072bd58f": {
+   "who": "think",
+   "text": "은주 씨도 나처럼 도시 카페에서 일했었다. 그 이야기를 들어 줄 사람이 이제야 생긴 거구나.",
+   "ko": "뭉클하고 공감하는 혼잣말",
+   "en": "Moved, empathizing."
+  },
+  "1f47e772": {
+   "who": "think",
+   "text": "여름에 혼자 식은 커피를 보던 은주 씨가, 오늘은 다른 사람을 데려왔다.",
+   "ko": "기쁘고 뭉클한 혼잣말",
+   "en": "Happy and touched."
+  },
+  "fc1e8850": {
+   "who": "think",
+   "text": "정전 밤에 모였던 사람들이, 오늘은 평소대로 왔다. 평소대로라는 게 이렇게 고마운 일이었다.",
+   "ko": "고마움에 마음이 따뜻한 혼잣말",
+   "en": "Warm and grateful."
+  },
+  "a6695415": {
+   "who": "jieun",
+   "text": "정전 다음 날, 가게는 다시 평소로 돌아왔다. 지안 씨의 스케치북이 두툼해졌다. 은주 씨가 처음 온 엄마를 데려왔다.",
+   "ko": "하루를 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm, like reading her diary aloud at the end of the day."
+  },
+  "8fcc50dc": {
+   "who": "haesun",
+   "text": "우리 손녀예요. 방학이라 놀러 왔어요.",
+   "ko": "미소 지으며 자랑스럽고 기쁘게",
+   "en": "Smiling, proud and happy."
+  },
+  "e6f3731e": {
+   "who": "granddaughter",
+   "text": "안녕하세요! 할머니가 여기 우유가 제일 맛있대요.",
+   "ko": "밝고 신나게 또랑또랑",
+   "en": "Bright, cheerful and lively."
+  },
+  "a8d36a5a": {
+   "who": "think",
+   "text": "늘 먹던 것은 할머니의 잔과 빈 의자의 잔, 우유 두 잔이었다. 오늘은 몇 잔을 준비할까?",
+   "ko": "조심스럽게 궁리하는 혼잣말",
+   "en": "Carefully thinking it over."
+  },
+  "018407b8": {
+   "who": "granddaughter",
+   "text": "할아버지 것도 있네!",
+   "ko": "신나서 반갑게",
+   "en": "Excited and delighted."
+  },
+  "484aed54": {
+   "who": "haesun",
+   "text": "그래. 여기서는 할아버지 자리도 늘 있단다.",
+   "ko": "미소 지으며 다정하고 애틋하게",
+   "en": "Smiling, tender and loving."
+  },
+  "3d90e4a1": {
+   "who": "granddaughter",
+   "text": "한 잔 더 주세요. 할아버지 거요.",
+   "ko": "또랑또랑하게, 진지하고 귀엽게",
+   "en": "Clear and sweet, earnest."
+  },
+  "c475c8a1": {
+   "who": "haesun",
+   "text": "고마워요. 한 잔 더 부탁해요.",
+   "ko": "미소 지으며 고마워함",
+   "en": "Smiling, thankful."
+  },
+  "3aa86ed7": {
+   "who": "think",
+   "text": "오늘은 손녀가 있었다. 늘 먹던 것도, 사람이 늘면 달라지는구나.",
+   "ko": "깨달으며 따뜻한 혼잣말",
+   "en": "Realizing, warm."
+  },
+  "77951f4b": {
+   "who": "haesun",
+   "text": "늘 먹던 거요. 괜찮아요, 천천히 해요.",
+   "ko": "느긋하고 다정하게",
+   "en": "Unhurried and kind."
+  },
+  "844bb99c": {
+   "who": "think",
+   "text": "할머니는 고개를 끄덕여 이미 알려 주셨는데. 오늘은 내가 먼저 알아챌 수 있었다.",
+   "ko": "조금 아쉽지만 배우는 혼잣말",
+   "en": "A little regretful, learning."
+  },
+  "0cb450d8": {
+   "who": "granddaughter",
+   "text": "저도 따뜻한 우유요!",
+   "ko": "신나서 밝게",
+   "en": "Excited and bright."
+  },
+  "adc02e0a": {
+   "who": "granddaughter",
+   "text": "할머니 거랑 똑같다!",
+   "ko": "신나서 기쁘게",
+   "en": "Delighted and excited."
+  },
+  "8b93c9dc": {
+   "who": "granddaughter",
+   "text": "양이 조금 많네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "fcc1d9d7": {
+   "who": "granddaughter",
+   "text": "거품이 조금 거칠네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "b0092c0a": {
+   "who": "granddaughter",
+   "text": "거품이 조금 적네요.",
+   "ko": "가볍게 한마디, 아이답게",
+   "en": "A light, childlike remark."
+  },
+  "c7b67984": {
+   "who": "haesun",
+   "text": "한 잔 더요. 그 자리 거.",
+   "ko": "다정하게, 조용히",
+   "en": "Kind and quiet."
+  },
+  "5221151a": {
+   "who": "granddaughter",
+   "text": "할아버지는 제가 아기 때 돌아가셨대요. 그래도 할머니는 여기 오면 할아버지 우유를 꼭 시킨대요.",
+   "ko": "속삭이듯 조용히, 아이답게 진지하게",
+   "en": "Whispering, earnest like a child."
+  },
+  "84f5f686": {
+   "who": "think",
+   "text": "빈 의자는 돌아가신 할아버지의 자리였다. 할머니는 날마다 우유 한 잔으로 할아버지를 기억하고 계셨구나.",
+   "ko": "가슴이 먹먹한 혼잣말",
+   "en": "Heart heavy, quietly moved."
+  },
+  "2ee95132": {
+   "who": "haesun",
+   "text": "지은 씨, 내가 왜 늘 우유 두 잔을 시키는지 이야기해 줄까요.",
+   "ko": "조용하고 다정하게, 천천히 말을 꺼냄",
+   "en": "Quiet and gentle, slowly beginning."
+  },
+  "526bbc42": {
+   "who": "haesun",
+   "text": "그 사람은 늘 블랙만 마셨어요. 나는 우유고요.",
+   "ko": "그리움을 담아 천천히, 담담하게",
+   "en": "Slowly, calm and full of longing."
+  },
+  "418d724e": {
+   "who": "haesun",
+   "text": "그런데 마지막으로 여기 온 날, 그 사람이 우유를 두 잔 시켰어요.",
+   "ko": "조용히 천천히, 그날을 떠올리며",
+   "en": "Quietly and slowly, remembering that day."
+  },
+  "6a7d6655": {
+   "who": "haesun",
+   "text": "\"오늘은 당신이랑 같은 걸로.\" 그게 그 사람의 마지막 주문이었어요.",
+   "ko": "미소 지으며 애틋하게, 조금 떨리는 목소리",
+   "en": "Smiling, tender, voice trembling a little."
+  },
+  "115f2ac7": {
+   "who": "haesun",
+   "text": "그래서 나는 지금도 두 잔을 시켜요. 그 사람 주문대로요.",
+   "ko": "미소 지으며 담담하게, 눈물을 머금은 듯",
+   "en": "Smiling, calm, as if holding back tears."
+  },
+  "b5a10b91": {
+   "who": "think",
+   "text": "왜 꼭 우유 두 잔인지, 할머니가 처음으로 이야기해 주셨다. 한 번도 묻지 않고 기다린 날들 덕분일까.",
+   "ko": "깊이 감동한 조용한 혼잣말",
+   "en": "Deeply moved, quietly to herself."
+  },
+  "1e457da5": {
+   "who": "noh",
+   "text": "사장 손이 처음 떨린 날, 내가 옆에 있었어.",
+   "ko": "낮고 무겁게, 처음 털어놓듯",
+   "en": "Low and heavy, confessing for the first time."
+  },
+  "62754ba0": {
+   "who": "noh",
+   "text": "그날도 사장이 그 잔을 탔는데, 숟가락이 떨리더라. 둘 다 아무 말도 안 했어.",
+   "ko": "낮고 조용하게, 그날을 떠올리며",
+   "en": "Low and quiet, remembering."
+  },
+  "656271b2": {
+   "who": "noh",
+   "text": "그다음 날 이 랜턴을 나한테 맡기더라. \"가게 불 꺼지면 네가 켜라.\"",
+   "ko": "낮게, 조금 뭉클하게",
+   "en": "Low, a little moved."
+  },
+  "40d2c039": {
+   "who": "noh",
+   "text": "그런데 이번에는 네가 먼저 켰더라.",
+   "ko": "작게 미소 지으며 흐뭇하게",
+   "en": "A small smile, proud of her."
+  },
+  "4b460aa8": {
+   "who": "think",
+   "text": "노 씨가 처음으로 사장님 이야기를 하셨다. 모른 척해 드린 날들 덕분일까.",
+   "ko": "뭉클하고 고마운 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "507b93ee": {
+   "who": "eunju",
+   "text": "지은 씨, 여름에 내가 처음 왔던 날 기억나요?",
+   "ko": "조용히 다정하게 말을 꺼냄",
+   "en": "Quietly and kindly bringing it up."
+  },
+  "784d2842": {
+   "who": "eunju",
+   "text": "그 전 일주일 동안, 나는 어른이랑 말한 적이 한 번도 없었어요.",
+   "ko": "조용하고 쓸쓸하게 털어놓듯",
+   "en": "Quietly and lonely, confiding."
+  },
+  "f6ad9217": {
+   "who": "eunju",
+   "text": "여기서 지은 씨랑 나눈 말이, 그 주의 첫 대화였어요.",
+   "ko": "미소 지으며 고마움에 울컥",
+   "en": "Smiling, choked up with gratitude."
+  },
+  "c743359d": {
+   "who": "think",
+   "text": "은주 씨가 그 이야기를 해 주었다. 먼저 물어봐 드린 날들 덕분일까.",
+   "ko": "뭉클하고 고마운 혼잣말",
+   "en": "Moved and grateful."
+  },
+  "c125ed53": {
+   "who": "jian",
+   "text": "지은 씨 손이에요. 정전 밤에 촛불 옆에서 그렸어요.",
+   "ko": "미소 지으며 수줍고 설레게",
+   "en": "Smiling, shy and excited."
+  },
+  "0e01fafa": {
+   "who": "jian",
+   "text": "천천히 움직여서, 그리기 좋았어요. 일 년 만에 처음으로 끝까지 그린 그림이에요.",
+   "ko": "미소 지으며 벅차게, 조금 울컥",
+   "en": "Smiling, full-hearted, a little choked up."
+  },
+  "c4914a97": {
+   "who": "think",
+   "text": "내 느린 손이 그림이 되었다. 색을 물어봐 드린 날들 덕분일까.",
+   "ko": "깊이 감동한 조용한 혼잣말",
+   "en": "Deeply moved, quietly to herself."
+  },
+  "b5b6c36f": {
+   "who": "think",
+   "text": "내일은 맑다고 한다. 왠지 좋은 일이 있을 것 같다.",
+   "ko": "기대에 찬 따뜻한 혼잣말",
+   "en": "Warm and hopeful."
+  },
+  "8ba86565": {
+   "who": "jieun",
+   "text": "해순 할머니가 손녀를 데려왔다. 빈 의자는 돌아가신 할아버지의 자리였다. 할머니는 날마다 우유 한 잔으로 할아버지를 기억한다.",
+   "ko": "가슴 먹먹한 하루를 돌아보며 따뜻하게 일기를 읽듯",
+   "en": "Warm and moved, like reading her diary aloud."
+  },
+  "12ac70d9": {
+   "who": "owner",
+   "text": "컵 닦았냐.",
+   "ko": "작게 미소 지으며 무뚝뚝한 다정함, 반가움을 감추며",
+   "en": "A small smile, gruff tenderness, hiding how glad he is."
+  },
+  "0012345e": {
+   "who": "jieun",
+   "text": "…네. 다 닦았어요.",
+   "ko": "반가움에 울컥하며 미소",
+   "en": "Smiling, choked up with joy."
+  },
+  "70d46e57": {
+   "who": "owner",
+   "text": "…잘했다.",
+   "ko": "잠깐 쉬고 낮고 따뜻하게, 진심으로",
+   "en": "After a pause, low and warm, sincere."
+  },
+  "0f489a04": {
+   "who": "haesun",
+   "text": "사장님, 돌아왔네요. 겨울 내내 지은 씨가 가게를 잘 지켰어요.",
+   "ko": "미소 지으며 반갑고 자랑스럽게",
+   "en": "Smiling, glad and proud."
+  },
+  "68346b46": {
+   "who": "haesun",
+   "text": "여기 우유가 맛있다고 알려 줬어요. 지은 씨 우유요.",
+   "ko": "미소 지으며 다정하고 뿌듯하게",
+   "en": "Smiling, warm and proud."
+  },
+  "a774d2bf": {
+   "who": "sumin",
+   "text": "봄에 떠나요. 요즘은 마을 사람들한테 인사하러 다니는 중이에요.",
+   "ko": "미소 지으며 밝고 조금 아쉽게",
+   "en": "Smiling, bright but a little wistful."
+  },
+  "5e61e7ac": {
+   "who": "sumin",
+   "text": "여기가 제일 처음이에요.",
+   "ko": "미소 지으며 진심으로, 조금 쑥스럽게",
+   "en": "Smiling, sincere and a little shy."
+  },
+  "cd964e39": {
+   "who": "owner",
+   "text": "네가 갖고 있어. 다음에도 네가 켜.",
+   "ko": "미소 지으며 담담하고 따뜻하게",
+   "en": "Smiling, plain and warm."
+  },
+  "058ed08b": {
+   "who": "geum",
+   "text": "…뜨거운 아이스 아메리카노 하나요.",
+   "ko": "진지한 척 농담조로, 무뚝뚝하게",
+   "en": "Deadpan, pretending to be serious."
+  },
+  "8175a3cc": {
+   "who": "geum",
+   "text": "…따뜻하네. 내년 여름엔 다시 아아예요.",
+   "ko": "한 모금 마시고 쑥스럽게, 살짝 웃음",
+   "en": "After a sip, a little embarrassed, a faint laugh."
+  },
+  "537e25d5": {
+   "who": "geum",
+   "text": "…농담이에요. 올해 처음으로, 따뜻하게요.",
+   "ko": "멋쩍게 웃으며 농담이라고, 조금 따뜻하게",
+   "en": "Laughing sheepishly, admitting it was a joke, warm."
+  },
+  "2159e1ef": {
+   "who": "jieun",
+   "text": "따뜻한 아메리카노 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "b6f4c05d": {
+   "who": "jieun",
+   "text": "사장님… 혹시 봄부터 그 갈매기한테 빵을 주셨어요?",
+   "ko": "깜짝 놀라며 웃음을 참으며 묻기",
+   "en": "Surprised, holding back laughter, asking."
+  },
+  "dd8d11b1": {
+   "who": "owner",
+   "text": "…단골이야.",
+   "ko": "잠깐 쉬고 무뚝뚝하게, 목소리에 살짝 웃음",
+   "en": "After a pause, deadpan, a faint smile in the voice."
+  },
+  "c739cd23": {
+   "who": "think",
+   "text": "그 갈매기도 사장님이 몰래 챙기던 손님이었다. 웃음이 터졌는데, 사장님도 입꼬리가 조금 올라갔다.",
+   "ko": "웃음이 터진 따뜻한 혼잣말",
+   "en": "Laughing, warm."
+  },
+  "e9d5a807": {
+   "who": "jieun",
+   "text": "사장님, 오늘은 제가 할게요. 앉아 계세요.",
+   "ko": "다정하고 단단하게",
+   "en": "Kind and firm."
+  },
+  "91936c5a": {
+   "who": "owner",
+   "text": "마감 우유. 내 잔에.",
+   "ko": "낮고 짧게, 고마움을 감추며",
+   "en": "Low and brief, hiding gratitude."
+  },
+  "7364f4a1": {
+   "who": "owner",
+   "text": "…하루를 닫는 잔이다.",
+   "ko": "천천히 낮고 따뜻하게, 깊은 뭉클함",
+   "en": "Slow, low and warm, deeply moved."
+  },
+  "c229526d": {
+   "who": "think",
+   "text": "받기만 하던 내가, 오늘은 드렸다.",
+   "ko": "벅차고 뭉클한 혼잣말",
+   "en": "Full-hearted and moved."
+  },
+  "a4ed13c5": {
+   "who": "think",
+   "text": "내 이름이다.",
+   "ko": "놀라움과 감동에 거의 울 것 같은 속삭임",
+   "en": "A surprised, deeply moved whisper to herself, almost in tears."
+  },
+  "b9ba55e0": {
+   "who": "jieun",
+   "text": "눈이 그친 아침, 사장님이 돌아왔다. \"컵 닦았냐.\" 마감 때 나는 사장님의 우유를 두 손에 쥐여 드렸다. 칠판의 빈칸에 내 이름이 생겼다.",
+   "ko": "벅찬 하루를 돌아보며 따뜻하게 일기를 읽듯, 조금 울컥",
+   "en": "Warm and moved, like reading her diary aloud, a little choked up."
+  },
+  "ded2bb22": {
+   "who": "think",
+   "text": "이 카페에 오는 사람들은 저마다 늘 마시던 한 잔이 있었다. 그리고 그 잔마다, 말하지 않은 마음이 있었다.",
+   "ko": "한 해를 돌아보며 고요하고 따뜻하게",
+   "en": "Looking back on the year, quiet and warm."
+  },
+  "0799351f": {
+   "who": "owner",
+   "text": "다 둘러봤냐. 한 해 동안 많은 사람이 다녀갔지.",
+   "ko": "작게 미소 지으며 담담하게, 따뜻하게",
+   "en": "A small smile, plain and warm."
+  },
+  "113f9711": {
+   "who": "jieun",
+   "text": "네. 처음에는 주문 받는 것도 무서웠는데, 이제는 다들 무엇을 마실지 알 것 같아요.",
+   "ko": "미소 지으며 뿌듯하고 따뜻하게",
+   "en": "Smiling, proud and warm."
+  },
+  "a81e7ab9": {
+   "who": "owner",
+   "text": "…나도 한 해를 봤다. 네가 못 본 쪽에서.",
+   "ko": "잠깐 쉬고 낮고 조용하게, 의미를 담아",
+   "en": "After a pause, low and quiet, meaningful."
+  },
+  "c323af67": {
+   "who": "owner",
+   "text": "그해 봄부터 내 손이 조금씩 떨렸다. 이제는 손을 쉬게 해야 할 때였다.",
+   "ko": "지난날을 털어놓듯 낮고 담담하게",
+   "en": "Low and calm, confiding about the past."
+  },
+  "ccc2e623": {
+   "who": "owner",
+   "text": "그래서 구인 글에 \"서두르지 않는 사람\"이라고 썼다. 가게를 맡길 사람은 빠른 사람이 아니라, 기다릴 줄 아는 사람이어야 했다.",
+   "ko": "차분하고 깊게, 진심을 담아",
+   "en": "Calm and deep, sincere."
+  },
+  "c906a022": {
+   "who": "owner",
+   "text": "둘째 날, 금 씨가 \"빨리요\" 하고 재촉하자 그 아이가 컵을 깼다.",
+   "ko": "지난날을 떠올리며 담담하게",
+   "en": "Calmly recalling the past."
+  },
+  "9b7b60ed": {
+   "who": "owner",
+   "text": "그 아이는 울지 않았다. 빗자루를 두 손으로 꼭 쥐고, 조각을 하나도 남기지 않고 쓸었다.",
+   "ko": "조용히 감탄하듯, 따뜻하게",
+   "en": "Quietly impressed, warm."
+  },
+  "560d59da": {
+   "who": "owner",
+   "text": "실수한 뒤에 다시 하는 사람. 내가 기다리던 사람이 그런 사람이었다.",
+   "ko": "확신을 담아 따뜻하게",
+   "en": "Warm and certain."
+  },
+  "74f2a5a7": {
+   "who": "owner",
+   "text": "그 아이가 까치발을 하고 컵을 꺼내는 것을 보았다. 그날 새벽, 나는 선반을 한 칸 내려 두었다.",
+   "ko": "조용히 떠올리며, 살짝 미소",
+   "en": "Quietly remembering, a faint smile."
+  },
+  "9e710590": {
+   "who": "owner",
+   "text": "말해 주지는 않았다. 일하기 편한 자리는, 말없이 만들어 두는 것이다.",
+   "ko": "담담하고 깊게",
+   "en": "Plain and deep."
+  },
+  "cbca77cf": {
+   "who": "owner",
+   "text": "줄 선 손님이 재촉하자, 그 아이의 손이 또 떨리기 시작했다. 나는 카운터 앞으로 나갔다.",
+   "ko": "조용히 떠올리며, 조금 걱정스럽게",
+   "en": "Quietly remembering, a little concerned."
+  },
+  "9afba908": {
+   "who": "owner",
+   "text": "\"맛은 시간이 만듭니다.\" 그 말은 손님보다, 그 아이에게 들려주고 싶었다.",
+   "ko": "낮고 따뜻하게, 속마음을 털어놓듯",
+   "en": "Low and warm, revealing his true feelings."
+  },
+  "07d28858": {
+   "who": "owner",
+   "text": "촬영 팀이 한꺼번에 주문을 했다. 내가 받았으면 금방 끝났을 것이다.",
+   "ko": "담담하게 떠올리며",
+   "en": "Calmly recalling."
+  },
+  "a463b07e": {
+   "who": "owner",
+   "text": "그래도 나는 그 아이 뒤에서 빈 컵만 꺼내 놓았다. 오늘 내가 대신 하면, 내일도 내가 해야 하니까.",
+   "ko": "조용하고 단단하게, 깊은 뜻을 담아",
+   "en": "Quiet and firm, with deep meaning."
+  },
+  "0e222fb2": {
+   "who": "owner",
+   "text": "칠판 오른쪽 아래는 처음 칠판을 걸던 날부터 비워 두었다.",
+   "ko": "조용히, 오래 간직한 비밀을 꺼내듯",
+   "en": "Quietly, like revealing a long-kept secret."
+  },
+  "fde63404": {
+   "who": "owner",
+   "text": "언젠가 이 가게를 맡을 사람의 이름을 쓰려고. 그해 봄, 그 칸을 볼 때마다 한 사람이 떠올랐다.",
+   "ko": "천천히 따뜻하게, 조금 뭉클하게",
+   "en": "Slow and warm, a little moved."
+  },
+  "edabf37d": {
+   "who": "owner",
+   "text": "여름은 하루 종일 바빴다. 마감 때 보니, 그 아이의 앞치마 끈이 풀려 늘어져 있었다.",
+   "ko": "조용히 떠올리며, 살짝 미소",
+   "en": "Quietly remembering, a faint smile."
+  },
+  "2a2017ab": {
+   "who": "owner",
+   "text": "나는 끈을 다시 매 주었다. 손은 느렸지만, 매듭만큼은 단단하게 묶어 주고 싶었다.",
+   "ko": "천천히 따뜻하게, 애틋하게",
+   "en": "Slow, warm and tender."
+  },
+  "7625220c": {
+   "who": "owner",
+   "text": "줄이 골목 끝까지 선 날, 한 손님이 \"사장님이 해 주세요\" 하고 말했다.",
+   "ko": "담담하게 떠올리며",
+   "en": "Calmly recalling."
+  },
+  "8cc2831c": {
+   "who": "owner",
+   "text": "\"오늘의 커피는 저 친구가 내립니다.\" 남 앞에서 그 아이를 그렇게 부른 것은 그날이 처음이었다.",
+   "ko": "조용한 자부심과 뭉클함",
+   "en": "Quiet pride, moved."
+  },
+  "f5e506f3": {
+   "who": "owner",
+   "text": "그날 밤, 나는 선반에 놓인 단골들의 잔을 오래 보았다. 이 가게가 원래 누구의 것이었는지, 바쁜 여름에 잊고 있었다.",
+   "ko": "조금 쓸쓸하게 반성하듯",
+   "en": "A little wistful, reflecting."
+  },
+  "53d095b9": {
+   "who": "owner",
+   "text": "칠판에 \"일곱 시 전은 동네 시간\"이라고 썼다. 글씨는 떨렸지만, 그 아이가 옆에서 끝까지 지켜보았다.",
+   "ko": "담담하지만 뭉클하게",
+   "en": "Plain but moved."
+  },
+  "8f5ad66a": {
+   "who": "owner",
+   "text": "축제가 끝난 밤, 처음으로 그 아이 이름을 다정하게 불렀다. 그리고 주머니 속 열쇠를 건넸다.",
+   "ko": "천천히 다정하게, 뭉클하게",
+   "en": "Slow, tender and moved."
+  },
+  "b1370f16": {
+   "who": "owner",
+   "text": "\"손님은 평소대로 온다.\" 겁내지 말라는 뜻이었다. 너도 평소대로만 하면 된다고.",
+   "ko": "따뜻하게 다독이듯",
+   "en": "Warm and encouraging."
+  },
+  "e89a16d3": {
+   "who": "owner",
+   "text": "열쇠를 건네던 밤, 마감 선반에 작은 메모를 붙여 두었다. \"서두르면 쏟는다.\"",
+   "ko": "조용히 떠올리며, 살짝 미소",
+   "en": "Quietly remembering, a faint smile."
+  },
+  "ff63a5e5": {
+   "who": "owner",
+   "text": "내가 없는 날에도, 바쁜 손을 잠깐 멈추고 한 번 읽어 볼 수 있게.",
+   "ko": "다정하게, 걱정과 믿음을 담아",
+   "en": "Tender, with care and trust."
+  },
+  "9b3b1b41": {
+   "who": "owner",
+   "text": "정전 밤, 나는 우리 집 창가에서 카페의 불빛을 보았다. 깜깜한 마을에서 불이 켜진 곳은 그 창 하나뿐이었다.",
+   "ko": "조용히, 깊은 감동을 누르며",
+   "en": "Quietly, holding back deep emotion."
+  },
+  "f52d6561": {
+   "who": "owner",
+   "text": "가지 않았다. 그 아이가 하고 있었으니까. 눈이 그친 아침, 내가 한 말은 \"컵 닦았냐\" 하나였다.",
+   "ko": "살짝 웃음 섞어 담담하게, 뭉클하게",
+   "en": "Plain with a hint of a smile, moved."
+  },
+  "0d9b4d30": {
+   "who": "owner",
+   "text": "서두르지 않는 사람을 찾으려고 구인 글을 붙였다. 그런데 돌아보니, 그 아이가 이 가게를 찾아온 것이었다.",
+   "ko": "조용히 깨달음을 담아, 따뜻하게",
+   "en": "Quiet and warm, a gentle realization."
+  },
+  "665f99d9": {
+   "who": "owner",
+   "text": "칠판의 빈칸에 이름을 쓰던 날, 내 글씨는 삐뚤었다. 그래도 그 이름은 어느 때보다 반듯해 보였다.",
+   "ko": "천천히 뭉클하게, 자랑스럽게",
+   "en": "Slow, moved and proud."
+  },
+  "fbb73786": {
+   "who": "owner",
+   "text": "봄마다 오는 그 갈매기에게, 나는 서른 해 동안 아침마다 빵 한 조각을 주었다.",
+   "ko": "무뚝뚝하게 고백하듯, 살짝 웃음",
+   "en": "Gruffly confessing, a faint laugh."
+  },
+  "3752c945": {
+   "who": "owner",
+   "text": "그 아이가 빵 바구니를 지키려고 갈매기를 쫓을 때, 나는 신문 뒤에서 웃었다. …그 녀석도 단골이니까.",
+   "ko": "웃음을 참으며 무뚝뚝한 농담, 따뜻하게",
+   "en": "Holding back a laugh, dry humor, warm."
+  },
+  "358186cf": {
+   "who": "think",
+   "text": "봄에 사장님이 건넨 첫 잔, 할머니가 빈 의자 앞에 두던 잔, 그리고 오늘 내가 두 손에 쥐여 드린 잔.",
+   "ko": "천천히 되새기며 조용히 뭉클하게",
+   "en": "Slowly reflecting, quietly moved."
+  },
+  "737bb95c": {
+   "who": "think",
+   "text": "모두 같은 따뜻한 우유였다. 그런데 한 잔도, 같은 마음은 아니었다.",
+   "ko": "잔잔하고 깊은 울림으로",
+   "en": "Gentle and deeply moving."
+  },
+  "89ab68d9": {
+   "who": "owner",
+   "text": "내일도 문 열지. 일곱 시 전에는 동네 시간이다.",
+   "ko": "작게 미소 지으며 담담하고 따뜻하게",
+   "en": "A small smile, plain and warm."
+  },
+  "c76634e2": {
+   "who": "jieun",
+   "text": "네, 손님은 평소대로 오니까요. 저도 평소대로 열게요.",
+   "ko": "미소 지으며 밝고 따뜻하게, 다짐하듯",
+   "en": "Smiling, bright and warm, a promise."
+  },
+  "c122773b": {
+   "who": "owner",
+   "text": "오늘도 평소대로 해요. 손님은 평소대로 오니까요.",
+   "ko": "미소 지으며 담담하고 따뜻하게",
+   "en": "A small smile, plain and warm."
+  },
+  "51a6dd24": {
+   "who": "jian",
+   "text": "오늘은 분홍색이요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "854b2c7f": {
+   "who": "jian",
+   "text": "오늘 색이다. 고마워요.",
+   "ko": "작게 미소 지으며 고마워함",
+   "en": "A small smile, thankful."
+  },
+  "32bfb2be": {
+   "who": "han",
+   "text": "딱 좋게 다네요. 고마워요.",
+   "ko": "흐뭇하게 고마워함",
+   "en": "Pleased and thankful."
+  },
+  "e980efc5": {
+   "who": "think",
+   "text": "오늘도 한 잔씩, 천천히. 내일도 평소대로 문을 열자.",
+   "ko": "차분하고 편안하게 다짐",
+   "en": "Calm and at ease, resolving."
+  },
+  "5a60e4d4": {
+   "who": "owner",
+   "text": "우유가 떨어지면 손님께 사정을 말하고, 다른 걸 권해 봐요.",
+   "ko": "미소 지으며 차분하게 일러 줌",
+   "en": "Smiling, calmly advising."
+  },
+  "170b13cd": {
+   "who": "do",
+   "text": "향이 좋네요. 고마워요.",
+   "ko": "밝고 기분 좋게 고마워함",
+   "en": "Bright and happy, thankful."
+  },
+  "2ce9e90a": {
+   "who": "jieun",
+   "text": "따뜻한 디카페인 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "dd3b6dbe": {
+   "who": "noh",
+   "text": "늘 먹던 거요.",
+   "ko": "짧고 무뚝뚝하게, 편하게",
+   "en": "Short and gruff, at ease."
+  },
+  "8e684753": {
+   "who": "owner",
+   "text": "비 오는 날은 가져가는 손님이 많아요. 드시고 가는지 꼭 물어봐요.",
+   "ko": "미소 지으며 차분하게 일러 줌",
+   "en": "Smiling, calmly advising."
+  },
+  "d00a4af6": {
+   "who": "kang",
+   "text": "늘 먹던 거요.",
+   "ko": "낮고 짧게",
+   "en": "Low and brief."
+  },
+  "f3340290": {
+   "who": "kang",
+   "text": "깊네요. 고마워요.",
+   "ko": "낮고 짧게, 만족해서 고마워함",
+   "en": "Low and brief, satisfied and thankful."
+  },
+  "9f2a9f17": {
+   "who": "jieun",
+   "text": "아이스 유자차 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "d816f116": {
+   "who": "owner",
+   "text": "머신이 데워질 때까지는 손님께 조금 기다려 달라고 해요.",
+   "ko": "미소 지으며 차분하게 일러 줌",
+   "en": "Smiling, calmly advising."
+  },
+  "db1f6d53": {
+   "who": "eunju",
+   "text": "이거면 마음 놓고 마셔요. 고마워요.",
+   "ko": "안심하고 고마워하며 다정하게",
+   "en": "Relieved, thankful and kind."
+  },
+  "a090d3b4": {
+   "who": "owner",
+   "text": "얼음이 떨어지면 따뜻하게 드려도 되는지 여쭤 봐요.",
+   "ko": "미소 지으며 차분하게 일러 줌",
+   "en": "Smiling, calmly advising."
+  },
+  "6cdd602f": {
+   "who": "sumin",
+   "text": "…늘 먹던 거요.",
+   "ko": "작고 조용하게",
+   "en": "Small and quiet."
+  },
+  "657561e3": {
+   "who": "sumin",
+   "text": "구수하네요. 고마워요.",
+   "ko": "작지만 편안하게 고마워함",
+   "en": "Quiet but relaxed, thankful."
+  },
+  "9fab829a": {
+   "who": "sumin",
+   "text": "이건 제가 늘 먹던 게 아니네요.",
+   "ko": "작고 무뚝뚝하게",
+   "en": "Small and flat."
+  },
+  "90def120": {
+   "who": "jieun",
+   "text": "따뜻한 우유 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "c6e5ba62": {
+   "who": "owner",
+   "text": "장 보러 다녀올게요. 손님이 몰려도 한 잔씩, 천천히 해요.",
+   "ko": "미소 지으며 담담하게 다독임",
+   "en": "Smiling, calmly encouraging."
+  },
+  "dfb5f31e": {
+   "who": "owner",
+   "text": "혼자서도 잘했네요. 오후는 같이 해요.",
+   "ko": "미소 지으며 흐뭇하게 칭찬",
+   "en": "Smiling, pleased, praising her."
+  },
+  "127b2fc2": {
+   "who": "owner",
+   "text": "오늘은 손님이 많아요. 그래도 한 잔씩, 순서대로 해요.",
+   "ko": "미소 지으며 차분하게 다독임",
+   "en": "Smiling, calmly encouraging."
+  },
+  "4bdf975c": {
+   "who": "jieun",
+   "text": "아이스 녹차라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "14a2fb13": {
+   "who": "jian",
+   "text": "오늘은 초록색이요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "b74dec58": {
+   "who": "owner",
+   "text": "아이가 마시는 따뜻한 잔은 우유를 평소보다 덜 데워요. 너무 뜨거우면 아이 입이 데어요.",
+   "ko": "미소 지으며 다정하게 일러 줌",
+   "en": "Smiling, kindly advising."
+  },
+  "94701adc": {
+   "who": "jieun",
+   "text": "따뜻한 우유 한 잔, 너무 뜨겁지 않게 데울게요. 가져가시는 거죠?",
+   "ko": "다정하게 확인하듯, 아이를 배려해",
+   "en": "Kindly double-checking, caring for the child."
+  },
+  "2e51dc4c": {
+   "who": "jieun",
+   "text": "따뜻한 우유 한 잔, 너무 뜨겁지 않게 데울게요. 드시고 가시는 거죠?",
+   "ko": "다정하게 확인하듯, 아이를 배려해",
+   "en": "Kindly double-checking, caring for the child."
+  },
+  "9c139d7b": {
+   "who": "jieun",
+   "text": "아이스 디카페인 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "7bcf4398": {
+   "who": "jieun",
+   "text": "아이스 바닐라 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "deb8219b": {
+   "who": "jieun",
+   "text": "따뜻한 녹차라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "44e734a7": {
+   "who": "jian",
+   "text": "오늘은 노란색이요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "659c7b43": {
+   "who": "jieun",
+   "text": "따뜻한 녹차라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "bf5bc6d5": {
+   "who": "jieun",
+   "text": "따뜻한 코코아 한 잔, 너무 뜨겁지 않게 데울게요. 가져가시는 거죠?",
+   "ko": "다정하게 확인하듯, 아이를 배려해",
+   "en": "Kindly double-checking, caring for the child."
+  },
+  "63d01c34": {
+   "who": "jian",
+   "text": "오늘은 갈색이요.",
+   "ko": "조용하지만 조금 밝게",
+   "en": "Quiet but a little brighter."
+  },
+  "d77e6ad1": {
+   "who": "jieun",
+   "text": "따뜻한 코코아 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "5f3f474d": {
+   "who": "jieun",
+   "text": "따뜻한 코코아 한 잔, 너무 뜨겁지 않게 데울게요. 드시고 가시는 거죠?",
+   "ko": "다정하게 확인하듯, 아이를 배려해",
+   "en": "Kindly double-checking, caring for the child."
+  },
+  "9d13d258": {
+   "who": "jieun",
+   "text": "아이스 보리차 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "95eb0163": {
+   "who": "jieun",
+   "text": "아이스 디카페인 라테 한 잔, 드시고 가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  },
+  "9568f128": {
+   "who": "jieun",
+   "text": "아이스 바닐라 라테 한 잔, 가져가시는 거죠?",
+   "ko": "공손하게 확인하듯",
+   "en": "Politely double-checking the order."
+  }
+ }
+}
