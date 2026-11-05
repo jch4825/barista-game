@@ -35,6 +35,11 @@ def head_box(path: Path):
         widths.append(w)
         # 머리 아래: 머리 폭(지금까지의 중간값)보다 1.55배 넘게 넓어지면 어깨
         if len(widths) > 60 and w > 1.55 * float(np.median(widths[20:])):
+            # 머리 위의 묶은 머리(소라의 포니테일)에서 머리로 넓어진 것이면 어깨가 아님: 거기서부터 다시 잼
+            if y - top < H * 0.12:
+                top, widths = y, [w]
+                bottom = top + int(H * 0.3)
+                continue
             bottom = y
             break
     head = a[top:bottom]

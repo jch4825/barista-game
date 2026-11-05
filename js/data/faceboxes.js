@@ -409,9 +409,9 @@ export const FACE_BOX = {
   8.2
  ],
  "sora_normal": [
-  1429,
-  53.0,
-  4.9
+  260,
+  50.7,
+  16.0
  ],
  "student_normal": [
   257,
@@ -907,9 +907,9 @@ export const PORTRAIT_BOX = {
   3.6
  ],
  "sora_normal": [
-  789,
-  53.2,
-  4.4
+  144,
+  51.5,
+  16.1
  ],
  "student_normal": [
   142,

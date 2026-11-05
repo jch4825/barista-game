@@ -32,6 +32,9 @@ const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
 const { metSpeech } = await imp('js/screens/result.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const cast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'voice_cast.json'), 'utf8'));
+// 다시 만들 목소리(Qwen3, 검수 13.55): 사람마다 목소리 설명 · 본보기 문장. 속마음 · 나레이션은 지은의 목소리(covers)
+const qcast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'qwen_cast.json'), 'utf8')).people;
+const qOwner = Object.fromEntries(Object.entries(qcast).flatMap(([id, v]) => [[id, id], ...(v.covers || []).map((c) => [c, id])]));
 
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째']; // overlays.js 와 같음
 const lines = new Map();
@@ -244,6 +247,7 @@ md.push(`게임이 브라우저 음성으로 읽는 줄(학생 별명이 든 줄
 md.push('## 1. 모아 보기', '');
 md.push(`- 말하는 사람 **${nPeople}명**(나레이션 · 속마음 · 안내 포함), 문장 **${out.length}줄**(같은 문장을 두 사람이 말하면 사람마다 셈: ${groups.reduce((n, [, ids]) => n + ids.reduce((m, id) => m + per.get(id).length, 0), 0)}줄)`);
 md.push(`- 지금 쓰는 Supertonic 목소리 **${voicesUsed.size}개**(M1~M5 · F1~F5)를 빠르기로 나눠 씀(\`tools/voice/voice_cast.json\`)`);
+md.push(`- 다시 만들 목소리(Qwen3, 검수 13.52 ~ 13.55): 사람마다 목소리 **${Object.keys(qcast).length}개**. 목소리 설명 · 본보기 문장은 \`tools/voice/qwen_cast.json\`(2장의 사람마다 '목소리'에 옮겨 적음)`);
 if (silent.length) md.push(`- 이 게임에서 말하지 않는 인물(목소리가 필요 없음): ${silent.map((id) => `${nameOf(id)}(\`${id}\`)`).join(' · ')}`);
 md.push('');
 md.push('| 묶음 | 사람 | id | 하는 일 | 지금 목소리 · 빠르기 | 줄 | 글자 |', '| :--- | :--- | :--- | :--- | :--- | ---: | ---: |');
@@ -261,6 +265,9 @@ for (const [g, ids] of groups) {
   for (const id of ids) {
     const arr = per.get(id);
     md.push(`#### ${nameOf(id)} (\`${id}\`) · ${arr.length}줄`, '');
+    const qid = qOwner[id];
+    if (qid && qid !== id) md.push(`> 목소리: ${nameOf(qid)}의 목소리를 함께 씀`, '');
+    else if (qid) md.push(`> 목소리: ${qcast[qid].ko}${qcast[qid].keep ? ' (직업 마1스톤의 지금 목소리를 이어 받을지는 검수 13.55)' : ''}`, '>', `> 본보기 문장: “${qcast[qid].ref}”`, '');
     md.push('| # | 대사 | 나오는 곳 |', '| ---: | :--- | :--- |');
     arr.forEach((x, i) => {
       const where = [...new Set(x.eps.map(placeName))];
