@@ -854,7 +854,8 @@ function drinkArt(made, res = {}, soFar = null, cls = '') {
   const menu = soFar ? null : findMenu(made);
   const r = menu ? RECIPES[menu] : null;
   // 라테아트 그림(cup_mug_heart 등)은 머그 그림이라 머그일 때만(종이컵에 하트를 그려도 드릴 때는 종이컵)
-  const look = r ? (made.cup === 'mug' && res.art && r.art?.[res.art]) || r.look?.[made.cup] : null;
+  // 종이컵은 뚜껑이 덮여 안이 보이지 않아, 무슨 음료든(엉뚱한 잔도) 다 만들면 종이컵 그림 그대로(2026-11-06, 검수 13.62)
+  const look = (r ? (made.cup === 'mug' && res.art && r.art?.[res.art]) || r.look?.[made.cup] : null) || (!soFar && made.cup === 'paper' ? cupArtId('paper') : null);
   if (look && img.has('objects', look)) {
     const el = objArt(look, `bw-drink ${cls}`);
     if (spec.spill) el.append(h('i', { class: 'bw-spill', 'aria-hidden': 'true' }));
