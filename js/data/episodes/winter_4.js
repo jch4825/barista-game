@@ -29,7 +29,6 @@ export default {
     bgm('blackout'), // 그레고리안 찬송가: 마을 불이 꺼지는 무거운 밤(2026-11-01)
     place('겨울 저녁 18:20', '폭설'),
     info('오늘의 칠판', '폭설 예보! 저녁에 눈이 아주 많이 온대요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
-    cg('winter_storm'),
     narr('라디오에서 말한 대로, 오후부터 눈이 쏟아졌다. 골목에 눈이 무릎까지 쌓였다.'),
     narr('저녁이 되자 마을의 불이 하나씩 꺼진다. 가로등도, 집집의 창문도.'),
     term('blackout'),
@@ -128,7 +127,6 @@ export default {
     show({ left: 'jieun:surprised', center: 'kang:normal', right: 'eunju:nervous' }),
     narr('그때 버너 옆에 있던 강 씨가 성큼 다가와, 아기 앞에 쪼그려 앉는다.'),
     say('kang', 'smile', '까꿍! 까꿍!'),
-    cg('kang_peekaboo'),
     narr('강 씨가 두 손으로 얼굴을 가렸다 열 때마다, 아기가 울다 말고 깔깔 웃는다. 가게 안이 조용해진다.'),
     narr('강 씨가 나와 눈이 마주친다. 그리고 크게 헛기침을 한다.'),
     say('kang', 'normal', '…바다 사람은 원래 애를 잘 봐. 배에서 막내들은 다 내가 키웠어.'),
@@ -146,7 +144,7 @@ export default {
     narr('물을 끓이고, 뜸을 들이고, 세 번에 나눠 붓는다. 한 잔에 몇 분씩 걸린다.'),
     emote('jieun', 'sweat'),
     think('빨리 해야 하나. 줄이 점점 길어진다.'),
-    cg('winter_gathering2'),
+    cg(null), // 단골 여덟 명 모임 CG 를 걷고 무대로(2026-11-06 CG 는 결정적인 장면에만, 검수 13.62)
     show({ left: 'jieun:nervous', right: 'geum:normal' }),
     narr('줄 가운데에 금 씨가 서 있다. 봄에 "빨리요" 하고 재촉하던 바로 그 금 씨다.'),
     say('geum', 'smile', '천천히 해요.'),
@@ -171,7 +169,6 @@ export default {
     narr('노 씨의 랜턴이 밤새 사장님 자리 위에서 가게를 비춘다.'),
     place('겨울 새벽 05:30', '불이 들어온 새벽'),
     sfx('beep'),
-    cg('winter_dawn_power'),
     narr('새벽, 냉장고가 웅 하고 다시 돌기 시작한다. 전기가 들어왔다.'),
     narr('사람들이 박수를 친다. 창밖에는 아직 눈이 조금씩 내린다.'),
     face('jieun', 'smile'),

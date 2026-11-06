@@ -2773,8 +2773,10 @@ export async function brew(opts = {}) {
     const cupBox = h('div', { class: 'bw-toss-cup' }, lidded ? openArt(made.cup, spec) : drinkArt(made, {}, null, 'toss'));
     const stream = h('i', { class: 'bw-toss-stream', style: { '--c': spec.color || '#B98A5E' } });
     const ice = spec.ice ? h('i', { class: 'bw-toss-ice' }, h('b'), h('b'), h('b')) : null;
-    const sink = h('span', { class: 'bw-toss-sink', html: sinkSVG() }, h('i', { class: 'bw-toss-drain' }));
-    const dest = h('span', { class: `bw-toss-dest ${wash ? 'is-rack' : 'is-bin'}`, html: wash ? rackSVG() : binSVG() });
+    // 개수대 · 건조대 · 쓰레기통: 물건 그림(obj_sink · obj_rack · obj_bin, sheet_drinks · sheet_drinks_blue)이 오면 그림, 없으면 임시 그림
+    const tossArt = (id, make) => (img.has('objects', id) ? `<img src="${img.url('objects', id)}" alt="" draggable="false">` : make());
+    const sink = h('span', { class: 'bw-toss-sink', html: tossArt('obj_sink', sinkSVG) }, h('i', { class: 'bw-toss-drain' }));
+    const dest = h('span', { class: `bw-toss-dest ${wash ? 'is-rack' : 'is-bin'}`, html: wash ? tossArt('obj_rack', rackSVG) : tossArt('obj_bin', binSVG) });
     const stage = h('div', { class: `bw-toss k-${kind}` }, sink, dest, stream, ice, cupBox);
     view.append(stage);
     await w(pauseMs(350));

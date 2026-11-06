@@ -652,6 +652,7 @@ body.reduce-motion .mg.mg-brew .bw-whirl-ring { display: none; }
 .mg.mg-brew .bw-toss-dest { position: absolute; right: 6%; bottom: 9%; width: 22%; }
 .mg.mg-brew .bw-toss-dest.is-bin { width: 16%; }
 .mg.mg-brew :is(.bw-toss-sink, .bw-toss-dest) svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mg.mg-brew :is(.bw-toss-sink, .bw-toss-dest) img { display: block; width: 100%; height: auto; } /* 물건 그림(obj_sink · obj_rack · obj_bin)이 오면 */
 .mg.mg-brew .bw-toss-cup { position: absolute; z-index: 2; left: 4%; bottom: 46%; width: 17%; aspect-ratio: 1; transition: left .6s ease, bottom .6s ease, transform .5s ease, opacity .45s ease; }
 .mg.mg-brew .bw-toss-cup .bw-art { display: block; width: 100%; height: 100%; }
 .mg.mg-brew .bw-toss.s1 .bw-toss-cup { left: 31%; bottom: 52%; }

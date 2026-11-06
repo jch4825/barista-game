@@ -215,10 +215,12 @@ export const stage = {
     state.chalk = text ? { text, shaky } : null;
     if (!chalkEl) return;
     if (!text) { chalkEl.replaceChildren(); chalkEl.classList.remove('is-on'); return; }
-    const spot = CGS[state.cg]?.chalk || { x: 50, y: 34, w: 46, rot: 0 };
+    // 칠판 자리가 있는 CG 가 없으면(2026-11-06 CG 는 결정적인 장면에만, 검수 13.62) 장면 위 작은 칠판에 씀
+    const board = !CGS[state.cg]?.chalk;
+    const spot = CGS[state.cg]?.chalk || { x: 50, y: 30, w: 34, rot: 0 };
     const lines = String(text).split('\n');
     let n = 0;
-    const box = h('div', { class: `chalk-text ${shaky ? 'is-shaky' : ''}`.trim(), style: { left: `${spot.x}%`, top: `${spot.y}%`, width: `${spot.w}%`, '--rot': `${spot.rot || 0}deg` } },
+    const box = h('div', { class: `chalk-text ${shaky ? 'is-shaky' : ''} ${board ? 'is-board' : ''}`.trim().replace(/\s+/g, ' '), style: { left: `${spot.x}%`, top: `${spot.y}%`, width: `${spot.w}%`, '--rot': `${spot.rot || 0}deg` } },
       ...lines.map((ln) => h('span', { class: 'chalk-line' }, ...[...ln].map((ch) => {
         n += 1;
         const r = shaky ? ((n * 37) % 11) - 5 : 0; // 같은 글씨는 늘 같은 모양(무작위 아님)

@@ -128,26 +128,10 @@
     "workbench_morning": "bg/workbench_morning.jpg"
   },
   "cg": {
-    "cg_actor_quiet": "cg/cg_actor_quiet.jpg",
     "cg_blackout_cafe_lit": "cg/cg_blackout_cafe_lit.jpg",
-    "cg_do_chair_out": "cg/cg_do_chair_out.jpg",
-    "cg_do_rain_letters": "cg/cg_do_rain_letters.jpg",
-    "cg_do_standing": "cg/cg_do_standing.jpg",
-    "cg_do_towel": "cg/cg_do_towel.jpg",
-    "cg_haesun_cup_for_him": "cg/cg_haesun_cup_for_him.jpg",
-    "cg_haesun_two_cups": "cg/cg_haesun_two_cups.jpg",
-    "cg_jian_color_menu": "cg/cg_jian_color_menu.jpg",
-    "cg_kang_dark_window": "cg/cg_kang_dark_window.jpg",
-    "cg_kang_light_on": "cg/cg_kang_light_on.jpg",
-    "cg_kang_window_sea": "cg/cg_kang_window_sea.jpg",
-    "cg_memory_city": "cg/cg_memory_city.jpg",
-    "cg_owner_closing_milk": "cg/cg_owner_closing_milk.jpg",
-    "cg_owner_cup_shake": "cg/cg_owner_cup_shake.jpg",
     "cg_spring_crew": "cg/cg_spring_crew.jpg",
     "cg_spring_first_cup": "cg/cg_spring_first_cup.jpg",
-    "cg_spring_name": "cg/cg_spring_name.jpg",
-    "cg_summer_line": "cg/cg_summer_line.jpg",
-    "cg_summer_tourist_chair": "cg/cg_summer_tourist_chair.jpg"
+    "cg_summer_line": "cg/cg_summer_line.jpg"
   },
   "photos": {},
   "sd": {},

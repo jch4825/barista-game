@@ -110,7 +110,6 @@ export default {
 
     // 사장님이 컵을 흘림
     sfx('spill'),
-    cg('owner_pocket'),
     narr('그때 사장님이 들던 컵이 기울어, 커피가 카운터에 쏟아졌다.'),
     narr('사장님은 아무 말 없이 행주로 닦고, 두 손을 앞치마 주머니에 넣는다.'),
     say('owner', 'normal', '…괜찮아요. 계속해요.'),
@@ -168,7 +167,6 @@ export default {
     say('owner', 'normal', '지은 씨, 이 가게는 원래 동네 사람들 거예요.'),
     say('owner', 'normal', '손님이 많아진 건 고마운 일이에요. 그래도 동네 사람이 못 들어오면 안 돼요.'),
     narr('사장님이 분필을 든다. 그리고 칠판 맨 위에 천천히 쓴다.'),
-    cg('summer_chalk_rule'),
     chalk('7시 전은\n동네 시간'),
     seen(8),
     narr('글씨가 조금 떨린다. 그래도 반듯하다.'),
@@ -176,7 +174,7 @@ export default {
     say('owner', 'normal', '관광객은 일곱 시부터 받아요. 조금 늦게 와도 맛은 같으니까요.'),
     face('jieun', 'smile'),
     think('동네 시간. 새벽의 강 씨도, 여섯 시 십 분의 한 씨도, 이제 다시 들어올 수 있다.'),
-    cg(null),
+    chalk(null), // CG 없이 작은 칠판에 쓴 글씨(2026-11-06 CG 는 결정적인 장면에만, 검수 13.62)를 지움
     motion('jieun', 'nod'),
     end(),
   ],

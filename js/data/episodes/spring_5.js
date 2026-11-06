@@ -105,7 +105,6 @@ export default {
     }),
 
     show({ left: 'jieun:normal', center: 'actor:smile', right: 'agent:normal' }),
-    cg('actor_quiet'),
     narr('배우는 쉬는 시간이 끝날 때까지 창밖의 벚꽃만 본다. 커피가 다 녹을 때까지.'),
     say('actor', 'smile', '여기, 조용해서 좋네요. 다들 자기 속도로 있어서요.'),
     cg(null),
@@ -124,7 +123,6 @@ export default {
       keep: [say('owner', 'normal', '아까, 할머니 자리를 지킨 거.'), say('owner', 'smile', '…잘했어요. 단골의 자리는 그 사람의 하루예요.')],
       give: [say('owner', 'normal', '아까, 배우가 스스로 일어난 거요.'), say('owner', 'smile', '할머니가 말없이 기다려 줘서예요. 지은 씨도 할머니가 어떻게 하시는지 잘 봤어요.')],
     }),
-    cg('owner_cup_shake'),
     narr('사장님이 마감 우유를 든다. 그런데 잔이 아주 조금 흔들린다.'),
     narr('사장님은 아무렇지 않은 듯, 잔을 두 손으로 고쳐 잡는다.'),
     think('오늘 손님이 많아서 많이 피곤하신가 보다.'),

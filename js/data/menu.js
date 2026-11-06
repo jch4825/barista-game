@@ -273,7 +273,7 @@ export const COLORS = {
 /**
  * 레시피
  *  temps: 고를 수 있는 온도(첫째가 메뉴판의 기본) · steps: 손 동작 순서(그 온도·단계에 없는 것은 빠짐) · cup: 컵이 정해진 메뉴
- *  look: 컵마다 다 만든 음료 그림 ID · art: 라테아트 그림 ID · color: 임시 그림의 음료 색 · foam: 거품 색
+ *  look: 컵마다 다 만든 음료 그림 ID(그림이 없으면 임시 그림, 종이컵은 뚜껑이 덮여 늘 종이컵 그림: brew.js drinkArt · 시트는 tools/import-objects.py) · art: 라테아트 그림 ID · color: 임시 그림의 음료 색 · foam: 거품 색
  *  thanks: 알맞게 만들었을 때 손님 말(주문마다 orders[].thanks 로 바꿈) · artThanks: 라테아트가 생겼을 때
  *  zones · laps: 이 메뉴에서만 다른 '알맞아요' 칸 · 바퀴 수(예: 믹스커피의 사장님 방식) · note: 수첩의 손글씨 메모
  *  tag: 지안의 색(COLORS) · desc: 수첩의 짧은 설명
@@ -282,7 +282,7 @@ export const RECIPES = {
   americano: {
     name: '아메리카노', icon: 'coffee',
     base: 'espresso', adds: ['water'], temps: ['iced', 'hot'], steps: ['ice', 'grind', 'tamp', 'extract', 'water'],
-    look: { mug: 'cup_mug_americano', glass: 'cup_glass_ice' },
+    look: { mug: 'cup_mug_americano', glass: 'cup_glass_ice', plastic: 'cup_plastic_americano' },
     color: '#4A2C1B',
     thanks: '향이 좋네요. 고마워요.',
     desc: '가장 많이 팔리는 커피. 아이스를 많이 찾아요.',
@@ -290,7 +290,7 @@ export const RECIPES = {
   latte: {
     name: '라테', icon: 'coffee',
     base: 'espresso', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
-    look: { mug: 'cup_mug_latte' },
+    look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' },
     art: { heart: 'cup_mug_heart', tulip: 'cup_mug_tulip', leaf: 'cup_mug_leaf' },
     color: '#C79A6B', foam: '#F4E7D3',
     thanks: '부드러워요. 고마워요.',
@@ -300,7 +300,7 @@ export const RECIPES = {
   vanilla_latte: {
     name: '바닐라 라테', icon: 'coffee',
     base: 'espresso', adds: ['milk', 'syrup'], temps: ['hot', 'iced'], steps: ['syrup', 'ice', 'tamp', 'extract', 'steam', 'pour'],
-    look: { mug: 'cup_mug_latte' }, art: { heart: 'cup_mug_heart' }, // 겉보기는 라테와 같음(2026-11-01)
+    look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, art: { heart: 'cup_mug_heart' }, // 겉보기는 라테와 같음(2026-11-01)
     color: '#CFA373', foam: '#F6EAD6',
     thanks: '딱 좋게 다네요. 고마워요.',
     desc: '달게 마시고 싶은 손님에게. 라테에 바닐라 시럽.',
@@ -308,7 +308,7 @@ export const RECIPES = {
   decaf_latte: {
     name: '디카페인 라테', icon: 'coffee',
     base: 'decaf', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
-    look: { mug: 'cup_mug_latte' }, // 겉보기는 라테와 같음
+    look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, // 겉보기는 라테와 같음
     color: '#C49A70', foam: '#F4E7D3',
     thanks: '이거면 마음 놓고 마셔요. 고마워요.',
     desc: '카페인을 뺀 원두로 만든 라테.',
@@ -341,6 +341,7 @@ export const RECIPES = {
   barley_tea: {
     name: '보리차', icon: 'tea',
     base: 'barley', adds: ['water'], temps: ['hot', 'iced'], steps: ['boil', 'water', 'steep', 'ice'],
+    look: { mug: 'cup_mug_barley', glass: 'cup_glass_barley', plastic: 'cup_plastic_barley' },
     color: '#C98E4E',
     thanks: '구수하네요. 고마워요.',
     desc: '메뉴판에서 가장 싼 음료.',
@@ -348,6 +349,7 @@ export const RECIPES = {
   yuja_tea: {
     name: '유자차', icon: 'tea',
     base: 'yuja', adds: ['water'], temps: ['hot', 'iced'], steps: ['ice', 'boil', 'jam', 'water', 'stir'],
+    look: { mug: 'cup_mug_yuja', glass: 'cup_glass_yuja', plastic: 'cup_plastic_yuja' },
     color: '#F2C230', tag: 'yellow',
     thanks: '상큼해요. 고마워요.',
     desc: '노란색. 유자청에 물을 부어요.',
@@ -355,6 +357,7 @@ export const RECIPES = {
   greentea_latte: {
     name: '녹차라테', icon: 'tea',
     base: 'matcha', adds: ['milk'], temps: ['iced', 'hot'], steps: ['powder', 'whisk', 'ice', 'steam', 'pour'],
+    look: { mug: 'cup_mug_greentea', glass: 'cup_glass_greentea', plastic: 'cup_plastic_greentea' },
     color: '#A8C97F', tag: 'green',
     thanks: '쌉쌀하고 시원해요. 고마워요.',
     desc: '초록색. 말차를 풀고 우유를 부어요.',
@@ -362,6 +365,7 @@ export const RECIPES = {
   strawberry_milk: {
     name: '딸기우유', icon: 'juice',
     base: 'strawberry', adds: ['milk'], temps: ['iced'], steps: ['ice', 'jam', 'pour', 'stir'],
+    look: { glass: 'cup_glass_strawberry', plastic: 'cup_plastic_strawberry' },
     color: '#F7B6C8', tag: 'pink',
     thanks: '달콤해요. 고마워요.',
     desc: '분홍색. 딸기청에 우유를 부어요.',
@@ -369,6 +373,7 @@ export const RECIPES = {
   cocoa: {
     name: '코코아', icon: 'coffee',
     base: 'cocoa', adds: ['milk'], temps: ['hot', 'iced'], steps: ['powder', 'ice', 'steam', 'pour', 'stir'],
+    look: { mug: 'cup_mug_cocoa', glass: 'cup_glass_cocoa', plastic: 'cup_plastic_cocoa' },
     color: '#8A5A3C', foam: '#C9A487', tag: 'brown',
     thanks: '달고 따뜻해요. 고마워요.',
     desc: '갈색. 코코아 가루에 우유를 부어요.',

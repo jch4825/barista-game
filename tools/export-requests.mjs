@@ -107,20 +107,83 @@ const cgMissing = Object.keys(CGS).filter((id) => !haveCg.has(id));
 const cgNew = cgMissing.filter((id) => !inExtra.has(id));
 const cgOld = cgMissing.filter((id) => inExtra.has(id));
 // 3) 물건
-const SHEET_MORE = [
-  ['obj_decaf', 'a glass jar of dark roasted decaf coffee beans with a plain forest green lid'],
-  ['obj_drip_beans', 'a small kraft paper bag of whole coffee beans with a folded top'],
-  ['obj_mix', 'three plain golden-yellow instant coffee mix stick packets fanned out'],
-  ['obj_barley', 'a glass jar of roasted barley grains with a cork lid'],
-  ['obj_yuja', 'a glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices'],
-  ['obj_strawberry', 'a glass jar of red strawberry preserve with small fruit pieces'],
-  ['obj_matcha', 'a small open tin of bright green matcha powder with a small bamboo scoop'],
-  ['obj_cocoa', 'a small open tin of dark brown cocoa powder with a small metal scoop'],
-  ['obj_hand_grinder', 'a wooden manual hand coffee grinder with a metal crank handle'],
-  ['obj_spoon', 'a long stainless steel bar spoon lying diagonally'],
-  ['cup_plastic', 'a clear plastic takeaway cup with a flat clear lid and a paper straw, empty'],
+// 3) 작업대 물건 · 다 만든 잔 시트(2026-11-06 다시 묶음, 검수 13.62): 칸 순서는 tools/import-objects.py 의 SHEETS 와 같음(줄마다 4 · 4 · 3, 마지막 칸 비움)
+//    초록 물건(녹차라테 · 말차)이 든 시트는 파란 바탕(import-objects.py 의 SHEET_KEY): 초록 바탕이면 초록 물건이 함께 지워짐
+const PLASTIC = 'a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw';
+const OBJ_SHEETS = [
+  {
+    id: 'sheet_more', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통, 왼쪽 앞 레시피 수첩',
+    rows: [
+      { intro: 'small kitchen containers that stand upright on a shelf, all about the same small height', items: [
+        ['obj_decaf', 'a small glass jar of dark roasted coffee beans with a plain cream lid'],
+        ['obj_drip_beans', 'a small kraft paper bag of whole coffee beans with a folded top, standing upright'],
+        ['obj_mix', 'a small paper box of instant coffee mix with a few slim golden-yellow stick packets poking out of the open top'],
+        ['obj_barley', 'a small paper box of roasted barley tea bags with a few tea bag tags on strings hanging over the edge'],
+      ] },
+      { items: [
+        ['obj_yuja', 'a small glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices and a plain white lid'],
+        ['obj_strawberry', 'a small glass jar of red strawberry preserve with small fruit pieces and a plain white lid'],
+        ['obj_cocoa', 'a small round tin of dark brown cocoa powder with the lid off and a small metal scoop resting in the powder'],
+        ['cup_plastic', 'an empty tall clear plastic takeaway cup with a flat clear lid and a white paper straw'],
+      ] },
+      { items: [
+        ['obj_ice_bucket', 'a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside'],
+        ['obj_recipe_book', 'a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn'],
+        ['obj_hand_grinder', 'a wooden manual hand coffee grinder with a metal crank handle'],
+      ] },
+    ],
+  },
+  {
+    id: 'sheet_drinks', key: 'green', ref: '`sheet_cups`', use: '드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대',
+    rows: [
+      { intro: 'the same plain white ceramic mug as in the reference image, identical shape, size and angle, filled to the same level just below the rim', items: [
+        ['cup_mug_barley', 'warm barley tea, clear amber brown'],
+        ['cup_mug_yuja', 'warm citron (yuja) tea, bright golden yellow with thin peel strips floating'],
+        ['cup_mug_cocoa', 'hot cocoa, dark chocolate brown with a little light foam'],
+        ['cup_thick_latte', 'the thick double-wall cream ceramic mug from the reference image filled with cafe latte, smooth light brown milk foam, no latte art'],
+      ] },
+      { intro: 'the same tall clear drinking glass as the iced americano in the reference image, with clear ice cubes, filled to the same level', items: [
+        ['cup_glass_latte', 'iced cafe latte, light caramel milk with soft coffee swirls'],
+        ['cup_glass_barley', 'iced barley tea, clear amber'],
+        ['cup_glass_yuja', 'iced citron (yuja) tea, golden yellow with thin peel strips'],
+        ['cup_glass_strawberry', 'strawberry milk, soft pink milk with red strawberry preserve at the bottom'],
+      ] },
+      { items: [
+        ['cup_glass_cocoa', 'iced cocoa in the same tall glass, light chocolate brown with ice cubes'],
+        ['cup_plastic_strawberry', `strawberry milk in ${PLASTIC}`],
+        ['obj_rack', 'an empty small stainless steel wire dish drying rack with a drip tray'],
+      ] },
+    ],
+  },
+  {
+    id: 'sheet_drinks_blue', key: 'blue', ref: '`sheet_cups`(+ 먼저 만든 `sheet_drinks`)', use: '플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**',
+    rows: [
+      { intro: `the same ${PLASTIC} in every cell, identical shape, size and angle, filled to the same level`, items: [
+        ['cup_plastic_americano', 'iced americano, dark coffee brown'],
+        ['cup_plastic_latte', 'iced cafe latte, light caramel milk with soft coffee swirls'],
+        ['cup_plastic_barley', 'iced barley tea, clear amber'],
+        ['cup_plastic_yuja', 'iced citron (yuja) tea, golden yellow with thin peel strips'],
+      ] },
+      { items: [
+        ['cup_plastic_cocoa', 'iced cocoa in the same plastic cup, light chocolate brown'],
+        ['cup_plastic_greentea', 'iced green tea latte in the same plastic cup, soft matcha green milk'],
+        ['cup_glass_greentea', 'iced green tea latte in a tall clear drinking glass with clear ice cubes (the same glass as the reference image)'],
+        ['cup_mug_greentea', 'warm green tea latte in the plain white ceramic mug (the same mug as the reference image), soft matcha green milk foam, no latte art'],
+      ] },
+      { items: [
+        ['obj_matcha', 'a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it'],
+        ['obj_sink', 'a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above'],
+        ['obj_bin', 'a small green kitchen trash bin with a lid'],
+      ] },
+    ],
+  },
 ];
-const objMissing = SHEET_MORE.filter(([id]) => !haveObj.has(id));
+const KEY_EN = {
+  green: 'Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.',
+  blue: 'Flat solid chroma key blue background (#0047BB) everywhere, no gradients, no cast shadows on the background, no blue reflections.',
+};
+const sheetItems = (sh) => sh.rows.flatMap((r) => r.items);
+const objMissing = OBJ_SHEETS.flatMap(sheetItems).filter(([id]) => !haveObj.has(id));
 // 4) 블렌더 컷: 메뉴 × 온도 × 매장/포장 × 단계마다 작업대가 고를 컷(menu.js 의 shotNames, 컵에 든 것은 brew.js 처럼 그 재료의 마지막 손 동작 뒤에 셈)
 //    컷이 없음(임시 그림) · 비슷한 컷으로 대신(다른 잔이나 다른 음료의 컷) · 드래그 활용 그림(tilt · drag)이 없음 을 모음
 const ACT = { hold: 'A 누르고 떼기', circle: 'B 원 그리기', beats: 'D 박자', wait: 'G 기다렸다 누르기' };
@@ -170,7 +233,7 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   '| 무엇 | 남은 수 | 넣는 곳 | 그다음 |', '| :--- | :--- | :--- | :--- |',
   `| 인물 스탠딩(새 인물 ${newPeople.length}명) | 설정화 ${sheetCount} + 표정 ${standCount}장 | \`assets/_src/stand/{id}_{표정}.jpg\` | \`npm run images\` → \`python tools/face-boxes.py\` |`,
   `| 장면 그림(CG) | 새로 ${cgNew.length}장 + \`docs/추가 제작.md\`에 이미 있는 ${cgOld.length}장 | \`assets/cg/cg_{id}.jpg\` | \`npm run assets\` |`,
-  `| 작업대 물건 시트 3 | ${objMissing.length}개를 시트 1장에 | \`assets/_src/objects/sheet_more.jpg\` | \`npm run objects\` |`,
+  `| 작업대 물건 · 다 만든 잔 시트 | ${objMissing.length}개를 시트 ${OBJ_SHEETS.filter((sh) => sheetItems(sh).some(([id]) => !haveObj.has(id))).length}장에 | \`assets/_src/objects/{시트}.jpg\` | \`npm run objects\` |`,
   `| 새 놀이의 그림 | ${playMissing.length}장(${playMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}) | \`assets/flow/\`에 두고 알려 주기 → \`assets/_src/play/{id}.jpg\` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |`,
   `| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 ${shotNone.length} · 🙋 있으면 더 맞는 컷 ${shotStandIn.length}(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 ${dragMiss.size} | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
@@ -227,14 +290,19 @@ cgNew.forEach((id, i) => {
 });
 
 /* 3. 물건 */
-P('## 3. 작업대 물건 시트 3 (`sheet_more`)', '',
-  '- 풀 버전 메뉴(디카페인 · 핸드드립 · 믹스커피 · 보리차 · 유자차 · 딸기우유 · 녹차라테 · 코코아)와 포장 컵에 쓰는 물건입니다. 지금은 임시 그림(SVG)으로 섭니다.',
-  '- 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움). 참조: `sheet_tools`. 칸 순서는 `tools/import-objects.py`의 `sheet_more`와 같습니다.',
-  `- 아직 없는 것: ${objMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}`, '',
-  '**sheet_more** · 1:1 · 참조: `sheet_tools`');
-const rows = [SHEET_MORE.slice(0, 4), SHEET_MORE.slice(4, 8), SHEET_MORE.slice(8, 11)];
-box(`Same art style, angle, lighting and rendering as the reference image (barista equipment sheet): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.\n${rows.map((r, i) => `Row ${i + 1}: ${r.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : ''}.`).join('\n')}\nFlat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, black outlines.`);
-P('', '- 얼음 통(`obj_ice_bucket`) · 레시피 수첩(`obj_recipe_book`)은 `docs/추가 제작.md` 27 · 28번에 있습니다.', '');
+P('## 3. 작업대 물건 · 다 만든 잔 시트 (Flow, 2026-11-06 사용자 결정 Q-52)', '',
+  '- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통입니다. 지금은 임시 그림(SVG)으로 섭니다(검수 13.62).',
+  '- 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).',
+  '- 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.',
+  '- 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.',
+  `- 아직 없는 것: ${objMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}`, '');
+for (const sh of OBJ_SHEETS) {
+  if (!sheetItems(sh).some(([id]) => !haveObj.has(id))) continue;
+  P(`### \`${sh.id}\` · 1:1 · ${sh.key === 'blue' ? '파란 바탕' : '초록 바탕'} · 참조: ${sh.ref}`, '', `- ${sh.use}`,
+    `- 칸: ${sh.rows.map((r, i) => `${i + 1}줄 ${r.items.map(([id]) => `\`${id}\``).join(' · ')}`).join(' / ')} / 마지막 칸 비움`, '');
+  box(`Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : ''}.`).join('\n')}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`);
+  P('');
+}
 
 /* 4. 새 놀이의 그림 */
 P('## 4. 새 놀이의 그림 (재미 개편)', '',

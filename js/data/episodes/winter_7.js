@@ -28,7 +28,6 @@ export default {
     place('겨울 아침 07:30', '눈이 그친 아침'),
     info('오늘의 칠판', '한 해의 마지막 날이에요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
     show({ center: 'jieun:normal' }),
-    cg('winter_wipe_cups'),
     narr('며칠 동안 내리던 눈이 그쳤다. 창밖이 눈부시게 하얗다.'),
     narr('나는 컵을 하나씩 닦는다. 사장님이 하던 대로, 안쪽부터 천천히.'),
     act('컵 닦기', 'cloth', 'wipe'),

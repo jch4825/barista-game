@@ -25,7 +25,6 @@ export default {
     bgm('cafe'),
     place('여름 오전 09:30', '카페 앞'),
     info('오늘의 칠판', '배우의 사진이 퍼졌대요. 관광객이 늘었어요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
-    cg('summer_rumor'),
     narr('여름이 왔다. 아침부터 카페 앞에 처음 보는 사람들이 줄을 서 있다.'),
     narr('다들 휴대전화를 들고 있다. 화면에는 봄에 배우가 올린, 이 카페의 창가 사진이 떠 있다.'),
     say('customer', 'smile', '여기다! 배우가 다녀간 그 카페!'),
@@ -38,7 +37,6 @@ export default {
     say('owner', 'normal', '여름에는 거의 다 아이스를 시켜요. 그래도 따뜻한 걸 찾는 사람도 있으니, 꼭 물어봐요.'),
     think('따뜻한지 차가운지, 여기서 마시는지 가져가는지. 주문을 받을 때 그 두 가지는 꼭 확인하자.'),
     show({ left: 'jieun:normal', center: 'yeonwoo:smile', right: 'dohyun:smile' }),
-    cg('summer_cameo'),
     narr('어깨에 앞치마 끈 자국이 남은 두 사람이 들어온다. 도시에서 카페 일을 하는 사람들 같다.'),
     say('dohyun', 'smile', '쉬는 날이라 바다 보러 왔어요. 사진에서 본 카페가 여기더라고요.'),
     say('yeonwoo', 'smile', '저는 아이스 라테요. 바다 보면서 여기서 마시고 갈게요.'),

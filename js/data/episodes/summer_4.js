@@ -76,7 +76,6 @@ export default {
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('하루 종일 손님이 끊이지 않았다. 바쁘게 움직이는 사이, 앞치마 끈이 풀려 늘어져 있다.'),
     narr('컵을 닦고 있는데, 등 뒤에서 누가 끈을 살며시 잡는다.'),
-    cg('owner_apron'),
     narr('사장님이 아무 말 없이 내 앞치마 끈을 다시 매 준다.'),
     seen(7),
     narr('사장님의 손이 조금 느리다. 그래도 매듭은 단단하다.'),

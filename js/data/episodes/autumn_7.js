@@ -89,7 +89,6 @@ export default {
       id: 'autumn_7_noh', title: '그 잔', level: 'normal', book: AUTUMN_BOOK,
       orders: [{ who: 'noh', say: '그 잔 줘.', menu: 'mix_coffee', togo: false, usual: true, thanks: '…같네.', miss: '…조금 다르네. 그래도 고맙네.' }],
     }),
-    cg('noh_same'),
     narr('노 씨가 종이컵을 두 손으로 감싸고, 천천히 끝까지 마신다.'),
     say('noh', 'smile', '사장한테 전해. 가게는 걱정 말라고.'),
     face('jieun', 'smile'),

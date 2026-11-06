@@ -10,8 +10,8 @@
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 100장 + `docs/추가 제작.md`에 이미 있는 22장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
-| 작업대 물건 시트 3 | 11개를 시트 1장에 | `assets/_src/objects/sheet_more.jpg` | `npm run objects` |
+| 장면 그림(CG) | 새로 21장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 작업대 물건 · 다 만든 잔 시트 | 33개를 시트 3장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
@@ -38,7 +38,7 @@
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 100장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 22장(`autumn_key` · `autumn_dawn_open` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup` · `haesun_small_bow` · `autumn_window_haesun` · `haesun_one_cup_wait` · `winter_blanket_chair` · `haesun_blanket_chair_warm` · `winter_granddaughter` · `haesun_three_cups` · `jian_yellow` · `jian_summer_corner` · `jian_green_cold` · `jian_autumn_window` · `jian_opens_sketchbook` · `winter_candle_jian` · `jian_first_line` · `jian_snow_sketchbook` · `jian_many_colors`)도 아직 없습니다.
+- 새로 요청하는 21장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 5장(`autumn_key` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -46,743 +46,31 @@
 
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
-| 1 | `spring_bus_window` | 바닷가로 가는 버스 | 봄 1일 | `jieun_sheet` · `bus_terminal_evening` |
-| 2 | `kang_warm_cup` | 따뜻한 새 잔 | 봄 6일 | `kang_sheet` · `hall_morning` |
-| 3 | `summer_rumor` | 여름 · 사진을 들고 온 사람들 | 여름 1일 | `cafe_front_morning` |
-| 4 | `summer_cameo` | 바다를 보러 온 두 사람 | 여름 1일 | `yeonwoo_sheet` · `dohyun_sheet` · `hall_summer` |
-| 5 | `han_watch` | 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
-| 6 | `han_sits` | 앉아서 마시는 10분 | 여름 2일 | `han_sheet` · `hall_morning` |
-| 7 | `eunju_cold_cup` | 늘 식는 커피 | 여름 3일 | `eunju_sheet` · `hall_summer` |
-| 8 | `eunju_thick_cup` | 두꺼운 컵 | 여름 3일 | `eunju_sheet` · `hall_summer` |
-| 9 | `sumin_corner` | 구석의 이어폰 | 여름 3일 | `sumin_sheet` · `hall_summer` |
-| 10 | `sumin_nod` | 작은 끄덕임 | 여름 3일 | `sumin_sheet` · `hall_summer` |
-| 11 | `noh_spoon` | 떨리는 숟가락 | 여름 4일 | `owner_sheet` · `noh_sheet` · `hall_summer` |
-| 12 | `noh_window_talk` | 바람이 좋네 | 여름 4일 | `noh_sheet` · `hall_summer` |
-| 13 | `owner_apron` | 다시 맨 앞치마 끈 | 여름 4일 | `owner_sheet` · `jieun_sheet` · `hall_evening` |
-| 14 | `do_heavy_bag` | 무거운 가방 | 여름 5일 | `do_sheet` · `hall_summer` |
-| 15 | `do_hook` | 문 옆의 못 | 여름 5일 | `do_sheet` · `hall_summer` |
-| 16 | `eunju_listens` | 옆 탁자의 웃음소리 | 여름 5일 | `eunju_sheet` · `hall_summer` |
-| 17 | `eunju_baby_talk` | 여섯 달 | 여름 5일 | `eunju_sheet` · `hall_summer` |
-| 18 | `owner_pocket` | 주머니 속의 손 | 여름 6일 | `owner_sheet` · `hall_busy_summer` |
-| 19 | `sumin_eave` | 처마 밑의 비 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
-| 20 | `sumin_umbrella` | 세워 둔 우산 | 여름 6일 | `sumin_sheet` · `cafe_front_morning` |
-| 21 | `summer_chalk_rule` | 여름 · 동네 시간 | 여름 6일 | `owner_sheet` · `hall_evening` |
-| 22 | `han_clock` | 여섯 시 십 분 | 여름 7일 | `jieun_sheet` · `hall_morning` |
-| 23 | `han_cup_ready` | 미리 놓인 컵 | 여름 7일 | `han_sheet` · `hall_morning` |
-| 24 | `kang_returns` | 며칠 만에 온 날 | 여름 7일 | `kang_sheet` · `hall_morning` |
-| 25 | `kang_black_again` | 이 맛이지 | 여름 7일 | `kang_sheet` · `hall_morning` |
-| 26 | `summer_village_time` | 여름 · 동네 시간의 첫 아침 | 여름 7일 | `kang_sheet` · `do_sheet` · `han_sheet` · `noh_sheet` · `haesun_sheet` · `hall_morning` |
-| 27 | `pass_summer` | 계절 사이 · 남은 여름 | 가을 1일 | `jieun_sheet` · `owner_sheet` · `hall_busy_summer` |
-| 28 | `pass_autumn` | 계절 사이 · 혼자 지킨 가게 | 겨울 1일 | `jieun_sheet` · `hall_evening` |
-| 29 | `autumn_first_drip` | 처음 내리는 새벽 블랙 | 가을 1일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
-| 30 | `kang_suit` | 양복 | 가을 2일 | `kang_sheet` · `hall_autumn` |
-| 31 | `kang_suit_cup` | 역시 여기가 편하네 | 가을 2일 | `kang_sheet` · `hall_autumn` |
-| 32 | `han_photo` | 딸 사진 | 가을 2일 | `han_sheet` · `hall_autumn` |
-| 33 | `han_memo` | 메모지 한 장 | 가을 2일 | `han_sheet` · `hall_autumn` |
-| 34 | `noh_shelf` | 낮아진 선반 | 가을 3일 | `noh_sheet` · `hall_autumn` |
-| 35 | `noh_wink` | 눈치가 있구먼 | 가을 3일 | `noh_sheet` · `hall_autumn` |
-| 36 | `eunju_door` | 걸리는 유모차 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
-| 37 | `eunju_space` | 창가 자리 | 가을 3일 | `eunju_sheet` · `hall_autumn` |
-| 38 | `festival_rush` | 가을 · 마을 축제 | 가을 4일 | `jieun_sheet` · `festival_alley_autumn` |
-| 39 | `owner_drop` | 손님들 앞에서 놓친 컵 | 가을 4일 | `owner_sheet` · `jieun_sheet` · `hall_autumn` |
-| 40 | `machine_stop` | 멈춘 머신 | 가을 4일 | `jieun_sheet` · `hall_autumn` |
-| 41 | `haesun_alley_greet` | 골목의 첫 인사 | 가을 5일 | `haesun_sheet` · `jieun_sheet` · `alley_morning` |
-| 42 | `do_notice` | 퇴직 소식 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 43 | `do_cup_chair` | 의자 앞의 잔 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 44 | `do_first_sit` | 서른 해 만에 앉은 의자 | 가을 5일 | `do_sheet` · `hall_autumn` |
-| 45 | `sumin_brochure` | 떨어진 안내서 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
-| 46 | `sumin_brochure_back` | 뒤집어 건넨 종이 | 가을 5일 | `sumin_sheet` · `hall_autumn` |
-| 47 | `sumin_exam_morning` | 수능 날 아침 | 가을 6일 | `sumin_sheet` · `hall_morning` |
-| 48 | `sumin_sleeve` | 슬리브의 파도 | 가을 6일 | `sumin_sheet` · `hall_morning` |
-| 49 | `han_fog` | 안개로 늦은 날 | 가을 6일 | `han_sheet` · `bus_terminal_evening` |
-| 50 | `han_cup_hands` | 두 손으로 건넨 잔 | 가을 6일 | `han_sheet` · `hall_morning` |
-| 51 | `jieun_spill` | 혼자 서두른 날 | 가을 6일 | `jieun_sheet` · `hall_autumn` |
-| 52 | `owner_memo` | 선반의 메모 | 가을 6일 | `jieun_sheet` · `hall_evening` |
-| 53 | `noh_empty_mug` | 사장님의 빈 잔 | 가을 7일 | `noh_sheet` · `hall_evening` |
-| 54 | `noh_newspaper` | 펴 놓은 신문 | 가을 7일 | `noh_sheet` · `hall_evening` |
-| 55 | `noh_same` | 가을 · 같네 | 가을 7일 | `noh_sheet` · `jieun_sheet` · `hall_evening` |
-| 56 | `kang_first_snow` | 첫눈과 소문 | 겨울 1일 | `kang_sheet` · `hall_winter` |
-| 57 | `kang_warm_mug` | 잔까지 따뜻하네 | 겨울 1일 | `kang_sheet` · `hall_winter` |
-| 58 | `eunju_tired` | 지친 얼굴 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
-| 59 | `eunju_heard` | 물어봐 준 사람 | 겨울 1일 | `eunju_sheet` · `hall_winter` |
-| 60 | `kang_secret` | 배를 판 날 | 겨울 2일 | `kang_sheet` · `harbor_dawn` |
-| 61 | `noh_heater` | 지나가다 들른 아침 | 겨울 2일 | `noh_sheet` · `hall_winter` |
-| 62 | `noh_mix_winter` | 사장 맛이 나 | 겨울 2일 | `noh_sheet` · `hall_winter` |
-| 63 | `sumin_envelope` | 봉투 | 겨울 2일 | `sumin_sheet` · `hall_winter` |
-| 64 | `sumin_wait` | 기다리는 컵 닦기 | 겨울 2일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 65 | `han_with_daughter` | 딸과 함께 온 새벽 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
-| 66 | `han_two_cups` | 코코아 한 잔 더 | 겨울 3일 | `han_sheet` · `luna_normal` · `hall_winter` |
-| 67 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 68 | `do_last_day` | 마지막 배달 | 겨울 3일 | `do_sheet` · `cafe_front_morning` |
-| 69 | `do_last_hook` | 마지막으로 건 가방 | 겨울 3일 | `do_sheet` · `hall_evening` |
-| 70 | `winter_storm` | 겨울 · 폭설 | 겨울 4일 | `jieun_sheet` · `alley_morning` |
-| 71 | `noh_lantern` | 랜턴 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
-| 72 | `noh_lantern_hung` | 원래 자리 | 겨울 4일 | `noh_sheet` · `hall_blackout` |
-| 73 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
-| 74 | `winter_gathering2` | 겨울 · 천천히 해요 | 겨울 4일 | `han_sheet` · `eunju_sheet` · `sumin_sheet` · `noh_sheet` · `geum_sheet` · `hall_blackout` |
-| 75 | `winter_dawn_power` | 불이 들어온 새벽 | 겨울 4일 | `jieun_sheet` · `hall_winter` |
-| 76 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
-| 77 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
-| 78 | `eunju_friend` | 처음 온 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
-| 79 | `eunju_two_moms` | 두 엄마 | 겨울 5일 | `eunju_sheet` · `mom2_sheet` · `hall_winter` |
-| 80 | `haesun_secret` | 남편의 마지막 주문 | 겨울 6일 | `haesun_sheet` · `hall_winter` |
-| 81 | `noh_secret` | 처음 떨린 날 | 겨울 6일 | `noh_sheet` · `hall_winter` |
-| 82 | `eunju_secret` | 일주일의 말 | 겨울 6일 | `eunju_sheet` · `hall_winter` |
-| 83 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
-| 84 | `winter_wipe_cups` | 눈 그친 아침 | 겨울 7일 | `jieun_sheet` · `hall_winter` |
-| 85 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 86 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
-| 87 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
-| 88 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 89 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
-| 90 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 91 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
-| 92 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 93 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 94 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
-| 95 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
-| 96 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
-| 97 | `do_candy` | 봄 · 도 씨의 사탕 주머니 | 봄 4일 | `do_sheet` · `hall_spring` |
-| 98 | `haesun_jar` | 봄 · 한 번에 열린 병뚜껑 | 봄 7일 | `haesun_sheet` · `jieun_sheet` · `hall_spring` |
-| 99 | `sumin_gull` | 가을 · 갈매기와 수민 | 가을 5일 | `jieun_sheet` · `sumin_sheet` · `hall_autumn` |
-| 100 | `kang_peekaboo` | 겨울 · 강 씨의 까꿍 | 겨울 4일 | `kang_sheet` · `eunju_sheet` · `hall_blackout` |
+| 1 | `kang_secret` | 배를 판 날 | 겨울 2일 | `kang_sheet` · `harbor_dawn` |
+| 2 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
+| 3 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
+| 4 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
+| 5 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
+| 6 | `haesun_secret` | 남편의 마지막 주문 | 겨울 6일 | `haesun_sheet` · `hall_winter` |
+| 7 | `noh_secret` | 처음 떨린 날 | 겨울 6일 | `noh_sheet` · `hall_winter` |
+| 8 | `eunju_secret` | 일주일의 말 | 겨울 6일 | `eunju_sheet` · `hall_winter` |
+| 9 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
+| 10 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 11 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
+| 12 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
+| 13 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 14 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
+| 15 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 16 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
+| 17 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 18 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 19 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
+| 20 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
+| 21 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
 
 ### 2.1 프롬프트
 
-#### 1. `spring_bus_window` · 바닷가로 가는 버스
-
-- 나오는 날: 봄 1일 · 장면: 창밖으로 바다가 보이기 시작한다 · 참조: `jieun_sheet` · `bus_terminal_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: (바닷가로 가는 버스) 창밖으로 바다가 보이기 시작한다
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 2. `kang_warm_cup` · 따뜻한 새 잔
-
-- 나오는 날: 봄 6일 · 장면: 두 손으로 감싼 잔 · 참조: `kang_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn inside the cafe: KANG wraps both big rough hands around a fresh steaming mug of black coffee, looking at the rising steam for a long time.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 3. `summer_rumor` · 여름 · 사진을 들고 온 사람들
-
-- 나오는 날: 여름 1일 · 장면: "배우가 다녀간 카페!" · 참조: `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Bright summer morning in front of the cafe: tourists in summer clothes line up holding up their phones showing a photo of the cafe window, excited and chatty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 4. `summer_cameo` · 바다를 보러 온 두 사람
-
-- 나오는 날: 여름 1일 · 장면: 쉬는 날, 바닷가 마을 · 참조: `yeonwoo_sheet` · `dohyun_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Summer inside the cafe by the window: YEONWOO and DOHYUN, two city baristas on their day off, sit with an iced latte and an iced americano, looking out at the sparkling sea, relaxed smiles.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 5. `han_watch` · 10분
-
-- 나오는 날: 여름 2일 · 장면: 마지막 밤 버스 · 참조: `han_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Early dawn inside the cafe: HAN stands at the counter in his bus driver uniform, eyes red from the night shift, checking his wristwatch; through the window, a night bus parked at the terminal.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 6. `han_sits` · 앉아서 마시는 10분
-
-- 나오는 날: 여름 2일 · 장면: 오랜만에 앉은 의자 · 참조: `han_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Early dawn: HAN sits down on a chair for the first time, watching JIEUN make his drink with a tired gentle smile, his driver cap on the table.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 7. `eunju_cold_cup` · 늘 식는 커피
-
-- 나오는 날: 여름 3일 · 장면: 한 모금도 못 마신 라테 · 참조: `eunju_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Summer inside the cafe by the window: EUNJU rocks a baby stroller with one hand, looking down at a full latte gone cold with its foam collapsed, a quiet sigh.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 8. `eunju_thick_cup` · 두꺼운 컵
-
-- 나오는 날: 여름 3일 · 장면: 이건 천천히 식어요 · 참조: `eunju_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Summer inside the cafe: EUNJU wraps both hands around a thick double-wall mug with a lid, warmth on her face, a small grateful smile, the baby asleep in the stroller.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 9. `sumin_corner` · 구석의 이어폰
-
-- 나오는 날: 여름 3일 · 장면: 벽 쪽으로 돌린 의자 · 참조: `sumin_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Summer afternoon: SUMIN sits in the farthest corner seat with her chair turned toward the wall, earphones in, bent over a thick workbook, a glass of iced barley tea.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 10. `sumin_nod` · 작은 끄덕임
-
-- 나오는 날: 여름 3일 · 장면: 말없이 놓인 보리차 · 참조: `sumin_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Summer afternoon in the corner seat: a glass of iced barley tea has been quietly placed beside SUMIN's workbook; she looks up and gives a tiny nod, earphones still in.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 11. `noh_spoon` · 떨리는 숟가락
-
-- 나오는 날: 여름 4일 · 장면: 종이컵 안의 숟가락 · 참조: `owner_sheet` · `noh_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Summer morning at the counter: the OWNER stirs a paper cup of instant mix coffee with a small spoon, calm hands; NOH sits on a stool looking out the window on purpose, talking about the calm sea.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 12. `noh_window_talk` · 바람이 좋네
-
-- 나오는 날: 여름 4일 · 장면: 창밖의 잔잔한 바다 · 참조: `noh_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Summer morning: NOH and JIEUN both look out the window at the calm glittering sea, NOH smiling quietly; a paper cup of coffee on the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 13. `owner_apron` · 다시 맨 앞치마 끈
-
-- 나오는 날: 여름 4일 · 장면: 아무 말 없이 · 참조: `owner_sheet` · `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Summer evening after closing: JIEUN wipes cups at the counter while the OWNER, standing behind her, quietly reties her loose green apron strings into a firm bow; calm hands, warm lamp light.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 14. `do_heavy_bag` · 무거운 가방
-
-- 나오는 날: 여름 5일 · 장면: 소포가 많은 계절 · 참조: `do_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Hot summer morning: DO hugs a bulging mailbag stuffed with parcels, about to put it down but stopping because the floor is wet; he glances at the empty wall beside the door.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 15. `do_hook` · 문 옆의 못
-
-- 나오는 날: 여름 5일 · 장면: 어깨가 가볍네 · 참조: `do_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Summer morning: a sturdy new hook on the wall beside the door; DO hangs his heavy mailbag on it and rolls his shoulder in relief, smiling.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 16. `eunju_listens` · 옆 탁자의 웃음소리
-
-- 나오는 날: 여름 5일 · 장면: 아기랑만 하는 이야기 · 참조: `eunju_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Summer afternoon: EUNJU sits alone by the window with a sleeping baby in the stroller, looking toward a neighboring table where friends laugh together, a little lonely.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 17. `eunju_baby_talk` · 여섯 달
-
-- 나오는 날: 여름 5일 · 장면: 어제 처음 뒤집기를 했어요 · 참조: `eunju_sheet` · `hall_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Summer afternoon: EUNJU happily tells JIEUN about her baby, glowing with joy, showing with her hands how the baby rolled over for the first time.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 18. `owner_pocket` · 주머니 속의 손
-
-- 나오는 날: 여름 6일 · 장면: 컵을 흘린 뒤 · 참조: `owner_sheet` · `hall_busy_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Very busy summer day: coffee spilled on the counter from a tipped cup; the OWNER calmly wipes it with a cloth, his other hand resting in his apron pocket, his face quiet.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 19. `sumin_eave` · 처마 밑의 비
-
-- 나오는 날: 여름 6일 · 장면: 우산이 없다 · 참조: `sumin_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Summer evening heavy rain: SUMIN stands under the cafe's narrow eave in her school uniform without an umbrella, hugging her backpack, checking the time on her phone.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 20. `sumin_umbrella` · 세워 둔 우산
-
-- 나오는 날: 여름 6일 · 장면: 작은 인사 · 참조: `sumin_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Summer evening rain: a cafe umbrella has been quietly propped next to SUMIN; she opens it and glances back with a tiny bow before walking into the rain.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 21. `summer_chalk_rule` · 여름 · 동네 시간
-
-- 나오는 날: 여름 6일 · 장면: 사장님이 칠판에 쓴 한 줄 · 참조: `owner_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Late summer night after closing: the OWNER stands at the wall chalkboard holding a piece of chalk, writing a line at the top (leave the board blank, the game adds the text); JIEUN watching beside the counter; regulars' mugs lined on the shelf.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 22. `han_clock` · 여섯 시 십 분
-
-- 나오는 날: 여름 7일 · 장면: 종점의 버스 불빛 · 참조: `jieun_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Before dawn inside the cafe: the wall clock shows 6:07; through the window, the headlights of a night bus pull into the terminal; JIEUN behind the counter about to start making a drink.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 23. `han_cup_ready` · 미리 놓인 컵
-
-- 나오는 날: 여름 7일 · 장면: 내 거예요? · 참조: `han_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Dawn: a takeaway paper cup already waiting on the counter; HAN, just walked in, stops and looks at it in surprise.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 24. `kang_returns` · 며칠 만에 온 날
-
-- 나오는 날: 여름 7일 · 장면: 두 손을 탁자 위에 · 참조: `kang_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn: KANG sits at his usual back table beside the side window after days away, both hands resting still on the table, turning his face away from the harbor.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 25. `kang_black_again` · 이 맛이지
-
-- 나오는 날: 여름 7일 · 장면: 늘 쓰던 잔 · 참조: `kang_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Dawn: KANG holds his usual mug of black coffee, looking at it for a long time with a small relieved smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 26. `summer_village_time` · 여름 · 동네 시간의 첫 아침
-
-- 나오는 날: 여름 7일 · 장면: 조용한 새벽, 단골 다섯 · 참조: `kang_sheet` · `do_sheet` · `han_sheet` · `noh_sheet` · `haesun_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots; DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes; HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Quiet summer dawn inside the cafe, no tourists: HAESUN at the window seat with two cups of milk, DO at the counter, NOH in the corner with a paper cup, KANG and HAN finishing their drinks, everyone quiet and comfortable; the chalkboard at the top is blank.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 27. `pass_summer` · 계절 사이 · 남은 여름
-
-- 나오는 날: 가을 1일 · 장면: 새벽의 핸드드립 연습, 낮의 긴 줄 · 참조: `jieun_sheet` · `owner_sheet` · `hall_busy_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Pale early dawn in late summer inside the small seaside cafe: JIEUN stands at the counter beside the OWNER, carefully pouring hot water from a gooseneck kettle into a ceramic dripper while he watches quietly; many used paper filters and a tall stack of clean cups beside her show weeks of practice; through the window the calm summer sea under a soft pale sky. No sun rays.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 28. `pass_autumn` · 계절 사이 · 혼자 지킨 가게
-
-- 나오는 날: 겨울 1일 · 장면: 혼자 불을 켜는 새벽, 선반의 메모 · 참조: `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Late autumn before dawn: JIEUN alone switches on the warm lights of the small seaside cafe, the alley outside still dark blue and cold, a few fallen yellow ginkgo leaves at the door; on the counter the owner's white mug sits in its usual place and a small handwritten note is stuck to the shelf. Quiet, steady, a little lonely but determined.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 29. `autumn_first_drip` · 처음 내리는 새벽 블랙
-
-- 나오는 날: 가을 1일 · 장면: 오늘부터 지은 씨가 내려요 · 참조: `owner_sheet` · `jieun_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn dawn: JIEUN carefully pours hot water in slow circles over a hand drip coffee dripper with a gooseneck kettle, focused; the OWNER stands beside her with his hands in his apron pockets, watching quietly.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 30. `kang_suit` · 양복
-
-- 나오는 날: 가을 2일 · 장면: 낡은 양복과 거친 손 · 참조: `kang_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Autumn dawn: KANG walks in wearing an old dark suit and a slightly crooked tie instead of his work clothes, his rough fisherman hands sticking out of the sleeves, looking awkward.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 31. `kang_suit_cup` · 역시 여기가 편하네
-
-- 나오는 날: 가을 2일 · 장면: 느슨하게 푼 넥타이 · 참조: `kang_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Autumn dawn: KANG in his old suit holds his usual mug, loosening his tie a little, relaxing with a small smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 32. `han_photo` · 딸 사진
-
-- 나오는 날: 가을 2일 · 장면: 쓸 종이가 없다 · 참조: `han_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Autumn dawn: HAN sits with a takeaway cup, looking at a photo of his school-age daughter on his phone, a pen in his other hand but no paper.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 33. `han_memo` · 메모지 한 장
-
-- 나오는 날: 가을 2일 · 장면: 딸한테요 · 참조: `han_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Autumn dawn: a small memo pad and pen beside HAN's cup; he writes a short note slowly and folds it into his chest pocket, smiling softly.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 34. `noh_shelf` · 낮아진 선반
-
-- 나오는 날: 가을 3일 · 장면: 사장님이 없는 사이 · 참조: `noh_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Autumn morning, the owner away: NOH with a toolbox lowers a high wooden shelf for heavy coffee bean canisters and replaces a stiff faucet handle with an easy lever handle.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 35. `noh_wink` · 눈치가 있구먼
-
-- 나오는 날: 가을 3일 · 장면: 입에 댄 손가락 · 참조: `noh_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Autumn morning: NOH, holding his toolbox, puts a finger to his lips and gives JIEUN a knowing small smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 36. `eunju_door` · 걸리는 유모차
-
-- 나오는 날: 가을 3일 · 장면: 좁은 통로 · 참조: `eunju_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Autumn: EUNJU tries to push the baby stroller through the narrow aisle between tables at the entrance, the wheel caught on a chair leg, hesitating.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 37. `eunju_space` · 창가 자리
-
-- 나오는 날: 가을 3일 · 장면: 아기가 바다를 좋아해요 · 참조: `eunju_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Autumn: two chairs moved aside to make a space by the window; EUNJU parks the stroller there, the baby looking at the sea, and she smiles at JIEUN gratefully.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 38. `festival_rush` · 가을 · 마을 축제
-
-- 나오는 날: 가을 4일 · 장면: 골목 가득한 축제 손님 · 참조: `jieun_sheet` · `festival_alley_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn seaside village festival: the alley full of flags, food stalls and crowds; a long line in front of the cafe; JIEUN behind the counter looking overwhelmed.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 39. `owner_drop` · 손님들 앞에서 놓친 컵
-
-- 나오는 날: 가을 4일 · 장면: 쨍그랑, 그리고 조용함 · 참조: `owner_sheet` · `jieun_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Busy festival day inside the cafe: a broken cup on the floor, customers suddenly silent and looking; the OWNER stands calmly with his hands behind his apron; JIEUN coming over with a broom.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 40. `machine_stop` · 멈춘 머신
-
-- 나오는 날: 가을 4일 · 장면: 전기가 나갔다 · 참조: `jieun_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Festival day: the espresso machine has gone dark and silent, a few ceiling lights out; JIEUN stares at the machine, nervous, the line still waiting.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 41. `haesun_alley_greet` · 골목의 첫 인사
-
-- 나오는 날: 가을 5일 · 장면: 내가 첫 손님 할게요 · 참조: `haesun_sheet` · `jieun_sheet` · `alley_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn dawn in the alley: HAESUN on her morning walk waves warmly to JIEUN who is on her way to open the cafe alone.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 42. `do_notice` · 퇴직 소식
-
-- 나오는 날: 가을 5일 · 장면: 소식지의 사진 · 참조: `do_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Autumn morning: DO at the counter puts down a bundle of mail; on top lies a post office newsletter with his photo; he looks away out the window.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 43. `do_cup_chair` · 의자 앞의 잔
-
-- 나오는 날: 가을 5일 · 장면: 겨울이면 그만둬요 · 참조: `do_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Autumn morning: DO's usual iced americano placed in front of the chair beside the counter; DO looks at the cup and the chair for a long time.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 44. `do_first_sit` · 서른 해 만에 앉은 의자
-
-- 나오는 날: 가을 5일 · 장면: 가방은 문 옆 못에 · 참조: `do_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Autumn morning: DO's mailbag hangs on the hook by the door; DO sits down on the chair beside the counter for the first time in thirty years, a shy happy smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 45. `sumin_brochure` · 떨어진 안내서
-
-- 나오는 날: 가을 5일 · 장면: 도시의 대학교 · 참조: `sumin_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Autumn: a university admission brochure has fallen on the floor at the counter; SUMIN reaches for it and freezes, her cheeks turning red.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 46. `sumin_brochure_back` · 뒤집어 건넨 종이
-
-- 나오는 날: 가을 5일 · 장면: 보지 않았어요 · 참조: `sumin_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Autumn: JIEUN hands the brochure back to SUMIN turned face down; SUMIN looks at the blank back of the paper for a long moment.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 47. `sumin_exam_morning` · 수능 날 아침
-
-- 나오는 날: 가을 6일 · 장면: 떨리는 손 · 참조: `sumin_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Autumn dawn on exam day: SUMIN stands at the counter without earphones, her hand holding an exam ticket trembling slightly; a hot paper cup and a plain white sleeve on the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 48. `sumin_sleeve` · 슬리브의 파도
-
-- 나오는 날: 가을 6일 · 장면: 다녀올게요 · 참조: `sumin_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Exam day dawn: a small hand-drawn wave doodle on the white paper sleeve of a hot cup; SUMIN looks at it and smiles for the first time.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 49. `han_fog` · 안개로 늦은 날
-
-- 나오는 날: 가을 6일 · 장면: 남은 시간 3분 · 참조: `han_sheet` · `bus_terminal_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Thick fog at dawn at the bus terminal: HAN runs from his bus toward the cafe, late, the clock showing very little time left.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 50. `han_cup_hands` · 두 손으로 건넨 잔
-
-- 나오는 날: 가을 6일 · 장면: 오늘은 이 한 모금이면 돼요 · 참조: `han_sheet` · `hall_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist.
-Scene: Foggy dawn: JIEUN hands HAN a lidded takeaway cup with both hands; HAN takes it, grateful, ready to run back into the fog.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 51. `jieun_spill` · 혼자 서두른 날
-
-- 나오는 날: 가을 6일 · 장면: 쏟아진 라테 · 참조: `jieun_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn lunch rush, the owner away: a latte spilled over a tray; JIEUN looks down at it, upset, customers waiting.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 52. `owner_memo` · 선반의 메모
-
-- 나오는 날: 가을 6일 · 장면: 서두르면 쏟는다 · 참조: `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn night after closing: JIEUN finds a small handwritten memo stuck inside the closing shelf where cups are turned upside down (no readable text), her face softening.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 53. `noh_empty_mug` · 사장님의 빈 잔
-
-- 나오는 날: 가을 7일 · 장면: 선반 위의 하얀 잔 · 참조: `noh_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Autumn evening: NOH stands at the counter looking at the owner's white cup on the shelf, a packet of instant mix coffee in his hand.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 54. `noh_newspaper` · 펴 놓은 신문
-
-- 나오는 날: 가을 7일 · 장면: 그 잔 줘 · 참조: `noh_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Autumn evening: a folded newspaper laid open at NOH's usual seat; NOH looks at it and sits down.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 55. `noh_same` · 가을 · 같네
-
-- 나오는 날: 가을 7일 · 장면: 사장님 방식의 믹스커피 · 참조: `noh_sheet` · `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Autumn evening: NOH holds a paper cup of instant mix coffee that JIEUN made, eyes closed as he tastes it, a quiet satisfied smile; JIEUN waiting behind the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 56. `kang_first_snow` · 첫눈과 소문
-
-- 나오는 날: 겨울 1일 · 장면: 빈 항구 · 참조: `kang_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: First snow at dawn: KANG brushes snow off his shoulders at the door; through the window, the harbor with one empty mooring spot.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 57. `kang_warm_mug` · 잔까지 따뜻하네
-
-- 나오는 날: 겨울 1일 · 장면: 데운 잔 · 참조: `kang_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Snowy dawn: KANG wraps both cold hands around a pre-warmed mug of black coffee, steam rising, a small gentle smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 58. `eunju_tired` · 지친 얼굴
-
-- 나오는 날: 겨울 1일 · 장면: 밤새 깬 아기 · 참조: `eunju_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: First snowy afternoon: EUNJU comes in with red tired eyes and a sniffling baby in the stroller, about to say something but stopping.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 59. `eunju_heard` · 물어봐 준 사람
-
-- 나오는 날: 겨울 1일 · 장면: 조금 울고, 웃는다 · 참조: `eunju_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Snowy afternoon by the window: EUNJU wipes a tear and laughs at the same time, talking with JIEUN, relieved.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 60. `kang_secret` · 배를 판 날
+#### 1. `kang_secret` · 배를 판 날
 
 - 나오는 날: 겨울 2일 · 장면: 그날 바다가 참 잔잔했어 · 참조: `kang_sheet` · `harbor_dawn`
 
@@ -793,73 +81,7 @@ Scene: Winter dawn at the harbor: KANG looks at the calm sea where his boat used
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 61. `noh_heater` · 지나가다 들른 아침
-
-- 나오는 날: 겨울 2일 · 장면: 덜덜거리는 난로 · 참조: `noh_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Snowy morning: NOH stands by an old rattling stove in the cafe, glancing at the empty owner's seat behind the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 62. `noh_mix_winter` · 사장 맛이 나
-
-- 나오는 날: 겨울 2일 · 장면: 종이컵의 그 잔 · 참조: `noh_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Snowy morning: NOH holds a paper cup of mix coffee made by JIEUN, steam rising, a soft smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 63. `sumin_envelope` · 봉투
-
-- 나오는 날: 겨울 2일 · 장면: 아직 뜯지 않은 봉투 · 참조: `sumin_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Winter: SUMIN stands at the counter holding an unopened white university envelope with both hands, looking at JIEUN.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 64. `sumin_wait` · 기다리는 컵 닦기
-
-- 나오는 날: 겨울 2일 · 장면: 내일 열어 볼게요. 여기서요. · 참조: `sumin_sheet` · `jieun_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Winter: SUMIN sits on the stool right in front of the counter looking at the envelope, while JIEUN quietly wipes cups nearby.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 65. `han_with_daughter` · 딸과 함께 온 새벽
-
-- 나오는 날: 겨울 3일 · 장면: 남은 시간 10분 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: the same look as the reference standing image luna_normal: Korean girl with long wavy chestnut-brown hair, a red beret, a pastel pink oversized jacket over a white top, light jeans and a small crossbody bag, bright friendly smile.
-Scene: Winter dawn: HAN comes in with his daughter HAN_DAUGHTER; the daughter looks at the cocoa on the menu, HAN looks at the clock.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 66. `han_two_cups` · 코코아 한 잔 더
-
-- 나오는 날: 겨울 3일 · 장면: 오늘은 아빠도 천천히야 · 참조: `han_sheet` · `luna_normal` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; HAN_DAUGHTER: the same look as the reference standing image luna_normal: Korean girl with long wavy chestnut-brown hair, a red beret, a pastel pink oversized jacket over a white top, light jeans and a small crossbody bag, bright friendly smile.
-Scene: Winter dawn: HAN and his daughter sit side by side, a sweet latte and a cocoa on the table, snow outside the window, both smiling.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 67. `sumin_secret` · 합격 통지서
+#### 2. `sumin_secret` · 합격 통지서
 
 - 나오는 날: 겨울 3일 · 장면: 여기서 열고 싶었어요 · 참조: `sumin_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -870,61 +92,7 @@ Scene: Winter: SUMIN at the counter opens the envelope and reads the letter, the
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 68. `do_last_day` · 마지막 배달
-
-- 나오는 날: 겨울 3일 · 장면: 납작한 가방 · 참조: `do_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Winter evening, the "closed" sign on the door (no readable text): DO stands outside with a flat empty mailbag, looking at the warm lit counter inside.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 69. `do_last_hook` · 마지막으로 건 가방
-
-- 나오는 날: 겨울 3일 · 장면: 서른 해 · 참조: `do_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Winter evening: DO hangs his empty mailbag on the hook by the door for the last time and sits on the chair by the counter.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 70. `winter_storm` · 겨울 · 폭설
-
-- 나오는 날: 겨울 4일 · 장면: 마을의 불이 하나씩 꺼진다 · 참조: `jieun_sheet` · `alley_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Heavy snowstorm in the evening: the seaside village alley buried knee-deep in snow, streetlights and windows going dark one by one; JIEUN looking out, worried.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 71. `noh_lantern` · 랜턴
-
-- 나오는 날: 겨울 4일 · 장면: 닳아 반질반질한 손잡이 · 참조: `noh_sheet` · `hall_blackout`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Blackout night: NOH comes in out of the snow holding a big old kerosene-style lantern with a polished worn handle.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 72. `noh_lantern_hung` · 원래 자리
-
-- 나오는 날: 겨울 4일 · 장면: 사장님 자리 위의 못 · 참조: `noh_sheet` · `hall_blackout`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Blackout night: the old lantern hangs on the nail above the owner's empty seat, lighting the whole cafe warmly; NOH looks up at the light.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 73. `winter_gathering` · 겨울 · 단골 여덟 명
+#### 3. `winter_gathering` · 겨울 · 단골 여덟 명
 
 - 나오는 날: 겨울 4일 · 장면: 각자의 방식으로 돕는 밤 · 참조: `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout`
 
@@ -935,28 +103,7 @@ Scene: Blackout night inside the candle-lit cafe: villagers gathered; HAESUN tuc
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 74. `winter_gathering2` · 겨울 · 천천히 해요
-
-- 나오는 날: 겨울 4일 · 장면: 줄에서 들려온 한마디 · 참조: `han_sheet` · `eunju_sheet` · `sumin_sheet` · `noh_sheet` · `geum_sheet` · `hall_blackout`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): HAN: Korean man in his mid forties, a night bus driver, short black hair, tired kind eyes with faint dark circles, navy bus driver uniform with a loosened tie, a navy driver cap, a wristwatch on his left wrist; EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes; SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack; NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt; GEUM: Korean man in his forties, a busy office worker who commutes by ferry, neat short black hair, dark charcoal suit with a slightly loosened tie, a smartphone in hand, a wristwatch.
-Scene: Blackout night: a patient line waiting for hand drip coffee by candle light; GEUM in the middle of the line smiling gently; HAN, EUNJU with a sleeping baby, SUMIN at the kettle and NOH nearby.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 75. `winter_dawn_power` · 불이 들어온 새벽
-
-- 나오는 날: 겨울 4일 · 장면: 눈이 조금 잦아든다 · 참조: `jieun_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Dawn after the blackout: the lights come back on in the cafe, people waking up under blankets and clapping, snow still falling softly outside.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 76. `do_secret` · 마지막 우편
+#### 4. `do_secret` · 마지막 우편
 
 - 나오는 날: 겨울 5일 · 장면: 지은 씨 앞으로 온 편지 · 참조: `do_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -967,7 +114,7 @@ Scene: Snowy morning: DO hands JIEUN a letter in an envelope he wrote himself (n
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 77. `han_secret` · 컵 속의 쪽지
+#### 5. `han_secret` · 컵 속의 쪽지
 
 - 나오는 날: 겨울 5일 · 장면: 아빠가 먼저 갈게 · 참조: `han_sheet` · `hall_winter`
 
@@ -978,29 +125,7 @@ Scene: Snowy morning: HAN shows two small folded notes on the counter, one in hi
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 78. `eunju_friend` · 처음 온 엄마
-
-- 나오는 날: 겨울 5일 · 장면: 문 앞에서 머뭇거린다 · 참조: `eunju_sheet` · `mom2_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes; MOM2: Korean woman in her early thirties, a shy new mother, long dark brown hair, gentle face, beige knit coat, a baby carrier sling, a small light gray baby stroller.
-Scene: Winter: EUNJU comes in with her stroller; behind her another young mother MOM2 hesitates at the door, holding her stroller tightly.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 79. `eunju_two_moms` · 두 엄마
-
-- 나오는 날: 겨울 5일 · 장면: 거봐요, 여기 좋다고 했죠 · 참조: `eunju_sheet` · `mom2_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes; MOM2: Korean woman in her early thirties, a shy new mother, long dark brown hair, gentle face, beige knit coat, a baby carrier sling, a small light gray baby stroller.
-Scene: Winter by the window: two strollers parked side by side, EUNJU and MOM2 talking and laughing over warm decaf lattes.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 80. `haesun_secret` · 남편의 마지막 주문
+#### 6. `haesun_secret` · 남편의 마지막 주문
 
 - 나오는 날: 겨울 6일 · 장면: 우유 두 잔 · 참조: `haesun_sheet` · `hall_winter`
 
@@ -1010,7 +135,7 @@ Scene: Winter afternoon by the window: HAESUN tells the story of her late husban
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 81. `noh_secret` · 처음 떨린 날
+#### 7. `noh_secret` · 처음 떨린 날
 
 - 나오는 날: 겨울 6일 · 장면: 가게 불 꺼지면 네가 켜라 · 참조: `noh_sheet` · `hall_winter`
 
@@ -1021,7 +146,7 @@ Scene: Winter: NOH looks up at the lantern above the owner's seat, remembering, 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 82. `eunju_secret` · 일주일의 말
+#### 8. `eunju_secret` · 일주일의 말
 
 - 나오는 날: 겨울 6일 · 장면: 여기서 처음 말했어요 · 참조: `eunju_sheet` · `hall_winter`
 
@@ -1032,7 +157,7 @@ Scene: Winter: EUNJU sits at the counter talking to JIEUN with a warm grateful s
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 83. `jian_secret` · 지은의 손
+#### 9. `jian_secret` · 지은의 손
 
 - 나오는 날: 겨울 6일 · 장면: 커피 내리는 손 · 참조: `jian_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -1042,17 +167,7 @@ Scene: Winter: JIAN shows JIEUN a sketchbook page with a careful drawing of a ha
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 84. `winter_wipe_cups` · 눈 그친 아침
-
-- 나오는 날: 겨울 7일 · 장면: 컵을 닦는 아침 · 참조: `jieun_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Bright morning after the snow stopped: JIEUN alone wiping cups one by one at the counter, sunlight reflecting off the snow outside.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 85. `eye_1` · 사장의 눈 1 · 컵을 깬 날
+#### 10. `eye_1` · 사장의 눈 1 · 컵을 깬 날
 
 - 나오는 날: 엔딩 · 장면: 빗자루를 두 손으로 꼭 쥔 아이 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -1062,7 +177,7 @@ Scene: From the OWNER's point of view: JIEUN in her green apron gripping a broom
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 86. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
+#### 11. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
 
 - 나오는 날: 엔딩 · 장면: 새벽, 컵을 한 칸 아래로 옮기는 손 · 참조: `hall_morning`
 
@@ -1072,7 +187,7 @@ Scene: From the OWNER's point of view before dawn: the owner's calm hands moving
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 87. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
+#### 12. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
 
 - 나오는 날: 엔딩 · 장면: 카운터 앞으로 나가며 본 두 사람 · 참조: `jieun_sheet` · `geum_sheet` · `hall_spring`
 
@@ -1083,7 +198,7 @@ Scene: From the OWNER's point of view stepping toward the counter: JIEUN behind 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 88. `eye_4` · 사장의 눈 4 · 빈 컵만
+#### 13. `eye_4` · 사장의 눈 4 · 빈 컵만
 
 - 나오는 날: 엔딩 · 장면: 그 아이 뒤에 빈 컵을 놓는 손 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -1093,7 +208,7 @@ Scene: From the OWNER's point of view: JIEUN focused on making drinks while the 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 89. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
+#### 14. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
 - 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_evening`
 
@@ -1103,7 +218,7 @@ Scene: From the OWNER's point of view at night: the wall chalkboard with today's
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 90. `eye_7` · 사장의 눈 7 · 앞치마 끈
+#### 15. `eye_7` · 사장의 눈 7 · 앞치마 끈
 
 - 나오는 날: 엔딩 · 장면: 등 뒤에서 다시 매 주는 끈 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1113,7 +228,7 @@ Scene: From the OWNER's point of view: JIEUN's back as she wipes cups, the owner
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 91. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
+#### 16. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
 
 - 나오는 날: 엔딩 · 장면: 앞치마 주머니에서 손을 꺼내며 · 참조: `jieun_sheet` · `hall_busy_summer`
 
@@ -1123,7 +238,7 @@ Scene: From the OWNER's point of view during the summer rush: a customer pointin
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 92. `eye_8` · 사장의 눈 8 · 동네 시간
+#### 17. `eye_8` · 사장의 눈 8 · 동네 시간
 
 - 나오는 날: 엔딩 · 장면: 선반의 단골 잔들, 칠판 앞의 분필 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1133,7 +248,7 @@ Scene: From the OWNER's point of view at night: the regulars' mugs untouched on 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 93. `eye_9` · 사장의 눈 9 · 열쇠
+#### 18. `eye_9` · 사장의 눈 9 · 열쇠
 
 - 나오는 날: 엔딩 · 장면: 주머니에서 꺼낸 낡은 열쇠 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -1143,7 +258,7 @@ Scene: From the OWNER's point of view: an old brass key held out in the owner's 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 94. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
+#### 19. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
 
 - 나오는 날: 엔딩 · 장면: 마감 선반에 붙이는 작은 메모 · 참조: `hall_evening`
 
@@ -1153,7 +268,7 @@ Scene: From the OWNER's point of view at night: the owner's hand sticking a smal
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 95. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
+#### 20. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
 
 - 나오는 날: 엔딩 · 장면: 깜깜한 마을, 불이 켜진 창 하나 · 참조: `alley_morning`
 
@@ -1163,7 +278,7 @@ Scene: Night of the blackout from far away: a dark snowy seaside village and one
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 96. `eye_12` · 사장의 눈 덤 · 그 갈매기
+#### 21. `eye_12` · 사장의 눈 덤 · 그 갈매기
 
 - 나오는 날: 엔딩 · 장면: 사장님이 몰래 갈매기에게 빵을 준다 · 참조: `owner_sheet` · `cafe_front_morning`
 
@@ -1173,67 +288,58 @@ Scene: Early spring morning in front of the cafe: the OWNER (Korean man, 66, nea
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 97. `do_candy` · 봄 · 도 씨의 사탕 주머니
+## 3. 작업대 물건 · 다 만든 잔 시트 (Flow, 2026-11-06 사용자 결정 Q-52)
 
-- 나오는 날: 봄 4일 · 장면: 비 오는 날, 우비 입은 아이들에게 사탕을 · 참조: `do_sheet` · `hall_spring`
+- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통입니다. 지금은 임시 그림(SVG)으로 섭니다(검수 13.62).
+- 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).
+- 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.
+- 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.
+- 아직 없는 것: `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` · `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` · `obj_ice_bucket` · `obj_recipe_book` · `obj_hand_grinder` · `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` · `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` · `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` · `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` · `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` · `obj_matcha` · `obj_sink` · `obj_bin`
 
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): DO: Korean man in his early sixties, a village mail carrier, short gray hair under a navy postal cap, kind face with smile wrinkles, navy blue postal uniform jacket with a thin red stripe, a heavy worn brown leather mailbag on a shoulder strap, sturdy walking shoes.
-Scene: Rainy spring afternoon at the cafe door: DO, the mail carrier, crouches slightly and hands small wrapped candies from the inner pocket of his postal bag to three little children in yellow raincoats; raindrops on the glass, warm light inside, his kind smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
+### `sheet_more` · 1:1 · 초록 바탕 · 참조: `sheet_tools` · `sheet_cups`
 
-#### 98. `haesun_jar` · 봄 · 한 번에 열린 병뚜껑
-
-- 나오는 날: 봄 7일 · 장면: 꿈쩍 않던 딸기청 병뚜껑이 펑 · 참조: `haesun_sheet` · `jieun_sheet` · `hall_spring`
+- 카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통, 왼쪽 앞 레시피 수첩
+- 칸: 1줄 `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` / 2줄 `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` / 3줄 `obj_ice_bucket` · `obj_recipe_book` · `obj_hand_grinder` / 마지막 칸 비움
 
 ```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Spring morning at the cafe counter: HAESUN, the small elderly woman, twists open a stubborn jar of strawberry syrup with one easy turn of her wrist and a calm smile, while JIEUN stares in surprise holding a kitchen towel; soft window light, blossoms outside.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 99. `sumin_gull` · 가을 · 갈매기와 수민
-
-- 나오는 날: 가을 5일 · 장면: 유리창의 그 갈매기, 지은 등 뒤로 숨은 수민 · 참조: `jieun_sheet` · `sumin_sheet` · `hall_autumn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): SUMIN: Korean girl age 18, a high school senior, short straight black bob haircut, quiet serious eyes, navy school uniform blazer with a white shirt and a navy skirt, white wired earphones, a dark backpack.
-Scene: Autumn afternoon inside the cafe: a chubby white seagull stands on the terrace railing and taps the window glass with its beak; SUMIN hides behind JIEUN at the counter, peeking out with wide nervous eyes, earphones hanging; JIEUN looks surprised. Gentle comedy, no sun rays.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 100. `kang_peekaboo` · 겨울 · 강 씨의 까꿍
-
-- 나오는 날: 겨울 4일 · 장면: 촛불 아래, 아기 앞에 쪼그려 앉은 강 씨 · 참조: `kang_sheet` · `eunju_sheet` · `hall_blackout`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots; EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Blackout night in the candle-lit cafe: KANG, the big weathered old fisherman, crouches in front of a baby held by EUNJU and plays peekaboo with both rough hands, his face soft and silly; the baby laughs, EUNJU smiles in relief; warm candle and lantern light, snow at the window.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-## 3. 작업대 물건 시트 3 (`sheet_more`)
-
-- 풀 버전 메뉴(디카페인 · 핸드드립 · 믹스커피 · 보리차 · 유자차 · 딸기우유 · 녹차라테 · 코코아)와 포장 컵에 쓰는 물건입니다. 지금은 임시 그림(SVG)으로 섭니다.
-- 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움). 참조: `sheet_tools`. 칸 순서는 `tools/import-objects.py`의 `sheet_more`와 같습니다.
-- 아직 없는 것: `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` · `obj_yuja` · `obj_strawberry` · `obj_matcha` · `obj_cocoa` · `obj_hand_grinder` · `obj_spoon` · `cup_plastic`
-
-**sheet_more** · 1:1 · 참조: `sheet_tools`
-```
-Same art style, angle, lighting and rendering as the reference image (barista equipment sheet): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
+Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
 The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
-Row 1: a glass jar of dark roasted decaf coffee beans with a plain forest green lid; a small kraft paper bag of whole coffee beans with a folded top; three plain golden-yellow instant coffee mix stick packets fanned out; a glass jar of roasted barley grains with a cork lid.
-Row 2: a glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices; a glass jar of red strawberry preserve with small fruit pieces; a small open tin of bright green matcha powder with a small bamboo scoop; a small open tin of dark brown cocoa powder with a small metal scoop.
-Row 3: a wooden manual hand coffee grinder with a metal crank handle; a long stainless steel bar spoon lying diagonally; a clear plastic takeaway cup with a flat clear lid and a paper straw, empty; the last cell (bottom right) completely empty.
+Row 1 (small kitchen containers that stand upright on a shelf, all about the same small height): a small glass jar of dark roasted coffee beans with a plain cream lid; a small kraft paper bag of whole coffee beans with a folded top, standing upright; a small paper box of instant coffee mix with a few slim golden-yellow stick packets poking out of the open top; a small paper box of roasted barley tea bags with a few tea bag tags on strings hanging over the edge.
+Row 2: a small glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices and a plain white lid; a small glass jar of red strawberry preserve with small fruit pieces and a plain white lid; a small round tin of dark brown cocoa powder with the lid off and a small metal scoop resting in the powder; an empty tall clear plastic takeaway cup with a flat clear lid and a white paper straw.
+Row 3: a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside; a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn; a wooden manual hand coffee grinder with a metal crank handle; the last cell (bottom right) completely empty.
 Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, black outlines.
+Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
 ```
 
-- 얼음 통(`obj_ice_bucket`) · 레시피 수첩(`obj_recipe_book`)은 `docs/추가 제작.md` 27 · 28번에 있습니다.
+### `sheet_drinks` · 1:1 · 초록 바탕 · 참조: `sheet_cups`
+
+- 드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대
+- 칸: 1줄 `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` / 2줄 `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` / 3줄 `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` / 마지막 칸 비움
+
+```
+Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
+The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
+Row 1 (the same plain white ceramic mug as in the reference image, identical shape, size and angle, filled to the same level just below the rim): warm barley tea, clear amber brown; warm citron (yuja) tea, bright golden yellow with thin peel strips floating; hot cocoa, dark chocolate brown with a little light foam; the thick double-wall cream ceramic mug from the reference image filled with cafe latte, smooth light brown milk foam, no latte art.
+Row 2 (the same tall clear drinking glass as the iced americano in the reference image, with clear ice cubes, filled to the same level): iced cafe latte, light caramel milk with soft coffee swirls; iced barley tea, clear amber; iced citron (yuja) tea, golden yellow with thin peel strips; strawberry milk, soft pink milk with red strawberry preserve at the bottom.
+Row 3: iced cocoa in the same tall glass, light chocolate brown with ice cubes; strawberry milk in a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw; an empty small stainless steel wire dish drying rack with a drip tray; the last cell (bottom right) completely empty.
+Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
+Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
+```
+
+### `sheet_drinks_blue` · 1:1 · 파란 바탕 · 참조: `sheet_cups`(+ 먼저 만든 `sheet_drinks`)
+
+- 플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**
+- 칸: 1줄 `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` / 2줄 `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` / 3줄 `obj_matcha` · `obj_sink` · `obj_bin` / 마지막 칸 비움
+
+```
+Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
+The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
+Row 1 (the same a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw in every cell, identical shape, size and angle, filled to the same level): iced americano, dark coffee brown; iced cafe latte, light caramel milk with soft coffee swirls; iced barley tea, clear amber; iced citron (yuja) tea, golden yellow with thin peel strips.
+Row 2: iced cocoa in the same plastic cup, light chocolate brown; iced green tea latte in the same plastic cup, soft matcha green milk; iced green tea latte in a tall clear drinking glass with clear ice cubes (the same glass as the reference image); warm green tea latte in the plain white ceramic mug (the same mug as the reference image), soft matcha green milk foam, no latte art.
+Row 3: a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it; a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above; a small green kitchen trash bin with a lid; the last cell (bottom right) completely empty.
+Flat solid chroma key blue background (#0047BB) everywhere, no gradients, no cast shadows on the background, no blue reflections.
+Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
+```
 
 ## 4. 새 놀이의 그림 (재미 개편)
 
@@ -1321,7 +427,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 3058줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 3323줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 - 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).
 
@@ -1332,8 +438,11 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `think` | 296 |
 | `owner` | 189 |
 | `jieun` | 148 |
-| `customer_f` | 118 |
-| `customer` | 91 |
+| `customer-sporty` | 89 |
+| `customer-olive` | 87 |
+| `customer-coffee` | 85 |
+| `customer-arms` | 83 |
+| `customer-stripe` | 81 |
 | `jian` | 79 |
 | `do` | 70 |
 | `haesun` | 65 |
@@ -1343,8 +452,10 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `kang` | 50 |
 | `noh` | 44 |
 | `geum` | 34 |
+| `customer` | 30 |
 | `agent` | 23 |
 | `dohyun` | 22 |
+| `granddaughter` | 19 |
 | `yeonwoo` | 18 |
 | `han_daughter` | 18 |
 | `sora` | 17 |

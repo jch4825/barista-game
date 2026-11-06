@@ -8,11 +8,15 @@
   (시험용) --src 폴더 --out 폴더 로 시트를 읽을 곳·만들 곳을 바꿀 수 있음
 
 시트(docs/image_requests.md 2장): 정사각형, 보이지 않는 4칸 × 3줄, 칸마다 물건 하나, 평평한 크로마키 초록(#00B140) 바탕
+  (초록 물건이 든 시트는 파란 바탕 #0047BB: SHEET_KEY. 아래 '초록'은 그 시트의 바탕색)
   sheet_tools: obj_machine obj_grinder obj_portafilter obj_portafilter_full / obj_tamper obj_pitcher obj_pitcher_milk obj_milk_bottle /
                obj_kettle obj_dripper obj_syrup (빈 칸)
   sheet_cups : cup_mug_empty cup_mug_americano cup_mug_milk cup_mug_latte(라테아트 없음) / cup_mug_heart cup_thick cup_glass_empty cup_glass_ice /
                cup_paper cup_shot obj_tray (빈 칸)
-  (튤립·나뭇잎 라테아트 cup_mug_tulip · cup_mug_leaf 는 자유 영업 시트에서. 그때까지 임시 그림)
+  sheet_more : 카운터 물건 11개(벽 선반의 병 · 통 · 상자 · 봉지 · 플라스틱 컵 · 얼음 통 · 레시피 수첩 · 손 그라인더)
+  sheet_drinks · sheet_drinks_blue: 다 만든 잔 18가지(cup_{컵}_{음료}) + 버리는 장면의 건조대 · 개수대 · 쓰레기통(2026-11-06, 검수 13.62)
+  칸 순서 · 프롬프트는 tools/export-requests.mjs 의 OBJ_SHEETS 와 같아야 함(docs/requests_full.md 3장)
+  (튤립·나뭇잎 라테아트 cup_mug_tulip · cup_mug_leaf 는 아직 게임에서 만들 수 없어 요청하지 않음)
   마지막 칸(오른쪽 아래)은 비워 둠: Flow 가 붙이는 표시가 물건을 가리지 않게. 그 칸에 있는 것은 버림
 
 하는 일
@@ -53,15 +57,31 @@ SHEETS: dict[str, list[str | None]] = {
         'cup_mug_heart', 'cup_thick', 'cup_glass_empty', 'cup_glass_ice',
         'cup_paper', 'cup_shot', 'obj_tray', None,
     ],
-    # 풀 버전 메뉴의 재료 · 도구(2026-10-31, docs/requests_full.md 3장)
+    # 풀 버전 메뉴의 재료 · 도구 · 카운터 물건(2026-10-31, 2026-11-06 다시 묶음: 카운터에 늘 보이는 11개를 한 장에, 검수 13.62)
     'sheet_more': [
         'obj_decaf', 'obj_drip_beans', 'obj_mix', 'obj_barley',
-        'obj_yuja', 'obj_strawberry', 'obj_matcha', 'obj_cocoa',
-        'obj_hand_grinder', 'obj_spoon', 'cup_plastic', None,
+        'obj_yuja', 'obj_strawberry', 'obj_cocoa', 'cup_plastic',
+        'obj_ice_bucket', 'obj_recipe_book', 'obj_hand_grinder', None,
+    ],
+    # 다 만든 잔(초록이 없는 음료) + 식기 건조대(2026-11-06, 검수 13.62). 이름은 cup_{컵}_{음료}, menu.js 의 RECIPES.look
+    'sheet_drinks': [
+        'cup_mug_barley', 'cup_mug_yuja', 'cup_mug_cocoa', 'cup_thick_latte',
+        'cup_glass_latte', 'cup_glass_barley', 'cup_glass_yuja', 'cup_glass_strawberry',
+        'cup_glass_cocoa', 'cup_plastic_strawberry', 'obj_rack', None,
+    ],
+    # 플라스틱 컵 잔 · 초록 음료 · 말차 통 · 개수대 · 쓰레기통: 녹차라테 · 말차가 초록이라 파란 바탕(SHEET_KEY)
+    'sheet_drinks_blue': [
+        'cup_plastic_americano', 'cup_plastic_latte', 'cup_plastic_barley', 'cup_plastic_yuja',
+        'cup_plastic_cocoa', 'cup_plastic_greentea', 'cup_glass_greentea', 'cup_mug_greentea',
+        'obj_matcha', 'obj_sink', 'obj_bin', None,
     ],
 }
 
-KEY = np.array([0x00, 0xB1, 0x40], np.float32)  # 요청서의 초록. 실제 바탕색은 시트에서 다시 잼(표본이 모자랄 때만 이 값)
+# 바탕색(크로마키): 이름 → (바탕 채널 번호, 요청서의 색). 실제 바탕색은 시트에서 다시 잼(표본이 모자랄 때만 이 값)
+#  초록 물건(녹차라테 · 말차)이 든 시트는 파란 바탕: 초록 바탕이면 초록 물건이 바탕과 함께 지워지거나 회색이 됨
+KEYS = {'green': (1, np.array([0x00, 0xB1, 0x40], np.float32)), 'blue': (2, np.array([0x00, 0x47, 0xBB], np.float32))}
+SHEET_KEY = {'sheet_drinks_blue': 'blue'}  # 적지 않은 시트는 초록
+CH, KEY = KEYS['green']  # 지금 처리하는 시트의 바탕(main 이 시트마다 바꿈)
 KEY_LO = 12        # 초록 정도가 이보다 작으면 물건(불투명)
 HOLE = 0.4         # 물건 안쪽은 초록 정도가 바탕의 이 비율을 넘을 때만 지움(손잡이 구멍·유리 너머). 금속 반사(약한 초록)는 이보다 낮음
 EDGE_PX = 3        # 바깥 배경과 맞닿은 테두리(반투명으로 계산하는 두께)
@@ -91,7 +111,9 @@ def load(path: Path) -> np.ndarray:
 
 
 def greenness(a: np.ndarray) -> np.ndarray:
-    return a[..., 1] - np.maximum(a[..., 0], a[..., 2])
+    """바탕색 정도: 바탕 채널 - 나머지 두 채널 중 큰 값(초록 바탕이면 G - max(R, B), 파란 바탕이면 B - max(R, G))"""
+    o = [i for i in range(3) if i != CH]
+    return a[..., CH] - np.maximum(a[..., o[0]], a[..., o[1]])
 
 
 def dilate(m: np.ndarray, r: int = 1) -> np.ndarray:
@@ -214,9 +236,10 @@ def key_sheet(a: np.ndarray):
 
     rgb = a.copy()
     rgb[soft] = unmix(a, alpha, pred)[soft]
-    mx = np.maximum(rgb[..., 0], rgb[..., 2])
+    o = [i for i in range(3) if i != CH]
+    mx = np.maximum(rgb[..., o[0]], rgb[..., o[1]])
     lim = np.where(soft | (alpha < 0.999), mx + SPILL_EDGE, mx + SPILL_IN)
-    rgb[..., 1] = np.minimum(rgb[..., 1], lim)
+    rgb[..., CH] = np.minimum(rgb[..., CH], lim)
     return rgb, alpha, pred, (cw, ch)
 
 
@@ -318,6 +341,7 @@ def find_sheet(src: Path, name: str) -> Path | None:
 
 
 def main() -> int:
+    global CH, KEY
     args = sys.argv[1:]
     checking = '--check' in args
     src, out, check_dir = SRC, OUT, CHECK
@@ -340,6 +364,7 @@ def main() -> int:
         if not path:
             say(f'- {name}: 아직 없어요(건너뜀)')
             continue
+        CH, KEY = KEYS[SHEET_KEY.get(name, 'green')]
         try:
             a = load(path)
             H, W, _ = a.shape
