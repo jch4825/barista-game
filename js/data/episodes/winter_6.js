@@ -97,8 +97,8 @@ export default {
     ...onlyIf({ trust: { eunju: '>=7' } },
       show({ left: 'jieun:normal', right: 'eunju:smile' }),
       sfx('bell'),
-      cg('eunju_secret'),
       say('eunju', 'normal', '지은 씨, 여름에 내가 처음 왔던 날 기억나요?'),
+      cg('eunju_secret'), // 그림은 여름 3일 은주가 처음 온 날(2026-11-06): 그날을 떠올리는 말 뒤에 띄움
       say('eunju', 'normal', '그 전 일주일 동안, 나는 어른이랑 말한 적이 한 번도 없었어요.'),
       say('eunju', 'smile', '여기서 지은 씨랑 나눈 말이, 그 주의 첫 대화였어요.'),
       secret('eunju'),

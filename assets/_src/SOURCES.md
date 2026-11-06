@@ -219,6 +219,10 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_summer_tourist_chair.jpg` | `Tourist_sits_beside_grandmother_…_2136599a_2K.jpg` (2026-10-31 15:45) |
 | `cg/cg_haesun_two_cups.jpg` | `Woman_holding_tray_in_cafe_c65e8af2_2K.jpg` (2026-10-31 08:04 · 그날 새 그림으로 바꿈, 커밋 1a76166 · 2026-11-04 지은의 남색 앞치마를 초록으로 바꿈: `tools/recolor-apron.py`) |
 | `cg/cg_haesun_cup_for_him.jpg` | `Elderly_woman_looking_at_mug_3ecc1748_2K.jpg` (2026-10-31 15:48 · 그날 새 그림으로 바꿈, 커밋 1a76166) |
+| `cg/cg_haesun_secret.jpg` | `Elderly_woman_looking_at_mug_3ecc1748_2K.jpg` (2026-10-31 15:48 · 위의 `cg_haesun_cup_for_him`과 같은 그림, 2026-11-06 해순 할머니의 비밀 장면 「남편의 마지막 주문」으로 옮겨 씀: 우유 두 잔과 빈 의자) |
+| `cg/cg_kang_secret.jpg` | `Man_holding_coffee_in_cafe_63bf8629.jpg` (2026-11-04 21:28 · 위의 `cg_kang_window_sea`와 같은 그림, 2026-11-06 강 씨의 비밀 장면 「배를 판 날」로 옮겨 씀: 새벽 항구의 빈자리) |
+| `cg/cg_eunju_secret.jpg` | `Woman_holding_mug_in_cafe_c9f7e446.jpg` (2026-11-05 22:27 · 처음에는 여름 3일 「두꺼운 컵」으로 만든 그림, 2026-11-06 은주의 비밀 장면 「일주일의 말」로 씀: "여름에 내가 처음 왔던 날") |
+| `cg/cg_noh_secret.jpg` | `Man_watching_woman_make_drink_e9a89317.jpg` (2026-11-05 22:41 · 처음에는 여름 4일 「떨리는 숟가락」으로 만든 그림, 2026-11-06 노 씨의 비밀 장면 「처음 떨린 날」로 씀: 잔을 젓는 사장님 옆) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):
 - `Character_design_sheet_of_barista_20261028002548.jpg`: 지은 설정화의 남색 앞치마 첫 판(2026-10-28). 게임은 초록 앞치마 설정화(`ref/jieun_sheet.jpg`)를 씀
@@ -226,3 +230,5 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 - `Man_holding_mug_in_cafe_ff250b7e_2K.jpg`: `cg_owner_closing_milk`(봄 · 마감 우유)의 다른 판(2026-10-31, 홀 저녁 배경과 같은 방). 봄 5일 `cg_owner_cup_shake`가 지금 그림과 같은 방이라 그대로 씀
 
 받은 폴더에 함께 있던 `cg_haesun_two_cups.jpg` · `cg_haesun_cup_for_him.jpg` · 위의 두 원래 이름 파일은 게임의 그림과 같은 파일(바이트까지 같음)이라 지웠습니다.
+
+2026-11-06 사용자가 전에 만든 그림 87장을 받은 폴더에 다시 넣어 줌("혹시 빠진 이미지 중에 이 중 필요한 것이 있으면 써라"): 위의 비밀 장면 네 장만 옮겨 씀. 나머지는 이미 게임에 들어간 그림과 같은 원본이거나, 2026-11-05 에 만든 힌트 장면 그림(대본에서 빠짐, Q-53) 9장이라 받은 폴더에 그대로 둠.

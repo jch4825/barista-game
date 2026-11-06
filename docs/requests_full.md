@@ -11,7 +11,7 @@
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 21장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 장면 그림(CG) | 새로 17장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 · 다 만든 잔 시트 | 36개를 시트 4장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
@@ -39,7 +39,7 @@
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 21장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 5장(`autumn_key` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup`)도 아직 없습니다.
+- 새로 요청하는 17장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 5장(`autumn_key` · `winter_owner_return` · `winter_milk_handover` · `winter_chalk_name` · `ending_last_cup`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -47,42 +47,27 @@
 
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
-| 1 | `kang_secret` | 배를 판 날 | 겨울 2일 | `kang_sheet` · `harbor_dawn` |
-| 2 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
-| 3 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
-| 4 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
-| 5 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
-| 6 | `haesun_secret` | 남편의 마지막 주문 | 겨울 6일 | `haesun_sheet` · `hall_winter` |
-| 7 | `noh_secret` | 처음 떨린 날 | 겨울 6일 | `noh_sheet` · `hall_winter` |
-| 8 | `eunju_secret` | 일주일의 말 | 겨울 6일 | `eunju_sheet` · `hall_winter` |
-| 9 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
-| 10 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 11 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
-| 12 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
-| 13 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 14 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
-| 15 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 16 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
-| 17 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 18 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 19 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
-| 20 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
-| 21 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
+| 1 | `sumin_secret` | 합격 통지서 | 겨울 3일 | `sumin_sheet` · `jieun_sheet` · `hall_winter` |
+| 2 | `winter_gathering` | 겨울 · 단골 여덟 명 | 겨울 4일 | `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout` |
+| 3 | `do_secret` | 마지막 우편 | 겨울 5일 | `do_sheet` · `jieun_sheet` · `hall_winter` |
+| 4 | `han_secret` | 컵 속의 쪽지 | 겨울 5일 | `han_sheet` · `hall_winter` |
+| 5 | `jian_secret` | 지은의 손 | 겨울 6일 | `jian_sheet` · `jieun_sheet` · `hall_winter` |
+| 6 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 7 | `eye_2` | 사장의 눈 2 · 한 칸 내린 선반 | 엔딩 | `hall_morning` |
+| 8 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
+| 9 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
+| 10 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
+| 11 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 12 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
+| 13 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 14 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
+| 15 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
+| 16 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
+| 17 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
 
 ### 2.1 프롬프트
 
-#### 1. `kang_secret` · 배를 판 날
-
-- 나오는 날: 겨울 2일 · 장면: 그날 바다가 참 잔잔했어 · 참조: `kang_sheet` · `harbor_dawn`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): KANG: Korean man in his sixties, an old fisherman, weathered tanned skin, short dark gray hair, gray stubble, a dark navy knit beanie, olive green work jacket over a thick cream sweater, big rough hands, black rubber work boots.
-Scene: Winter dawn at the harbor: KANG looks at the calm sea where his boat used to be, remembering the day he sold it; quiet, still water, soft dawn colors.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 2. `sumin_secret` · 합격 통지서
+#### 1. `sumin_secret` · 합격 통지서
 
 - 나오는 날: 겨울 3일 · 장면: 여기서 열고 싶었어요 · 참조: `sumin_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -93,7 +78,7 @@ Scene: Winter: SUMIN at the counter opens the envelope and reads the letter, the
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 3. `winter_gathering` · 겨울 · 단골 여덟 명
+#### 2. `winter_gathering` · 겨울 · 단골 여덟 명
 
 - 나오는 날: 겨울 4일 · 장면: 각자의 방식으로 돕는 밤 · 참조: `haesun_sheet` · `kang_sheet` · `do_sheet` · `jian_sheet` · `hall_blackout`
 
@@ -104,7 +89,7 @@ Scene: Blackout night inside the candle-lit cafe: villagers gathered; HAESUN tuc
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 4. `do_secret` · 마지막 우편
+#### 3. `do_secret` · 마지막 우편
 
 - 나오는 날: 겨울 5일 · 장면: 지은 씨 앞으로 온 편지 · 참조: `do_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -115,7 +100,7 @@ Scene: Snowy morning: DO hands JIEUN a letter in an envelope he wrote himself (n
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 5. `han_secret` · 컵 속의 쪽지
+#### 4. `han_secret` · 컵 속의 쪽지
 
 - 나오는 날: 겨울 5일 · 장면: 아빠가 먼저 갈게 · 참조: `han_sheet` · `hall_winter`
 
@@ -126,39 +111,7 @@ Scene: Snowy morning: HAN shows two small folded notes on the counter, one in hi
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 6. `haesun_secret` · 남편의 마지막 주문
-
-- 나오는 날: 겨울 6일 · 장면: 우유 두 잔 · 참조: `haesun_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Winter afternoon by the window: HAESUN tells the story of her late husband's last order, looking at the empty chair with two cups of warm milk in front of her, a tender smile.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 7. `noh_secret` · 처음 떨린 날
-
-- 나오는 날: 겨울 6일 · 장면: 가게 불 꺼지면 네가 켜라 · 참조: `noh_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): NOH: Korean man in his late sixties, owner of a small hardware store, short silver-gray hair, deep smile wrinkles, a pencil tucked behind his ear, brown canvas work vest over a beige shirt, a leather tool pouch on his belt.
-Scene: Winter: NOH looks up at the lantern above the owner's seat, remembering, a quiet nostalgic expression.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 8. `eunju_secret` · 일주일의 말
-
-- 나오는 날: 겨울 6일 · 장면: 여기서 처음 말했어요 · 참조: `eunju_sheet` · `hall_winter`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): EUNJU: Korean woman in her early thirties, a new mother, dark brown hair in a messy low bun, soft tired eyes, pastel pink cardigan over a cream top, a gray baby carrier sling across her body, flat shoes.
-Scene: Winter: EUNJU sits at the counter talking to JIEUN with a warm grateful smile, the baby asleep.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 9. `jian_secret` · 지은의 손
+#### 5. `jian_secret` · 지은의 손
 
 - 나오는 날: 겨울 6일 · 장면: 커피 내리는 손 · 참조: `jian_sheet` · `jieun_sheet` · `hall_winter`
 
@@ -168,7 +121,7 @@ Scene: Winter: JIAN shows JIEUN a sketchbook page with a careful drawing of a ha
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 10. `eye_1` · 사장의 눈 1 · 컵을 깬 날
+#### 6. `eye_1` · 사장의 눈 1 · 컵을 깬 날
 
 - 나오는 날: 엔딩 · 장면: 빗자루를 두 손으로 꼭 쥔 아이 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -178,7 +131,7 @@ Scene: From the OWNER's point of view: JIEUN in her green apron gripping a broom
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 11. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
+#### 7. `eye_2` · 사장의 눈 2 · 한 칸 내린 선반
 
 - 나오는 날: 엔딩 · 장면: 새벽, 컵을 한 칸 아래로 옮기는 손 · 참조: `hall_morning`
 
@@ -188,7 +141,7 @@ Scene: From the OWNER's point of view before dawn: the owner's calm hands moving
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 12. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
+#### 8. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
 
 - 나오는 날: 엔딩 · 장면: 카운터 앞으로 나가며 본 두 사람 · 참조: `jieun_sheet` · `geum_sheet` · `hall_spring`
 
@@ -199,7 +152,7 @@ Scene: From the OWNER's point of view stepping toward the counter: JIEUN behind 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 13. `eye_4` · 사장의 눈 4 · 빈 컵만
+#### 9. `eye_4` · 사장의 눈 4 · 빈 컵만
 
 - 나오는 날: 엔딩 · 장면: 그 아이 뒤에 빈 컵을 놓는 손 · 참조: `jieun_sheet` · `hall_spring`
 
@@ -209,7 +162,7 @@ Scene: From the OWNER's point of view: JIEUN focused on making drinks while the 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 14. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
+#### 10. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
 - 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_evening`
 
@@ -219,7 +172,7 @@ Scene: From the OWNER's point of view at night: the wall chalkboard with today's
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 15. `eye_7` · 사장의 눈 7 · 앞치마 끈
+#### 11. `eye_7` · 사장의 눈 7 · 앞치마 끈
 
 - 나오는 날: 엔딩 · 장면: 등 뒤에서 다시 매 주는 끈 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -229,7 +182,7 @@ Scene: From the OWNER's point of view: JIEUN's back as she wipes cups, the owner
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 16. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
+#### 12. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
 
 - 나오는 날: 엔딩 · 장면: 앞치마 주머니에서 손을 꺼내며 · 참조: `jieun_sheet` · `hall_busy_summer`
 
@@ -239,7 +192,7 @@ Scene: From the OWNER's point of view during the summer rush: a customer pointin
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 17. `eye_8` · 사장의 눈 8 · 동네 시간
+#### 13. `eye_8` · 사장의 눈 8 · 동네 시간
 
 - 나오는 날: 엔딩 · 장면: 선반의 단골 잔들, 칠판 앞의 분필 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -249,7 +202,7 @@ Scene: From the OWNER's point of view at night: the regulars' mugs untouched on 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 18. `eye_9` · 사장의 눈 9 · 열쇠
+#### 14. `eye_9` · 사장의 눈 9 · 열쇠
 
 - 나오는 날: 엔딩 · 장면: 주머니에서 꺼낸 낡은 열쇠 · 참조: `jieun_sheet` · `hall_evening`
 
@@ -259,7 +212,7 @@ Scene: From the OWNER's point of view: an old brass key held out in the owner's 
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 19. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
+#### 15. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
 
 - 나오는 날: 엔딩 · 장면: 마감 선반에 붙이는 작은 메모 · 참조: `hall_evening`
 
@@ -269,7 +222,7 @@ Scene: From the OWNER's point of view at night: the owner's hand sticking a smal
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 20. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
+#### 16. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
 
 - 나오는 날: 엔딩 · 장면: 깜깜한 마을, 불이 켜진 창 하나 · 참조: `alley_morning`
 
@@ -279,7 +232,7 @@ Scene: Night of the blackout from far away: a dark snowy seaside village and one
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 21. `eye_12` · 사장의 눈 덤 · 그 갈매기
+#### 17. `eye_12` · 사장의 눈 덤 · 그 갈매기
 
 - 나오는 날: 엔딩 · 장면: 사장님이 몰래 갈매기에게 빵을 준다 · 참조: `owner_sheet` · `cafe_front_morning`
 
@@ -442,16 +395,16 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 3334줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 3522줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 - 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 822 |
+| `sys` | 999 |
 | `narr` | 678 |
 | `think` | 296 |
-| `owner` | 189 |
+| `owner` | 200 |
 | `jieun` | 148 |
 | `customer-sporty` | 89 |
 | `customer-olive` | 87 |

@@ -286,5 +286,15 @@ export const IMAGE_PROMPTS = {
   'sheet:manager': { title: '설정화 · 점장님', from: 'look', prompt: P([STYLE + ', plain white background.', 'character design sheet of the cafe manager.', MANAGER + '.', 'color swatches, full-body front view and side view, headshot, three expression headshots: strict disciplined look, serious thoughtful evaluation, proud genuine warm smile, small detail boxes: hand, pocket watch, apron pocket, name tag.']), neg: 'watermark, logo, deformed hands', note: '그림 속 가게 이름(CAFÉ LUMINA)은 옛 이름이라 쓰지 않음' },
 };
 
+/* ===== 단골 비밀 장면(엔딩 앨범)으로 옮겨 쓴 그림 (2026-11-06 사용자 "빠진 이미지 중에 이 중 필요한 것이 있으면 써라") =====
+   대본에서 빠진 장면(Q-53)을 위해 만든 그림이 그 비밀 장면이 되돌아보는 바로 그 순간이라 옮겨 씀: 프롬프트는 처음 만든 장면의 것 */
+const cgFrom = (id, cast) => P([CG_STYLE, cast.length ? `New characters (match their character sheets): ${cast.map((w) => `${w.toUpperCase()}: ${PEOPLE_EN[w]}`).join('; ')}.` : '', `Scene: ${CG_EN[id]}`]);
+Object.assign(IMAGE_PROMPTS, {
+  cg_haesun_secret: { ...IMAGE_PROMPTS.cg_haesun_cup_for_him, title: '장면 · 남편의 마지막 주문', note: '처음에는 봄의 「의자 앞의 잔」(cg_haesun_cup_for_him)으로 만든 그림 · 우유 두 잔과 빈 의자 · 참조 이미지: haesun_sheet · hall_morning · 2K 2752×1536' },
+  cg_kang_secret: { ...IMAGE_PROMPTS.cg_kang_window_sea, title: '장면 · 배를 판 날', note: '처음에는 봄 6일 「바다 안 나가요」(cg_kang_window_sea)로 만든 그림 · 새벽 항구의 빈자리 · 참조 이미지: kang_sheet · harbor_dawn · 1376×768' },
+  cg_eunju_secret: { title: '장면 · 일주일의 말', from: 'doc', prompt: cgFrom('eunju_thick_cup', ['eunju']), neg: CG_NEG, note: '처음에는 여름 3일(은주가 처음 온 날) 「두꺼운 컵」으로 만든 그림 · "여름에 내가 처음 왔던 날" · 참조 이미지: eunju_sheet · hall_summer · 1376×768' },
+  cg_noh_secret: { title: '장면 · 처음 떨린 날', from: 'doc', prompt: cgFrom('noh_spoon', ['noh']), neg: CG_NEG, note: '처음에는 여름 4일 「떨리는 숟가락」으로 만든 그림 · 숟가락으로 잔을 젓는 사장님 옆의 노 씨 · 참조 이미지: noh_sheet · owner_sheet · hall_summer · 1376×768' },
+});
+
 /** 원래 파일 이름이 SOURCES.md 에 없는 그림 */
 export const NO_SOURCE_NOTE = '원래 파일 이름 기록 없음';
