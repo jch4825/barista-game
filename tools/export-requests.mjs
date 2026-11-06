@@ -112,7 +112,7 @@ const cgOld = cgMissing.filter((id) => inExtra.has(id));
 const PLASTIC = 'a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw';
 const OBJ_SHEETS = [
   {
-    id: 'sheet_more', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩',
+    id: 'sheet_more', name: '카운터 물건(선반의 병 · 플라스틱 컵 · 얼음 통 · 수첩)', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩',
     rows: [
       { intro: 'small kitchen containers that stand upright on a shelf, all about the same small height', items: [
         ['obj_decaf', 'a small glass jar of dark roasted coffee beans with a plain cream lid'],
@@ -134,7 +134,7 @@ const OBJ_SHEETS = [
     ],
   },
   {
-    id: 'sheet_drinks', key: 'green', ref: '`sheet_cups`', use: '드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대',
+    id: 'sheet_drinks', name: '다 만든 잔(머그 · 유리컵) · 건조대', key: 'green', ref: '`sheet_cups`', use: '드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대',
     rows: [
       { intro: 'the same plain white ceramic mug as in the reference image, identical shape, size and angle, filled to the same level just below the rim', items: [
         ['cup_mug_barley', 'warm barley tea, clear amber brown'],
@@ -156,7 +156,7 @@ const OBJ_SHEETS = [
     ],
   },
   {
-    id: 'sheet_drinks_blue', key: 'blue', ref: '`sheet_cups`(+ 먼저 만든 `sheet_drinks`)', use: '플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**',
+    id: 'sheet_drinks_blue', name: '다 만든 잔(플라스틱 컵 · 녹차라테) · 개수대 · 쓰레기통', key: 'blue', ref: '`sheet_cups`(+ 먼저 만든 `sheet_drinks`)', use: '플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**',
     rows: [
       { intro: `the same ${PLASTIC} in every cell, identical shape, size and angle, filled to the same level`, items: [
         ['cup_plastic_americano', 'iced americano, dark coffee brown'],
@@ -178,7 +178,7 @@ const OBJ_SHEETS = [
     ],
   },
   {
-    id: 'sheet_empty', key: 'green', ref: '`sheet_tools`(우유병이 있는 시트)', use: '우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움',
+    id: 'sheet_empty', name: '빈 우유병 · 손 그라인더 · 바 스푼', key: 'green', ref: '`sheet_tools`(우유병이 있는 시트)', use: '우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움',
     rows: [
       { items: [
         ['obj_milk_bottle_empty', 'the same glass milk bottle as in the reference image, now empty: clear glass with only a thin trace of milk at the bottom, the same cap'],
@@ -225,17 +225,18 @@ const shotNone = [...shotWant].filter(([, e]) => !e.standIn);
 const shotStandIn = [...shotWant].filter(([, e]) => e.standIn);
 // 5) 새 놀이의 그림(docs/image_requests.md 8장): 받은 그림을 assets/_src/play/{id}.jpg 로 옮겨 두면 목록에서 빠짐
 const PLAY_ART = [
-  ['sheet_play', '놀이 시트(그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 지은의 가방)', '1:1', '8.2'],
-  ['bus_far', '버스 창밖 ① 먼 바다(가장 뒤, 좌우가 이어짐)', '16:9', '8.3'],
-  ['bus_hills', '버스 창밖 ② 동산(가운데, 위쪽 절반은 초록 바탕)', '16:9', '8.3'],
-  ['bus_window_frame', '버스 창밖 ③ 버스 창틀(맨 앞, 유리 자리는 초록 바탕)', '16:9', '8.3'],
-  ['sheet_deco', '꾸미기 · 앞치마 시트', '1:1', '8.4'],
+  ['sheet_play', '놀이 시트(그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 지은의 가방)', '1:1', '8.2', 'cafe_front_morning'],
+  ['bus_far', '버스 창밖 ① 먼 바다(가장 뒤, 좌우가 이어짐)', '16:9', '8.3', 'cafe_front_morning'],
+  ['bus_hills', '버스 창밖 ② 동산(가운데, 위쪽 절반은 초록 바탕)', '16:9', '8.3', 'cafe_front_morning'],
+  ['bus_window_frame', '버스 창밖 ③ 버스 창틀(맨 앞, 유리 자리는 초록 바탕)', '16:9', '8.3', 'cafe_front_morning'],
+  ['sheet_deco', '꾸미기 · 앞치마 시트', '1:1', '8.4', 'title_cafe_dusk'],
 ];
 const havePlay = new Set(ls('assets/_src/play').map((f) => f.replace(/\.(jpe?g|png|webp)$/i, '')));
 const playMissing = PLAY_ART.filter(([id]) => !havePlay.has(id));
 
 P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음성)', '',
   '> 생성: `npm run requests`(`tools/export-requests.mjs`) · 이 파일은 직접 고치지 않습니다. 그림이 들어오면 다시 돌리면 목록에서 빠집니다.',
+  '> **그림 프롬프트만 보려면 `docs/아직 없는 그림.md`**(아직 없는 그림 · 영상의 프롬프트를 만들 순서대로 한 번호로 모은 것, 같은 명령이 함께 만듦).',
   '> 사용자(2026-10-31): "부족한 컴포넌트 예를 들어 이미지, 추가 효과음, 추가 음성 TTS 파일 등은 요청서를 만들면 내PC에서 제작하겠다. 필요 이미지들은 … 대체 요망이라고 적어두면 된다."',
   '> 지금 게임은 이 목록이 없어도 끝까지 돌아갑니다. 없는 그림은 임시 그림(SVG)에 **"임시 그림 · 대체 요망"** 표시가 붙고, 없는 소리는 조용히 넘어갑니다.',
   '> 그림 규칙은 `docs/image_requests.md` 0장 · 6.1과 같습니다(글자 없음 · 빛살 금지 · 사장님 손은 떨림 없이 차분하게 · 얼굴과 손은 위쪽 2/3).', '',
@@ -249,6 +250,20 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
   `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
   '| 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |', '');
+
+// 프롬프트: 이 요청서와 '아직 없는 그림' 문서(docs/아직 없는 그림.md)가 같은 글을 씀
+const sheetPrompt = (id, fl) => `${STYLE}, plain white background.\ncharacter design sheet of ${id.toUpperCase()}, ${PEOPLE_EN[id]}.\nfull-body front view and side view, three expression headshots on the right: calm, warm smile, ${fl.includes('surprised') ? 'surprised' : fl.includes('worried') ? 'worried' : 'thoughtful'}.\nAvoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.`;
+const normalPrompt = (id) => `${STYLE}.\n${PEOPLE_EN[id]}.\nfull-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, ${FACE_EN.normal}.\nplain pure white background, whole body visible from head to feet with empty space above the head, single character centered.\nSame face and outfit as the reference image (character sheet).\n${AVOID_P}`;
+// docs/image_requests.md 1장 ③ 상자(나머지 표정)
+const facePrompt = (face) => `Same character as the reference image: identical face, hairstyle, outfit, colors, body proportions, line style, pose angle and framing, same plain pure white background, whole body from head to feet. Change only the facial expression and hands:\n${face}.\nclean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, sharp lineart, high resolution.\nAvoid: different outfit, different hairstyle, changed pose angle, text, letters, watermark, logo, extra fingers, deformed hands, blurry, cropped head, cropped feet, duplicate character, background objects.`;
+const cgPrompt = (id) => {
+  const c = CGS[id];
+  const ph = c.ph || {};
+  const people = [...new Set((ph.cast || []).map((v) => String(v).split(':')[0]))];
+  const castLine = people.filter((w) => PEOPLE_EN[w]).map((w) => `${tagOf(w)}: ${PEOPLE_EN[w]}`).join('; ');
+  return `${SCENE}\n${castLine ? `New characters (match their character sheets): ${castLine}.\n` : ''}Scene: ${CG_EN[id] || `(${c.title}) ${ph.desc || ''}`}\n${AVOID_S}`;
+};
+const objPrompt = (sh) => `Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each ${sheetItems(sh).length < 11 ? 'used ' : ''}cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : r.items.length < 4 ? '; the remaining cells of this row completely empty' : ''}.`).join('\n')}${sh.rows.length < 3 ? `\nRows ${sh.rows.length + 1} to 3: every cell completely empty. Only ${sheetItems(sh).length} objects in the whole image.` : ''}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`;
 
 /* 1. 인물 */
 P('## 1. 인물 스탠딩 (새 인물)', '',
@@ -264,9 +279,9 @@ for (const id of newPeople) {
     ...(have.length ? [`- 이미 있는 것: ${have.join(' · ')} — 아래는 아직 없는 것만`] : []),
     `- 임시 초상 색: 옷 ${c.svg?.outfit || ''} · 강조 ${c.color}`, '');
   if (need.sheet) P(`**① 설정화** \`${id}_sheet\` · 1:1`);
-  if (need.sheet) box(`${STYLE}, plain white background.\ncharacter design sheet of ${id.toUpperCase()}, ${PEOPLE_EN[id]}.\nfull-body front view and side view, three expression headshots on the right: calm, warm smile, ${fl.includes('surprised') ? 'surprised' : fl.includes('worried') ? 'worried' : 'thoughtful'}.\nAvoid: text, letters, names, numbers, name tag writing, watermark, logo, deformed hands, extra fingers.`);
+  if (need.sheet) box(sheetPrompt(id, fl));
   if (need.normal) P('', `**② 보통** \`${id}_normal\` · 9:16 · 참조: \`${id}_sheet\``);
-  if (need.normal) box(`${STYLE}.\n${PEOPLE_EN[id]}.\nfull-body character design, standing naturally, body turned slightly toward the viewer's right, looking at the viewer, ${FACE_EN.normal}.\nplain pure white background, whole body visible from head to feet with empty space above the head, single character centered.\nSame face and outfit as the reference image (character sheet).\n${AVOID_P}`);
+  if (need.normal) box(normalPrompt(id));
   if (need.faces.length) {
     P('', `**③ 나머지 표정** · 9:16 · 참조: \`${id}_normal\` — \`docs/image_requests.md\` 1장 ③의 상자에 아래 문장을 넣습니다.`, '',
       '| id | 표정 | `[표정]`에 넣을 문장 |', '| :--- | :--- | :--- |',
@@ -281,21 +296,19 @@ P('## 2. 장면 그림 · 이벤트 CG', '',
   '- 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.',
   '- 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.', '',
   '### 2.0 목록', '', '| # | id | 제목 | 나오는 날 | 참조 |', '| ---: | :--- | :--- | :--- | :--- |');
-const refOf = (id) => {
+const refList = (id) => {
   const ph = CGS[id].ph || {};
   const people = [...new Set((ph.cast || []).map((v) => String(v).split(':')[0]))].filter((w) => w !== 'customer');
   const bgRef = ph.bg ? `${ph.bg === 'hall' ? 'hall' : ph.bg}_${ph.v || 'morning'}` : '';
-  return [...people.map((w) => (CHARS[w]?.stand ? `\`${CHARS[w].stand}_normal\`` : `\`${w}_sheet\``)), bgRef ? `\`${bgRef}\`` : ''].filter(Boolean).join(' · '); // 빌려 쓰는 인물은 그 스탠딩이 참조
+  return [...people.map((w) => (CHARS[w]?.stand ? `${CHARS[w].stand}_normal` : `${w}_sheet`)), bgRef].filter(Boolean); // 빌려 쓰는 인물은 그 스탠딩이 참조
 };
+const refOf = (id) => refList(id).map((x) => `\`${x}\``).join(' · ');
 cgNew.forEach((id, i) => P(`| ${i + 1} | \`${id}\` | ${CGS[id].title} | ${epLabel(CGS[id].ep)} | ${refOf(id)} |`));
 P('', '### 2.1 프롬프트', '');
 cgNew.forEach((id, i) => {
   const c = CGS[id];
-  const ph = c.ph || {};
-  const people = [...new Set((ph.cast || []).map((v) => String(v).split(':')[0]))];
-  const castLine = people.filter((w) => PEOPLE_EN[w]).map((w) => `${tagOf(w)}: ${PEOPLE_EN[w]}`).join('; ');
-  P(`#### ${i + 1}. \`${id}\` · ${c.title}`, '', `- 나오는 날: ${epLabel(c.ep)} · 장면: ${ph.desc || ''} · 참조: ${refOf(id)}`, '');
-  box(`${SCENE}\n${castLine ? `New characters (match their character sheets): ${castLine}.\n` : ''}Scene: ${CG_EN[id] || `(${c.title}) ${ph.desc || ''}`}\n${AVOID_S}`);
+  P(`#### ${i + 1}. \`${id}\` · ${c.title}`, '', `- 나오는 날: ${epLabel(c.ep)} · 장면: ${c.ph?.desc || ''} · 참조: ${refOf(id)}`, '');
+  box(cgPrompt(id));
   P('');
 });
 
@@ -310,7 +323,7 @@ for (const sh of OBJ_SHEETS) {
   if (!sheetItems(sh).some(([id]) => !haveObj.has(id))) continue;
   P(`### \`${sh.id}\` · 1:1 · ${sh.key === 'blue' ? '파란 바탕' : '초록 바탕'} · 참조: ${sh.ref}`, '', `- ${sh.use}`,
     `- 칸: ${sh.rows.map((r, i) => `${i + 1}줄 ${r.items.map(([id]) => `\`${id}\``).join(' · ')}`).join(' / ')} / ${sh.rows.length < 3 ? '나머지 칸 모두 비움' : '마지막 칸 비움'}`, '');
-  box(`Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each ${sheetItems(sh).length < 11 ? 'used ' : ''}cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : r.items.length < 4 ? '; the remaining cells of this row completely empty' : ''}.`).join('\n')}${sh.rows.length < 3 ? `\nRows ${sh.rows.length + 1} to 3: every cell completely empty. Only ${sheetItems(sh).length} objects in the whole image.` : ''}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`);
+  box(objPrompt(sh));
   P('');
 }
 
@@ -402,3 +415,120 @@ P('## 8. 넣은 뒤 할 일 (순서)', '',
 
 fs.writeFileSync(path.join(root, 'docs/requests_full.md'), `${L.join('\n')}\n`);
 console.log(`요청서: 인물 ${newPeople.length}명 · 장면 그림 ${cgNew.length}장(+ 추가 제작 ${cgOld.length}) · 물건 ${objMissing.length} · 놀이 그림 ${playMissing.length} · 블렌더 없음 ${shotNone.length} / 대신 ${shotStandIn.length} / 드래그 ${dragMiss.size} → docs/requests_full.md`);
+
+/* ── 아직 없는 그림: 프롬프트만 한곳에 ──
+   사용자(2026-11-06): "아직 없는 그림들의 프롬프트를 모아서 새 문서로 만들어라. … 지금 너무 많아서 찾을 수가 없어."
+   이 요청서 · docs/추가 제작.md · docs/image_requests.md 8 · 9장에 흩어진 프롬프트 가운데 아직 파일이 없는 것만,
+   빈칸([표정] · [놀이 그림 블록] 등)을 채운 채로 만들 순서대로(앞에서 만든 그림이 뒤의 참조) 한 번호로 모음 */
+const imgDoc = fs.readFileSync(path.join(root, 'docs/image_requests.md'), 'utf8').replace(/\r\n/g, '\n');
+const extraText = extraDoc.replace(/\r\n/g, '\n');
+const boxAfter = (text, from) => { const m = /```\n([\s\S]*?)\n```/.exec(text.slice(Math.max(0, from))); return m ? m[1] : ''; };
+const names = (s) => [...String(s || '').matchAll(/`([a-z_0-9]+)`/g)].map((m) => m[1]);
+// docs/추가 제작.md 의 한 항목(### N. `id` · 제목): 참조 · 쓰이는 곳 · 게임 파일 · 상자
+function extraItem(id) {
+  const m = new RegExp('^### \\d+\\. `' + id + '` · (.+)$', 'm').exec(extraText);
+  if (!m) return null;
+  const rest = extraText.slice(m.index + m[0].length);
+  const end = rest.search(/^#{2,3} /m);
+  const sec = end < 0 ? rest : rest.slice(0, end);
+  const line = (k) => (new RegExp('^- ' + k + ': (.+)$', 'm').exec(sec) || [])[1] || '';
+  return { title: m[1], refs: names(line('참조')), use: line('쓰이는 곳'), file: (/`([^`]+)`/.exec(line('게임 파일')) || [])[1] || '', prompt: boxAfter(sec, 0) };
+}
+const FACE_KO = { normal: '보통', smile: '웃음', surprised: '놀람', worried: '걱정', sad: '슬픔', nervous: '긴장', angry: '화남', think: '생각' };
+const todo = []; // { group, id, title, ratio, bg, refs, file, use, prompt }
+// 1) 인물: 추가 제작의 사람(손녀 등) → 새 인물의 빠진 것
+for (const [, id] of extraText.matchAll(/^\| \d+ \| `([a-z_0-9]+)`/gm)) {
+  if (id.endsWith('_sheet') ? haveRef.has(id) : haveStand.has(id)) continue;
+  const it = extraItem(id);
+  // 사람 그림(설정화 · 스탠딩)만: 대본에서 뺀 CG 와 시트로 옮긴 물건은 게임 파일 자리가 달라 걸러짐
+  if (it?.prompt && /^assets\/_src\/(ref|stand)\//.test(it.file)) todo.push({ group: '인물', id, title: it.title, ratio: id.endsWith('_sheet') ? '1:1' : '9:16', bg: '흰 바탕', refs: it.refs, file: it.file, use: '', prompt: it.prompt });
+}
+for (const id of newPeople) {
+  const c = CHARS[id];
+  const fl = [...faces[id]].filter((f) => f !== 'normal');
+  const need = needOf(id);
+  if (need.sheet) todo.push({ group: '인물', id: `${id}_sheet`, title: `${c.name} · 설정화`, ratio: '1:1', bg: '흰 바탕', refs: [], file: `assets/_src/ref/${id}_sheet.jpg`, use: `처음 나오는 날: ${epLabel(firstEp[id])}`, prompt: sheetPrompt(id, fl) });
+  if (need.normal) todo.push({ group: '인물', id: `${id}_normal`, title: `${c.name} · 보통`, ratio: '9:16', bg: '흰 바탕', refs: [`${id}_sheet`], file: `assets/_src/stand/${id}_normal.jpg`, use: '', prompt: normalPrompt(id) });
+  for (const f of need.faces) todo.push({ group: '인물', id: `${id}_${f}`, title: `${c.name} · ${FACE_KO[f] || f}`, ratio: '9:16', bg: '흰 바탕', refs: [`${id}_normal`], file: `assets/_src/stand/${id}_${f}.jpg`, use: '', prompt: facePrompt(FACE_EN[f] || f) });
+}
+// 2) 장면 그림(CG): js/data/cg.js 차례
+for (const id of cgMissing) {
+  const c = CGS[id];
+  const it = inExtra.has(id) ? extraItem(id) : null;
+  const prompt = it?.prompt
+    ? it.prompt.replace(/harsh contrast\.$/m, 'harsh contrast, sunburst, radial rays.') // 옛 상자에도 지금 요청서와 같은 '빛살 금지'
+    : cgPrompt(id);
+  todo.push({ group: '장면 그림', id, title: c.title, ratio: '16:9', bg: '', refs: it ? it.refs : refList(id), file: `assets/cg/cg_${id}.jpg`, use: [epLabel(c.ep), it?.use || c.ph?.desc].filter(Boolean).join(' · '), prompt });
+}
+// 3) 작업대 물건 · 다 만든 잔 시트
+for (const sh of OBJ_SHEETS) {
+  const miss = sheetItems(sh).filter(([id]) => !haveObj.has(id));
+  if (!miss.length) continue;
+  todo.push({ group: '작업대 물건', id: sh.id, title: `${sh.name} · 시트 ${sheetItems(sh).length}칸`, ratio: '1:1', bg: sh.key === 'blue' ? '파란 바탕 #0047BB' : '초록 바탕 #00B140', refs: names(sh.ref), file: `assets/_src/objects/${sh.id}.jpg`, use: sh.use.replace(/\*\*/g, ''), cells: sh.rows.map((r, i) => `${i + 1}줄 ${r.items.map(([id]) => `\`${id}\``).join(' · ')}`).join(' / '), prompt: objPrompt(sh) });
+}
+// 4) 새 놀이의 그림(docs/image_requests.md 8장: 상자 맨 앞의 [블록]을 채움)
+const blockAfter = (label) => { const i = imgDoc.indexOf(label); return i < 0 ? '' : boxAfter(imgDoc, i); };
+const PLAY_BLOCK = blockAfter('**[놀이 그림]**');
+const STORY_BG = blockAfter('**[이야기 배경]**');
+const sec8 = imgDoc.slice(imgDoc.indexOf('## 8. '), imgDoc.indexOf('## 9. '));
+for (const [id, what, ratio, , ref] of playMissing) {
+  const i = sec8.indexOf('`' + id + '`');
+  const prompt = i < 0 ? '' : boxAfter(sec8, i).replace('[놀이 그림 블록]', PLAY_BLOCK).replace('[5.2 이야기 배경 블록]', STORY_BG);
+  if (prompt) todo.push({ group: '놀이 그림', id, title: what, ratio, bg: /Flat solid chroma key green background/.test(prompt) ? '초록 바탕 #00B140' : /chroma key green/.test(prompt) ? '일부만 초록 #00B140' : '', refs: [ref], file: `assets/_src/play/${id}.jpg`, use: '', prompt });
+}
+// 5) 잔 버리기 영상(9장, 있으면 좋음: 없으면 그림 움직임이 나옴)
+const sec9 = imgDoc.slice(imgDoc.indexOf('## 9. '));
+const MOVIE_HEAD = boxAfter(sec9, sec9.indexOf('**공통 앞부분**'));
+const haveMovie = new Set([...ls('assets/movies'), ...ls('assets/_src/movies')].map((f) => f.replace(/\.[a-z0-9]+$/i, '')));
+const CUP_KO = { mug: '머그', glass: '유리컵', paper: '종이컵', plastic: '플라스틱 컵' };
+for (const [, id, , scene] of [...sec9.matchAll(/^\| `(discard_([a-z]+))` \| (.+) \|$/gm)]) {
+  if (haveMovie.has(id) || !MOVIE_HEAD) continue;
+  todo.push({ group: '영상', id, title: `잔 버리기 · ${CUP_KO[id.replace('discard_', '')] || id}`, ratio: '16:9 · mp4 · 4~6초 · 소리 없음', bg: '', refs: [], file: `assets/_src/movies/${id}.mp4`, use: '틀린 잔을 [버리기] 했을 때(없으면 지금처럼 그림 움직임)', prompt: `${MOVIE_HEAD}\n${scene}` });
+}
+// 참조 그림이 있는 곳: 없으면 이 문서에서 먼저 만드는 번호
+const REF_DIRS = [['assets/_src/ref', '.jpg'], ['assets/_src/stand', '.jpg'], ['assets/stand', '.webp'], ['assets/bg', '.jpg'], ['assets/_src/objects', '.jpg']];
+const refWhere = (name) => {
+  for (const [d, ext] of REF_DIRS) if (fs.existsSync(path.join(root, d, name + ext))) return `\`${d}/${name}${ext}\``;
+  const n = todo.findIndex((t) => t.id === name);
+  return n >= 0 ? `**${n + 1}번**에서 먼저 만듦` : '아직 없음';
+};
+const pics = todo.filter((t) => t.group !== '영상');
+const groups = [...new Set(todo.map((t) => t.group))];
+const GROUP_HEAD = {
+  인물: '인물 스탠딩 · 설정화 (흰 바탕, 무대에서 오른쪽을 보고 섬)',
+  '장면 그림': '장면 그림 · CG (결정적인 장면만, ✅ Q-53)',
+  '작업대 물건': '작업대 물건 · 다 만든 잔 시트 (✅ Q-52, 4칸 × 3줄)',
+  '놀이 그림': '새 놀이의 그림 (버스 · 갈매기 · 꾸미기)',
+  영상: '잔 버리기 영상 (있으면 좋음 · 급하지 않음)',
+};
+const D = [];
+const Q = (...x) => D.push(...x);
+Q('# 아직 없는 그림 · 프롬프트 모음', '',
+  '> 생성: `npm run requests`(`tools/export-requests.mjs`) · 이 파일은 직접 고치지 않습니다. 그림을 넣고 다시 돌리면 그 번호가 빠지고 번호가 새로 매겨집니다.',
+  '> 사용자(2026-11-06): "아직 없는 그림들의 프롬프트를 모아서 새 문서로 만들어라." 흩어져 있던 프롬프트(`docs/requests_full.md` · `docs/추가 제작.md` · `docs/image_requests.md` 8 · 9장)를 여기 한곳에 모았습니다. 빈칸은 모두 채워 두었습니다.', '',
+  `**아직 없는 그림 ${pics.length}장**${todo.length > pics.length ? ` + 영상 ${todo.length - pics.length}개(있으면 좋음)` : ''}: ${groups.map((g) => `${g} ${todo.filter((t) => t.group === g).length}`).join(' · ')}`, '',
+  '## 만드는 법', '',
+  '1. **위에서부터 차례로** 만듭니다. 앞에서 만든 그림이 뒤의 참조 그림이 됩니다(예: 손녀 설정화 → 손녀 보통 → 손녀가 나오는 장면).',
+  '2. 상자 안의 글을 **통째로 복사**해 Flow에 붙입니다. 마지막 줄 `Avoid: …`까지 함께 넣습니다.',
+  '3. 항목마다 적은 **비율**로 만들고, **참조** 그림을 Flow의 참조 이미지(재료)로 함께 넣습니다. 한 번에 다 못 넣으면 인물 그림을 먼저 넣습니다.',
+  '4. 여러 장이 나오면 얼굴 · 옷 · 물건 모양이 참조와 가장 같은 것을 고르고 **2K로 키워서** 받습니다.',
+  '5. 받은 그림은 `assets/flow/`에 원래 이름 그대로 두고 **번호나 id를 알려 주세요.** 제가 이름을 맞춰 게임에 넣습니다(항목의 \'게임 파일\' 자리).',
+  '- 그림 속에 글자 · 숫자가 없어야 합니다. 붉은 바탕 + 가운데 원 + 퍼지는 빛살 구도는 쓰지 않습니다.',
+  '- 이 문서에 없는 것: 블렌더 한 컷(제가 블렌더로 만듦) · 소리 · 음성은 `docs/requests_full.md`에 있습니다.', '',
+  '## 한눈에', '', '| # | 무엇 | id | 비율 · 바탕 | 참조 |', '| ---: | :--- | :--- | :--- | :--- |',
+  ...todo.map((t, i) => `| ${i + 1} | ${t.group} · ${t.title} | \`${t.id}\` | ${[t.ratio, t.bg].filter(Boolean).join(' · ')} | ${t.refs.length ? t.refs.map((r) => `\`${r}\``).join(' · ') : '없음'} |`), '');
+let gi = 0;
+for (const g of groups) {
+  Q(`## ${++gi}. ${GROUP_HEAD[g] || g}`, '');
+  todo.forEach((t, i) => {
+    if (t.group !== g) return;
+    Q(`### ${i + 1}. \`${t.id}\` · ${t.title}`, '',
+      `- 비율: ${t.ratio}${t.bg ? ` · ${t.bg}` : ''}`,
+      `- 참조: ${t.refs.length ? t.refs.map((r) => `\`${r}\` (${refWhere(r)})`).join(' · ') : t.group === '영상' ? '없음' : '없음(처음 만드는 그림)'}`,
+      ...(t.use ? [`- 쓰는 곳: ${t.use}`] : []),
+      ...(t.cells ? [`- 칸: ${t.cells} (나머지 칸 비움)`] : []),
+      `- 게임 파일: \`${t.file}\``, '', '```', t.prompt, '```', '');
+  });
+}
+fs.writeFileSync(path.join(root, 'docs/아직 없는 그림.md'), `${D.join('\n')}\n`);
+console.log(`아직 없는 그림: ${pics.length}장 + 영상 ${todo.length - pics.length} (${groups.map((g) => `${g} ${todo.filter((t) => t.group === g).length}`).join(' · ')}) → docs/아직 없는 그림.md`);

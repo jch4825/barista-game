@@ -6,7 +6,7 @@
 - **제목은 「직업 ε바리스타3」**(사용자 결정 2026-10-30, PRD Q-3). 앞의 ε는 '3을 좌우로 뒤집은 모양'입니다. 글로만 쓰는 곳(창 제목·설치 파일·대본·문서)은 그리스 문자 ε(U+03B5), 처음 화면의 큰 제목은 진짜 3을 뒤집어 그립니다(`title.js`의 `titleMark`, 함렛에 ε가 없음). 소리로 읽을 때는 `CONFIG.TITLE_SAY`('직업 바리스타'): 앞뒤의 3은 소리 내지 않습니다(사용자 결정). 제목에 조사를 바로 붙이지 않습니다(글은 3으로, 소리는 '바리스타'로 끝나 은/는이 어긋남).
 - **이름은 짓지 않습니다**(Q-3, 사용자 결정 2026-10-30): 마을 · 카페 · 사장님은 '바닷가 마을' · '카페' · '사장님'으로만 부르고, 간판은 비워 둡니다. 대사 · 그림 프롬프트에 새 고유 이름을 만들지 않습니다.
 - **한 해는 계절마다 7일**(고요한 날 6 + 폭발 사건 1, 한 해 28일 + 엔딩, Q-12). 숨은 장면은 여는 때 · 닫는 때 [둘러보기]로도 찾습니다(Q-13).
-- **기준 문서: `PRD.md`**(v0.6, 2026-10-30). 검수 문서는 `docs/review.md`, 그림 요청서는 `docs/image_requests.md`. 결정이 필요한 것은 PRD 20장의 Q 번호로 묻습니다.
+- **기준 문서: `PRD.md`**(v0.6, 2026-10-30). 검수 문서는 `docs/review.md`, 그림 요청서는 `docs/image_requests.md`, **아직 없는 그림의 프롬프트는 `docs/아직 없는 그림.md` 한곳**(2026-11-06 사용자 "너무 많아서 찾을 수가 없어", `npm run requests`가 만듦: 새 그림 프롬프트는 `tools/export-requests.mjs` · `tools/requests/prompts_en.mjs`에 적으면 저절로 들어감). 결정이 필요한 것은 PRD 20장의 Q 번호로 묻습니다.
 - 이 폴더는 「직업 마1스톤」 v2.0.0(`C:\AI\game`)을 복사해 엔진만 남긴 것입니다(2026-10-27 M0). **원본 폴더는 사용자가 말할 때만 고칩니다.** 지운 파일·옛 문서·옛 코드는 원본에서 찾아 참고합니다(예: 주문 담기 `js/game/minigames/order.js`, 매일 매일 카페 생활 `js/data/daily.js`, 옛 안내 `CLAUDE.md`).
 - 지금 이야기는 **풀 버전**입니다(2026-10-31, 사용자 "클라우드 세션에서 모든 게임을 만들어라"): 봄 · 여름 · 가을 · 겨울 28일(`js/data/episodes/{spring,summer,autumn,winter}_{1..7}.js`, 단골 8명 × 대응 5번 = 40) + 엔딩(`ending.js`: 단골 앨범 → 사장의 눈 11컷 → 마지막 우유 한 잔 → 크레디트) + 자유 영업(`free.js`, 엔딩 뒤) + 새 해. 설계서는 `docs/story.md`(Q-22~), 아직 없는 그림 · 소리 · 음성은 `docs/requests_full.md`(`npm run requests`가 만듦). 시험판(m1_*)은 지웠습니다(원본은 git 기록).
 
@@ -19,7 +19,7 @@ npm run web          # 개발 서버 http://localhost:5175 (의존성 없음, ES
 npm start            # Electron (app:// 프로토콜)
 npm run validate     # 시나리오 검사: 오류 0 이어야 함
 npm run export       # 읽기용 대본 → scenarios/*.md (자동 생성물, 직접 고치지 않기)
-npm run requests     # 아직 없는 그림 · 물건 · 블렌더 컷 · 소리 · 음성 요청서 → docs/requests_full.md (자동 생성물)
+npm run requests     # 아직 없는 그림 · 물건 · 블렌더 컷 · 소리 · 음성 요청서 → docs/requests_full.md + 그림 프롬프트만 만들 순서대로 한 번호로 → docs/아직 없는 그림.md (둘 다 자동 생성물)
 npm run assets       # 소리 assets/audio/{sfx,amb}/ → assets/audio/manifest.json, 배경음악 assets/music/ → assets/music/manifest.json, 그림 → assets/images.json
 npm run images       # assets/_src/{stand,vfx,…} 원본 → 게임용 그림(tools/import-images.py) + 목록
 npm run objects      # 작업대 물건 시트 assets/_src/objects/sheet_*.jpg → assets/objects/{id}.webp(초록 바탕 지우기·자르기) + 목록. --check 는 python tools/import-objects.py --check
