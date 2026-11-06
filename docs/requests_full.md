@@ -11,7 +11,7 @@
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 21장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
-| 작업대 물건 · 다 만든 잔 시트 | 33개를 시트 3장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
+| 작업대 물건 · 다 만든 잔 시트 | 36개를 시트 4장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
@@ -290,23 +290,23 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 
 ## 3. 작업대 물건 · 다 만든 잔 시트 (Flow, 2026-11-06 사용자 결정 Q-52)
 
-- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통입니다. 지금은 임시 그림(SVG)으로 섭니다(검수 13.62).
+- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통, 우유 · 얼음이 다 떨어진 날의 빈 우유병 · 빈 얼음 통입니다. 지금은 임시 그림(SVG)으로 섭니다(빈 그릇은 가득 찬 그림을 흐리게, 검수 13.62).
 - 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).
 - 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.
 - 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.
-- 아직 없는 것: `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` · `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` · `obj_ice_bucket` · `obj_recipe_book` · `obj_hand_grinder` · `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` · `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` · `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` · `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` · `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` · `obj_matcha` · `obj_sink` · `obj_bin`
+- 아직 없는 것: `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` · `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` · `obj_ice_bucket` · `obj_ice_bucket_empty` · `obj_recipe_book` · `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` · `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` · `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` · `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` · `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` · `obj_matcha` · `obj_sink` · `obj_bin` · `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon`
 
 ### `sheet_more` · 1:1 · 초록 바탕 · 참조: `sheet_tools` · `sheet_cups`
 
-- 카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통, 왼쪽 앞 레시피 수첩
-- 칸: 1줄 `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` / 2줄 `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` / 3줄 `obj_ice_bucket` · `obj_recipe_book` · `obj_hand_grinder` / 마지막 칸 비움
+- 카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩
+- 칸: 1줄 `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` / 2줄 `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` / 3줄 `obj_ice_bucket` · `obj_ice_bucket_empty` · `obj_recipe_book` / 마지막 칸 비움
 
 ```
 Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
 The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
 Row 1 (small kitchen containers that stand upright on a shelf, all about the same small height): a small glass jar of dark roasted coffee beans with a plain cream lid; a small kraft paper bag of whole coffee beans with a folded top, standing upright; a small paper box of instant coffee mix with a few slim golden-yellow stick packets poking out of the open top; a small paper box of roasted barley tea bags with a few tea bag tags on strings hanging over the edge.
 Row 2: a small glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices and a plain white lid; a small glass jar of red strawberry preserve with small fruit pieces and a plain white lid; a small round tin of dark brown cocoa powder with the lid off and a small metal scoop resting in the powder; an empty tall clear plastic takeaway cup with a flat clear lid and a white paper straw.
-Row 3: a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside; a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn; a wooden manual hand coffee grinder with a metal crank handle; the last cell (bottom right) completely empty.
+Row 3: a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside; the same ice bucket again, now empty: no ice cubes, only a little melted water at the bottom, the same metal scoop resting inside; a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn; the last cell (bottom right) completely empty.
 Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
 Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
 ```
@@ -338,6 +338,20 @@ Row 1 (the same a tall clear plastic takeaway cup with clear ice cubes, a flat c
 Row 2: iced cocoa in the same plastic cup, light chocolate brown; iced green tea latte in the same plastic cup, soft matcha green milk; iced green tea latte in a tall clear drinking glass with clear ice cubes (the same glass as the reference image); warm green tea latte in the plain white ceramic mug (the same mug as the reference image), soft matcha green milk foam, no latte art.
 Row 3: a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it; a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above; a small green kitchen trash bin with a lid; the last cell (bottom right) completely empty.
 Flat solid chroma key blue background (#0047BB) everywhere, no gradients, no cast shadows on the background, no blue reflections.
+Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
+```
+
+### `sheet_empty` · 1:1 · 초록 바탕 · 참조: `sheet_tools`(우유병이 있는 시트)
+
+- 우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움
+- 칸: 1줄 `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon` / 나머지 칸 모두 비움
+
+```
+Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
+The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each used cell with wide empty margins; nothing touches or overlaps.
+Row 1: the same glass milk bottle as in the reference image, now empty: clear glass with only a thin trace of milk at the bottom, the same cap; a wooden manual hand coffee grinder with a metal crank handle; a long stainless steel bar spoon lying diagonally; the remaining cells of this row completely empty.
+Rows 2 to 3: every cell completely empty. Only 3 objects in the whole image.
+Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
 Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
 ```
 

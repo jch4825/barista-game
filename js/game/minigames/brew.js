@@ -1395,14 +1395,25 @@ export async function brew(opts = {}) {
   const ready = () => Boolean(made.cup && ings.length);
   const promptNow = () => (!made.cup ? PROMPT.cup : !ings.length ? PROMPT.base : PROMPT.adds);
 
-  /** 물건 단추 하나: 그림 + 이름(늘 보임) + 고른 표시 */
-  function hotBtn(key, art, name, pos, on, cls = '') {
+  /**
+   * 물건 단추 하나: 그림 + 이름(늘 보임) + 고른 표시
+   * out: 오늘의 칠판에서 다 떨어진 것(우유 · 얼음, 2026-11-06 사용자 "Yes, add it", 검수 13.62): 빈 그릇 그림(RUN_OUT)이 있으면 그 그림,
+   *      없으면 가득 찬 그림을 흐리게. 이름표는 '우유 없음', 읽어 줄 이름에 '다 떨어졌어요'(글자로도 알림, 원칙 11)
+   */
+  function hotBtn(key, art, name, pos, on, cls = '', out = null) {
+    const empty = out && img.has('objects', out) ? out : null;
     const b = h('button', {
-      class: `bw-hot ${cls} ${on ? 'is-on' : ''}`.trim(), 'data-hot': key, style: hotStyle(pos),
-      'aria-pressed': String(on), 'aria-label': `${name}${on ? ', 골랐어요' : ''}`,
-    }, objArt(art), h('span', { class: 'bw-hot-name', text: name }), on ? h('i', { class: 'bw-hot-on', html: ICON('check') }) : null);
+      class: `bw-hot ${cls} ${on ? 'is-on' : ''} ${out ? `is-runout${empty ? '' : ' is-runout-dim'}` : ''}`.trim().replace(/\s+/g, ' '), 'data-hot': key, style: hotStyle(pos),
+      'aria-pressed': String(on), 'aria-label': `${name}${out ? ', 다 떨어졌어요' : ''}${on ? ', 골랐어요' : ''}`,
+    }, objArt(empty || art), h('span', { class: 'bw-hot-name', text: name }), out ? h('b', { class: 'bw-hot-out', text: '없음' }) : null, on ? h('i', { class: 'bw-hot-on', html: ICON('check') }) : null);
     return b;
   }
+  /** 오늘의 칠판에서 다 떨어졌으면 빈 그릇 그림 ID(그림이 아직 없어도 ID 를 돌려줌: hotBtn 이 흐리게 함), 아니면 null */
+  const RUN_OUT = { milk: ['milk', 'obj_milk_bottle_empty'], iced: ['ice', 'obj_ice_bucket_empty'] };
+  const runOut = (k) => {
+    const [field, id] = RUN_OUT[k] || [];
+    return field && today?.[field] !== undefined && today[field] <= 0 ? id : null;
+  };
 
   function renderHots() {
     const map = new Map();
@@ -1418,14 +1429,14 @@ export async function brew(opts = {}) {
       const pos = HOT_POS[id];
       if (!pos) continue;
       const on = ings.includes(id);
-      const b = hotBtn(`ing:${id}`, HOT_ART[id] || INGREDIENTS[id].obj, INGREDIENTS[id].name, pos, on, id === 'espresso' ? 'is-machine' : '');
+      const b = hotBtn(`ing:${id}`, HOT_ART[id] || INGREDIENTS[id].obj, INGREDIENTS[id].name, pos, on, id === 'espresso' ? 'is-machine' : '', runOut(id));
       onTap(b, () => press(b, INGREDIENTS[id].name, () => pickIng(id)));
       map.set(`ing:${id}`, b);
       kids.push(b);
     }
     if (pantry.temps.includes('iced')) {
       const on = made.temp === 'iced';
-      const b = hotBtn('temp:iced', HOT_ART.iced, '얼음', HOT_POS.iced, on);
+      const b = hotBtn('temp:iced', HOT_ART.iced, '얼음', HOT_POS.iced, on, '', runOut('iced'));
       onTap(b, () => press(b, '얼음', () => pickIce()));
       map.set('temp:iced', b);
       kids.push(b);

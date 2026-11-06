@@ -112,7 +112,7 @@ const cgOld = cgMissing.filter((id) => inExtra.has(id));
 const PLASTIC = 'a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw';
 const OBJ_SHEETS = [
   {
-    id: 'sheet_more', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통, 왼쪽 앞 레시피 수첩',
+    id: 'sheet_more', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩',
     rows: [
       { intro: 'small kitchen containers that stand upright on a shelf, all about the same small height', items: [
         ['obj_decaf', 'a small glass jar of dark roasted coffee beans with a plain cream lid'],
@@ -128,8 +128,8 @@ const OBJ_SHEETS = [
       ] },
       { items: [
         ['obj_ice_bucket', 'a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside'],
+        ['obj_ice_bucket_empty', 'the same ice bucket again, now empty: no ice cubes, only a little melted water at the bottom, the same metal scoop resting inside'],
         ['obj_recipe_book', 'a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn'],
-        ['obj_hand_grinder', 'a wooden manual hand coffee grinder with a metal crank handle'],
       ] },
     ],
   },
@@ -174,6 +174,16 @@ const OBJ_SHEETS = [
         ['obj_matcha', 'a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it'],
         ['obj_sink', 'a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above'],
         ['obj_bin', 'a small green kitchen trash bin with a lid'],
+      ] },
+    ],
+  },
+  {
+    id: 'sheet_empty', key: 'green', ref: '`sheet_tools`(우유병이 있는 시트)', use: '우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움',
+    rows: [
+      { items: [
+        ['obj_milk_bottle_empty', 'the same glass milk bottle as in the reference image, now empty: clear glass with only a thin trace of milk at the bottom, the same cap'],
+        ['obj_hand_grinder', 'a wooden manual hand coffee grinder with a metal crank handle'],
+        ['obj_spoon', 'a long stainless steel bar spoon lying diagonally'],
       ] },
     ],
   },
@@ -291,7 +301,7 @@ cgNew.forEach((id, i) => {
 
 /* 3. 물건 */
 P('## 3. 작업대 물건 · 다 만든 잔 시트 (Flow, 2026-11-06 사용자 결정 Q-52)', '',
-  '- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통입니다. 지금은 임시 그림(SVG)으로 섭니다(검수 13.62).',
+  '- 카운터(재료 고르기)의 물건, 드리기 쟁반 · 레시피 수첩의 다 만든 잔, 버리는 장면의 개수대 · 건조대 · 쓰레기통, 우유 · 얼음이 다 떨어진 날의 빈 우유병 · 빈 얼음 통입니다. 지금은 임시 그림(SVG)으로 섭니다(빈 그릇은 가득 찬 그림을 흐리게, 검수 13.62).',
   '- 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).',
   '- 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.',
   '- 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.',
@@ -299,8 +309,8 @@ P('## 3. 작업대 물건 · 다 만든 잔 시트 (Flow, 2026-11-06 사용자 �
 for (const sh of OBJ_SHEETS) {
   if (!sheetItems(sh).some(([id]) => !haveObj.has(id))) continue;
   P(`### \`${sh.id}\` · 1:1 · ${sh.key === 'blue' ? '파란 바탕' : '초록 바탕'} · 참조: ${sh.ref}`, '', `- ${sh.use}`,
-    `- 칸: ${sh.rows.map((r, i) => `${i + 1}줄 ${r.items.map(([id]) => `\`${id}\``).join(' · ')}`).join(' / ')} / 마지막 칸 비움`, '');
-  box(`Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : ''}.`).join('\n')}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`);
+    `- 칸: ${sh.rows.map((r, i) => `${i + 1}줄 ${r.items.map(([id]) => `\`${id}\``).join(' · ')}`).join(' / ')} / ${sh.rows.length < 3 ? '나머지 칸 모두 비움' : '마지막 칸 비움'}`, '');
+  box(`Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each ${sheetItems(sh).length < 11 ? 'used ' : ''}cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : r.items.length < 4 ? '; the remaining cells of this row completely empty' : ''}.`).join('\n')}${sh.rows.length < 3 ? `\nRows ${sh.rows.length + 1} to 3: every cell completely empty. Only ${sheetItems(sh).length} objects in the whole image.` : ''}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`);
   P('');
 }
 

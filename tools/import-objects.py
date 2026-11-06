@@ -13,7 +13,8 @@
                obj_kettle obj_dripper obj_syrup (빈 칸)
   sheet_cups : cup_mug_empty cup_mug_americano cup_mug_milk cup_mug_latte(라테아트 없음) / cup_mug_heart cup_thick cup_glass_empty cup_glass_ice /
                cup_paper cup_shot obj_tray (빈 칸)
-  sheet_more : 카운터 물건 11개(벽 선반의 병 · 통 · 상자 · 봉지 · 플라스틱 컵 · 얼음 통 · 레시피 수첩 · 손 그라인더)
+  sheet_more : 카운터 물건 11개(벽 선반의 병 · 통 · 상자 · 봉지 · 플라스틱 컵 · 얼음 통(가득 · 빈 것) · 레시피 수첩)
+  sheet_empty: 빈 우유병(우유가 다 떨어진 날) · 손 그라인더 · 바 스푼(첫 줄 세 칸만)
   sheet_drinks · sheet_drinks_blue: 다 만든 잔 18가지(cup_{컵}_{음료}) + 버리는 장면의 건조대 · 개수대 · 쓰레기통(2026-11-06, 검수 13.62)
   칸 순서 · 프롬프트는 tools/export-requests.mjs 의 OBJ_SHEETS 와 같아야 함(docs/requests_full.md 3장)
   (튤립·나뭇잎 라테아트 cup_mug_tulip · cup_mug_leaf 는 아직 게임에서 만들 수 없어 요청하지 않음)
@@ -61,7 +62,7 @@ SHEETS: dict[str, list[str | None]] = {
     'sheet_more': [
         'obj_decaf', 'obj_drip_beans', 'obj_mix', 'obj_barley',
         'obj_yuja', 'obj_strawberry', 'obj_cocoa', 'cup_plastic',
-        'obj_ice_bucket', 'obj_recipe_book', 'obj_hand_grinder', None,
+        'obj_ice_bucket', 'obj_ice_bucket_empty', 'obj_recipe_book', None,
     ],
     # 다 만든 잔(초록이 없는 음료) + 식기 건조대(2026-11-06, 검수 13.62). 이름은 cup_{컵}_{음료}, menu.js 의 RECIPES.look
     'sheet_drinks': [
@@ -74,6 +75,12 @@ SHEETS: dict[str, list[str | None]] = {
         'cup_plastic_americano', 'cup_plastic_latte', 'cup_plastic_barley', 'cup_plastic_yuja',
         'cup_plastic_cocoa', 'cup_plastic_greentea', 'cup_glass_greentea', 'cup_mug_greentea',
         'obj_matcha', 'obj_sink', 'obj_bin', None,
+    ],
+    # 모자란 날(오늘의 칠판: 우유가 다 떨어짐)의 빈 우유병 + 거의 보이지 않는 손 도구 둘(2026-11-06, 검수 13.62). 빈 얼음 통은 가득 찬 통과 같은 sheet_more 에
+    'sheet_empty': [
+        'obj_milk_bottle_empty', 'obj_hand_grinder', 'obj_spoon', None,
+        None, None, None, None,
+        None, None, None, None,
     ],
 }
 

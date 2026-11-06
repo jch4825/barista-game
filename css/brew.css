@@ -276,6 +276,11 @@ html body .mg.mg-brew { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap
 .mg.mg-brew .bw-hot:focus-visible { outline: 4px solid #FFE6A0; outline-offset: 8px; border-radius: 14px; }
 .mg.mg-brew .bw-hot.is-on .bw-art { filter: drop-shadow(0 0 8px rgba(111, 207, 154, .95)) drop-shadow(0 8px 8px rgba(30, 18, 8, .35)); }
 .mg.mg-brew .bw-hot.is-on .bw-hot-name { background: var(--main); color: #fff; }
+/* 오늘의 칠판에서 다 떨어진 우유 · 얼음(2026-11-06, 검수 13.62): 빈 그릇 그림이 오기 전에는 가득 찬 그림을 흐리게, 이름표는 'OO 없음' */
+.mg.mg-brew .bw-hot.is-runout-dim .bw-art { filter: grayscale(.75) brightness(.8); opacity: .55; }
+.mg.mg-brew .bw-hot.is-runout .bw-hot-name { background: rgba(60, 44, 30, .82); color: #F3E3C4; }
+/* '없음' 꼬리표: 물건 위 벽 쪽에(이름표 아래는 손 띠에 가리고, 옆 이름표와 겹치지 않게) */
+.mg.mg-brew .bw-hot-out { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 10px; padding: 2px 12px; border-radius: 999px; background: rgba(60, 44, 30, .88); color: #F0C987; font-size: 18px; font-weight: 700; line-height: 1.35; white-space: nowrap; pointer-events: none; }
 .mg.mg-brew .bw-hot-on { position: absolute; top: -12px; right: -10px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 3px solid #F0D9A2; background: var(--main); color: #fff; }
 .mg.mg-brew .bw-hot-on svg { width: 24px; height: 24px; }
 .mg.mg-brew .bw-hot.is-away .bw-art { opacity: .28; } /* 받침으로 옮긴 컵: 원래 자리는 흐리게 */
