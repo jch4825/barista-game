@@ -302,7 +302,7 @@ async function exec(s, b, index) {
       if (hm) hud.setTime(hm[1]);
       return undefined;
     }
-    case 'big': dialogue.hide(); await w(ov.big(b.text, b.sub)); dialogue.show(); return undefined;
+    case 'big': dialogue.hide(); await w(ov.big(b.text, b.sub, b.say)); dialogue.show(); return undefined;
     case 'schedule': dialogue.hide(); await w(ov.schedule(s.ep)); dialogue.show(); return undefined;
     case 'check': hud.checkStep(b.n); await w(ov.check(b.n, s.ep.schedule?.[b.n - 1])); return undefined;
     case 'meet': if (store.meet(b.who)) await w(ov.crewCard(b.who)); return undefined;

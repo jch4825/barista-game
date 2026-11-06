@@ -221,7 +221,7 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
     diary: `${sName}의 자유 영업 ${day}번째 날. 오늘도 손님마다 주문을 확인하고, 한 잔씩 천천히 만들었다.`,
     free: day,
     script: [
-      big('자유 영업', `${day}번째 날 · ${sName}`),
+      big('자유 영업', `${day}번째 날 · ${sName}`, `자유 영업. ${sName}의 하루.`), // 소리는 날 번호 없이(번호는 끝없이 늘어 음성 파일을 만들 수 없음, 검수 13.63)
       bg('hall', season),
       amb('cafe'),
       bgm('morning'),

@@ -55,7 +55,7 @@ const themeOf = (opts) => THEMES[opts.theme] || THEMES.cafe;
 export function rushLines(opts = {}) {
   const th = themeOf(opts);
   const out = [...line.intro(opts.title || th.title, th.howto)];
-  if (th.howtoAlone) out.push(line.sys(th.howtoAlone));
+  if (th.howtoAlone) out.push(...line.intro(opts.title || th.title, th.howtoAlone)); // 사장님이 안 계신 날: 틀이 '제목. 할 일'로 읽음(검수 13.63: 이 짝이 없어 브라우저 음성이었음)
   for (const t of Object.values(th.say)) out.push(line.sys(t));
   for (const t of th.slips || []) out.push(line.sys(t));
   return out;

@@ -142,7 +142,8 @@ export async function showResult(ep, result, { ending = false, again = '' } = {}
         epOops.length ? h('p', { class: 'rs-oops' }, h('i', { html: ICON('think') }), `아차 노트 ${epOops.filter((o) => got.has(o.id)).length} / ${epOops.length}`) : null)),
     nextBtn);
 
-  const say = [`${ep.title}. 오늘 하루를 돌아봐요.`];
+  // 자유 영업은 날 번호가 끝없이 늘어 음성 파일을 만들 수 없어, 소리는 번호 없이(화면 글은 그대로, 검수 13.63)
+  const say = [ep.free ? '자유 영업. 오늘 하루를 돌아봐요.' : `${ep.title}. 오늘 하루를 돌아봐요.`];
   if (today.met.length) say.push('오늘 만난 사람.', ...today.met.map((l) => metSpeech(l.who, l.score)));
   nextBtn.before(growView(ep, say));
   for (const [skill, lv] of best) {

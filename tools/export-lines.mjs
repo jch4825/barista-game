@@ -15,7 +15,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const imp = (p) => import(pathToFileURL(path.join(root, p)).href);
-const { hashKey, speakable, plain, fill } = await imp('js/core/text.js');
+const { hashKey, speakable, plain, fill, sentencesOf } = await imp('js/core/text.js');
 const { CHARS, cardSpeech, costumeVoice } = await imp('js/data/characters.js');
 const { FEELINGS, SKILLS, LEVELS } = await imp('js/data/skills.js');
 const { GLOSSARY } = await imp('js/data/glossary.js');
@@ -30,6 +30,9 @@ const { EPISODES, ENDING } = await imp('js/data/episodes/index.js');
 const { REGULARS } = await imp('js/data/regulars.js');
 const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
 const { metSpeech } = await imp('js/screens/result.js');
+const { usualOf } = await imp('js/data/eyes.js');
+const { STATS, MAX_LEVEL, RANKS, won, PAY_HOURS } = await imp('js/core/grow.js');
+const { josa } = await imp('js/core/text.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const cast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'voice_cast.json'), 'utf8'));
 // 다시 만들 목소리(Qwen3, 검수 13.55): 사람마다 목소리 설명 · 본보기 문장. 속마음 · 나레이션은 지은의 목소리(covers)
@@ -110,7 +113,7 @@ function walk(list, ep) {
       case 'album': for (const [v, t] of albumLines()) add(v, t, ep); break;
       case 'eyes': for (const [, t] of eyesLines()) add(voiceOf('owner'), t, ep, 'owner'); break;
       case 'letter': add(voiceOf('jieun'), b.speech, ep, 'jieun'); break;
-      case 'big': add('sys', `${b.text}. ${b.sub}`, ep); break;
+      case 'big': add('sys', b.say || `${b.text}. ${b.sub}`, ep); break; // say: 화면 글과 다르게 읽는 말(자유 영업)
       case 'photo': if (PHOTOS[b.id]) add('sys', `오늘의 한 장. ${PHOTOS[b.id].title}`, ep); break;
       case 'info': add('sys', `${b.title}. ${b.body}`, ep); break;
       case 'meet': met.add(b.who); break;
@@ -142,14 +145,14 @@ for (const ep of [...EPISODES, ENDING]) {
 
 // 자유 영업(free.js): 날 번호로 정해지는 하루(손님 말은 정해 둔 문장 가운데서 고름). 칠판 카드 9 × 계절 28일인 252일을
 // 두 번(앨범 액자가 열렸을 때 · 아직일 때) 모읍니다. 2520일 · 5040일을 모아도 같은 줄이었음(2026-11-05 확인).
-// 큰 제목(날 번호가 들어감) · 하루 끝 화면(날 번호)은 빼서 브라우저 음성으로 읽음
+// 큰 제목 · 하루 끝 화면은 날 번호 없이 읽음(b.say · result.js, 검수 13.63: 전에는 날 번호가 들어가 브라우저 음성이었음)
 const FREE_DAYS = 252;
 const allAlbum = Object.fromEntries(Object.keys(REGULARS).map((k) => [k, 1]));
 for (let n = 1; n <= FREE_DAYS; n++) {
   for (const album of [{}, allAlbum]) {
     const d = freeDay(n, { album });
     epCostume = d.costume || null;
-    walk(d.script.filter((b) => b.t !== 'big'), 'free');
+    walk(d.script, 'free'); // 큰 제목은 날 번호 없이 읽음(b.say: '자유 영업. 봄의 하루.')
     epCostume = null;
   }
 }
@@ -185,6 +188,7 @@ const EXTRA = [
   ['sys', CONFIG.TITLE_SAY], // 처음 화면이 읽어 주는 제목(title.js 의 speakSeq 첫 조각)
   ['sys', CONFIG.TAGLINE.join(' ')], // 처음 화면 캐치프레이즈(title.js 의 speakSeq 둘째 조각)
   ['sys', TIMEOUT_SAY], // 시간 제한 막대가 다 됐을 때(js/ui/timer.js)
+  ['sys', '자유 영업. 오늘 하루를 돌아봐요.'], // 자유 영업의 하루 끝 화면 첫 조각(result.js, 날 번호 없이)
 ];
 for (const [v, t] of EXTRA) add(v, t, 'common');
 for (const f of FEELINGS) add('sys', f.label, 'common');
@@ -193,6 +197,21 @@ add('sys', '오늘 만난 사람.', 'result');
 for (const who of Object.keys(REGULARS)) for (const sc of [0, 1, 2]) add('sys', metSpeech(who, sc), 'result');
 // 결과 화면 요약 조각: 스킬 × 별 단계 (result.js 의 speakSeq)
 for (const sk of Object.values(SKILLS)) for (const lv of Object.values(LEVELS)) add('sys', `${sk.name}, ${lv.name}.`, 'result');
+// 하루 끝 '오늘의 일'(result.js growView): 받은 돈(해마다 시급 × 6시간) · 능력치가 오른 말(두 문장: tts 가 문장마다 나눠 읽음) · 새 단계(검수 13.63: 모두 브라우저 음성이었음)
+for (const hourly of Object.values(CONFIG.WAGE_TABLE)) add('sys', `오늘 받은 돈은 ${won(hourly * PAY_HOURS)}이에요.`, 'result');
+for (const st of STATS) {
+  add('sys', st.effect, 'result');
+  for (let lv = 2; lv <= MAX_LEVEL; lv++) add('sys', `${josa(st.name, '이/가')} ${lv}단계가 되었어요!`, 'result');
+}
+for (const r of RANKS.slice(1)) add('sys', `이제 ${r}예요!`, 'result');
+// 수첩의 단골 쪽 [읽어 주기](notebook.js regularsView): 이름 · 늘 마시는 것 · 기억 카드 · 들은 이야기를 이어 읽음.
+// 학생마다 아는 것이 달라 통째로는 파일이 없으므로 문장마다(tts 가 문장마다 나눠 읽음, 검수 13.63)
+for (const [id, r] of Object.entries(REGULARS)) {
+  const parts = [`${r.name}.`, `늘 마시는 것: ${usualOf(id)}`, '늘 마시는 것: 아직 몰라요. "늘 먹던 거"를 한 번 맞게 내면 적혀요.',
+    ...Object.values(r.touches || {}).filter((t) => t.card).map((t) => `기억 카드: ${t.card}`),
+    r.album ? `들은 이야기: ${r.album.title}. ${r.album.line}` : ''];
+  for (const t of parts) for (const p of sentencesOf(t)) add('sys', p, 'notebook');
+}
 
 const out = [...lines.values()];
 fs.mkdirSync(path.join(root, 'tools', 'voice'), { recursive: true });
@@ -225,7 +244,7 @@ const SPECIAL = { think: '지은의 속마음', narr: '나레이션(지은이 �
 const nameOf = (id) => SPECIAL[id] || LOOK[id] && `손님 · ${LOOK[id]}` || CHARS[id]?.name || id;
 const roleOf = (id) => (SPECIAL[id] ? '' : CHARS[id.split('-')[0]]?.role || '');
 const EP_NAME = Object.fromEntries([...EPISODES, ENDING].map((e) => [e.id, e.label]));
-const placeName = (ep) => EP_NAME[ep] || { free: '자유 영업', common: '화면', mini: '미니게임', saves: '저장', crew: '인물 카드', glossary: '말 사전', result: '하루 끝' }[ep] || ep;
+const placeName = (ep) => EP_NAME[ep] || { free: '자유 영업', common: '화면', mini: '미니게임', saves: '저장', crew: '인물 카드', glossary: '말 사전', result: '하루 끝', notebook: '수첩' }[ep] || ep;
 // 사람별 줄(같은 사람의 같은 문장은 한 줄)
 const per = new Map();
 for (const l of out) {
@@ -249,7 +268,7 @@ md.push('# 읽어 줄 문장 · 사람별 목록', '');
 md.push('> 자동 생성물(`npm run lines`, `tools/export-lines.mjs`): 직접 고치지 않습니다. 대사를 고치면 다시 만듭니다.', '');
 md.push(`이야기 28일 · 엔딩 · 자유 영업 · 화면 안내에서 게임이 읽어 주는 문장을 **말하는 사람마다** 모았습니다. 같은 사람이 같은 문장을 여러 곳에서 말하면 한 줄로 셉니다.`);
 md.push(`이름 없는 손님은 같은 '손님'이라도 옷차림(그림)이 다르면 다른 사람으로 나눴습니다. 옷차림마다 목소리 이름도 따로입니다(\`customer\` · \`customer-olive\` 등, 검수 13.58).`);
-md.push(`게임이 브라우저 음성으로 읽는 줄(학생 별명이 든 줄, 자유 영업의 날 번호가 든 제목 · 하루 끝 화면)은 빠져 있습니다.`, '');
+md.push(`게임이 브라우저 음성으로 읽는 줄(학생 별명이 든 줄)은 빠져 있습니다. 여러 문장을 이어 읽는 말(작업대의 다시 볼 곳 · 하루 끝의 오늘의 일 · 수첩의 단골 쪽)은 문장마다 한 줄입니다(게임이 문장마다 나눠 읽음, 검수 13.63).`, '');
 md.push('## 1. 모아 보기', '');
 md.push(`- 말하는 사람 **${nPeople}명**(나레이션 · 속마음 · 안내 포함), 문장 **${out.length}줄**(같은 문장을 두 사람이 말하면 사람마다 셈: ${groups.reduce((n, [, ids]) => n + ids.reduce((m, id) => m + per.get(id).length, 0), 0)}줄)`);
 md.push(`- 지금 쓰는 Supertonic 목소리 **${voicesUsed.size}개**(M1~M5 · F1~F5)를 빠르기로 나눠 씀(\`tools/voice/voice_cast.json\`)`);

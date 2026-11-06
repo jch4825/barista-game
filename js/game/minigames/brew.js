@@ -277,6 +277,16 @@ export function brewLines(opts = {}) {
     out.push(line.sys(skillSpeech(kid)), line.sys(skillSpeech(kid, true)), line.sys(skillSpeech(kid, false, false, true)), line.sys(KID_CUP.ticket), line.sys(KID_CUP.ticketValue));
     for (const t of Object.values(KID_CUP.react)) out.push(line.say('customer', t));
   }
+  // 레시피와 다를 때 다시 볼 곳(wrongHint 의 ingSay)과 사장님이 살펴 일러 주는 말(ownerCheck): 문장마다 따로 음성 파일.
+  // 두 문장을 이어 읽어도 tts 가 문장마다 나눠 이 파일들로 읽음(검수 13.63: 통째로는 파일이 없어 브라우저 음성이었음)
+  for (const id of new Set([...pantry.bases, ...pantry.adds])) {
+    const name = INGREDIENTS[id].name;
+    out.push(line.sys(`${josa(name, '이/가')} 빠졌어요.`), line.sys(`${josa(name, '은/는')} 빼요.`));
+  }
+  if (opts.maker === 'owner') {
+    for (const t of ['재료가 조금 다르네요.', '재료가 조금 부족하네요.', '재료가 좀 많네요.', '차갑게 드신답니다.', '따뜻하게 드신답니다.', '손님은 가져가신답니다.', '손님은 여기서 드시고 가신답니다.']) out.push(line.say('owner', t));
+    for (const id of pantry.cups) out.push(line.say('owner', `이건 ${CUPS[id].name}에 내요.`));
+  }
   for (const ing of Object.values(INGREDIENTS)) for (const t of Object.values(ing.auto || {})) out.push(line.sys(t));
   for (const t of Object.values(TEMPS)) if (t.auto) out.push(line.sys(t.auto));
   // 지은의 성장: 처음 익숙해진 손 기술의 한마디 · 엉뚱한 잔(사장님의 맛보기)
@@ -3231,6 +3241,8 @@ export async function brew(opts = {}) {
     const t = orderTarget(cur);
     if (!badLeft) return t;
     const other = t.base === 'espresso' ? 'milk' : 'espresso'; // 자연스러운 실수: 바탕 재료를 바꿈(라테 → 따뜻한 우유처럼)
+    // 그 재료가 카운터에 없는 날(정전 밤의 핸드드립: 머신이 없음)은 틀리게 고르기를 건너뜀(없는 단추를 기다리며 멈췄음, 2026-11-06)
+    if (ui.hot && !ui.hot.has(`ing:${other}`)) { badLeft = 0; return t; }
     return { ...t, base: other, adds: t.adds.filter((a) => a !== other) };
   }
   function robotAct() {

@@ -52,7 +52,8 @@ export const phone = (from, text) => ({ t: 'phone', from, text });
 /* ---------- 화면 정보 ---------- */
 export const time = (v) => ({ t: 'time', v });
 export const place = (when, text) => ({ t: 'place', time: when, text });
-export const big = (text, sub = '') => ({ t: 'big', text, sub });
+/** 큰 제목. say: 읽어 줄 말이 화면 글과 다를 때(자유 영업의 날 번호처럼 끝없이 바뀌는 말은 음성 파일을 만들 수 없어 읽지 않음, 검수 13.63) */
+export const big = (text, sub = '', say = null) => ({ t: 'big', text, sub, ...(say ? { say } : {}) });
 export const schedule = () => ({ t: 'schedule' });
 /** 오늘의 일정 n번을 해냈을 때(해낸 직후에 둠, 미리 알려 주는 용도로 쓰지 않음) */
 export const check = (n) => ({ t: 'check', n });

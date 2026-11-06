@@ -6,7 +6,7 @@
  */
 
 import { store } from '../core/store.js';
-import { speakable, hashKey } from '../core/text.js';
+import { speakable, hashKey, sentencesOf } from '../core/text.js';
 
 const synth = typeof window !== 'undefined' ? window.speechSynthesis : null;
 let voice = null;
@@ -163,7 +163,21 @@ function play(text, who, { force = false } = {}) {
   halt();
   const path = voiceManifest[voiceKey(who, text)];
   if (path) return speakFile(path, s);
+  // 여러 문장을 한 번에 이어 붙인 말(작업대의 '우유가 빠졌어요. 에스프레소는 빼요.' 등)은 통째로는 파일이 없음:
+  // 문장마다 나눠 그 문장의 음성 파일로 차례로 읽고, 파일이 없는 문장만 브라우저 음성(2026-11-06 사용자 '음성 소리가 다르다', 검수 13.63)
+  const parts = sentencesOf(line);
+  if (parts.length > 1 && parts.some((p) => voiceManifest[voiceKey(who, p)])) return playParts(parts, who, s);
   return speakSynth(line, who, s);
+}
+
+/** 문장마다 차례로: 파일이 있으면 파일, 없으면 브라우저 음성. 다른 말 · 멈춤이 오면(seqId · halt) 그만 */
+async function playParts(parts, who, s) {
+  const my = seqId;
+  for (const p of parts) {
+    if (my !== seqId) return;
+    const path = voiceManifest[voiceKey(who, p)];
+    await (path ? speakFile(path, s) : speakSynth(p, who, s));
+  }
 }
 
 function halt() {

@@ -10,6 +10,8 @@ Qwen3 TTS로 대사 음성 만들기(사용자 결정 2026-11-05 '새 ②', 검�
   3. 한 줄에 후보 둘(K)을 만들어, 글자 수에 맞는 길이인 것 가운데 본보기와 목소리 지문(Base 의 화자 인코더)이 가장 닮은 것을 고름.
   4. 지문이 0.98 밑이거나 길이가 어긋나면 다시: 감정 지시 앞에 그 사람의 목소리 설명(en)을 붙여(사장님이 흔들렸을 때 고친 방법),
      그래도 안 되면 씨앗을 바꿔 한 번 더. 끝까지 안 되면 가장 나은 것을 쓰고 '들어 볼 줄'로 표시.
+  5. 말 끝이 잘린 후보(마지막 소리가 아직 나는 채 끝남: 끝에서 '톡' 튐, 2026-11-06 사용자 검수 13.65)는 길이가 어긋난 것처럼 낮게 침.
+     고른 것은 말 끝 뒤 0.25초를 남기고 자르고, 파일 끝을 짧게 줄여(fade) 조용히 끝나게 함. 잘린 채 쓴 줄은 '끝' 표시.
 입력: tools/voice/lines.json(npm run lines) · qwen_cast.json · emotions.json
 출력: assets/voice/lines/{key}.ogg(Opus 40k, 게임과 같은 이름) · assets/voice/manifest.json
 기록: tools/voice/qwen_made.json(줄마다 사람 · 닮음 · 빠르기 · 시도 · 표시 · 서명). 서명(본보기 · 문장 · 감정 지시)이 바뀐 줄만 다시 만듦.
@@ -61,6 +63,18 @@ def syllables(text: str) -> int:
     return len(re.findall(r"[가-힣]", text))
 
 
+CUT_DB = -55.0   # 파일 마지막 10ms 의 세기가 이보다 크면 '말 끝이 잘림'(소리가 나는 채 끝나 '톡' 튐, 검수 13.65)
+FADE_S = 0.03    # 파일 끝을 줄이는 길이(잘린 끝도 튀지 않게)
+
+
+def cut_end(w, sr) -> bool:
+    """소리가 아직 나는 채 파일이 끝났는지(마지막 10ms RMS > CUT_DB)"""
+    import numpy as np
+    n = max(1, int(sr * 0.01))
+    tail = w[-n:] if len(w) >= n else w
+    return bool(20 * np.log10(float(np.sqrt(np.mean(tail ** 2) + 1e-12)) + 1e-9) > CUT_DB)
+
+
 def check(w, sr, text):
     """글자 수에 비해 말 길이가 알맞은지(덧붙인 말 · 잘린 말 막기)와 끝 침묵. → (ok, 1초에 몇 자, 말 끝 자리(초))"""
     import numpy as np
@@ -84,14 +98,18 @@ def check(w, sr, text):
 
 
 def trim(w, sr, end):
-    """말이 끝난 뒤 0.25초만 남기고 자름 · 너무 크면 줄임(찢어짐 막기)"""
+    """말이 끝난 뒤 0.25초만 남기고 자름 · 너무 크면 줄임(찢어짐 막기) · 끝을 짧게 줄임(FADE_S, 소리가 나는 채 끝나도 튀지 않게)
+    · 뒤에 조용한 0.15초를 붙임(파일이 말 끝에서 바로 끝나 다음 소리와 붙지 않게)"""
     import numpy as np
     cut = min(len(w), int((end + 0.25) * sr))
-    w = w[:cut]
+    w = np.array(w[:cut], dtype=np.float32)
     peak = float(np.max(np.abs(w))) if len(w) else 0.0
     if peak > 0.98:
         w = w * (0.98 / peak)
-    return w
+    n = min(len(w), int(sr * FADE_S))
+    if n > 1:
+        w[-n:] *= (0.5 + 0.5 * np.cos(np.linspace(0, np.pi, n))).astype(np.float32)
+    return np.concatenate([w, np.zeros(int(sr * 0.15), dtype=np.float32)])
 
 
 def sig_of(person, ref_file: Path, ref_text, emo_en, text):
@@ -272,8 +290,9 @@ def main() -> int:
                     for c in range(kk):
                         w = np.asarray(wavs[j * kk + c], dtype=np.float32)
                         ok, rate, end = check(w, sr, t["text"])
+                        cut = cut_end(w, sr)  # 말 끝이 잘린 후보는 길이가 어긋난 것처럼 낮게(검수 13.65)
                         sim = float(a_emb @ emb(w, sr))
-                        cand = {"ok": ok, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
+                        cand = {"ok": ok and not cut, "cut": cut, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
                         cur = best[t["key"]]
                         if cur is None or (cand["ok"], cand["sim"]) > (cur["ok"], cur["sim"]):
                             best[t["key"]] = cand
@@ -292,7 +311,9 @@ def main() -> int:
                     done_n += 1
                     continue
                 flag = []
-                if not b["ok"]:
+                if b.get("cut"):
+                    flag.append("끝")  # 후보가 모두 말 끝이 잘림: 끝을 줄여(trim) 튀지는 않지만 들어 볼 줄
+                elif not b["ok"]:
                     flag.append("길이")
                 if b["sim"] < sim_min(t["text"]):
                     flag.append("목소리")

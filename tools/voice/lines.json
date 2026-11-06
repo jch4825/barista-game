@@ -1542,6 +1542,54 @@
   "ep": "spring_1"
  },
  {
+  "key": "07f58d04",
+  "voice": "sys",
+  "text": "에스프레소가 빠졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7a801878",
+  "voice": "sys",
+  "text": "에스프레소는 빼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "b88f5d03",
+  "voice": "sys",
+  "text": "우유가 빠졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "4b2f60af",
+  "voice": "sys",
+  "text": "우유는 빼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "83697359",
+  "voice": "sys",
+  "text": "물이 빠졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "9a00b724",
+  "voice": "sys",
+  "text": "물은 빼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e7bab68d",
+  "voice": "sys",
+  "text": "바닐라 시럽이 빠졌어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "d4872860",
+  "voice": "sys",
+  "text": "바닐라 시럽은 빼요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "725ba814",
   "voice": "sys",
   "text": "믹스커피 가루를 컵에 털어 넣었어요.",
@@ -3186,6 +3234,84 @@
   "ep": "spring_3"
  },
  {
+  "key": "90c2d818",
+  "voice": "sys",
+  "text": "드립 원두가 빠졌어요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "7c08c864",
+  "voice": "sys",
+  "text": "드립 원두는 빼요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "edc4fa40",
+  "voice": "owner",
+  "text": "재료가 조금 다르네요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "b9f6e06d",
+  "voice": "owner",
+  "text": "재료가 조금 부족하네요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "f1e593f1",
+  "voice": "owner",
+  "text": "재료가 좀 많네요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "4f97ddc5",
+  "voice": "owner",
+  "text": "차갑게 드신답니다.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "70fc057f",
+  "voice": "owner",
+  "text": "따뜻하게 드신답니다.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "b0ecca69",
+  "voice": "owner",
+  "text": "손님은 가져가신답니다.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "a9f2921a",
+  "voice": "owner",
+  "text": "손님은 여기서 드시고 가신답니다.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "9f2bec42",
+  "voice": "owner",
+  "text": "이건 머그컵에 내요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "5b72b8af",
+  "voice": "owner",
+  "text": "이건 유리컵에 내요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "a2721d4e",
+  "voice": "owner",
+  "text": "이건 종이컵에 내요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "dbc64ce4",
+  "voice": "owner",
+  "text": "이건 플라스틱 컵에 내요.",
+  "ep": "spring_3"
+ },
+ {
   "key": "85caa794",
   "voice": "kang",
   "text": "…좋네.",
@@ -4122,6 +4248,12 @@
   "ep": "spring_5"
  },
  {
+  "key": "a32d2aeb",
+  "voice": "sys",
+  "text": "벚꽃 주간의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
+  "ep": "spring_5"
+ },
+ {
   "key": "acacd59d",
   "voice": "sys",
   "text": "주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
@@ -4899,6 +5031,18 @@
   "key": "a653ab85",
   "voice": "sys",
   "text": "딸기우유. 아이스. 딸기청, 우유.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "38008308",
+  "voice": "sys",
+  "text": "딸기청이 빠졌어요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "95577f49",
+  "voice": "sys",
+  "text": "딸기청은 빼요.",
   "ep": "spring_6"
  },
  {
@@ -5880,6 +6024,18 @@
   "ep": "summer_1"
  },
  {
+  "key": "f044ed7f",
+  "voice": "sys",
+  "text": "유자청이 빠졌어요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "d70110de",
+  "voice": "sys",
+  "text": "유자청은 빼요.",
+  "ep": "summer_1"
+ },
+ {
   "key": "9977f1de",
   "voice": "jian",
   "text": "노란색이요. 유자차 주세요.",
@@ -6576,6 +6732,18 @@
   "ep": "summer_3"
  },
  {
+  "key": "e15541b2",
+  "voice": "sys",
+  "text": "디카페인 원두가 빠졌어요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "c55aa856",
+  "voice": "sys",
+  "text": "디카페인 원두는 빼요.",
+  "ep": "summer_3"
+ },
+ {
   "key": "ef408b6d",
   "voice": "eunju",
   "text": "디카페인 라테 하나요.",
@@ -6837,6 +7005,18 @@
   "key": "a40f282d",
   "voice": "sys",
   "text": "보리차 티백",
+  "ep": "summer_3"
+ },
+ {
+  "key": "bf852a6b",
+  "voice": "sys",
+  "text": "보리차 티백이 빠졌어요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "14364542",
+  "voice": "sys",
+  "text": "보리차 티백은 빼요.",
   "ep": "summer_3"
  },
  {
@@ -7392,6 +7572,18 @@
   "ep": "summer_4"
  },
  {
+  "key": "f735a29f",
+  "voice": "sys",
+  "text": "말차 가루가 빠졌어요.",
+  "ep": "summer_4"
+ },
+ {
+  "key": "d1e00143",
+  "voice": "sys",
+  "text": "말차 가루는 빼요.",
+  "ep": "summer_4"
+ },
+ {
   "key": "0fdb8ff9",
   "voice": "jian",
   "text": "초록색이요. 녹차라테, 차갑게요.",
@@ -7935,6 +8127,12 @@
   "key": "c87ba4d5",
   "voice": "sys",
   "text": "문 열자마자 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "385de1d0",
+  "voice": "sys",
+  "text": "문 열자마자 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
   "ep": "summer_6"
  },
  {
@@ -9444,6 +9642,18 @@
   "ep": "autumn_1"
  },
  {
+  "key": "ba6b10a2",
+  "voice": "sys",
+  "text": "코코아 가루가 빠졌어요.",
+  "ep": "autumn_1"
+ },
+ {
+  "key": "fbb839a6",
+  "voice": "sys",
+  "text": "코코아 가루는 빼요.",
+  "ep": "autumn_1"
+ },
+ {
   "key": "4e2e639d",
   "voice": "jian",
   "text": "코코아요. 따뜻하게요.",
@@ -10605,6 +10815,12 @@
   "key": "89b4efc9",
   "voice": "sys",
   "text": "축제의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "138bc2fc",
+  "voice": "sys",
+  "text": "축제의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
   "ep": "autumn_4"
  },
  {
@@ -12387,6 +12603,18 @@
   "key": "46c5cd7d",
   "voice": "sys",
   "text": "믹스커피",
+  "ep": "autumn_7"
+ },
+ {
+  "key": "e3d9f608",
+  "voice": "sys",
+  "text": "믹스커피가 빠졌어요.",
+  "ep": "autumn_7"
+ },
+ {
+  "key": "8a74bc74",
+  "voice": "sys",
+  "text": "믹스커피는 빼요.",
   "ep": "autumn_7"
  },
  {
@@ -14838,6 +15066,12 @@
   "ep": "winter_5"
  },
  {
+  "key": "e1f950b4",
+  "voice": "sys",
+  "text": "불이 들어온 날의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
+  "ep": "winter_5"
+ },
+ {
   "key": "4217d2b7",
   "voice": "narr",
   "text": "은주 씨가 유모차를 밀고 들어온다. 그 뒤에 처음 보는 엄마가 서 있다.",
@@ -16296,6 +16530,12 @@
   "ep": "ending"
  },
  {
+  "key": "924f68a3",
+  "voice": "sys",
+  "text": "자유 영업. 봄의 하루.",
+  "ep": "free"
+ },
+ {
   "key": "caf753e6",
   "voice": "sys",
   "text": "오늘의 칠판. 평소와 같은 하루예요.",
@@ -17334,6 +17574,12 @@
   "ep": "free"
  },
  {
+  "key": "211c4042",
+  "voice": "sys",
+  "text": "혼자 맞는 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
+  "ep": "free"
+ },
+ {
   "key": "3298a48b",
   "voice": "customer-coffee",
   "text": "커피 말고, 따뜻한 거요.",
@@ -17412,6 +17658,12 @@
   "ep": "free"
  },
  {
+  "key": "368a915c",
+  "voice": "sys",
+  "text": "자유 영업. 여름의 하루.",
+  "ep": "free"
+ },
+ {
   "key": "f627ec48",
   "voice": "sys",
   "text": "오늘의 칠판. 마을에 행사가 있어요. 손님이 평소보다 많이 몰려와요.",
@@ -17433,6 +17685,12 @@
   "key": "4232115d",
   "voice": "sys",
   "text": "행사 날의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오래 두면 사장님이 받아 줘요.",
+  "ep": "free"
+ },
+ {
+  "key": "9c7c21a8",
+  "voice": "sys",
+  "text": "행사 날의 몰림 시간. 주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.",
   "ep": "free"
  },
  {
@@ -18096,6 +18354,12 @@
   "ep": "free"
  },
  {
+  "key": "b00268ff",
+  "voice": "sys",
+  "text": "자유 영업. 가을의 하루.",
+  "ep": "free"
+ },
+ {
   "key": "ac140f96",
   "voice": "narr",
   "text": "오늘도 가게 문을 연다. 가을 아침의 바닷가 마을은 조용하다.",
@@ -18375,6 +18639,12 @@
   "key": "7c58544f",
   "voice": "customer-olive",
   "text": "따뜻한 바닐라 라테요.",
+  "ep": "free"
+ },
+ {
+  "key": "d10588cc",
+  "voice": "sys",
+  "text": "자유 영업. 겨울의 하루.",
   "ep": "free"
  },
  {
@@ -19614,6 +19884,12 @@
   "ep": "common"
  },
  {
+  "key": "d62b932c",
+  "voice": "sys",
+  "text": "자유 영업. 오늘 하루를 돌아봐요.",
+  "ep": "common"
+ },
+ {
   "key": "42d7fc58",
   "voice": "sys",
   "text": "기뻐요",
@@ -20002,5 +20278,923 @@
   "voice": "sys",
   "text": "나의 권리, 스스로 해냈어요.",
   "ep": "result"
+ },
+ {
+  "key": "6065d27d",
+  "voice": "sys",
+  "text": "오늘 받은 돈은 육만 천구백이십원이에요.",
+  "ep": "result"
+ },
+ {
+  "key": "96bf3d20",
+  "voice": "sys",
+  "text": "오늘 받은 돈은 육만 사천이백원이에요.",
+  "ep": "result"
+ },
+ {
+  "key": "713aff80",
+  "voice": "sys",
+  "text": "알맞아요 칸이 조금씩 넓어져요.",
+  "ep": "result"
+ },
+ {
+  "key": "99aa5e5b",
+  "voice": "sys",
+  "text": "손맛이 이단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "eeadbb8e",
+  "voice": "sys",
+  "text": "손맛이 삼단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "cb5b94de",
+  "voice": "sys",
+  "text": "손맛이 사단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "b8008734",
+  "voice": "sys",
+  "text": "손맛이 오단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "9cb30649",
+  "voice": "sys",
+  "text": "손맛이 육단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "adc9d143",
+  "voice": "sys",
+  "text": "손맛이 칠단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "9c603c8d",
+  "voice": "sys",
+  "text": "손맛이 팔단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "b7ddd73d",
+  "voice": "sys",
+  "text": "손맛이 구단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "b4b64be4",
+  "voice": "sys",
+  "text": "손맛이 십단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "2c648c0a",
+  "voice": "sys",
+  "text": "단골의 늘 먹던 것을 한 번에 담을 수 있어요.",
+  "ep": "result"
+ },
+ {
+  "key": "10406299",
+  "voice": "sys",
+  "text": "기억이 이단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "e8f0c558",
+  "voice": "sys",
+  "text": "기억이 삼단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "ccca3348",
+  "voice": "sys",
+  "text": "기억이 사단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "9131b1c2",
+  "voice": "sys",
+  "text": "기억이 오단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "13b2a9b7",
+  "voice": "sys",
+  "text": "기억이 육단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "10c2a071",
+  "voice": "sys",
+  "text": "기억이 칠단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "a9f1f5f3",
+  "voice": "sys",
+  "text": "기억이 팔단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "84ca101f",
+  "voice": "sys",
+  "text": "기억이 구단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "d119a29e",
+  "voice": "sys",
+  "text": "기억이 십단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "85136b8d",
+  "voice": "sys",
+  "text": "온도와 매장   포장을 한 번에 물어볼 수 있어요.",
+  "ep": "result"
+ },
+ {
+  "key": "0deeacd0",
+  "voice": "sys",
+  "text": "응대가 이단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "fbd3b931",
+  "voice": "sys",
+  "text": "응대가 삼단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "51875901",
+  "voice": "sys",
+  "text": "응대가 사단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "2c6f5b8f",
+  "voice": "sys",
+  "text": "응대가 오단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "ceef4792",
+  "voice": "sys",
+  "text": "응대가 육단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "efec3f38",
+  "voice": "sys",
+  "text": "응대가 칠단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "d9b9b45e",
+  "voice": "sys",
+  "text": "응대가 팔단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "7e669446",
+  "voice": "sys",
+  "text": "응대가 구단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "0e175743",
+  "voice": "sys",
+  "text": "응대가 십단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "1091b017",
+  "voice": "sys",
+  "text": "바쁜 시간에 사장님이 더 일찍 도와줘요.",
+  "ep": "result"
+ },
+ {
+  "key": "d24f63f1",
+  "voice": "sys",
+  "text": "차분함이 이단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "3c804a50",
+  "voice": "sys",
+  "text": "차분함이 삼단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "e8a841e0",
+  "voice": "sys",
+  "text": "차분함이 사단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "1a65aafa",
+  "voice": "sys",
+  "text": "차분함이 오단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "59f49baf",
+  "voice": "sys",
+  "text": "차분함이 육단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "4918e409",
+  "voice": "sys",
+  "text": "차분함이 칠단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "64fa77eb",
+  "voice": "sys",
+  "text": "차분함이 팔단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "795c6117",
+  "voice": "sys",
+  "text": "차분함이 구단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "e1daca46",
+  "voice": "sys",
+  "text": "차분함이 십단계가 되었어요!",
+  "ep": "result"
+ },
+ {
+  "key": "6d4b74ca",
+  "voice": "sys",
+  "text": "이제 새내기 바리스타예요!",
+  "ep": "result"
+ },
+ {
+  "key": "d96a537a",
+  "voice": "sys",
+  "text": "이제 바리스타예요!",
+  "ep": "result"
+ },
+ {
+  "key": "8e4b3bda",
+  "voice": "sys",
+  "text": "이제 마을의 바리스타예요!",
+  "ep": "result"
+ },
+ {
+  "key": "77efa6ba",
+  "voice": "sys",
+  "text": "이제 우리 카페의 바리스타예요!",
+  "ep": "result"
+ },
+ {
+  "key": "167b76ff",
+  "voice": "sys",
+  "text": "해순 할머니.",
+  "ep": "notebook"
+ },
+ {
+  "key": "ca122a87",
+  "voice": "sys",
+  "text": "늘 마시는 것: 따뜻한 우유 두 잔.",
+  "ep": "notebook"
+ },
+ {
+  "key": "50179b70",
+  "voice": "sys",
+  "text": "창가 자리.",
+  "ep": "notebook"
+ },
+ {
+  "key": "35be00f0",
+  "voice": "sys",
+  "text": "한 잔은 빈 의자 앞에.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2032402e",
+  "voice": "sys",
+  "text": "늘 마시는 것: 아직 몰라요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "ca863b28",
+  "voice": "sys",
+  "text": "\"늘 먹던 거\"를 한 번 맞게 내면 적혀요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "93398187",
+  "voice": "sys",
+  "text": "기억 카드: 해순 할머니는 우유 두 잔을 시키고, 한 잔은 늘 빈 의자 앞에 둔다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f21b1081",
+  "voice": "sys",
+  "text": "기억 카드: 할머니 옆의 빈 의자는, 누가 앉으면 할머니가 말을 멈출 만큼 소중한 자리다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "1daf0d4f",
+  "voice": "sys",
+  "text": "기억 카드: 할머니는 우유가 한 잔뿐인 날에도 서두르지 않고 기다려 주셨다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "bedeae70",
+  "voice": "sys",
+  "text": "기억 카드: 할머니는 담요를 남에게 다 나눠 주고, 빈 의자부터 챙기는 사람이다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2fe8e44b",
+  "voice": "sys",
+  "text": "기억 카드: 할머니에게는 방학이면 놀러 오는 손녀가 있다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "8e405ed8",
+  "voice": "sys",
+  "text": "들은 이야기: 남편의 마지막 주문.",
+  "ep": "notebook"
+ },
+ {
+  "key": "965c28e1",
+  "voice": "sys",
+  "text": "\"그 사람이 마지막으로 시킨 게 우유 두 잔이었어요.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "d86de3f4",
+  "voice": "sys",
+  "text": "지안.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f1c76dcf",
+  "voice": "sys",
+  "text": "늘 마시는 것: 그날의 색.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f5ad8a38",
+  "voice": "sys",
+  "text": "\"오늘은 어떤 색이에요?\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "58a475df",
+  "voice": "sys",
+  "text": "하고 물어봐요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "b5f02b08",
+  "voice": "sys",
+  "text": "기억 카드: 지안 씨는 \"아무거나\"라고 말하지만, 메뉴판의 색 동그라미를 오래 본다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9c04bdcd",
+  "voice": "sys",
+  "text": "기억 카드: 지안 씨의 스케치북은 오래 비어 있었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "59eb2614",
+  "voice": "sys",
+  "text": "더우면 색이 다 똑같아 보인다고 했다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3e6470ed",
+  "voice": "sys",
+  "text": "기억 카드: 지안 씨는 창밖의 계절 색을 보고 마실 것을 고른다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "d922a550",
+  "voice": "sys",
+  "text": "기억 카드: 지안 씨는 정전 밤에 촛불 옆에서 연필을 쥐고 있었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "41c4291a",
+  "voice": "sys",
+  "text": "기억 카드: 지안 씨의 스케치북이 여러 색으로 두툼해졌다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "01ec2410",
+  "voice": "sys",
+  "text": "들은 이야기: 지은의 손.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3cbd60ce",
+  "voice": "sys",
+  "text": "\"커피 내리는 손이요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "70ce3bcb",
+  "voice": "sys",
+  "text": "천천히 움직여서, 그리기 좋았어요.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "e81ba8be",
+  "voice": "sys",
+  "text": "도 씨.",
+  "ep": "notebook"
+ },
+ {
+  "key": "ecb3e43b",
+  "voice": "sys",
+  "text": "늘 마시는 것: 아이스 아메리카노.",
+  "ep": "notebook"
+ },
+ {
+  "key": "e4a4787d",
+  "voice": "sys",
+  "text": "비가 와도 아이스.",
+  "ep": "notebook"
+ },
+ {
+  "key": "be28c29e",
+  "voice": "sys",
+  "text": "유리컵, 서서 마셔요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "43844389",
+  "voice": "sys",
+  "text": "기억 카드: 도 씨는 앉으면 못 일어난다며, 늘 서서 커피를 마신다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "c22db7ed",
+  "voice": "sys",
+  "text": "기억 카드: 도 씨는 비에 젖어도 자기 얼굴보다 편지를 먼저 닦는다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "c6b17913",
+  "voice": "sys",
+  "text": "기억 카드: 도 씨의 우편 가방은 무거워서, 잠깐 내려놓을 곳이 필요하다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "55234b35",
+  "voice": "sys",
+  "text": "기억 카드: 도 씨는 곧 정년 퇴직을 한다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "95e26999",
+  "voice": "sys",
+  "text": "기억 카드: 오늘은 도 씨의 마지막 배달 날이었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "4b019950",
+  "voice": "sys",
+  "text": "들은 이야기: 마지막 우편.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3d87804e",
+  "voice": "sys",
+  "text": "\"서른 해 동안 남의 편지만 날랐어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "22a1d5f6",
+  "voice": "sys",
+  "text": "마지막은 내 편지를 날라 보고 싶었어요.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "a192a95f",
+  "voice": "sys",
+  "text": "강 씨.",
+  "ep": "notebook"
+ },
+ {
+  "key": "ec052077",
+  "voice": "sys",
+  "text": "늘 마시는 것: 새벽 블랙(핸드드립).",
+  "ep": "notebook"
+ },
+ {
+  "key": "8fc934ea",
+  "voice": "sys",
+  "text": "머그컵.",
+  "ep": "notebook"
+ },
+ {
+  "key": "688ec6cc",
+  "voice": "sys",
+  "text": "뒤쪽 테이블에서 창 너머 바다를 봐요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9d87c468",
+  "voice": "sys",
+  "text": "기억 카드: 강 씨는 불이 켜진 가게에만 들어온다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "312dfc2a",
+  "voice": "sys",
+  "text": "늘 마시는 것은 새벽 블랙이다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "5c4aca8c",
+  "voice": "sys",
+  "text": "기억 카드: 강 씨는 바다에 나가지 않는 날에도 항구의 배 자리를 오래 본다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "180888e5",
+  "voice": "sys",
+  "text": "기억 카드: 강 씨는 사흘 동안 오지 않다가, 늘 앉던 뒤쪽 테이블로 돌아왔다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "32ef0fbe",
+  "voice": "sys",
+  "text": "기억 카드: 강 씨는 낡은 양복을 입은 날에도 늘 쓰던 머그잔을 찾는다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "553581b4",
+  "voice": "sys",
+  "text": "기억 카드: 마을에는 강 씨가 배를 팔았다는 소문이 돈다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "207a260e",
+  "voice": "sys",
+  "text": "들은 이야기: 배를 판 날.",
+  "ep": "notebook"
+ },
+ {
+  "key": "10257f7c",
+  "voice": "sys",
+  "text": "\"그날 바다가 참 잔잔했어.",
+  "ep": "notebook"
+ },
+ {
+  "key": "86e8e892",
+  "voice": "sys",
+  "text": "그래서 더 못 말했지.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "fea1d0ca",
+  "voice": "sys",
+  "text": "한 씨.",
+  "ep": "notebook"
+ },
+ {
+  "key": "bd0c1f20",
+  "voice": "sys",
+  "text": "늘 마시는 것: 달게 한 잔(바닐라 라테).",
+  "ep": "notebook"
+ },
+ {
+  "key": "a165654f",
+  "voice": "sys",
+  "text": "따뜻하게, 종이컵.",
+  "ep": "notebook"
+ },
+ {
+  "key": "1404354d",
+  "voice": "sys",
+  "text": "새벽 여섯 시 십분, 십분만 쉬어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "fa3be29e",
+  "voice": "sys",
+  "text": "기억 카드: 한 씨는 밤 버스 기사님이다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "54f9aff2",
+  "voice": "sys",
+  "text": "버스를 차고에 넣기 전 십분 동안 들른다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "d7593438",
+  "voice": "sys",
+  "text": "기억 카드: 한 씨는 날마다 새벽 여섯 시 십 분에 온다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "5e1b4732",
+  "voice": "sys",
+  "text": "늘 마시는 것은 달게 한 잔이다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "98f6dc56",
+  "voice": "sys",
+  "text": "기억 카드: 한 씨에게는 학교에 다니는 딸이 있다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3635a485",
+  "voice": "sys",
+  "text": "한 씨가 집에 가면 딸은 이미 학교에 가 있다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "fc34099e",
+  "voice": "sys",
+  "text": "기억 카드: 안개가 낀 날, 한 씨에게는 삼분밖에 없었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "6cd75790",
+  "voice": "sys",
+  "text": "기억 카드: 한 씨의 딸은 코코아를 좋아하지만, 아빠에게 말하지 않았다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "5fcaa8b7",
+  "voice": "sys",
+  "text": "들은 이야기: 컵 속의 쪽지.",
+  "ep": "notebook"
+ },
+ {
+  "key": "4cc523aa",
+  "voice": "sys",
+  "text": "\"아빠가 먼저 갈게.",
+  "ep": "notebook"
+ },
+ {
+  "key": "26eaa75b",
+  "voice": "sys",
+  "text": "아침 꼭 먹어.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "b85bdce3",
+  "voice": "sys",
+  "text": "컵 받침에 쓴 쪽지.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f48bee74",
+  "voice": "sys",
+  "text": "은주.",
+  "ep": "notebook"
+ },
+ {
+  "key": "eed8c4d6",
+  "voice": "sys",
+  "text": "늘 마시는 것: 디카페인 라테.",
+  "ep": "notebook"
+ },
+ {
+  "key": "83b0622f",
+  "voice": "sys",
+  "text": "따뜻하게.",
+  "ep": "notebook"
+ },
+ {
+  "key": "b7ed980d",
+  "voice": "sys",
+  "text": "두꺼운 컵에 뚜껑을 덮으면 덜 식어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "8acf4e20",
+  "voice": "sys",
+  "text": "기억 카드: 은주 씨는 아기를 돌보느라 커피를 끝까지 마셔 본 적이 없다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "b71b61bf",
+  "voice": "sys",
+  "text": "기억 카드: 은주 씨는 요즘 아기하고만 이야기한다고 했다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "c216badb",
+  "voice": "sys",
+  "text": "기억 카드: 은주 씨의 유모차는 좁은 통로에서 의자 다리에 걸린다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "def59629",
+  "voice": "sys",
+  "text": "기억 카드: 은주 씨의 아기가 감기에 걸렸다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "0233de2e",
+  "voice": "sys",
+  "text": "은주 씨는 많이 지쳐 보였다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "e7d2489f",
+  "voice": "sys",
+  "text": "기억 카드: 은주 씨가 처음 온 엄마를 카페에 데려왔다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "c747fc53",
+  "voice": "sys",
+  "text": "들은 이야기: 일주일의 말.",
+  "ep": "notebook"
+ },
+ {
+  "key": "dba1d938",
+  "voice": "sys",
+  "text": "\"일주일 동안 어른이랑 말한 게 여기가 처음이었어요.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "6e895236",
+  "voice": "sys",
+  "text": "수민.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9409d88f",
+  "voice": "sys",
+  "text": "늘 마시는 것: 보리차(가장 싼 음료).",
+  "ep": "notebook"
+ },
+ {
+  "key": "a4a9b8a5",
+  "voice": "sys",
+  "text": "구석 자리.",
+  "ep": "notebook"
+ },
+ {
+  "key": "533c3ed6",
+  "voice": "sys",
+  "text": "말 걸기보다 조용히.",
+  "ep": "notebook"
+ },
+ {
+  "key": "82d3a02c",
+  "voice": "sys",
+  "text": "기억 카드: 수민은 가장 구석진 자리에서 이어폰을 끼고 문제집을 푼다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9b0ad64b",
+  "voice": "sys",
+  "text": "기억 카드: 수민은 비 오는 날 우산이 없어서 처마 밑에 서 있었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9ac91008",
+  "voice": "sys",
+  "text": "기억 카드: 수민은 바다가 없는 먼 도시의 대학교를 생각하고 있다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3bb681ba",
+  "voice": "sys",
+  "text": "기억 카드: 오늘은 수민의 수능 날이었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "6f69cdfb",
+  "voice": "sys",
+  "text": "수험표를 쥔 손이 많이 떨렸다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "fe393c29",
+  "voice": "sys",
+  "text": "기억 카드: 수민이 아직 뜯지 않은 대학교 봉투를 들고 왔다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "504e9dee",
+  "voice": "sys",
+  "text": "들은 이야기: 합격 통지서.",
+  "ep": "notebook"
+ },
+ {
+  "key": "a5ff0701",
+  "voice": "sys",
+  "text": "\"여기서 열고 싶었어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3a3299f6",
+  "voice": "sys",
+  "text": "혼자 열면 무서울 것 같아서.\"",
+  "ep": "notebook"
+ },
+ {
+  "key": "31d86e74",
+  "voice": "sys",
+  "text": "노 씨.",
+  "ep": "notebook"
+ },
+ {
+  "key": "a6d150a3",
+  "voice": "sys",
+  "text": "늘 마시는 것: 믹스커피(사장님 방식).",
+  "ep": "notebook"
+ },
+ {
+  "key": "e2800ba9",
+  "voice": "sys",
+  "text": "종이컵, 물은 선까지, 열 바퀴.",
+  "ep": "notebook"
+ },
+ {
+  "key": "25018703",
+  "voice": "sys",
+  "text": "기억 카드: 노 씨는 철물점 주인이다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "eae17cf4",
+  "voice": "sys",
+  "text": "사장님은 서른 해 동안 노 씨에게 믹스커피를 타 주었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "7b3a7559",
+  "voice": "sys",
+  "text": "기억 카드: 노 씨는 사장님 몰래 선반을 낮추고, 수도꼭지를 돌리기 쉽게 바꿔 주었다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2afc0e3a",
+  "voice": "sys",
+  "text": "기억 카드: 노 씨는 사장님의 빈 잔을 오래 보았다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "da63e89e",
+  "voice": "sys",
+  "text": "늘 사장님이 타 주던 커피가 있다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "a1354afd",
+  "voice": "sys",
+  "text": "기억 카드: 노 씨는 \"지나가다 들렀다\"며 사흘째 아침마다 온다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "900fb6a2",
+  "voice": "sys",
+  "text": "기억 카드: 노 씨가 오래된 랜턴을 가져왔다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "3070e407",
+  "voice": "sys",
+  "text": "꼭 사장님 자리 위의 못에 걸고 싶어 했다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "6d26e1f1",
+  "voice": "sys",
+  "text": "들은 이야기: 처음 떨린 날.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f36eb111",
+  "voice": "sys",
+  "text": "\"그날 내가 옆에 있었어.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2123bd23",
+  "voice": "sys",
+  "text": "아무 말도 안 했지.",
+  "ep": "notebook"
+ },
+ {
+  "key": "697ee06f",
+  "voice": "sys",
+  "text": "그게 그 사람 방식이니까.\"",
+  "ep": "notebook"
  }
 ]

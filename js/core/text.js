@@ -102,6 +102,14 @@ export function plain(str) {
  * 음성 파일 키: FNV-1a 32bit (UTF-8). tools/export-lines.mjs 와 같은 함수를 씁니다.
  * key = hashKey(`${voiceId}|${speakable(text)}`)
  */
+/**
+ * 문장 나누기: . ! ? … 뒤(닫는 따옴표 · 괄호까지)에서 자름. 여러 문장을 이어 붙인 말은 통째로는 음성 파일이 없어,
+ * tts 가 문장마다 나눠 그 문장의 파일로 읽음(검수 13.63). tools/export-lines.mjs 도 같은 나누기로 문장마다 줄을 만듦
+ */
+export function sentencesOf(text) {
+  return (String(text).match(/[^.!?…]+(?:[.!?…]+["'”’」)]*|$)/g) || []).map((p) => p.trim()).filter(Boolean);
+}
+
 export function hashKey(str) {
   const bytes = new TextEncoder().encode(str);
   let h = 0x811c9dc5;

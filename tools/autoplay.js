@@ -50,7 +50,7 @@ function pickRespond(choices, mode) {
   return choices.find((c) => c.score === score) || choices.find((c) => c.score === 2) || choices[0];
 }
 
-export async function autoplay({ episode = null, bad = false, timeout = false, respond = 'best', hint = false, delay = 40, maxSteps = 6000 } = {}) {
+export async function autoplay({ episode = null, bad = false, timeout = false, respond = 'best', hint = false, delay = 40, maxSteps = 12000 } = {}) { // 걸음 한도: 긴 날(봄 5일 · 자유 영업)은 6,000을 넘음(검수 13.63)
   const J = window.__jm;
   if (!J) throw new Error('?debug 로 열어 주세요');
   if (episode && episode !== 'free' && !J.getEpisode(episode)) throw new Error(`없는 에피소드: ${episode} (쓸 수 있는 것: ${[...EPISODES, ENDING].map((e) => e.id).join(' ')})`);

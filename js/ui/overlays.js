@@ -157,7 +157,7 @@ export const ov = {
   },
 
   /* ---------- 큰 제목 (장 제목) ---------- */
-  async big(text, sub = '') {
+  async big(text, sub = '', say = null) {
     const go = h('button', { class: 'btn btn-small ov-next' }, '계속 ▶');
     const el = h('section', { class: 'ov ov-big', role: 'dialog', 'aria-label': `${text} ${sub}` },
       h('div', { class: 'big-emblem', html: EMBLEM }),
@@ -166,7 +166,7 @@ export const ov = {
     el.addEventListener('click', () => go.click());
     const close = mount(el);
     audio.sfx('whoosh');
-    const voiceP = tts.speak(`${text}. ${sub}`, 'sys');
+    const voiceP = tts.speak(say || `${text}. ${sub}`, 'sys');
     go.focus({ preventScroll: true });
     await waitButton(go, 3200, voiceP);
     tts.stop();
