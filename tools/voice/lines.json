@@ -174,9 +174,21 @@
   "ep": "spring_1"
  },
  {
+  "key": "32aeafdc",
+  "voice": "sys",
+  "text": "창밖에서 본 것을 세어 봤어요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "df58d051",
   "voice": "sys",
   "text": "갈매기 일",
+  "ep": "spring_1"
+ },
+ {
+  "key": "7ba49afb",
+  "voice": "sys",
+  "text": "갈매기 한 마리",
   "ep": "spring_1"
  },
  {
@@ -186,9 +198,21 @@
   "ep": "spring_1"
  },
  {
+  "key": "0dbddd49",
+  "voice": "sys",
+  "text": "갈매기 두 마리",
+  "ep": "spring_1"
+ },
+ {
   "key": "dd65991e",
   "voice": "sys",
   "text": "갈매기 삼",
+  "ep": "spring_1"
+ },
+ {
+  "key": "2c00e891",
+  "voice": "sys",
+  "text": "갈매기 세 마리",
   "ep": "spring_1"
  },
  {
@@ -198,9 +222,45 @@
   "ep": "spring_1"
  },
  {
+  "key": "cf358b3a",
+  "voice": "sys",
+  "text": "갈매기 네 마리",
+  "ep": "spring_1"
+ },
+ {
   "key": "714cea34",
   "voice": "sys",
   "text": "갈매기 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "179f0610",
+  "voice": "sys",
+  "text": "갈매기 다섯 마리",
+  "ep": "spring_1"
+ },
+ {
+  "key": "c657fd5f",
+  "voice": "sys",
+  "text": "갈매기 육",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ca0c34c9",
+  "voice": "sys",
+  "text": "갈매기 여섯 마리",
+  "ep": "spring_1"
+ },
+ {
+  "key": "539eab71",
+  "voice": "sys",
+  "text": "갈매기 칠",
+  "ep": "spring_1"
+ },
+ {
+  "key": "29d4f1ba",
+  "voice": "sys",
+  "text": "갈매기 일곱 마리",
   "ep": "spring_1"
  },
  {
@@ -210,9 +270,21 @@
   "ep": "spring_1"
  },
  {
+  "key": "094d87db",
+  "voice": "sys",
+  "text": "고깃배 한 척",
+  "ep": "spring_1"
+ },
+ {
   "key": "a762553d",
   "voice": "sys",
   "text": "고깃배 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "0494a271",
+  "voice": "sys",
+  "text": "고깃배 두 척",
   "ep": "spring_1"
  },
  {
@@ -222,15 +294,9 @@
   "ep": "spring_1"
  },
  {
-  "key": "ad33007a",
+  "key": "9141d309",
   "voice": "sys",
-  "text": "고깃배 사",
-  "ep": "spring_1"
- },
- {
-  "key": "2169d110",
-  "voice": "sys",
-  "text": "고깃배 오",
+  "text": "고깃배 세 척",
   "ep": "spring_1"
  },
  {
@@ -240,27 +306,21 @@
   "ep": "spring_1"
  },
  {
+  "key": "6d10f594",
+  "voice": "sys",
+  "text": "등대 한 개",
+  "ep": "spring_1"
+ },
+ {
   "key": "24e24c6d",
   "voice": "sys",
   "text": "등대 이",
   "ep": "spring_1"
  },
  {
-  "key": "1b00fd5a",
+  "key": "fe07a2e2",
   "voice": "sys",
-  "text": "등대 삼",
-  "ep": "spring_1"
- },
- {
-  "key": "0b00e42a",
-  "voice": "sys",
-  "text": "등대 사",
-  "ep": "spring_1"
- },
- {
-  "key": "7ee995e0",
-  "voice": "sys",
-  "text": "등대 오",
+  "text": "등대 두 개",
   "ep": "spring_1"
  },
  {
@@ -270,9 +330,21 @@
   "ep": "spring_1"
  },
  {
+  "key": "e274105d",
+  "voice": "sys",
+  "text": "물고기 한 마리",
+  "ep": "spring_1"
+ },
+ {
   "key": "6cc4aeaf",
   "voice": "sys",
   "text": "물고기 이",
+  "ep": "spring_1"
+ },
+ {
+  "key": "40c2639f",
+  "voice": "sys",
+  "text": "물고기 두 마리",
   "ep": "spring_1"
  },
  {
@@ -282,15 +354,9 @@
   "ep": "spring_1"
  },
  {
-  "key": "e28b7ce0",
+  "key": "21d102fb",
   "voice": "sys",
-  "text": "물고기 사",
-  "ep": "spring_1"
- },
- {
-  "key": "8eca0cfa",
-  "voice": "sys",
-  "text": "물고기 오",
+  "text": "물고기 세 마리",
   "ep": "spring_1"
  },
  {

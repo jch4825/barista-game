@@ -11,6 +11,7 @@ import { h, sleep, dur, isReducedMotion } from '../../core/dom.js';
 import { ICON } from '../../data/icons.js';
 import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
+import { josaOnly } from '../../core/text.js';
 import { frame, line, abortGeneration, abortMinigame } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus as evBus } from '../../core/bus.js';
@@ -32,10 +33,26 @@ const SIGHTS = {
   fish: { name: '물고기', unit: '마리', y: [58, 64], svg: '<svg viewBox="0 0 110 70"><path d="M14 35 q34 -30 70 0 q-36 30 -70 0z" fill="#7FB3D5" stroke="#2F5D7A" stroke-width="4"/><path d="M84 35 l20 -16 v32z" fill="#7FB3D5" stroke="#2F5D7A" stroke-width="4" stroke-linejoin="round"/><circle cx="34" cy="31" r="4" fill="#222"/></svg>' },
 };
 const ORDER = ['gull', 'boat', 'gull', 'fish', 'lighthouse', 'gull', 'boat', 'fish', 'gull'];
+const FIRST_MS = 400;            // 첫 풍경이 나오는 때
+const GAP_MS = [2600, 1400];     // 다음 풍경까지: 2.6초 + 0~1.4초(× 빠르기 k)
+const SUMMARY = '창밖에서 본 것을 세어 봤어요.'; // 마지막 요약의 첫 말(요약은 조각마다 음성 파일로 읽음)
+const countSay = (id, n) => `${SIGHTS[id].name} ${n}`; // 누를 때 세는 말
+const totalSay = (id, n) => `${SIGHTS[id].name} ${n}${SIGHTS[id].unit}`; // 요약 조각
+
+/**
+ * 한 번 타는 동안 풍경마다 셀 수 있는 가장 많은 수: 세는 말 · 요약 조각의 음성 파일을 이만큼 만듦.
+ * 풍경 수는 빠르기 k 와 상관없음(간격과 시간이 함께 k 배). 2026-11-06 사용자 '갈매기6' 음성이 다름: 5까지만 만들어 6 · 7 은 브라우저 음성이었음
+ */
+function maxSeen(opts = {}) {
+  const n = 1 + Math.floor(((opts.seconds || 38) * 1000 - FIRST_MS) / GAP_MS[0]);
+  const out = Object.fromEntries(Object.keys(SIGHTS).map((id) => [id, 0]));
+  for (let i = 0; i < Math.max(n, ORDER.length); i++) out[ORDER[i % ORDER.length]] += 1;
+  return out;
+}
 
 export function busLines(opts = {}) {
-  const out = [...line.intro(opts.title || TITLE, HOWTO), ...Object.values(SAY).map(line.sys)];
-  for (const s of Object.values(SIGHTS)) for (let n = 1; n <= 5; n++) out.push(line.sys(`${s.name} ${n}`));
+  const out = [...line.intro(opts.title || TITLE, HOWTO), ...Object.values(SAY).map(line.sys), line.sys(SUMMARY)];
+  for (const [id, max] of Object.entries(maxSeen(opts))) for (let n = 1; n <= max; n++) out.push(line.sys(countSay(id, n)), line.sys(totalSay(id, n)));
   return out;
 }
 export function busProblems() { return []; }
@@ -97,7 +114,7 @@ export async function bus(opts = {}) {
       const lr = lane.getBoundingClientRect();
       const kk = lane.offsetWidth ? lr.width / lane.offsetWidth : 1;
       popText(lane, `${s.name} ${seen[id]}!`, (r.left + r.width / 2 - lr.left) / kk, (r.top - lr.top) / kk);
-      tts.speak(`${s.name} ${seen[id]}`, 'sys');
+      tts.speak(countSay(id, seen[id]), 'sys');
       b.classList.add('is-got');
       paint();
       if (turn) setTimeout(() => nextB?.focus({ preventScroll: true }), 40);
@@ -149,13 +166,13 @@ export async function bus(opts = {}) {
   /* ---- 시간 ---- */
   const total = (opts.seconds || 38) * 1000 * k;
   let tAcc = 0;
-  let sightIn = 400;
+  let sightIn = FIRST_MS;
   let nextBump = 7000 * k;
   function step(dt) {
     if (over || !started) return;
     tAcc += dt;
     sightIn -= dt;
-    if (sightIn <= 0) { addSight(); sightIn = (2600 + Math.random() * 1400) * k; }
+    if (sightIn <= 0) { addSight(); sightIn = (GAP_MS[0] + Math.random() * GAP_MS[1]) * k; }
     for (const it of [...flying]) {
       it.t += dt;
       if (auto && !it.b.disabled && it.t > 1200) it.b.click();
@@ -193,11 +210,13 @@ export async function bus(opts = {}) {
     strap.disabled = true;
     if (nextB) nextB.disabled = true;
     for (const it of flying) it.b.disabled = true;
-    const parts = Object.entries(seen).filter(([, n]) => n).map(([id, n]) => `${SIGHTS[id].name} ${n}${SIGHTS[id].unit}`);
-    const text = parts.length ? `${parts.join(', ')}를 봤어요. ${SAY.end}` : SAY.end;
+    const parts = Object.entries(seen).filter(([, n]) => n).map(([id, n]) => totalSay(id, n));
+    // 화면 글: '갈매기 6마리, 고깃배 3척을 봤어요.'(조사는 마지막 말에 맞춤) · 소리: 바뀌지 않는 조각마다 음성 파일(요약 첫 말 → 풍경마다 → 끝말)
+    const text = parts.length ? `${parts.join(', ')}${josaOnly(parts[parts.length - 1], '을/를')} 봤어요. ${SAY.end}` : SAY.end;
     tally.textContent = text;
     audio.sfx('bus'); // 브레이크 → 손 브레이크: 정류장에 섬
-    await Promise.race([Promise.all([tts.speak(text, 'sys'), sleep(dur(900))]), sleep(9000)]);
+    const say = parts.length ? [SUMMARY, ...parts, SAY.end] : [SAY.end];
+    await Promise.race([Promise.all([tts.speakSeq(say, 'sys'), sleep(dur(900))]), sleep(4000 + say.length * 2500)]);
     doneRes('done');
   }
 
