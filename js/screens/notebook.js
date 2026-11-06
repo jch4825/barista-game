@@ -29,6 +29,12 @@ import { audio } from '../av/audio.js';
 import { ov } from '../ui/overlays.js';
 import { openScreen } from './screen.js';
 
+/** 꾸미기 · 앞치마 그림(꾸미기 시트, 2026-11-06 받음: assets/objects/deco_* · apron_*, 기본 초록 앞치마는 apron_basic). 없으면 아이콘 */
+export const decoPic = (it, icon) => {
+  const id = it.id === 'basic' ? 'apron_basic' : it.id;
+  return img.has('objects', id) ? `<img src="${img.url('objects', id)}" alt="" draggable="false">` : ICON(icon);
+};
+
 const TABS = [
   ['regulars', '단골', 'team'],
   ['grow', '나의 성장', 'star'],
@@ -232,7 +238,7 @@ function growView() {
     const apron = grow.apronOf(g.apron);
     const head = h('div', { class: 'gr-head' },
       h('div', { class: 'gr-rank' }, h('i', { html: ICON('badge') }), h('b', { text: rk.name })),
-      h('div', { class: 'gr-apron', style: { '--c': apron.color } }, h('i', { html: ICON('apron') }), h('span', { text: apron.name })),
+      h('div', { class: 'gr-apron', style: { '--c': apron.color } }, h('i', { html: decoPic(apron, 'apron') }), h('span', { text: apron.name })),
       h('div', { class: 'gr-money' }, h('i', { html: ICON('coin') }), h('b', { text: `모은 돈 ${grow.won(g.money)}` }), h('small', { text: `지금까지 번 돈 ${grow.won(g.earned)}` })));
     const stats = h('section', { class: 'gr-stats' }, h('h3', { text: '능력치' }), ...grow.STATS.map((s) => {
       const v = st[s.id];
@@ -275,7 +281,7 @@ function growView() {
           }, h('i', { html: ICON('coin') }), h('span', { text: g.money < it.price ? `${grow.won(it.price)} · 돈이 모자라요` : `${grow.won(it.price)}에 사기` }));
         }
         return h('div', { class: `gr-item ${owned ? 'is-owned' : ''}`.trim(), style: it.color ? { '--c': it.color } : {} },
-          h('i', { class: 'gr-item-ico', html: ICON(it.kind === 'apron' ? 'apron' : it.icon) }),
+          h('i', { class: 'gr-item-ico', html: decoPic(it, it.kind === 'apron' ? 'apron' : it.icon) }),
           h('div', {}, h('b', { text: it.name }), h('small', { text: it.desc })), act);
       })));
     const found = new Set(g.odd);

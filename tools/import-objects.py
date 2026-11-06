@@ -82,7 +82,34 @@ SHEETS: dict[str, list[str | None]] = {
         None, None, None, None,
         None, None, None, None,
     ],
+    # 새 놀이의 그림(docs/image_requests.md 8.2 · 8.4, 2026-11-06 받음): 손그림 애니 그림체(짙은 갈색 선). 원본은 assets/_src/play/(SHEET_DIR)
+    #  그 갈매기(서 있음 · 놀람 · 빵 물고 날아감 · 높이 떠감) · 배 · 등대 · 물고기 · 자동차 · 배달 차 · 버스 · 지은의 가방
+    'sheet_play': [
+        'play_gull_stand', 'play_gull_startle', 'play_gull_fly', 'play_gull_glide',
+        'play_boat', 'play_lighthouse', 'play_fish', 'play_car',
+        'play_van', 'play_bus', 'play_bag', None,
+    ],
+    # 가게 꾸미기(js/core/grow.js 의 SHOP id 그대로) · 앞치마 다섯(초록 = 기본 앞치마 apron_basic)
+    'sheet_deco': [
+        'deco_pot', 'deco_chime', 'deco_bench', 'deco_lamp',
+        'deco_board', 'deco_flag', 'apron_navy', 'apron_brown',
+        'apron_stripe', 'apron_coral', 'apron_basic', None,
+    ],
 }
+SHEET_DIR = {'sheet_play': 'play', 'sheet_deco': 'play'}  # assets/_src/{여기} (적지 않은 시트는 objects)
+# 시트마다 다른 값: 손그림 시트는 짙은 선이 테두리라 안쪽 초록빛 누르기를 하지 않음(초록 앞치마 · 가방의 초록 담요가 회색이 되지 않게),
+#  물건 안쪽의 구멍도 아주 초록인 곳만(초록 앞치마가 뚫리지 않게)
+SHEET_OPT = {'sheet_play': {'hole': 0.85, 'spill_in': None}, 'sheet_deco': {'hole': 0.85, 'spill_in': None}}
+
+# 버스 창밖(docs/image_requests.md 8.3, 2026-11-06 받음): 시트가 아닌 한 장 그림 → assets/bg/{id}.webp
+#  key: 크고 이어진 초록 덩어리(하늘 자리 · 유리 자리)만 투명으로(동산의 풀빛 초록은 그대로) · mirror: 좌우로 뒤집은 그림을 옆에 붙여 끝없이 이어지게
+#  height: 게임에서 그리는 크기에 맞춰 줄임(px)
+LAYERS = {
+    'bus_far': {'key': False, 'height': 768},
+    'bus_hills': {'key': True, 'mirror': True, 'height': 640, 'crop': (0, 0, 0.94, 1)},  # 오른쪽 아래 Flow 표시(✦)를 잘라 내고 뒤집어 붙임
+    'bus_window_frame': {'key': True, 'height': 1080},
+}
+LAYER_OUT = ROOT / 'assets' / 'bg'
 
 # 바탕색(크로마키): 이름 → (바탕 채널 번호, 요청서의 색). 실제 바탕색은 시트에서 다시 잼(표본이 모자랄 때만 이 값)
 #  초록 물건(녹차라테 · 말차)이 든 시트는 파란 바탕: 초록 바탕이면 초록 물건이 바탕과 함께 지워지거나 회색이 됨
@@ -204,8 +231,8 @@ def resize_rgba(im: Image.Image, size: tuple[int, int]) -> Image.Image:
 
 
 # ---------------------------------------------------------------- 초록 지우기 (시트 한 장)
-def key_sheet(a: np.ndarray):
-    """→ (색, 투명도, 바탕 모형, 칸 크기)"""
+def key_sheet(a: np.ndarray, hole_k: float = HOLE, spill_in: int | None = SPILL_IN):
+    """→ (색, 투명도, 바탕 모형, 칸 크기). hole_k · spill_in 은 시트마다(SHEET_OPT), spill_in=None 이면 안쪽은 그대로"""
     H, W, _ = a.shape
     cw, ch = W / COLS, H / ROWS
     k = greenness(a)
@@ -233,7 +260,7 @@ def key_sheet(a: np.ndarray):
     seed = np.unique(lab[band & cand])
     seed = seed[seed > 0]
     bg = np.isin(lab, seed) if len(seed) else np.zeros_like(cand)
-    hole = ~bg & (k > HOLE * kb)  # 물건 안쪽의 아주 초록인 곳: 손잡이 구멍·유리 너머
+    hole = ~bg & (k > hole_k * kb)  # 물건 안쪽의 아주 초록인 곳: 손잡이 구멍·유리 너머
     clear = bg | hole
     edge = dilate(clear, EDGE_PX) & ~clear  # 바깥 배경·구멍과 맞닿은 테두리
     soft = clear | edge
@@ -245,9 +272,90 @@ def key_sheet(a: np.ndarray):
     rgb[soft] = unmix(a, alpha, pred)[soft]
     o = [i for i in range(3) if i != CH]
     mx = np.maximum(rgb[..., o[0]], rgb[..., o[1]])
-    lim = np.where(soft | (alpha < 0.999), mx + SPILL_EDGE, mx + SPILL_IN)
+    lim = np.where(soft | (alpha < 0.999), mx + SPILL_EDGE, mx + (SPILL_IN if spill_in is None else spill_in))
+    if spill_in is None:
+        lim = np.where(soft | (alpha < 0.999), lim, 1e9)
     rgb[..., CH] = np.minimum(rgb[..., CH], lim)
     return rgb, alpha, pred, (cw, ch)
+
+
+def key_layer(a: np.ndarray):
+    """한 장 그림(버스 창밖)의 초록 지우기: 크고 이어진 아주 초록인 덩어리 + 그 테두리만 → (색, 투명도, 큰 초록 덩어리들의 상자)"""
+    H, W, _ = a.shape
+    k = greenness(a)
+    strong = k > 70
+    pred = bg_model(a, strong) if strong.sum() > 500 else np.broadcast_to(KEY, a.shape).astype(np.float32).copy()
+    kb = np.maximum(greenness(pred), KEY_LO + 1)
+    alpha_key = 1 - np.clip((k - KEY_LO) / (kb - KEY_LO), 0, 1)
+    lab, n = label(k > 0.55 * kb)
+    area = np.bincount(lab.ravel(), minlength=n + 1)
+    big = [i for i in range(1, n + 1) if area[i] > 0.0002 * H * W]  # 손잡이 고리 안쪽 같은 작은 유리 자리도(풀빛 초록은 0.55 밑이라 후보가 아님)
+    clear = np.isin(lab, big) if big else np.zeros((H, W), bool)
+    edge = dilate(clear, EDGE_PX) & ~clear
+    soft = clear | edge
+    alpha = np.ones((H, W), np.float32)
+    alpha[soft] = alpha_key[soft]
+    alpha[clear] = 0
+    alpha[alpha < 0.06] = 0
+    rgb = a.copy()
+    rgb[soft] = unmix(a, alpha, pred)[soft]
+    o = [i for i in range(3) if i != CH]
+    mx = np.maximum(rgb[..., o[0]], rgb[..., o[1]])
+    rgb[..., CH] = np.where(soft, np.minimum(rgb[..., CH], mx + SPILL_EDGE), rgb[..., CH])
+    boxes = []
+    for i in sorted(big, key=lambda i: -area[i]):
+        ys, xs = np.nonzero(lab == i)
+        boxes.append((xs.min() / W, ys.min() / H, (xs.max() + 1) / W, (ys.max() + 1) / H, area[i] / (H * W)))
+    return rgb, alpha, boxes
+
+
+def import_layers(src: Path, out: Path, checking: bool) -> int:
+    """버스 창밖 그림(LAYERS) → assets/bg/{id}.webp. 점검이면 어두운 바탕에 얹은 그림만"""
+    global CH, KEY
+    CH, KEY = KEYS['green']
+    made = 0
+    for name, opt in LAYERS.items():
+        path = find_sheet(src, name)
+        if not path:
+            say(f'- {name}: 아직 없어요(건너뜀)')
+            continue
+        a = load(path)
+        if opt.get('crop'):
+            x0, y0, x1, y1 = opt['crop']
+            h0, w0, _ = a.shape
+            a = a[round(y0 * h0):round(y1 * h0), round(x0 * w0):round(x1 * w0)]
+        H, W, _ = a.shape
+        if opt.get('key'):
+            rgb, alpha, boxes = key_layer(a)
+            im = to_image(rgb, alpha)
+            info = ' · '.join(f'초록 칸 x {b[0]:.3f}~{b[2]:.3f} y {b[1]:.3f}~{b[3]:.3f} ({b[4] * 100:.1f}%)' for b in boxes[:3])
+        else:
+            im = Image.fromarray(a.round().clip(0, 255).astype(np.uint8), 'RGB').convert('RGBA')
+            info = '그대로'
+        h = opt.get('height', H)
+        if H > h:
+            im = resize_rgba(im, (round(W * h / H), h))
+        if opt.get('mirror'):
+            both = Image.new('RGBA', (im.size[0] * 2, im.size[1]))
+            both.paste(im, (0, 0))
+            both.paste(im.transpose(Image.FLIP_LEFT_RIGHT), (im.size[0], 0))
+            im = both
+        say(f'- {name} ({path.name}, {W}x{H}) → {im.size[0]}x{im.size[1]}px · {info}')
+        if checking:
+            bgc = Image.new('RGBA', im.size, DARK + (255,))
+            bgc.alpha_composite(im)
+            CHECK.mkdir(parents=True, exist_ok=True)
+            dst = CHECK / f'layer_{name}.jpg'
+            bgc.convert('RGB').save(dst, quality=85)
+            say(f'  점검 그림 → {rel(dst)}')
+            continue
+        out.mkdir(parents=True, exist_ok=True)
+        if opt.get('key'):
+            im.save(out / f'{name}.webp', 'WEBP', **WEBP)
+        else:
+            im.convert('RGB').save(out / f'{name}.webp', 'WEBP', quality=90, method=6)
+        made += 1
+    return made
 
 
 def split_objects(rgb: np.ndarray, alpha: np.ndarray, cell: tuple[float, float], ids: list[str | None]):
@@ -357,7 +465,9 @@ def main() -> int:
     if '--out' in args:
         out = Path(args[args.index('--out') + 1]).resolve()
         check_dir = out / '_check'
-    found = {name: find_sheet(src, name) for name in SHEETS}
+    found = {name: find_sheet(src.parent / SHEET_DIR[name] if name in SHEET_DIR and src == SRC else src, name) for name in SHEETS}
+    play_src = SRC.parent / 'play' if src == SRC else src
+    made = import_layers(play_src, LAYER_OUT if out == OUT else out, checking)
     if not any(found.values()):
         say('아직 물건 시트가 없어요. 그림이 오면 아래 이름으로 넣고 다시 실행해 주세요(docs/image_requests.md 2장).')
         for name in SHEETS:
@@ -365,19 +475,19 @@ def main() -> int:
         say('그때까지 게임은 임시 그림으로 돌아가요.')
         return 0
     failed = 0
-    made = 0
     for name, path in found.items():
         ids = SHEETS[name]
         if not path:
             say(f'- {name}: 아직 없어요(건너뜀)')
             continue
         CH, KEY = KEYS[SHEET_KEY.get(name, 'green')]
+        opt = SHEET_OPT.get(name, {})
         try:
             a = load(path)
             H, W, _ = a.shape
             if abs(W - H) > max(W, H) * 0.02:
                 say(f'  (주의) {path.name}: 정사각형이 아니에요({W}x{H}). 4칸 x 3줄로 나눠 봅니다.')
-            rgb, alpha, _, cell = key_sheet(a)
+            rgb, alpha, _, cell = key_sheet(a, opt.get('hole', HOLE), opt.get('spill_in', SPILL_IN))
             objs, empty = split_objects(rgb, alpha, cell, ids)
         except Exception as ex:  # noqa: BLE001
             failed += 1

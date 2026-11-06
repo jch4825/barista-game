@@ -20,6 +20,11 @@ import { bus } from '../../core/bus.js';
 import * as grow from '../../core/grow.js';
 import { store } from '../../core/store.js';
 import { vfx, centerOf } from '../../ui/vfx.js';
+import { img } from '../../core/assets.js';
+
+// 그 갈매기 그림(놀이 시트, 2026-11-06 받음): 빵을 문 채 서 있음 · 맞으면 놀람(빵이 빠짐) · 빵을 물고 날아감. 없으면 아래 SVG + 빵 아이콘
+const GULL_ART = { stand: 'play_gull_stand', hit: 'play_gull_startle', fly: 'play_gull_fly' };
+const gullArt = () => Object.values(GULL_ART).every((id) => img.has('objects', id));
 
 const GULL = '<svg viewBox="0 0 120 92" aria-hidden="true"><path d="M44 78 l-5 12 M62 78 l3 12" stroke="#E2A23A" stroke-width="5" stroke-linecap="round"/><ellipse cx="56" cy="56" rx="36" ry="22" fill="#fff" stroke="#55585C" stroke-width="3"/><path d="M30 50 q14 -30 40 -10 q-14 6 -40 10z" fill="#BCC7CF" stroke="#55585C" stroke-width="3" stroke-linejoin="round"/><circle cx="88" cy="38" r="15" fill="#fff" stroke="#55585C" stroke-width="3"/><path d="M101 38 l16 4 -16 5z" fill="#F2B233" stroke="#8A5A00" stroke-width="2" stroke-linejoin="round"/><circle cx="92" cy="34" r="3" fill="#222"/><path d="M84 28 l10 -2" stroke="#55585C" stroke-width="3" stroke-linecap="round"/></svg>';
 
@@ -169,7 +174,13 @@ export async function rush(opts = {}) {
   /* ---- 갈매기(gull) ---- */
   let gullAt = 0;
   let hop = 0;
-  const gull = kind === 'gull' ? h('button', { class: 'ru-gull', 'aria-label': '빵을 문 갈매기' }, h('span', { class: 'ru-gull-pic', html: GULL }), h('i', { class: 'ru-bread', html: ICON('croissant') })) : null;
+  const art = kind === 'gull' && gullArt();
+  const gullPic = art ? h('img', { class: 'ru-gull-img', src: img.url('objects', GULL_ART.stand), alt: '', draggable: 'false' }) : null;
+  const gullShow = (pose) => { if (gullPic) gullPic.src = img.url('objects', GULL_ART[pose]); };
+  let gullBack = 0;
+  const gull = kind === 'gull'
+    ? h('button', { class: `ru-gull${art ? ' has-art' : ''}`, 'aria-label': '빵을 문 갈매기' }, art ? gullPic : h('span', { class: 'ru-gull-pic', html: GULL }), art ? null : h('i', { class: 'ru-bread', html: ICON('croissant') }))
+    : null;
   function placeGull(i) {
     gullAt = i;
     gull.style.left = `${S[i][0]}%`;
@@ -188,8 +199,11 @@ export async function rush(opts = {}) {
       gull.classList.remove('is-hit');
       void gull.offsetWidth;
       gull.classList.add('is-hit');
+      gullShow('hit');
+      clearTimeout(gullBack);
       paint();
       if (cleared >= th.hits) { finish('got'); return; }
+      gullBack = setTimeout(() => { if (!over) gullShow('stand'); }, dur(450));
       placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt)));
       hop = 0;
     });
@@ -257,6 +271,8 @@ export async function rush(opts = {}) {
     } else if (kind === 'gull') {
       text = how === 'got' ? th.say.got : th.say.fled;
       audio.sfx(how === 'got' ? 'great' : 'whoosh');
+      clearTimeout(gullBack);
+      gullShow(how === 'got' ? 'hit' : 'fly'); // 빵을 떨어뜨림 · 빵을 물고 날아감
       gull?.classList.add(how === 'got' ? 'is-gone' : 'is-fled');
     } else {
       audio.sfx('great');

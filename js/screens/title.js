@@ -90,7 +90,12 @@ function decoLayer() {
   const owned = grow.SHOP.filter((it) => it.kind === 'deco' && grow.owns(it.id));
   if (!owned.length) return null;
   return h('div', { class: 'tt-deco', 'aria-label': `가게 꾸미기: ${owned.map((it) => it.name).join(', ')}` },
-    ...owned.map((it) => h('span', { class: `tt-deco-item d-${it.id}`, title: it.name, style: { left: `${it.spot[0]}%`, top: `${it.spot[1]}%` }, html: ICON(it.icon) })));
+    ...owned.map((it) => {
+      // 그림(꾸미기 시트, 2026-11-06 받음)이 있으면 그 물건 그림을 그 자리에, 없으면 동그라미 아이콘
+      const art = img.has('objects', it.id);
+      return h('span', { class: `tt-deco-item d-${it.id}${art ? ' has-art' : ''}`, title: it.name, style: { left: `${it.spot[0]}%`, top: `${it.spot[1]}%` },
+        html: art ? `<img src="${img.url('objects', it.id)}" alt="" draggable="false">` : ICON(it.icon) });
+    }));
 }
 
 export function showTitle() {

@@ -20,6 +20,7 @@ const { REGULARS } = await imp('js/data/regulars.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const { PEOPLE_EN, FACE_EN, CG_EN } = await imp('tools/requests/prompts_en.mjs');
 const { MISSING } = await imp('tools/audio/audio_map.mjs');
+const { OBJ_SHEETS, KEY_EN, sheetItems, objPrompt } = await imp('tools/requests/obj_sheets.mjs');
 const { BGM_VARIANTS } = await imp('js/av/audio.js');
 // 곡 파일이 있는 분위기(2026-11-01 저작자가 AI 음악 모델 Suno로 만든 곡을 넣음): 요청서에서 뺌
 let bgmFiles = {};
@@ -109,90 +110,7 @@ const cgOld = cgMissing.filter((id) => inExtra.has(id));
 // 3) 물건
 // 3) 작업대 물건 · 다 만든 잔 시트(2026-11-06 다시 묶음, 검수 13.62): 칸 순서는 tools/import-objects.py 의 SHEETS 와 같음(줄마다 4 · 4 · 3, 마지막 칸 비움)
 //    초록 물건(녹차라테 · 말차)이 든 시트는 파란 바탕(import-objects.py 의 SHEET_KEY): 초록 바탕이면 초록 물건이 함께 지워짐
-const PLASTIC = 'a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw';
-const OBJ_SHEETS = [
-  {
-    id: 'sheet_more', name: '카운터 물건(선반의 병 · 플라스틱 컵 · 얼음 통 · 수첩)', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: '카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩',
-    rows: [
-      { intro: 'small kitchen containers that stand upright on a shelf, all about the same small height', items: [
-        ['obj_decaf', 'a small glass jar of dark roasted coffee beans with a plain cream lid'],
-        ['obj_drip_beans', 'a small kraft paper bag of whole coffee beans with a folded top, standing upright'],
-        ['obj_mix', 'a small paper box of instant coffee mix with a few slim golden-yellow stick packets poking out of the open top'],
-        ['obj_barley', 'a small paper box of roasted barley tea bags with a few tea bag tags on strings hanging over the edge'],
-      ] },
-      { items: [
-        ['obj_yuja', 'a small glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices and a plain white lid'],
-        ['obj_strawberry', 'a small glass jar of red strawberry preserve with small fruit pieces and a plain white lid'],
-        ['obj_cocoa', 'a small round tin of dark brown cocoa powder with the lid off and a small metal scoop resting in the powder'],
-        ['cup_plastic', 'an empty tall clear plastic takeaway cup with a flat clear lid and a white paper straw'],
-      ] },
-      { items: [
-        ['obj_ice_bucket', 'a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside'],
-        ['obj_ice_bucket_empty', 'the same ice bucket again, now empty: no ice cubes, only a little melted water at the bottom, the same metal scoop resting inside'],
-        ['obj_recipe_book', 'a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn'],
-      ] },
-    ],
-  },
-  {
-    id: 'sheet_drinks', name: '다 만든 잔(머그 · 유리컵) · 건조대', key: 'green', ref: '`sheet_cups`', use: '드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대',
-    rows: [
-      { intro: 'the same plain white ceramic mug as in the reference image, identical shape, size and angle, filled to the same level just below the rim', items: [
-        ['cup_mug_barley', 'warm barley tea, clear amber brown'],
-        ['cup_mug_yuja', 'warm citron (yuja) tea, bright golden yellow with thin peel strips floating'],
-        ['cup_mug_cocoa', 'hot cocoa, dark chocolate brown with a little light foam'],
-        ['cup_thick_latte', 'the thick double-wall cream ceramic mug from the reference image filled with cafe latte, smooth light brown milk foam, no latte art'],
-      ] },
-      { intro: 'the same tall clear drinking glass as the iced americano in the reference image, with clear ice cubes, filled to the same level', items: [
-        ['cup_glass_latte', 'iced cafe latte, light caramel milk with soft coffee swirls'],
-        ['cup_glass_barley', 'iced barley tea, clear amber'],
-        ['cup_glass_yuja', 'iced citron (yuja) tea, golden yellow with thin peel strips'],
-        ['cup_glass_strawberry', 'strawberry milk, soft pink milk with red strawberry preserve at the bottom'],
-      ] },
-      { items: [
-        ['cup_glass_cocoa', 'iced cocoa in the same tall glass, light chocolate brown with ice cubes'],
-        ['cup_plastic_strawberry', `strawberry milk in ${PLASTIC}`],
-        ['obj_rack', 'an empty small stainless steel wire dish drying rack with a drip tray'],
-      ] },
-    ],
-  },
-  {
-    id: 'sheet_drinks_blue', name: '다 만든 잔(플라스틱 컵 · 녹차라테) · 개수대 · 쓰레기통', key: 'blue', ref: '`sheet_cups`(+ 먼저 만든 `sheet_drinks`)', use: '플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**',
-    rows: [
-      { intro: `the same ${PLASTIC} in every cell, identical shape, size and angle, filled to the same level`, items: [
-        ['cup_plastic_americano', 'iced americano, dark coffee brown'],
-        ['cup_plastic_latte', 'iced cafe latte, light caramel milk with soft coffee swirls'],
-        ['cup_plastic_barley', 'iced barley tea, clear amber'],
-        ['cup_plastic_yuja', 'iced citron (yuja) tea, golden yellow with thin peel strips'],
-      ] },
-      { items: [
-        ['cup_plastic_cocoa', 'iced cocoa in the same plastic cup, light chocolate brown'],
-        ['cup_plastic_greentea', 'iced green tea latte in the same plastic cup, soft matcha green milk'],
-        ['cup_glass_greentea', 'iced green tea latte in a tall clear drinking glass with clear ice cubes (the same glass as the reference image)'],
-        ['cup_mug_greentea', 'warm green tea latte in the plain white ceramic mug (the same mug as the reference image), soft matcha green milk foam, no latte art'],
-      ] },
-      { items: [
-        ['obj_matcha', 'a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it'],
-        ['obj_sink', 'a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above'],
-        ['obj_bin', 'a small green kitchen trash bin with a lid'],
-      ] },
-    ],
-  },
-  {
-    id: 'sheet_empty', name: '빈 우유병 · 손 그라인더 · 바 스푼', key: 'green', ref: '`sheet_tools`(우유병이 있는 시트)', use: '우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움',
-    rows: [
-      { items: [
-        ['obj_milk_bottle_empty', 'the same glass milk bottle as in the reference image, now empty: clear glass with only a thin trace of milk at the bottom, the same cap'],
-        ['obj_hand_grinder', 'a wooden manual hand coffee grinder with a metal crank handle'],
-        ['obj_spoon', 'a long stainless steel bar spoon lying diagonally'],
-      ] },
-    ],
-  },
-];
-const KEY_EN = {
-  green: 'Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.',
-  blue: 'Flat solid chroma key blue background (#0047BB) everywhere, no gradients, no cast shadows on the background, no blue reflections.',
-};
-const sheetItems = (sh) => sh.rows.flatMap((r) => r.items);
+// 물건 시트(칸 · 프롬프트)는 tools/requests/obj_sheets.mjs(제작 정보 image_prompts.mjs 도 같은 글을 씀)
 const objMissing = OBJ_SHEETS.flatMap(sheetItems).filter(([id]) => !haveObj.has(id));
 // 4) 블렌더 컷: 메뉴 × 온도 × 매장/포장 × 단계마다 작업대가 고를 컷(menu.js 의 shotNames, 컵에 든 것은 brew.js 처럼 그 재료의 마지막 손 동작 뒤에 셈)
 //    컷이 없음(임시 그림) · 비슷한 컷으로 대신(다른 잔이나 다른 음료의 컷) · 드래그 활용 그림(tilt · drag)이 없음 을 모음
@@ -263,7 +181,6 @@ const cgPrompt = (id) => {
   const castLine = people.filter((w) => PEOPLE_EN[w]).map((w) => `${tagOf(w)}: ${PEOPLE_EN[w]}`).join('; ');
   return `${SCENE}\n${castLine ? `New characters (match their character sheets): ${castLine}.\n` : ''}Scene: ${CG_EN[id] || `(${c.title}) ${ph.desc || ''}`}\n${AVOID_S}`;
 };
-const objPrompt = (sh) => `Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.\nThe square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each ${sheetItems(sh).length < 11 ? 'used ' : ''}cell with wide empty margins; nothing touches or overlaps.\n${sh.rows.map((r, i) => `Row ${i + 1}${r.intro ? ` (${r.intro})` : ''}: ${r.items.map(([, d]) => d).join('; ')}${i === 2 ? '; the last cell (bottom right) completely empty' : r.items.length < 4 ? '; the remaining cells of this row completely empty' : ''}.`).join('\n')}${sh.rows.length < 3 ? `\nRows ${sh.rows.length + 1} to 3: every cell completely empty. Only ${sheetItems(sh).length} objects in the whole image.` : ''}\n${KEY_EN[sh.key]}\nAvoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.`;
 
 /* 1. 인물 */
 P('## 1. 인물 스탠딩 (새 인물)', '',

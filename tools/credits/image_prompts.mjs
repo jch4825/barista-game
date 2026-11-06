@@ -29,6 +29,7 @@ const MANAGER = 'Korean man age 42, short slate grey-green hair, short stubble b
 
 /* ---------- 2026-11-04 새 인물 11명 · 장면 그림: 요청서(docs/requests_full.md)와 같은 글 ---------- */
 import { PEOPLE_EN, FACE_EN, CG_EN } from '../requests/prompts_en.mjs';
+import { OBJ_SHEETS, sheetItems, objPrompt, playPrompt } from '../requests/obj_sheets.mjs';
 
 /* ---------- 새 게임(바닷가 카페) 공통 블록 (docs/image_requests.md 0.3 · 5.2 · 6.2) ---------- */
 const SEA_STYLE = 'clean modern anime cel-shading, bold clean black outlines, medium saturation, soft warm lighting, warm seaside-cafe palette (forest green and warm wood accents, cream, sand beige, a little soft sea blue), consistent character design, sharp lineart, high resolution';
@@ -295,6 +296,38 @@ Object.assign(IMAGE_PROMPTS, {
   cg_eunju_secret: { title: '장면 · 일주일의 말', from: 'doc', prompt: cgFrom('eunju_thick_cup', ['eunju']), neg: CG_NEG, note: '처음에는 여름 3일(은주가 처음 온 날) 「두꺼운 컵」으로 만든 그림 · "여름에 내가 처음 왔던 날" · 참조 이미지: eunju_sheet · hall_summer · 1376×768' },
   cg_noh_secret: { title: '장면 · 처음 떨린 날', from: 'doc', prompt: cgFrom('noh_spoon', ['noh']), neg: CG_NEG, note: '처음에는 여름 4일 「떨리는 숟가락」으로 만든 그림 · 숟가락으로 잔을 젓는 사장님 옆의 노 씨 · 참조 이미지: noh_sheet · owner_sheet · hall_summer · 1376×768' },
 });
+
+/* ===== 작업대 시트 · 놀이 그림 (2026-11-06 받음: tools/import-objects.py 가 칸마다 잘라 냄) =====
+   프롬프트는 요청서와 같은 글(tools/requests/obj_sheets.mjs), 버스 창밖 · 놀이 시트는 docs/image_requests.md 8장 */
+const SHEET_KO = {
+  obj_decaf: '디카페인 원두 병', obj_drip_beans: '핸드드립 원두 봉지', obj_mix: '믹스커피 상자', obj_barley: '보리차 티백 상자',
+  obj_yuja: '유자청 병', obj_strawberry: '딸기청 병', obj_cocoa: '코코아 가루 통', cup_plastic: '플라스틱 컵',
+  obj_ice_bucket: '얼음 통', obj_ice_bucket_empty: '빈 얼음 통', obj_recipe_book: '레시피 수첩',
+  cup_mug_barley: '머그 · 보리차', cup_mug_yuja: '머그 · 유자차', cup_mug_cocoa: '머그 · 코코아', cup_thick_latte: '두꺼운 머그 · 라테',
+  cup_glass_latte: '유리컵 · 아이스 라테', cup_glass_barley: '유리컵 · 아이스 보리차', cup_glass_yuja: '유리컵 · 아이스 유자차', cup_glass_strawberry: '유리컵 · 딸기우유',
+  cup_glass_cocoa: '유리컵 · 아이스 코코아', cup_plastic_strawberry: '플라스틱 컵 · 딸기우유', obj_rack: '식기 건조대',
+  cup_plastic_americano: '플라스틱 컵 · 아이스 아메리카노', cup_plastic_latte: '플라스틱 컵 · 아이스 라테', cup_plastic_barley: '플라스틱 컵 · 아이스 보리차', cup_plastic_yuja: '플라스틱 컵 · 아이스 유자차',
+  cup_plastic_cocoa: '플라스틱 컵 · 아이스 코코아', cup_plastic_greentea: '플라스틱 컵 · 녹차라테', cup_glass_greentea: '유리컵 · 녹차라테', cup_mug_greentea: '머그 · 녹차라테',
+  obj_matcha: '말차 가루 통', obj_sink: '개수대', obj_bin: '쓰레기통',
+  obj_milk_bottle_empty: '빈 우유병', obj_hand_grinder: '손 그라인더', obj_spoon: '바 스푼',
+};
+const OBJ_NEG = 'text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines';
+for (const sh of OBJ_SHEETS) {
+  for (const [id] of sheetItems(sh)) IMAGE_PROMPTS[id] ||= { title: `작업대 · ${SHEET_KO[id] || id}`, from: 'doc', sheet: sh.id, prompt: objPrompt(sh), neg: OBJ_NEG, note: `${sh.id} 시트(4칸 × 3줄)에서 잘라 냄 · ${sh.key === 'blue' ? '파란 바탕' : '초록 바탕'} · 참조 이미지: ${sh.ref.replace(/`/g, '')}` };
+}
+const PLAY_KO = {
+  play_gull_stand: '그 갈매기 · 빵을 물고 서 있음', play_gull_startle: '그 갈매기 · 놀라 빵을 떨어뜨림', play_gull_fly: '그 갈매기 · 빵을 물고 날아감', play_gull_glide: '그 갈매기 · 높이 떠감',
+  play_boat: '고깃배', play_lighthouse: '등대', play_fish: '뛰어오르는 물고기', play_car: '자동차', play_van: '배달 차', play_bus: '마을버스', play_bag: '지은의 가방',
+  deco_pot: '꾸미기 · 문 옆 화분', deco_chime: '꾸미기 · 조개 풍경', deco_bench: '꾸미기 · 창가 긴 의자', deco_lamp: '꾸미기 · 처마 등', deco_board: '꾸미기 · 오늘의 메뉴 칠판', deco_flag: '꾸미기 · 바다색 깃발',
+  apron_navy: '앞치마 · 남색', apron_brown: '앞치마 · 갈색', apron_stripe: '앞치마 · 줄무늬', apron_coral: '앞치마 · 산호색', apron_basic: '앞치마 · 기본 초록',
+};
+for (const [id, title] of Object.entries(PLAY_KO)) {
+  const sheet = id.startsWith('play_') ? 'sheet_play' : 'sheet_deco';
+  IMAGE_PROMPTS[id] ||= { title: id.startsWith('play_') ? `놀이 · ${title}` : title, from: 'doc', sheet, prompt: playPrompt(sheet), neg: '', note: `${sheet} 시트(4칸 × 3줄)에서 잘라 냄 · 초록 바탕 · 참조 이미지: ${sheet === 'sheet_play' ? 'cafe_front_morning' : 'title_cafe_dusk'} · docs/image_requests.md 8장` };
+}
+for (const [id, title] of [['bus_far', '버스 창밖 ① 먼 바다 마을'], ['bus_hills', '버스 창밖 ② 동산'], ['bus_window_frame', '버스 창밖 ③ 버스 창틀']]) {
+  IMAGE_PROMPTS[id] ||= { title: `배경 · ${title}`, from: 'doc', prompt: playPrompt(id), neg: '', note: `참조 이미지: cafe_front_morning · docs/image_requests.md 8.3${id === 'bus_far' ? ' · 받은 그림은 가운데에 카페가 있는 바닷가 마을이라 이어 붙이지 않고 천천히 옆으로 움직임' : id === 'bus_hills' ? ' · 위쪽 초록을 지우고 좌우로 뒤집어 붙임' : ' · 유리 자리의 초록을 지움'}` };
+}
 
 /** 원래 파일 이름이 SOURCES.md 에 없는 그림 */
 export const NO_SOURCE_NOTE = '원래 파일 이름 기록 없음';

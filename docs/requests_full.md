@@ -12,8 +12,8 @@
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 17장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
-| 작업대 물건 · 다 만든 잔 시트 | 36개를 시트 4장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
-| 새 놀이의 그림 | 5장(`sheet_play` · `bus_far` · `bus_hills` · `bus_window_frame` · `sheet_deco`) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
+| 작업대 물건 · 다 만든 잔 시트 | 3개를 시트 1장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
+| 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
@@ -248,52 +248,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 - 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).
 - 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.
 - 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.
-- 아직 없는 것: `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` · `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` · `obj_ice_bucket` · `obj_ice_bucket_empty` · `obj_recipe_book` · `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` · `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` · `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` · `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` · `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` · `obj_matcha` · `obj_sink` · `obj_bin` · `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon`
-
-### `sheet_more` · 1:1 · 초록 바탕 · 참조: `sheet_tools` · `sheet_cups`
-
-- 카운터(재료 고르기)에 늘 보이는 물건: 벽 선반의 병 · 통 · 상자 · 봉지(그날 주문에 든 것만), 컵 줄의 플라스틱 컵, 오른쪽 끝 얼음 통(얼음이 다 떨어진 날은 빈 통), 왼쪽 앞 레시피 수첩
-- 칸: 1줄 `obj_decaf` · `obj_drip_beans` · `obj_mix` · `obj_barley` / 2줄 `obj_yuja` · `obj_strawberry` · `obj_cocoa` · `cup_plastic` / 3줄 `obj_ice_bucket` · `obj_ice_bucket_empty` · `obj_recipe_book` / 마지막 칸 비움
-
-```
-Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
-The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
-Row 1 (small kitchen containers that stand upright on a shelf, all about the same small height): a small glass jar of dark roasted coffee beans with a plain cream lid; a small kraft paper bag of whole coffee beans with a folded top, standing upright; a small paper box of instant coffee mix with a few slim golden-yellow stick packets poking out of the open top; a small paper box of roasted barley tea bags with a few tea bag tags on strings hanging over the edge.
-Row 2: a small glass jar of bright yellow-orange citron (yuja) tea preserve with thin peel slices and a plain white lid; a small glass jar of red strawberry preserve with small fruit pieces and a plain white lid; a small round tin of dark brown cocoa powder with the lid off and a small metal scoop resting in the powder; an empty tall clear plastic takeaway cup with a flat clear lid and a white paper straw.
-Row 3: a small brushed stainless steel ice bucket filled to the top with clear ice cubes, a small metal ice scoop resting inside; the same ice bucket again, now empty: no ice cubes, only a little melted water at the bottom, the same metal scoop resting inside; a small closed recipe notebook lying flat, deep navy linen hardcover with thin gold corner trims and a gold ribbon bookmark hanging out, slightly worn; the last cell (bottom right) completely empty.
-Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
-```
-
-### `sheet_drinks` · 1:1 · 초록 바탕 · 참조: `sheet_cups`
-
-- 드리기 쟁반 · 레시피 수첩의 다 만든 잔(머그 · 두꺼운 컵 · 유리컵 · 플라스틱 컵 딸기우유) + 버리는 장면의 식기 건조대
-- 칸: 1줄 `cup_mug_barley` · `cup_mug_yuja` · `cup_mug_cocoa` · `cup_thick_latte` / 2줄 `cup_glass_latte` · `cup_glass_barley` · `cup_glass_yuja` · `cup_glass_strawberry` / 3줄 `cup_glass_cocoa` · `cup_plastic_strawberry` · `obj_rack` / 마지막 칸 비움
-
-```
-Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
-The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
-Row 1 (the same plain white ceramic mug as in the reference image, identical shape, size and angle, filled to the same level just below the rim): warm barley tea, clear amber brown; warm citron (yuja) tea, bright golden yellow with thin peel strips floating; hot cocoa, dark chocolate brown with a little light foam; the thick double-wall cream ceramic mug from the reference image filled with cafe latte, smooth light brown milk foam, no latte art.
-Row 2 (the same tall clear drinking glass as the iced americano in the reference image, with clear ice cubes, filled to the same level): iced cafe latte, light caramel milk with soft coffee swirls; iced barley tea, clear amber; iced citron (yuja) tea, golden yellow with thin peel strips; strawberry milk, soft pink milk with red strawberry preserve at the bottom.
-Row 3: iced cocoa in the same tall glass, light chocolate brown with ice cubes; strawberry milk in a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw; an empty small stainless steel wire dish drying rack with a drip tray; the last cell (bottom right) completely empty.
-Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
-```
-
-### `sheet_drinks_blue` · 1:1 · 파란 바탕 · 참조: `sheet_cups`(+ 먼저 만든 `sheet_drinks`)
-
-- 플라스틱 컵(포장 · 아이스)의 다 만든 잔 · 녹차라테 세 가지 · 벽 선반의 말차 통 + 버리는 장면의 개수대 · 쓰레기통. 녹차라테 · 말차가 초록이라 **파란 바탕**
-- 칸: 1줄 `cup_plastic_americano` · `cup_plastic_latte` · `cup_plastic_barley` · `cup_plastic_yuja` / 2줄 `cup_plastic_cocoa` · `cup_plastic_greentea` · `cup_glass_greentea` · `cup_mug_greentea` / 3줄 `obj_matcha` · `obj_sink` · `obj_bin` / 마지막 칸 비움
-
-```
-Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
-The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
-Row 1 (the same a tall clear plastic takeaway cup with clear ice cubes, a flat clear lid and a white paper straw in every cell, identical shape, size and angle, filled to the same level): iced americano, dark coffee brown; iced cafe latte, light caramel milk with soft coffee swirls; iced barley tea, clear amber; iced citron (yuja) tea, golden yellow with thin peel strips.
-Row 2: iced cocoa in the same plastic cup, light chocolate brown; iced green tea latte in the same plastic cup, soft matcha green milk; iced green tea latte in a tall clear drinking glass with clear ice cubes (the same glass as the reference image); warm green tea latte in the plain white ceramic mug (the same mug as the reference image), soft matcha green milk foam, no latte art.
-Row 3: a small round tin of bright green matcha powder with the lid off and a small bamboo scoop resting in it; a small rectangular stainless steel bar sink basin with a curved gooseneck faucet, empty and clean, seen from slightly above; a small green kitchen trash bin with a lid; the last cell (bottom right) completely empty.
-Flat solid chroma key blue background (#0047BB) everywhere, no gradients, no cast shadows on the background, no blue reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
-```
+- 아직 없는 것: `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon`
 
 ### `sheet_empty` · 1:1 · 초록 바탕 · 참조: `sheet_tools`(우유병이 있는 시트)
 
@@ -315,13 +270,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 - 프롬프트 · 규칙은 `docs/image_requests.md` 8장에 있습니다(시트는 초록 바탕 · 4칸 × 3줄 · 마지막 칸 비움, 버스 창밖은 좌우가 이어지는 그림).
 - 받은 그림은 `assets/flow/`에 두고 알려 주세요. `assets/_src/play/{id}.jpg`로 옮겨 넣으면 이 목록에서 빠집니다.
 
-| id | 무엇 | 비율 | 프롬프트 |
-| :--- | :--- | :--- | :--- |
-| `sheet_play` | 놀이 시트(그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 지은의 가방) | 1:1 | `docs/image_requests.md` 8.2 |
-| `bus_far` | 버스 창밖 ① 먼 바다(가장 뒤, 좌우가 이어짐) | 16:9 | `docs/image_requests.md` 8.3 |
-| `bus_hills` | 버스 창밖 ② 동산(가운데, 위쪽 절반은 초록 바탕) | 16:9 | `docs/image_requests.md` 8.3 |
-| `bus_window_frame` | 버스 창밖 ③ 버스 창틀(맨 앞, 유리 자리는 초록 바탕) | 16:9 | `docs/image_requests.md` 8.3 |
-| `sheet_deco` | 꾸미기 · 앞치마 시트 | 1:1 | `docs/image_requests.md` 8.4 |
+- 모두 있습니다.
 
 ## 5. 블렌더 한 컷 (손 동작)
 
@@ -395,13 +344,13 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 3522줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 3533줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 - 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 999 |
+| `sys` | 1010 |
 | `narr` | 678 |
 | `think` | 296 |
 | `owner` | 200 |

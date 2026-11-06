@@ -15,6 +15,7 @@ import { josaOnly } from '../../core/text.js';
 import { frame, line, abortGeneration, abortMinigame } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus as evBus } from '../../core/bus.js';
+import { img } from '../../core/assets.js';
 
 const TITLE = '바닷가로 가는 버스';
 const HOWTO = '창밖으로 지나가는 것을 눌러서 세어요. "덜컹!" 하면 [손잡이 잡기]를 눌러요.';
@@ -32,6 +33,11 @@ const SIGHTS = {
   lighthouse: { name: '등대', unit: '개', y: [40, 44], svg: '<svg viewBox="0 0 80 140"><path d="M28 30 h24 l8 100 h-40z" fill="#fff" stroke="#55585C" stroke-width="4"/><path d="M26 64 h28 M24 96 h32" stroke="#C8553D" stroke-width="12"/><rect x="26" y="12" width="28" height="20" fill="#FFE08A" stroke="#55585C" stroke-width="4"/><path d="M24 12 l16 -10 16 10z" fill="#C8553D" stroke="#55585C" stroke-width="3"/></svg>' },
   fish: { name: '물고기', unit: '마리', y: [58, 64], svg: '<svg viewBox="0 0 110 70"><path d="M14 35 q34 -30 70 0 q-36 30 -70 0z" fill="#7FB3D5" stroke="#2F5D7A" stroke-width="4"/><path d="M84 35 l20 -16 v32z" fill="#7FB3D5" stroke="#2F5D7A" stroke-width="4" stroke-linejoin="round"/><circle cx="34" cy="31" r="4" fill="#222"/></svg>' },
 };
+// 그림(2026-11-06 받음, docs/image_requests.md 8.2 · 8.3): 놀이 시트의 그림(assets/objects/play_*) · 창밖 세 장(assets/bg/bus_*). 없으면 위의 SVG · 색 띠
+//  창틀 그림이 있으면 풍경 · 지나가는 것은 창 유리 자리(.bs-glass) 안에만: 먼 바다 마을(천천히 옆으로, 끝에 카페가 가운데) → 동산(빠르게 이어 흐름) → 창틀
+const ART = { gull: 'play_gull_glide', boat: 'play_boat', lighthouse: 'play_lighthouse', fish: 'play_fish' };
+const ART_Y = { gull: [21, 28], boat: [60, 64], lighthouse: [52, 55], fish: [64, 70] }; // 창 유리 안의 높이(%): 갈매기는 위 유리, 나머지는 바다 띠
+const picOf = (id, art) => (art && img.has('objects', ART[id]) ? `<img src="${img.url('objects', ART[id])}" alt="" draggable="false">` : SIGHTS[id].svg);
 const ORDER = ['gull', 'boat', 'gull', 'fish', 'lighthouse', 'gull', 'boat', 'fish', 'gull'];
 const FIRST_MS = 400;            // 첫 풍경이 나오는 때
 const GAP_MS = [2600, 1400];     // 다음 풍경까지: 2.6초 + 0~1.4초(× 빠르기 k)
@@ -79,14 +85,32 @@ export async function bus(opts = {}) {
   const doneP = new Promise((r) => { doneRes = r; });
 
   // 창밖: 하늘 · 먼 산 · 바다(움직이는 층) + 창틀 · 손잡이 · 지은의 가방
-  const view = h('div', { class: 'bs-view' }, h('i', { class: 'bs-sky' }), h('i', { class: 'bs-hills' }), h('i', { class: 'bs-sea' }), h('i', { class: 'bs-road' }));
+  const art = img.has('bg', 'bus_window_frame') && img.has('bg', 'bus_far');
   const lane = h('div', { class: 'bs-lane', role: 'group', 'aria-label': '창밖 풍경' });
-  const frameEl = h('i', { class: 'bs-window', 'aria-hidden': 'true' });
-  const bag = h('i', { class: 'bs-bag', 'aria-hidden': 'true', html: ICON('bag') });
+  const bagPic = img.has('objects', 'play_bag') ? `<img src="${img.url('objects', 'play_bag')}" alt="" draggable="false">` : ICON('bag');
+  const bag = h('i', { class: 'bs-bag', 'aria-hidden': 'true', html: bagPic });
+  let far = null;
+  let view;
+  let frameEl;
+  if (art) {
+    far = h('i', { class: 'bs-far', style: { backgroundImage: `url(${img.url('bg', 'bus_far')})` } });
+    const hillsUrl = img.url('bg', 'bus_hills');
+    const hills = hillsUrl
+      ? h('i', { class: 'bs-hillsart' }, h('i', { class: 'bs-hills-track', style: { '--hk': k } }, h('img', { src: hillsUrl, alt: '', draggable: 'false' }), h('img', { src: hillsUrl, alt: '', draggable: 'false' })))
+      : null;
+    view = h('div', { class: 'bs-art' }, h('i', { class: 'bs-sky' }), h('div', { class: 'bs-glass' }, far, hills, lane),
+      h('i', { class: 'bs-frameart', 'aria-hidden': 'true', style: { backgroundImage: `url(${img.url('bg', 'bus_window_frame')})` } }), bag);
+  } else {
+    view = h('div', { class: 'bs-view' }, h('i', { class: 'bs-sky' }), h('i', { class: 'bs-hills' }), h('i', { class: 'bs-sea' }), h('i', { class: 'bs-road' }));
+    frameEl = h('i', { class: 'bs-window', 'aria-hidden': 'true' });
+  }
+  // 먼 바다 마을이 타는 동안 천천히 옆으로(0 → 1: 끝에 카페가 창 가운데). 움직임 줄이기는 처음부터 끝 자리
+  const farAt = (p) => { if (far) far.style.setProperty('--p', String(still ? 1 : Math.min(1, Math.max(0, p)))); };
+  farAt(0);
   const strap = h('button', { class: 'btn btn-big btn-main bs-strap' }, h('i', { html: ICON('hand') }), h('span', { text: '손잡이 잡기' }));
   const nextB = turn ? h('button', { class: 'btn btn-big btn-soft bs-next' }, h('i', { html: ICON('arrow_right') }), h('span', { text: '다음 풍경' })) : null;
   const tally = h('p', { class: 'bs-tally', 'aria-live': 'polite' });
-  f.body.append(h('div', { class: 'bs-scene' }, view, lane, frameEl, bag), h('div', { class: 'bs-foot' }, tally, nextB, strap));
+  f.body.append(h('div', { class: `bs-scene${art ? ' has-art' : ''}` }, ...(art ? [view] : [view, lane, frameEl, bag])), h('div', { class: 'bs-foot' }, tally, nextB, strap));
   strap.disabled = true;
 
   const paint = () => {
@@ -101,8 +125,9 @@ export async function bus(opts = {}) {
     const id = ORDER[orderI % ORDER.length];
     orderI += 1;
     const s = SIGHTS[id];
-    const y = s.y[0] + Math.random() * (s.y[1] - s.y[0]);
-    const b = h('button', { class: `bs-sight s-${id}${turn ? ' is-hold' : ''}`, style: { top: `${y}%`, '--dur': `${(6200 * k) / 1000}s` }, 'aria-label': s.name, html: s.svg });
+    const yr = art ? ART_Y[id] : s.y;
+    const y = yr[0] + Math.random() * (yr[1] - yr[0]);
+    const b = h('button', { class: `bs-sight s-${id}${turn ? ' is-hold' : ''}`, style: { top: `${y}%`, '--dur': `${(6200 * k) / 1000}s` }, 'aria-label': s.name, html: picOf(id, art) });
     const it = { b, id, t: 0 };
     b.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -171,6 +196,7 @@ export async function bus(opts = {}) {
   function step(dt) {
     if (over || !started) return;
     tAcc += dt;
+    farAt(tAcc / total);
     sightIn -= dt;
     if (sightIn <= 0) { addSight(); sightIn = (GAP_MS[0] + Math.random() * GAP_MS[1]) * k; }
     for (const it of [...flying]) {
@@ -196,6 +222,7 @@ export async function bus(opts = {}) {
     if (!started || over || bumpOn) return;
     if (curTurn) dropSight(curTurn);
     turnN += 1;
+    farAt(turnN / ORDER.length);
     if (turnN > ORDER.length) { finish(); return; }
     curTurn = addSight();
     if (turnN % 3 === 0) bumpStart();

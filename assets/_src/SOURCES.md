@@ -232,3 +232,20 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 받은 폴더에 함께 있던 `cg_haesun_two_cups.jpg` · `cg_haesun_cup_for_him.jpg` · 위의 두 원래 이름 파일은 게임의 그림과 같은 파일(바이트까지 같음)이라 지웠습니다.
 
 2026-11-06 사용자가 전에 만든 그림 87장을 받은 폴더에 다시 넣어 줌("혹시 빠진 이미지 중에 이 중 필요한 것이 있으면 써라"): 위의 비밀 장면 네 장만 옮겨 씀. 나머지는 이미 게임에 들어간 그림과 같은 원본이거나, 2026-11-05 에 만든 힌트 장면 그림(대본에서 빠짐, Q-53) 9장이라 받은 폴더에 그대로 둠.
+
+## 2026-11-06 작업대 시트 · 놀이 그림(Google Flow, `assets/flow/`로 받은 것: 사용자 "버스 씬과 작업대 관련")
+
+시트는 `npm run objects`(`tools/import-objects.py`)가 칸마다 잘라 `assets/objects/{id}.webp`로, 버스 창밖 세 장은 초록을 지워 `assets/bg/bus_*.webp`로 만듭니다. 놀이 · 꾸미기 시트와 버스 창밖의 원본은 `assets/_src/play/`.
+
+| 게임 파일 | Flow 원래 이름 (받은 시각) |
+| :--- | :--- |
+| `objects/sheet_more.jpg` | `Kitchen_containers_and_coffee_items_bf3276d5_2K.jpg` (카운터 물건 시트 · 2026-11-06 20:33) |
+| `objects/sheet_drinks.jpg` | `Game_asset_illustration_of_drinks_7c4c0064_2K.jpg` (다 만든 잔 시트 · 2026-11-06 20:31) |
+| `objects/sheet_drinks_blue.jpg` | `Generating_beverage_and_equipmen…_d100c27e_2K.jpg` (다 만든 잔 시트, 파란 바탕 · 2026-11-06 20:30) |
+| `objects/sheet_play.jpg` | `Game_sprite_asset_sheet_grid_51e3ac77_2K.jpg` (놀이 시트: 그 갈매기 · 배 · 등대 · 물고기 · 자동차 · 버스 · 가방, 원본은 `play/sheet_play.jpg` · 2026-11-06 20:28) |
+| `objects/sheet_deco.jpg` | `Hand-painted_anime_game_sprite_s…_b0e07e2c_2K.jpg` (꾸미기 · 앞치마 시트, 원본은 `play/sheet_deco.jpg` · 2026-11-06 20:23) |
+| `bg/bus_far.jpg` | `Hand-painted_seaside_cafe_backgr…_f66edafe.jpg` (버스 창밖 ① 먼 바다 마을, 1376×768 · 2026-11-06 20:35) |
+| `bg/bus_hills.jpg` | `Coastal_hills_and_cafe_art_f1ceff1a_2K.jpg` (버스 창밖 ② 동산: 오른쪽 아래 Flow 표시를 잘라 내고 좌우로 뒤집어 붙임 · 2026-11-06 20:25) |
+| `bg/bus_window_frame.jpg` | `Bus_interior_with_green_window_2973c69e_2K.jpg` (버스 창밖 ③ 버스 창틀 · 2026-11-06 20:25) |
+
+- 먼 바다(`bus_far`)는 요청서의 '좌우가 이어지는 먼 바다'가 아니라 가운데에 카페가 있는 바닷가 마을 그림이라, 이어 붙이지 않고 타는 동안 천천히 옆으로 움직여 끝에 카페가 창 가운데 오게 씀(`js/game/minigames/bus.js`).

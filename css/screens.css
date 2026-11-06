@@ -468,3 +468,14 @@ body.reduce-motion .ld-fill { transition: none; }
 .tt-deco { position: absolute; inset: 0; pointer-events: none; }
 .tt-deco-item { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 248, 230, .9); box-shadow: 0 0 0 3px rgba(212, 174, 98, .8), 0 6px 18px rgba(0, 0, 0, .45); color: #6B4E1E; }
 .tt-deco-item svg { width: 38px; height: 38px; }
+/* 그림이 있을 때(꾸미기 시트): 동그라미 없이 물건 그림만, 자리(spot)는 그림의 가운데 · 크기는 카페 앞 그림에 맞춤 */
+.tt-deco-item.has-art { display: block; width: auto; height: auto; border-radius: 0; background: none; box-shadow: none; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .45)); }
+.tt-deco-item.has-art img { display: block; height: var(--h, 120px); width: auto; }
+/* 자리(grow.js 의 spot)는 카페 앞 그림에 이미 있는 긴 의자 · 입간판 · 화분을 피해 2026-11-06 옮김: 풍경은 문 옆, 등은 창 오른쪽 벽(왼쪽 벽은 처음 화면의 메뉴가 가림), 화분은 창턱, 의자 · 칠판은 골목 앞 */
+.tt-deco-item.has-art.d-deco_pot { --h: 100px; }
+.tt-deco-item.has-art.d-deco_chime { --h: 140px; }
+.tt-deco-item.has-art.d-deco_bench { --h: 180px; }
+.tt-deco-item.has-art.d-deco_lamp { --h: 124px; }
+.tt-deco-item.has-art.d-deco_board { --h: 150px; }
+.tt-deco-item.has-art:is(.d-deco_bench, .d-deco_board) { filter: brightness(.92) saturate(.9) drop-shadow(0 10px 12px rgba(0, 0, 0, .5)); } /* 해 질 녘 골목 그늘(처음 화면의 그늘 막이 위에 한 번 더 덮음) */
+.tt-deco-item.has-art.d-deco_flag { --h: 150px; }

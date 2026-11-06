@@ -340,6 +340,8 @@ body.contrast .mg-routine .rt-obj, body.contrast .mg-look .lk-name { background:
 .mg-rush .ru-gull .ru-bread svg { width: 54px; height: 54px; }
 .mg-rush .ru-gull:focus-visible { outline: 4px solid #F0D9A2; outline-offset: 6px; border-radius: 20px; }
 .mg-rush .ru-gull.is-hit { animation: ru-hit .35s ease; }
+.mg-rush .ru-gull.has-art { width: 190px; height: 180px; }
+.mg-rush .ru-gull .ru-gull-img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; pointer-events: none; }
 @keyframes ru-hit { 30% { transform: translate(-50%, -85%) rotate(-14deg) scale(1.1); } 70% { transform: translate(-50%, -85%) rotate(10deg); } }
 .mg-rush .ru-gull.is-gone .ru-bread { opacity: 0; }
 .mg-rush .ru-gull.is-gone, .mg-rush .ru-gull.is-fled { transition: left 1.2s ease-in, top 1.2s ease-in, opacity 1.2s; left: 110% !important; top: -10% !important; opacity: 0; }
@@ -376,6 +378,32 @@ body:is(.reduce-motion, .theme-calm) .mg-rush :is(.ru-slip, .ru-gull, .sc-bg) { 
 @keyframes bs-fade { 0% { opacity: 0; } 10%, 85% { opacity: 1; } 100% { opacity: 0; } }
 body:is(.reduce-motion, .theme-calm) .mg-bus :is(.bs-sea, .bs-road, .bs-scene, .bs-bag) { animation: none !important; }
 .mg-bus .bs-sight.is-hold { animation: none; left: 55%; }
+/* 그림이 있을 때(2026-11-06 받음, bus.js 의 ART): 창틀 그림(1935×1080)을 판 너비에 맞추고(아래는 잘림), 풍경 · 지나가는 것은 창 유리 자리(.bs-glass) 안에만.
+   유리 자리는 tools/import-objects.py 가 잰 초록 칸(x 26~86% · y 6.7~84.1%). 옆 창 조각에는 하늘 · 바다 색만 */
+.mg-bus .bs-scene.has-art { background: #1E2A30; }
+.mg-bus .bs-art { position: absolute; left: 0; top: 0; width: 100%; aspect-ratio: 1935 / 1080; }
+.mg-bus .bs-art .bs-sky { background: linear-gradient(180deg, #F6C9A5 0%, #F3D9B8 30%, #CFE3EA 55%, #4A7F96 72%, #2F6680 100%); }
+.mg-bus .bs-glass { position: absolute; left: 26%; top: 6.7%; width: 60%; height: 77.4%; overflow: hidden; }
+/* 먼 바다 마을: 유리 높이의 125%, 방파제 아래(그림 70%)가 유리 66% 에 오게. --p 0 → 1 이면 그림 너비의 19% 만큼 왼쪽으로(카페가 유리 가운데) */
+.mg-bus .bs-far { position: absolute; left: 0; top: -21.5%; height: 125%; aspect-ratio: 1376 / 768; background-size: 100% 100%; transform: translateX(calc(var(--p, 0) * -19%)); transition: transform .5s linear; }
+/* 동산: 위쪽 59% 가 투명이라 유리 아래 16% 띠로 보임. 뒤집어 붙인 그림 두 장을 이어 흘림(한 장 = -50%) */
+.mg-bus .bs-hillsart { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; overflow: hidden; pointer-events: none; }
+.mg-bus .bs-hills-track { position: absolute; left: 0; top: 0; height: 100%; display: flex; animation: bs-hills calc(7s * var(--hk, 1)) linear infinite; }
+.mg-bus .bs-hills-track img { display: block; flex: none; height: 100%; width: auto; }
+@keyframes bs-hills { to { transform: translateX(-50%); } }
+.mg-bus .bs-frameart { position: absolute; inset: 0; background-size: 100% 100%; pointer-events: none; }
+.mg-bus .has-art .bs-sight { animation-name: bs-pass-art; }
+@keyframes bs-pass-art { to { transform: translateX(-1400px); } }
+.mg-bus.is-still .has-art .bs-sight { animation-name: bs-fade; }
+.mg-bus .has-art .bs-sight.is-hold { animation: none; }
+.mg-bus .has-art .bs-sight img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.mg-bus .has-art .bs-sight.s-gull { width: 180px; height: 64px; }
+.mg-bus .has-art .bs-sight.s-boat { width: 160px; height: 118px; }
+.mg-bus .has-art .bs-sight.s-lighthouse { width: 104px; height: 142px; }
+.mg-bus .has-art .bs-sight.s-fish { width: 84px; height: 112px; }
+.mg-bus .has-art .bs-bag { left: 9%; top: 63%; bottom: auto; width: 8.5%; height: auto; aspect-ratio: 485 / 551; }
+.mg-bus .has-art .bs-bag img { display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .35)); }
+body:is(.reduce-motion, .theme-calm) .mg-bus :is(.bs-hills-track, .bs-far) { animation: none !important; transition: none !important; }
 
 /* 떠오르는 짧은 글(펑! · 꽥! · 갈매기 1!, arcade.js popText). 직업 마1스톤의 work.css 에서 가져와 바닷가 밤 색으로 */
 .mg-pop { position: absolute; z-index: 30; pointer-events: none; transform: translate(-50%, -50%); font-size: 40px; font-weight: 900; color: #FFF4D6; -webkit-text-stroke: 2px #2A1D12; paint-order: stroke fill; text-shadow: 0 4px 10px rgba(0, 0, 0, .45); white-space: nowrap; animation: mg-pop .75s ease-out both; }
