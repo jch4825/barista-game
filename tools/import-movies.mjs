@@ -1,10 +1,12 @@
 /**
- * 크로마키(초록 배경) 영상 → 게임 영상
+ * 크로마키(초록 배경) 영상 · 블렌더로 만든 영상 → 게임 영상
  *   node tools/import-movies.mjs              전체 (npm run movies)
  *   node tools/import-movies.mjs {ID}         일부만
  * 원본: assets/_src/movies/{ID}.mp4 (원래 이름은 assets/_src/SOURCES.md) · 배포에서 빠짐
  * 결과: assets/movies/{ID}.webm (VP9 + 투명, 소리 없음) · assets/movies/{ID}_end.png (마지막 장면, 움직임 줄이기·영상을 못 틀 때)
  * 초록 지우기 값은 아래 MOVIES 에서 맞춥니다. 지운 결과는 _check/{ID}.png(밝은 바탕 · 어두운 바탕, 1초마다 한 장)로 확인합니다.
+ * plain: true 는 바탕이 있는 영상(블렌더 렌더, 초록 지우기 · 자르기 없음, 투명 없음): 잔 버리기 영상 discard_*
+ *   (2026-11-06 사용자 "블랜더로 만들어서 넣어야 해. flow 영상으로 만들면 안된다", tools/blender/scene_bench.py … discard → tools/blender/discard_post.mjs)
  */
 
 import fs from 'node:fs';
@@ -26,7 +28,13 @@ const CHECK = path.join(root, 'assets', '_src', '_check');
  * 직업 마1스톤의 표지 영상(title_intro)은 지웠습니다(2026-10-27). 새 영상을 넣을 때 참고할 그때 값:
  *   { crop: [840, 720, 440, 0], key: '0x16EB17', similarity: 0.17, blend: 0.06, despill: 0.7, crf: 32, start: 2 }
  */
-const MOVIES = {};
+const MOVIES = {
+  // 잔 버리기(검수 13.67): 블렌더 장면 그대로(확대 창과 같은 3.68:1), 소리 없음 · 투명 없음
+  discard_mug: { plain: true, crf: 33 },
+  discard_glass: { plain: true, crf: 33 },
+  discard_paper: { plain: true, crf: 33 },
+  discard_plastic: { plain: true, crf: 33 },
+};
 
 function run(bin, args) {
   const r = spawnSync(bin, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
@@ -57,6 +65,17 @@ for (const id of ids) {
   if (!src) { console.error(`  ✗ ${id}: 원본이 없어요 (assets/_src/movies/${id}.mp4)`); process.exitCode = 1; continue; }
   const webm = path.join(OUT, `${id}.webm`);
   const png = path.join(OUT, `${id}_end.png`);
+  if (m.plain) {
+    // 바탕이 있는 영상: 그대로 VP9(투명 없음) + 마지막 장면(움직임 줄이기 · 영상을 못 틀 때) + 1초마다 한 장 확인 그림
+    ff(['-i', src, '-an', '-c:v', 'libvpx-vp9', '-pix_fmt', 'yuv420p', '-b:v', '0', '-crf', String(m.crf), '-row-mt', '1', webm]);
+    const n = frames(webm);
+    ff(['-i', webm, '-vf', `select=eq(n\\,${n - 1})`, '-fps_mode', 'vfr', '-frames:v', '1', png]);
+    const sec = Math.max(1, Math.round(seconds(webm)));
+    ff(['-i', webm, '-vf', `fps=1,scale=368:-2,tile=${sec}x1`, '-frames:v', '1', path.join(CHECK, `${id}.png`)]);
+    const kbp = (f) => `${Math.round(fs.statSync(f).size / 1024)}KB`;
+    console.log(`  ✓ ${id}: ${n}장 · ${id}.webm ${kbp(webm)} · ${id}_end.png ${kbp(png)}`);
+    continue;
+  }
   const [w, hgt, x, y] = m.crop;
   const vf = [
     `crop=${w}:${hgt}:${x}:${y}`,

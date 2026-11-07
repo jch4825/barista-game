@@ -2689,5 +2689,14 @@
     "whisk_s15": "shots/whisk_s15.webp",
     "whisk_s16": "shots/whisk_s16.webp"
   },
-  "movies": {}
+  "movies": {
+    "discard_glass": "movies/discard_glass.webm",
+    "discard_glass_end": "movies/discard_glass_end.png",
+    "discard_mug": "movies/discard_mug.webm",
+    "discard_mug_end": "movies/discard_mug_end.png",
+    "discard_paper": "movies/discard_paper.webm",
+    "discard_paper_end": "movies/discard_paper_end.png",
+    "discard_plastic": "movies/discard_plastic.webm",
+    "discard_plastic_end": "movies/discard_plastic_end.png"
+  }
 }

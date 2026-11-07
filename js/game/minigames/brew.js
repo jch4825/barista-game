@@ -171,6 +171,16 @@ const SYS = {
 /** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
 const WHIRL_WORD = '휘리릭!';
 const TOSS_KIND = { mug: 'mug', thick: 'mug', shot: 'glass', glass: 'glass', paper: 'paper', plastic: 'plastic' };
+/**
+ * 버리는 영상의 효과음 때(초): 블렌더 장면에서 잰 것(tools/blender/scene_bench.py discard 가 '사건(초)'로 알려 줌, 검수 13.67).
+ * 영상을 다시 만들면 그 숫자로 맞춤. 쏟기 pour · 얼음이 개수대 바닥에 ice · 뚜껑이 쓰레기통에 tap · 잔이 건조대에 clink · 쓰레기통에 stack
+ */
+const TOSS_CUES = {
+  mug: [[0.9, 'pour'], [1.5, 'water'], [4.6, 'clink']],
+  glass: [[1.0, 'pour'], [1.6, 'water'], [2.2, 'ice'], [4.6, 'clink']],
+  paper: [[1.6, 'tap'], [1.95, 'pour'], [2.6, 'water'], [4.8, 'stack']],
+  plastic: [[1.6, 'tap'], [2.0, 'pour'], [2.6, 'water'], [3.05, 'ice'], [4.8, 'stack']],
+};
 /** 손 기술에 처음 익숙해졌을 때 지은의 말(재미 개편 6.2) */
 const mastered = (sk) => `이제 ${josa(sk.name, '은/는')} 눈 감고도 할 수 있겠다.`;
 /** 박자 동작의 단추 이름 */
@@ -2776,8 +2786,14 @@ export async function brew(opts = {}) {
       const v = h('video', { class: 'bw-toss-movie', src: movie, muted: '', playsinline: '', autoplay: '', preload: 'auto' });
       v.muted = true;
       view.append(v);
-      audio.sfx('pour');
+      // 효과음은 영상의 그 순간에(블렌더 영상, 검수 13.67): 쏟기 · 얼음이 개수대에 · 뚜껑 · 잔이 건조대 · 쓰레기통에
+      const cues = (TOSS_CUES[kind] || [[0, 'pour']]).slice();
+      const tick = setInterval(() => {
+        if (!v.isConnected || stopped() || over) { clearInterval(tick); return; }
+        while (cues.length && v.currentTime >= cues[0][0]) audio.sfx(cues.shift()[1]);
+      }, 40);
       await w(Promise.race([new Promise((r) => { v.addEventListener('ended', r, { once: true }); v.addEventListener('error', r, { once: true }); }), sleep(robot ? 300 : 12000)]));
+      clearInterval(tick);
       await w(pauseMs(300));
       closeUpOff();
       return;

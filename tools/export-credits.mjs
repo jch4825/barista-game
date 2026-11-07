@@ -306,6 +306,28 @@ for (const [sid, m] of Object.entries(shotMeta)) {
     note: SHOT_NOTES[sid] || '',
   });
 }
+// 잔 버리기 영상(블렌더 3D 렌더, 생성 AI 아님, 검수 13.67): 틀린 잔을 [버리기] 했을 때 확대 창에 트는 영상
+const DISCARD_NOTES = {
+  mug: '아일랜드 작업대에 박힌 스테인리스 개수대에 머그를 기울여 쏟고 엎어서 식기 건조대에 놓는 5초(1456×750, 24장/초)',
+  glass: '같은 장면에서 유리컵: 쏟을 때 얼음이 개수대 바닥으로 떨어지고, 엎어서 건조대에 놓는 5초',
+  paper: '작업대 위에서 종이컵 뚜껑을 열어 쓰레기통에 → 쏟고 → 빈 컵을 쓰레기통에 넣는 5.8초',
+  plastic: '플라스틱 컵: 뚜껑(빨대째)을 쓰레기통에 → 쏟으면 얼음 24개가 함께 → 빈 컵을 쓰레기통에 넣는 5.8초',
+};
+const DISCARD_TITLES = { mug: '머그', glass: '유리컵', paper: '종이컵', plastic: '플라스틱 컵' };
+const movieFiles = images.movies || {};
+for (const [k, label] of Object.entries(DISCARD_TITLES)) {
+  const mv = movieFiles[`discard_${k}`];
+  if (!mv) continue;
+  imageList.push({
+    id: `movie_discard_${k}`, kind: 'shots', group: '작업대 장면(블렌더)', title: `잔 버리기 영상 · ${label}`,
+    file: `assets/${movieFiles[`discard_${k}_end`] || mv}`,
+    tool: 'Blender 5.2 (Cycles) · 이 저장소의 스크립트', made: '', flow: '블렌더로 렌더(생성 AI 아님): assets/_src/blender/bench_test.blend', first: '', firstMade: '', upscaled: false,
+    from: 'blender',
+    prompt: `blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender discard ${k}\nnode tools/blender/discard_post.mjs ${k}\nnpm run movies`,
+    neg: '',
+    note: DISCARD_NOTES[k],
+  });
+}
 const portraits = fs.readdirSync(path.join(root, 'assets', 'portraits')).filter((f) => f.endsWith('.jpg'));
 
 /* ---------------- 4. 음악·효과음 ---------------- */

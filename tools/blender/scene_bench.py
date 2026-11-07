@@ -3777,6 +3777,392 @@ def drag_ice(sdir, plastic=False):
     log('얼음 끌기', sid, meta)
 
 
+# ------------------------------------------------------------------ 잔 버리기 영상(… discard [mug,glass,paper,plastic] · discard_preview)
+# 2026-11-06 사용자 "블랜더로 만들어서 넣어야 해. flow 영상으로 만들면 안된다"(검수 13.67): 틀린 잔을 [버리기] 했을 때 확대 창에 트는 영상.
+# 개수대 위에서 잔을 기울여 쏟음(얼음은 개수대 바닥으로) → 머그 · 유리컵은 엎어서 식기 건조대에, 종이컵 · 플라스틱 컵은 뚜껑을 먼저 열어
+# 쓰레기통에 넣고 쏟은 뒤 컵도 쓰레기통에. 손은 그리지 않음(손 동작 컷의 피처 · 주전자처럼 잔이 스스로 움직임).
+# 한 장씩 자리를 정해 렌더(음료 높이 · 줄기 · 떨어지는 얼음을 그 장마다 셈) → discard/{종류}/f0000.png … → 밖에서 ffmpeg 로 mp4
+DISCARD_RES = (1456, 750)  # 잔 버리기 확대 창의 장면 칸(1920 판에서 약 1450 × 746, 1.94:1). 손 기술 컷(3.68:1)과 다름
+DISCARD_FPS = 24
+# 2026-11-06 사용자 "계수대가 너무 작다. 아일랜드 위에 올려져 있는 것 같지 않다": 실제 크기(안쪽 50 × 36cm)의 개수대를
+# 아일랜드 작업대 앞 끝 가까이에 박고, 카메라를 조금 낮춰 작업대 앞 두께 · 아래 장(크림색 판자)이 화면 아래에 보이게
+SINK_X, SINK_Y = -0.02, -0.20   # 개수대 가운데(작업대 앞 끝 y = -0.45 에서 앞쪽 테두리까지 6cm)
+SINK_W, SINK_D, SINK_H = 0.50, 0.36, 0.10  # 안쪽 너비(좌우) · 깊이(앞뒤) · 높이(얕게: 앞 벽에 가려 바닥의 얼음이 안 보이지 않게)
+CUP_Y = SINK_Y + 0.09          # 잔이 움직이는 줄(개수대 가운데보다 뒤: 떨어진 얼음 · 줄기가 앞 벽에 가리지 않게)
+SINK_FLOOR = -SINK_H
+RIGHT_X = 0.52                   # 건조대 · 쓰레기통 가운데 x(개수대 오른쪽 테두리 밖)
+RACK_Z = 0.034                   # 건조대 살 윗면
+BIN_R, BIN_H = 0.085, 0.10       # 작업대 위 작은 쓰레기통(낮게: 컵을 넣을 때 화면 위로 나가지 않게)
+G = 9.8
+
+
+def d_ease(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * (3 - 2 * t)
+
+
+def d_seg(f, f0, f1):
+    """f0 ~ f1 사이에서 0 → 1(부드럽게)"""
+    return d_ease((f - f0) / max(1e-6, f1 - f0))
+
+
+def d_lerp(a, b, t):
+    return a + (b - a) * t
+
+
+def build_sink(c):
+    """작업대에 박힌 스테인리스 개수대(테두리 · 안쪽 벽 · 바닥 · 배수구) + 뒤쪽 꺾인 수도꼭지. 작업대 · 아래장은 그 자리를 뚫음"""
+    cutter = box('SINK_cut', (SINK_W + 0.004, SINK_D + 0.004, 0.6), (SINK_X, SINK_Y, -0.2), M['steel'], 'rig', bev=0.0)
+    cutter.hide_render = True
+    cutter.hide_viewport = True
+    # 아일랜드 아래 장은 차분한 바다빛 초록 칠(크림색이면 뒤의 흰 타일 벽과 섞여 작업대가 섬처럼 보이지 않음, 이 장면에서만)
+    for n in M['cabinet'].node_tree.nodes:
+        if n.type == 'TEX_BRICK':
+            n.inputs['Color1'].default_value = lin('#3F6B5C')
+            n.inputs['Color2'].default_value = lin('#3A6556')
+            n.inputs['Mortar'].default_value = lin('#22403A')
+    for name in ('SET_counter', 'SET_cabinet'):
+        md = bpy.data.objects[name].modifiers.new('Sink', 'BOOLEAN')
+        md.operation = 'DIFFERENCE'
+        md.object = cutter
+    t = 0.004
+    st = M['steel']
+    # 안쪽 벽 넷 + 바닥
+    box('SINK_floor', (SINK_W, SINK_D, t), (SINK_X, SINK_Y, SINK_FLOOR - t / 2), st, c, bev=0.002)
+    for sx in (-1, 1):
+        box('SINK_wall', (t, SINK_D, SINK_H), (SINK_X + sx * (SINK_W / 2 + t / 2), SINK_Y, SINK_FLOOR / 2), st, c, bev=0.0015)
+    for sy in (-1, 1):
+        box('SINK_wall', (SINK_W + 2 * t, t, SINK_H), (SINK_X, SINK_Y + sy * (SINK_D / 2 + t / 2), SINK_FLOOR / 2), st, c, bev=0.0015)
+    # 테두리(작업대 위로 조금 올라온 판)
+    rim, rt = 0.022, 0.005
+    for sx in (-1, 1):
+        box('SINK_rim', (rim, SINK_D + 2 * rim, rt), (SINK_X + sx * (SINK_W / 2 + rim / 2), SINK_Y, rt / 2), st, c, bev=0.002)
+    for sy in (-1, 1):
+        box('SINK_rim', (SINK_W, rim, rt), (SINK_X, SINK_Y + sy * (SINK_D / 2 + rim / 2), rt / 2), st, c, bev=0.002)
+    cyl('SINK_drain_ring', 0.03, 0.003, (SINK_X + 0.06, SINK_Y + 0.06, SINK_FLOOR + 0.0015), M['chrome'], c, bev=0.001)
+    cyl('SINK_drain', 0.022, 0.004, (SINK_X + 0.06, SINK_Y + 0.06, SINK_FLOOR + 0.0012), M['rubber'], c, bev=0.0)
+    # 수도꼭지: 뒤쪽 오른편에서 올라와 앞으로 꺾임(쏟는 잔과 부딪치지 않게)
+    fx, fy = SINK_X + 0.17, SINK_Y + SINK_D / 2 + 0.05
+    cyl('SINK_tap_base', 0.026, 0.02, (fx, fy, 0.01), M['chrome'], c, bev=0.003)
+    tube('SINK_tap', [(fx, fy, 0.018), (fx, fy, 0.25), (fx - 0.012, fy - 0.03, 0.30), (fx - 0.03, fy - 0.06, 0.27), (fx - 0.034, fy - 0.066, 0.24)], 0.011, M['chrome'], c)
+    cyl('SINK_tap_lever', 0.007, 0.06, (fx + 0.026, fy + 0.006, 0.075), M['chrome'], c, rot=(0, math.radians(-60), 0), bev=0.001)
+
+
+def build_rack(c):
+    """작업대 위 식기 건조대: 물받이 판 + 가로 살(엎어 둔 잔이 앉는 곳) + 뒤쪽 세운 살"""
+    x0, y0 = RIGHT_X, CUP_Y
+    st, ch = M['steel'], M['chrome']
+    box('RACK_tray', (0.26, 0.21, 0.012), (x0, y0, 0.006), st, c, bev=0.003)
+    for i in range(12):
+        cyl('RACK_bar', 0.0024, 0.20, (x0 - 0.11 + i * 0.02, y0, RACK_Z - 0.0024), ch, c, rot=(math.radians(90), 0, 0), bev=0.0)
+    for sx in (-1, 1):
+        cyl('RACK_side', 0.003, 0.24, (x0, y0 + sx * 0.098, RACK_Z - 0.006), ch, c, rot=(0, math.radians(90), 0), bev=0.0)
+        for sy in (-1, 1):
+            cyl('RACK_leg', 0.003, RACK_Z - 0.012, (x0 + sx * 0.115, y0 + sy * 0.095, 0.012 + (RACK_Z - 0.012) / 2), ch, c, bev=0.0)
+    for i in range(12):
+        cyl('RACK_up', 0.002, 0.11, (x0 - 0.11 + i * 0.02, y0 + 0.098, RACK_Z + 0.055), ch, c, bev=0.0)
+    cyl('RACK_top', 0.0025, 0.24, (x0, y0 + 0.098, RACK_Z + 0.11), ch, c, rot=(0, math.radians(90), 0), bev=0.0)
+
+
+def build_bin(c):
+    """작업대 위 작은 초록 쓰레기통(뚜껑 없음, 글자 · 표시 없음)"""
+    m = basic('bin', lin('#3F7A57'), rough=0.45, coat=0.2, coat_rough=0.2)
+    prof = [(0.0, 0.0), (BIN_R - 0.012, 0.0), (BIN_R - 0.006, 0.004), (BIN_R, BIN_H - 0.006), (BIN_R + 0.005, BIN_H - 0.003),
+            (BIN_R + 0.004, BIN_H + 0.002), (BIN_R - 0.004, BIN_H), (BIN_R - 0.009, 0.012), (0.0, 0.01)]
+    lathe('BIN_body', prof, m, (RIGHT_X, CUP_Y, 0.0), c)
+
+
+DLID = {'paper': [(0.0, 0.0105), (0.040, 0.0105), (0.0435, 0.0085), (0.0462, 0.0045), (0.0468, -0.0012), (0.0458, -0.0016), (0.0445, 0.0030),
+                  (0.0418, 0.0062), (0.0, 0.0062)],
+        'plastic': [(0.0, 0.0030), (0.0475, 0.0030), (0.0492, 0.0008), (0.0490, -0.0025), (0.0478, -0.0025), (0.0478, 0.0), (0.0, 0.0008)]}
+
+
+def discard_cup(kind, c):
+    """잔(뿌리 Empty 의 자식들) · 음료 · 얼음 · 뚜껑을 만듦. 돌려줌: dict(root, lid, rim(높이), r(테두리 반지름), liquid, full(음료 높이), ice[], stream 재질 …)"""
+    root = bpy.data.objects.new('D_root', None)
+    coll(c).objects.link(root)
+    lid_root = None
+    ice = []
+    names_before = set(o.name for o in coll(c).objects)
+    if kind == 'mug':
+        lathe('D_mug', MUG, M['ceramic'], (0, 0, 0), c)
+        a = math.radians(180.0)  # 손잡이는 왼쪽(오른쪽으로 쏟을 때 위로 감)
+        tube('D_handle', [(0.0405 * math.cos(a), 0.0405 * math.sin(a), 0.074), (0.064 * math.cos(a), 0, 0.079), (0.0755 * math.cos(a), 0, 0.058),
+                          (0.068 * math.cos(a), 0, 0.031), (0.0400 * math.cos(a), 0, 0.025)], 0.0066, M['ceramic'], c)
+        mat = basic('d_latte', lin('#B98856'), rough=0.22, sss=0.1)
+        full = 0.0835
+        build_mug_liquid((0, 0), 0.0, full, mat, c)
+        info = dict(rim=0.0913, r=0.042, mat=mat, full=full)
+    elif kind == 'glass':
+        lathe('D_glass', GLASS, M['glass'], (0, 0, 0), c)
+        mat = basic('d_ilatte', lin('#B48A5E'), rough=0.12, sss=0.15)
+        full = 0.112
+        build_glass_liquid((0, 0, 0), full, mat, c)
+        for i, (dx, dy, z, rx, ry, rz) in enumerate(ICE_PILE):
+            ice.append(box(f'D_ice{i}', (ICE, ICE, ICE), (dx, dy, z + 0.03), M['ice'], c, bev=0.0045, segs=3, rot=(math.radians(rx), math.radians(ry), math.radians(rz))))
+        info = dict(rim=0.1255, r=0.0385, mat=mat, full=full)
+    elif kind == 'paper':
+        build_paper_cup((0, 0, 0), c)
+        mat = M['americano']
+        full = 0.098
+        build_cup_liquid('D_paper_liquid', (0, 0, 0), PAPER_INNER, full, mat, c)
+        info = dict(rim=PAPER_RIM, r=0.045, mat=mat, full=full)
+    else:  # plastic
+        lathe('D_plastic', PLASTIC, M['pet'], (0, 0, 0), c)
+        mat = M['americano']
+        full = 0.136
+        build_cup_liquid('D_pl_liquid', (0, 0, 0), PLASTIC_INNER, full, mat, c)
+        for i, (dx, dy, z, rx, ry, rz) in enumerate(ICE_PILE_PL):
+            ice.append(box(f'D_ice{i}', (ICE, ICE, ICE), (dx, dy, z), M['ice'], c, bev=0.0045, segs=3, rot=(math.radians(rx), math.radians(ry), math.radians(rz))))
+        info = dict(rim=PLASTIC_RIM, r=0.0465, mat=mat, full=full)
+    for o in coll(c).objects:
+        if o.name not in names_before and o is not root:
+            o.parent = root
+    liquid = [o for o in root.children if 'liquid' in o.name]
+    # 음료는 수평면 아래만(Boolean 교집합): 잔을 기울이면 음료 윗면이 늘 수평, 테두리 아래로 내려감
+    cutter = box('D_level', (1.2, 1.2, 1.0), (0, 0, -0.5), M['steel'], 'rig', bev=0.0)
+    cutter.hide_render = True
+    for o in liquid:
+        md = o.modifiers.new('Level', 'BOOLEAN')
+        md.operation = 'INTERSECT'
+        md.object = cutter
+    if kind in ('paper', 'plastic'):
+        lid_root = bpy.data.objects.new('D_lid_root', None)
+        coll(c).objects.link(lid_root)
+        lm = basic('d_lid', lin('#F7F6F2'), rough=0.35) if kind == 'paper' else basic('d_pet_lid', lin('#E9F0F3'), rough=0.16, trans=0.75, ior=1.45)  # 투명 뚜껑은 조금 뿌옇게(안 보이지 않게)
+        lid = lathe('D_lid', DLID[kind], lm, (0, 0, 0), c)
+        lid.parent = lid_root
+        if kind == 'paper':
+            cyl('D_lid_hole', 0.0045, 0.002, (0.03, 0.0, 0.0107), M['rubber'], c, bev=0.0).parent = lid_root
+        else:  # 빨대(흰 종이 빨대): 뚜껑을 지나 컵 바닥 가까이까지
+            sm = basic('d_straw', lin('#F4F1EA'), rough=0.6)
+            s = cyl('D_straw', 0.0034, 0.215, (0.012, 0.004, -0.045), sm, c, rot=(0, math.radians(-8), 0), bev=0.0)
+            s.parent = lid_root
+        info['lid_h'] = info['rim']
+    info.update(root=root, lid=lid_root, liquid=liquid, cutter=cutter, ice=ice)
+    info['stream_mat'] = M['stream'] if kind in ('paper', 'plastic') else basic('d_lstream', lin('#A97A4E'), rough=0.12, spec=0.6)
+    return info
+
+
+def discard_camera():
+    cam.data.lens = 40
+    tgt = Vector((0.05, SINK_Y + 0.02, 0.035))
+    el, az, d = math.radians(24), math.radians(3), 1.38
+    cam.location = tgt + d * Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
+    look(cam, tgt)
+    cam.data.dof.use_dof = False
+    cy.seed = 11
+
+
+def discard_plan(kind):
+    """장(frame)마다 잔 · 뚜껑의 자리: 돌려줌 (장 수, f(n) → dict(x, z, th(기울기°), lid=(x, z, 기울기°) 또는 None, drop=쓰레기통에 떨어지는 중))"""
+    wash = kind in ('mug', 'glass')
+    hi = {'mug': 0.085, 'glass': 0.10, 'paper': 0.095, 'plastic': 0.115}[kind]  # 쏟을 때 뿌리(잔 바닥) 높이: 테두리가 개수대 안으로 내려가게
+    px = SINK_X - 0.055                       # 쏟을 때 x(테두리가 개수대 가운데 위에 오게)
+    rim = {'mug': 0.0913, 'glass': 0.1255, 'paper': PAPER_RIM, 'plastic': PLASTIC_RIM}[kind]
+    if wash:
+        n = 120
+        t_in, t_tilt, t_hold, t_move, t_land = (0, 16), (16, 60), (60, 70), (70, 104), (104, 112)
+    else:
+        n = 140
+        t_in, t_lid, t_tilt, t_hold, t_move, t_land = (0, 12), (14, 42), (40, 82), (82, 90), (90, 112), (112, 126)
+
+    def at(f):
+        s = {'lid': None, 'drop': 0.0}
+        e = d_seg(f, *t_in)
+        z_in = hi - 0.03 if wash else 0.0  # 종이컵 · 플라스틱 컵은 작업대 위에 선 채로(뚜껑을 열 때 화면 위로 나가지 않게)
+        x, z, th = d_lerp(-0.56, px - 0.02, e), d_lerp(0.012 if wash else 0.0, z_in, e), 0.0
+        tt = d_seg(f, *t_tilt)
+        x, z = d_lerp(x, px, tt), d_lerp(z, hi, tt)
+        th = 148.0 * tt
+        if wash:
+            m = d_seg(f, *t_move)
+            th = d_lerp(th, 180.0, m)
+            land_z = RACK_Z + rim + 0.002
+            x = d_lerp(x, RIGHT_X - 0.04 if kind == 'mug' else RIGHT_X + 0.03, m)
+            z = d_lerp(z, land_z + 0.03, m) + 0.06 * math.sin(math.pi * m)
+            k = d_seg(f, *t_land)
+            z = d_lerp(z, land_z, k) if m >= 1.0 else z
+        else:
+            m = d_seg(f, *t_move)
+            th = d_lerp(th, 6.0, m)
+            x = d_lerp(x, RIGHT_X, m)
+            z = d_lerp(z, BIN_H + 0.022, m) + 0.015 * math.sin(math.pi * m)
+            if f >= t_land[0]:  # 쓰레기통 안으로 떨어져 바닥에 멈춤(거의 똑바로: 통 벽을 뚫지 않게)
+                dt = (f - t_land[0]) / DISCARD_FPS
+                z = max(0.014, z - 0.5 * G * dt * dt)
+                s['drop'] = dt
+            # 뚜껑: 위로 들어 올려 → 쓰레기통 위로 → 떨어뜨림
+            lu = d_seg(f, t_lid[0], t_lid[0] + 8)
+            lm = d_seg(f, t_lid[0] + 6, t_lid[1] - 6)
+            lx = d_lerp(d_lerp(-0.56, px - 0.02, d_seg(f, *t_in)), RIGHT_X, lm)
+            lz0 = rim
+            lz = lz0 + 0.03 * lu
+            lz = d_lerp(lz, BIN_H + 0.035, lm) + 0.02 * math.sin(math.pi * lm)
+            lth = 25.0 * lm
+            if f >= t_lid[1] - 6:
+                dt = (f - (t_lid[1] - 6)) / DISCARD_FPS
+                lz = max(0.016, lz - 0.5 * G * dt * dt)
+                lth += 30.0 * min(dt, 0.2)
+            s['lid'] = (lx, lz, lth)
+            if f < t_lid[0]:  # 뚜껑을 열기 전에는 잔에 덮여 함께 움직임
+                s['lid'] = ('cup',)
+        s.update(x=x, z=z, th=th)
+        return s
+    return n, at, t_tilt
+
+
+def lip_of(x, z, th, r, rim):
+    """잔 뿌리(x, z) · 오른쪽으로 th° 기울였을 때 테두리의 가장 낮은 점(오른쪽)"""
+    t = math.radians(th)
+    return Vector((x + r * math.cos(t) + rim * math.sin(t), CUP_Y, z - r * math.sin(t) + rim * math.cos(t)))
+
+
+def discard(kind, preview=False):
+    """잔 버리기 영상 한 편: OUT/discard/{kind}/f0000.png … (preview 면 몇 장만 작게)"""
+    c, cd = 'discard_static', 'discard_cup'
+    for name in (c, cd, 'discard_dyn'):
+        for ob in list(coll(name).objects):
+            bpy.data.objects.remove(ob, do_unlink=True)
+    if 'SINK_floor' not in bpy.data.objects:  # 개수대는 한 번만(작업대를 뚫는 Boolean 도 한 번)
+        build_sink('discard_sink')
+    if kind in ('mug', 'glass'):
+        build_rack(c)
+    else:
+        build_bin(c)
+    cup = discard_cup(kind, cd)
+    show_only(('discard_sink', c, cd, 'discard_dyn'))
+    discard_camera()
+    n, at, t_tilt = discard_plan(kind)
+    sdir = os.path.join(OUT, 'discard', kind + ('_preview' if preview else ''))
+    os.makedirs(sdir, exist_ok=True)
+    frames = [0, 14, 30, 44, 56, 66, 80, 96, 110, n - 1] if preview else list(range(n))
+    root, lid, cutter = cup['root'], cup['lid'], cup['cutter']
+    rim, r, full = cup['rim'], cup['r'], cup['full']
+    deficit = 0.0          # 쏟아서 줄어든 음료 높이(잔에 붙어 움직이고, 다시 늘지 않음)
+    emptied = False
+    ice = [dict(ob=o, free=False, v=Vector((0, 0, 0)), w=Vector((0, 0, 0)), rest=False) for o in cup['ice']]
+    rnd = random.Random(5)
+    puddle = 0.0
+    prev = None
+    dt = 1.0 / DISCARD_FPS
+    events = {}  # 소리를 맞출 때(장): 쏟기 시작 · 얼음이 바닥에 · 뚜껑 · 잔이 내려앉음(brew.js tossScene 의 TOSS_CUES)
+    norender = bool(os.environ.get('DISCARD_NORENDER'))
+    resume = bool(os.environ.get('DISCARD_RESUME')) and not preview
+    for f in range(n):
+        s = at(f)
+        root.location = (s['x'], CUP_Y, s['z'])
+        root.rotation_euler = (0, math.radians(s['th']), 0)
+        bpy.context.view_layer.update()
+        lip = lip_of(s['x'], s['z'], s['th'], r, rim)
+        base_full = s['z'] + full * math.cos(math.radians(s['th']))  # 똑바로일 때의 음료 높이(기울면 조금 내려감)
+        cap = lip.z - 0.0015
+        need = base_full - cap  # 테두리 아래로 내려가야 할 만큼(쏟은 양)
+        pouring = need > deficit + 1e-5 and s['th'] < 170
+        if pouring:
+            events.setdefault('pour', f)
+        deficit = max(deficit, need)
+        level = base_full - deficit
+        emptied = emptied or s['th'] > 132.0  # 한 번 거의 엎었으면 다 쏟은 것(잔을 다시 세워도 음료가 돌아오지 않게)
+        gone = emptied or deficit > full * 0.95
+        cutter.location = (s['x'], CUP_Y, (level if not gone else -5.0) - 0.5)
+        for o in cup['liquid']:
+            o.hide_render = gone
+        # 뚜껑
+        if lid is not None:
+            if s['lid'] and s['lid'][0] == 'cup':
+                lid.matrix_world = root.matrix_world @ Matrix_T((0, 0, cup['lid_h']))
+                lid.hide_render = False
+            elif s['lid']:
+                lid.location = (s['lid'][0], CUP_Y, s['lid'][1])
+                lid.rotation_euler = (0, math.radians(s['lid'][2]), 0)
+                lid.hide_render = False
+            else:
+                lid.hide_render = True
+            for ch in lid.children:
+                ch.hide_render = lid.hide_render
+        # 얼음: 잔이 거의 엎어지면 하나씩 떨어져 개수대 바닥으로
+        for i, it in enumerate(ice):
+            o = it['ob']
+            if not it['free'] and s['th'] > 118.0 + 1.2 * (i % 9):
+                mw = o.matrix_world.copy()
+                o.parent = None
+                o.matrix_world = mw
+                it['free'] = True
+                it['v'] = Vector((rnd.uniform(0.05, 0.22), rnd.uniform(-0.02, 0.14), -0.1))  # 조금 뒤로(앞 벽에 가리지 않게)
+                it['w'] = Vector((rnd.uniform(-6, 6), rnd.uniform(-6, 6), rnd.uniform(-4, 4)))
+            if it['free'] and not it['rest']:
+                it['v'].z -= G * dt
+                o.location += it['v'] * dt
+                o.rotation_euler = tuple(a + b * dt for a, b in zip(o.rotation_euler, it['w']))
+                lo, hi_ = SINK_X - SINK_W / 2 + 0.014, SINK_X + SINK_W / 2 - 0.014
+                o.location.x = min(max(o.location.x, lo), hi_)
+                o.location.y = min(max(o.location.y, SINK_Y - SINK_D / 2 + 0.014), SINK_Y + SINK_D / 2 - 0.014)
+                floor = SINK_FLOOR + ICE * 0.55
+                if o.location.z <= floor:
+                    o.location.z = floor
+                    if abs(it['v'].z) > 0.6:  # 한 번 통 튀고 멈춤
+                        it['v'] = Vector((it['v'].x * 0.4, it['v'].y * 0.4, -it['v'].z * 0.25))
+                        it['w'] *= 0.4
+                    else:
+                        it['rest'] = True
+                        events.setdefault('ice', f)
+                        o.rotation_euler = (round(o.rotation_euler.x / (math.pi / 2)) * math.pi / 2 + rnd.uniform(-0.1, 0.1),
+                                            round(o.rotation_euler.y / (math.pi / 2)) * math.pi / 2 + rnd.uniform(-0.1, 0.1), o.rotation_euler.z)
+        # 줄기 · 개수대 바닥에 고인 음료
+        for ob in list(coll('discard_dyn').objects):
+            bpy.data.objects.remove(ob, do_unlink=True)
+        if pouring and not gone:
+            vx = 0.32
+            pts = []
+            for k in range(7):
+                tt = k * 0.045
+                p = Vector((lip.x + 0.004 + vx * tt, CUP_Y, lip.z - 0.5 * G * tt * tt))
+                if p.z < SINK_FLOOR + 0.002:
+                    p.z = SINK_FLOOR + 0.002
+                    pts.append(p)
+                    break
+                pts.append(p)
+            if len(pts) >= 2:
+                tube('D_stream', [tuple(p) for p in pts], 0.0042 if kind != 'glass' else 0.0038, cup['stream_mat'], 'discard_dyn')
+            puddle = min(0.055, puddle + 0.0035)
+        else:
+            puddle = max(0.0, puddle - 0.0022)
+        if puddle > 0.004:
+            pd = cyl('D_puddle', puddle, 0.0012, (SINK_X + 0.06, SINK_Y + 0.06, SINK_FLOOR + 0.0007), cup['mat'], 'discard_dyn', bev=0.0)
+            pd.scale = (1.0, 0.75, 1.0)
+        if f == 0 and os.environ.get('DISCARD_DEBUG'):  # 화면 아래쪽에 무엇이 보이는지(시험용)
+            dg = bpy.context.evaluated_depsgraph_get()
+            fr = cam.data.view_frame(scene=scene)
+            for vy in (0.02, 0.06, 0.12, 0.2):
+                p = ((fr[1] + fr[2]) * 0.5).lerp((fr[0] + fr[3]) * 0.5, vy)  # 아래 가운데 → 위 가운데
+                d = (cam.matrix_world.to_3x3() @ p).normalized()
+                o0 = cam.matrix_world.translation.copy()
+                for _ in range(4):
+                    hit, loc, nor, idx, ob, mx = scene.ray_cast(dg, o0, d)
+                    if not hit or not ob.name.startswith(('D_level', 'SINK_cut')):
+                        break
+                    o0 = loc + d * 0.001
+                log('ray', vy, ob.name if hit else None, tuple(round(v, 3) for v in loc) if hit else None)
+        if lid is not None and s['lid'] and s['lid'][0] != 'cup' and s['lid'][1] <= 0.0161:
+            events.setdefault('lid', f)
+        if s.get('drop') and s['z'] <= 0.0141:
+            events.setdefault('bin', f)
+        if kind in ('mug', 'glass') and s['th'] >= 179.9 and abs(s['z'] - (RACK_Z + rim + 0.002)) < 1e-4:
+            events.setdefault('rack', f)
+        if f in frames and not norender:
+            path = os.path.join(sdir, f'f{f:04d}.png')
+            if resume and os.path.exists(path) and os.path.getsize(path) > 0:
+                continue  # DISCARD_RESUME=1: 멈췄던 렌더를 이어서(이미 있는 장면은 건너뜀)
+            render(path, (DISCARD_RES[0] // 2, DISCARD_RES[1] // 2) if preview else DISCARD_RES, 24 if preview else 56, fmt='PNG')
+    log('잔 버리기', kind, n, '장 →', sdir, '사건(초)', {k: round(v / DISCARD_FPS, 2) for k, v in sorted(events.items(), key=lambda kv: kv[1])})
+
+
+def Matrix_T(v):
+    from mathutils import Matrix
+    return Matrix.Translation(Vector(v))
+
+
 ALL = ('machine', 'mug', 'pitcher', 'tamper', 'shot')
 modes =['full', 'bg', 'extract', 'sprites'] if MODE == 'all' else [MODE]  # 물건 그림은 보이기 설정을 바꾸므로 맨 끝
 blend = os.path.join(OUT, 'bench_test.blend')
@@ -3815,6 +4201,10 @@ for mode in modes:
         for sid in (ARGS[2] if len(ARGS) > 2 else ','.join(TILT_SHOTS)).split(','):
             SHOTS[sid](sdir, False)
         TILT = False
+    elif mode in ('discard', 'discard_preview'):
+        # 잔 버리기 영상(셋째 인자: mug,glass,paper,plastic 가운데 쉼표로, 없으면 넷 모두) 예) ... -- assets/_src/blender discard_preview mug
+        for kind in (ARGS[2] if len(ARGS) > 2 else 'mug,glass,paper,plastic').split(','):
+            discard(kind, mode == 'discard_preview')
     elif mode == 'drag_ice':
         sdir = os.path.join(OUT, 'shots')
         os.makedirs(sdir, exist_ok=True)
