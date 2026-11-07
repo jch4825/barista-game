@@ -197,14 +197,14 @@ export const HAND_SKILLS = {
     react: { low: '조금 진하네요.', high: '조금 싱겁네요.' },
   },
   hotwater: { // 아이스 유자차: 피처의 청에 뜨거운 물을 조금(청이 잠길 만큼). 컵에 바로 부으면 유리컵이 깨지거나 플라스틱 컵이 휨(2026-11-07 사용자, 검수 13.81)
-    name: '뜨거운 물 조금', act: 'hold', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'pour', temp: 'iced',
-    howto: '[누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이 잠길 만큼만 붓고 손을 떼요.',
-    howtoTurn: '청이 잠길 만큼 물이 차면 [멈추기]를 눌러요.',
+    name: '뜨거운 물 조금', act: 'hold', of: ['water', 'matcha', 'cocoa'], obj: 'obj_kettle', icon: 'water', sfx: 'pour', temp: 'iced', // 말차 · 코코아 가루도 피처에서 녹임(검수 13.86)
+    howto: '[누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이나 가루가 잠길 만큼만 붓고 손을 떼요.',
+    howtoTurn: '청이나 가루가 잠길 만큼 물이 차면 [멈추기]를 눌러요.',
     howtoCue: '[누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 화면에 "지금!"이 뜨면 손을 떼요.',
     safety: '주전자와 김은 뜨거워요. 손잡이만 잡아요.',
     zone: [0.25, 0.5], // 블렌더 컷 hotwater_pitcher_yuja: 띠 0.25 ~ 0.5 = 청이 잠길 만큼, 1 = 피처 절반 넘게
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
-    react: { low: '아래에 청이 조금 남았네요.', high: '조금 싱겁네요.' },
+    react: { low: '아래에 덜 녹은 게 조금 있네요.', high: '조금 싱겁네요.' },
   },
   boil: {
     name: '물 끓이기', act: 'wait', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'bubbles', temp: 'hot', ms: 4600,
@@ -373,6 +373,8 @@ export const RECIPES = {
   greentea_latte: {
     name: '녹차라테', icon: 'tea',
     base: 'matcha', adds: ['milk'], temps: ['iced', 'hot'], steps: ['powder', 'whisk', 'ice', 'steam', 'pour'],
+    // 아이스: 피처에 말차 → 뜨거운 물 조금 → 차선으로 풀기 → 컵에 얼음 → 푼 말차 옮겨 붓기 → 찬 우유(검수 13.86)
+    iced: ['powder', 'hotwater', 'whisk', 'ice', 'pourin:matcha', 'pour'], pitcher: ['powder', 'hotwater', 'whisk'],
     look: { mug: 'cup_mug_greentea', glass: 'cup_glass_greentea', plastic: 'cup_plastic_greentea' },
     color: '#A8C97F', tag: 'green',
     thanks: '쌉쌀하고 시원해요. 고마워요.',
@@ -389,6 +391,8 @@ export const RECIPES = {
   cocoa: {
     name: '코코아', icon: 'coffee',
     base: 'cocoa', adds: ['milk'], temps: ['hot', 'iced'], steps: ['powder', 'ice', 'steam', 'pour', 'stir'],
+    // 아이스: 피처에 코코아 → 뜨거운 물 조금 → 저어 녹임 → 컵에 얼음 → 녹인 코코아 옮겨 붓기 → 찬 우유(찬 우유에는 가루가 잘 안 녹음, 검수 13.86)
+    iced: ['powder', 'hotwater', 'stir', 'ice', 'pourin:cocoa', 'pour'], pitcher: ['powder', 'hotwater', 'stir'],
     look: { mug: 'cup_mug_cocoa', glass: 'cup_glass_cocoa', plastic: 'cup_plastic_cocoa' },
     color: '#8A5A3C', foam: '#C9A487', tag: 'brown',
     thanks: '달고 따뜻해요. 고마워요.',
@@ -416,6 +420,8 @@ export const POURIN_SAY = {
   espresso: '샷잔의 에스프레소를 컵에 부었어요.',
   decaf: '샷잔의 디카페인 에스프레소를 컵에 부었어요.',
   yuja: '피처에 녹인 유자청을 얼음 위에 부었어요.',
+  matcha: '피처에 푼 말차를 얼음 위에 부었어요.',
+  cocoa: '피처에 녹인 코코아를 얼음 위에 부었어요.',
 };
 /** 그 메뉴 · 온도의 손 동작 차례(아이스는 iced 가 있으면 그것) */
 export const stepsOf = (r, temp) => (temp === 'iced' && r.iced) || r.steps;

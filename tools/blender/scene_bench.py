@@ -3208,6 +3208,7 @@ MIX = {  # 젓기: (안 섞인 두 색, 다 섞인 색) · 따뜻한 잔 겉면 
     'yuja': ('#F3EBD2', '#E8A91C', ('#E2A23A', '#EDB956')),
     'strawberry': ('#F6F2EA', '#B3172F', ('#EA7F9C', '#F6A9BD')),
     'cocoa': ('#F4EFE6', '#4E2A17', ('#7A4B2E', '#94603E')),
+    'cocoa_pitcher': ('#6A3A22', '#2B1508', ('#3E2010', '#552D18')),  # 피처에서 뜨거운 물에 코코아를 녹임(우유 없이, 검수 13.86)
     'mix': ('#3A1D0B', '#D9B98E', ('#9C6B40', '#B5855A')),
 }
 
@@ -3471,6 +3472,8 @@ def kettle_stream(t, surf):
 
 
 WATER_TINT = {  # 처음(바탕) → 다 부은 물빛
+    'matcha': (('#2C5512', '#46741F'), ('#3D6A1A', '#557F2A')),  # 피처의 말차 가루에 뜨거운 물 조금(검수 13.86)
+    'cocoa': (('#2B1508', '#472612'), ('#3A1D0C', '#552D16')),   # 피처의 코코아 가루에 뜨거운 물 조금
     'barley': (('#E9D6A0', '#F1E2B4'), ('#CF9A50', '#DDAE68')),
     'yuja': (('#E39E10', '#EFB52E'), ('#EDB933', '#F4CC5A')),
     'mix': (('#C9A57A', '#DDBD94'), ('#8E5E35', '#A8784C')),
@@ -3617,12 +3620,18 @@ def shot_hotwater_pitcher(sdir, preview, key='yuja'):
     tip = (px - 0.012, py, pz + 0.1062 + 0.035)
     build_pour_kettle(tip, 24.0, c)
     m, K = water_tint_mat(key)
-    jam = jam_mat(key)
+    powder = key in POWDER
+    first = powder_mat(key) if powder else jam_mat(key)
+    h0 = 0.006 if powder else YUJA_JAM_H
 
     def build(k, p, flow):
         K.outputs[0].default_value = sstep(p / 0.45)
-        h = YUJA_JAM_H + YUJA_HOT_SPAN * p
-        surf = pitcher_liquid(h, m if k > 0 else jam)
+        h = h0 + YUJA_HOT_SPAN * p
+        if k == 0 and powder:  # 처음: 바닥의 가루 더미
+            powder_mound((px, py), pz + 0.003, 0.024, 0.012, first)
+            surf = pz + 0.012
+        else:
+            surf = pitcher_liquid(h, m if k > 0 else first)
         if flow:
             kettle_stream(tip, surf)
     if preview:
@@ -3642,7 +3651,7 @@ def shot_stir_pitcher(sdir, preview, key='yuja'):
     c = sid + '_static'
     pitcher_counter_scene(c)
     px, py, pz = PITCHER_AT
-    a, b, final = MIX[key]
+    a, b, final = MIX.get(f'{key}_pitcher', MIX[key])
     m, K = xm(f'mix_{key}_pitcher', lambda: mat_mix(f'mix_{key}_pitcher', a, b, final, scale=30.0))
     top = pz + YUJA_DONE_H
 
@@ -3740,7 +3749,7 @@ def shot_pourin(sdir, preview, cup, kind):
     에스프레소는 위에 뜬 갈색 띠로 쌓임(층이 보이게). 17단계 × 줄기 있음/없음, 작업대는 0.8125 까지 저절로 차오름"""
     sid = f'pourin_{cup}_{kind}'
     c = sid + '_static'
-    yuja = kind == 'yuja'
+    yuja = kind in ('yuja', 'matcha', 'cocoa')  # 피처에서 녹인 것을 얼음만 든 컵에(검수 13.86: 말차 · 코코아도)
     if cup == 'glass':
         cupd, at, scene_fn, rect_fn = GLASS_CUP, GLASS_AT, glass_scene, glass_rect
         inner_r = glass_inner_r
@@ -3748,10 +3757,11 @@ def shot_pourin(sdir, preview, cup, kind):
         cupd, at, scene_fn, rect_fn = PLASTIC_CUP, PLASTIC_AT, plastic_scene, plastic_rect
         inner_r = lambda hh: table_r(PLASTIC_INNER, hh)
     if yuja:
-        lip = scene_fn(c, pitcher=yuja_done_mat())
-        hi = cupd['bottom'] + (0.034 if cup == 'glass' else 0.040)
+        conc = yuja_done_mat() if kind == 'yuja' else conc_mat(kind)
+        lip = scene_fn(c, pitcher=conc)
+        hi = cupd['bottom'] + ((0.034 if cup == 'glass' else 0.040) if kind == 'yuja' else TINTS[kind]['lo'])  # 말차 · 코코아는 우유 붓기 컷(pour_*_{kind})의 바탕 두께까지
         lo = 0.0
-        base_mat, top_mat, stream = None, yuja_done_mat(), yuja_done_mat()
+        base_mat, top_mat, stream = None, conc, conc
     else:
         scene_fn(c)
         lip = (at[0] - 0.022, at[1], at[2] + cupd['rim'] + 0.012)  # 샷잔이 화면 위로 잘리지 않게 낮고 눕게
@@ -3788,6 +3798,69 @@ def shot_pourin(sdir, preview, cup, kind):
     render_frames(sdir, sid, rect_fn(lip), 17, build)
 
 
+def conc_mat(key):
+    """피처에서 녹인 말차 · 코코아(우유 붓기 컷의 바탕 색 TINTS[key]['base'] 와 같게)"""
+    a, b = TINTS[key]['base']
+    return xm(f'conc_{key}', lambda: mat_grain(f'conc_{key}', a, b, scale=40.0, bump=0.05, rough=0.15, distance=0.001))
+
+
+def shot_powder_pitcher(sdir, preview, key):
+    """피처에 가루 떠 넣기(박자 두 번): 작업대 위 빈 스팀 피처에 찻숟가락으로 말차 · 코코아 가루. 위에서 내려다봄. 5단계"""
+    sid = f'powder_pitcher_{key}'
+    c = sid + '_static'
+    pitcher_counter_scene(c)
+    px, py, pz = PITCHER_AT
+    mat = powder_mat(key)
+    bowl = (px - 0.004, py, pz + 0.1062 + 0.022)
+
+    def build(k, p, flow):
+        powder_mound((px, py), pz + 0.003, 0.012 + 0.012 * p, 0.012 * p, mat)
+        build_teaspoon(bowl, 55.0 if flow else 0.0, heap=0.0 if flow else (0.006 if p < 1 else 0.0), heap_mat=mat)
+        if flow:
+            rnd = random.Random(k)
+            top_z, end_z = bowl[2] - 0.004, pz + 0.003 + 0.012 * p
+            for i in range(60):
+                t = rnd.random()
+                w = 0.0012 + 0.0045 * t
+                ball(f'PWD_{i}', rnd.uniform(0.0006, 0.0014), (bowl[0] + 0.007 + rnd.uniform(-w, w), bowl[1] + rnd.uniform(-w, w), top_z + (end_z - top_z) * t), mat, 'shot_dyn')
+    if preview:
+        clear_dyn()
+        build(2, 0.5, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    extra = [(bowl[0] - 0.13, bowl[1] - 0.05, bowl[2] + 0.08), (bowl[0] + 0.02, bowl[1] + 0.02, bowl[2] + 0.02)]
+    render_frames(sdir, sid, pitcher_rect(extra), 5, build)
+
+
+def shot_whisk_pitcher(sdir, preview):
+    """피처에서 말차 풀기(원 그리기): 뜨거운 물에 잠긴 말차를 대나무 차선으로 풀면 짙은 초록 덩어리가 고운 연두 거품이 됨. 17단계 × 젓는 중 있음/없음"""
+    sid = 'whisk_pitcher_matcha'
+    c = sid + '_static'
+    pitcher_counter_scene(c)
+    px, py, pz = PITCHER_AT
+    m, F, C = mat_matcha()
+    h_base = 0.006 + YUJA_HOT_SPAN * 0.375
+
+    def build(k, p, flow):
+        F.outputs[0].default_value = sstep(p / 0.6)
+        C.outputs[0].default_value = sstep((p - 0.72) / 0.28)
+        h = h_base + 0.006 * sstep(p / 0.6)
+        pitcher_liquid(h, m)
+        build_whisk((px, py), pz + h - 0.02, flow, k)
+    if preview:
+        clear_dyn()
+        build(5, 0.31, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, pitcher_rect([(px - 0.04, py + 0.04, pz + h_base + 0.13), (px + 0.04, py - 0.04, pz + h_base)]), 17, build)
+
+
 def shot_water_plastic_tint(sdir, preview, key='yuja'):
     """찬물 붓기(플라스틱 컵 · 에스프레소가 없는 잔): 얼음 + 녹인 유자청이 든 컵에 피처로 찬물. 물이 들수록 옅은 노랑. 17단계 × 물줄기 있음/없음"""
     sid = f'water_plastic_{key}'
@@ -3817,6 +3890,12 @@ MORE_SHOTS.update({
     'pourin_glass_yuja': lambda d, pv: shot_pourin(d, pv, 'glass', 'yuja'), 'pourin_plastic_yuja': lambda d, pv: shot_pourin(d, pv, 'plastic', 'yuja'),
     'pourin_glass_americano': lambda d, pv: shot_pourin(d, pv, 'glass', 'americano'), 'pourin_plastic_americano': lambda d, pv: shot_pourin(d, pv, 'plastic', 'americano'),
     'pourin_glass_latte': lambda d, pv: shot_pourin(d, pv, 'glass', 'latte'), 'pourin_plastic_latte': lambda d, pv: shot_pourin(d, pv, 'plastic', 'latte'),
+    # 아이스 녹차라테 · 코코아: 피처에 가루 → 뜨거운 물 조금 → 풀기 · 젓기 → 얼음 위에 옮겨 붓기(검수 13.86)
+    'powder_pitcher_matcha': lambda d, pv: shot_powder_pitcher(d, pv, 'matcha'), 'powder_pitcher_cocoa': lambda d, pv: shot_powder_pitcher(d, pv, 'cocoa'),
+    'hotwater_pitcher_matcha': lambda d, pv: shot_hotwater_pitcher(d, pv, 'matcha'), 'hotwater_pitcher_cocoa': lambda d, pv: shot_hotwater_pitcher(d, pv, 'cocoa'),
+    'whisk_pitcher_matcha': shot_whisk_pitcher, 'stir_pitcher_cocoa': lambda d, pv: shot_stir_pitcher(d, pv, 'cocoa'),
+    'pourin_glass_matcha': lambda d, pv: shot_pourin(d, pv, 'glass', 'matcha'), 'pourin_plastic_matcha': lambda d, pv: shot_pourin(d, pv, 'plastic', 'matcha'),
+    'pourin_glass_cocoa': lambda d, pv: shot_pourin(d, pv, 'glass', 'cocoa'), 'pourin_plastic_cocoa': lambda d, pv: shot_pourin(d, pv, 'plastic', 'cocoa'),
 })
 
 
