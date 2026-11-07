@@ -22,7 +22,9 @@
  *  - 빠르기는 설정 '시간 제한'(arcade.pace): 보통 · 넉넉히(2배 천천히) · 두 번 눌러 고르기(1.5배). 끄기·자동 스캔은 턴 방식([한 칸] · [기다리기] + [멈추기] · [지금!])
  *  - [시작!]을 눌러야 움직임. 언제든 [보기]: 저절로 알맞게 해 줌(보기로 기록, 실수 아님)
  *  - 단계(opts.level): easy = 손 동작을 모두 보기로 · normal = 직접 · barista = 거품까지 직접 + 라테아트(하트) + 알맞아요 칸이 조금 좁음
- * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, count?, more?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry?, maker? }
+ * 옵션: { title, orders: [{ who, say, menu, temp?, togo?, ask?: ['temp','togo'], reply?, cup?, usual?, ticket?, count?, more?, thanks?, miss? }], level, quit, book?: [메뉴 id], pantry?, maker?, setOut? }
+ *  - setOut: 'owner' = 사장님이 컵을 꺼내 둔 장면(봄 5일 촬영 팀 주문): 주문마다 그 주문에 맞는 컵이 금색 둥근 테두리 + '사장님이 꺼내 둠' 표로 보임(그 컵을 받침에 놓으면 사라짐, 다른 컵을 골라도 남음).
+ *    대본이 '사장님이 컵을 꺼내 주셨다'고 하는데 카운터에 아무 표시가 없었음(2026-11-07 사용자, 검수 13.75). 읽어 줄 이름에도 '사장님이 꺼내 둔 컵'(원칙 11)
  *  - maker: 'owner' = 사장님이 내리는 장면(학생은 도구만 챙김). [만들기 시작]에서 사장님이 먼저 살펴, 레시피가 다르면 만들지 않고 부드럽게 일러 줌
  *    ("재료가 조금 부족하네요." 등, 2026-11-01 사용자: 잘못 고른 재료로 사장님이 무언가를 만드는 건 이상함). 손 띠에 빠진 재료 · 빼요 표시가 고칠 때까지 남음
  *  - usual: 단골의 '늘 먹던 거'(메뉴를 말하지 않음. 수첩의 단골 쪽에 평소 주문) · ticket: 말로 설명한 주문(주문 메모에 메뉴 이름 대신, 예 '달게 한 잔')
@@ -61,7 +63,7 @@ import {
   LEVELS, CUPS, INGREDIENTS, TEMPS, HAND_SKILLS, RECIPES, LATTE_ART, STARTER_BOOK, PANTRY, STEP_NAMES, MAX_ADDS,
   SERVICES, COLORS, ASK_SAY, CUP_RULE,
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
-  orderTemp, orderService, orderAsk, replyOf, repeatBack, drinkName, skillFor,
+  orderTemp, orderService, orderAsk, cupFor, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
   TODAY_SAY, todayTags, lackOf, todayLines, shotNames, TILT_SKILLS, KID_CUP,
 } from '../../data/menu.js';
@@ -333,6 +335,7 @@ export function brewProblems(opts = {}) {
   const errs = [];
   if (opts.level !== undefined && !LEVELS.includes(opts.level)) errs.push(`level 은 ${LEVELS.join(' · ')} 가운데 하나`);
   if (opts.maker !== undefined && opts.maker !== 'owner') errs.push("maker 는 'owner'(사장님이 내리는 장면)만");
+  if (opts.setOut !== undefined && opts.setOut !== 'owner') errs.push("setOut 은 'owner'(사장님이 컵을 꺼내 둔 장면)만");
   if (!Array.isArray(opts.orders) || !opts.orders.length) errs.push('orders(주문 목록)가 비어 있음');
   (opts.orders || []).forEach((o, i) => {
     for (const e of orderProblems(o)) errs.push(`orders[${i}] ${e}`);
@@ -1438,9 +1441,15 @@ export async function brew(opts = {}) {
   function renderHots() {
     const map = new Map();
     const kids = [];
+    const outCup = opts.setOut && cur ? cupFor(cur) : null; // 사장님이 꺼내 둔 컵(setOut): 그 컵을 받침에 놓으면 사라짐, 다른 컵을 골라도 남아 있음
     pantry.cups.forEach((id, i) => {
       const onMat = made.cup === id;
-      const b = hotBtn(`cup:${id}`, cupArtId(id), CUPS[id].name, [CUP_ROW.x + i * CUP_ROW.step, CUP_ROW.bottom, CUP_W[id] || 4.8], onMat, `is-cup${onMat ? ' is-away' : ''}`);
+      const setOut = id === outCup && !onMat;
+      const b = hotBtn(`cup:${id}`, cupArtId(id), CUPS[id].name, [CUP_ROW.x + i * CUP_ROW.step, CUP_ROW.bottom, CUP_W[id] || 4.8], onMat, `is-cup${onMat ? ' is-away' : ''}${setOut ? ' is-setout' : ''}`);
+      if (setOut) {
+        b.append(h('b', { class: 'bw-hot-setout', text: '사장님이 꺼내 둠' }));
+        b.setAttribute('aria-label', `${CUPS[id].name}, 사장님이 꺼내 둔 컵`);
+      }
       onTap(b, () => press(b, CUPS[id].name, () => pickCup(id)));
       map.set(`cup:${id}`, b);
       kids.push(b);

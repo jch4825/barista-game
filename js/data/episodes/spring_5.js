@@ -44,6 +44,7 @@ export default {
     think('사장님이 컵을 꺼내 주셨다. 나는 순서대로 만들기만 하면 된다.'),
     mini('brew', {
       id: 'spring_5_crew', title: '촬영 팀 주문', level: 'normal', quit: true,
+      setOut: 'owner', // 사장님이 꺼내 둔 컵이 카운터에서 빛남(위 서술 '빈 컵만 하나씩 꺼내 줄지어 놓는다', 검수 13.75)
       book: ['warm_milk', 'americano', 'latte', 'hand_drip'],
       orders: [
         { who: 'agent', say: '아아 하나요. 가져갈게요.', menu: 'americano', temp: 'iced', togo: true },
