@@ -131,7 +131,7 @@ function measure(file, target) {
 
 function build(e) {
   // 배경음악은 공개 폴더 assets/music/(저작자가 AI로 만든 곡, 2026-11-01), 사서 쓰는 소리는 비공개 서브모듈 assets/audio/
-  const outDir = e.kind === 'bgm' ? path.join(root, 'assets', 'music') : path.join(root, 'assets', 'audio', e.kind);
+  const outDir = e.kind === 'bgm' ? path.join(root, 'assets', e.local ? 'music_local' : 'music') : path.join(root, 'assets', 'audio', e.kind); // local: 무료 요금제 곡(공개하지 않음, 검수 13.83)
   fs.mkdirSync(outDir, { recursive: true });
   const t1 = path.join(tmp, `${e.kind}_${e.id}_1.wav`);
   const { inputs, filter } = graph(e);
@@ -163,7 +163,7 @@ function packOf(rel) {
 }
 
 function writeCredits() {
-  const rows = AUDIO_MAP.map((e) => {
+  const rows = AUDIO_MAP.filter((e) => !e.local).map((e) => { // 이 컴퓨터 전용 곡(Suno 무료 요금제)은 출처 문서에도 적지 않음(검수 13.83)
     const src = sources(e).map((s) => `${e.pack ? PACKS[e.pack].name : packOf(s)} · \`${s.split('/').pop()}\``).join('<br>');
     return `| \`${e.kind === 'bgm' ? 'music' : e.kind}/${e.id}.ogg\` | ${src} | ${e.note || ''} |`;
   });
@@ -185,7 +185,7 @@ function writeCredits() {
 | :--- | :--- | :--- | :--- | :--- |
 ${packs.join('\n')}
 
-## 파일별 출처 (${AUDIO_MAP.length}개)
+## 파일별 출처 (${rows.length}개)
 | 게임 파일 | 원본 | 고른 이유·가공 |
 | :--- | :--- | :--- |
 ${rows.join('\n')}

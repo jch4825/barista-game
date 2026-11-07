@@ -104,8 +104,10 @@ async function loadManifest() {
       return {};
     }
   };
-  const [sounds, music] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json')]);
-  manifest = { sfx: {}, amb: {}, ...sounds, bgm: music.bgm || {} };
+  // 배경음악: 공개 목록 + 이 컴퓨터에만 있는 곡(assets/music_local, Suno 무료 요금제라 공개하지 않음: 없으면 빈 목록, 검수 13.83)
+  const [sounds, music, local] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json'), get('./assets/music_local/manifest.json')]);
+  const under = (dir, list) => Object.fromEntries(Object.entries(list || {}).map(([k, f]) => [k, `${dir}/${f}`]));
+  manifest = { sfx: {}, amb: {}, ...sounds, bgm: { ...under('music', music.bgm), ...under('music_local', local.bgm) } };
 }
 
 async function preloadSfx() {
@@ -476,7 +478,9 @@ function stopFileBgm() {
 export const BGM_VARIANTS = {
   title: ['glow_a'],              // Rising Glow: 처음 화면과 엔딩에 같은 곡(한 해를 여닫음)
   ending: ['glow_a'],
-  morning: ['glow_b'],            // Rising Glow 다른 판: 해 뜨는 아침
+  morning: ['glow_b'],            // Rising Glow 다른 판: 해 뜨는 아침(계절 아침 곡이 없는 계절)
+  morning_spring: ['spring_morning_a', 'spring_morning_b'], // 봄의 아침 두 곡(2026-11-07 사용자, 검수 13.83): 봄에 bgm('morning') 이면 이것(seasonMood)
+  rush: ['danger'],               // 몰림 시간(피아졸라풍 누보 탱고, 2026-11-07 사용자): 몰림 놀이가 시작하면 이것, 끝나면 앞의 곡(rush.js)
   cafe: ['waltz'],                // Galactic Waltz: 손님이 오가는 낮
   celebrate: ['waltz'],           // 하루 끝 결과 화면
   warm: ['ballad_a', 'ballad_b'], // 피아노 발라드 두 판을 돌려 가며: 단골의 마음 · 마감 · 일기
@@ -486,6 +490,12 @@ export const BGM_VARIANTS = {
   blackout: ['chant_a', 'chant_b'],    // 그레고리안 찬송가: 겨울 정전 밤
   credits: ['letter'],            // 아이에게 보내는 편지(가사 있음): 엔딩 크레디트에서만, 한 번
 };
+/** 계절 곡이 있으면 그 계절의 분위기('morning' → 'morning_spring'), 없으면 그대로 */
+export function seasonMood(mood, season) {
+  if (!mood || !season) return mood;
+  const m = `${mood}_${season}`;
+  return BGM_VARIANTS[m] && variantsOf(m).length ? m : mood;
+}
 // 반복하지 않고 한 번만 트는 곡(끝나면 조용히)
 const ONCE = ['letter'];
 const variantTurn = {};
@@ -502,7 +512,7 @@ function nextVariant(m) {
 const LOOP_FROM = {};
 
 function startFileBgm(id, moodName = id) {
-  const el = new Audio(`./assets/music/${manifest.bgm[id]}`);
+  const el = new Audio(`./assets/${manifest.bgm[id]}`);
   const playlist = variantsOf(moodName).length > 1;
   const from = LOOP_FROM[id];
   el.loop = !ONCE.includes(id) && !playlist && !from;
@@ -719,6 +729,8 @@ export const audio = {
 
   state() { return { mood: targetMood, ambience: amb?.kind || null, ambLevel: amb?.level || 1, duck: duckGain ? Number(duckGain.gain.value.toFixed(2)) : 1 }; },
   hasFile(kind, id) { return Boolean(manifest[kind]?.[id]); },
+  /** 이 분위기에 틀 곡이 있는지(공개판에는 이 컴퓨터 전용 곡이 없음) */
+  hasMood(m) { return variantsOf(m).length > 0; },
   applyVolumes,
 };
 

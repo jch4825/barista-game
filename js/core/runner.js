@@ -21,7 +21,7 @@ import { hud } from '../ui/hud.js';
 import { cards } from '../ui/cards.js';
 import { ov } from '../ui/overlays.js';
 import { breathe as breatheUI } from '../ui/breathe.js';
-import { audio } from '../av/audio.js';
+import { audio, seasonMood } from '../av/audio.js';
 import { tts } from '../av/tts.js';
 import { MINIGAMES } from '../game/minigames/index.js';
 import { abortMinigame } from '../game/minigames/frame.js';
@@ -264,7 +264,7 @@ async function exec(s, b, index) {
 
   switch (b.t) {
     case 'bg': await w(stage.setBg(b.id, b.variant, { keepCg: Boolean(s.cgHold || s.cgOff) })); return undefined;
-    case 'bgm': audio.bgm(b.mood); return undefined;
+    case 'bgm': audio.bgm(seasonMood(b.mood, s.ep?.season)); return undefined; // 계절 곡이 있으면 그 곡(봄 아침, 검수 13.83)
     case 'amb': audio.ambience(b.kind, b.level || 1); return undefined;
     case 'sfx': audio.sfx(b.name); return undefined;
     case 'show': stage.setCast(b.cast); await w(sleep(150)); return undefined;

@@ -25,3 +25,4 @@ docs/design/ref_*
 /BGM/
 __pycache__/
 assets/_src/blender/move/
+assets/music_local/

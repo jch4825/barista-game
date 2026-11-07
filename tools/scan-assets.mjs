@@ -33,6 +33,12 @@ for (const kind of Object.keys(manifest)) {
 }
 fs.writeFileSync(path.join(audioDir, 'manifest.json'), `${JSON.stringify({ sfx: manifest.sfx, amb: manifest.amb }, null, 2)}\n`);
 fs.writeFileSync(path.join(musicDir, 'manifest.json'), `${JSON.stringify({ bgm: manifest.bgm }, null, 2)}\n`);
+// 이 컴퓨터에만 있는 곡(Suno 무료 요금제, git · 배포에 넣지 않음, 검수 13.83): assets/music_local/manifest.json
+const localDir = path.join(root, 'assets', 'music_local');
+if (fs.existsSync(localDir)) {
+  const bgm = Object.fromEntries(fs.readdirSync(localDir).filter((f) => f.endsWith('.ogg')).sort().map((f) => [f.replace(/\.ogg$/, ''), f]));
+  fs.writeFileSync(path.join(localDir, 'manifest.json'), `${JSON.stringify({ bgm }, null, 2)}\n`);
+}
 const count = (k) => Object.keys(manifest[k]).length;
 console.log(`오디오 목록: BGM ${count('bgm')} · 효과음 ${count('sfx')} · 환경음 ${count('amb')} → assets/audio/manifest.json · assets/music/manifest.json`);
 

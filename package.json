@@ -48,7 +48,7 @@
       "assets/**",
       "!assets/**/*.md",
       "!assets/*_sheet.jpg",
-      "!assets/_src/**"
+      "!assets/_src/**", "!assets/music_local/**"
     ],
     "win": {
       "target": "nsis"

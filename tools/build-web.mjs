@@ -20,7 +20,7 @@ if (!NAME || NAME === 'job-milestone') {
 }
 const OUT = path.join(root, 'dist', NAME);
 const PARTS = ['index.html', 'css', 'js', 'assets'];
-const skip = (rel) => rel.startsWith('assets/_src/') || rel.endsWith('.md') || rel.split('/').includes('.vercel') || path.basename(rel) === '.DS_Store' || path.basename(rel) === 'Thumbs.db';
+const skip = (rel) => rel.startsWith('assets/_src/') || rel.startsWith('assets/music_local/') || rel.endsWith('.md') || rel.split('/').includes('.vercel') || path.basename(rel) === '.DS_Store' || path.basename(rel) === 'Thumbs.db';
 
 // 지난 결과를 통째로 지움(Vercel 연결 정보 .vercel 도 함께 → 다음 배포가 옛 프로젝트에 붙지 않음)
 fs.rmSync(OUT, { recursive: true, force: true });
