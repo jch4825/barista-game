@@ -29038,18 +29038,6 @@
   "flag": "",
   "at": "2026-11-07 16:22"
  },
- "c4ad2437": {
-  "who": "customer-olive",
-  "sig": "3e0e641e6b4a",
-  "sim": 0.9725,
-  "rate": 4.94,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:14",
-  "long": 80
- },
  "eb03581b": {
   "who": "customer-olive",
   "sig": "6c613c632cda",
@@ -29378,18 +29366,6 @@
   "flag": "",
   "at": "2026-11-07 16:22"
  },
- "a2dce992": {
-  "who": "customer-olive",
-  "sig": "c9d8db3aad52",
-  "sim": 0.9902,
-  "rate": 7.33,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:14",
-  "long": 80
- },
  "1c16f645": {
   "who": "customer-olive",
   "sig": "0381251a7aae",
@@ -29425,30 +29401,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-06 01:15"
- },
- "6f080e6d": {
-  "who": "customer-olive",
-  "sig": "b88a6e7e8805",
-  "sim": 0.9913,
-  "rate": 6.25,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:15",
-  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
- },
- "69e57829": {
-  "who": "customer-olive",
-  "sig": "d51012ee0377",
-  "sim": 0.9838,
-  "rate": 5.42,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:15",
-  "long": 60
  },
  "fa3bdf3c": {
   "who": "customer-olive",
@@ -29512,31 +29464,6 @@
   "flag": "",
   "at": "2026-11-07 16:22"
  },
- "544c719f": {
-  "who": "customer-olive",
-  "sig": "22f7c4971ceb",
-  "sim": 0.9909,
-  "rate": 5.43,
-  "fall": 40,
-  "long": 60,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:22"
- },
- "a84d6993": {
-  "who": "customer-olive",
-  "sig": "41aaad34f18e",
-  "sim": 0.9871,
-  "rate": 7.07,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:15",
-  "long": 70
- },
  "b372e284": {
   "who": "customer-olive",
   "sig": "2162ccc5bbf9",
@@ -29574,30 +29501,6 @@
   "flag": "",
   "at": "2026-11-07 16:23"
  },
- "1dac98c3": {
-  "who": "customer-olive",
-  "sig": "5e2bdc49e337",
-  "sim": 0.9906,
-  "rate": 5.63,
-  "fall": 60,
-  "try": 3,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:23"
- },
- "00d8b4ff": {
-  "who": "customer-olive",
-  "sig": "e2a48c036abd",
-  "sim": 0.9907,
-  "rate": 6.48,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:23"
- },
  "ea75fea9": {
   "who": "customer-olive",
   "sig": "2daba386401c",
@@ -29609,30 +29512,6 @@
   "flag": "",
   "at": "2026-11-06 01:15",
   "long": 80
- },
- "4d7e0c6a": {
-  "who": "customer-olive",
-  "sig": "48385b5f8a77",
-  "sim": 0.99,
-  "rate": 6.94,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:15",
-  "long": 80
- },
- "a30453a5": {
-  "who": "customer-olive",
-  "sig": "d4f7b420cf58",
-  "sim": 0.9916,
-  "rate": 3.73,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:15",
-  "long": 100
  },
  "6fa3a411": {
   "who": "customer-olive",
@@ -41555,5 +41434,129 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 20:17"
+ },
+ "ce1e25d5": {
+  "who": "customer-sporty",
+  "sig": "de4c91e2702c",
+  "sim": 0.9756,
+  "rate": 4.55,
+  "fall": 60,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "3a5a8568": {
+  "who": "customer-sporty",
+  "sig": "2663cc94936e",
+  "sim": 0.9759,
+  "rate": 6.79,
+  "fall": 60,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "b0ab73bf": {
+  "who": "customer-sporty",
+  "sig": "03d751c0aa4c",
+  "sim": 0.9794,
+  "rate": 4.78,
+  "fall": 70,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "245a0e5b": {
+  "who": "customer-sporty",
+  "sig": "47d641940db1",
+  "sim": 0.9857,
+  "rate": 6.31,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "15427209": {
+  "who": "customer-sporty",
+  "sig": "1775bb6d8bae",
+  "sim": 0.9855,
+  "rate": 5.6,
+  "fall": 40,
+  "long": 120,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "29c1e56d": {
+  "who": "customer-sporty",
+  "sig": "a0d3e4a0b190",
+  "sim": 0.9863,
+  "rate": 6.03,
+  "fall": 50,
+  "long": 120,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "368ed2b9": {
+  "who": "customer-sporty",
+  "sig": "3d1ec08df9a2",
+  "sim": 0.9882,
+  "rate": 4.91,
+  "fall": 60,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "f9f998e9": {
+  "who": "customer-sporty",
+  "sig": "e1770b6f6874",
+  "sim": 0.9851,
+  "rate": 6.25,
+  "fall": 50,
+  "long": 100,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "aa231014": {
+  "who": "customer-sporty",
+  "sig": "b4ae0bc99f07",
+  "sim": 0.9908,
+  "rate": 6.06,
+  "fall": 60,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
+ "52cc972b": {
+  "who": "customer-sporty",
+  "sig": "4b941ec315ba",
+  "sim": 0.9911,
+  "rate": 5.45,
+  "fall": 50,
+  "long": 110,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
  }
 }

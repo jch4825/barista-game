@@ -15,7 +15,7 @@ export default {
   schedule: [],
   skills: [],
   standards: ['[12진로04-05]', '[12진로03-02]'],
-  costume: { customer: 'olive' },
+  costume: { customer: 'sporty' }, // 서른쯤의 olive 그림이 목소리보다 나이 들어 보여서, 관광객인 sporty(스물다섯쯤 · 운동복)로(2026-11-07 사용자 '커스터머 스포티랑 어울릴듯', 검수 13.78)
   diary: '강 씨는 오늘 바다에 나가지 않았다. 처음 보는 손님들이 사진을 찍으러 왔다. 칠판 구석은 늘 비어 있다.',
   script: [
     big('봄 · 6일', '바다 안 나가요'),
