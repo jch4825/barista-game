@@ -121,6 +121,8 @@ function checkTimer(ep, b, where) {
   if (tm.oops || b.t !== 'decide') checkOops(ep, tm.oops, `${where} timer`);
 }
 
+const STARTS_TALK = new Set(['say', 'narr', 'think', 'sys', 'phone', 'info', 'respond', 'mini', 'decide', 'choose', 'act', 'guide']);
+
 function walk(ep, list, { nested = false, labels = new Set(), jumps = [] } = {}) {
   for (const b of list || []) {
     totals.beats += 1;
@@ -290,6 +292,12 @@ for (const ep of [...EPISODES, ENDING].filter(Boolean)) {
   (ep.schedule || []).forEach(([ic]) => { if (!hasIcon(ic)) err(id, `일정표 아이콘 없음: ${ic}`); });
   if (ep.photo && !PHOTOS[ep.photo]) err(id, `대표 사진 없음: ${ep.photo}`);
   if (ep.script[ep.script.length - 1]?.t !== 'end') err(id, '마지막 비트는 end() 이어야 함');
+  // 하루를 시작할 때 앞날의 음악을 끄므로(runner 의 stopAll), 학생이 볼 첫 대사 · 놀이 전에 bgm() 이 있어야 함(검수 13.74: 새벽 장면 셋이 한동안 음악 없이 갔음). 일부러 조용히 시작하려면 bgm(null)
+  {
+    const at = ep.script.findIndex((b) => b && STARTS_TALK.has(b.t));
+    const m = ep.script.findIndex((b) => b && b.t === 'bgm');
+    if (at >= 0 && (m < 0 || m > at)) err(id, `첫 대사 · 놀이(${ep.script[at].t}) 전에 bgm() 이 없음: 앞날의 음악이 꺼진 채 시작함`);
+  }
   const before = { ...totals };
   curSchedule = ep.schedule || [];
   checks = [];

@@ -19,6 +19,7 @@ export default {
   script: [
     big('봄 · 3일', '새벽 블랙'),
     bg('harbor', 'dawn'),
+    bgm('morning'), // 하루를 시작할 때 앞날의 음악을 끄므로(runner 의 stopAll) 첫 장면부터 틂: 새벽 장면이 한동안 음악 없이 갔음(2026-11-07 사용자 '한 동안 음악이 안나오다가 다시 나온다', 검수 13.74)
     amb('street'),
     place('봄 새벽 05:50', '항구 앞'),
     info('오늘의 칠판', '새벽 다섯 시 오십 분에 문을 열어요. 오늘은 사장님의 핸드드립을 봐요.', 'menu'), // 재미 개편 Q-43: 오늘 하나 달라지는 것(미리 알고 시작)
@@ -35,7 +36,6 @@ export default {
 
     bg('hall', 'morning'),
     amb('cafe'),
-    bgm('morning'),
     show({ left: 'jieun:normal', center: 'kang:normal', right: 'owner:normal' }),
     narr('원두 봉지를 든 사장님이 뒷방에서 나온다.'),
     say('owner', 'normal', '강 씨, 오셨어요.'),

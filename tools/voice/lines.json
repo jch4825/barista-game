@@ -3006,9 +3006,15 @@
   "ep": "spring_2"
  },
  {
-  "key": "196003ab",
+  "key": "b039da1f",
   "voice": "owner",
-  "text": "수고했어요. 내일도 여덟 시예요.",
+  "text": "수고했어요. 내일은 여섯 시까지 와요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "8233f0d4",
+  "voice": "owner",
+  "text": "새벽 손님이 있어요.",
   "ep": "spring_2"
  },
  {
