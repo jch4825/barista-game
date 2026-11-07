@@ -85,6 +85,8 @@ export function addSkill(id) {
 }
 
 export const skillCount = (id) => store.grow().skills[id] || 0;
+/** [맡기기]를 쓴 횟수(능력치에는 들지 않음): 처음 몇 번만 말로 알림(검수 13.87) */
+export const handoffUses = () => store.grow().counts.handoff || 0;
 export const isMastered = (id) => skillCount(id) >= MASTER_AT;
 export const handoffOn = (id) => isMastered(id) && Boolean(store.grow().handoff[id]);
 export function setHandoff(id, on) {

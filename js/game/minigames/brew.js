@@ -152,7 +152,7 @@ const SYS = {
   scoopDrop: '얼음은 컵 위에 놓아요. 다시 해 봐요.',
   seeFirst: '처음 하는 일이면 [보기]로 먼저 봐도 좋아요.',
   // 지은의 성장(재미 개편 6장): 익숙해진 손 기술 맡기기 · 완벽한 한 잔 · 한 번에 묻기 · 늘 드시던 거
-  handoff: '익숙한 일이라 손이 알아서 해요.',
+  handoff: '익숙한 일이라 손이 알아서 해요.', // [맡기기]: 처음 HANDOFF_SAY 번만 읽음
   perfectCup: '완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.',
   usualFill: '늘 드시던 걸로 담았어요.',
   taste: '사장님이 한 모금 맛보세요.',
@@ -170,6 +170,8 @@ const SYS = {
   move: '새 컵에 옮겨 담고 뚜껑을 덮어요. 쓴 컵은 씻어요.',
   moveServe: '다 옮겨 담았어요. 손님에게 드려요.',
 };
+/** [맡기기]를 누를 때 '익숙한 일이라 손이 알아서 해요.'를 읽는 횟수(그 뒤로는 효과음만, 검수 13.87) */
+const HANDOFF_SAY = 5;
 /** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
 const WHIRL_WORD = '휘리릭!';
 const TOSS_KIND = { mug: 'mug', thick: 'mug', shot: 'glass', glass: 'glass', paper: 'paper', plastic: 'plastic' };
@@ -2587,7 +2589,10 @@ export async function brew(opts = {}) {
     if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk), saysNow));
     if (how === 'hand') {
       // 맡기기: 손이 알아서 알맞아요 칸 가운데까지(실패 없음, '딱 좋아요'는 직접 했을 때만)
-      talk(sysV(SYS.handoff));
+      // 말은 처음 HANDOFF_SAY 번만, 그 뒤로는 효과음만(2026-11-07 사용자 '버튼 누를 때마다 나오니까 어색하다. 처음 5번 정도는 그렇게 하고 그 이후에는', 검수 13.87)
+      if (grow.handoffUses() < HANDOFF_SAY) talk(sysV(SYS.handoff));
+      else audio.sfx('hint');
+      grow.add('handoff');
       phase = 'skill';
       flow = true;
       await w(new Promise((resolve) => {
