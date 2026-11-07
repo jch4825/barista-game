@@ -1,4 +1,870 @@
 {
+ "10236118": {
+  "who": "sys",
+  "sig": "18646db1e9e1",
+  "sim": 0.9921,
+  "rate": 5.27,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:58"
+ },
+ "10406299": {
+  "who": "sys",
+  "sig": "92a9ad58ab27",
+  "sim": 0.9844,
+  "rate": 6.96,
+  "fall": 40,
+  "long": 90,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 12:51"
+ },
+ "11612034": {
+  "who": "jieun",
+  "sig": "919874912b3e",
+  "sim": 0.9935,
+  "rate": 4.91,
+  "fall": 40,
+  "try": 1,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-07 10:58",
+  "long": 70
+ },
+ "11957299": {
+  "who": "sys",
+  "sig": "8dd97ec93efc",
+  "sim": 0.9911,
+  "rate": 5.88,
+  "fall": 30,
+  "long": 90,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:40"
+ },
+ "12247859": {
+  "who": "sys",
+  "sig": "deadbe2d9f59",
+  "sim": 0.9911,
+  "rate": 5.69,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "14076083": {
+  "who": "do",
+  "sig": "c87e2d8c3557",
+  "sim": 0.9909,
+  "rate": 4.94,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:11"
+ },
+ "14265395": {
+  "who": "customer-olive",
+  "sig": "7aeec13d217f",
+  "sim": 0.9924,
+  "rate": 5.4,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 01:15",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "14364542": {
+  "who": "sys",
+  "sig": "3061f506c3e3",
+  "sim": 0.9827,
+  "rate": 5.8,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:12",
+  "long": 70
+ },
+ "15240504": {
+  "who": "customer-coffee",
+  "sig": "9b00d32bd3e8",
+  "sim": 0.9854,
+  "rate": 4.55,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 01:31",
+  "long": 80
+ },
+ "15732946": {
+  "who": "jieun",
+  "sig": "9f1b515ed7e2",
+  "sim": 0.9924,
+  "rate": 4.8,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-05 22:50"
+ },
+ "17145268": {
+  "who": "jieun",
+  "sig": "4650cdf0cd06",
+  "sim": 0.9896,
+  "rate": 6.67,
+  "fall": 80,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 08:24"
+ },
+ "19562407": {
+  "who": "jieun",
+  "sig": "dfbfd42dd92f",
+  "sim": 0.9921,
+  "rate": 5.47,
+  "fall": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 08:28",
+  "long": 150
+ },
+ "24610438": {
+  "who": "jian",
+  "sig": "713e286ac3c0",
+  "sim": 0.9871,
+  "rate": 5.71,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:17"
+ },
+ "25018703": {
+  "who": "sys",
+  "sig": "ae1d17b575d0",
+  "sim": 0.9764,
+  "rate": 4.73,
+  "fall": 70,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:12"
+ },
+ "26877167": {
+  "who": "sys",
+  "sig": "6e980a6b06f3",
+  "sim": 0.9864,
+  "rate": 5.17,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:13",
+  "long": 80
+ },
+ "26903279": {
+  "who": "jieun",
+  "sig": "8c44c9b10ded",
+  "sim": 0.9914,
+  "rate": 7.02,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-05 22:46"
+ },
+ "27612206": {
+  "who": "customer-stripe",
+  "sig": "2dafaff920c4",
+  "sim": 0.9738,
+  "rate": 7.89,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 01:32"
+ },
+ "28574495": {
+  "who": "sumin",
+  "sig": "2c8cdcde51d4",
+  "sim": 0.9869,
+  "rate": 6.67,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:27"
+ },
+ "28613202": {
+  "who": "owner",
+  "sig": "a0f679a3f20f",
+  "sim": 0.9806,
+  "rate": 6.67,
+  "try": 1,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 00:53",
+  "long": 140
+ },
+ "29723467": {
+  "who": "jian",
+  "sig": "72a1ed05d332",
+  "sim": 0.9815,
+  "rate": 4.5,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:18"
+ },
+ "31793180": {
+  "who": "sys",
+  "sig": "704258c90e7a",
+  "sim": 0.9683,
+  "rate": 5.56,
+  "fall": 20,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "목소리",
+  "at": "2026-11-07 12:22"
+ },
+ "33494489": {
+  "who": "sys",
+  "sig": "91e76fa8f9b1",
+  "sim": 0.9797,
+  "rate": 3.57,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "35296930": {
+  "who": "noh",
+  "sig": "63719836548d",
+  "sim": 0.9896,
+  "rate": 6.1,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:28"
+ },
+ "35630280": {
+  "who": "geum",
+  "sig": "062352fa2dd3",
+  "sim": 0.9785,
+  "rate": 8.33,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:06",
+  "long": 110
+ },
+ "36729389": {
+  "who": "sys",
+  "sig": "9ac7875c476e",
+  "sim": 0.9916,
+  "rate": 5.7,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:37",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "38008308": {
+  "who": "sys",
+  "sig": "f82e67e6cb2f",
+  "sim": 0.9826,
+  "rate": 6.15,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:11",
+  "long": 90
+ },
+ "39763886": {
+  "who": "customer",
+  "sig": "838b53670ee0",
+  "sim": 0.9814,
+  "rate": 8.14,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:07"
+ },
+ "41703425": {
+  "who": "sys",
+  "sig": "9be0730f139a",
+  "sim": 0.9901,
+  "rate": 4.56,
+  "fall": 20,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 16:05"
+ },
+ "43557400": {
+  "who": "customer-coffee",
+  "sig": "291514f40e1b",
+  "sim": 0.9887,
+  "rate": 6.57,
+  "fall": 40,
+  "long": 90,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 16:29"
+ },
+ "43844389": {
+  "who": "sys",
+  "sig": "e6cb144539f3",
+  "sim": 0.9852,
+  "rate": 5.1,
+  "fall": 70,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:58"
+ },
+ "46457417": {
+  "who": "owner",
+  "sig": "b6479e223b59",
+  "sim": 0.981,
+  "rate": 4.17,
+  "try": 2,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 00:47"
+ },
+ "47505748": {
+  "who": "jieun",
+  "sig": "fbc663a8f23e",
+  "sim": 0.9929,
+  "rate": 5.79,
+  "fall": 100,
+  "try": 1,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-07 09:22"
+ },
+ "47551291": {
+  "who": "jieun",
+  "sig": "8c0793b47f3b",
+  "sim": 0.991,
+  "rate": 4.94,
+  "fall": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 08:43"
+ },
+ "47878896": {
+  "who": "sys",
+  "sig": "874a6ed5d076",
+  "sim": 0.9889,
+  "rate": 7.38,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:27"
+ },
+ "48446525": {
+  "who": "sys",
+  "sig": "a9e4238a527d",
+  "sim": 0.9889,
+  "rate": 6.84,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:23",
+  "long": 80
+ },
+ "48564309": {
+  "who": "geum",
+  "sig": "e75fb565073e",
+  "sim": 0.9819,
+  "rate": 7.41,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:06"
+ },
+ "48854790": {
+  "who": "jieun",
+  "sig": "09e8659aebe2",
+  "sim": 0.9903,
+  "rate": 6.4,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-05 22:47",
+  "long": 130
+ },
+ "50368408": {
+  "who": "sys",
+  "sig": "1ec2af4a6072",
+  "sim": 0.9877,
+  "rate": 4.33,
+  "fall": 40,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 12:39"
+ },
+ "50488902": {
+  "who": "sys",
+  "sig": "40956645edb8",
+  "sim": 0.9901,
+  "rate": 5.36,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:41",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "50930137": {
+  "who": "jieun",
+  "sig": "0ffe2c318962",
+  "sim": 0.9904,
+  "rate": 5.53,
+  "fall": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 08:26",
+  "long": 90
+ },
+ "51875901": {
+  "who": "sys",
+  "sig": "ed9acd667b35",
+  "sim": 0.9838,
+  "rate": 6.4,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:13",
+  "long": 70
+ },
+ "53446314": {
+  "who": "sys",
+  "sig": "6c05adc6eadd",
+  "sim": 0.9907,
+  "rate": 5.01,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:41",
+  "long": 80
+ },
+ "54741829": {
+  "who": "jian",
+  "sig": "edf56d490e94",
+  "sim": 0.9794,
+  "rate": 7.41,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:17",
+  "long": 100
+ },
+ "54803338": {
+  "who": "do",
+  "sig": "ada222b0f72b",
+  "sim": 0.9848,
+  "rate": 4.95,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:10"
+ },
+ "55370159": {
+  "who": "do",
+  "sig": "e96e1577c81a",
+  "sim": 0.9788,
+  "rate": 6.67,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:09"
+ },
+ "56478032": {
+  "who": "kang",
+  "sig": "c0eb7964a02c",
+  "sim": 0.9885,
+  "rate": 4.59,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:09"
+ },
+ "57062717": {
+  "who": "jieun",
+  "sig": "aa6d1e3ba7fe",
+  "sim": 0.9937,
+  "rate": 5.29,
+  "fall": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-07 09:17"
+ },
+ "57187194": {
+  "who": "jieun",
+  "sig": "c4d1e1ea4277",
+  "sim": 0.9908,
+  "rate": 6.05,
+  "fall": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 08:51"
+ },
+ "59744030": {
+  "who": "customer-arms",
+  "sig": "49a94b50d6c3",
+  "sim": 0.9908,
+  "rate": 5.41,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 01:37"
+ },
+ "62195731": {
+  "who": "agent",
+  "sig": "24e69a0bcfab",
+  "sim": 0.9861,
+  "rate": 6.62,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:12"
+ },
+ "62776629": {
+  "who": "kang",
+  "sig": "c48d2f6eab1a",
+  "sim": 0.9754,
+  "rate": 6.82,
+  "fall": 70,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-07 16:20"
+ },
+ "62939210": {
+  "who": "sys",
+  "sig": "2b2b06555cee",
+  "sim": 0.9889,
+  "rate": 6.09,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:20",
+  "long": 100
+ },
+ "64225801": {
+  "who": "sys",
+  "sig": "382d15f7d575",
+  "sim": 0.9894,
+  "rate": 4.6,
+  "fall": 40,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 14:40"
+ },
+ "66328933": {
+  "who": "owner",
+  "sig": "e2f72b73447f",
+  "sim": 0.9729,
+  "rate": 3.77,
+  "try": 3,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 02:12"
+ },
+ "67356082": {
+  "who": "kang",
+  "sig": "8d00d6260ecc",
+  "sim": 0.9885,
+  "rate": 4.62,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:09"
+ },
+ "72963229": {
+  "who": "do",
+  "sig": "62b24d761187",
+  "sim": 0.9898,
+  "rate": 5.08,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:11"
+ },
+ "76192849": {
+  "who": "grandma",
+  "sig": "496ed256a75c",
+  "sim": 0.9844,
+  "rate": 5.26,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 01:42",
+  "long": 110
+ },
+ "76735112": {
+  "who": "sys",
+  "sig": "a6f9d48a3eb8",
+  "sim": 0.9759,
+  "rate": 5.77,
+  "fall": 70,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 12:57"
+ },
+ "79657901": {
+  "who": "jian",
+  "sig": "ffd7f40527f8",
+  "sim": 0.9856,
+  "rate": 4.42,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:18"
+ },
+ "82060137": {
+  "who": "jieun",
+  "sig": "3538a81cb8bb",
+  "sim": 0.994,
+  "rate": 5.23,
+  "fall": 40,
+  "long": 70,
+  "try": 2,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-07 16:19"
+ },
+ "82941657": {
+  "who": "sys",
+  "sig": "886ef42fbeee",
+  "sim": 0.9897,
+  "rate": 5.52,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:21"
+ },
+ "83697359": {
+  "who": "sys",
+  "sig": "39f3d7d392a4",
+  "sim": 0.9812,
+  "rate": 6,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:11",
+  "long": 90
+ },
+ "86243817": {
+  "who": "jieun",
+  "sig": "202cb6e39cf8",
+  "sim": 0.9937,
+  "rate": 6.14,
+  "fall": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 09:31"
+ },
+ "87171284": {
+  "who": "sora",
+  "sig": "86f8ccef7b0a",
+  "sim": 0.986,
+  "rate": 7.03,
+  "fall": 50,
+  "long": 100,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 16:31"
+ },
+ "88516882": {
+  "who": "sys",
+  "sig": "034fab2d96ba",
+  "sim": 0.9871,
+  "rate": 6.77,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 13:27"
+ },
+ "89517751": {
+  "who": "sys",
+  "sig": "791e46f2de7f",
+  "sim": 0.9866,
+  "rate": 5.17,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:18",
+  "long": 60
+ },
+ "92172317": {
+  "who": "owner",
+  "sig": "ba8bcd257c9b",
+  "sim": 0.9858,
+  "rate": 5.69,
+  "try": 1,
+  "style": "desc",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 00:56"
+ },
+ "92675047": {
+  "who": "jian",
+  "sig": "b46b07e846f1",
+  "sim": 0.9733,
+  "rate": 6.45,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:17"
+ },
+ "93398187": {
+  "who": "sys",
+  "sig": "3367f8e0ce3f",
+  "sim": 0.9897,
+  "rate": 4.87,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 20:15",
+  "long": 80
+ },
+ "97122314": {
+  "who": "sumin",
+  "sig": "bdb02d6a6425",
+  "sim": 0.9829,
+  "rate": 6.35,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:27"
+ },
+ "97463570": {
+  "who": "sys",
+  "sig": "0bb9ac62cc46",
+  "sim": 0.9738,
+  "rate": 5.68,
+  "fall": 60,
+  "try": 2,
+  "style": "plain",
+  "emo": false,
+  "flag": "목소리",
+  "at": "2026-11-07 12:45"
+ },
+ "98302317": {
+  "who": "jian",
+  "sig": "1f56a68e6edc",
+  "sim": 0.9879,
+  "rate": 3.98,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-06 01:18"
+ },
+ "98955013": {
+  "who": "jieun",
+  "sig": "349edafa5ee8",
+  "sim": 0.9946,
+  "rate": 5.54,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-05 23:52"
+ },
  "a2303798": {
   "who": "sys",
   "sig": "e4bf97ac7c61",
@@ -49,27 +915,13 @@
  "be5f5522": {
   "who": "sys",
   "sig": "0afd47654654",
-  "sim": 0.9873,
-  "rate": 5.24,
-  "fall": 50,
-  "long": 80,
-  "try": 1,
-  "style": "desc",
+  "sim": 0.9876,
+  "rate": 5.43,
+  "try": 2,
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
- },
- "97463570": {
-  "who": "sys",
-  "sig": "0bb9ac62cc46",
-  "sim": 0.9738,
-  "rate": 5.68,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:45"
+  "at": "2026-11-05 22:24",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "cba59b86": {
   "who": "sys",
@@ -250,7 +1102,7 @@
   "who": "jieun",
   "sig": "6235a18e95ea",
   "sim": 0.983,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 80,
   "try": 2,
   "style": "desc",
@@ -569,15 +1421,14 @@
  "6ab2bc16": {
   "who": "jieun",
   "sig": "aa7d94e26181",
-  "sim": 0.992,
-  "rate": 3.68,
-  "fall": 70,
+  "sim": 0.9912,
+  "rate": 3.8,
   "try": 1,
   "style": "plain",
   "emo": true,
-  "flag": "느림",
-  "at": "2026-11-07 18:44",
-  "tight": 540
+  "flag": "",
+  "at": "2026-11-05 22:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "30a96054": {
   "who": "jieun",
@@ -844,15 +1695,14 @@
  "69f2feb5": {
   "who": "jieun",
   "sig": "20862316038c",
-  "sim": 0.9903,
-  "rate": 5.15,
-  "fall": 50,
-  "long": 70,
+  "sim": 0.981,
+  "rate": 6.8,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "9c266322": {
   "who": "jieun",
@@ -1002,7 +1852,7 @@
   "who": "jieun",
   "sig": "42cce9e201f0",
   "sim": 0.9928,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 60,
   "try": 1,
   "style": "desc",
@@ -1146,14 +1996,14 @@
  "eafcd2fd": {
   "who": "jieun",
   "sig": "efcae7b6efac",
-  "sim": 0.9912,
-  "rate": 6.1,
-  "fall": 100,
+  "sim": 0.9873,
+  "rate": 6.05,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:44",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "627778c8": {
   "who": "jieun",
@@ -1195,13 +2045,13 @@
   "who": "jieun",
   "sig": "afe12524cf40",
   "sim": 0.9928,
-  "rate": 5.14,
-  "fall": 60,
+  "rate": 5.1,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:44",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fa6a6055": {
   "who": "jieun",
@@ -1428,17 +2278,6 @@
   "flag": "",
   "at": "2026-11-07 08:09"
  },
- "26903279": {
-  "who": "jieun",
-  "sig": "8c44c9b10ded",
-  "sim": 0.9914,
-  "rate": 7.02,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-05 22:46"
- },
  "4e9523fe": {
   "who": "jieun",
   "sig": "7258e40ba39d",
@@ -1607,18 +2446,6 @@
   "flag": "",
   "at": "2026-11-05 22:47",
   "long": 100
- },
- "48854790": {
-  "who": "jieun",
-  "sig": "09e8659aebe2",
-  "sim": 0.9903,
-  "rate": 6.4,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:47",
-  "long": 130
  },
  "7f0a07c9": {
   "who": "jieun",
@@ -1988,15 +2815,14 @@
  "bb7f823d": {
   "who": "jieun",
   "sig": "4a58a6a9c5ec",
-  "sim": 0.9935,
-  "rate": 4.43,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9928,
+  "rate": 4.62,
+  "try": 1,
+  "style": "plain",
   "emo": true,
-  "flag": "느림",
-  "at": "2026-11-07 18:44",
-  "tight": 220
+  "flag": "",
+  "at": "2026-11-05 22:49",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "2f7308ac": {
   "who": "jieun",
@@ -2171,14 +2997,14 @@
  "3f926e94": {
   "who": "jieun",
   "sig": "76f8c093122e",
-  "sim": 0.9911,
-  "rate": 6.44,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9914,
+  "rate": 5.99,
+  "try": 1,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:50",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "ae447bcc": {
   "who": "jieun",
@@ -2221,15 +3047,14 @@
  "ab095dff": {
   "who": "jieun",
   "sig": "22c21b21f15d",
-  "sim": 0.9911,
-  "rate": 5.35,
-  "fall": 50,
-  "long": 90,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.991,
+  "rate": 5.06,
+  "try": 1,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-06 20:06",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fa9e78b9": {
   "who": "jieun",
@@ -2289,17 +3114,6 @@
   "flag": "",
   "at": "2026-11-07 09:42",
   "long": 120
- },
- "15732946": {
-  "who": "jieun",
-  "sig": "9f1b515ed7e2",
-  "sim": 0.9924,
-  "rate": 4.8,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:50"
  },
  "0ccd5c5a": {
   "who": "jieun",
@@ -2562,7 +3376,7 @@
   "who": "jieun",
   "sig": "5b36be290d3d",
   "sim": 0.9941,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 80,
   "try": 1,
   "style": "desc",
@@ -2825,7 +3639,7 @@
   "who": "jieun",
   "sig": "51ac7c87a20b",
   "sim": 0.9937,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 40,
   "try": 1,
   "style": "desc",
@@ -2833,19 +3647,6 @@
   "flag": "",
   "at": "2026-11-07 08:19",
   "long": 80
- },
- "82060137": {
-  "who": "jieun",
-  "sig": "3538a81cb8bb",
-  "sim": 0.994,
-  "rate": 5.23,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-07 16:19"
  },
  "99ae3b14": {
   "who": "jieun",
@@ -3223,14 +4024,14 @@
  "c721cd50": {
   "who": "jieun",
   "sig": "85173a3ba171",
-  "sim": 0.9934,
-  "rate": 5.62,
-  "fall": 60,
+  "sim": 0.9942,
+  "rate": 5.37,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:55",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6b06ee90": {
   "who": "jieun",
@@ -3281,14 +4082,14 @@
  "b5b6c36f": {
   "who": "jieun",
   "sig": "06db651807ae",
-  "sim": 0.9919,
-  "rate": 5.11,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9925,
+  "rate": 5,
+  "try": 1,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:56",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "95eb0163": {
   "who": "jieun",
@@ -3442,15 +4243,14 @@
  "a63d151e": {
   "who": "jieun",
   "sig": "3135fb94ec3c",
-  "sim": 0.9942,
-  "rate": 4.83,
-  "fall": 50,
-  "long": 100,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9937,
+  "rate": 4.9,
+  "try": 1,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:56",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "4bfc0e56": {
   "who": "jieun",
@@ -3503,7 +4303,7 @@
   "who": "jieun",
   "sig": "7f19a5abd3e5",
   "sim": 0.9949,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -3557,18 +4357,6 @@
   "try": 1,
   "style": "desc",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-07 08:24"
- },
- "17145268": {
-  "who": "jieun",
-  "sig": "4650cdf0cd06",
-  "sim": 0.9896,
-  "rate": 6.67,
-  "fall": 80,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
   "flag": "",
   "at": "2026-11-07 08:24"
  },
@@ -3721,14 +4509,14 @@
  "5c395799": {
   "who": "jieun",
   "sig": "63b27d06800e",
-  "sim": 0.9929,
-  "rate": 5.1,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9924,
+  "rate": 5.46,
+  "try": 1,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:57",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "4fa0ca94": {
   "who": "jieun",
@@ -3812,31 +4600,17 @@
   "at": "2026-11-05 22:57",
   "long": 130
  },
- "50930137": {
-  "who": "jieun",
-  "sig": "0ffe2c318962",
-  "sim": 0.9904,
-  "rate": 5.53,
-  "fall": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:26",
-  "long": 90
- },
  "a4c07913": {
   "who": "jieun",
   "sig": "f4cfac36cede",
-  "sim": 0.9913,
-  "rate": 5.41,
-  "fall": 30,
-  "long": 40,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9929,
+  "rate": 5.77,
+  "try": 1,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:57",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "42a336ff": {
   "who": "jieun",
@@ -4000,15 +4774,14 @@
  "b89c46a9": {
   "who": "jieun",
   "sig": "1190960c1b7a",
-  "sim": 0.9939,
-  "rate": 5.61,
-  "fall": 50,
-  "long": 90,
-  "try": 3,
+  "sim": 0.9934,
+  "rate": 5.83,
+  "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 22:57",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e78fee09": {
   "who": "jieun",
@@ -4099,7 +4872,7 @@
   "who": "jieun",
   "sig": "775f93ff3a03",
   "sim": 0.9919,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -4155,19 +4928,6 @@
   "flag": "",
   "at": "2026-11-05 22:58"
  },
- "19562407": {
-  "who": "jieun",
-  "sig": "dfbfd42dd92f",
-  "sim": 0.9921,
-  "rate": 5.47,
-  "fall": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:28",
-  "long": 150
- },
  "1dda08c2": {
   "who": "jieun",
   "sig": "a96877288c68",
@@ -4178,19 +4938,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-05 22:58"
- },
- "11612034": {
-  "who": "jieun",
-  "sig": "919874912b3e",
-  "sim": 0.9935,
-  "rate": 4.91,
-  "fall": 40,
-  "try": 1,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-07 10:58",
-  "long": 70
  },
  "cfad0ef2": {
   "who": "jieun",
@@ -4353,7 +5100,7 @@
   "who": "jieun",
   "sig": "46427a11effe",
   "sim": 0.9924,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -4568,14 +5315,14 @@
  "cc9282e4": {
   "who": "jieun",
   "sig": "20f94629b8b5",
-  "sim": 0.9905,
-  "rate": 5.5,
-  "fall": 80,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.991,
+  "rate": 5.98,
+  "try": 1,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 23:00",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "3c8b6570": {
   "who": "jieun",
@@ -4713,15 +5460,14 @@
  "201df07c": {
   "who": "jieun",
   "sig": "6085b4241c25",
-  "sim": 0.993,
-  "rate": 5.56,
-  "fall": 20,
-  "long": 30,
+  "sim": 0.9914,
+  "rate": 6.21,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 23:00",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "82b4bdec": {
   "who": "jieun",
@@ -4942,14 +5688,14 @@
  "b7b44c9a": {
   "who": "jieun",
   "sig": "2994a6e703f1",
-  "sim": 0.9908,
-  "rate": 4.66,
-  "fall": 60,
+  "sim": 0.9931,
+  "rate": 4.72,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:44"
+  "at": "2026-11-05 23:02",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "33864d15": {
   "who": "jieun",
@@ -5013,15 +5759,14 @@
  "a430eb01": {
   "who": "jieun",
   "sig": "62056bb42d52",
-  "sim": 0.994,
-  "rate": 5.45,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9949,
+  "rate": 5.2,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:03",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "385906c5": {
   "who": "jieun",
@@ -5122,15 +5867,14 @@
  "d88dfbb6": {
   "who": "jieun",
   "sig": "3d5a05ad8949",
-  "sim": 0.9936,
-  "rate": 5.37,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9935,
+  "rate": 6.15,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:03",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "4058f677": {
   "who": "jieun",
@@ -5252,14 +5996,14 @@
  "05bcb48f": {
   "who": "jieun",
   "sig": "5a1a01d31b42",
-  "sim": 0.994,
-  "rate": 5.02,
-  "fall": 70,
+  "sim": 0.9904,
+  "rate": 5.84,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:04",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "cbab4872": {
   "who": "jieun",
@@ -5461,14 +6205,14 @@
  "8eec39a2": {
   "who": "jieun",
   "sig": "5e2cc6a9032b",
-  "sim": 0.9934,
-  "rate": 5.28,
-  "fall": 70,
+  "sim": 0.9911,
+  "rate": 6.46,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:05",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "942ac349": {
   "who": "jieun",
@@ -6140,24 +6884,12 @@
   "who": "jieun",
   "sig": "8c63ce696070",
   "sim": 0.9948,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
   "at": "2026-11-05 23:10"
- },
- "47551291": {
-  "who": "jieun",
-  "sig": "8c0793b47f3b",
-  "sim": 0.991,
-  "rate": 4.94,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:43"
  },
  "9768c5c2": {
   "who": "jieun",
@@ -6318,7 +7050,7 @@
   "who": "jieun",
   "sig": "da42f2c755cc",
   "sim": 0.9942,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 80,
   "try": 1,
   "style": "desc",
@@ -7304,7 +8036,7 @@
   "who": "jieun",
   "sig": "7e3bbc55c0d5",
   "sim": 0.9923,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -8047,18 +8779,6 @@
   "at": "2026-11-05 23:23",
   "long": 110
  },
- "57187194": {
-  "who": "jieun",
-  "sig": "c4d1e1ea4277",
-  "sim": 0.9908,
-  "rate": 6.05,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:51"
- },
  "1e18f3e1": {
   "who": "jieun",
   "sig": "5f56c5448fbe",
@@ -8133,7 +8853,7 @@
   "who": "jieun",
   "sig": "ac979a629236",
   "sim": 0.9928,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 70,
   "try": 1,
   "style": "desc",
@@ -8144,14 +8864,14 @@
  "51e2c497": {
   "who": "jieun",
   "sig": "45dab01115b8",
-  "sim": 0.9937,
-  "rate": 5.82,
-  "fall": 80,
+  "sim": 0.9905,
+  "rate": 6.46,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:23",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "ec585f60": {
   "who": "jieun",
@@ -8255,7 +8975,7 @@
   "who": "jieun",
   "sig": "d4214f4c61f6",
   "sim": 0.9927,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 60,
   "try": 1,
   "style": "desc",
@@ -8328,14 +9048,14 @@
  "9d979839": {
   "who": "jieun",
   "sig": "42fa23ba884f",
-  "sim": 0.9911,
-  "rate": 6.52,
-  "fall": 60,
-  "try": 2,
+  "sim": 0.9909,
+  "rate": 5.74,
+  "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:24",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "3e9ca345": {
   "who": "jieun",
@@ -8389,7 +9109,7 @@
   "who": "jieun",
   "sig": "869818fa7993",
   "sim": 0.9927,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -8945,14 +9665,14 @@
  "ff35b167": {
   "who": "jieun",
   "sig": "75d65a0ae00b",
-  "sim": 0.9937,
-  "rate": 5.0,
-  "fall": 70,
+  "sim": 0.9918,
+  "rate": 5.81,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:28",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "d4ffe90c": {
   "who": "jieun",
@@ -9268,15 +9988,14 @@
  "873140f3": {
   "who": "jieun",
   "sig": "ffaa6e6b41f7",
-  "sim": 0.9934,
+  "sim": 0.9914,
   "rate": 5.6,
-  "fall": 40,
-  "long": 100,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "358f16b0": {
   "who": "jieun",
@@ -9304,14 +10023,14 @@
  "3e12b186": {
   "who": "jieun",
   "sig": "7fd3d2e7a7ed",
-  "sim": 0.9941,
-  "rate": 6.02,
-  "fall": 60,
+  "sim": 0.9931,
+  "rate": 6.5,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5901e4f3": {
   "who": "jieun",
@@ -9341,15 +10060,14 @@
  "dc08e77c": {
   "who": "jieun",
   "sig": "b8c05db0aca0",
-  "sim": 0.9921,
-  "rate": 5.92,
-  "fall": 30,
-  "long": 100,
+  "sim": 0.9864,
+  "rate": 7.32,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fbdeddee": {
   "who": "jieun",
@@ -9379,14 +10097,14 @@
  "c231caff": {
   "who": "jieun",
   "sig": "a4487deb652d",
-  "sim": 0.9922,
-  "rate": 6.14,
-  "fall": 60,
+  "sim": 0.9896,
+  "rate": 7.07,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-06 20:10",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "727babd1": {
   "who": "jieun",
@@ -9449,14 +10167,14 @@
  "c4d2f7b5": {
   "who": "jieun",
   "sig": "6be1c9464a2c",
-  "sim": 0.9917,
-  "rate": 5.35,
-  "fall": 60,
+  "sim": 0.9897,
+  "rate": 5.99,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:45"
+  "at": "2026-11-05 23:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "bcd6b5bc": {
   "who": "jieun",
@@ -10531,14 +11249,15 @@
  "49e3cdb3": {
   "who": "jieun",
   "sig": "354a95fff26a",
-  "sim": 0.9942,
-  "rate": 4.87,
-  "fall": 70,
+  "sim": 0.9896,
+  "rate": 5.62,
+  "fall": 40,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:47"
+  "at": "2026-11-07 09:09",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f019eed1": {
   "who": "jieun",
@@ -10754,15 +11473,14 @@
  "da5551ab": {
   "who": "jieun",
   "sig": "68c7aba82ba8",
-  "sim": 0.9943,
-  "rate": 5.84,
-  "fall": 40,
-  "long": 110,
+  "sim": 0.9901,
+  "rate": 7.31,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:47"
+  "at": "2026-11-05 23:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "99b5c832": {
   "who": "jieun",
@@ -11188,14 +11906,14 @@
  "7d8de461": {
   "who": "jieun",
   "sig": "5c6146cac58a",
-  "sim": 0.9912,
-  "rate": 4.73,
-  "fall": 60,
-  "try": 2,
+  "sim": 0.9897,
+  "rate": 5.78,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:47"
+  "at": "2026-11-05 23:46",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "9f8bede3": {
   "who": "jieun",
@@ -11224,14 +11942,14 @@
  "2fccf7c9": {
   "who": "jieun",
   "sig": "2e524bb87eee",
-  "sim": 0.9921,
-  "rate": 6.09,
-  "fall": 80,
+  "sim": 0.9903,
+  "rate": 6.76,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:47"
+  "at": "2026-11-05 23:47",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "800de68f": {
   "who": "jieun",
@@ -11456,7 +12174,7 @@
   "who": "jieun",
   "sig": "1858797e61da",
   "sim": 0.9931,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "try": 1,
   "style": "desc",
@@ -11662,17 +12380,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 09:14"
- },
- "98955013": {
-  "who": "jieun",
-  "sig": "349edafa5ee8",
-  "sim": 0.9946,
-  "rate": 5.54,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 23:52"
  },
  "9a32f0ca": {
   "who": "jieun",
@@ -11952,18 +12659,6 @@
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 09:17"
- },
- "57062717": {
-  "who": "jieun",
-  "sig": "aa6d1e3ba7fe",
-  "sim": 0.9937,
-  "rate": 5.29,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": true,
   "flag": "",
   "at": "2026-11-07 09:17"
  },
@@ -12498,15 +13193,14 @@
  "6c0e77b0": {
   "who": "jieun",
   "sig": "88c89098a05e",
-  "sim": 0.9943,
-  "rate": 5.18,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
+  "sim": 0.9942,
+  "rate": 4.68,
+  "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 18:47"
+  "at": "2026-11-05 23:59",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "31b555a0": {
   "who": "jieun",
@@ -12638,18 +13332,6 @@
   "flag": "",
   "at": "2026-11-06 00:00"
  },
- "47505748": {
-  "who": "jieun",
-  "sig": "fbc663a8f23e",
-  "sim": 0.9929,
-  "rate": 5.79,
-  "fall": 100,
-  "try": 1,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-07 09:22"
- },
  "6b95fe3c": {
   "who": "jieun",
   "sig": "a6b678e7cfc2",
@@ -12700,16 +13382,14 @@
  "ce436631": {
   "who": "jieun",
   "sig": "c8ae3e0df03a",
-  "sim": 0.995,
-  "rate": 3.97,
-  "fall": 20,
-  "long": 20,
-  "try": 3,
+  "sim": 0.9933,
+  "rate": 4.18,
+  "try": 1,
   "style": "plain",
   "emo": true,
-  "flag": "느림",
-  "at": "2026-11-07 18:47",
-  "tight": 460
+  "flag": "",
+  "at": "2026-11-06 00:00",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "24f97eed": {
   "who": "jieun",
@@ -13055,18 +13735,6 @@
   "flag": "",
   "at": "2026-11-07 10:46",
   "long": 40
- },
- "86243817": {
-  "who": "jieun",
-  "sig": "202cb6e39cf8",
-  "sim": 0.9937,
-  "rate": 6.14,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 09:31"
  },
  "14e018d9": {
   "who": "jieun",
@@ -13464,7 +14132,7 @@
   "who": "jieun",
   "sig": "53c81bd482a3",
   "sim": 0.9902,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -13607,17 +14275,6 @@
   "flag": "",
   "at": "2026-11-06 00:07"
  },
- "39763886": {
-  "who": "customer",
-  "sig": "838b53670ee0",
-  "sim": 0.9814,
-  "rate": 8.14,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:07"
- },
  "8105658a": {
   "who": "customer",
   "sig": "d24379646bd0",
@@ -13656,7 +14313,7 @@
   "who": "customer",
   "sig": "6c07475d9a33",
   "sim": 0.9811,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -13780,7 +14437,7 @@
   "who": "customer",
   "sig": "b0725bcf1438",
   "sim": 0.9865,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -13895,7 +14552,7 @@
   "who": "sys",
   "sig": "5ff54fe0c98e",
   "sim": 0.9696,
-  "rate": 5.0,
+  "rate": 5,
   "try": 3,
   "style": "plain",
   "emo": false,
@@ -13945,7 +14602,7 @@
   "who": "sys",
   "sig": "ee452a96e9bf",
   "sim": 0.9722,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -13957,7 +14614,7 @@
   "who": "sys",
   "sig": "361d30903da2",
   "sim": 0.9706,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 30,
   "try": 1,
   "style": "plain",
@@ -14024,18 +14681,6 @@
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:22"
- },
- "31793180": {
-  "who": "sys",
-  "sig": "704258c90e7a",
-  "sim": 0.9683,
-  "rate": 5.56,
-  "fall": 20,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "목소리",
   "at": "2026-11-07 12:22"
  },
  "0a8d3f7b": {
@@ -14140,7 +14785,7 @@
   "who": "sys",
   "sig": "6f3e7854b92a",
   "sim": 0.9722,
-  "rate": 6.0,
+  "rate": 6,
   "try": 2,
   "style": "desc",
   "emo": false,
@@ -14164,7 +14809,7 @@
   "who": "sys",
   "sig": "cbcf8e813d66",
   "sim": 0.9736,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 20,
   "long": 50,
   "try": 1,
@@ -14203,7 +14848,7 @@
   "who": "sys",
   "sig": "bb542cf4bd78",
   "sim": 0.9738,
-  "rate": 6.0,
+  "rate": 6,
   "try": 2,
   "style": "desc",
   "emo": false,
@@ -14921,15 +15566,14 @@
  "878ae379": {
   "who": "sys",
   "sig": "be08ea4dc0aa",
-  "sim": 0.9799,
-  "rate": 3.85,
-  "fall": 30,
-  "long": 60,
-  "try": 2,
+  "sim": 0.9828,
+  "rate": 2.98,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:12",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "78fc3e0d": {
   "who": "sys",
@@ -15072,15 +15716,14 @@
  "637f44ef": {
   "who": "sys",
   "sig": "bf85f9fe7063",
-  "sim": 0.9761,
-  "rate": 3.45,
-  "fall": 40,
-  "long": 100,
+  "sim": 0.977,
+  "rate": 2.52,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f0b87167": {
   "who": "sys",
@@ -15098,7 +15741,7 @@
   "who": "sys",
   "sig": "5cb68db07092",
   "sim": 0.9716,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "long": 80,
   "try": 2,
@@ -15110,16 +15753,14 @@
  "b2fe0464": {
   "who": "sys",
   "sig": "974df9c10a07",
-  "sim": 0.978,
-  "rate": 2.86,
-  "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9862,
+  "rate": 3.19,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53",
-  "tight": 370
+  "at": "2026-11-06 00:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "a1cc7845": {
   "who": "sys",
@@ -15132,20 +15773,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 12:30"
- },
- "33494489": {
-  "who": "sys",
-  "sig": "91e76fa8f9b1",
-  "sim": 0.9704,
-  "rate": 2.83,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
-  "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 17:53",
-  "tight": 390
  },
  "7442019e": {
   "who": "sys",
@@ -15188,28 +15815,26 @@
  "59699e40": {
   "who": "sys",
   "sig": "34b720484e75",
-  "sim": 0.9837,
-  "rate": 3.49,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
+  "sim": 0.9831,
+  "rate": 3.61,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "3226cf81": {
   "who": "sys",
   "sig": "7f7fe606c7b4",
-  "sim": 0.9804,
-  "rate": 3.7,
-  "fall": 40,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9845,
+  "rate": 4.35,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c3336e5d": {
   "who": "sys",
@@ -15313,7 +15938,7 @@
   "who": "sys",
   "sig": "c634ec87180c",
   "sim": 0.9828,
-  "rate": 7.0,
+  "rate": 7,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -15409,15 +16034,14 @@
  "14be6b26": {
   "who": "sys",
   "sig": "4bb7493b6517",
-  "sim": 0.9854,
+  "sim": 0.9873,
   "rate": 4.22,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:14",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "7506b7f3": {
   "who": "sys",
@@ -15509,7 +16133,7 @@
   "who": "sys",
   "sig": "18372d0dfec5",
   "sim": 0.9851,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -15520,28 +16144,26 @@
  "9d6d77e5": {
   "who": "sys",
   "sig": "1c6c16551a0e",
-  "sim": 0.9856,
-  "rate": 4.55,
-  "fall": 30,
-  "long": 60,
-  "try": 2,
+  "sim": 0.982,
+  "rate": 4.26,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:14",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1146a315": {
   "who": "sys",
   "sig": "48bfa58a1544",
-  "sim": 0.9765,
-  "rate": 3.23,
-  "fall": 60,
+  "sim": 0.985,
+  "rate": 3.42,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53",
-  "tight": 390
+  "at": "2026-11-06 00:14",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "34ad935a": {
   "who": "sys",
@@ -15584,15 +16206,14 @@
  "c3e3829a": {
   "who": "sys",
   "sig": "0b766d4f8c92",
-  "sim": 0.9861,
-  "rate": 4.04,
-  "fall": 40,
-  "long": 50,
-  "try": 2,
+  "sim": 0.9883,
+  "rate": 4.76,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:14",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c61ade05": {
   "who": "sys",
@@ -15850,7 +16471,7 @@
   "who": "sys",
   "sig": "34a6267d8f93",
   "sim": 0.9736,
-  "rate": 4.0,
+  "rate": 4,
   "fall": 40,
   "long": 90,
   "try": 2,
@@ -15960,19 +16581,6 @@
   "at": "2026-11-06 00:15",
   "long": 70
  },
- "50368408": {
-  "who": "sys",
-  "sig": "1ec2af4a6072",
-  "sim": 0.9877,
-  "rate": 4.33,
-  "fall": 40,
-  "long": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:39"
- },
  "18b4aaf0": {
   "who": "sys",
   "sig": "6d41f7d8c1be",
@@ -15988,14 +16596,14 @@
  "a0a93a7e": {
   "who": "sys",
   "sig": "b648f025cda1",
-  "sim": 0.9862,
-  "rate": 4.74,
-  "fall": 60,
-  "try": 2,
+  "sim": 0.9867,
+  "rate": 5.23,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:15",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5ba72682": {
   "who": "sys",
@@ -16089,15 +16697,14 @@
  "185ea5af": {
   "who": "sys",
   "sig": "9ad1fcf748dd",
-  "sim": 0.9846,
-  "rate": 5.42,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
+  "sim": 0.9853,
+  "rate": 5.17,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:15",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f77c1f86": {
   "who": "sys",
@@ -16242,28 +16849,26 @@
  "7d1a0b8f": {
   "who": "sys",
   "sig": "67c8ed18927b",
-  "sim": 0.9877,
-  "rate": 5.15,
-  "fall": 30,
-  "long": 70,
-  "try": 2,
+  "sim": 0.9887,
+  "rate": 5.1,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:16",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "adc61647": {
   "who": "sys",
   "sig": "856d264f2e6d",
-  "sim": 0.9835,
-  "rate": 4.39,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9863,
+  "rate": 4.46,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 17:53"
+  "flag": "",
+  "at": "2026-11-06 00:16",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "83229ac8": {
   "who": "sys",
@@ -16281,15 +16886,14 @@
  "b9fba27b": {
   "who": "sys",
   "sig": "f1179a1bf3fb",
-  "sim": 0.9837,
-  "rate": 5.15,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
+  "sim": 0.9868,
+  "rate": 5.38,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 00:16",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1afa663d": {
   "who": "sys",
@@ -16318,21 +16922,20 @@
  "6b5154f1": {
   "who": "sys",
   "sig": "3e9096da0c54",
-  "sim": 0.9873,
-  "rate": 5.05,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9871,
+  "rate": 4.9,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:16",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "7b142afb": {
   "who": "sys",
   "sig": "a839ae2fa273",
   "sim": 0.9869,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -16406,7 +17009,7 @@
   "who": "sys",
   "sig": "6f9e542b49c9",
   "sim": 0.986,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "long": 70,
   "try": 1,
@@ -16541,14 +17144,14 @@
  "6058d0f4": {
   "who": "sys",
   "sig": "7b5a524bec18",
-  "sim": 0.9766,
-  "rate": 3.48,
-  "fall": 60,
+  "sim": 0.981,
+  "rate": 3.74,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 17:57"
+  "flag": "",
+  "at": "2026-11-06 00:16",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "864041e8": {
   "who": "sys",
@@ -16689,7 +17292,7 @@
   "who": "sys",
   "sig": "2a98947eaa98",
   "sim": 0.9893,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -16726,7 +17329,7 @@
   "who": "sys",
   "sig": "c68792a72019",
   "sim": 0.9874,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 60,
   "try": 1,
   "style": "desc",
@@ -16751,15 +17354,14 @@
  "75c2f25e": {
   "who": "sys",
   "sig": "469628c8fa45",
-  "sim": 0.9871,
-  "rate": 5.19,
-  "fall": 30,
-  "long": 40,
+  "sim": 0.9822,
+  "rate": 5.85,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:17",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "d9339c52": {
   "who": "sys",
@@ -16850,15 +17452,14 @@
  "2d3f367c": {
   "who": "sys",
   "sig": "d6bde68d8fd7",
-  "sim": 0.9888,
-  "rate": 5.05,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9881,
+  "rate": 5.67,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:17",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1c57839a": {
   "who": "sys",
@@ -17036,18 +17637,6 @@
   "at": "2026-11-06 00:18",
   "long": 90
  },
- "76735112": {
-  "who": "sys",
-  "sig": "a6f9d48a3eb8",
-  "sim": 0.9759,
-  "rate": 5.77,
-  "fall": 70,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:57"
- },
  "a9d9a0a8": {
   "who": "sys",
   "sig": "6fbd8bd9952e",
@@ -17135,30 +17724,6 @@
   "flag": "",
   "at": "2026-11-07 12:57"
  },
- "89517751": {
-  "who": "sys",
-  "sig": "791e46f2de7f",
-  "sim": 0.9866,
-  "rate": 5.17,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:18",
-  "long": 60
- },
- "26877167": {
-  "who": "sys",
-  "sig": "6e980a6b06f3",
-  "sim": 0.9864,
-  "rate": 5.17,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:13",
-  "long": 80
- },
  "b7a0a18d": {
   "who": "sys",
   "sig": "8d42fb9f37fe",
@@ -17188,7 +17753,7 @@
   "who": "sys",
   "sig": "dfb0421cf4a8",
   "sim": 0.9911,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -17287,15 +17852,14 @@
  "6923e311": {
   "who": "sys",
   "sig": "35b44fc1d60e",
-  "sim": 0.9898,
-  "rate": 4.68,
-  "fall": 40,
-  "long": 60,
+  "sim": 0.9877,
+  "rate": 4.58,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:18",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5f0f8205": {
   "who": "sys",
@@ -17338,15 +17902,14 @@
  "800ae679": {
   "who": "sys",
   "sig": "59ed5df8be9e",
-  "sim": 0.9774,
-  "rate": 3.63,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9862,
+  "rate": 3.99,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 17:57",
-  "tight": 420
+  "flag": "",
+  "at": "2026-11-06 00:18",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "87de3033": {
   "who": "sys",
@@ -17378,7 +17941,7 @@
   "who": "sys",
   "sig": "1ee14fa6bf21",
   "sim": 0.9877,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -17564,15 +18127,14 @@
  "38d0feec": {
   "who": "sys",
   "sig": "51af8e7f77f5",
-  "sim": 0.9865,
-  "rate": 5.7,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9881,
+  "rate": 5.28,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:20",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "38e51fdc": {
   "who": "sys",
@@ -17590,7 +18152,7 @@
   "who": "sys",
   "sig": "0a8826ca10b0",
   "sim": 0.9917,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "long": 80,
   "try": 1,
@@ -17639,7 +18201,7 @@
   "who": "sys",
   "sig": "de71faa5dd92",
   "sim": 0.9906,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -17664,7 +18226,7 @@
   "who": "sys",
   "sig": "bfc96e844671",
   "sim": 0.9872,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -17781,18 +18343,6 @@
   "flag": "",
   "at": "2026-11-07 13:09"
  },
- "62939210": {
-  "who": "sys",
-  "sig": "2b2b06555cee",
-  "sim": 0.9889,
-  "rate": 6.09,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:20",
-  "long": 100
- },
  "3aa38376": {
   "who": "sys",
   "sig": "fef9e3746867",
@@ -17835,7 +18385,7 @@
   "who": "sys",
   "sig": "8293b9e0e69d",
   "sim": 0.9874,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 30,
   "long": 60,
   "try": 1,
@@ -18640,18 +19190,6 @@
   "at": "2026-11-06 00:23",
   "long": 80
  },
- "48446525": {
-  "who": "sys",
-  "sig": "a9e4238a527d",
-  "sim": 0.9889,
-  "rate": 6.84,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:23",
-  "long": 80
- },
  "d65bc92e": {
   "who": "sys",
   "sig": "b6c056080b84",
@@ -18835,19 +19373,6 @@
   "at": "2026-11-06 00:23",
   "long": 70
  },
- "82941657": {
-  "who": "sys",
-  "sig": "886ef42fbeee",
-  "sim": 0.9897,
-  "rate": 5.52,
-  "fall": 30,
-  "long": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:21"
- },
  "4bd89e5e": {
   "who": "sys",
   "sig": "46b579ceb913",
@@ -18877,7 +19402,7 @@
   "who": "sys",
   "sig": "a81ed49aaab4",
   "sim": 0.9901,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -19025,15 +19550,14 @@
  "a2cf13f2": {
   "who": "sys",
   "sig": "69d8da6bae7f",
-  "sim": 0.9883,
-  "rate": 6.16,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9881,
+  "rate": 5.28,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:24",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "a1f82bd2": {
   "who": "sys",
@@ -19167,32 +19691,6 @@
   "at": "2026-11-06 00:25",
   "long": 80
  },
- "88516882": {
-  "who": "sys",
-  "sig": "034fab2d96ba",
-  "sim": 0.9871,
-  "rate": 6.77,
-  "fall": 30,
-  "long": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:27"
- },
- "47878896": {
-  "who": "sys",
-  "sig": "874a6ed5d076",
-  "sim": 0.9889,
-  "rate": 7.38,
-  "fall": 30,
-  "long": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:27"
- },
  "7b69322a": {
   "who": "sys",
   "sig": "094b5e54c4c2",
@@ -19235,7 +19733,7 @@
   "who": "sys",
   "sig": "cfbb720b2bc4",
   "sim": 0.9891,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -19514,15 +20012,14 @@
  "1b9f135b": {
   "who": "sys",
   "sig": "286af3d2b474",
-  "sim": 0.9857,
-  "rate": 5.08,
-  "fall": 50,
-  "long": 100,
+  "sim": 0.9909,
+  "rate": 5.14,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:26",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e97b50d9": {
   "who": "sys",
@@ -19552,16 +20049,14 @@
  "88411d1c": {
   "who": "sys",
   "sig": "25816f0fcd89",
-  "sim": 0.9806,
-  "rate": 3.58,
-  "fall": 50,
-  "long": 110,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9867,
+  "rate": 4.19,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 17:57",
-  "tight": 440
+  "flag": "",
+  "at": "2026-11-06 00:26",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "30ac920e": {
   "who": "sys",
@@ -19626,14 +20121,14 @@
  "bac4486a": {
   "who": "sys",
   "sig": "85ecd418d096",
-  "sim": 0.9811,
-  "rate": 4.68,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9915,
+  "rate": 5.14,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 00:26",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6377f29b": {
   "who": "sys",
@@ -19723,14 +20218,14 @@
  "a9448193": {
   "who": "sys",
   "sig": "6fdf97e555a5",
-  "sim": 0.9911,
-  "rate": 5.05,
-  "fall": 60,
+  "sim": 0.9914,
+  "rate": 4.95,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:27",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "0607e5b1": {
   "who": "sys",
@@ -19821,16 +20316,14 @@
  "f354f5a6": {
   "who": "sys",
   "sig": "c6425a015884",
-  "sim": 0.9786,
-  "rate": 3.55,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9873,
+  "rate": 4.35,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:05",
-  "tight": 420
+  "flag": "",
+  "at": "2026-11-06 00:27",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6a3cb023": {
   "who": "sys",
@@ -19884,15 +20377,14 @@
  "0be27446": {
   "who": "sys",
   "sig": "94f0ada7be13",
-  "sim": 0.9896,
-  "rate": 5.05,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9892,
+  "rate": 5.18,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:27",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f5ad1a1d": {
   "who": "sys",
@@ -20050,19 +20542,6 @@
   "at": "2026-11-06 00:28",
   "long": 80
  },
- "11957299": {
-  "who": "sys",
-  "sig": "8dd97ec93efc",
-  "sim": 0.9911,
-  "rate": 5.88,
-  "fall": 30,
-  "long": 90,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:40"
- },
  "287f3f94": {
   "who": "sys",
   "sig": "226fb3e7d0c8",
@@ -20102,15 +20581,14 @@
  "082e171f": {
   "who": "sys",
   "sig": "e54760bc3cb5",
-  "sim": 0.9904,
-  "rate": 5.15,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9914,
+  "rate": 5.26,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:28",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b87509fb": {
   "who": "sys",
@@ -20242,15 +20720,14 @@
  "814b0f85": {
   "who": "sys",
   "sig": "221b23e9027f",
-  "sim": 0.9888,
-  "rate": 4.93,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9896,
+  "rate": 4.88,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:28",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1825464b": {
   "who": "sys",
@@ -20363,15 +20840,14 @@
  "7a61f6b2": {
   "who": "sys",
   "sig": "61ecb1ee45fd",
-  "sim": 0.9899,
-  "rate": 5.38,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.991,
+  "rate": 5.25,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:29",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f279eede": {
   "who": "sys",
@@ -20439,15 +20915,14 @@
  "2472d9e2": {
   "who": "sys",
   "sig": "2dac6ebeaab7",
-  "sim": 0.9892,
-  "rate": 3.99,
-  "fall": 40,
-  "long": 60,
+  "sim": 0.989,
+  "rate": 4.28,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:05"
+  "flag": "",
+  "at": "2026-11-06 00:29",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5cb928c0": {
   "who": "sys",
@@ -20528,15 +21003,14 @@
  "37201d61": {
   "who": "sys",
   "sig": "851e1e950f84",
-  "sim": 0.9907,
-  "rate": 5.26,
-  "fall": 50,
-  "long": 100,
+  "sim": 0.9916,
+  "rate": 5.82,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:30",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "19ef4a9a": {
   "who": "sys",
@@ -20698,16 +21172,14 @@
  "2eaa02b8": {
   "who": "sys",
   "sig": "c7607753488e",
-  "sim": 0.9818,
-  "rate": 4.26,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9879,
+  "rate": 4.37,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:05",
-  "tight": 380
+  "flag": "",
+  "at": "2026-11-06 00:30",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b48f2683": {
   "who": "sys",
@@ -20751,15 +21223,14 @@
  "9f8c3f4d": {
   "who": "sys",
   "sig": "415c722c3f9b",
-  "sim": 0.9907,
-  "rate": 4.71,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9902,
+  "rate": 4.77,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6b579d7d": {
   "who": "sys",
@@ -20812,16 +21283,14 @@
  "ffcee3aa": {
   "who": "sys",
   "sig": "beb92ed93a13",
-  "sim": 0.9859,
-  "rate": 4.07,
-  "fall": 50,
-  "long": 100,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9885,
+  "rate": 4.15,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:05",
-  "tight": 440
+  "flag": "",
+  "at": "2026-11-06 00:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5c56509d": {
   "who": "sys",
@@ -20887,15 +21356,14 @@
  "d7cc10f9": {
   "who": "sys",
   "sig": "b180724dc6a1",
-  "sim": 0.9901,
-  "rate": 5.69,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.991,
+  "rate": 5.71,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "559f14f9": {
   "who": "sys",
@@ -20934,19 +21402,6 @@
   "flag": "",
   "at": "2026-11-07 13:58"
  },
- "10236118": {
-  "who": "sys",
-  "sig": "18646db1e9e1",
-  "sim": 0.9921,
-  "rate": 5.27,
-  "fall": 30,
-  "long": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:58"
- },
  "48ed2253": {
   "who": "sys",
   "sig": "dc23b54ad7cc",
@@ -20974,15 +21429,14 @@
  "dd0ada15": {
   "who": "sys",
   "sig": "968b3ece7b6f",
-  "sim": 0.9935,
-  "rate": 5.76,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9923,
+  "rate": 6.04,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "4d2dafa6": {
   "who": "sys",
@@ -21023,15 +21477,14 @@
  "32e87bf3": {
   "who": "sys",
   "sig": "c0adc81dc837",
-  "sim": 0.9924,
-  "rate": 5.21,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9938,
+  "rate": 4.94,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5f74a606": {
   "who": "sys",
@@ -21173,16 +21626,14 @@
  "01ec2a26": {
   "who": "sys",
   "sig": "a40e04b2dc42",
-  "sim": 0.9803,
-  "rate": 3.41,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9879,
+  "rate": 3.93,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:05",
-  "tight": 850
+  "flag": "",
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e978d380": {
   "who": "sys",
@@ -21199,15 +21650,14 @@
  "214f7502": {
   "who": "sys",
   "sig": "56f6d75eebb1",
-  "sim": 0.9889,
-  "rate": 5.0,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9884,
+  "rate": 4.77,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:05"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "0368fe65": {
   "who": "sys",
@@ -21225,15 +21675,14 @@
  "9e15c449": {
   "who": "sys",
   "sig": "017ecb71b47b",
-  "sim": 0.9894,
-  "rate": 5.27,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9898,
+  "rate": 5.09,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1cb9d752": {
   "who": "sys",
@@ -21264,15 +21713,14 @@
  "1288a74f": {
   "who": "sys",
   "sig": "aed36d297694",
-  "sim": 0.9903,
-  "rate": 5.38,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9911,
+  "rate": 4.74,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "d1f7e803": {
   "who": "sys",
@@ -21289,15 +21737,14 @@
  "a31856be": {
   "who": "sys",
   "sig": "46a04de42725",
-  "sim": 0.9925,
-  "rate": 6.05,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9929,
+  "rate": 6.16,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:32",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b525a69c": {
   "who": "sys",
@@ -21350,15 +21797,14 @@
  "c94a9ccc": {
   "who": "sys",
   "sig": "c6713ec48c3a",
-  "sim": 0.9918,
-  "rate": 5.11,
-  "fall": 20,
-  "long": 60,
+  "sim": 0.9907,
+  "rate": 5.29,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:33",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "60cd2d6d": {
   "who": "sys",
@@ -21375,15 +21821,14 @@
  "0f86b45e": {
   "who": "sys",
   "sig": "4f9fa622572b",
-  "sim": 0.9922,
-  "rate": 4.95,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9908,
+  "rate": 4.93,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:33",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "cda43c31": {
   "who": "sys",
@@ -21424,15 +21869,14 @@
  "1f8e21ba": {
   "who": "sys",
   "sig": "d360f1c420f4",
-  "sim": 0.9901,
-  "rate": 4.17,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9881,
+  "rate": 5.07,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:18"
+  "flag": "",
+  "at": "2026-11-06 00:33",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c7702d61": {
   "who": "sys",
@@ -21450,7 +21894,7 @@
   "who": "sys",
   "sig": "794a2cb499aa",
   "sim": 0.9915,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -21560,41 +22004,38 @@
  "0a3a8fe8": {
   "who": "sys",
   "sig": "dac9869a640b",
-  "sim": 0.989,
-  "rate": 5.74,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9924,
+  "rate": 5.36,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "10ea30c8": {
   "who": "sys",
   "sig": "420e5f9d8776",
-  "sim": 0.9904,
-  "rate": 5.62,
-  "fall": 20,
-  "long": 50,
+  "sim": 0.9915,
+  "rate": 5.2,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "957a702e": {
   "who": "sys",
   "sig": "bcc1a4aefb79",
-  "sim": 0.9909,
-  "rate": 4.62,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.99,
+  "rate": 4.81,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "f53950f4": {
   "who": "sys",
@@ -21612,15 +22053,14 @@
  "556e750c": {
   "who": "sys",
   "sig": "bdab3b2917c7",
-  "sim": 0.9903,
-  "rate": 5.03,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9911,
+  "rate": 5.02,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fb3d1966": {
   "who": "sys",
@@ -21637,15 +22077,14 @@
  "89c62396": {
   "who": "sys",
   "sig": "3dc9ab82faf6",
-  "sim": 0.9893,
-  "rate": 5.12,
-  "fall": 30,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9905,
+  "rate": 4.98,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "9c8cbf69": {
   "who": "sys",
@@ -21662,41 +22101,26 @@
  "9d12c2f9": {
   "who": "sys",
   "sig": "e5c892b5bca6",
-  "sim": 0.9912,
-  "rate": 5.27,
-  "fall": 40,
-  "long": 60,
+  "sim": 0.991,
+  "rate": 5.25,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5fdc30cf": {
   "who": "sys",
   "sig": "c893cbb4a7cc",
-  "sim": 0.9901,
-  "rate": 5.0,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9914,
+  "rate": 4.79,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
- },
- "64225801": {
-  "who": "sys",
-  "sig": "382d15f7d575",
-  "sim": 0.9894,
-  "rate": 4.6,
-  "fall": 40,
-  "long": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-06 00:34",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "bce287e1": {
   "who": "sys",
@@ -21814,15 +22238,14 @@
  "045165f2": {
   "who": "sys",
   "sig": "fa766aa628d9",
-  "sim": 0.9913,
-  "rate": 4.69,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9896,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:35",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "789b5dd9": {
   "who": "sys",
@@ -21877,15 +22300,14 @@
  "a841751c": {
   "who": "sys",
   "sig": "8f673a914b70",
-  "sim": 0.9896,
-  "rate": 4.73,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9887,
+  "rate": 4.6,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:35",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "20c3d9b8": {
   "who": "sys",
@@ -21902,41 +22324,38 @@
  "f2cc05fc": {
   "who": "sys",
   "sig": "b1db9e71dbba",
-  "sim": 0.9898,
-  "rate": 5.08,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9907,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:18"
+  "at": "2026-11-06 00:35",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "60bc80cb": {
   "who": "sys",
   "sig": "b0c941757ecd",
-  "sim": 0.9909,
-  "rate": 5.0,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9902,
+  "rate": 5.38,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "cd9bb8cd": {
   "who": "sys",
   "sig": "1c706fdf37cb",
-  "sim": 0.991,
-  "rate": 5.12,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9902,
+  "rate": 5.21,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "8f72e669": {
   "who": "sys",
@@ -22028,15 +22447,14 @@
  "b6337fee": {
   "who": "sys",
   "sig": "46343ebb78de",
-  "sim": 0.9893,
-  "rate": 6.28,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9916,
+  "rate": 6.22,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "5334d842": {
   "who": "sys",
@@ -22053,42 +22471,38 @@
  "74abe144": {
   "who": "sys",
   "sig": "f2726f854b93",
-  "sim": 0.9793,
-  "rate": 3.51,
-  "fall": 50,
-  "long": 90,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9901,
+  "rate": 4.18,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 18:30",
-  "tight": 910
+  "flag": "",
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "97006f35": {
   "who": "sys",
   "sig": "63604bd9f00d",
-  "sim": 0.993,
-  "rate": 4.61,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9909,
+  "rate": 4.73,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c1d6866e": {
   "who": "sys",
   "sig": "7f808a5f6765",
-  "sim": 0.9902,
-  "rate": 4.84,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9905,
+  "rate": 4.59,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6d397e90": {
   "who": "sys",
@@ -22105,28 +22519,26 @@
  "47f580d8": {
   "who": "sys",
   "sig": "586f2059c4ff",
-  "sim": 0.9879,
-  "rate": 4.63,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9898,
+  "rate": 5.44,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:36",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "36a6066c": {
   "who": "sys",
   "sig": "69401ded6c29",
-  "sim": 0.9905,
-  "rate": 5.05,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9919,
+  "rate": 4.63,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:37",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "55dd7846": {
   "who": "sys",
@@ -22170,14 +22582,13 @@
   "who": "sys",
   "sig": "db3a0e68d811",
   "sim": 0.9922,
-  "rate": 5.0,
-  "fall": 30,
-  "long": 50,
+  "rate": 5.54,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:37",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e8d19340": {
   "who": "sys",
@@ -22207,15 +22618,14 @@
  "3b16b818": {
   "who": "sys",
   "sig": "3274540bf401",
-  "sim": 0.9875,
-  "rate": 5.15,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9902,
+  "rate": 5.64,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:37",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "8918248d": {
   "who": "sys",
@@ -22241,19 +22651,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 14:52"
- },
- "36729389": {
-  "who": "sys",
-  "sig": "9ac7875c476e",
-  "sim": 0.9914,
-  "rate": 5.34,
-  "fall": 40,
-  "long": 60,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 18:30"
  },
  "2a314f2f": {
   "who": "sys",
@@ -22309,15 +22706,14 @@
  "68b14013": {
   "who": "sys",
   "sig": "9d3f2ad1e24c",
-  "sim": 0.9884,
-  "rate": 5.5,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9898,
+  "rate": 6.05,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:37",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "7342871f": {
   "who": "sys",
@@ -22335,68 +22731,62 @@
  "f26f530f": {
   "who": "sys",
   "sig": "b0e2f2b33eea",
-  "sim": 0.9921,
-  "rate": 5.34,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9931,
+  "rate": 5.2,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:38",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b25e7cba": {
   "who": "sys",
   "sig": "7e88ae4b1d0e",
-  "sim": 0.9944,
-  "rate": 5.72,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9893,
+  "rate": 5.68,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:38",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1465c84a": {
   "who": "sys",
   "sig": "55c43424b5f2",
-  "sim": 0.9906,
-  "rate": 5.6,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9886,
+  "rate": 5.68,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:38",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "3471637e": {
   "who": "sys",
   "sig": "281f3092d8ce",
-  "sim": 0.988,
-  "rate": 4.81,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9908,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 18:30"
+  "at": "2026-11-06 00:38",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "04fc6ef8": {
   "who": "sys",
   "sig": "156fed970a76",
-  "sim": 0.9835,
-  "rate": 4.89,
-  "fall": 40,
-  "long": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9899,
+  "rate": 5.12,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09",
-  "tight": 440
+  "at": "2026-11-06 00:38",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fdd039f3": {
   "who": "sys",
@@ -22452,7 +22842,7 @@
   "who": "sys",
   "sig": "be157a8ea0dd",
   "sim": 0.9913,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 30,
   "long": 60,
   "try": 1,
@@ -22526,15 +22916,14 @@
  "3ed35b72": {
   "who": "sys",
   "sig": "212e7b9f11c1",
-  "sim": 0.9929,
-  "rate": 5.59,
-  "fall": 30,
-  "long": 40,
-  "try": 2,
+  "sim": 0.9909,
+  "rate": 5.48,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1314be5c": {
   "who": "sys",
@@ -22564,55 +22953,50 @@
  "ba816722": {
   "who": "sys",
   "sig": "66b8baadb31e",
-  "sim": 0.9924,
-  "rate": 5.54,
-  "fall": 30,
-  "long": 60,
-  "try": 2,
+  "sim": 0.9929,
+  "rate": 5.16,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b4fd42b7": {
   "who": "sys",
   "sig": "682a8ec74a2d",
-  "sim": 0.9912,
-  "rate": 5.73,
-  "fall": 30,
-  "long": 50,
-  "try": 2,
+  "sim": 0.9919,
+  "rate": 5.16,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "81425c9b": {
   "who": "sys",
   "sig": "8e278d6cf34d",
-  "sim": 0.992,
-  "rate": 5.59,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
+  "sim": 0.9925,
+  "rate": 5.48,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "d1522877": {
   "who": "sys",
   "sig": "0442e3ede2c0",
-  "sim": 0.9923,
-  "rate": 5.48,
-  "fall": 30,
-  "long": 70,
-  "try": 2,
+  "sim": 0.9918,
+  "rate": 6.02,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09",
-  "tight": 390
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "2f19d699": {
   "who": "sys",
@@ -22643,15 +23027,14 @@
  "586d8f1c": {
   "who": "sys",
   "sig": "6401fcafe88e",
-  "sim": 0.9926,
-  "rate": 4.98,
-  "fall": 40,
-  "long": 60,
-  "try": 2,
+  "sim": 0.9908,
+  "rate": 5.22,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "593a93a2": {
   "who": "sys",
@@ -22665,19 +23048,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 15:20"
- },
- "12247859": {
-  "who": "sys",
-  "sig": "deadbe2d9f59",
-  "sim": 0.9896,
-  "rate": 5.63,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 19:09"
  },
  "c267213f": {
   "who": "sys",
@@ -22694,14 +23064,14 @@
  "bd5f84a4": {
   "who": "sys",
   "sig": "19a554705581",
-  "sim": 0.99,
-  "rate": 5.11,
-  "fall": 60,
-  "try": 2,
+  "sim": 0.9892,
+  "rate": 5.57,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:09"
+  "at": "2026-11-06 00:39",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "be3d1828": {
   "who": "sys",
@@ -22757,21 +23127,20 @@
  "9e83ef41": {
   "who": "sys",
   "sig": "a99b54c8b92d",
-  "sim": 0.9861,
-  "rate": 5.03,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 5.65,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12",
-  "tight": 420
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1e0c4e12": {
   "who": "sys",
   "sig": "4f57436b46f8",
   "sim": 0.9935,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -22782,15 +23151,14 @@
  "24a3a37e": {
   "who": "sys",
   "sig": "141287cef423",
-  "sim": 0.9916,
-  "rate": 5.03,
-  "fall": 20,
-  "long": 60,
+  "sim": 0.9917,
+  "rate": 5.14,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "7c7fa69d": {
   "who": "sys",
@@ -22820,28 +23188,26 @@
  "21ba26cd": {
   "who": "sys",
   "sig": "076fe0a0049f",
-  "sim": 0.9906,
-  "rate": 4.44,
-  "fall": 30,
-  "long": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 19:12"
- },
- "8ce243f0": {
-  "who": "sys",
-  "sig": "671aee9ca117",
-  "sim": 0.9914,
-  "rate": 5.25,
-  "fall": 40,
-  "long": 60,
+  "sim": 0.9897,
+  "rate": 4.9,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
+ },
+ "8ce243f0": {
+  "who": "sys",
+  "sig": "671aee9ca117",
+  "sim": 0.993,
+  "rate": 5.81,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fe2abb7f": {
   "who": "sys",
@@ -22910,28 +23276,26 @@
  "36d4f440": {
   "who": "sys",
   "sig": "bc2fa126f786",
-  "sim": 0.9885,
-  "rate": 4.7,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9896,
+  "rate": 5.15,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "70b2272b": {
   "who": "sys",
   "sig": "b384fde1812a",
-  "sim": 0.9904,
-  "rate": 4.91,
-  "fall": 30,
-  "long": 80,
+  "sim": 0.9899,
+  "rate": 5.36,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:40",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "acacd59d": {
   "who": "sys",
@@ -22946,31 +23310,17 @@
   "flag": "",
   "at": "2026-11-07 15:34"
  },
- "50488902": {
-  "who": "sys",
-  "sig": "40956645edb8",
-  "sim": 0.9915,
-  "rate": 5.65,
-  "fall": 40,
-  "long": 50,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 19:12"
- },
  "231c4301": {
   "who": "sys",
   "sig": "df7eec4929e0",
-  "sim": 0.9918,
-  "rate": 6.34,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9923,
+  "rate": 6.01,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:41",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "89b4efc9": {
   "who": "sys",
@@ -22987,28 +23337,26 @@
  "8df8ab97": {
   "who": "sys",
   "sig": "20153261d733",
-  "sim": 0.9922,
-  "rate": 5.0,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9934,
+  "rate": 5.84,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:12"
+  "at": "2026-11-06 00:41",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "dc49a2d8": {
   "who": "sys",
   "sig": "5ef99d8c35d8",
-  "sim": 0.9918,
-  "rate": 6.27,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9908,
+  "rate": 5.61,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:41",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "879b1870": {
   "who": "sys",
@@ -23073,18 +23421,6 @@
   "flag": "",
   "at": "2026-11-07 15:34"
  },
- "53446314": {
-  "who": "sys",
-  "sig": "6c05adc6eadd",
-  "sim": 0.9907,
-  "rate": 5.01,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:41",
-  "long": 80
- },
  "a664a740": {
   "who": "sys",
   "sig": "4269d740204b",
@@ -23111,15 +23447,14 @@
  "4ed0e9b3": {
   "who": "sys",
   "sig": "8f861850554e",
-  "sim": 0.9919,
-  "rate": 5.61,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9925,
+  "rate": 5.43,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:41",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "4232115d": {
   "who": "sys",
@@ -23136,28 +23471,26 @@
  "2f97de90": {
   "who": "sys",
   "sig": "fde687a764e9",
-  "sim": 0.9917,
-  "rate": 5.68,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.991,
+  "rate": 5.66,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "467a5ac1": {
   "who": "sys",
   "sig": "b310811434c4",
-  "sim": 0.9908,
-  "rate": 5.01,
-  "fall": 20,
-  "long": 40,
+  "sim": 0.9918,
+  "rate": 4.9,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "1fbc82d3": {
   "who": "sys",
@@ -23213,28 +23546,26 @@
  "bebab628": {
   "who": "sys",
   "sig": "b3514f8acf5b",
-  "sim": 0.9914,
-  "rate": 5.59,
-  "fall": 30,
-  "long": 80,
+  "sim": 0.9929,
+  "rate": 5.42,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c87ba4d5": {
   "who": "sys",
   "sig": "e2eb61a4c019",
-  "sim": 0.991,
-  "rate": 6.16,
-  "fall": 30,
-  "long": 80,
+  "sim": 0.9924,
+  "rate": 5.77,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:42",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "390e4927": {
   "who": "sys",
@@ -23340,55 +23671,50 @@
  "9ddb1e0c": {
   "who": "sys",
   "sig": "4535604f2f8f",
-  "sim": 0.9917,
-  "rate": 5.99,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9902,
+  "rate": 5.97,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "706ae731": {
   "who": "sys",
   "sig": "8b5372bc1f5b",
-  "sim": 0.9917,
-  "rate": 6.23,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9887,
+  "rate": 6.35,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:27"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "c8c57009": {
   "who": "sys",
   "sig": "b76d5e68d666",
-  "sim": 0.9911,
-  "rate": 5.01,
-  "fall": 30,
-  "long": 40,
+  "sim": 0.9896,
+  "rate": 4.56,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "2f712ba7": {
   "who": "sys",
   "sig": "ccf25002f30d",
-  "sim": 0.9825,
-  "rate": 5.19,
-  "fall": 30,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9907,
+  "rate": 6.02,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30",
-  "tight": 430
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "498e8404": {
   "who": "sys",
@@ -23405,15 +23731,14 @@
  "72781a6c": {
   "who": "sys",
   "sig": "528dd0d446d5",
-  "sim": 0.9903,
-  "rate": 5.49,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9905,
+  "rate": 5.41,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6a24faba": {
   "who": "sys",
@@ -23443,28 +23768,26 @@
  "797349bf": {
   "who": "sys",
   "sig": "d8420f433385",
-  "sim": 0.9922,
-  "rate": 5.96,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9925,
+  "rate": 5.63,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "677e66d5": {
   "who": "sys",
   "sig": "01b3f7ee1322",
-  "sim": 0.9764,
-  "rate": 4.32,
-  "fall": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9912,
+  "rate": 4.56,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 19:30",
-  "tight": 1310
+  "flag": "",
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e17998ea": {
   "who": "sys",
@@ -23494,41 +23817,38 @@
  "522be685": {
   "who": "sys",
   "sig": "ae2c8aea57a0",
-  "sim": 0.992,
-  "rate": 4.75,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9911,
+  "rate": 5.41,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "a431c930": {
   "who": "sys",
   "sig": "15be972d447d",
-  "sim": 0.9907,
-  "rate": 5.18,
-  "fall": 40,
-  "long": 100,
+  "sim": 0.9904,
+  "rate": 5.26,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "eb43476f": {
   "who": "sys",
   "sig": "ed77771497ad",
-  "sim": 0.9923,
-  "rate": 5.42,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9928,
+  "rate": 4.87,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:43",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "a4b50a63": {
   "who": "sys",
@@ -23548,19 +23868,6 @@
   "sim": 0.99,
   "rate": 5.45,
   "fall": 30,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:05"
- },
- "41703425": {
-  "who": "sys",
-  "sig": "9be0730f139a",
-  "sim": 0.9901,
-  "rate": 4.56,
-  "fall": 20,
-  "long": 60,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -23594,15 +23901,14 @@
  "1603c3c5": {
   "who": "sys",
   "sig": "1e1ffa628d6b",
-  "sim": 0.9795,
-  "rate": 4.57,
-  "fall": 70,
+  "sim": 0.9928,
+  "rate": 5.11,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 19:32",
-  "tight": 460
+  "flag": "",
+  "at": "2026-11-06 00:46",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "452828e3": {
   "who": "sys",
@@ -23644,15 +23950,14 @@
  "b83fcaab": {
   "who": "sys",
   "sig": "b6777f2e159b",
-  "sim": 0.9928,
-  "rate": 5.69,
-  "fall": 20,
-  "long": 50,
+  "sim": 0.9926,
+  "rate": 5.52,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:46",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "dfede2e2": {
   "who": "sys",
@@ -23723,17 +24028,6 @@
   "flag": "",
   "at": "2026-11-06 00:47"
  },
- "46457417": {
-  "who": "owner",
-  "sig": "b6479e223b59",
-  "sim": 0.981,
-  "rate": 4.17,
-  "try": 2,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 00:47"
- },
  "b7940302": {
   "who": "owner",
   "sig": "22f5660c10e9",
@@ -23778,17 +24072,6 @@
   "flag": "",
   "at": "2026-11-06 20:16",
   "long": 90
- },
- "66328933": {
-  "who": "owner",
-  "sig": "e2f72b73447f",
-  "sim": 0.9729,
-  "rate": 3.77,
-  "try": 3,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 02:12"
  },
  "12ac70d9": {
   "who": "owner",
@@ -23839,7 +24122,7 @@
   "who": "owner",
   "sig": "cf313b248c6e",
   "sim": 0.9822,
-  "rate": 4.0,
+  "rate": 4,
   "try": 2,
   "style": "desc",
   "emo": true,
@@ -23850,7 +24133,7 @@
   "who": "owner",
   "sig": "ca4903d3a448",
   "sim": 0.9831,
-  "rate": 6.0,
+  "rate": 6,
   "try": 2,
   "style": "desc",
   "emo": true,
@@ -24086,15 +24369,14 @@
  "88a712ab": {
   "who": "owner",
   "sig": "3ec3b8f6690e",
-  "sim": 0.9807,
-  "rate": 5.05,
-  "fall": 30,
-  "long": 80,
-  "try": 2,
+  "sim": 0.9819,
+  "rate": 5,
+  "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:49",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "3f72611f": {
   "who": "owner",
@@ -24611,18 +24893,6 @@
   "flag": "",
   "at": "2026-11-06 20:16"
  },
- "28613202": {
-  "who": "owner",
-  "sig": "a0f679a3f20f",
-  "sim": 0.9806,
-  "rate": 6.67,
-  "try": 1,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 00:53",
-  "long": 140
- },
  "ba94e8c2": {
   "who": "owner",
   "sig": "6ba126b3125d",
@@ -24638,7 +24908,7 @@
   "who": "owner",
   "sig": "79c246bded32",
   "sim": 0.9771,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 100,
   "try": 2,
   "style": "desc",
@@ -24931,26 +25201,26 @@
  "131eab74": {
   "who": "owner",
   "sig": "5b0ad84e2c72",
-  "sim": 0.9851,
+  "sim": 0.983,
   "rate": 5.69,
-  "fall": 140,
-  "try": 2,
+  "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 19:32"
+  "at": "2026-11-06 00:54",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "ea114144": {
   "who": "owner",
   "sig": "dc1aeeeba5bf",
-  "sim": 0.9638,
-  "rate": 4.94,
-  "fall": 200,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9833,
+  "rate": 6.18,
+  "try": 1,
+  "style": "desc",
   "emo": true,
-  "flag": "목소리",
-  "at": "2026-11-07 19:32"
+  "flag": "",
+  "at": "2026-11-06 00:54",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "fc095792": {
   "who": "owner",
@@ -25043,17 +25313,6 @@
   "style": "plain",
   "emo": true,
   "flag": "목소리",
-  "at": "2026-11-06 00:56"
- },
- "92172317": {
-  "who": "owner",
-  "sig": "ba8bcd257c9b",
-  "sim": 0.9858,
-  "rate": 5.69,
-  "try": 1,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
   "at": "2026-11-06 00:56"
  },
  "9956d10d": {
@@ -26504,7 +26763,7 @@
   "who": "haesun",
   "sig": "7ea6cf037d5c",
   "sim": 0.9907,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -26683,29 +26942,6 @@
   "flag": "",
   "at": "2026-11-06 01:06",
   "long": 90
- },
- "35630280": {
-  "who": "geum",
-  "sig": "062352fa2dd3",
-  "sim": 0.9785,
-  "rate": 8.33,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:06",
-  "long": 110
- },
- "48564309": {
-  "who": "geum",
-  "sig": "e75fb565073e",
-  "sim": 0.9819,
-  "rate": 7.41,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:06"
  },
  "3abb9737": {
   "who": "geum",
@@ -26960,7 +27196,7 @@
   "who": "kang",
   "sig": "efb30cee9bd1",
   "sim": 0.973,
-  "rate": 5.0,
+  "rate": 5,
   "try": 2,
   "style": "desc",
   "emo": true,
@@ -27143,7 +27379,7 @@
   "who": "kang",
   "sig": "aad2c853eb80",
   "sim": 0.9848,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 100,
   "try": 2,
   "style": "desc",
@@ -27275,18 +27511,6 @@
   "flag": "",
   "at": "2026-11-06 01:08"
  },
- "62776629": {
-  "who": "kang",
-  "sig": "c48d2f6eab1a",
-  "sim": 0.9754,
-  "rate": 6.82,
-  "fall": 70,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-07 16:20"
- },
  "20b844ad": {
   "who": "kang",
   "sig": "d011b4dcb46b",
@@ -27297,17 +27521,6 @@
   "emo": true,
   "flag": "",
   "at": "2026-11-06 01:08"
- },
- "56478032": {
-  "who": "kang",
-  "sig": "c0eb7964a02c",
-  "sim": 0.9885,
-  "rate": 4.59,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:09"
  },
  "90e78358": {
   "who": "kang",
@@ -27372,17 +27585,6 @@
   "sig": "357c47386554",
   "sim": 0.9846,
   "rate": 5.28,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:09"
- },
- "67356082": {
-  "who": "kang",
-  "sig": "8d00d6260ecc",
-  "sim": 0.9885,
-  "rate": 4.62,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -27461,7 +27663,7 @@
   "who": "kang",
   "sig": "7ade16efc252",
   "sim": 0.988,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -27505,7 +27707,7 @@
   "who": "do",
   "sig": "453963afa79b",
   "sim": 0.9813,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -27568,17 +27770,6 @@
   "flag": "",
   "at": "2026-11-06 01:09",
   "long": 80
- },
- "55370159": {
-  "who": "do",
-  "sig": "e96e1577c81a",
-  "sim": 0.9788,
-  "rate": 6.67,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:09"
  },
  "318cefcd": {
   "who": "do",
@@ -27690,17 +27881,6 @@
   "sig": "500fb31572ec",
   "sim": 0.9824,
   "rate": 4.09,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:10"
- },
- "54803338": {
-  "who": "do",
-  "sig": "ada222b0f72b",
-  "sim": 0.9848,
-  "rate": 4.95,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -28077,17 +28257,6 @@
   "at": "2026-11-06 01:11",
   "long": 100
  },
- "14076083": {
-  "who": "do",
-  "sig": "c87e2d8c3557",
-  "sim": 0.9909,
-  "rate": 4.94,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:11"
- },
  "8a1fc586": {
   "who": "do",
   "sig": "329807fe3e02",
@@ -28115,17 +28284,6 @@
   "sig": "daad59d55988",
   "sim": 0.9922,
   "rate": 4.38,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:11"
- },
- "72963229": {
-  "who": "do",
-  "sig": "62b24d761187",
-  "sim": 0.9898,
-  "rate": 5.08,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -28406,7 +28564,7 @@
   "who": "student",
   "sig": "164aefc4aff3",
   "sim": 0.9838,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -28439,7 +28597,7 @@
   "who": "student",
   "sig": "5913c3e6072a",
   "sim": 0.9847,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -28450,7 +28608,7 @@
   "who": "student",
   "sig": "ad991671d4d0",
   "sim": 0.9871,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -28620,17 +28778,6 @@
   "sig": "826f034b8d9c",
   "sim": 0.9893,
   "rate": 4.25,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:12"
- },
- "62195731": {
-  "who": "agent",
-  "sig": "24e69a0bcfab",
-  "sim": 0.9861,
-  "rate": 6.62,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -28817,7 +28964,7 @@
   "who": "customer-olive",
   "sig": "5dac347dee48",
   "sim": 0.9853,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "long": 70,
   "try": 3,
@@ -28940,7 +29087,7 @@
   "who": "customer-olive",
   "sig": "7ba9c3d6aabe",
   "sim": 0.984,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -29039,7 +29186,7 @@
   "who": "customer-olive",
   "sig": "c791ba8686f0",
   "sim": 0.978,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 50,
   "long": 120,
   "try": 3,
@@ -29100,7 +29247,7 @@
   "who": "customer-olive",
   "sig": "6e1568290b97",
   "sim": 0.9904,
-  "rate": 7.0,
+  "rate": 7,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -29585,14 +29732,14 @@
  "6f080e6d": {
   "who": "customer-olive",
   "sig": "b88a6e7e8805",
-  "sim": 0.9841,
-  "rate": 5.96,
-  "fall": 70,
-  "try": 3,
+  "sim": 0.9913,
+  "rate": 6.25,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:33"
+  "at": "2026-11-06 01:15",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "69e57829": {
   "who": "customer-olive",
@@ -29716,19 +29863,6 @@
   "flag": "",
   "at": "2026-11-06 01:15",
   "long": 80
- },
- "14265395": {
-  "who": "customer-olive",
-  "sig": "7aeec13d217f",
-  "sim": 0.9931,
-  "rate": 5.28,
-  "fall": 40,
-  "long": 70,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 19:33"
  },
  "44f5ae42": {
   "who": "customer-olive",
@@ -29900,7 +30034,7 @@
   "who": "dohyun",
   "sig": "f0151ab18778",
   "sim": 0.9786,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -30087,7 +30221,7 @@
   "who": "yeonwoo",
   "sig": "99a81e23cf48",
   "sim": 0.9794,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -30122,7 +30256,7 @@
   "who": "yeonwoo",
   "sig": "55f95e7e6dff",
   "sim": 0.9807,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 40,
   "long": 100,
   "try": 3,
@@ -30146,7 +30280,7 @@
   "who": "yeonwoo",
   "sig": "f6ecba912344",
   "sim": 0.9827,
-  "rate": 7.0,
+  "rate": 7,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -30316,17 +30450,6 @@
   "flag": "",
   "at": "2026-11-06 01:17"
  },
- "92675047": {
-  "who": "jian",
-  "sig": "b46b07e846f1",
-  "sim": 0.9733,
-  "rate": 6.45,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:17"
- },
  "73c9f895": {
   "who": "jian",
   "sig": "1e0b3c8a0ada",
@@ -30443,7 +30566,7 @@
   "who": "jian",
   "sig": "d2be74a38414",
   "sim": 0.9892,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30513,7 +30636,7 @@
   "who": "jian",
   "sig": "6a1d9100fb8a",
   "sim": 0.986,
-  "rate": 7.0,
+  "rate": 7,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30602,29 +30725,6 @@
   "sig": "3f6f93082980",
   "sim": 0.9873,
   "rate": 7.27,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:17"
- },
- "54741829": {
-  "who": "jian",
-  "sig": "edf56d490e94",
-  "sim": 0.9794,
-  "rate": 7.41,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:17",
-  "long": 100
- },
- "24610438": {
-  "who": "jian",
-  "sig": "713e286ac3c0",
-  "sim": 0.9871,
-  "rate": 5.71,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30746,17 +30846,6 @@
   "flag": "",
   "at": "2026-11-06 01:18"
  },
- "98302317": {
-  "who": "jian",
-  "sig": "1f56a68e6edc",
-  "sim": 0.9879,
-  "rate": 3.98,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:18"
- },
  "b9c28578": {
   "who": "jian",
   "sig": "87bfef625baf",
@@ -30791,17 +30880,6 @@
   "flag": "",
   "at": "2026-11-06 01:18"
  },
- "29723467": {
-  "who": "jian",
-  "sig": "72a1ed05d332",
-  "sim": 0.9815,
-  "rate": 4.5,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:18"
- },
  "4e2e639d": {
   "who": "jian",
   "sig": "35fd1adb1141",
@@ -30828,7 +30906,7 @@
   "who": "jian",
   "sig": "ca04e0b91142",
   "sim": 0.9878,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30840,7 +30918,7 @@
   "who": "jian",
   "sig": "e5ba3efe994c",
   "sim": 0.9827,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30863,7 +30941,7 @@
   "who": "jian",
   "sig": "a38712b4f8e3",
   "sim": 0.9853,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -30893,17 +30971,6 @@
   "flag": "",
   "at": "2026-11-06 01:18",
   "long": 100
- },
- "79657901": {
-  "who": "jian",
-  "sig": "ffd7f40527f8",
-  "sim": 0.9856,
-  "rate": 4.42,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:18"
  },
  "0ac16ac1": {
   "who": "jian",
@@ -30976,14 +31043,14 @@
  "fca5cc50": {
   "who": "jian",
   "sig": "e73104f10423",
-  "sim": 0.9891,
+  "sim": 0.989,
   "rate": 4.29,
-  "fall": 20,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 19:33"
+  "at": "2026-11-06 01:18",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b46bc0bc": {
   "who": "jian",
@@ -31044,7 +31111,7 @@
   "who": "jian",
   "sig": "da05ed4879d9",
   "sim": 0.99,
-  "rate": 7.0,
+  "rate": 7,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -31169,7 +31236,7 @@
   "who": "jian",
   "sig": "9287bf71861d",
   "sim": 0.9911,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -31304,7 +31371,7 @@
   "who": "han",
   "sig": "0822c9fa40c8",
   "sim": 0.9732,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -31560,7 +31627,7 @@
   "who": "han",
   "sig": "b36a82fc0899",
   "sim": 0.9887,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -31936,7 +32003,7 @@
   "who": "customer-sporty",
   "sig": "83139c084372",
   "sim": 0.9818,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -31995,7 +32062,7 @@
   "who": "customer-sporty",
   "sig": "6c775dfd2135",
   "sim": 0.9834,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -32090,7 +32157,7 @@
   "who": "customer-sporty",
   "sig": "ef65a7f4aab6",
   "sim": 0.9831,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 60,
   "try": 3,
   "style": "plain",
@@ -32348,7 +32415,7 @@
   "who": "customer-sporty",
   "sig": "0cc2cba41fd8",
   "sim": 0.9814,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -32451,14 +32518,14 @@
  "ec30ecb4": {
   "who": "customer-sporty",
   "sig": "23218cefab3f",
-  "sim": 0.981,
-  "rate": 5.21,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9838,
+  "rate": 5.32,
+  "try": 1,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:33"
+  "at": "2026-11-06 01:23",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6ae2fb7c": {
   "who": "customer-sporty",
@@ -32523,15 +32590,14 @@
  "81b8a164": {
   "who": "customer-sporty",
   "sig": "4d1a732e9334",
-  "sim": 0.9843,
-  "rate": 5.1,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
+  "sim": 0.987,
+  "rate": 5.68,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:33"
+  "at": "2026-11-06 01:23",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "9c738667": {
   "who": "customer-sporty",
@@ -32877,16 +32943,14 @@
  "39cae6dd": {
   "who": "eunju",
   "sig": "421ea66e7095",
-  "sim": 0.9806,
-  "rate": 2.75,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9746,
+  "rate": 3.09,
   "try": 2,
   "style": "desc",
   "emo": true,
-  "flag": "길이",
-  "at": "2026-11-07 19:34",
-  "tight": 450
+  "flag": "",
+  "at": "2026-11-06 01:24",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "ea0f895a": {
   "who": "eunju",
@@ -33049,7 +33113,7 @@
   "who": "eunju",
   "sig": "fe7b20fc5115",
   "sim": 0.9825,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -33623,7 +33687,7 @@
   "who": "sumin",
   "sig": "6972ea2f6930",
   "sim": 0.9819,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -33651,17 +33715,6 @@
   "emo": true,
   "flag": "",
   "at": "2026-11-06 01:26"
- },
- "97122314": {
-  "who": "sumin",
-  "sig": "bdb02d6a6425",
-  "sim": 0.9829,
-  "rate": 6.35,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:27"
  },
  "3d260505": {
   "who": "sumin",
@@ -33795,17 +33848,6 @@
   "flag": "",
   "at": "2026-11-06 01:27"
  },
- "28574495": {
-  "who": "sumin",
-  "sig": "2c8cdcde51d4",
-  "sim": 0.9869,
-  "rate": 6.67,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:27"
- },
  "5e61e7ac": {
   "who": "sumin",
   "sig": "74ab86394374",
@@ -33931,7 +33973,7 @@
   "who": "sumin",
   "sig": "c4b87b330423",
   "sim": 0.9865,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -34284,17 +34326,6 @@
   "flag": "",
   "at": "2026-11-07 16:25"
  },
- "35296930": {
-  "who": "noh",
-  "sig": "63719836548d",
-  "sim": 0.9896,
-  "rate": 6.1,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:28"
- },
  "b2c5f538": {
   "who": "noh",
   "sig": "0e0448cc9288",
@@ -34432,7 +34463,7 @@
   "who": "noh",
   "sig": "e8151527295c",
   "sim": 0.9835,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -34767,7 +34798,7 @@
   "who": "customer-coffee",
   "sig": "1e2b65c29fa4",
   "sim": 0.9838,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 40,
   "long": 110,
   "try": 2,
@@ -35090,15 +35121,14 @@
  "7cee1344": {
   "who": "customer-coffee",
   "sig": "0941c2d4226a",
-  "sim": 0.9845,
-  "rate": 4.59,
-  "fall": 40,
-  "long": 70,
-  "try": 3,
+  "sim": 0.9825,
+  "rate": 4.02,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:34"
+  "at": "2026-11-06 01:30",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "62e824eb": {
   "who": "customer-coffee",
@@ -35153,27 +35183,14 @@
  "3298a48b": {
   "who": "customer-coffee",
   "sig": "e2382b3d4c24",
-  "sim": 0.9865,
-  "rate": 5.17,
-  "fall": 50,
-  "long": 80,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 19:34"
- },
- "15240504": {
-  "who": "customer-coffee",
-  "sig": "9b00d32bd3e8",
-  "sim": 0.9854,
-  "rate": 4.55,
+  "sim": 0.9871,
+  "rate": 4.33,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
   "at": "2026-11-06 01:31",
-  "long": 80
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "39f079c3": {
   "who": "customer-coffee",
@@ -35377,15 +35394,14 @@
  "b183f349": {
   "who": "customer-coffee",
   "sig": "a7212110f684",
-  "sim": 0.9864,
-  "rate": 5.04,
-  "fall": 50,
-  "long": 90,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.987,
+  "rate": 4.8,
+  "try": 1,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:34"
+  "at": "2026-11-06 01:31",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "7c2bdf26": {
   "who": "customer-coffee",
@@ -35449,19 +35465,6 @@
   "flag": "",
   "at": "2026-11-06 01:31",
   "long": 90
- },
- "43557400": {
-  "who": "customer-coffee",
-  "sig": "291514f40e1b",
-  "sim": 0.9887,
-  "rate": 6.57,
-  "fall": 40,
-  "long": 90,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:29"
  },
  "b97409d4": {
   "who": "customer-coffee",
@@ -35716,7 +35719,7 @@
   "who": "customer-stripe",
   "sig": "210d4c44a259",
   "sim": 0.9825,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -35759,17 +35762,6 @@
   "flag": "",
   "at": "2026-11-06 01:32",
   "long": 120
- },
- "27612206": {
-  "who": "customer-stripe",
-  "sig": "2dafaff920c4",
-  "sim": 0.9738,
-  "rate": 7.89,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:32"
  },
  "ce1f5bb9": {
   "who": "customer-stripe",
@@ -36331,7 +36323,7 @@
   "who": "customer-stripe",
   "sig": "0180ab54e181",
   "sim": 0.9863,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -36410,7 +36402,7 @@
   "who": "customer-stripe",
   "sig": "582b257061b0",
   "sim": 0.9835,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -36956,7 +36948,7 @@
   "who": "customer-arms",
   "sig": "4d38fdeb1cdc",
   "sim": 0.9854,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -37262,7 +37254,7 @@
   "who": "customer-arms",
   "sig": "799bd08b4a28",
   "sim": 0.9897,
-  "rate": 8.0,
+  "rate": 8,
   "fall": 70,
   "try": 1,
   "style": "plain",
@@ -37412,17 +37404,6 @@
   "at": "2026-11-06 01:37",
   "long": 90
  },
- "59744030": {
-  "who": "customer-arms",
-  "sig": "49a94b50d6c3",
-  "sim": 0.9908,
-  "rate": 5.41,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:37"
- },
  "e1a5e9be": {
   "who": "customer-arms",
   "sig": "74908630cc24",
@@ -37485,7 +37466,7 @@
   "who": "han_daughter",
   "sig": "bbce424860a9",
   "sim": 0.9764,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -37531,7 +37512,7 @@
   "who": "han_daughter",
   "sig": "16fdb01db4b7",
   "sim": 0.9827,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 50,
   "long": 100,
   "try": 2,
@@ -37867,7 +37848,7 @@
   "who": "mom2",
   "sig": "7ade1172d620",
   "sim": 0.9904,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -37950,7 +37931,7 @@
   "who": "granddaughter",
   "sig": "8504d2b5a396",
   "sim": 0.9748,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": true,
@@ -38269,7 +38250,7 @@
   "who": "teacher",
   "sig": "330b5a9eec30",
   "sim": 0.9854,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -38438,19 +38419,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-06 01:40"
- },
- "87171284": {
-  "who": "sora",
-  "sig": "86f8ccef7b0a",
-  "sim": 0.986,
-  "rate": 7.03,
-  "fall": 50,
-  "long": 100,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:31"
  },
  "f342cf7c": {
   "who": "sora",
@@ -38751,7 +38719,7 @@
   "who": "daeri",
   "sig": "a4873ac79423",
   "sim": 0.9819,
-  "rate": 8.0,
+  "rate": 8,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -38843,7 +38811,7 @@
   "who": "manager",
   "sig": "e88c32cf75d8",
   "sim": 0.9774,
-  "rate": 4.0,
+  "rate": 4,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -38945,7 +38913,7 @@
   "who": "manager",
   "sig": "0939dbe5211f",
   "sim": 0.9831,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 70,
   "try": 2,
   "style": "desc",
@@ -39021,18 +38989,6 @@
   "flag": "",
   "at": "2026-11-06 01:42",
   "long": 80
- },
- "76192849": {
-  "who": "grandma",
-  "sig": "496ed256a75c",
-  "sim": 0.9844,
-  "rate": 5.26,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 01:42",
-  "long": 110
  },
  "a5376401": {
   "who": "grandma",
@@ -39469,7 +39425,7 @@
   "who": "sys",
   "sig": "98815aaeaeb1",
   "sim": 0.9731,
-  "rate": 5.0,
+  "rate": 5,
   "try": 1,
   "style": "plain",
   "emo": false,
@@ -39481,7 +39437,7 @@
   "who": "sys",
   "sig": "1ba924f72d2a",
   "sim": 0.9656,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 60,
   "try": 3,
   "style": "plain",
@@ -39657,7 +39613,7 @@
   "who": "sys",
   "sig": "63397daadad4",
   "sim": 0.9646,
-  "rate": 4.0,
+  "rate": 4,
   "fall": 50,
   "long": 120,
   "try": 2,
@@ -39768,23 +39724,11 @@
   "flag": "",
   "at": "2026-11-07 12:28"
  },
- "83697359": {
-  "who": "sys",
-  "sig": "39f3d7d392a4",
-  "sim": 0.9812,
-  "rate": 6.0,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:11",
-  "long": 90
- },
  "95577f49": {
   "who": "sys",
   "sig": "8187f6d4f70b",
   "sim": 0.9808,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -39953,18 +39897,6 @@
   "at": "2026-11-06 20:11",
   "long": 100
  },
- "38008308": {
-  "who": "sys",
-  "sig": "f82e67e6cb2f",
-  "sim": 0.9826,
-  "rate": 6.15,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:11",
-  "long": 90
- },
  "f044ed7f": {
   "who": "sys",
   "sig": "d761373ef495",
@@ -39976,18 +39908,6 @@
   "flag": "",
   "at": "2026-11-06 20:11",
   "long": 90
- },
- "14364542": {
-  "who": "sys",
-  "sig": "3061f506c3e3",
-  "sim": 0.9827,
-  "rate": 5.8,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:12",
-  "long": 70
  },
  "fbb839a6": {
   "who": "sys",
@@ -40081,7 +40001,7 @@
   "who": "sys",
   "sig": "71f63b9e776f",
   "sim": 0.9772,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 40,
   "long": 80,
   "try": 3,
@@ -40094,7 +40014,7 @@
   "who": "sys",
   "sig": "6442e58fffa9",
   "sim": 0.9827,
-  "rate": 6.0,
+  "rate": 6,
   "try": 1,
   "style": "desc",
   "emo": false,
@@ -40131,7 +40051,7 @@
   "who": "sys",
   "sig": "0d7ddada9e4b",
   "sim": 0.9861,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 30,
   "try": 1,
   "style": "desc",
@@ -40269,15 +40189,14 @@
  "4b019950": {
   "who": "sys",
   "sig": "4881ed808fd4",
-  "sim": 0.9882,
-  "rate": 4.9,
-  "fall": 20,
-  "long": 40,
+  "sim": 0.9864,
+  "rate": 5.15,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 20:12",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "10257f7c": {
   "who": "sys",
@@ -40318,15 +40237,14 @@
  "504e9dee": {
   "who": "sys",
   "sig": "a966add7eb62",
-  "sim": 0.9873,
-  "rate": 5.0,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9874,
+  "rate": 5.1,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 20:12",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "6d26e1f1": {
   "who": "sys",
@@ -40480,19 +40398,6 @@
   "at": "2026-11-06 20:12",
   "long": 60
  },
- "10406299": {
-  "who": "sys",
-  "sig": "92a9ad58ab27",
-  "sim": 0.9844,
-  "rate": 6.96,
-  "fall": 40,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:51"
- },
  "e8f0c558": {
   "who": "sys",
   "sig": "1f651e59eec8",
@@ -40619,18 +40524,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 12:54"
- },
- "51875901": {
-  "who": "sys",
-  "sig": "ed9acd667b35",
-  "sim": 0.9838,
-  "rate": 6.4,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:13",
-  "long": 70
  },
  "2c6f5b8f": {
   "who": "sys",
@@ -41024,15 +40917,14 @@
  "9409d88f": {
   "who": "sys",
   "sig": "b8f753df7441",
-  "sim": 0.9864,
-  "rate": 4.58,
-  "fall": 30,
-  "long": 60,
+  "sim": 0.9881,
+  "rate": 4.14,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:57"
+  "at": "2026-11-06 20:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "da63e89e": {
   "who": "sys",
@@ -41050,7 +40942,7 @@
   "who": "sys",
   "sig": "1b969a29d4a8",
   "sim": 0.9881,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 40,
   "long": 70,
   "try": 1,
@@ -41088,15 +40980,14 @@
  "bd0c1f20": {
   "who": "sys",
   "sig": "3dfe763c3d7e",
-  "sim": 0.989,
-  "rate": 4.49,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9881,
+  "rate": 4.67,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "느림",
-  "at": "2026-11-07 17:57"
+  "flag": "",
+  "at": "2026-11-06 20:13",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "a6d150a3": {
   "who": "sys",
@@ -41109,18 +41000,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 13:09"
- },
- "25018703": {
-  "who": "sys",
-  "sig": "ae1d17b575d0",
-  "sim": 0.9764,
-  "rate": 4.73,
-  "fall": 70,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:12"
  },
  "59eb2614": {
   "who": "sys",
@@ -41175,7 +41054,7 @@
   "who": "sys",
   "sig": "0b963f2cfa76",
   "sim": 0.9864,
-  "rate": 6.0,
+  "rate": 6,
   "fall": 40,
   "long": 80,
   "try": 1,
@@ -41406,7 +41285,7 @@
   "who": "sys",
   "sig": "ff487f7a3e22",
   "sim": 0.9787,
-  "rate": 5.0,
+  "rate": 5,
   "fall": 80,
   "try": 2,
   "style": "plain",
@@ -41559,18 +41438,6 @@
   "at": "2026-11-06 20:15",
   "long": 100
  },
- "43844389": {
-  "who": "sys",
-  "sig": "e6cb144539f3",
-  "sim": 0.9852,
-  "rate": 5.1,
-  "fall": 70,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:58"
- },
  "9b0ad64b": {
   "who": "sys",
   "sig": "33d2abfb39db",
@@ -41678,18 +41545,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 14:22"
- },
- "93398187": {
-  "who": "sys",
-  "sig": "3367f8e0ce3f",
-  "sim": 0.9897,
-  "rate": 4.87,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:15",
-  "long": 80
  },
  "5c4aca8c": {
   "who": "sys",
@@ -41913,15 +41768,14 @@
  "368a915c": {
   "who": "sys",
   "sig": "678a4e86c427",
-  "sim": 0.9877,
-  "rate": 4.74,
-  "fall": 30,
-  "long": 50,
+  "sim": 0.9873,
+  "rate": 4.46,
   "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 17:53"
+  "at": "2026-11-06 20:19",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "b00268ff": {
   "who": "sys",
@@ -42000,29 +41854,26 @@
  "a32d2aeb": {
   "who": "sys",
   "sig": "97b18d5719e9",
-  "sim": 0.9903,
-  "rate": 5.42,
-  "fall": 30,
-  "long": 50,
-  "try": 1,
+  "sim": 0.9924,
+  "rate": 5.87,
+  "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30"
+  "at": "2026-11-06 20:19",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "385de1d0": {
   "who": "sys",
   "sig": "787584680d10",
-  "sim": 0.9844,
-  "rate": 5.36,
-  "fall": 40,
-  "long": 90,
-  "try": 2,
+  "sim": 0.9861,
+  "rate": 5.12,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 19:30",
-  "tight": 410
+  "at": "2026-11-06 20:19",
+  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.71)"
  },
  "e1f950b4": {
   "who": "sys",
