@@ -874,3 +874,60 @@ body.contrast .rs-grow { background: #000; border-color: #FFE14D; }
 .nb-menu-card.is-gold { box-shadow: 0 0 0 3px #E2B84A, 0 0 18px rgba(226, 184, 74, .5); }
 .nb-menu-star svg { width: 26px; height: 26px; color: #E2B84A; }
 body.contrast .gr-item, body.contrast .gr-odd-card.got { background: #000; color: #fff; border: 2px solid #FFE14D; }
+
+/* ---------- 선물 · 꾸미기(수첩 '나의 성장' → js/ui/gift.js, 검수 13.91 · Q-54) ---------- */
+.gr-shop-group + .gr-shop-group { margin-top: 18px; padding-top: 14px; border-top: 1px dashed rgba(240, 217, 162, .3); }
+.gr-shop-group h4 { margin: 0 0 4px; font-family: var(--font-title); font-size: 25px; color: #FFE9B0; }
+.gr-acts { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.gr-to { display: inline-block; margin-right: 8px; padding: 1px 10px; border-radius: 999px; font-size: 16px; font-style: normal; font-weight: 800; vertical-align: 3px; background: #E3F1E8; color: #1B5E35; }
+.gr-to.to-family { background: #F6E7D4; color: #7A4E2D; }
+.gr-me { display: block; width: 92px; height: 120px; overflow: hidden; border-radius: 10px; background: rgba(255, 255, 255, .08); }
+.gr-me img { display: block; width: 150px; margin: -4px 0 0 -29px; }
+
+.ov-gift, .ov-placed { z-index: 5; }
+.gf-card, .pl-card {
+  width: 1040px; padding: 38px 50px 32px; text-align: center; color: #2A1D12;
+  background: linear-gradient(180deg, var(--parch, #FFFDF7), var(--parch-2, #F4EAD2));
+  border: 3px solid var(--gold-d, #8E6C33); border-radius: 18px; outline: 1px solid rgba(142, 108, 51, .5); outline-offset: -11px;
+  box-shadow: 0 0 0 2px rgba(240, 217, 162, .55), 0 18px 40px rgba(0, 0, 0, .5);
+}
+.gf-head { margin: 0; font-size: 26px; font-weight: 800; color: var(--sea-2, #1C5A63); }
+.gf-name, .pl-card h2 { margin: 6px 0 12px; font-family: var(--font-title); font-size: 46px; font-weight: 800; color: var(--sea-2, #1C5A63); }
+.gf-stage { display: grid; place-items: center; height: 250px; }
+.gf-box, .gf-item { grid-area: 1 / 1; }
+.gf-box { transition: opacity .3s, transform .35s; }
+.gf-box svg { display: block; width: 236px; height: 212px; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .25)); }
+.gf-item { opacity: 0; transform: scale(.6); transition: opacity .35s .15s, transform .5s .15s cubic-bezier(.2, 1.4, .4, 1); }
+.gf-item img { display: block; height: 236px; width: auto; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, .25)); }
+.gf-item .dc-ico { display: grid; place-items: center; width: 190px; height: 190px; border-radius: 50%; background: #FFF7E6; box-shadow: 0 0 0 4px var(--gold-d, #8E6C33); color: #6B4E1E; }
+.gf-item .dc-ico svg { width: 110px; height: 110px; }
+.gf-card.is-open .gf-box { opacity: 0; transform: translateY(-24px) scale(.9); }
+.gf-card.is-open .gf-item { opacity: 1; transform: none; }
+.gf-talk { display: grid; place-items: center; min-height: 150px; margin: 8px 0 18px; }
+.gf-say, .gf-phone { display: flex; gap: 18px; align-items: center; max-width: 900px; padding: 14px 22px; border-radius: 16px; text-align: left; }
+.gf-say { background: #FFFDF7; border: 2px solid var(--gold-line, rgba(240, 217, 162, .7)); }
+.gf-face { flex: none; display: block; width: 96px; height: 96px; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 3px var(--gold-d, #8E6C33); background: #F4EAD2; }
+.gf-face .face-img { display: block; width: 100%; height: 100%; background-repeat: no-repeat; }
+.gf-say b { font-size: 22px; color: #5B3A29; }
+.gf-say p { margin: 4px 0 0; font-size: 32px; font-weight: 700; line-height: 1.45; }
+.gf-reply { margin: 0; font-size: 28px; font-weight: 800; color: var(--sea-2, #1C5A63); }
+.gf-phone { flex-direction: column; align-items: flex-start; gap: 8px; background: #E7F1EC; border: 2px solid #9CC3B4; }
+.gf-phone small { font-size: 19px; font-weight: 800; color: #2F6B57; }
+.gf-bubble { margin: 0; padding: 12px 18px; border-radius: 18px 18px 18px 4px; background: #fff; font-size: 30px; font-weight: 700; line-height: 1.45; box-shadow: 0 3px 8px rgba(0, 0, 0, .12); }
+.gf-think { display: flex; gap: 16px; align-items: center; margin: 0; font-size: 30px; line-height: 1.45; }
+.gf-think em { font-style: normal; padding-bottom: 4px; border-bottom: 3px dotted var(--main, #25844A); } /* 속마음 = 점선(대화창과 같은 표시) */
+.gf-btns { display: flex; justify-content: center; }
+.pl-scene { position: relative; width: 900px; height: 506px; margin: 0 auto 16px; overflow: hidden; border-radius: 14px; border: 3px solid var(--gold-d, #8E6C33); background: #0B1C20; }
+.pl-inner { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform: scale(.46875); transform-origin: 0 0; background: #3A2A1C center / 100% 100% no-repeat; }
+.pl-note { margin: 0 0 18px; font-size: 26px; font-weight: 700; }
+/* 새로 놓은 물건: 금빛 숨쉬기(빛살 없이 물건 모양을 따라 번지는 빛) */
+:is(.bw-deco, .tt-deco-item).is-new { animation: dc-new 1.6s ease-in-out infinite; }
+@keyframes dc-new { 0%, 100% { filter: drop-shadow(0 0 2px rgba(255, 212, 59, .5)) drop-shadow(0 6px 6px rgba(30, 18, 8, .35)); } 50% { filter: drop-shadow(0 0 18px rgba(255, 212, 59, 1)) drop-shadow(0 6px 6px rgba(30, 18, 8, .35)); } }
+body.reduce-motion :is(.bw-deco, .tt-deco-item).is-new, body.theme-calm :is(.bw-deco, .tt-deco-item).is-new { animation: none; filter: drop-shadow(0 0 14px rgba(255, 212, 59, .95)); }
+body.reduce-motion :is(.gf-box, .gf-item) { transition: none; }
+body.contrast :is(.gf-card, .pl-card) { background: #000; color: #fff; border-color: #FFE14D; }
+body.contrast :is(.gf-say, .gf-phone, .gf-bubble) { background: #000; color: #fff; border: 2px solid #FFE14D; }
+body.contrast :is(.gf-head, .gf-name, .pl-card h2, .gf-reply, .gf-say b, .gf-phone small) { color: #FFE14D; }
+/* 놓은 자리 보기: 새 물건 뒤의 둥근 금빛 무리(퍼지는 빛살이 아니라 둥근 번짐) */
+.pl-inner :is(.bw-deco, .tt-deco-item).is-new::before { content: ''; position: absolute; left: 50%; top: 50%; width: max(220px, 160%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 226, 120, .55), rgba(255, 212, 59, .18) 60%, transparent); z-index: -1; pointer-events: none; }
+.pl-inner .tt-deco-item.is-new { z-index: 1; }

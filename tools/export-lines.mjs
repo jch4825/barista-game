@@ -31,7 +31,7 @@ const { REGULARS } = await imp('js/data/regulars.js');
 const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
 const { metSpeech } = await imp('js/screens/result.js');
 const { usualOf } = await imp('js/data/eyes.js');
-const { STATS, MAX_LEVEL, RANKS, won, PAY_HOURS, NO_PAY_SAY } = await imp('js/core/grow.js');
+const { STATS, MAX_LEVEL, RANKS, won, PAY_HOURS, NO_PAY_SAY, SHOP, GIFT_TO, GIFT_END, PLACED_SAY } = await imp('js/core/grow.js');
 const { josa } = await imp('js/core/text.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const cast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'voice_cast.json'), 'utf8'));
@@ -205,6 +205,12 @@ for (const st of STATS) {
   for (let lv = 2; lv <= MAX_LEVEL; lv++) add('sys', `${josa(st.name, '이/가')} ${lv}단계가 되었어요!`, 'result');
 }
 for (const r of RANKS.slice(1)) add('sys', `이제 ${r}예요!`, 'result');
+// 선물 · 꾸미기(수첩 '나의 성장' → js/ui/gift.js, 검수 13.91): 사는 물음 · 선물 장면(사장님의 말 · 집에서 온 문자는 지은이 읽음 · 지은의 속마음) · 놓은 자리 알림(문장마다)
+for (const it of SHOP) add('sys', `${josa(it.name, '을/를')} ${won(it.price)}에 살까요?`, 'notebook');
+add('sys', GIFT_TO.owner.head, 'notebook'); add('sys', GIFT_TO.family.head, 'notebook'); add('sys', GIFT_TO.family.reply, 'notebook');
+for (const it of SHOP.filter((x) => x.kind === 'gift')) for (const l of it.lines) add(it.to === 'owner' ? 'owner' : 'narr', l, 'notebook', it.to === 'owner' ? 'owner' : 'narr');
+add('think', GIFT_END, 'notebook');
+for (const pair of Object.values(PLACED_SAY)) for (const t of pair) add('sys', t, 'notebook');
 // 수첩의 단골 쪽 [읽어 주기](notebook.js regularsView): 이름 · 늘 마시는 것 · 기억 카드 · 들은 이야기를 이어 읽음.
 // 학생마다 아는 것이 달라 통째로는 파일이 없으므로 문장마다(tts 가 문장마다 나눠 읽음, 검수 13.63)
 for (const [id, r] of Object.entries(REGULARS)) {

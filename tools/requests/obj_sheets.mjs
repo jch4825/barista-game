@@ -87,6 +87,28 @@ export const OBJ_SHEETS = [
       ] },
     ],
   },
+  {
+    id: 'sheet_gift', name: '선물 · 카운터 꾸미기', key: 'green', ref: '`sheet_tools` · `sheet_cups`', use: "수첩 '나의 성장'에서 사는 것(검수 13.91): 카운터 꾸미기 다섯(작업대 카운터 오른쪽 창틀 위에 놓임, 머그와 같은 배율) + 선물 여섯(선물 장면에서 상자가 열리면 보임). 초록 바탕이라 초록이 거의 없게(다육이는 청회색, 꽃은 말린 들꽃). 그림이 오기 전에는 동그라미 아이콘",
+    rows: [
+      { intro: 'small decorations for a cafe window sill, each about as tall as a mug or a little taller', items: [
+        ['counter_plant', 'a small round terracotta pot with one plump pale blue-grey echeveria succulent (dusty blue-grey, not bright green)'],
+        ['counter_shells', 'a small clear glass jar with a cork lid, filled with little seashells in cream, peach and pale pink'],
+        ['counter_flowers', 'a small cream ceramic vase with a loose bunch of dried seaside wildflowers: lavender purple sea lavender, cream and pale yellow blossoms, muted olive-brown stems'],
+        ['counter_hourglass', 'an hourglass with a warm oak wood frame and pale sand, the sand halfway fallen'],
+      ] },
+      { items: [
+        ['counter_lighthouse', 'a small table lamp shaped like a lighthouse with red and white stripes and a softly glowing warm yellow window at the top'],
+        ['gift_bread', 'a kraft paper bakery bag with the top folded open, two round golden bread rolls and the end of a baguette poking out'],
+        ['gift_mug', 'a new ceramic mug in deep sea blue with a cream inside and a thin cream wave line around the middle, empty'],
+        ['gift_scarf', 'a neatly folded soft knit wool scarf in warm mustard and cream stripes with short tassels'],
+      ] },
+      { items: [
+        ['gift_postcard', 'a postcard with a painted calm blue sea and small islands, leaning on a plain cream envelope with a small sea-blue stamp shape, no writing anywhere'],
+        ['gift_beans', 'a kraft paper coffee bean bag with a fold-over top and a tin tie, standing upright, a few roasted coffee beans beside it'],
+        ['gift_blanket', 'a neatly folded soft fleece lap blanket in warm oatmeal beige with a cream tartan check pattern'],
+      ] },
+    ],
+  },
 ];
 export const KEY_EN = {
   green: 'Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.',

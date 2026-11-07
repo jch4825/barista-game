@@ -23,6 +23,7 @@ import { loadRecordFiles } from './records.js';
 import { AI_NOTICE } from '../data/credits.js';
 import { ov } from '../ui/overlays.js';
 import * as grow from '../core/grow.js';
+import { frontDecos } from '../ui/gift.js';
 
 let titleEl = null;
 // 표지 영상(assets/movies/title_intro): 앱을 켜고 처음 본 표지에서만 끝까지 틀고, 그 뒤로는 마지막 장면. 영상이 없으면 그림만
@@ -85,18 +86,8 @@ export function hideTitle() {
   }
 }
 
-/** 가게 꾸미기(지은의 성장 · 재미 개편 Q-42): 산 것이 카페 앞 그림 위 제자리에. 그림이 오기 전에는 임시 표시(아이콘) */
-function decoLayer() {
-  const owned = grow.SHOP.filter((it) => it.kind === 'deco' && grow.owns(it.id));
-  if (!owned.length) return null;
-  return h('div', { class: 'tt-deco', 'aria-label': `가게 꾸미기: ${owned.map((it) => it.name).join(', ')}` },
-    ...owned.map((it) => {
-      // 그림(꾸미기 시트, 2026-11-06 받음)이 있으면 그 물건 그림을 그 자리에, 없으면 동그라미 아이콘
-      const art = img.has('objects', it.id);
-      return h('span', { class: `tt-deco-item d-${it.id}${art ? ' has-art' : ''}`, title: it.name, style: { left: `${it.spot[0]}%`, top: `${it.spot[1]}%` },
-        html: art ? `<img src="${img.url('objects', it.id)}" alt="" draggable="false">` : ICON(it.icon) });
-    }));
-}
+/** 가게 앞 꾸미기(지은의 성장 · 재미 개편 Q-42): 산 것이 카페 앞 그림 위 제자리에(js/ui/gift.js frontDecos, 수첩의 '놓은 자리 보기'와 같은 그림) */
+const decoLayer = () => frontDecos();
 
 export function showTitle() {
   hideTitle();

@@ -12,6 +12,7 @@
 
 import { drawPortrait } from './portrait-svg.js';
 import { img } from '../core/assets.js';
+import { store } from '../core/store.js';
 import { FACE_BOX, PORTRAIT_BOX } from './faceboxes.js';
 
 export const CHARS = {
@@ -276,9 +277,15 @@ const STAND_GENERIC = { happy: 'smile', proud: 'smile', bright: 'smile', warm: '
 /** 에피소드별 의상: { yeonwoo: 'interview' } → assets/stand/yeonwoo-interview_{face}.webp 가 있으면 그 그림 */
 let costumes = {};
 export function setCostumes(map) { costumes = { ...(map || {}) }; }
+/** 지은이 입은 앞치마(나의 성장에서 산 것): jieun-{색}_{표정} 그림(tools/recolor-stand-apron.py). 이야기의 의상(costume)이 먼저 */
+function apronLook(id) {
+  if (id !== 'jieun') return null;
+  const a = store.active()?.grow?.apron;
+  return a && a !== 'basic' ? String(a).replace(/^apron_/, '') : null;
+}
 function standKey(id) {
   const base = CHARS[id]?.stand || id; // 다른 인물의 스탠딩을 빌려 쓰는 인물(stand: 그 인물 id)
-  const c = costumes[id];
+  const c = costumes[id] || apronLook(id);
   return c && img.has('stand', `${base}-${c}_normal`) ? `${base}-${c}` : base;
 }
 
@@ -305,7 +312,8 @@ export function faceHTML(id, face = 'normal') {
   const c = CHARS[id];
   if (!c) return '';
   if (hasStand(id)) {
-    const [size, x, y] = c.faceBox || FACE_BOX[`${standKey(id)}_${standFace(id, face)}`] || [300, 50, 3];
+    const f = standFace(id, face);
+    const [size, x, y] = c.faceBox || FACE_BOX[`${standKey(id)}_${f}`] || FACE_BOX[`${c.stand || id}_${f}`] || [300, 50, 3]; // 앞치마 · 의상만 다른 그림은 기본 그림의 얼굴 자리
     return `<span class="face-img" style="background-image:url('${standURL(id, face)}');background-size:${size}% auto;background-position:${x}% ${y}%"></span>`;
   }
   if (c.faces) return `<span class="face-img" style="background-image:url('./assets/portraits/${id}_${resolveFace(id, face)}.jpg');background-size:135% auto;background-position:50% 28%"></span>`;

@@ -12,9 +12,9 @@
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 17장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
-| 작업대 물건 · 다 만든 잔 시트 | 3개를 시트 1장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
+| 작업대 물건 · 다 만든 잔 시트 | 14개를 시트 2장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
-| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 22(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
+| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 15(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 5 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
@@ -248,7 +248,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 - 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).
 - 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.
 - 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.
-- 아직 없는 것: `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon`
+- 아직 없는 것: `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon` · `counter_plant` · `counter_shells` · `counter_flowers` · `counter_hourglass` · `counter_lighthouse` · `gift_bread` · `gift_mug` · `gift_scarf` · `gift_postcard` · `gift_beans` · `gift_blanket`
 
 ### `sheet_empty` · 1:1 · 초록 바탕 · 참조: `sheet_tools`(우유병이 있는 시트)
 
@@ -264,6 +264,21 @@ Flat solid chroma key green background (#00B140) everywhere, no gradients, no ca
 Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
 ```
 
+### `sheet_gift` · 1:1 · 초록 바탕 · 참조: `sheet_tools` · `sheet_cups`
+
+- 수첩 '나의 성장'에서 사는 것(검수 13.91): 카운터 꾸미기 다섯(작업대 카운터 오른쪽 창틀 위에 놓임, 머그와 같은 배율) + 선물 여섯(선물 장면에서 상자가 열리면 보임). 초록 바탕이라 초록이 거의 없게(다육이는 청회색, 꽃은 말린 들꽃). 그림이 오기 전에는 동그라미 아이콘
+- 칸: 1줄 `counter_plant` · `counter_shells` · `counter_flowers` · `counter_hourglass` / 2줄 `counter_lighthouse` · `gift_bread` · `gift_mug` · `gift_scarf` / 3줄 `gift_postcard` · `gift_beans` · `gift_blanket` / 마지막 칸 비움
+
+```
+Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
+The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
+Row 1 (small decorations for a cafe window sill, each about as tall as a mug or a little taller): a small round terracotta pot with one plump pale blue-grey echeveria succulent (dusty blue-grey, not bright green); a small clear glass jar with a cork lid, filled with little seashells in cream, peach and pale pink; a small cream ceramic vase with a loose bunch of dried seaside wildflowers: lavender purple sea lavender, cream and pale yellow blossoms, muted olive-brown stems; an hourglass with a warm oak wood frame and pale sand, the sand halfway fallen.
+Row 2: a small table lamp shaped like a lighthouse with red and white stripes and a softly glowing warm yellow window at the top; a kraft paper bakery bag with the top folded open, two round golden bread rolls and the end of a baguette poking out; a new ceramic mug in deep sea blue with a cream inside and a thin cream wave line around the middle, empty; a neatly folded soft knit wool scarf in warm mustard and cream stripes with short tassels.
+Row 3: a postcard with a painted calm blue sea and small islands, leaning on a plain cream envelope with a small sea-blue stamp shape, no writing anywhere; a kraft paper coffee bean bag with a fold-over top and a tin tie, standing upright, a few roasted coffee beans beside it; a neatly folded soft fleece lap blanket in warm oatmeal beige with a cream tartan check pattern; the last cell (bottom right) completely empty.
+Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
+Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
+```
+
 ## 4. 새 놀이의 그림 (재미 개편)
 
 - 몰림 · 그 갈매기 쫓기 · 바닷가로 가는 버스 · 가게 꾸미기 · 앞치마의 그림입니다. 지금은 코드로 그린 임시 그림(SVG · 색 띠 · 아이콘)으로 섭니다.
@@ -274,7 +289,7 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 5. 블렌더 한 컷 (손 동작)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja` · `steam_kid`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja` · `steam_kid` · `hotwater_pitcher_yuja` · `ice_strawberry` · `jam_pitcher_yuja` · `pourin_glass_americano` · `pourin_glass_latte` · `pourin_glass_yuja` · `pourin_plastic_americano` · `pourin_plastic_latte` · `pourin_plastic_yuja` · `stir_pitcher_yuja` · `water_glass_ice` · `water_plastic_ice` · `water_plastic_yuja` · `hotwater_pitcher_cocoa` · `hotwater_pitcher_matcha` · `pourin_glass_cocoa` · `pourin_glass_matcha` · `pourin_plastic_cocoa` · `pourin_plastic_matcha` · `powder_pitcher_cocoa` · `powder_pitcher_matcha` · `stir_pitcher_cocoa` · `whisk_pitcher_matcha` · `ice_barley` · `ice_plastic_barley`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
 게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`js/data/menu.js`의 `shotNames`, 작업대 `brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7), 컵에 넣기 · 젓기 · 우리기는 `{동작}[_iced]_{바탕}`(포장 컵은 `{동작}{잔}_{바탕}`, 6.10). 이름만 맞으면 코드를 고치지 않아도 됩니다.
 아래 목록은 메뉴마다 온도 · 매장/포장 · 단계를 모두 따라가며 작업대가 고를 컷을 셈한 것입니다.
 
@@ -298,25 +313,24 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 | `jam_paper_yuja` | 청 떠 넣기 | 유자차 · 따뜻하게 · 종이컵 | `jam_yuja` |
 | `water_paper_yuja` | 물 붓기 | 유자차 · 따뜻하게 · 종이컵 | `water_paper` |
 | `stir_paper_yuja` | 젓기 | 유자차 · 따뜻하게 · 종이컵 | `stir_yuja` |
-| `jam_plastic_yuja` | 청 떠 넣기 | 유자차 · 아이스 · 플라스틱 컵 | `jam_iced_yuja` |
-| `water_plastic_yuja` | 물 붓기 | 유자차 · 아이스 · 플라스틱 컵 | `water_plastic` |
-| `stir_plastic_yuja` | 젓기 | 유자차 · 아이스 · 플라스틱 컵 | `stir_iced_yuja` |
-| `powder_plastic_matcha` | 가루 떠 넣기 | 녹차라테 · 아이스 · 플라스틱 컵 | `powder_iced_matcha` |
-| `whisk_plastic_matcha` | 말차 풀기 | 녹차라테 · 아이스 · 플라스틱 컵 | `whisk_iced` |
 | `powder_paper_matcha` | 가루 떠 넣기 | 녹차라테 · 따뜻하게 · 종이컵 | `powder_matcha` |
 | `whisk_paper_matcha` | 말차 풀기 | 녹차라테 · 따뜻하게 · 종이컵 | `whisk` |
 | `jam_plastic_strawberry` | 청 떠 넣기 | 딸기우유 · 플라스틱 컵 | `jam_iced_strawberry` |
 | `stir_plastic_strawberry` | 젓기 | 딸기우유 · 플라스틱 컵 | `stir_iced_strawberry` |
 | `powder_paper_cocoa` | 가루 떠 넣기 | 코코아 · 따뜻하게 · 종이컵 | `powder_cocoa` |
 | `stir_paper_cocoa` | 젓기 | 코코아 · 따뜻하게 · 종이컵 | `stir_cocoa` |
-| `powder_plastic_cocoa` | 가루 떠 넣기 | 코코아 · 아이스 · 플라스틱 컵 | `powder_iced_cocoa` |
-| `stir_plastic_cocoa` | 젓기 | 코코아 · 아이스 · 플라스틱 컵 | `stir_iced_cocoa` |
 
 ### 5.3 조작법 '드래그 활용'의 그림 (`docs/recipes.md` 6.11)
 
 - 붓는 컷에 덜 기운 그릇(`… tilt`)이 없으면 끌어 붓기는 되지만 그릇이 기울어 보이지 않고, 얼음 담기 컷에 얼음 통 · 국자(`… drag_ice`)가 없으면 터치 기반처럼 눌러서 담습니다.
 
-- 모두 있습니다.
+| 컷 | 필요한 그림 | 쓰는 잔 |
+| :--- | :--- | :--- |
+| `water_glass_ice` | `scene_bench.py … tilt` (덜 기운 그릇) | 아메리카노 · 아이스 · 유리컵 |
+| `water_plastic_ice` | `scene_bench.py … tilt` (덜 기운 그릇) | 아메리카노 · 아이스 · 플라스틱 컵 |
+| `ice_barley` | `scene_bench.py … drag_ice` (얼음 통 · 국자) | 보리차 · 아이스 · 유리컵 |
+| `ice_plastic_barley` | `scene_bench.py … drag_ice` (얼음 통 · 국자) | 보리차 · 아이스 · 플라스틱 컵 |
+| `water_plastic_yuja` | `scene_bench.py … tilt` (덜 기운 그릇) | 유자차 · 아이스 · 플라스틱 컵 |
 
 ## 6. 소리
 
@@ -344,23 +358,23 @@ Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, ha
 
 ## 7. 음성 (Supertonic, 내 PC)
 
-- 읽어 줄 문장 3533줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
+- 읽어 줄 문장 3592줄(`npm run lines` → `tools/voice/lines.json`). `npm run voices`가 바뀐 줄만 만듭니다.
 - 새 인물의 목소리 배정은 `tools/voice/voice_cast.json`에 있습니다(Supertonic 목소리가 10개뿐이라 빠르기로 구별, 들어 보고 정함).
 - 사람별 대본(주인공 · 사장님 · 단골 · 조연 · 손님 옷차림별 · 안내, 줄 수 · 글자 수)은 `docs/voice_lines.md`(`npm run lines`가 함께 만듦).
 
 | 목소리 | 줄 수 |
 | :--- | ---: |
-| `sys` | 1010 |
-| `narr` | 678 |
-| `think` | 296 |
-| `owner` | 200 |
-| `jieun` | 148 |
-| `customer-sporty` | 89 |
-| `customer-olive` | 87 |
-| `customer-coffee` | 85 |
-| `customer-arms` | 83 |
-| `customer-stripe` | 81 |
-| `jian` | 79 |
+| `sys` | 1048 |
+| `narr` | 684 |
+| `think` | 297 |
+| `owner` | 207 |
+| `jieun` | 149 |
+| `customer-sporty` | 100 |
+| `customer-coffee` | 86 |
+| `customer-arms` | 84 |
+| `customer-stripe` | 82 |
+| `jian` | 80 |
+| `customer-olive` | 78 |
 | `do` | 70 |
 | `haesun` | 65 |
 | `eunju` | 59 |

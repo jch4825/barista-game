@@ -310,6 +310,8 @@ const SHEET_KO = {
   cup_plastic_cocoa: '플라스틱 컵 · 아이스 코코아', cup_plastic_greentea: '플라스틱 컵 · 녹차라테', cup_glass_greentea: '유리컵 · 녹차라테', cup_mug_greentea: '머그 · 녹차라테',
   obj_matcha: '말차 가루 통', obj_sink: '개수대', obj_bin: '쓰레기통',
   obj_milk_bottle_empty: '빈 우유병', obj_hand_grinder: '손 그라인더', obj_spoon: '바 스푼',
+  counter_plant: '카운터 꾸미기 · 작은 다육이 화분', counter_shells: '카운터 꾸미기 · 조개껍데기 유리병', counter_flowers: '카운터 꾸미기 · 들꽃 꽃병', counter_hourglass: '카운터 꾸미기 · 모래시계', counter_lighthouse: '카운터 꾸미기 · 등대 모양 작은 등',
+  gift_bread: '선물 · 갓 구운 빵 한 봉지', gift_mug: '선물 · 바다색 머그컵', gift_scarf: '선물 · 털목도리', gift_postcard: '선물 · 바다 엽서와 편지', gift_beans: '선물 · 우리 카페 원두', gift_blanket: '선물 · 포근한 무릎 담요',
 };
 const OBJ_NEG = 'text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines';
 for (const sh of OBJ_SHEETS) {

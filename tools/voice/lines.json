@@ -20664,6 +20664,252 @@
   "ep": "result"
  },
  {
+  "key": "8503c4de",
+  "voice": "sys",
+  "text": "갓 구운 빵 한 봉지를 만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "d8b1ec30",
+  "voice": "sys",
+  "text": "바다색 머그컵을 사만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "08ede94f",
+  "voice": "sys",
+  "text": "털목도리를 육만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "92ad0e00",
+  "voice": "sys",
+  "text": "바다 엽서와 편지를 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "20686a7f",
+  "voice": "sys",
+  "text": "우리 카페 원두를 이만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "266bdb35",
+  "voice": "sys",
+  "text": "포근한 무릎 담요를 오만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "9d6fc5cf",
+  "voice": "sys",
+  "text": "작은 다육이 화분을 이만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "24daf8f6",
+  "voice": "sys",
+  "text": "조개껍데기 유리병을 만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "c9176f7a",
+  "voice": "sys",
+  "text": "들꽃 꽃병을 삼만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "a569751e",
+  "voice": "sys",
+  "text": "모래시계를 삼만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "f52dd42a",
+  "voice": "sys",
+  "text": "등대 모양 작은 등을 사만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "1677cc07",
+  "voice": "sys",
+  "text": "문 옆 화분을 삼만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "8994d78c",
+  "voice": "sys",
+  "text": "조개 풍경을 이만 오천원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "a5135b81",
+  "voice": "sys",
+  "text": "창가 긴 의자를 육만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "f2738da7",
+  "voice": "sys",
+  "text": "처마 등을 칠만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "dbdcd1c7",
+  "voice": "sys",
+  "text": "오늘의 메뉴 칠판을 사만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "357ad6b2",
+  "voice": "sys",
+  "text": "바다색 깃발을 이만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "4025806b",
+  "voice": "sys",
+  "text": "남색 앞치마를 삼만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "974c2c42",
+  "voice": "sys",
+  "text": "갈색 앞치마를 삼만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "fe03aa04",
+  "voice": "sys",
+  "text": "줄무늬 앞치마를 사만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "54f6fed7",
+  "voice": "sys",
+  "text": "산호색 앞치마를 오만원에 살까요?",
+  "ep": "notebook"
+ },
+ {
+  "key": "239cfe2f",
+  "voice": "sys",
+  "text": "사장님께 선물을 드려요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2f41515a",
+  "voice": "sys",
+  "text": "집에 있는 가족에게 선물을 보내요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "9e608a1f",
+  "voice": "sys",
+  "text": "집에서 문자가 왔어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "512deacb",
+  "voice": "owner",
+  "text": "빵 냄새가 가게에 가득하네요. 아직 따뜻해요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "16113982",
+  "voice": "owner",
+  "text": "반은 지은 씨 거예요. 같이 먹어야 더 맛있으니까요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "991d6200",
+  "voice": "owner",
+  "text": "내 컵을 사 왔어요? 나는 늘 손님 컵 가운데 남는 걸로 마셨는데.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f9701224",
+  "voice": "owner",
+  "text": "고마워요. 마감 뒤에 마시는 따뜻한 우유는, 이제 이 컵에 마셔야겠네요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "bd52edd4",
+  "voice": "owner",
+  "text": "아침에 가게 문을 열 때 바닷바람이 차거든요. 딱 좋겠네요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "ab900be7",
+  "voice": "owner",
+  "text": "지은 씨가 일해서 번 돈으로 산 거라, 더 따뜻할 것 같아요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "6ba00f8c",
+  "voice": "narr",
+  "text": "엽서 잘 받았어. 바다가 정말 예쁘더라.",
+  "ep": "notebook"
+ },
+ {
+  "key": "2e2f90d9",
+  "voice": "narr",
+  "text": "네 글씨를 보니까, 잘 지내는 것 같아서 마음이 놓여.",
+  "ep": "notebook"
+ },
+ {
+  "key": "b03173e4",
+  "voice": "narr",
+  "text": "보내 준 원두로 아침에 커피를 내려 마셨어. 네가 일하는 카페의 맛이구나.",
+  "ep": "notebook"
+ },
+ {
+  "key": "013e948f",
+  "voice": "narr",
+  "text": "다음에는 네가 내려 주는 커피를 마시러 갈게.",
+  "ep": "notebook"
+ },
+ {
+  "key": "e247d922",
+  "voice": "narr",
+  "text": "담요가 정말 포근해. 저녁마다 덮고 있어.",
+  "ep": "notebook"
+ },
+ {
+  "key": "c80a6c7d",
+  "voice": "narr",
+  "text": "네가 일해서 번 돈으로 산 거라 더 따뜻해. 고마워.",
+  "ep": "notebook"
+ },
+ {
+  "key": "f456dabf",
+  "voice": "think",
+  "text": "일해서 번 돈으로, 고마운 사람에게 마음을 전했다.",
+  "ep": "notebook"
+ },
+ {
+  "key": "d6d1768f",
+  "voice": "sys",
+  "text": "카운터 창가에 놓았어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "12ac817c",
+  "voice": "sys",
+  "text": "커피를 만들 때, 카운터 창가에서 볼 수 있어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "d3c10aa9",
+  "voice": "sys",
+  "text": "가게 앞에 놓았어요.",
+  "ep": "notebook"
+ },
+ {
+  "key": "33a4e370",
+  "voice": "sys",
+  "text": "처음 화면의 카페 앞에서 볼 수 있어요.",
+  "ep": "notebook"
+ },
+ {
   "key": "167b76ff",
   "voice": "sys",
   "text": "해순 할머니.",

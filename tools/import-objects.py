@@ -95,6 +95,12 @@ SHEETS: dict[str, list[str | None]] = {
         'deco_board', 'deco_flag', 'apron_navy', 'apron_brown',
         'apron_stripe', 'apron_coral', 'apron_basic', None,
     ],
+    # 선물 · 카운터 꾸미기(검수 13.91, js/core/grow.js 의 SHOP id 그대로): 카운터 창틀 위 다섯 · 선물 여섯
+    'sheet_gift': [
+        'counter_plant', 'counter_shells', 'counter_flowers', 'counter_hourglass',
+        'counter_lighthouse', 'gift_bread', 'gift_mug', 'gift_scarf',
+        'gift_postcard', 'gift_beans', 'gift_blanket', None,
+    ],
 }
 SHEET_DIR = {'sheet_play': 'play', 'sheet_deco': 'play'}  # assets/_src/{여기} (적지 않은 시트는 objects)
 # 시트마다 다른 값: 손그림 시트는 짙은 선이 테두리라 안쪽 초록빛 누르기를 하지 않음(초록 앞치마 · 가방의 초록 담요가 회색이 되지 않게),

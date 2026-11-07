@@ -12,6 +12,7 @@ import { h, sleep } from '../core/dom.js';
 import { img } from '../core/assets.js';
 import { CHARS } from '../data/characters.js';
 import { PHOTOS } from '../data/photos.js';
+import { store } from '../core/store.js';
 
 const MIN_MS = 900; // 화면이 번쩍 지나가지 않게
 const MAX_MS = 15000;
@@ -69,7 +70,8 @@ export function episodeImages(ep) {
   const urls = [];
   const stand = Object.keys(img.list('stand'));
   for (const id of who) {
-    const c = ep.costume?.[id];
+    const a = id === 'jieun' && store.active()?.grow?.apron; // 지은이 입은 앞치마(characters.js apronLook)
+    const c = ep.costume?.[id] || (a && a !== 'basic' ? String(a).replace(/^apron_/, '') : null);
     const base = CHARS[id].stand || id; // 빌려 쓰는 스탠딩(characters.js stand)
     const key = c && img.has('stand', `${base}-${c}_normal`) ? `${base}-${c}` : base;
     for (const k of stand) if (k.startsWith(`${key}_`)) urls.push(img.url('stand', k));

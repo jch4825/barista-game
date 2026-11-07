@@ -745,3 +745,12 @@ body.contrast .mg.mg-brew .bw-toss-view { background: #000; }
 .mg.mg-brew .bw-move.is-lid .bw-move-lid { opacity: 1; transform: none; }
 body.reduce-motion .mg.mg-brew .bw-move * { transition: none !important; animation: none !important; }
 body.theme-calm .mg.mg-brew .bw-move-from { transition-duration: .9s; }
+
+/* 카운터 꾸미기(창틀 위, js/ui/gift.js counterDecos · 검수 13.91): 누르지 않는 그림, 자리는 grow.js 의 sill · h(판의 %).
+   그림(objects/counter_*)이 오기 전에는 작은 동그라미 아이콘. 수첩의 '놓은 자리 보기'(.pl-inner)도 같은 규칙 */
+.bw-decos { position: absolute; inset: 0; pointer-events: none; }
+.bw-deco { position: absolute; transform: translateX(-50%); display: flex; align-items: flex-end; justify-content: center; filter: drop-shadow(0 6px 6px rgba(30, 18, 8, .35)); }
+.bw-deco img { display: block; height: 100%; width: auto; }
+.bw-deco:not(.has-art) { height: 6.4% !important; aspect-ratio: 1; }
+.bw-deco .dc-ico { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: rgba(255, 248, 230, .92); box-shadow: 0 0 0 3px rgba(212, 174, 98, .85); color: #6B4E1E; }
+.bw-deco .dc-ico svg { width: 60%; height: 60%; }

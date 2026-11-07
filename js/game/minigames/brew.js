@@ -70,6 +70,7 @@ import {
 import { REGULARS } from '../../data/regulars.js';
 import * as grow from '../../core/grow.js';
 import { josa } from '../../core/text.js';
+import { counterDecos } from '../../ui/gift.js';
 
 const TITLE = '커피 만들기';
 const HOWTO = '주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.';
@@ -1138,7 +1139,7 @@ export async function brew(opts = {}) {
   const board = ([a, b], bottom = BACK) => h('i', { class: 'bw-board', style: { left: `${a}%`, width: `${b - a}%`, bottom: `${bottom - 1.2}%` } }); // 물건 바닥이 판 윗면 가운데에
   const onShelf = [...pantry.bases, ...pantry.adds].some((id) => INGREDIENTS[id]?.shelf);
   const boards = h('div', { class: 'bw-boards', 'aria-hidden': 'true' }, ...[board(cupEnds), pantry.temps.includes('iced') || pantry.adds.includes('syrup') ? board(BOARD_BOTTLES) : null, onShelf ? board(BOARD_SHELF, SHELF) : null].filter(Boolean));
-  const set = h('div', { class: 'bw-set' }, boards, mat, hots, bookBtn);
+  const set = h('div', { class: 'bw-set' }, boards, counterDecos(), mat, hots, bookBtn); // counterDecos: 산 카운터 꾸미기(창틀 위, js/ui/gift.js · 검수 13.91)
   const scene = h('div', { class: 'bw-scene' }, set, spots.left, spots.center, tube, spots.right);
   const panel = h('div', { class: 'bw-panel' });
   // 오늘의 칠판(작은 칠판, 카운터 오른쪽 위): 남은 얼음 · 우유 · 머신 · 사장님. 깊은 길은 '오늘의 도전'도(다른 학생과 견주지 않는 혼자의 목표)

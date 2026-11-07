@@ -28,6 +28,7 @@ import { tts } from '../av/tts.js';
 import { audio } from '../av/audio.js';
 import { ov } from '../ui/overlays.js';
 import { openScreen } from './screen.js';
+import { showGift, showPlaced } from '../ui/gift.js';
 
 /** 꾸미기 · 앞치마 그림(꾸미기 시트, 2026-11-06 받음: assets/objects/deco_* · apron_*, 기본 초록 앞치마는 apron_basic). 없으면 아이콘 */
 export const decoPic = (it, icon) => {
@@ -238,7 +239,8 @@ function growView() {
     const apron = grow.apronOf(g.apron);
     const head = h('div', { class: 'gr-head' },
       h('div', { class: 'gr-rank' }, h('i', { html: ICON('badge') }), h('b', { text: rk.name })),
-      h('div', { class: 'gr-apron', style: { '--c': apron.color } }, h('i', { html: decoPic(apron, 'apron') }), h('span', { text: apron.name })),
+      // 입은 앞치마: 지은의 스탠딩 윗몸(앞치마 색이 바뀐 그림, characters.js apronLook)
+      h('div', { class: 'gr-apron', style: { '--c': apron.color } }, hasStand('jieun') ? h('span', { class: 'gr-me', 'aria-hidden': 'true' }, h('img', { src: standURL('jieun', 'smile'), alt: '', draggable: 'false' })) : h('i', { html: decoPic(apron, 'apron') }), h('span', { text: apron.name })),
       h('div', { class: 'gr-money' }, h('i', { html: ICON('coin') }), h('b', { text: `모은 돈 ${grow.won(g.money)}` }), h('small', { text: `지금까지 번 돈 ${grow.won(g.earned)}` })));
     const stats = h('section', { class: 'gr-stats' }, h('h3', { text: '능력치' }), ...grow.STATS.map((s) => {
       const v = st[s.id];
@@ -258,32 +260,45 @@ function growView() {
         const done = n >= grow.MASTER_AT;
         return h('span', { class: `gr-skill ${done ? 'is-done' : ''}`.trim() }, h('i', { html: ICON(done ? 'sparkle' : sk.icon || 'hand') }), h('b', { text: sk.name }), h('small', { text: done ? '익숙해짐 · [맡기기] 가능' : `${n} / ${grow.MASTER_AT}번` }));
       })) : h('p', { class: 'nb-empty', text: '커피를 만들면 손 기술이 하나씩 쌓여요. 열 번 하면 익숙해져요.' }));
-    const shop = h('section', { class: 'gr-shop' }, h('h3', { text: '가게 꾸미기 · 앞치마' }),
-      h('p', { class: 'gr-shop-note', text: '일해서 모은 돈으로 사요. 꾸미기는 처음 화면의 카페 앞에 놓여요.' }),
-      h('div', { class: 'gr-shop-list' }, ...[grow.APRON_BASIC, ...grow.SHOP].map((it) => {
-        const owned = grow.owns(it.id);
-        const wearing = it.kind === 'apron' && g.apron === it.id;
-        let act;
-        if (it.kind === 'apron' && owned) {
-          act = h('button', { class: `btn btn-small ${wearing ? 'btn-main' : 'btn-soft'}`, disabled: wearing, onclick: (e) => { e.stopPropagation(); audio.sfx('towel'); grow.wearApron(it.id); draw(); } }, h('span', { text: wearing ? '입고 있어요' : '입기' }));
-        } else if (owned) act = h('span', { class: 'gr-owned', text: '가게에 있어요' });
-        else {
-          act = h('button', {
-            class: 'btn btn-small btn-main', disabled: g.money < it.price,
-            onclick: async (e) => {
-              e.stopPropagation();
-              const ok = await ov.confirm({ text: `${josa(it.name, '을/를')} ${grow.won(it.price)}에 살까요?`, detail: `모은 돈 ${grow.won(g.money)} → ${grow.won(g.money - it.price)}`, yes: '사기', no: '그만두기' });
-              if (!ok || !grow.buy(it.id)) return;
-              audio.sfx('coin');
-              ov.toast(`${josa(it.name, '을/를')} 샀어요!`, it.kind === 'apron' ? 'apron' : 'sparkle');
-              draw();
-            },
-          }, h('i', { html: ICON('coin') }), h('span', { text: g.money < it.price ? `${grow.won(it.price)} · 돈이 모자라요` : `${grow.won(it.price)}에 사기` }));
-        }
-        return h('div', { class: `gr-item ${owned ? 'is-owned' : ''}`.trim(), style: it.color ? { '--c': it.color } : {} },
-          h('i', { class: 'gr-item-ico', html: decoPic(it, it.kind === 'apron' ? 'apron' : it.icon) }),
-          h('div', {}, h('b', { text: it.name }), h('small', { text: it.desc })), act);
-      })));
+    // 선물 · 카운터 꾸미기 · 가게 앞 꾸미기 · 앞치마(검수 13.91, Q-54): 사면 바로 그 결과가 보임(선물 장면 · 놓은 자리 · 지은의 앞치마)
+    const buyBtn = (it, label) => h('button', {
+      class: 'btn btn-small btn-main', disabled: g.money < it.price,
+      onclick: async (e) => {
+        e.stopPropagation();
+        const ok = await ov.confirm({ text: `${josa(it.name, '을/를')} ${grow.won(it.price)}에 살까요?`, detail: `모은 돈 ${grow.won(g.money)} → ${grow.won(g.money - it.price)}`, yes: it.kind === 'gift' ? '사서 선물하기' : '사기', no: '그만두기' });
+        if (!ok || !grow.buy(it.id)) return;
+        audio.sfx('coin');
+        if (it.kind === 'gift') await showGift(it);
+        else if (it.kind === 'apron') ov.toast(`${josa(it.name, '을/를')} 입었어요!`, 'apron');
+        else await showPlaced(it);
+        draw();
+      },
+    }, h('i', { html: ICON(it.kind === 'gift' ? 'gift' : 'coin') }), h('span', { text: g.money < it.price ? `${grow.won(it.price)} · 돈이 모자라요` : `${grow.won(it.price)}에 ${label}` }));
+    const again = (label, fn) => h('button', { class: 'btn btn-small btn-soft', onclick: async (e) => { e.stopPropagation(); await fn(); } }, h('i', { html: ICON('repeat') }), h('span', { text: label }));
+    const itemRow = (it) => {
+      const owned = grow.owns(it.id);
+      const wearing = it.kind === 'apron' && g.apron === it.id;
+      let act;
+      if (it.kind === 'apron' && owned) {
+        act = h('button', { class: `btn btn-small ${wearing ? 'btn-main' : 'btn-soft'}`, disabled: wearing, onclick: (e) => { e.stopPropagation(); audio.sfx('towel'); grow.wearApron(it.id); draw(); } }, h('span', { text: wearing ? '입고 있어요' : '입기' }));
+      } else if (owned && it.kind === 'gift') act = h('div', { class: 'gr-acts' }, h('span', { class: 'gr-owned', text: it.to === 'owner' ? '드렸어요' : '보냈어요' }), again('다시 보기', () => showGift(it)));
+      else if (owned) act = h('div', { class: 'gr-acts' }, h('span', { class: 'gr-owned', text: '가게에 있어요' }), again('보기', () => showPlaced(it)));
+      else act = buyBtn(it, it.kind === 'gift' ? '선물하기' : '사기');
+      const toTag = it.kind === 'gift' ? h('em', { class: `gr-to to-${it.to}`, text: `${grow.GIFT_TO[it.to]?.name || ''}에게` }) : null;
+      return h('div', { class: `gr-item k-${it.kind} ${owned ? 'is-owned' : ''}`.trim(), style: it.color ? { '--c': it.color } : {} },
+        h('i', { class: 'gr-item-ico', html: decoPic(it, it.kind === 'apron' ? 'apron' : it.icon) }),
+        h('div', {}, h('b', {}, toTag, h('span', { text: it.name })), h('small', { text: it.desc })), act);
+    };
+    const SHOP_GROUPS = [
+      ['gift', '고마운 사람에게 선물', '일해서 모은 돈으로 사장님과 가족에게 선물해요. 선물하면 바로 건네요.'],
+      ['counter', '카운터 꾸미기', '커피를 만드는 카운터의 창가에 놓여요.'],
+      ['deco', '가게 앞 꾸미기', '처음 화면의 카페 앞에 놓여요.'],
+      ['apron', '앞치마', '입으면 지은의 앞치마 색이 바뀌어요.'],
+    ];
+    const shop = h('section', { class: 'gr-shop' }, h('h3', { text: '선물 · 꾸미기 · 앞치마' }),
+      ...SHOP_GROUPS.map(([kind, name, note]) => h('div', { class: `gr-shop-group g-${kind}` },
+        h('h4', { text: name }), h('p', { class: 'gr-shop-note', text: note }),
+        h('div', { class: 'gr-shop-list' }, ...(kind === 'apron' ? [grow.APRON_BASIC, ...grow.SHOP.filter((x) => x.kind === 'apron')] : grow.SHOP.filter((x) => x.kind === kind)).map(itemRow)))));
     const found = new Set(g.odd);
     const odds = [...ODD_DRINKS, ODD_ANY];
     const odd = h('section', { class: 'gr-odd' }, h('h3', { text: `엉뚱한 잔 도감 ${odds.filter((o) => found.has(o.id)).length} / ${odds.length}` }),
