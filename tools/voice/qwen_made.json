@@ -49,14 +49,15 @@
  "be5f5522": {
   "who": "sys",
   "sig": "0afd47654654",
-  "sim": 0.9771,
-  "rate": 4.1,
-  "fall": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9873,
+  "rate": 5.24,
+  "fall": 50,
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:12"
+  "at": "2026-11-07 17:57"
  },
  "97463570": {
   "who": "sys",
@@ -568,14 +569,15 @@
  "6ab2bc16": {
   "who": "jieun",
   "sig": "aa7d94e26181",
-  "sim": 0.9922,
-  "rate": 3.3,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.992,
+  "rate": 3.68,
+  "fall": 70,
+  "try": 1,
+  "style": "plain",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-07 08:04"
+  "flag": "느림",
+  "at": "2026-11-07 18:44",
+  "tight": 540
  },
  "30a96054": {
   "who": "jieun",
@@ -842,15 +844,15 @@
  "69f2feb5": {
   "who": "jieun",
   "sig": "20862316038c",
-  "sim": 0.9886,
-  "rate": 4.73,
-  "fall": 60,
+  "sim": 0.9903,
+  "rate": 5.15,
+  "fall": 50,
+  "long": 70,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:06",
-  "long": 80
+  "at": "2026-11-07 18:44"
  },
  "9c266322": {
   "who": "jieun",
@@ -1144,14 +1146,14 @@
  "eafcd2fd": {
   "who": "jieun",
   "sig": "efcae7b6efac",
-  "sim": 0.9925,
-  "rate": 4.36,
-  "fall": 70,
+  "sim": 0.9912,
+  "rate": 6.1,
+  "fall": 100,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:07"
+  "at": "2026-11-07 18:44"
  },
  "627778c8": {
   "who": "jieun",
@@ -1192,14 +1194,14 @@
  "f5b7853f": {
   "who": "jieun",
   "sig": "afe12524cf40",
-  "sim": 0.994,
-  "rate": 4.1,
+  "sim": 0.9928,
+  "rate": 5.14,
   "fall": 60,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 09:42"
+  "at": "2026-11-07 18:44"
  },
  "fa6a6055": {
   "who": "jieun",
@@ -1986,14 +1988,15 @@
  "bb7f823d": {
   "who": "jieun",
   "sig": "4a58a6a9c5ec",
-  "sim": 0.9912,
-  "rate": 4.07,
-  "fall": 90,
-  "try": 1,
+  "sim": 0.9935,
+  "rate": 4.43,
+  "fall": 60,
+  "try": 2,
   "style": "desc",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-07 08:10"
+  "flag": "느림",
+  "at": "2026-11-07 18:44",
+  "tight": 220
  },
  "2f7308ac": {
   "who": "jieun",
@@ -2168,14 +2171,14 @@
  "3f926e94": {
   "who": "jieun",
   "sig": "76f8c093122e",
-  "sim": 0.9918,
-  "rate": 4.21,
-  "fall": 100,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9911,
+  "rate": 6.44,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 09:42"
+  "at": "2026-11-07 18:44"
  },
  "ae447bcc": {
   "who": "jieun",
@@ -2218,15 +2221,15 @@
  "ab095dff": {
   "who": "jieun",
   "sig": "22c21b21f15d",
-  "sim": 0.9919,
-  "rate": 4.25,
+  "sim": 0.9911,
+  "rate": 5.35,
   "fall": 50,
+  "long": 90,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:14",
-  "long": 70
+  "at": "2026-11-07 18:44"
  },
  "fa9e78b9": {
   "who": "jieun",
@@ -3220,14 +3223,14 @@
  "c721cd50": {
   "who": "jieun",
   "sig": "85173a3ba171",
-  "sim": 0.9946,
-  "rate": 4.5,
+  "sim": 0.9934,
+  "rate": 5.62,
   "fall": 60,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:21"
+  "at": "2026-11-07 18:44"
  },
  "6b06ee90": {
   "who": "jieun",
@@ -3278,14 +3281,14 @@
  "b5b6c36f": {
   "who": "jieun",
   "sig": "06db651807ae",
-  "sim": 0.9939,
-  "rate": 4.26,
-  "fall": 80,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.11,
+  "fall": 60,
+  "try": 2,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:21"
+  "at": "2026-11-07 18:44"
  },
  "95eb0163": {
   "who": "jieun",
@@ -3439,14 +3442,15 @@
  "a63d151e": {
   "who": "jieun",
   "sig": "3135fb94ec3c",
-  "sim": 0.9945,
-  "rate": 4.31,
-  "fall": 80,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9942,
+  "rate": 4.83,
+  "fall": 50,
+  "long": 100,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 10:51"
+  "at": "2026-11-07 18:44"
  },
  "4bfc0e56": {
   "who": "jieun",
@@ -3717,15 +3721,14 @@
  "5c395799": {
   "who": "jieun",
   "sig": "63b27d06800e",
-  "sim": 0.9939,
-  "rate": 4.61,
-  "fall": 40,
+  "sim": 0.9929,
+  "rate": 5.1,
+  "fall": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:24",
-  "long": 110
+  "at": "2026-11-07 18:44"
  },
  "4fa0ca94": {
   "who": "jieun",
@@ -3825,15 +3828,15 @@
  "a4c07913": {
   "who": "jieun",
   "sig": "f4cfac36cede",
-  "sim": 0.992,
-  "rate": 4.79,
-  "fall": 50,
+  "sim": 0.9913,
+  "rate": 5.41,
+  "fall": 30,
+  "long": 40,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 10:58",
-  "long": 90
+  "at": "2026-11-07 18:44"
  },
  "42a336ff": {
   "who": "jieun",
@@ -3997,15 +4000,15 @@
  "b89c46a9": {
   "who": "jieun",
   "sig": "1190960c1b7a",
-  "sim": 0.9949,
-  "rate": 5.17,
+  "sim": 0.9939,
+  "rate": 5.61,
   "fall": 50,
-  "try": 1,
-  "style": "desc",
+  "long": 90,
+  "try": 3,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:26",
-  "long": 90
+  "at": "2026-11-07 18:44"
  },
  "e78fee09": {
   "who": "jieun",
@@ -4566,14 +4569,13 @@
   "who": "jieun",
   "sig": "20f94629b8b5",
   "sim": 0.9905,
-  "rate": 4.66,
-  "fall": 50,
-  "try": 1,
+  "rate": 5.5,
+  "fall": 80,
+  "try": 2,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:30",
-  "long": 120
+  "at": "2026-11-07 18:44"
  },
  "3c8b6570": {
   "who": "jieun",
@@ -4711,14 +4713,15 @@
  "201df07c": {
   "who": "jieun",
   "sig": "6085b4241c25",
-  "sim": 0.9886,
-  "rate": 4.76,
-  "fall": 90,
-  "try": 2,
+  "sim": 0.993,
+  "rate": 5.56,
+  "fall": 20,
+  "long": 30,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:31"
+  "at": "2026-11-07 18:44"
  },
  "82b4bdec": {
   "who": "jieun",
@@ -4939,14 +4942,14 @@
  "b7b44c9a": {
   "who": "jieun",
   "sig": "2994a6e703f1",
-  "sim": 0.9945,
-  "rate": 4.03,
+  "sim": 0.9908,
+  "rate": 4.66,
   "fall": 60,
   "try": 1,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:34"
+  "at": "2026-11-07 18:44"
  },
  "33864d15": {
   "who": "jieun",
@@ -5010,15 +5013,15 @@
  "a430eb01": {
   "who": "jieun",
   "sig": "62056bb42d52",
-  "sim": 0.9951,
-  "rate": 4.6,
-  "fall": 40,
+  "sim": 0.994,
+  "rate": 5.45,
+  "fall": 30,
+  "long": 60,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 11:00",
-  "long": 70
+  "at": "2026-11-07 18:45"
  },
  "385906c5": {
   "who": "jieun",
@@ -5119,14 +5122,15 @@
  "d88dfbb6": {
   "who": "jieun",
   "sig": "3d5a05ad8949",
-  "sim": 0.9938,
-  "rate": 4.83,
-  "fall": 70,
+  "sim": 0.9936,
+  "rate": 5.37,
+  "fall": 30,
+  "long": 50,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:36"
+  "at": "2026-11-07 18:45"
  },
  "4058f677": {
   "who": "jieun",
@@ -5248,14 +5252,14 @@
  "05bcb48f": {
   "who": "jieun",
   "sig": "5a1a01d31b42",
-  "sim": 0.9921,
-  "rate": 5.16,
-  "fall": 60,
+  "sim": 0.994,
+  "rate": 5.02,
+  "fall": 70,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:36"
+  "at": "2026-11-07 18:45"
  },
  "cbab4872": {
   "who": "jieun",
@@ -5457,14 +5461,14 @@
  "8eec39a2": {
   "who": "jieun",
   "sig": "5e2cc6a9032b",
-  "sim": 0.994,
-  "rate": 5.04,
-  "fall": 60,
+  "sim": 0.9934,
+  "rate": 5.28,
+  "fall": 70,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:38"
+  "at": "2026-11-07 18:45"
  },
  "942ac349": {
   "who": "jieun",
@@ -8140,14 +8144,14 @@
  "51e2c497": {
   "who": "jieun",
   "sig": "45dab01115b8",
-  "sim": 0.9925,
-  "rate": 5.72,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9937,
+  "rate": 5.82,
+  "fall": 80,
+  "try": 1,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:51"
+  "at": "2026-11-07 18:45"
  },
  "ec585f60": {
   "who": "jieun",
@@ -8324,15 +8328,14 @@
  "9d979839": {
   "who": "jieun",
   "sig": "42fa23ba884f",
-  "sim": 0.9901,
-  "rate": 5.29,
-  "fall": 40,
-  "try": 1,
-  "style": "desc",
+  "sim": 0.9911,
+  "rate": 6.52,
+  "fall": 60,
+  "try": 2,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:53",
-  "long": 100
+  "at": "2026-11-07 18:45"
  },
  "3e9ca345": {
   "who": "jieun",
@@ -8942,14 +8945,14 @@
  "ff35b167": {
   "who": "jieun",
   "sig": "75d65a0ae00b",
-  "sim": 0.994,
+  "sim": 0.9937,
   "rate": 5.0,
-  "fall": 80,
+  "fall": 70,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:56"
+  "at": "2026-11-07 18:45"
  },
  "d4ffe90c": {
   "who": "jieun",
@@ -9265,15 +9268,15 @@
  "873140f3": {
   "who": "jieun",
   "sig": "ffaa6e6b41f7",
-  "sim": 0.9922,
-  "rate": 4.87,
-  "fall": 50,
+  "sim": 0.9934,
+  "rate": 5.6,
+  "fall": 40,
+  "long": 100,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:59",
-  "long": 90
+  "at": "2026-11-07 18:45"
  },
  "358f16b0": {
   "who": "jieun",
@@ -9301,15 +9304,14 @@
  "3e12b186": {
   "who": "jieun",
   "sig": "7fd3d2e7a7ed",
-  "sim": 0.9935,
-  "rate": 5.56,
+  "sim": 0.9941,
+  "rate": 6.02,
   "fall": 60,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:59",
-  "long": 120
+  "at": "2026-11-07 18:45"
  },
  "5901e4f3": {
   "who": "jieun",
@@ -9339,15 +9341,15 @@
  "dc08e77c": {
   "who": "jieun",
   "sig": "b8c05db0aca0",
-  "sim": 0.9924,
-  "rate": 6.12,
-  "fall": 40,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9921,
+  "rate": 5.92,
+  "fall": 30,
+  "long": 100,
+  "try": 1,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 08:59",
-  "long": 60
+  "at": "2026-11-07 18:45"
  },
  "fbdeddee": {
   "who": "jieun",
@@ -9377,14 +9379,14 @@
  "c231caff": {
   "who": "jieun",
   "sig": "a4487deb652d",
-  "sim": 0.992,
-  "rate": 5.43,
-  "fall": 90,
+  "sim": 0.9922,
+  "rate": 6.14,
+  "fall": 60,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 11:05"
+  "at": "2026-11-07 18:45"
  },
  "727babd1": {
   "who": "jieun",
@@ -9447,14 +9449,14 @@
  "c4d2f7b5": {
   "who": "jieun",
   "sig": "6be1c9464a2c",
-  "sim": 0.9858,
-  "rate": 5.0,
-  "fall": 90,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9917,
+  "rate": 5.35,
+  "fall": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:59"
+  "at": "2026-11-07 18:45"
  },
  "bcd6b5bc": {
   "who": "jieun",
@@ -10529,14 +10531,14 @@
  "49e3cdb3": {
   "who": "jieun",
   "sig": "354a95fff26a",
-  "sim": 0.9876,
-  "rate": 4.64,
-  "fall": 60,
+  "sim": 0.9942,
+  "rate": 4.87,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:19"
+  "at": "2026-11-07 18:47"
  },
  "f019eed1": {
   "who": "jieun",
@@ -10752,14 +10754,15 @@
  "da5551ab": {
   "who": "jieun",
   "sig": "68c7aba82ba8",
-  "sim": 0.9931,
-  "rate": 5.71,
-  "fall": 70,
+  "sim": 0.9943,
+  "rate": 5.84,
+  "fall": 40,
+  "long": 110,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 11:08"
+  "at": "2026-11-07 18:47"
  },
  "99b5c832": {
   "who": "jieun",
@@ -11185,14 +11188,14 @@
  "7d8de461": {
   "who": "jieun",
   "sig": "5c6146cac58a",
-  "sim": 0.9915,
-  "rate": 5.03,
+  "sim": 0.9912,
+  "rate": 4.73,
   "fall": 60,
   "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 09:12"
+  "at": "2026-11-07 18:47"
  },
  "9f8bede3": {
   "who": "jieun",
@@ -11221,14 +11224,14 @@
  "2fccf7c9": {
   "who": "jieun",
   "sig": "2e524bb87eee",
-  "sim": 0.993,
-  "rate": 5.5,
-  "fall": 60,
+  "sim": 0.9921,
+  "rate": 6.09,
+  "fall": 80,
   "try": 1,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 09:12"
+  "at": "2026-11-07 18:47"
  },
  "800de68f": {
   "who": "jieun",
@@ -12495,14 +12498,15 @@
  "6c0e77b0": {
   "who": "jieun",
   "sig": "88c89098a05e",
-  "sim": 0.9952,
-  "rate": 4.3,
-  "fall": 60,
-  "try": 1,
-  "style": "desc",
+  "sim": 0.9943,
+  "rate": 5.18,
+  "fall": 40,
+  "long": 80,
+  "try": 2,
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 09:22"
+  "at": "2026-11-07 18:47"
  },
  "31b555a0": {
   "who": "jieun",
@@ -12696,15 +12700,16 @@
  "ce436631": {
   "who": "jieun",
   "sig": "c8ae3e0df03a",
-  "sim": 0.9962,
-  "rate": 3.36,
-  "fall": 40,
+  "sim": 0.995,
+  "rate": 3.97,
+  "fall": 20,
+  "long": 20,
   "try": 3,
   "style": "plain",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-07 10:46",
-  "long": 70
+  "flag": "느림",
+  "at": "2026-11-07 18:47",
+  "tight": 460
  },
  "24f97eed": {
   "who": "jieun",
@@ -14916,15 +14921,15 @@
  "878ae379": {
   "who": "sys",
   "sig": "be08ea4dc0aa",
-  "sim": 0.9719,
-  "rate": 2.23,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9799,
+  "rate": 3.85,
+  "fall": 30,
+  "long": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 12:28"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "78fc3e0d": {
   "who": "sys",
@@ -15067,15 +15072,15 @@
  "637f44ef": {
   "who": "sys",
   "sig": "bf85f9fe7063",
-  "sim": 0.9728,
-  "rate": 2.5,
-  "fall": 50,
-  "long": 120,
-  "try": 2,
+  "sim": 0.9761,
+  "rate": 3.45,
+  "fall": 40,
+  "long": 100,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:30"
+  "at": "2026-11-07 17:53"
  },
  "f0b87167": {
   "who": "sys",
@@ -15105,14 +15110,16 @@
  "b2fe0464": {
   "who": "sys",
   "sig": "974df9c10a07",
-  "sim": 0.9758,
-  "rate": 2.44,
-  "fall": 80,
+  "sim": 0.978,
+  "rate": 2.86,
+  "fall": 40,
+  "long": 80,
   "try": 3,
   "style": "plain",
   "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 12:30"
+  "flag": "",
+  "at": "2026-11-07 17:53",
+  "tight": 370
  },
  "a1cc7845": {
   "who": "sys",
@@ -15129,15 +15136,16 @@
  "33494489": {
   "who": "sys",
   "sig": "91e76fa8f9b1",
-  "sim": 0.9702,
-  "rate": 2.5,
+  "sim": 0.9704,
+  "rate": 2.83,
   "fall": 50,
   "long": 100,
-  "try": 2,
+  "try": 3,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:30"
+  "flag": "길이",
+  "at": "2026-11-07 17:53",
+  "tight": 390
  },
  "7442019e": {
   "who": "sys",
@@ -15180,28 +15188,28 @@
  "59699e40": {
   "who": "sys",
   "sig": "34b720484e75",
-  "sim": 0.973,
-  "rate": 2.4,
-  "fall": 50,
-  "long": 100,
+  "sim": 0.9837,
+  "rate": 3.49,
+  "fall": 40,
+  "long": 70,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 12:30"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "3226cf81": {
   "who": "sys",
   "sig": "7f7fe606c7b4",
-  "sim": 0.9715,
-  "rate": 2.54,
+  "sim": 0.9804,
+  "rate": 3.7,
   "fall": 40,
   "long": 70,
   "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:30"
+  "at": "2026-11-07 17:53"
  },
  "c3336e5d": {
   "who": "sys",
@@ -15401,15 +15409,15 @@
  "14be6b26": {
   "who": "sys",
   "sig": "4bb7493b6517",
-  "sim": 0.9725,
-  "rate": 2.38,
-  "fall": 50,
-  "long": 100,
+  "sim": 0.9854,
+  "rate": 4.22,
+  "fall": 40,
+  "long": 80,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 12:33"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "7506b7f3": {
   "who": "sys",
@@ -15512,27 +15520,28 @@
  "9d6d77e5": {
   "who": "sys",
   "sig": "1c6c16551a0e",
-  "sim": 0.9756,
-  "rate": 2.82,
-  "fall": 50,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9856,
+  "rate": 4.55,
+  "fall": 30,
+  "long": 60,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:33"
+  "at": "2026-11-07 17:53"
  },
  "1146a315": {
   "who": "sys",
   "sig": "48bfa58a1544",
-  "sim": 0.9649,
-  "rate": 2.7,
+  "sim": 0.9765,
+  "rate": 3.23,
   "fall": 60,
-  "try": 2,
+  "try": 1,
   "style": "plain",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:33"
+  "flag": "",
+  "at": "2026-11-07 17:53",
+  "tight": 390
  },
  "34ad935a": {
   "who": "sys",
@@ -15575,15 +15584,15 @@
  "c3e3829a": {
   "who": "sys",
   "sig": "0b766d4f8c92",
-  "sim": 0.9704,
-  "rate": 2.48,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9861,
+  "rate": 4.04,
+  "fall": 40,
+  "long": 50,
+  "try": 2,
+  "style": "desc",
   "emo": false,
-  "flag": "길이",
-  "at": "2026-11-07 12:36"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "c61ade05": {
   "who": "sys",
@@ -15979,14 +15988,14 @@
  "a0a93a7e": {
   "who": "sys",
   "sig": "b648f025cda1",
-  "sim": 0.9703,
-  "rate": 2.62,
-  "fall": 70,
+  "sim": 0.9862,
+  "rate": 4.74,
+  "fall": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:39"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "5ba72682": {
   "who": "sys",
@@ -16080,15 +16089,15 @@
  "185ea5af": {
   "who": "sys",
   "sig": "9ad1fcf748dd",
-  "sim": 0.9869,
-  "rate": 4.74,
+  "sim": 0.9846,
+  "rate": 5.42,
   "fall": 40,
   "long": 80,
-  "try": 1,
+  "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:42"
+  "at": "2026-11-07 17:53"
  },
  "f77c1f86": {
   "who": "sys",
@@ -16233,28 +16242,28 @@
  "7d1a0b8f": {
   "who": "sys",
   "sig": "67c8ed18927b",
-  "sim": 0.989,
-  "rate": 4.5,
+  "sim": 0.9877,
+  "rate": 5.15,
   "fall": 30,
-  "long": 50,
-  "try": 1,
+  "long": 70,
+  "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:45"
+  "at": "2026-11-07 17:53"
  },
  "adc61647": {
   "who": "sys",
   "sig": "856d264f2e6d",
-  "sim": 0.976,
-  "rate": 3.25,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
+  "sim": 0.9835,
+  "rate": 4.39,
+  "fall": 40,
+  "long": 90,
+  "try": 1,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:45"
+  "flag": "느림",
+  "at": "2026-11-07 17:53"
  },
  "83229ac8": {
   "who": "sys",
@@ -16272,15 +16281,15 @@
  "b9fba27b": {
   "who": "sys",
   "sig": "f1179a1bf3fb",
-  "sim": 0.9871,
-  "rate": 4.55,
+  "sim": 0.9837,
+  "rate": 5.15,
   "fall": 40,
-  "long": 80,
-  "try": 1,
+  "long": 70,
+  "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:45"
+  "at": "2026-11-07 17:53"
  },
  "1afa663d": {
   "who": "sys",
@@ -16309,15 +16318,15 @@
  "6b5154f1": {
   "who": "sys",
   "sig": "3e9096da0c54",
-  "sim": 0.9841,
-  "rate": 4.63,
+  "sim": 0.9873,
+  "rate": 5.05,
   "fall": 40,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:45"
+  "at": "2026-11-07 17:57"
  },
  "7b142afb": {
   "who": "sys",
@@ -16532,15 +16541,14 @@
  "6058d0f4": {
   "who": "sys",
   "sig": "7b5a524bec18",
-  "sim": 0.9736,
-  "rate": 2.64,
+  "sim": 0.9766,
+  "rate": 3.48,
   "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:48",
-  "long": 110
+  "flag": "느림",
+  "at": "2026-11-07 17:57"
  },
  "864041e8": {
   "who": "sys",
@@ -16743,15 +16751,15 @@
  "75c2f25e": {
   "who": "sys",
   "sig": "469628c8fa45",
-  "sim": 0.9861,
-  "rate": 4.74,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9871,
+  "rate": 5.19,
+  "fall": 30,
+  "long": 40,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:48"
+  "at": "2026-11-07 17:57"
  },
  "d9339c52": {
   "who": "sys",
@@ -16842,15 +16850,15 @@
  "2d3f367c": {
   "who": "sys",
   "sig": "d6bde68d8fd7",
-  "sim": 0.9771,
-  "rate": 4.51,
+  "sim": 0.9888,
+  "rate": 5.05,
   "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "long": 90,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 12:51"
+  "at": "2026-11-07 17:57"
  },
  "1c57839a": {
   "who": "sys",
@@ -17279,15 +17287,15 @@
  "6923e311": {
   "who": "sys",
   "sig": "35b44fc1d60e",
-  "sim": 0.9757,
-  "rate": 3.49,
+  "sim": 0.9898,
+  "rate": 4.68,
   "fall": 40,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:00"
+  "at": "2026-11-07 17:57"
  },
  "5f0f8205": {
   "who": "sys",
@@ -17330,14 +17338,15 @@
  "800ae679": {
   "who": "sys",
   "sig": "59ed5df8be9e",
-  "sim": 0.9687,
-  "rate": 2.58,
+  "sim": 0.9774,
+  "rate": 3.63,
   "fall": 60,
   "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 13:00"
+  "flag": "느림",
+  "at": "2026-11-07 17:57",
+  "tight": 420
  },
  "87de3033": {
   "who": "sys",
@@ -17555,15 +17564,15 @@
  "38d0feec": {
   "who": "sys",
   "sig": "51af8e7f77f5",
-  "sim": 0.9814,
-  "rate": 3.78,
+  "sim": 0.9865,
+  "rate": 5.7,
   "fall": 40,
   "long": 90,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:06"
+  "at": "2026-11-07 17:57"
  },
  "38e51fdc": {
   "who": "sys",
@@ -19016,15 +19025,15 @@
  "a2cf13f2": {
   "who": "sys",
   "sig": "69d8da6bae7f",
-  "sim": 0.9779,
-  "rate": 4.4,
+  "sim": 0.9883,
+  "rate": 6.16,
   "fall": 30,
-  "long": 60,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:27"
+  "at": "2026-11-07 17:57"
  },
  "a1f82bd2": {
   "who": "sys",
@@ -19505,15 +19514,15 @@
  "1b9f135b": {
   "who": "sys",
   "sig": "286af3d2b474",
-  "sim": 0.9874,
-  "rate": 4.61,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9857,
+  "rate": 5.08,
+  "fall": 50,
+  "long": 100,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:40"
+  "at": "2026-11-07 17:57"
  },
  "e97b50d9": {
   "who": "sys",
@@ -19543,15 +19552,16 @@
  "88411d1c": {
   "who": "sys",
   "sig": "25816f0fcd89",
-  "sim": 0.9765,
-  "rate": 2.97,
-  "fall": 40,
-  "long": 100,
+  "sim": 0.9806,
+  "rate": 3.58,
+  "fall": 50,
+  "long": 110,
   "try": 3,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:40"
+  "flag": "느림",
+  "at": "2026-11-07 17:57",
+  "tight": 440
  },
  "30ac920e": {
   "who": "sys",
@@ -19616,14 +19626,14 @@
  "bac4486a": {
   "who": "sys",
   "sig": "85ecd418d096",
-  "sim": 0.9792,
-  "rate": 3.88,
-  "fall": 70,
+  "sim": 0.9811,
+  "rate": 4.68,
+  "fall": 60,
   "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:40"
+  "at": "2026-11-07 17:57"
  },
  "6377f29b": {
   "who": "sys",
@@ -19713,14 +19723,14 @@
  "a9448193": {
   "who": "sys",
   "sig": "6fdf97e555a5",
-  "sim": 0.98,
-  "rate": 4.24,
-  "fall": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9911,
+  "rate": 5.05,
+  "fall": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:40"
+  "at": "2026-11-07 18:05"
  },
  "0607e5b1": {
   "who": "sys",
@@ -19811,15 +19821,16 @@
  "f354f5a6": {
   "who": "sys",
   "sig": "c6425a015884",
-  "sim": 0.9789,
-  "rate": 3.31,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
+  "sim": 0.9786,
+  "rate": 3.55,
+  "fall": 40,
+  "long": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:40"
+  "flag": "느림",
+  "at": "2026-11-07 18:05",
+  "tight": 420
  },
  "6a3cb023": {
   "who": "sys",
@@ -19873,15 +19884,15 @@
  "0be27446": {
   "who": "sys",
   "sig": "94f0ada7be13",
-  "sim": 0.9893,
-  "rate": 4.61,
-  "fall": 30,
-  "long": 70,
+  "sim": 0.9896,
+  "rate": 5.05,
+  "fall": 40,
+  "long": 90,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:40"
+  "at": "2026-11-07 18:05"
  },
  "f5ad1a1d": {
   "who": "sys",
@@ -20091,15 +20102,15 @@
  "082e171f": {
   "who": "sys",
   "sig": "e54760bc3cb5",
-  "sim": 0.9789,
-  "rate": 4.26,
+  "sim": 0.9904,
+  "rate": 5.15,
   "fall": 30,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:46"
+  "at": "2026-11-07 18:05"
  },
  "b87509fb": {
   "who": "sys",
@@ -20231,15 +20242,15 @@
  "814b0f85": {
   "who": "sys",
   "sig": "221b23e9027f",
-  "sim": 0.9895,
-  "rate": 4.53,
+  "sim": 0.9888,
+  "rate": 4.93,
   "fall": 40,
   "long": 70,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:46"
+  "at": "2026-11-07 18:05"
  },
  "1825464b": {
   "who": "sys",
@@ -20352,14 +20363,15 @@
  "7a61f6b2": {
   "who": "sys",
   "sig": "61ecb1ee45fd",
-  "sim": 0.9826,
-  "rate": 4.47,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9899,
+  "rate": 5.38,
+  "fall": 40,
+  "long": 90,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:46"
+  "at": "2026-11-07 18:05"
  },
  "f279eede": {
   "who": "sys",
@@ -20427,15 +20439,15 @@
  "2472d9e2": {
   "who": "sys",
   "sig": "2dac6ebeaab7",
-  "sim": 0.9895,
-  "rate": 3.81,
-  "fall": 50,
-  "long": 110,
+  "sim": 0.9892,
+  "rate": 3.99,
+  "fall": 40,
+  "long": 60,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:52"
+  "flag": "느림",
+  "at": "2026-11-07 18:05"
  },
  "5cb928c0": {
   "who": "sys",
@@ -20516,14 +20528,15 @@
  "37201d61": {
   "who": "sys",
   "sig": "851e1e950f84",
-  "sim": 0.976,
-  "rate": 4.25,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9907,
+  "rate": 5.26,
+  "fall": 50,
+  "long": 100,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:52"
+  "at": "2026-11-07 18:05"
  },
  "19ef4a9a": {
   "who": "sys",
@@ -20685,15 +20698,16 @@
  "2eaa02b8": {
   "who": "sys",
   "sig": "c7607753488e",
-  "sim": 0.9877,
-  "rate": 3.92,
+  "sim": 0.9818,
+  "rate": 4.26,
   "fall": 40,
-  "long": 70,
-  "try": 1,
-  "style": "desc",
+  "long": 80,
+  "try": 2,
+  "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:52"
+  "flag": "느림",
+  "at": "2026-11-07 18:05",
+  "tight": 380
  },
  "b48f2683": {
   "who": "sys",
@@ -20737,15 +20751,15 @@
  "9f8c3f4d": {
   "who": "sys",
   "sig": "415c722c3f9b",
-  "sim": 0.976,
-  "rate": 3.77,
+  "sim": 0.9907,
+  "rate": 4.71,
   "fall": 40,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:58"
+  "at": "2026-11-07 18:05"
  },
  "6b579d7d": {
   "who": "sys",
@@ -20798,14 +20812,16 @@
  "ffcee3aa": {
   "who": "sys",
   "sig": "beb92ed93a13",
-  "sim": 0.9861,
-  "rate": 3.9,
-  "fall": 90,
-  "try": 3,
+  "sim": 0.9859,
+  "rate": 4.07,
+  "fall": 50,
+  "long": 100,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:58"
+  "flag": "느림",
+  "at": "2026-11-07 18:05",
+  "tight": 440
  },
  "5c56509d": {
   "who": "sys",
@@ -20871,15 +20887,15 @@
  "d7cc10f9": {
   "who": "sys",
   "sig": "b180724dc6a1",
-  "sim": 0.9771,
-  "rate": 4.4,
+  "sim": 0.9901,
+  "rate": 5.69,
   "fall": 30,
-  "long": 50,
-  "try": 3,
-  "style": "plain",
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:58"
+  "at": "2026-11-07 18:05"
  },
  "559f14f9": {
   "who": "sys",
@@ -20958,15 +20974,15 @@
  "dd0ada15": {
   "who": "sys",
   "sig": "968b3ece7b6f",
-  "sim": 0.9834,
-  "rate": 4.92,
+  "sim": 0.9935,
+  "rate": 5.76,
   "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:58"
+  "at": "2026-11-07 18:05"
  },
  "4d2dafa6": {
   "who": "sys",
@@ -21007,15 +21023,15 @@
  "32e87bf3": {
   "who": "sys",
   "sig": "c0adc81dc837",
-  "sim": 0.9754,
-  "rate": 3.7,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9924,
+  "rate": 5.21,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:58"
+  "at": "2026-11-07 18:05"
  },
  "5f74a606": {
   "who": "sys",
@@ -21157,15 +21173,16 @@
  "01ec2a26": {
   "who": "sys",
   "sig": "a40e04b2dc42",
-  "sim": 0.9761,
-  "rate": 3.16,
-  "fall": 50,
-  "long": 130,
-  "try": 3,
+  "sim": 0.9803,
+  "rate": 3.41,
+  "fall": 40,
+  "long": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 14:07"
+  "flag": "느림",
+  "at": "2026-11-07 18:05",
+  "tight": 850
  },
  "e978d380": {
   "who": "sys",
@@ -21182,15 +21199,15 @@
  "214f7502": {
   "who": "sys",
   "sig": "56f6d75eebb1",
-  "sim": 0.9795,
-  "rate": 3.71,
+  "sim": 0.9889,
+  "rate": 5.0,
   "fall": 40,
   "long": 80,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:07"
+  "at": "2026-11-07 18:05"
  },
  "0368fe65": {
   "who": "sys",
@@ -21208,15 +21225,15 @@
  "9e15c449": {
   "who": "sys",
   "sig": "017ecb71b47b",
-  "sim": 0.9782,
-  "rate": 4.1,
-  "fall": 40,
+  "sim": 0.9894,
+  "rate": 5.27,
+  "fall": 30,
   "long": 70,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:07"
+  "at": "2026-11-07 18:18"
  },
  "1cb9d752": {
   "who": "sys",
@@ -21247,15 +21264,15 @@
  "1288a74f": {
   "who": "sys",
   "sig": "aed36d297694",
-  "sim": 0.9808,
-  "rate": 4.31,
+  "sim": 0.9903,
+  "rate": 5.38,
   "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:07"
+  "at": "2026-11-07 18:18"
  },
  "d1f7e803": {
   "who": "sys",
@@ -21272,15 +21289,15 @@
  "a31856be": {
   "who": "sys",
   "sig": "46a04de42725",
-  "sim": 0.9778,
-  "rate": 4.79,
+  "sim": 0.9925,
+  "rate": 6.05,
   "fall": 40,
-  "long": 90,
-  "try": 2,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:07"
+  "at": "2026-11-07 18:18"
  },
  "b525a69c": {
   "who": "sys",
@@ -21333,15 +21350,15 @@
  "c94a9ccc": {
   "who": "sys",
   "sig": "c6713ec48c3a",
-  "sim": 0.9784,
-  "rate": 4.58,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9918,
+  "rate": 5.11,
+  "fall": 20,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:07"
+  "at": "2026-11-07 18:18"
  },
  "60cd2d6d": {
   "who": "sys",
@@ -21358,15 +21375,15 @@
  "0f86b45e": {
   "who": "sys",
   "sig": "4f9fa622572b",
-  "sim": 0.9796,
-  "rate": 3.53,
+  "sim": 0.9922,
+  "rate": 4.95,
   "fall": 40,
   "long": 70,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "cda43c31": {
   "who": "sys",
@@ -21407,15 +21424,15 @@
  "1f8e21ba": {
   "who": "sys",
   "sig": "d360f1c420f4",
-  "sim": 0.9817,
-  "rate": 3.73,
-  "fall": 30,
-  "long": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9901,
+  "rate": 4.17,
+  "fall": 40,
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 14:22"
+  "flag": "느림",
+  "at": "2026-11-07 18:18"
  },
  "c7702d61": {
   "who": "sys",
@@ -21543,41 +21560,41 @@
  "0a3a8fe8": {
   "who": "sys",
   "sig": "dac9869a640b",
-  "sim": 0.9828,
-  "rate": 4.79,
+  "sim": 0.989,
+  "rate": 5.74,
   "fall": 40,
   "long": 70,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "10ea30c8": {
   "who": "sys",
   "sig": "420e5f9d8776",
-  "sim": 0.9765,
-  "rate": 4.14,
-  "fall": 30,
-  "long": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9904,
+  "rate": 5.62,
+  "fall": 20,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "957a702e": {
   "who": "sys",
   "sig": "bcc1a4aefb79",
-  "sim": 0.9914,
-  "rate": 4.23,
+  "sim": 0.9909,
+  "rate": 4.62,
   "fall": 40,
   "long": 80,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "f53950f4": {
   "who": "sys",
@@ -21595,15 +21612,15 @@
  "556e750c": {
   "who": "sys",
   "sig": "bdab3b2917c7",
-  "sim": 0.9759,
-  "rate": 3.81,
-  "fall": 40,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9903,
+  "rate": 5.03,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "fb3d1966": {
   "who": "sys",
@@ -21620,15 +21637,15 @@
  "89c62396": {
   "who": "sys",
   "sig": "3dc9ab82faf6",
-  "sim": 0.9799,
-  "rate": 4.32,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9893,
+  "rate": 5.12,
+  "fall": 30,
+  "long": 70,
   "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "9c8cbf69": {
   "who": "sys",
@@ -21645,28 +21662,28 @@
  "9d12c2f9": {
   "who": "sys",
   "sig": "e5c892b5bca6",
-  "sim": 0.9778,
-  "rate": 3.83,
-  "fall": 50,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9912,
+  "rate": 5.27,
+  "fall": 40,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "5fdc30cf": {
   "who": "sys",
   "sig": "c893cbb4a7cc",
-  "sim": 0.9752,
-  "rate": 3.44,
-  "fall": 50,
+  "sim": 0.9901,
+  "rate": 5.0,
+  "fall": 40,
   "long": 80,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:22"
+  "at": "2026-11-07 18:18"
  },
  "64225801": {
   "who": "sys",
@@ -21797,15 +21814,15 @@
  "045165f2": {
   "who": "sys",
   "sig": "fa766aa628d9",
-  "sim": 0.9771,
-  "rate": 3.9,
-  "fall": 50,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9913,
+  "rate": 4.69,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-07 18:18"
  },
  "789b5dd9": {
   "who": "sys",
@@ -21860,15 +21877,15 @@
  "a841751c": {
   "who": "sys",
   "sig": "8f673a914b70",
-  "sim": 0.9758,
-  "rate": 3.47,
-  "fall": 40,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9896,
+  "rate": 4.73,
+  "fall": 30,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-07 18:18"
  },
  "20c3d9b8": {
   "who": "sys",
@@ -21885,41 +21902,41 @@
  "f2cc05fc": {
   "who": "sys",
   "sig": "b1db9e71dbba",
-  "sim": 0.9839,
-  "rate": 4.67,
+  "sim": 0.9898,
+  "rate": 5.08,
   "fall": 30,
   "long": 70,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-07 18:18"
  },
  "60bc80cb": {
   "who": "sys",
   "sig": "b0c941757ecd",
-  "sim": 0.9752,
-  "rate": 3.93,
+  "sim": 0.9909,
+  "rate": 5.0,
   "fall": 40,
   "long": 80,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-07 18:30"
  },
  "cd9bb8cd": {
   "who": "sys",
   "sig": "1c706fdf37cb",
-  "sim": 0.9843,
-  "rate": 4.67,
-  "fall": 40,
-  "long": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.991,
+  "rate": 5.12,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:40"
+  "at": "2026-11-07 18:30"
  },
  "8f72e669": {
   "who": "sys",
@@ -22011,15 +22028,15 @@
  "b6337fee": {
   "who": "sys",
   "sig": "46343ebb78de",
-  "sim": 0.9779,
-  "rate": 5.0,
+  "sim": 0.9893,
+  "rate": 6.28,
   "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "5334d842": {
   "who": "sys",
@@ -22036,41 +22053,42 @@
  "74abe144": {
   "who": "sys",
   "sig": "f2726f854b93",
-  "sim": 0.9788,
-  "rate": 3.17,
-  "fall": 40,
-  "long": 70,
-  "try": 3,
+  "sim": 0.9793,
+  "rate": 3.51,
+  "fall": 50,
+  "long": 90,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 14:52"
+  "flag": "느림",
+  "at": "2026-11-07 18:30",
+  "tight": 910
  },
  "97006f35": {
   "who": "sys",
   "sig": "63604bd9f00d",
-  "sim": 0.9835,
-  "rate": 4.01,
+  "sim": 0.993,
+  "rate": 4.61,
   "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "c1d6866e": {
   "who": "sys",
   "sig": "7f808a5f6765",
-  "sim": 0.9767,
-  "rate": 3.66,
-  "fall": 50,
+  "sim": 0.9902,
+  "rate": 4.84,
+  "fall": 40,
   "long": 90,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "6d397e90": {
   "who": "sys",
@@ -22087,28 +22105,28 @@
  "47f580d8": {
   "who": "sys",
   "sig": "586f2059c4ff",
-  "sim": 0.978,
-  "rate": 4.28,
+  "sim": 0.9879,
+  "rate": 4.63,
   "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "long": 90,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "36a6066c": {
   "who": "sys",
   "sig": "69401ded6c29",
-  "sim": 0.9763,
-  "rate": 3.58,
-  "fall": 50,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9905,
+  "rate": 5.05,
+  "fall": 40,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "55dd7846": {
   "who": "sys",
@@ -22151,15 +22169,15 @@
  "d7c5a550": {
   "who": "sys",
   "sig": "db3a0e68d811",
-  "sim": 0.9831,
-  "rate": 4.34,
-  "fall": 40,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 5.0,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "e8d19340": {
   "who": "sys",
@@ -22189,15 +22207,15 @@
  "3b16b818": {
   "who": "sys",
   "sig": "3274540bf401",
-  "sim": 0.9775,
-  "rate": 4.11,
+  "sim": 0.9875,
+  "rate": 5.15,
   "fall": 40,
   "long": 70,
   "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "8918248d": {
   "who": "sys",
@@ -22227,15 +22245,15 @@
  "36729389": {
   "who": "sys",
   "sig": "9ac7875c476e",
-  "sim": 0.9782,
-  "rate": 4.16,
+  "sim": 0.9914,
+  "rate": 5.34,
   "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 14:52"
+  "at": "2026-11-07 18:30"
  },
  "2a314f2f": {
   "who": "sys",
@@ -22291,15 +22309,15 @@
  "68b14013": {
   "who": "sys",
   "sig": "9d3f2ad1e24c",
-  "sim": 0.9754,
-  "rate": 3.97,
+  "sim": 0.9884,
+  "rate": 5.5,
   "fall": 40,
-  "long": 90,
-  "try": 2,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 18:30"
  },
  "7342871f": {
   "who": "sys",
@@ -22317,67 +22335,68 @@
  "f26f530f": {
   "who": "sys",
   "sig": "b0e2f2b33eea",
-  "sim": 0.9757,
-  "rate": 4.04,
+  "sim": 0.9921,
+  "rate": 5.34,
   "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 18:30"
  },
  "b25e7cba": {
   "who": "sys",
   "sig": "7e88ae4b1d0e",
-  "sim": 0.9752,
-  "rate": 4.1,
+  "sim": 0.9944,
+  "rate": 5.72,
   "fall": 40,
   "long": 70,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 18:30"
  },
  "1465c84a": {
   "who": "sys",
   "sig": "55c43424b5f2",
-  "sim": 0.9755,
-  "rate": 4.34,
-  "fall": 50,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 15:04"
- },
- "3471637e": {
-  "who": "sys",
-  "sig": "281f3092d8ce",
   "sim": 0.9906,
-  "rate": 4.57,
+  "rate": 5.6,
   "fall": 30,
   "long": 60,
   "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 18:30"
+ },
+ "3471637e": {
+  "who": "sys",
+  "sig": "281f3092d8ce",
+  "sim": 0.988,
+  "rate": 4.81,
+  "fall": 30,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 18:30"
  },
  "04fc6ef8": {
   "who": "sys",
   "sig": "156fed970a76",
-  "sim": 0.9843,
-  "rate": 4.64,
+  "sim": 0.9835,
+  "rate": 4.89,
   "fall": 40,
-  "long": 70,
-  "try": 2,
+  "long": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 19:09",
+  "tight": 440
  },
  "fdd039f3": {
   "who": "sys",
@@ -22507,15 +22526,15 @@
  "3ed35b72": {
   "who": "sys",
   "sig": "212e7b9f11c1",
-  "sim": 0.9799,
-  "rate": 4.24,
-  "fall": 40,
-  "long": 90,
+  "sim": 0.9929,
+  "rate": 5.59,
+  "fall": 30,
+  "long": 40,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:04"
+  "at": "2026-11-07 19:09"
  },
  "1314be5c": {
   "who": "sys",
@@ -22545,54 +22564,55 @@
  "ba816722": {
   "who": "sys",
   "sig": "66b8baadb31e",
-  "sim": 0.9757,
-  "rate": 3.86,
-  "fall": 40,
-  "long": 70,
+  "sim": 0.9924,
+  "rate": 5.54,
+  "fall": 30,
+  "long": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "b4fd42b7": {
   "who": "sys",
   "sig": "682a8ec74a2d",
-  "sim": 0.9852,
-  "rate": 4.62,
-  "fall": 40,
-  "long": 60,
+  "sim": 0.9912,
+  "rate": 5.73,
+  "fall": 30,
+  "long": 50,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "81425c9b": {
   "who": "sys",
   "sig": "8e278d6cf34d",
-  "sim": 0.976,
-  "rate": 3.62,
+  "sim": 0.992,
+  "rate": 5.59,
   "fall": 40,
-  "long": 90,
+  "long": 70,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "d1522877": {
   "who": "sys",
   "sig": "0442e3ede2c0",
-  "sim": 0.9797,
-  "rate": 4.26,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9923,
+  "rate": 5.48,
+  "fall": 30,
+  "long": 70,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09",
+  "tight": 390
  },
  "2f19d699": {
   "who": "sys",
@@ -22623,15 +22643,15 @@
  "586d8f1c": {
   "who": "sys",
   "sig": "6401fcafe88e",
-  "sim": 0.976,
-  "rate": 3.63,
+  "sim": 0.9926,
+  "rate": 4.98,
   "fall": 40,
-  "long": 70,
+  "long": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "593a93a2": {
   "who": "sys",
@@ -22649,15 +22669,15 @@
  "12247859": {
   "who": "sys",
   "sig": "deadbe2d9f59",
-  "sim": 0.9763,
-  "rate": 4.84,
+  "sim": 0.9896,
+  "rate": 5.63,
   "fall": 40,
-  "long": 70,
+  "long": 80,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "c267213f": {
   "who": "sys",
@@ -22674,15 +22694,14 @@
  "bd5f84a4": {
   "who": "sys",
   "sig": "19a554705581",
-  "sim": 0.9836,
-  "rate": 5.02,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.99,
+  "rate": 5.11,
+  "fall": 60,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:09"
  },
  "be3d1828": {
   "who": "sys",
@@ -22738,14 +22757,15 @@
  "9e83ef41": {
   "who": "sys",
   "sig": "a99b54c8b92d",
-  "sim": 0.9814,
-  "rate": 4.53,
-  "fall": 70,
+  "sim": 0.9861,
+  "rate": 5.03,
+  "fall": 60,
   "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:12",
+  "tight": 420
  },
  "1e0c4e12": {
   "who": "sys",
@@ -22762,15 +22782,15 @@
  "24a3a37e": {
   "who": "sys",
   "sig": "141287cef423",
-  "sim": 0.9755,
-  "rate": 4.34,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9916,
+  "rate": 5.03,
+  "fall": 20,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:20"
+  "at": "2026-11-07 19:12"
  },
  "7c7fa69d": {
   "who": "sys",
@@ -22800,28 +22820,28 @@
  "21ba26cd": {
   "who": "sys",
   "sig": "076fe0a0049f",
-  "sim": 0.9918,
-  "rate": 4.53,
-  "fall": 50,
+  "sim": 0.9906,
+  "rate": 4.44,
+  "fall": 30,
   "long": 70,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 15:34"
+  "flag": "느림",
+  "at": "2026-11-07 19:12"
  },
  "8ce243f0": {
   "who": "sys",
   "sig": "671aee9ca117",
-  "sim": 0.9777,
-  "rate": 4.3,
+  "sim": 0.9914,
+  "rate": 5.25,
   "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "fe2abb7f": {
   "who": "sys",
@@ -22890,28 +22910,28 @@
  "36d4f440": {
   "who": "sys",
   "sig": "bc2fa126f786",
-  "sim": 0.9772,
-  "rate": 3.7,
+  "sim": 0.9885,
+  "rate": 4.7,
   "fall": 40,
-  "long": 90,
-  "try": 2,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "70b2272b": {
   "who": "sys",
   "sig": "b384fde1812a",
-  "sim": 0.9756,
-  "rate": 3.89,
-  "fall": 50,
+  "sim": 0.9904,
+  "rate": 4.91,
+  "fall": 30,
   "long": 80,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "acacd59d": {
   "who": "sys",
@@ -22929,28 +22949,28 @@
  "50488902": {
   "who": "sys",
   "sig": "40956645edb8",
-  "sim": 0.9787,
-  "rate": 4.28,
+  "sim": 0.9915,
+  "rate": 5.65,
   "fall": 40,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "231c4301": {
   "who": "sys",
   "sig": "df7eec4929e0",
-  "sim": 0.9761,
-  "rate": 4.13,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9918,
+  "rate": 6.34,
+  "fall": 30,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "89b4efc9": {
   "who": "sys",
@@ -22967,28 +22987,28 @@
  "8df8ab97": {
   "who": "sys",
   "sig": "20153261d733",
-  "sim": 0.9759,
-  "rate": 4.06,
-  "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 5.0,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:12"
  },
  "dc49a2d8": {
   "who": "sys",
   "sig": "5ef99d8c35d8",
-  "sim": 0.9779,
-  "rate": 4.34,
-  "fall": 40,
-  "long": 90,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9918,
+  "rate": 6.27,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:34"
+  "at": "2026-11-07 19:27"
  },
  "879b1870": {
   "who": "sys",
@@ -23091,15 +23111,15 @@
  "4ed0e9b3": {
   "who": "sys",
   "sig": "8f861850554e",
-  "sim": 0.9795,
-  "rate": 4.33,
-  "fall": 50,
-  "long": 110,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9919,
+  "rate": 5.61,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "4232115d": {
   "who": "sys",
@@ -23116,28 +23136,28 @@
  "2f97de90": {
   "who": "sys",
   "sig": "fde687a764e9",
-  "sim": 0.9812,
-  "rate": 4.81,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9917,
+  "rate": 5.68,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "467a5ac1": {
   "who": "sys",
   "sig": "b310811434c4",
-  "sim": 0.9757,
-  "rate": 3.72,
-  "fall": 40,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9908,
+  "rate": 5.01,
+  "fall": 20,
+  "long": 40,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "1fbc82d3": {
   "who": "sys",
@@ -23193,28 +23213,28 @@
  "bebab628": {
   "who": "sys",
   "sig": "b3514f8acf5b",
-  "sim": 0.977,
-  "rate": 4.23,
-  "fall": 40,
+  "sim": 0.9914,
+  "rate": 5.59,
+  "fall": 30,
   "long": 80,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "c87ba4d5": {
   "who": "sys",
   "sig": "e2eb61a4c019",
-  "sim": 0.9814,
-  "rate": 4.42,
-  "fall": 40,
+  "sim": 0.991,
+  "rate": 6.16,
+  "fall": 30,
   "long": 80,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "390e4927": {
   "who": "sys",
@@ -23320,54 +23340,55 @@
  "9ddb1e0c": {
   "who": "sys",
   "sig": "4535604f2f8f",
-  "sim": 0.9775,
-  "rate": 4.55,
-  "fall": 40,
-  "long": 80,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9917,
+  "rate": 5.99,
+  "fall": 30,
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "706ae731": {
   "who": "sys",
   "sig": "8b5372bc1f5b",
-  "sim": 0.9762,
-  "rate": 4.51,
+  "sim": 0.9917,
+  "rate": 6.23,
   "fall": 40,
   "long": 80,
-  "try": 2,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:27"
  },
  "c8c57009": {
   "who": "sys",
   "sig": "b76d5e68d666",
-  "sim": 0.9804,
-  "rate": 4.19,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9911,
+  "rate": 5.01,
+  "fall": 30,
+  "long": 40,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 15:46"
+  "at": "2026-11-07 19:30"
  },
  "2f712ba7": {
   "who": "sys",
   "sig": "ccf25002f30d",
-  "sim": 0.9752,
-  "rate": 4.37,
-  "fall": 50,
-  "long": 90,
+  "sim": 0.9825,
+  "rate": 5.19,
+  "fall": 30,
+  "long": 70,
   "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:30",
+  "tight": 430
  },
  "498e8404": {
   "who": "sys",
@@ -23384,15 +23405,15 @@
  "72781a6c": {
   "who": "sys",
   "sig": "528dd0d446d5",
-  "sim": 0.9807,
-  "rate": 4.85,
+  "sim": 0.9903,
+  "rate": 5.49,
   "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "long": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:30"
  },
  "6a24faba": {
   "who": "sys",
@@ -23422,27 +23443,28 @@
  "797349bf": {
   "who": "sys",
   "sig": "d8420f433385",
-  "sim": 0.9759,
-  "rate": 4.17,
-  "fall": 50,
-  "long": 70,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 5.96,
+  "fall": 30,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:30"
  },
  "677e66d5": {
   "who": "sys",
   "sig": "01b3f7ee1322",
-  "sim": 0.977,
-  "rate": 3.84,
-  "fall": 70,
-  "try": 3,
+  "sim": 0.9764,
+  "rate": 4.32,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:05"
+  "flag": "느림",
+  "at": "2026-11-07 19:30",
+  "tight": 1310
  },
  "e17998ea": {
   "who": "sys",
@@ -23472,41 +23494,41 @@
  "522be685": {
   "who": "sys",
   "sig": "ae2c8aea57a0",
-  "sim": 0.9768,
-  "rate": 3.94,
+  "sim": 0.992,
+  "rate": 4.75,
   "fall": 40,
   "long": 80,
-  "try": 3,
-  "style": "plain",
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:32"
  },
  "a431c930": {
   "who": "sys",
   "sig": "15be972d447d",
-  "sim": 0.9813,
-  "rate": 4.5,
+  "sim": 0.9907,
+  "rate": 5.18,
   "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "long": 100,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:32"
  },
  "eb43476f": {
   "who": "sys",
   "sig": "ed77771497ad",
-  "sim": 0.9786,
-  "rate": 4.02,
-  "fall": 50,
-  "long": 70,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9923,
+  "rate": 5.42,
+  "fall": 40,
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:32"
  },
  "a4b50a63": {
   "who": "sys",
@@ -23572,14 +23594,15 @@
  "1603c3c5": {
   "who": "sys",
   "sig": "1e1ffa628d6b",
-  "sim": 0.9763,
-  "rate": 4.05,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9795,
+  "rate": 4.57,
+  "fall": 70,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:05"
+  "flag": "느림",
+  "at": "2026-11-07 19:32",
+  "tight": 460
  },
  "452828e3": {
   "who": "sys",
@@ -23621,15 +23644,15 @@
  "b83fcaab": {
   "who": "sys",
   "sig": "b6777f2e159b",
-  "sim": 0.9861,
-  "rate": 4.71,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
+  "sim": 0.9928,
+  "rate": 5.69,
+  "fall": 20,
+  "long": 50,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:16"
+  "at": "2026-11-07 19:32"
  },
  "dfede2e2": {
   "who": "sys",
@@ -24063,14 +24086,15 @@
  "88a712ab": {
   "who": "owner",
   "sig": "3ec3b8f6690e",
-  "sim": 0.988,
-  "rate": 4.37,
-  "fall": 100,
+  "sim": 0.9807,
+  "rate": 5.05,
+  "fall": 30,
+  "long": 80,
   "try": 2,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 16:08"
+  "at": "2026-11-07 19:32"
  },
  "3f72611f": {
   "who": "owner",
@@ -24907,26 +24931,26 @@
  "131eab74": {
   "who": "owner",
   "sig": "5b0ad84e2c72",
-  "sim": 0.9877,
-  "rate": 5.11,
-  "fall": 110,
-  "try": 1,
+  "sim": 0.9851,
+  "rate": 5.69,
+  "fall": 140,
+  "try": 2,
   "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 16:13"
+  "at": "2026-11-07 19:32"
  },
  "ea114144": {
   "who": "owner",
   "sig": "dc1aeeeba5bf",
-  "sim": 0.9802,
-  "rate": 4.28,
-  "fall": 110,
-  "try": 1,
-  "style": "desc",
+  "sim": 0.9638,
+  "rate": 4.94,
+  "fall": 200,
+  "try": 3,
+  "style": "plain",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-07 16:13"
+  "flag": "목소리",
+  "at": "2026-11-07 19:32"
  },
  "fc095792": {
   "who": "owner",
@@ -29561,15 +29585,14 @@
  "6f080e6d": {
   "who": "customer-olive",
   "sig": "b88a6e7e8805",
-  "sim": 0.9907,
-  "rate": 5.08,
-  "fall": 40,
-  "long": 60,
-  "try": 1,
-  "style": "desc",
+  "sim": 0.9841,
+  "rate": 5.96,
+  "fall": 70,
+  "try": 3,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:22"
+  "at": "2026-11-07 19:33"
  },
  "69e57829": {
   "who": "customer-olive",
@@ -29697,15 +29720,15 @@
  "14265395": {
   "who": "customer-olive",
   "sig": "7aeec13d217f",
-  "sim": 0.991,
-  "rate": 4.78,
+  "sim": 0.9931,
+  "rate": 5.28,
   "fall": 40,
   "long": 70,
-  "try": 3,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:22"
+  "at": "2026-11-07 19:33"
  },
  "44f5ae42": {
   "who": "customer-olive",
@@ -30953,14 +30976,14 @@
  "fca5cc50": {
   "who": "jian",
   "sig": "e73104f10423",
-  "sim": 0.9901,
-  "rate": 3.92,
-  "fall": 30,
+  "sim": 0.9891,
+  "rate": 4.29,
+  "fall": 20,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-07 16:23"
+  "at": "2026-11-07 19:33"
  },
  "b46bc0bc": {
   "who": "jian",
@@ -32428,14 +32451,14 @@
  "ec30ecb4": {
   "who": "customer-sporty",
   "sig": "23218cefab3f",
-  "sim": 0.9808,
-  "rate": 4.27,
-  "fall": 70,
+  "sim": 0.981,
+  "rate": 5.21,
+  "fall": 60,
   "try": 2,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:24"
+  "at": "2026-11-07 19:33"
  },
  "6ae2fb7c": {
   "who": "customer-sporty",
@@ -32500,15 +32523,15 @@
  "81b8a164": {
   "who": "customer-sporty",
   "sig": "4d1a732e9334",
-  "sim": 0.9872,
-  "rate": 4.81,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9843,
+  "rate": 5.1,
+  "fall": 50,
+  "long": 100,
   "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:24"
+  "at": "2026-11-07 19:33"
  },
  "9c738667": {
   "who": "customer-sporty",
@@ -32854,15 +32877,16 @@
  "39cae6dd": {
   "who": "eunju",
   "sig": "421ea66e7095",
-  "sim": 0.976,
-  "rate": 2.45,
+  "sim": 0.9806,
+  "rate": 2.75,
   "fall": 40,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
+  "long": 70,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "길이",
-  "at": "2026-11-07 16:25"
+  "at": "2026-11-07 19:34",
+  "tight": 450
  },
  "ea0f895a": {
   "who": "eunju",
@@ -35067,14 +35091,14 @@
   "who": "customer-coffee",
   "sig": "0941c2d4226a",
   "sim": 0.9845,
-  "rate": 3.72,
-  "fall": 50,
-  "long": 100,
-  "try": 1,
-  "style": "desc",
+  "rate": 4.59,
+  "fall": 40,
+  "long": 70,
+  "try": 3,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:28"
+  "at": "2026-11-07 19:34"
  },
  "62e824eb": {
   "who": "customer-coffee",
@@ -35129,15 +35153,15 @@
  "3298a48b": {
   "who": "customer-coffee",
   "sig": "e2382b3d4c24",
-  "sim": 0.9876,
-  "rate": 4.05,
-  "fall": 40,
-  "long": 100,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9865,
+  "rate": 5.17,
+  "fall": 50,
+  "long": 80,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:28"
+  "at": "2026-11-07 19:34"
  },
  "15240504": {
   "who": "customer-coffee",
@@ -35353,15 +35377,15 @@
  "b183f349": {
   "who": "customer-coffee",
   "sig": "a7212110f684",
-  "sim": 0.9866,
-  "rate": 4.51,
-  "fall": 40,
-  "long": 80,
+  "sim": 0.9864,
+  "rate": 5.04,
+  "fall": 50,
+  "long": 90,
   "try": 2,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:28"
+  "at": "2026-11-07 19:34"
  },
  "7c2bdf26": {
   "who": "customer-coffee",
@@ -40245,14 +40269,15 @@
  "4b019950": {
   "who": "sys",
   "sig": "4881ed808fd4",
-  "sim": 0.9709,
-  "rate": 4.17,
-  "fall": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9882,
+  "rate": 4.9,
+  "fall": 20,
+  "long": 40,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:48"
+  "flag": "",
+  "at": "2026-11-07 17:57"
  },
  "10257f7c": {
   "who": "sys",
@@ -40293,14 +40318,15 @@
  "504e9dee": {
   "who": "sys",
   "sig": "a966add7eb62",
-  "sim": 0.9715,
-  "rate": 4.27,
-  "fall": 60,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9873,
+  "rate": 5.0,
+  "fall": 40,
+  "long": 80,
+  "try": 1,
+  "style": "desc",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:48"
+  "flag": "",
+  "at": "2026-11-07 17:57"
  },
  "6d26e1f1": {
   "who": "sys",
@@ -40998,15 +41024,15 @@
  "9409d88f": {
   "who": "sys",
   "sig": "b8f753df7441",
-  "sim": 0.9847,
-  "rate": 3.87,
-  "fall": 40,
-  "long": 80,
-  "try": 2,
-  "style": "plain",
+  "sim": 0.9864,
+  "rate": 4.58,
+  "fall": 30,
+  "long": 60,
+  "try": 1,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 13:06"
+  "at": "2026-11-07 17:57"
  },
  "da63e89e": {
   "who": "sys",
@@ -41062,15 +41088,15 @@
  "bd0c1f20": {
   "who": "sys",
   "sig": "3dfe763c3d7e",
-  "sim": 0.9853,
-  "rate": 4.4,
-  "fall": 50,
-  "long": 100,
+  "sim": 0.989,
+  "rate": 4.49,
+  "fall": 40,
+  "long": 70,
   "try": 1,
   "style": "desc",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-07 13:09"
+  "flag": "느림",
+  "at": "2026-11-07 17:57"
  },
  "a6d150a3": {
   "who": "sys",
@@ -41887,14 +41913,15 @@
  "368a915c": {
   "who": "sys",
   "sig": "678a4e86c427",
-  "sim": 0.9702,
-  "rate": 3.21,
-  "fall": 60,
-  "try": 3,
-  "style": "plain",
+  "sim": 0.9877,
+  "rate": 4.74,
+  "fall": 30,
+  "long": 50,
+  "try": 2,
+  "style": "desc",
   "emo": false,
-  "flag": "목소리",
-  "at": "2026-11-07 12:39"
+  "flag": "",
+  "at": "2026-11-07 17:53"
  },
  "b00268ff": {
   "who": "sys",
@@ -41973,28 +42000,29 @@
  "a32d2aeb": {
   "who": "sys",
   "sig": "97b18d5719e9",
-  "sim": 0.9765,
-  "rate": 4.52,
+  "sim": 0.9903,
+  "rate": 5.42,
+  "fall": 30,
+  "long": 50,
+  "try": 1,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 19:30"
+ },
+ "385de1d0": {
+  "who": "sys",
+  "sig": "787584680d10",
+  "sim": 0.9844,
+  "rate": 5.36,
   "fall": 40,
   "long": 90,
   "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 16:05"
- },
- "385de1d0": {
-  "who": "sys",
-  "sig": "787584680d10",
-  "sim": 0.9757,
-  "rate": 4.51,
-  "fall": 50,
-  "long": 110,
-  "try": 3,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 16:05"
+  "at": "2026-11-07 19:30",
+  "tight": 410
  },
  "e1f950b4": {
   "who": "sys",

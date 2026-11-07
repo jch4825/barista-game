@@ -17,6 +17,10 @@ Qwen3 TTS로 대사 음성 만들기(사용자 결정 2026-11-05 '새 ②', 검�
      ㄱ · ㄷ · ㅂ 소리 받침으로 끝나는 말('창밖' · '머그컵')은 원래 끝이 짧아 끝 검사를 하지 않음.
   6. 그래도 끝이 50ms 안에 사라지는 줄은 '끝 늘이기'(stretch_end): 마지막 글자가 잦아드는 부분만 높낮이 그대로 늘여 0.1초쯤에 걸쳐 잦아들게
      (사용자 2026-11-07 '끝 늘이기가 맞다'). 이미 만든 파일은 --stretch 로(모델 없이 몇 분).
+  7. 그 사람의 평소 빠르기(기록의 1초에 몇 자, 가운데 값)보다 15% 넘게 느린 후보는 '느림'으로 낮게 침(끝 길이보다 먼저).
+     끝이 천천히 잦아드는 후보만 고르니 문장 사이를 1초씩 쉬며 천천히 읽은 후보가 뽑혀, 안내 163줄이 느려졌음(검수 13.70 '새 배지').
+     말 앞의 조용한 곳은 0.12초만 남김. 후보가 모두 느리면(목록처럼 끊어 읽는 줄: 마침표마다 1초씩 쉼) 0.95초 넘는 쉼의 조용한 가운데만
+     잘라 0.6초(나레이션 0.8초)로 줄임(tighten_pauses, 소리 나는 곳은 그대로라 목소리가 바뀌지 않음).
 입력: tools/voice/lines.json(npm run lines) · qwen_cast.json · emotions.json
 출력: assets/voice/lines/{key}.ogg(Opus 40k, 게임과 같은 이름) · assets/voice/manifest.json
 기록: tools/voice/qwen_made.json(줄마다 사람 · 닮음 · 빠르기 · 시도 · 표시 · 서명). 서명(본보기 · 문장 · 감정 지시)이 바뀐 줄만 다시 만듦.
@@ -42,7 +46,7 @@ BASE_MODEL = "Qwen3-TTS-12Hz-1.7B-Base"
 LANG = "Korean"
 K = 2            # 다시 만들 때 한 줄의 후보 수(첫 시도는 하나: 대부분 첫 시도에 통과함)
 BATCH = 16       # 한 번에 만드는 줄 수
-SYL_BUDGET = 1024  # 한 묶음의 글자 수 합(후보마다 셈): 16줄 × 후보 2 × 32자. 긴 줄은 이보다 덜 묶음(검수 13.69)
+SYL_BUDGET = 640   # 한 묶음의 글자 수 합(후보마다 셈). 긴 줄은 이보다 덜 묶음(검수 13.69: 1024 로도 안내의 긴 줄을 다시 만들 때 메모리가 넘쳐 묶음 하나에 12분, 검수 13.70)
 SIM_MIN = 0.975  # 본보기와 이만큼 닮지 않으면 다시(짧은 줄은 지문이 덜 정확해 0.97). 흔들린 사장님 줄은 0.96 ~ 0.97이었음
 SR_OUT = 24000
 TOKENS_PER_SEC = 12.5  # 12Hz 말소리 토큰
@@ -83,6 +87,50 @@ def cut_end(w, sr) -> bool:
 
 ABRUPT_MS = 50  # 말 끝이 이보다 빨리 사라지면 '끝 소리가 끊김'(마지막 '다' · '요'가 반쯤에서 뚝: 모델이 말을 다 하기 전에 멈춤, 검수 13.68. 처음 30 → 40 · 50ms 줄도 끊겨 들려 50, 검수 13.69)
 LONG_MS = 100   # 후보 가운데 고를 때 끝이 이만큼 천천히 잦아드는 것까지 더 낫게 침(사용자 2026-11-07 '100ms', 검수 13.69)
+PACE_MIN = 0.85  # 그 사람의 평소 빠르기(가운데 값)의 이만큼보다 느리면 '느림': 끝만 보고 고르니 문장 사이를 1초씩 쉬는 후보가 뽑혔음(검수 13.70)
+LEAD_S = 0.12    # 말 앞의 조용한 곳은 이만큼만 남김(다시 만든 안내가 0.5초 늦게 말을 시작했음, 검수 13.70)
+
+
+def pace_norm(pid: str, made: dict, text_of: dict) -> float:
+    """그 사람의 평소 빠르기: 기록된 줄(9자 이상)의 1초에 몇 자, 가운데 값. 기록이 적으면 0(빠르기를 보지 않음)"""
+    v = sorted(r["rate"] for k, r in made.items() if r.get("who") == pid and r.get("rate") and syllables(text_of.get(k, "")) > 8)
+    return float(v[len(v) // 2]) if len(v) >= 10 else 0.0
+
+
+PAUSE_MAX = 0.95  # 말 사이 쉼이 이보다 길면 줄임(다시 만들어도 느린 줄만: 모델이 마침표마다 1초씩 쉬었음, 검수 13.70)
+PAUSE_KEEP = {"jieun": 0.8}  # 줄여서 남기는 쉼(초). 나레이션 · 속마음(지은의 목소리)은 원래 문장 사이를 길게 쉬어 0.8, 그 밖 0.6
+PAUSE_KEEP_DEFAULT = 0.6
+
+
+def tighten_pauses(w, sr, keep: float):
+    """말 사이의 긴 쉼(PAUSE_MAX 초 넘게 조용한 곳)을 keep 초로: 조용한 곳의 가운데만 잘라내고 10ms 를 겹쳐 이음. → (소리, 줄인 ms)"""
+    import numpy as np
+    w = np.asarray(w, dtype=np.float32)
+    h = max(1, int(sr * 0.01)); nf = len(w) // h
+    if nf < 20:
+        return w, 0
+    db = 20 * np.log10(np.sqrt((w[: nf * h].reshape(nf, h) ** 2).mean(1)) + 1e-9)
+    idx = np.where(db > max(float(db.max()) - 35, -50))[0]
+    cuts = []
+    for a, b in zip(idx[:-1], idx[1:]):
+        quiet = (int(b) - int(a) - 1) * h
+        if quiet > PAUSE_MAX * sr:
+            s0 = (int(a) + 1) * h + int(keep * sr / 2)
+            cuts.append((s0, s0 + quiet - int(keep * sr)))
+    if not cuts:
+        return w, 0
+    xf = int(sr * 0.01); r = np.linspace(0, 1, xf, dtype=np.float32)
+    removed = 0
+    for s0, s1 in reversed(cuts):  # 뒤에서부터 잘라야 앞 자리가 그대로
+        mix = w[s0:s0 + xf] * (1 - r) + w[s1:s1 + xf] * r
+        w = np.concatenate([w[:s0], mix, w[s1 + xf:]])
+        removed += s1 - s0
+    return w, int(removed * 1000 / sr)
+
+
+def pace_ok(rate: float, text: str, norm: float) -> bool:
+    """짧은 말('덜컹!')은 원래 빠르기가 들쭉날쭉해 보지 않음"""
+    return syllables(text) <= 8 or not norm or rate >= PACE_MIN * norm
 
 
 def fall_ms(w, sr) -> int:
@@ -204,6 +252,15 @@ def trim(w, sr, end):
     import numpy as np
     cut = min(len(w), int((end + 0.25) * sr))
     w = np.array(w[:cut], dtype=np.float32)
+    h = max(1, int(sr * 0.01)); nf = len(w) // h
+    if nf > 10:  # 말 앞의 조용한 곳은 LEAD_S 만(약한 첫소리 'ㅅ' · 'ㅎ'이 잘리지 않게 가장 큰 소리 -45 dB 위부터 셈)
+        db = 20 * np.log10(np.sqrt((w[: nf * h].reshape(nf, h) ** 2).mean(1)) + 1e-9)
+        on = np.where(db > max(float(db.max()) - 45, -60))[0]
+        a = max(0, int(on[0]) * h - int(sr * LEAD_S)) if len(on) else 0
+        if a > 0:
+            w = w[a:]
+            m = min(len(w), int(sr * 0.005))
+            w[:m] *= np.linspace(0, 1, m, dtype=np.float32)
     peak = float(np.max(np.abs(w))) if len(w) else 0.0
     if peak > 0.98:
         w = w * (0.98 / peak)
@@ -407,8 +464,10 @@ def main() -> int:
         items.sort(key=lambda t: syllables(t["text"]))
     t0 = time.time()
     done_n, flagged = 0, 0
+    text_of = {l["key"]: l["text"] for l in lines}
     for pid, items in by_person.items():
         item, a_emb = anchor(pid)
+        norm = pace_norm(pid, made, text_of)  # 평소 빠르기(검수 13.70)
         desc = qcast[pid]["en"]
         first = {"ok": 0, "n": 0}  # 첫 시도(감정 지시만)로 통과한 수: 절반 밑이면 그 사람은 목소리 설명부터(사장님)
         # 한 번에 만드는 소리는 평소(16줄 × 후보 2)만큼까지: --flagged(후보 4)에서 16줄씩이면 그래픽카드 메모리가 모자랐음(검수 13.68)
@@ -459,9 +518,11 @@ def main() -> int:
                         fall = fall_ms(trim(w, sr, end), sr)  # 끝 소리가 반쯤에서 뚝 끊긴 후보도 다시(검수 13.68: 지은의 줄 절반이 그랬음). 파일에 들어갈 소리로 잼: 말 뒤 0.25초 밖의 잡음을 '긴 끝'으로 치지 않게(검수 13.69)
                         sim = float(a_emb @ emb(w, sr))
                         fine = fall_ok(fall, t["text"])  # ㄱ · ㄷ · ㅂ 받침으로 끝나는 말은 끝이 짧아도 괜찮음(검수 13.69)
-                        cand = {"ok": ok and not cut and fine, "len_ok": ok, "cut": cut or not fine, "fall": fall, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
+                        pace = pace_ok(rate, t["text"], norm)
+                        cand = {"ok": ok and not cut and fine and pace, "len_ok": ok, "cut": cut or not fine, "pace": pace, "fall": fall, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
                         cur = best[t["key"]]
-                        rank = lambda c: (c["ok"], c["sim"] >= sim_min(t["text"]), 0 if closed_end(t["text"]) else min(c["fall"], LONG_MS), c["sim"])  # 목소리가 닮은 것이 끝 길이보다 먼저(아주 짧은 말이 흔들렸음, 검수 13.69)
+                        # 목소리가 닮은 것이 끝 길이보다 먼저(아주 짧은 말이 흔들렸음, 검수 13.69). 빠르기도 끝 길이보다 먼저(검수 13.70: 끝이 긴 후보 = 천천히 쉬며 읽은 후보였음)
+                        rank = lambda c: (c["ok"], c["sim"] >= sim_min(t["text"]), c["pace"], 0 if closed_end(t["text"]) else min(c["fall"], LONG_MS), c["sim"])
                         if cur is None or rank(cand) > rank(cur):
                             best[t["key"]] = cand
                     if attempt == 1:
@@ -474,12 +535,18 @@ def main() -> int:
                     print(f"  ✗ {t['key']} ({pid}) 만들지 못함: {t['text'][:30]}", flush=True)
                     continue
                 old = made.get(t["key"])
-                old_ok = not any(x in old.get("flag", "") for x in ("길이", "끝")) if old else False  # 끝이 잘린 줄도 '나쁜 것'(검수 13.68)
+                old_ok = not any(x in old.get("flag", "") for x in ("길이", "끝", "느림")) if old else False  # 끝이 잘린 줄도 '나쁜 것'(검수 13.68)
                 if args.flagged and old and old.get("sig") == t["sig"] and (old_ok, old.get("sim", 0)) >= (b["ok"], b["sim"]):
                     flagged += 1  # 다시 만든 것이 지금 것보다 낫지 않으면 지금 것을 그대로 둠
                     done_n += 1
                     continue
                 out, longer = stretch_end(trim(b["w"], sr, b["end"]), sr, t["text"])  # 끝이 빨리 사라진 채 고른 줄은 끝 늘이기(검수 13.69)
+                tight = 0
+                if not b.get("pace", True):  # 후보가 모두 느림: 긴 쉼만 줄이고 다시 잼(검수 13.70)
+                    out, tight = tighten_pauses(out, sr, PAUSE_KEEP.get(pid, PAUSE_KEEP_DEFAULT))
+                    if tight:
+                        _, b["rate"], _ = check(out, sr, t["text"])
+                        b["pace"] = pace_ok(b["rate"], t["text"], norm)
                 flag = []
                 if b.get("cut") and not longer:
                     flag.append("끝")  # 후보가 모두 끝이 잘렸고 늘이지도 못함(소리가 나는 채 끝남 등): 끝을 줄여(trim) 튀지는 않지만 들어 볼 줄
@@ -487,9 +554,11 @@ def main() -> int:
                     flag.append("길이")  # 글자 수에 비해 말이 너무 길거나 짧음(끝 검사와 따로, 검수 13.69)
                 if b["sim"] < sim_min(t["text"]):
                     flag.append("목소리")
+                if not b.get("pace", True):
+                    flag.append("느림")  # 후보가 모두 평소보다 15% 넘게 느림(검수 13.70)
                 flagged += bool(flag)
                 write_line(t, out, sr, {
-                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "fall": b.get("fall"), **({"long": longer} if longer else {}), "try": b["try"], "style": b["style"],
+                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "fall": b.get("fall"), **({"long": longer} if longer else {}), **({"tight": tight} if tight else {}), "try": b["try"], "style": b["style"],
                     "emo": bool(t["emo"]), "flag": "·".join(flag), "at": time.strftime("%Y-%m-%d %H:%M"),
                 })
                 done_n += 1
