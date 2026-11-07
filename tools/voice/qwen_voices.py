@@ -11,6 +11,7 @@ Qwen3 TTS로 대사 음성 만들기(사용자 결정 2026-11-05 '새 ②', 검�
   4. 지문이 0.98 밑이거나 길이가 어긋나면 다시: 감정 지시 앞에 그 사람의 목소리 설명(en)을 붙여(사장님이 흔들렸을 때 고친 방법),
      그래도 안 되면 씨앗을 바꿔 한 번 더. 끝까지 안 되면 가장 나은 것을 쓰고 '들어 볼 줄'로 표시.
   5. 말 끝이 잘린 후보(마지막 소리가 아직 나는 채 끝남: 끝에서 '톡' 튐, 2026-11-06 사용자 검수 13.65)는 길이가 어긋난 것처럼 낮게 침.
+     끝 소리가 반쯤에서 뚝 끊긴 후보(마지막 큰 소리가 30ms 안에 사라짐: '쌌다'의 '다'가 끊김, 2026-11-07 사용자 검수 13.68)도 같이 다시.
      고른 것은 말 끝 뒤 0.25초를 남기고 자르고, 파일 끝을 짧게 줄여(fade) 조용히 끝나게 함. 잘린 채 쓴 줄은 '끝' 표시.
 입력: tools/voice/lines.json(npm run lines) · qwen_cast.json · emotions.json
 출력: assets/voice/lines/{key}.ogg(Opus 40k, 게임과 같은 이름) · assets/voice/manifest.json
@@ -73,6 +74,25 @@ def cut_end(w, sr) -> bool:
     n = max(1, int(sr * 0.01))
     tail = w[-n:] if len(w) >= n else w
     return bool(20 * np.log10(float(np.sqrt(np.mean(tail ** 2) + 1e-12)) + 1e-9) > CUT_DB)
+
+
+ABRUPT_MS = 30  # 말 끝이 이보다 빨리 사라지면 '끝 소리가 끊김'(마지막 '다' · '요'가 반쯤에서 뚝: 모델이 말을 다 하기 전에 멈춤, 검수 13.68)
+
+
+def fall_ms(w, sr) -> int:
+    """마지막 큰 소리(가장 큰 소리 -20 dB 위)에서 -40 dB 밑으로 떨어지기까지(ms). 자연스러운 끝은 60 ~ 120ms 에 걸쳐 잦아듦"""
+    import numpy as np
+    h = max(1, int(sr * 0.01))
+    n = len(w) // h
+    if n < 10:
+        return 999
+    db = 20 * np.log10(np.sqrt((np.asarray(w[: n * h], dtype=np.float32).reshape(n, h) ** 2).mean(1)) + 1e-9)
+    pk = float(db.max())
+    strong = np.where(db > pk - 20)[0]
+    if not len(strong):
+        return 999
+    after = np.where(db[strong[-1]:] < pk - 40)[0]
+    return int(after[0]) * 10 if len(after) else 999
 
 
 def check(w, sr, text):
@@ -261,8 +281,10 @@ def main() -> int:
         item, a_emb = anchor(pid)
         desc = qcast[pid]["en"]
         first = {"ok": 0, "n": 0}  # 첫 시도(감정 지시만)로 통과한 수: 절반 밑이면 그 사람은 목소리 설명부터(사장님)
-        for b0 in range(0, len(items), BATCH):
-            batch = items[b0:b0 + BATCH]
+        # 한 번에 만드는 소리는 평소(16줄 × 후보 2)만큼까지: --flagged(후보 4)에서 16줄씩이면 그래픽카드 메모리가 모자랐음(검수 13.68)
+        step = max(1, min(BATCH, BATCH * 2 // K))
+        for b0 in range(0, len(items), step):
+            batch = items[b0:b0 + step]
             best = {t["key"]: None for t in batch}
             desc_first = first["n"] >= 8 and first["ok"] < first["n"] / 2
             # 시도: plain = 감정 지시(있으면) · desc = 목소리 설명 + 감정 지시 · 마지막은 씨앗을 바꿔 plain 으로
@@ -291,10 +313,11 @@ def main() -> int:
                         w = np.asarray(wavs[j * kk + c], dtype=np.float32)
                         ok, rate, end = check(w, sr, t["text"])
                         cut = cut_end(w, sr)  # 말 끝이 잘린 후보는 길이가 어긋난 것처럼 낮게(검수 13.65)
+                        fall = fall_ms(w, sr)  # 끝 소리가 반쯤에서 뚝 끊긴 후보도 다시(검수 13.68: 지은의 줄 절반이 그랬음)
                         sim = float(a_emb @ emb(w, sr))
-                        cand = {"ok": ok and not cut, "cut": cut, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
+                        cand = {"ok": ok and not cut and fall > ABRUPT_MS, "cut": cut or fall <= ABRUPT_MS, "fall": fall, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
                         cur = best[t["key"]]
-                        if cur is None or (cand["ok"], cand["sim"]) > (cur["ok"], cur["sim"]):
+                        if cur is None or (cand["ok"], min(cand["fall"], 60), cand["sim"]) > (cur["ok"], min(cur["fall"], 60), cur["sim"]):
                             best[t["key"]] = cand
                     if attempt == 1:
                         b1 = best[t["key"]]
@@ -306,7 +329,8 @@ def main() -> int:
                     print(f"  ✗ {t['key']} ({pid}) 만들지 못함: {t['text'][:30]}", flush=True)
                     continue
                 old = made.get(t["key"])
-                if args.flagged and old and old.get("sig") == t["sig"] and ("길이" not in old.get("flag", ""), old.get("sim", 0)) >= (b["ok"], b["sim"]):
+                old_ok = not any(x in old.get("flag", "") for x in ("길이", "끝")) if old else False  # 끝이 잘린 줄도 '나쁜 것'(검수 13.68)
+                if args.flagged and old and old.get("sig") == t["sig"] and (old_ok, old.get("sim", 0)) >= (b["ok"], b["sim"]):
                     flagged += 1  # 다시 만든 것이 지금 것보다 낫지 않으면 지금 것을 그대로 둠
                     done_n += 1
                     continue
@@ -319,7 +343,7 @@ def main() -> int:
                     flag.append("목소리")
                 flagged += bool(flag)
                 write_line(t, trim(b["w"], sr, b["end"]), sr, {
-                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "try": b["try"], "style": b["style"],
+                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "fall": b.get("fall"), "try": b["try"], "style": b["style"],
                     "emo": bool(t["emo"]), "flag": "·".join(flag), "at": time.strftime("%Y-%m-%d %H:%M"),
                 })
                 done_n += 1

@@ -176,13 +176,14 @@
  "c6b61c40": {
   "who": "jieun",
   "sig": "a67ddad2e628",
-  "sim": 0.9701,
-  "rate": 8.06,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9738,
+  "rate": 7.81,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:40"
+  "at": "2026-11-07 08:04"
  },
  "a4ed13c5": {
   "who": "jieun",
@@ -220,24 +221,26 @@
  "8a58b18d": {
   "who": "jieun",
   "sig": "6235a18e95ea",
-  "sim": 0.9787,
-  "rate": 6.98,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.983,
+  "rate": 6.0,
+  "fall": 80,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:40"
+  "at": "2026-11-07 08:04"
  },
  "7a3f193e": {
   "who": "jieun",
   "sig": "2afc01a00e7d",
-  "sim": 0.9888,
-  "rate": 4.38,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9889,
+  "rate": 3.93,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:40"
+  "at": "2026-11-07 08:04"
  },
  "17f62298": {
   "who": "jieun",
@@ -264,13 +267,14 @@
  "25061a8d": {
   "who": "jieun",
   "sig": "83f64378ec7a",
-  "sim": 0.9827,
-  "rate": 5.8,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9883,
+  "rate": 5.97,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:04"
  },
  "be951e98": {
   "who": "jieun",
@@ -319,13 +323,14 @@
  "02102a06": {
   "who": "jieun",
   "sig": "ffd58cfea1d3",
-  "sim": 0.9873,
-  "rate": 8.18,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9859,
+  "rate": 6.92,
+  "fall": 40,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:40"
+  "at": "2026-11-07 08:04"
  },
  "6cc80d1b": {
   "who": "jieun",
@@ -352,13 +357,14 @@
  "611b496d": {
   "who": "jieun",
   "sig": "e1de0baf9772",
-  "sim": 0.9917,
-  "rate": 6.94,
+  "sim": 0.9897,
+  "rate": 6.85,
+  "fall": 40,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:41"
+  "at": "2026-11-07 08:04"
  },
  "ff9a665a": {
   "who": "jieun",
@@ -374,13 +380,14 @@
  "be287508": {
   "who": "jieun",
   "sig": "3b285764340a",
-  "sim": 0.9755,
-  "rate": 5.75,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9872,
+  "rate": 5.68,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:41"
+  "at": "2026-11-07 08:04"
  },
  "a5008800": {
   "who": "jieun",
@@ -396,13 +403,14 @@
  "bb6891c0": {
   "who": "jieun",
   "sig": "a6620f4c6682",
-  "sim": 0.9897,
-  "rate": 4.03,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9906,
+  "rate": 4.27,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:41"
+  "at": "2026-11-07 08:04"
  },
  "954d60d2": {
   "who": "jieun",
@@ -418,13 +426,14 @@
  "cff11075": {
   "who": "jieun",
   "sig": "470c751693e5",
-  "sim": 0.9852,
-  "rate": 5.61,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9869,
+  "rate": 4.87,
+  "fall": 40,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:41"
+  "at": "2026-11-07 08:04"
  },
  "d8f63c89": {
   "who": "jieun",
@@ -440,24 +449,26 @@
  "06f65000": {
   "who": "jieun",
   "sig": "bccabd074f16",
-  "sim": 0.9904,
-  "rate": 6.88,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9913,
+  "rate": 6.11,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:04"
  },
  "ac109dfd": {
   "who": "jieun",
   "sig": "71ed152cde7e",
-  "sim": 0.9853,
-  "rate": 6.71,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9898,
+  "rate": 7.05,
+  "fall": 80,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:41"
+  "at": "2026-11-07 08:04"
  },
  "2cca5cec": {
   "who": "jieun",
@@ -517,13 +528,14 @@
  "6ab2bc16": {
   "who": "jieun",
   "sig": "aa7d94e26181",
-  "sim": 0.9912,
-  "rate": 3.8,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 3.3,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:04"
  },
  "30a96054": {
   "who": "jieun",
@@ -550,35 +562,38 @@
  "4217c53e": {
   "who": "jieun",
   "sig": "5a05d48cd98a",
-  "sim": 0.9814,
-  "rate": 8.22,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9895,
+  "rate": 6.9,
+  "fall": 110,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:04"
  },
  "1756f0a6": {
   "who": "jieun",
   "sig": "23a686c955b4",
-  "sim": 0.987,
-  "rate": 7.41,
+  "sim": 0.9924,
+  "rate": 6.67,
+  "fall": 70,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:04"
  },
  "9ea11bac": {
   "who": "jieun",
   "sig": "93086c20f5f4",
-  "sim": 0.9845,
-  "rate": 6.0,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9891,
+  "rate": 6.12,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:04"
  },
  "c85a7ba9": {
   "who": "jieun",
@@ -605,57 +620,62 @@
  "baad8195": {
   "who": "jieun",
   "sig": "6197aaa30eb8",
-  "sim": 0.9835,
-  "rate": 6.82,
+  "sim": 0.9888,
+  "rate": 6.19,
+  "fall": 100,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:04"
  },
  "65a7c538": {
   "who": "jieun",
   "sig": "e521c75a546d",
-  "sim": 0.9854,
-  "rate": 7.5,
-  "try": 1,
+  "sim": 0.9832,
+  "rate": 7.79,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:06"
  },
  "1794491e": {
   "who": "jieun",
   "sig": "412f8d8a1443",
-  "sim": 0.9912,
-  "rate": 4.64,
+  "sim": 0.9929,
+  "rate": 4.33,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:06"
  },
  "9ae68e5a": {
   "who": "jieun",
   "sig": "f25899fd417e",
-  "sim": 0.9897,
-  "rate": 5.2,
+  "sim": 0.9871,
+  "rate": 6.57,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:06"
  },
  "704c3d6c": {
   "who": "jieun",
   "sig": "5e77edf714cc",
-  "sim": 0.9898,
-  "rate": 4.92,
+  "sim": 0.9899,
+  "rate": 5.16,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:06"
  },
  "490a0c5c": {
   "who": "jieun",
@@ -671,13 +691,14 @@
  "0868060e": {
   "who": "jieun",
   "sig": "2fc1950e80a0",
-  "sim": 0.9795,
-  "rate": 7.07,
-  "try": 1,
+  "sim": 0.9863,
+  "rate": 6.84,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:42"
+  "at": "2026-11-07 08:06"
  },
  "9bcfe9a2": {
   "who": "jieun",
@@ -704,24 +725,26 @@
  "b4f7988d": {
   "who": "jieun",
   "sig": "517159ad4204",
-  "sim": 0.9846,
-  "rate": 6.84,
+  "sim": 0.9856,
+  "rate": 6.31,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "a9ccb0fb": {
   "who": "jieun",
   "sig": "0d1e75afd1e0",
-  "sim": 0.9918,
-  "rate": 4.09,
+  "sim": 0.9887,
+  "rate": 3.82,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "1e0cc360": {
   "who": "jieun",
@@ -737,24 +760,26 @@
  "1d37e8c6": {
   "who": "jieun",
   "sig": "06663d79c81b",
-  "sim": 0.9849,
-  "rate": 6.37,
-  "try": 1,
+  "sim": 0.9884,
+  "rate": 5.96,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "fce76db5": {
   "who": "jieun",
   "sig": "af09c783b075",
-  "sim": 0.9925,
-  "rate": 3.99,
+  "sim": 0.9928,
+  "rate": 4.74,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "c229526d": {
   "who": "jieun",
@@ -770,13 +795,14 @@
  "69f2feb5": {
   "who": "jieun",
   "sig": "20862316038c",
-  "sim": 0.981,
-  "rate": 6.8,
+  "sim": 0.9886,
+  "rate": 4.73,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "9c266322": {
   "who": "jieun",
@@ -814,57 +840,62 @@
  "5bff2b37": {
   "who": "jieun",
   "sig": "57c0e5310430",
-  "sim": 0.9894,
-  "rate": 5.79,
+  "sim": 0.9909,
+  "rate": 5.3,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:06"
  },
  "6bc97709": {
   "who": "jieun",
   "sig": "0a3a5700f48c",
-  "sim": 0.9845,
-  "rate": 6.54,
-  "try": 1,
+  "sim": 0.9822,
+  "rate": 6.67,
+  "fall": 100,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "29ff4633": {
   "who": "jieun",
   "sig": "a890896069e4",
-  "sim": 0.9921,
-  "rate": 4.96,
+  "sim": 0.9925,
+  "rate": 5.19,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "0ce140cc": {
   "who": "jieun",
   "sig": "8574add08dd8",
-  "sim": 0.9937,
-  "rate": 5.3,
+  "sim": 0.9914,
+  "rate": 5.43,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "433f8b81": {
   "who": "jieun",
   "sig": "cf596349df34",
-  "sim": 0.9776,
-  "rate": 6.8,
-  "try": 2,
+  "sim": 0.9898,
+  "rate": 6.73,
+  "fall": 60,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:06"
  },
  "a7680bb3": {
   "who": "jieun",
@@ -880,68 +911,74 @@
  "66f25740": {
   "who": "jieun",
   "sig": "0612d01ef6e9",
-  "sim": 0.9922,
+  "sim": 0.991,
   "rate": 5.11,
+  "fall": 50,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 09:42"
  },
  "87720dd6": {
   "who": "jieun",
   "sig": "581b75505a6c",
-  "sim": 0.9892,
-  "rate": 6.93,
-  "try": 2,
+  "sim": 0.9885,
+  "rate": 6.25,
+  "fall": 80,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:07"
  },
  "8f06166a": {
   "who": "jieun",
   "sig": "ee0a17b9be11",
-  "sim": 0.9883,
-  "rate": 5.83,
+  "sim": 0.9927,
+  "rate": 6.36,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "9a7bab97": {
   "who": "jieun",
   "sig": "42cce9e201f0",
-  "sim": 0.9913,
-  "rate": 4.93,
+  "sim": 0.9928,
+  "rate": 5.0,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "08a39cac": {
   "who": "jieun",
   "sig": "5e2b6fdc03cf",
-  "sim": 0.9901,
-  "rate": 4.73,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9913,
+  "rate": 4.83,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 09:42"
  },
  "080c1a2b": {
   "who": "jieun",
   "sig": "8496cd2ef53f",
-  "sim": 0.983,
-  "rate": 7.61,
-  "try": 1,
+  "sim": 0.9915,
+  "rate": 6.73,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "a50c0e97": {
   "who": "jieun",
@@ -957,13 +994,14 @@
  "90def120": {
   "who": "jieun",
   "sig": "a63b81ad87a1",
-  "sim": 0.9927,
-  "rate": 5.43,
+  "sim": 0.9912,
+  "rate": 4.96,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "c8693605": {
   "who": "jieun",
@@ -1001,68 +1039,74 @@
  "66313b20": {
   "who": "jieun",
   "sig": "0040171d9e80",
-  "sim": 0.9897,
-  "rate": 5.47,
+  "sim": 0.9941,
+  "rate": 4.87,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "3eab7972": {
   "who": "jieun",
   "sig": "b9ed68425b28",
-  "sim": 0.9918,
-  "rate": 5.1,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9924,
+  "rate": 5.24,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 10:51"
  },
  "9182498b": {
   "who": "jieun",
   "sig": "d6a48b30da82",
   "sim": 0.9923,
-  "rate": 5.56,
+  "rate": 5.21,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "1f3eb100": {
   "who": "jieun",
   "sig": "0afcdf295a81",
-  "sim": 0.9924,
-  "rate": 5.24,
-  "try": 1,
+  "sim": 0.9916,
+  "rate": 5.14,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:43"
+  "at": "2026-11-07 08:07"
  },
  "eafcd2fd": {
   "who": "jieun",
   "sig": "efcae7b6efac",
-  "sim": 0.9873,
-  "rate": 6.05,
+  "sim": 0.9925,
+  "rate": 4.36,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 08:07"
  },
  "627778c8": {
   "who": "jieun",
   "sig": "ab5b6fd6eaa6",
-  "sim": 0.9909,
-  "rate": 5.81,
-  "try": 1,
+  "sim": 0.9916,
+  "rate": 6.25,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:44"
+  "flag": "길이",
+  "at": "2026-11-07 08:07"
  },
  "ef511c96": {
   "who": "jieun",
@@ -1089,13 +1133,14 @@
  "f5b7853f": {
   "who": "jieun",
   "sig": "afe12524cf40",
-  "sim": 0.9928,
-  "rate": 5.1,
+  "sim": 0.994,
+  "rate": 4.1,
+  "fall": 60,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 09:42"
  },
  "fa6a6055": {
   "who": "jieun",
@@ -1111,24 +1156,26 @@
  "38b16d41": {
   "who": "jieun",
   "sig": "f7d3ee8241bc",
-  "sim": 0.9919,
-  "rate": 5.28,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.07,
+  "fall": 40,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 08:07"
  },
  "4e8147ec": {
   "who": "jieun",
   "sig": "476da236eb8f",
-  "sim": 0.9846,
-  "rate": 6.52,
+  "sim": 0.9911,
+  "rate": 5.24,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 08:07"
  },
  "0e7853bb": {
   "who": "jieun",
@@ -1188,35 +1235,38 @@
  "d77e6ad1": {
   "who": "jieun",
   "sig": "6b8074978b3a",
-  "sim": 0.9899,
-  "rate": 5.17,
+  "sim": 0.9917,
+  "rate": 4.84,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 08:07"
  },
  "9d13d258": {
   "who": "jieun",
   "sig": "ac345e6ef5a6",
-  "sim": 0.9913,
-  "rate": 5.95,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9948,
+  "rate": 5.36,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 09:42"
  },
  "2365c93b": {
   "who": "jieun",
   "sig": "75df7aafd1e4",
-  "sim": 0.9881,
-  "rate": 7.08,
+  "sim": 0.9874,
+  "rate": 6.9,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:44"
+  "at": "2026-11-07 08:09"
  },
  "de149580": {
   "who": "jieun",
@@ -1287,24 +1337,26 @@
  "905485b3": {
   "who": "jieun",
   "sig": "fc60383e246e",
-  "sim": 0.9859,
-  "rate": 7.34,
-  "try": 1,
+  "sim": 0.9923,
+  "rate": 6.72,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:46"
+  "at": "2026-11-07 08:09"
  },
  "466e0e1b": {
   "who": "jieun",
   "sig": "833594a7c5a7",
-  "sim": 0.9831,
-  "rate": 7.02,
+  "sim": 0.9884,
+  "rate": 6.3,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:46"
+  "at": "2026-11-07 08:09"
  },
  "26903279": {
   "who": "jieun",
@@ -1342,13 +1394,14 @@
  "cb531fbc": {
   "who": "jieun",
   "sig": "ca4a9860b883",
-  "sim": 0.9922,
-  "rate": 5.41,
+  "sim": 0.9917,
+  "rate": 5.26,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:46"
+  "at": "2026-11-07 08:09"
  },
  "4dc0bdb4": {
   "who": "jieun",
@@ -1386,13 +1439,14 @@
  "6dffb9e1": {
   "who": "jieun",
   "sig": "2fa0674e6424",
-  "sim": 0.9876,
-  "rate": 7.08,
-  "try": 1,
+  "sim": 0.9911,
+  "rate": 6.35,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:46"
+  "at": "2026-11-07 08:09"
  },
  "d86c0ff1": {
   "who": "jieun",
@@ -1408,13 +1462,14 @@
  "cc81858f": {
   "who": "jieun",
   "sig": "68f99c88f0ca",
-  "sim": 0.9932,
-  "rate": 5.76,
+  "sim": 0.9922,
+  "rate": 4.94,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:09"
  },
  "a0e4dac3": {
   "who": "jieun",
@@ -1430,35 +1485,38 @@
  "11f726a0": {
   "who": "jieun",
   "sig": "152ea3db2193",
-  "sim": 0.9853,
-  "rate": 6.84,
+  "sim": 0.9929,
+  "rate": 7.08,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "8b55bdc8": {
   "who": "jieun",
   "sig": "d65a78d85e02",
-  "sim": 0.991,
-  "rate": 5.93,
+  "sim": 0.9942,
+  "rate": 5.76,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "0fd49953": {
   "who": "jieun",
   "sig": "5b83b6d7dc24",
-  "sim": 0.9866,
-  "rate": 7.77,
+  "sim": 0.9878,
+  "rate": 7.34,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "c5d44cfc": {
   "who": "jieun",
@@ -1496,46 +1554,50 @@
  "56d99d81": {
   "who": "jieun",
   "sig": "924649fc04cb",
-  "sim": 0.9881,
-  "rate": 6.35,
+  "sim": 0.993,
+  "rate": 5.16,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "ebea58de": {
   "who": "jieun",
   "sig": "90f6cbcf12cd",
-  "sim": 0.9922,
-  "rate": 5.37,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9933,
+  "rate": 5.06,
+  "fall": 40,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 09:42"
  },
  "0c91a889": {
   "who": "jieun",
   "sig": "0eb97d2716dc",
-  "sim": 0.9921,
-  "rate": 5.8,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9922,
+  "rate": 5.16,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 09:42"
  },
  "3c43090e": {
   "who": "jieun",
   "sig": "9ece89b5673f",
-  "sim": 0.9935,
+  "sim": 0.9934,
   "rate": 5.23,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "35454d61": {
   "who": "jieun",
@@ -1551,24 +1613,26 @@
  "c34e320a": {
   "who": "jieun",
   "sig": "8edea6f818aa",
-  "sim": 0.9879,
-  "rate": 6.3,
-  "try": 1,
+  "sim": 0.9921,
+  "rate": 6.02,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "816f7dc8": {
   "who": "jieun",
   "sig": "f7e9dfdd9138",
-  "sim": 0.9858,
-  "rate": 5.93,
-  "try": 1,
+  "sim": 0.9862,
+  "rate": 6.3,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:47"
+  "at": "2026-11-07 08:09"
  },
  "03ec5301": {
   "who": "jieun",
@@ -1606,68 +1670,74 @@
  "c0780f39": {
   "who": "jieun",
   "sig": "b881aa6adcbc",
-  "sim": 0.9934,
-  "rate": 5.48,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9935,
+  "rate": 5.76,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 09:42"
  },
  "309b9d49": {
   "who": "jieun",
   "sig": "a4120ae3c468",
-  "sim": 0.9886,
-  "rate": 6.56,
+  "sim": 0.9879,
+  "rate": 7.34,
+  "fall": 40,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 09:42"
  },
  "f4ba7a36": {
   "who": "jieun",
   "sig": "f9f2c0136866",
-  "sim": 0.9928,
-  "rate": 5.1,
+  "sim": 0.9926,
+  "rate": 6.35,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "c8e5a1d8": {
   "who": "jieun",
   "sig": "694fae00859b",
-  "sim": 0.9904,
-  "rate": 6.15,
+  "sim": 0.9891,
+  "rate": 6.4,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "65cc03d7": {
   "who": "jieun",
   "sig": "ef86bee4c25e",
-  "sim": 0.9885,
-  "rate": 6.72,
-  "try": 1,
+  "sim": 0.9918,
+  "rate": 6.9,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "a3a03104": {
   "who": "jieun",
   "sig": "095923e69029",
-  "sim": 0.9823,
-  "rate": 7.69,
+  "sim": 0.9901,
+  "rate": 6.4,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "2c904243": {
   "who": "jieun",
@@ -1705,24 +1775,26 @@
  "4bdf975c": {
   "who": "jieun",
   "sig": "e9667b23db60",
-  "sim": 0.9914,
-  "rate": 5.8,
+  "sim": 0.9944,
+  "rate": 5.37,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "deb8219b": {
   "who": "jieun",
   "sig": "4901188573e4",
-  "sim": 0.9896,
-  "rate": 5.71,
-  "try": 1,
+  "sim": 0.9917,
+  "rate": 5.23,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:48"
+  "at": "2026-11-07 08:10"
  },
  "0fc78027": {
   "who": "jieun",
@@ -1760,90 +1832,98 @@
  "d8766d24": {
   "who": "jieun",
   "sig": "d89865c0237a",
-  "sim": 0.9876,
-  "rate": 6.8,
+  "sim": 0.9881,
+  "rate": 7.2,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "b96931fb": {
   "who": "jieun",
   "sig": "80887b869d6a",
-  "sim": 0.9925,
-  "rate": 4.47,
+  "sim": 0.9938,
+  "rate": 4.75,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "016eca02": {
   "who": "jieun",
   "sig": "5391f56bf2ef",
-  "sim": 0.9921,
-  "rate": 5.99,
+  "sim": 0.9907,
+  "rate": 5.41,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "b3506584": {
   "who": "jieun",
   "sig": "54fd02ed529b",
-  "sim": 0.9854,
-  "rate": 6.64,
-  "try": 1,
+  "sim": 0.9863,
+  "rate": 6.75,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "cec63af9": {
   "who": "jieun",
   "sig": "884dd3fc8fb9",
-  "sim": 0.991,
-  "rate": 6.07,
+  "sim": 0.9874,
+  "rate": 6.69,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "bb7f823d": {
   "who": "jieun",
   "sig": "4a58a6a9c5ec",
-  "sim": 0.9928,
-  "rate": 4.62,
+  "sim": 0.9912,
+  "rate": 4.07,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "2f7308ac": {
   "who": "jieun",
   "sig": "726b1fa4a985",
-  "sim": 0.9896,
-  "rate": 5.9,
-  "try": 1,
+  "sim": 0.9921,
+  "rate": 5.12,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "94495c22": {
   "who": "jieun",
   "sig": "4dc56542c4f6",
-  "sim": 0.9868,
-  "rate": 7.02,
-  "try": 1,
+  "sim": 0.9854,
+  "rate": 6.91,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:10"
  },
  "3c3eaaec": {
   "who": "jieun",
@@ -1870,13 +1950,14 @@
  "06ecb3c9": {
   "who": "jieun",
   "sig": "3fe6d8161c22",
-  "sim": 0.9913,
-  "rate": 5.45,
+  "sim": 0.9897,
+  "rate": 5.28,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:14"
  },
  "257acc97": {
   "who": "jieun",
@@ -1892,57 +1973,62 @@
  "6d8c3116": {
   "who": "jieun",
   "sig": "96643e7ba13e",
-  "sim": 0.9912,
-  "rate": 7.14,
+  "sim": 0.9926,
+  "rate": 6.91,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:14"
  },
  "2a83ac17": {
   "who": "jieun",
   "sig": "95b2ebe68c8f",
-  "sim": 0.9891,
-  "rate": 6.25,
+  "sim": 0.9912,
+  "rate": 6.59,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:14"
  },
  "cdb2ee55": {
   "who": "jieun",
   "sig": "cbeafe1d571d",
-  "sim": 0.9924,
-  "rate": 5.63,
+  "sim": 0.9912,
+  "rate": 4.97,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:49"
+  "at": "2026-11-07 08:14"
  },
  "0fc79aa8": {
   "who": "jieun",
   "sig": "2e1115630eb3",
-  "sim": 0.9923,
-  "rate": 5.63,
+  "sim": 0.9893,
+  "rate": 6.54,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 08:14"
  },
  "780700cf": {
   "who": "jieun",
   "sig": "3e6906108d48",
-  "sim": 0.9914,
-  "rate": 5.12,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9919,
+  "rate": 5.15,
+  "fall": 40,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 09:42"
  },
  "399cebe0": {
   "who": "jieun",
@@ -1969,68 +2055,74 @@
  "2362fb53": {
   "who": "jieun",
   "sig": "24348cb85af3",
-  "sim": 0.989,
-  "rate": 6.54,
+  "sim": 0.9905,
+  "rate": 6.07,
+  "fall": 60,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 09:42"
  },
  "3f926e94": {
   "who": "jieun",
   "sig": "76f8c093122e",
-  "sim": 0.9914,
-  "rate": 5.99,
+  "sim": 0.9918,
+  "rate": 4.21,
+  "fall": 100,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 09:42"
  },
  "ae447bcc": {
   "who": "jieun",
   "sig": "872aa428b7a8",
-  "sim": 0.9943,
-  "rate": 5.94,
+  "sim": 0.9944,
+  "rate": 4.86,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 08:14"
  },
  "edb42e88": {
   "who": "jieun",
   "sig": "20777b512e48",
-  "sim": 0.994,
-  "rate": 5.7,
+  "sim": 0.9929,
+  "rate": 5.56,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 08:14"
  },
  "5f80f1b8": {
   "who": "jieun",
   "sig": "a42f041ffdaf",
-  "sim": 0.9885,
-  "rate": 6.8,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9898,
+  "rate": 6.69,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 09:42"
  },
  "ab095dff": {
   "who": "jieun",
   "sig": "22c21b21f15d",
-  "sim": 0.991,
-  "rate": 5.06,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 4.25,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 08:14"
  },
  "fa9e78b9": {
   "who": "jieun",
@@ -2057,13 +2149,14 @@
  "11216e55": {
   "who": "jieun",
   "sig": "4b07294aa715",
-  "sim": 0.9841,
-  "rate": 7.33,
+  "sim": 0.9892,
+  "rate": 6.97,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 08:14"
  },
  "d05160dc": {
   "who": "jieun",
@@ -2079,13 +2172,14 @@
  "4f2b996b": {
   "who": "jieun",
   "sig": "06525b19246e",
-  "sim": 0.9921,
-  "rate": 5.25,
+  "sim": 0.994,
+  "rate": 5.41,
+  "fall": 50,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:50"
+  "at": "2026-11-07 09:42"
  },
  "15732946": {
   "who": "jieun",
@@ -2134,57 +2228,62 @@
  "ad63b7f1": {
   "who": "jieun",
   "sig": "e905b718ace0",
-  "sim": 0.9924,
-  "rate": 5.56,
-  "try": 1,
+  "sim": 0.9942,
+  "rate": 4.91,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:14"
  },
  "de3cbe0f": {
   "who": "jieun",
   "sig": "fbb0426121b8",
-  "sim": 0.989,
-  "rate": 5.67,
-  "try": 1,
+  "sim": 0.9866,
+  "rate": 6.3,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:14"
  },
  "d91465f4": {
   "who": "jieun",
   "sig": "0a07b70438a1",
-  "sim": 0.9932,
-  "rate": 4.64,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9931,
+  "rate": 5.06,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 09:42"
  },
  "b124f7ec": {
   "who": "jieun",
   "sig": "2d3d4bae7594",
-  "sim": 0.9867,
-  "rate": 6.91,
+  "sim": 0.9919,
+  "rate": 6.49,
+  "fall": 50,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 09:42"
  },
  "664604ee": {
   "who": "jieun",
   "sig": "c9fe23ecc56c",
-  "sim": 0.9882,
-  "rate": 6.54,
-  "try": 1,
+  "sim": 0.99,
+  "rate": 6.2,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "8eec225f": {
   "who": "jieun",
@@ -2200,13 +2299,14 @@
  "2159e1ef": {
   "who": "jieun",
   "sig": "ab1019b14faf",
-  "sim": 0.9918,
-  "rate": 5.48,
+  "sim": 0.994,
+  "rate": 5.15,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "36ea72bb": {
   "who": "jieun",
@@ -2222,57 +2322,62 @@
  "659c7b43": {
   "who": "jieun",
   "sig": "60aa0c121880",
-  "sim": 0.9907,
-  "rate": 5.63,
-  "try": 1,
+  "sim": 0.994,
+  "rate": 5.12,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "9568f128": {
   "who": "jieun",
   "sig": "96ba0d9e4cea",
-  "sim": 0.9922,
-  "rate": 5.48,
-  "try": 1,
+  "sim": 0.9918,
+  "rate": 5.7,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "8a676f0a": {
   "who": "jieun",
   "sig": "a55a9b66059a",
-  "sim": 0.9897,
-  "rate": 4.66,
+  "sim": 0.9918,
+  "rate": 5.17,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "ef8e3a6a": {
   "who": "jieun",
   "sig": "dfc308fd6ae1",
-  "sim": 0.9947,
-  "rate": 5.73,
+  "sim": 0.9921,
+  "rate": 5.66,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "ed893828": {
   "who": "jieun",
   "sig": "42ba6a376a93",
-  "sim": 0.9911,
-  "rate": 5.33,
+  "sim": 0.9929,
+  "rate": 4.57,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:51"
+  "at": "2026-11-07 08:17"
  },
  "1f9c14ea": {
   "who": "jieun",
@@ -2288,24 +2393,26 @@
  "0bfde265": {
   "who": "jieun",
   "sig": "11a61a561d69",
-  "sim": 0.9857,
-  "rate": 6.92,
-  "try": 1,
+  "sim": 0.988,
+  "rate": 7.09,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:17"
  },
  "ff50000b": {
   "who": "jieun",
   "sig": "1e7521cbc377",
-  "sim": 0.9917,
-  "rate": 5.29,
+  "sim": 0.9926,
+  "rate": 5.26,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:17"
  },
  "5dca02af": {
   "who": "jieun",
@@ -2321,24 +2428,26 @@
  "8f09f8b2": {
   "who": "jieun",
   "sig": "f8ff6c84d0b6",
-  "sim": 0.9942,
-  "rate": 5.39,
-  "try": 1,
+  "sim": 0.9937,
+  "rate": 5.26,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:17"
  },
  "b018b0b7": {
   "who": "jieun",
   "sig": "5b36be290d3d",
-  "sim": 0.9935,
-  "rate": 4.46,
+  "sim": 0.9941,
+  "rate": 5.0,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:17"
  },
  "be11bf72": {
   "who": "jieun",
@@ -2354,13 +2463,14 @@
  "d6cf26c2": {
   "who": "jieun",
   "sig": "72105e3c89e1",
-  "sim": 0.9931,
+  "sim": 0.9941,
   "rate": 5.2,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:17"
  },
  "afc0af66": {
   "who": "jieun",
@@ -2376,35 +2486,38 @@
  "0b8be445": {
   "who": "jieun",
   "sig": "8b9809ea570c",
-  "sim": 0.9936,
-  "rate": 4.71,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9931,
+  "rate": 4.69,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 10:51"
  },
  "35856cd7": {
   "who": "jieun",
   "sig": "ad3a4b0fa6d2",
-  "sim": 0.9948,
-  "rate": 4.57,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9946,
+  "rate": 5.11,
+  "fall": 40,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:06"
+  "at": "2026-11-07 10:51"
  },
  "548b4612": {
   "who": "jieun",
   "sig": "c0b7e51a9252",
-  "sim": 0.9923,
-  "rate": 4.62,
+  "sim": 0.9948,
+  "rate": 4.95,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:19"
  },
  "2c65dbec": {
   "who": "jieun",
@@ -2420,35 +2533,38 @@
  "bc780fef": {
   "who": "jieun",
   "sig": "2ceb9a3b8ddb",
-  "sim": 0.9927,
-  "rate": 5.49,
+  "sim": 0.9917,
+  "rate": 5.81,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:19"
  },
  "5aefa028": {
   "who": "jieun",
   "sig": "7b289fb1be39",
-  "sim": 0.993,
-  "rate": 4.43,
-  "try": 1,
+  "sim": 0.9925,
+  "rate": 4.39,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:19"
  },
  "1bc0195d": {
   "who": "jieun",
   "sig": "ecf81bf04fd6",
-  "sim": 0.9888,
-  "rate": 4.37,
-  "try": 1,
+  "sim": 0.9894,
+  "rate": 4.27,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:52"
+  "at": "2026-11-07 08:19"
  },
  "abd2de01": {
   "who": "jieun",
@@ -2464,24 +2580,26 @@
  "91c84f2c": {
   "who": "jieun",
   "sig": "d659cee17f32",
-  "sim": 0.9897,
-  "rate": 6.0,
+  "sim": 0.9932,
+  "rate": 5.36,
+  "fall": 110,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "26795dbf": {
   "who": "jieun",
   "sig": "e8cab596c728",
-  "sim": 0.9937,
+  "sim": 0.9932,
   "rate": 4.86,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "5ec54a00": {
   "who": "jieun",
@@ -2497,13 +2615,14 @@
  "a0c1eed1": {
   "who": "jieun",
   "sig": "cab048037d58",
-  "sim": 0.9905,
+  "sim": 0.992,
   "rate": 5.96,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "444465f2": {
   "who": "jieun",
@@ -2552,35 +2671,38 @@
  "0dafc207": {
   "who": "jieun",
   "sig": "a2ae71e227fe",
-  "sim": 0.9878,
-  "rate": 6.87,
-  "try": 1,
+  "sim": 0.9926,
+  "rate": 6.72,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "9c139d7b": {
   "who": "jieun",
   "sig": "16bfcf98735b",
-  "sim": 0.9926,
-  "rate": 5.52,
+  "sim": 0.9936,
+  "rate": 5.56,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "7bcf4398": {
   "who": "jieun",
   "sig": "51ac7c87a20b",
-  "sim": 0.992,
-  "rate": 5.96,
+  "sim": 0.9937,
+  "rate": 6.0,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:53"
+  "at": "2026-11-07 08:19"
  },
  "82060137": {
   "who": "jieun",
@@ -2629,35 +2751,38 @@
  "e84a7f28": {
   "who": "jieun",
   "sig": "4da3b7ca38ae",
-  "sim": 0.9916,
-  "rate": 5.94,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9939,
+  "rate": 5.49,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 10:51"
  },
  "1213868f": {
   "who": "jieun",
   "sig": "1673fd723b38",
-  "sim": 0.9912,
-  "rate": 5.56,
+  "sim": 0.993,
+  "rate": 5.25,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 08:19"
  },
  "24a10b1d": {
   "who": "jieun",
   "sig": "508a35d617a0",
-  "sim": 0.9936,
-  "rate": 4.36,
+  "sim": 0.9941,
+  "rate": 4.06,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 08:19"
  },
  "c8e2ae42": {
   "who": "jieun",
@@ -2673,24 +2798,26 @@
  "25989ef9": {
   "who": "jieun",
   "sig": "db411cf4f95c",
-  "sim": 0.9922,
-  "rate": 5.22,
+  "sim": 0.994,
+  "rate": 5.59,
+  "fall": 70,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 10:51"
  },
  "d8cd9c93": {
   "who": "jieun",
   "sig": "3198d01a78c2",
-  "sim": 0.9907,
-  "rate": 5.28,
+  "sim": 0.9931,
+  "rate": 5.43,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 08:19"
  },
  "ba6f2148": {
   "who": "jieun",
@@ -2739,24 +2866,26 @@
  "c5b64c7e": {
   "who": "jieun",
   "sig": "aeaf4a1ea906",
-  "sim": 0.994,
-  "rate": 4.59,
+  "sim": 0.9938,
+  "rate": 4.24,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:19"
  },
  "82101ed3": {
   "who": "jieun",
   "sig": "32f769326340",
-  "sim": 0.9888,
-  "rate": 6.64,
+  "sim": 0.9874,
+  "rate": 7.09,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 08:21"
  },
  "87a5ee10": {
   "who": "jieun",
@@ -2783,13 +2912,14 @@
  "5b2b5c7b": {
   "who": "jieun",
   "sig": "98b43530def6",
-  "sim": 0.9927,
-  "rate": 5.76,
+  "sim": 0.9923,
+  "rate": 5.43,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:54"
+  "at": "2026-11-07 08:21"
  },
  "f4855542": {
   "who": "jieun",
@@ -2805,13 +2935,14 @@
  "30697b14": {
   "who": "jieun",
   "sig": "d5fea8dfda1a",
-  "sim": 0.991,
-  "rate": 4.85,
+  "sim": 0.9931,
+  "rate": 5.11,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:55"
+  "at": "2026-11-07 08:21"
  },
  "e7eb4431": {
   "who": "jieun",
@@ -2838,13 +2969,14 @@
  "55a1fba4": {
   "who": "jieun",
   "sig": "0133c086a00d",
-  "sim": 0.9914,
-  "rate": 5.72,
+  "sim": 0.993,
+  "rate": 5.31,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:55"
+  "at": "2026-11-07 08:21"
  },
  "75db47d7": {
   "who": "jieun",
@@ -2860,13 +2992,14 @@
  "a879fd28": {
   "who": "jieun",
   "sig": "904b954b8939",
-  "sim": 0.9918,
-  "rate": 5.56,
+  "sim": 0.9914,
+  "rate": 5.4,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:55"
+  "at": "2026-11-07 08:21"
  },
  "18d6c6bf": {
   "who": "jieun",
@@ -2882,13 +3015,14 @@
  "8147cae5": {
   "who": "jieun",
   "sig": "3bb3540d24ff",
-  "sim": 0.991,
-  "rate": 5.69,
+  "sim": 0.9905,
+  "rate": 5.37,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:55"
+  "at": "2026-11-07 08:21"
  },
  "77e8b467": {
   "who": "jieun",
@@ -2926,13 +3060,14 @@
  "ba0071b4": {
   "who": "jieun",
   "sig": "659aef0cbefa",
-  "sim": 0.9912,
-  "rate": 5.62,
+  "sim": 0.9905,
+  "rate": 5.46,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:21"
  },
  "f5e452e8": {
   "who": "jieun",
@@ -2948,13 +3083,14 @@
  "c721cd50": {
   "who": "jieun",
   "sig": "85173a3ba171",
-  "sim": 0.9942,
-  "rate": 5.37,
+  "sim": 0.9946,
+  "rate": 4.5,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:55"
+  "at": "2026-11-07 08:21"
  },
  "6b06ee90": {
   "who": "jieun",
@@ -2981,13 +3117,14 @@
  "15fd4a57": {
   "who": "jieun",
   "sig": "3899e7fb08c4",
-  "sim": 0.9932,
-  "rate": 4.68,
+  "sim": 0.9901,
+  "rate": 5.28,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:21"
  },
  "f85f0644": {
   "who": "jieun",
@@ -3003,35 +3140,38 @@
  "b5b6c36f": {
   "who": "jieun",
   "sig": "06db651807ae",
-  "sim": 0.9925,
-  "rate": 5.0,
+  "sim": 0.9939,
+  "rate": 4.26,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:21"
  },
  "95eb0163": {
   "who": "jieun",
   "sig": "2d08e1a48c1e",
-  "sim": 0.9928,
-  "rate": 5.69,
+  "sim": 0.9917,
+  "rate": 5.86,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:21"
  },
  "6ca7436a": {
   "who": "jieun",
   "sig": "83648acc321c",
-  "sim": 0.9864,
-  "rate": 7.04,
+  "sim": 0.9921,
+  "rate": 5.49,
+  "fall": 120,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:21"
  },
  "54416a1e": {
   "who": "jieun",
@@ -3069,13 +3209,14 @@
  "ff78b2c4": {
   "who": "jieun",
   "sig": "100bf60f8d13",
-  "sim": 0.9915,
-  "rate": 5.32,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.88,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:56"
+  "flag": "길이",
+  "at": "2026-11-07 08:21"
  },
  "3a522e96": {
   "who": "jieun",
@@ -3113,13 +3254,14 @@
  "4ceba493": {
   "who": "jieun",
   "sig": "236f8b996e26",
-  "sim": 0.9911,
-  "rate": 7.04,
-  "try": 1,
+  "sim": 0.9922,
+  "rate": 6.02,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:21"
  },
  "466cb66d": {
   "who": "jieun",
@@ -3157,13 +3299,14 @@
  "a63d151e": {
   "who": "jieun",
   "sig": "3135fb94ec3c",
-  "sim": 0.9937,
-  "rate": 4.9,
+  "sim": 0.9945,
+  "rate": 4.31,
+  "fall": 80,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 10:51"
  },
  "4bfc0e56": {
   "who": "jieun",
@@ -3190,24 +3333,26 @@
  "1087d4ea": {
   "who": "jieun",
   "sig": "62eaac7506fa",
-  "sim": 0.9927,
+  "sim": 0.9938,
   "rate": 5.15,
-  "try": 1,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:21"
  },
  "296fd47d": {
   "who": "jieun",
   "sig": "c6086641e43b",
-  "sim": 0.9929,
-  "rate": 5.92,
-  "try": 1,
+  "sim": 0.9931,
+  "rate": 6.29,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "dcbe9470": {
   "who": "jieun",
@@ -3234,46 +3379,50 @@
  "d7304cc2": {
   "who": "jieun",
   "sig": "aecdbcd9f424",
-  "sim": 0.9929,
-  "rate": 5.68,
-  "try": 1,
+  "sim": 0.9928,
+  "rate": 5.85,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:24"
  },
  "fcbc2c48": {
   "who": "jieun",
   "sig": "450cd756e0e5",
-  "sim": 0.9947,
-  "rate": 5.46,
+  "sim": 0.9943,
+  "rate": 4.88,
+  "fall": 40,
   "try": 1,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 10:51"
  },
  "ef8019c5": {
   "who": "jieun",
   "sig": "bbb827ba38fd",
-  "sim": 0.9945,
-  "rate": 4.1,
+  "sim": 0.9947,
+  "rate": 4.93,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "17145268": {
   "who": "jieun",
   "sig": "4650cdf0cd06",
-  "sim": 0.9874,
-  "rate": 6.33,
-  "try": 1,
+  "sim": 0.9896,
+  "rate": 6.67,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "36a47105": {
   "who": "jieun",
@@ -3289,46 +3438,50 @@
  "6fe68264": {
   "who": "jieun",
   "sig": "9d57c0522670",
-  "sim": 0.9936,
-  "rate": 5.29,
+  "sim": 0.9943,
+  "rate": 5.49,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "60c1ea3c": {
   "who": "jieun",
   "sig": "881d1eb3eb3a",
-  "sim": 0.9904,
-  "rate": 5.62,
-  "try": 1,
+  "sim": 0.992,
+  "rate": 5.59,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "aeb5a948": {
   "who": "jieun",
   "sig": "169420f3d2e9",
-  "sim": 0.9861,
-  "rate": 7.19,
+  "sim": 0.9903,
+  "rate": 6.54,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "1b49cc76": {
   "who": "jieun",
   "sig": "3aed6143d64b",
-  "sim": 0.9915,
+  "sim": 0.9913,
   "rate": 7.35,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:56"
+  "at": "2026-11-07 08:24"
  },
  "de846360": {
   "who": "jieun",
@@ -3344,79 +3497,86 @@
  "897427f1": {
   "who": "jieun",
   "sig": "ee745441168c",
-  "sim": 0.9906,
-  "rate": 5.56,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.78,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:24"
  },
  "fbbf3c29": {
   "who": "jieun",
   "sig": "cb8ce76e35be",
-  "sim": 0.9929,
-  "rate": 5.65,
+  "sim": 0.9902,
+  "rate": 5.99,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:24"
  },
  "bf0b8df0": {
   "who": "jieun",
   "sig": "60a677ca9ebb",
-  "sim": 0.9905,
-  "rate": 5.43,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9892,
+  "rate": 5.59,
+  "fall": 50,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 10:51"
  },
  "b6f4c05d": {
   "who": "jieun",
   "sig": "5dc5bb0f37e3",
-  "sim": 0.9927,
-  "rate": 5.1,
+  "sim": 0.9947,
+  "rate": 4.9,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:24"
  },
  "b4c20b13": {
   "who": "jieun",
   "sig": "4eeedc8d7e93",
-  "sim": 0.992,
-  "rate": 5.59,
-  "try": 1,
+  "sim": 0.9932,
+  "rate": 5.38,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:24"
  },
  "e980efc5": {
   "who": "jieun",
   "sig": "68e47522d1d0",
-  "sim": 0.9933,
-  "rate": 4.61,
+  "sim": 0.9921,
+  "rate": 4.46,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:24"
  },
  "5c395799": {
   "who": "jieun",
   "sig": "63b27d06800e",
-  "sim": 0.9924,
-  "rate": 5.46,
-  "try": 1,
+  "sim": 0.9939,
+  "rate": 4.61,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:24"
  },
  "4fa0ca94": {
   "who": "jieun",
@@ -3476,13 +3636,14 @@
  "e034cacb": {
   "who": "jieun",
   "sig": "99b0a360c7bc",
-  "sim": 0.9937,
-  "rate": 4.75,
-  "try": 1,
+  "sim": 0.9939,
+  "rate": 5.38,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "e0795b97": {
   "who": "jieun",
@@ -3498,24 +3659,26 @@
  "50930137": {
   "who": "jieun",
   "sig": "0ffe2c318962",
-  "sim": 0.9906,
+  "sim": 0.9904,
   "rate": 5.53,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "a4c07913": {
   "who": "jieun",
   "sig": "f4cfac36cede",
-  "sim": 0.9929,
-  "rate": 5.77,
-  "try": 1,
+  "sim": 0.992,
+  "rate": 4.79,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 10:58"
  },
  "42a336ff": {
   "who": "jieun",
@@ -3531,13 +3694,14 @@
  "f0bc3d60": {
   "who": "jieun",
   "sig": "ec04ba4aa1f9",
-  "sim": 0.9898,
-  "rate": 6.07,
+  "sim": 0.9924,
+  "rate": 5.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "6340c94a": {
   "who": "jieun",
@@ -3553,35 +3717,38 @@
  "623e38e8": {
   "who": "jieun",
   "sig": "f90979218b4e",
-  "sim": 0.991,
-  "rate": 6.1,
+  "sim": 0.9918,
+  "rate": 5.74,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "25ed0a2f": {
   "who": "jieun",
   "sig": "e5f3b144b39f",
-  "sim": 0.9918,
-  "rate": 5.3,
+  "sim": 0.9909,
+  "rate": 5.61,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 10:58"
  },
  "95d70fcb": {
   "who": "jieun",
   "sig": "502883521706",
-  "sim": 0.9921,
-  "rate": 5.97,
+  "sim": 0.9949,
+  "rate": 5.74,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "4924a355": {
   "who": "jieun",
@@ -3597,24 +3764,26 @@
  "4ea9365e": {
   "who": "jieun",
   "sig": "52be9d87c040",
-  "sim": 0.9926,
-  "rate": 5.9,
+  "sim": 0.9933,
+  "rate": 5.44,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 10:58"
  },
  "3d99fd94": {
   "who": "jieun",
   "sig": "607726803206",
-  "sim": 0.9917,
-  "rate": 5.38,
-  "try": 1,
+  "sim": 0.9921,
+  "rate": 4.91,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "dd2dc2d9": {
   "who": "jieun",
@@ -3630,13 +3799,14 @@
  "9d75e125": {
   "who": "jieun",
   "sig": "99cae19427a5",
-  "sim": 0.9903,
-  "rate": 6.07,
+  "sim": 0.9879,
+  "rate": 5.97,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "2a25d971": {
   "who": "jieun",
@@ -3652,35 +3822,38 @@
  "c9ce5608": {
   "who": "jieun",
   "sig": "620693679836",
-  "sim": 0.9915,
-  "rate": 5.33,
+  "sim": 0.9934,
+  "rate": 5.12,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "b89c46a9": {
   "who": "jieun",
   "sig": "1190960c1b7a",
-  "sim": 0.9934,
-  "rate": 5.83,
+  "sim": 0.9949,
+  "rate": 5.17,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:57"
+  "at": "2026-11-07 08:26"
  },
  "e78fee09": {
   "who": "jieun",
   "sig": "47ec2c1c2d50",
-  "sim": 0.9933,
-  "rate": 5.56,
+  "sim": 0.9921,
+  "rate": 5.28,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:07"
+  "at": "2026-11-07 08:26"
  },
  "cc9d4b14": {
   "who": "jieun",
@@ -3696,35 +3869,38 @@
  "8558c69b": {
   "who": "jieun",
   "sig": "a431412ad898",
-  "sim": 0.9909,
-  "rate": 5.59,
+  "sim": 0.9933,
+  "rate": 5.38,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 10:58"
  },
  "7f819b4b": {
   "who": "jieun",
   "sig": "6673db58dcf0",
-  "sim": 0.9898,
-  "rate": 5.9,
+  "sim": 0.9916,
+  "rate": 5.25,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 08:26"
  },
  "5ab3c699": {
   "who": "jieun",
   "sig": "6ad90dc08757",
-  "sim": 0.9871,
-  "rate": 6.91,
+  "sim": 0.9907,
+  "rate": 6.21,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 08:26"
  },
  "376d24e2": {
   "who": "jieun",
@@ -3740,13 +3916,14 @@
  "b4e1759d": {
   "who": "jieun",
   "sig": "cccfb80540e7",
-  "sim": 0.9919,
-  "rate": 4.77,
+  "sim": 0.9922,
+  "rate": 5.44,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 10:58"
  },
  "df3d84f7": {
   "who": "jieun",
@@ -3762,35 +3939,38 @@
  "52d50237": {
   "who": "jieun",
   "sig": "71c1e0f75fa8",
-  "sim": 0.99,
-  "rate": 5.68,
-  "try": 1,
+  "sim": 0.9892,
+  "rate": 5.65,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 10:58"
  },
  "0eb7e61f": {
   "who": "jieun",
   "sig": "471fe655299a",
-  "sim": 0.9919,
-  "rate": 5.53,
+  "sim": 0.9922,
+  "rate": 5.59,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 10:58"
  },
  "832fbe8a": {
   "who": "jieun",
   "sig": "8b4ee4a6a139",
-  "sim": 0.9848,
-  "rate": 6.73,
-  "try": 1,
+  "sim": 0.989,
+  "rate": 6.65,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 08:28"
  },
  "38f52f9e": {
   "who": "jieun",
@@ -3806,13 +3986,14 @@
  "19562407": {
   "who": "jieun",
   "sig": "dfbfd42dd92f",
-  "sim": 0.9929,
-  "rate": 5.28,
+  "sim": 0.9921,
+  "rate": 5.47,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 08:28"
  },
  "1dda08c2": {
   "who": "jieun",
@@ -3828,24 +4009,26 @@
  "11612034": {
   "who": "jieun",
   "sig": "919874912b3e",
-  "sim": 0.9933,
-  "rate": 4.95,
+  "sim": 0.9935,
+  "rate": 4.91,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 10:58"
  },
  "cfad0ef2": {
   "who": "jieun",
   "sig": "53f9f726390e",
-  "sim": 0.9898,
-  "rate": 5.47,
+  "sim": 0.9915,
+  "rate": 6.07,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:58"
+  "at": "2026-11-07 08:28"
  },
  "07552c00": {
   "who": "jieun",
@@ -3872,24 +4055,26 @@
  "05218867": {
   "who": "jieun",
   "sig": "0376be39178f",
-  "sim": 0.9898,
-  "rate": 5.9,
-  "try": 1,
+  "sim": 0.9923,
+  "rate": 5.53,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 08:28"
  },
  "892e7432": {
   "who": "jieun",
   "sig": "321e66241c31",
-  "sim": 0.9863,
-  "rate": 6.91,
+  "sim": 0.9894,
+  "rate": 7.24,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 08:28"
  },
  "e305aadc": {
   "who": "jieun",
@@ -3905,24 +4090,26 @@
  "622d7ea7": {
   "who": "jieun",
   "sig": "2d30eeb5478f",
-  "sim": 0.9935,
-  "rate": 5.5,
+  "sim": 0.9942,
+  "rate": 5.15,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:28"
  },
  "e3970078": {
   "who": "jieun",
   "sig": "01f8db9256bb",
-  "sim": 0.9926,
-  "rate": 5.65,
+  "sim": 0.9947,
+  "rate": 5.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 11:00"
  },
  "02851f05": {
   "who": "jieun",
@@ -3938,13 +4125,14 @@
  "c76634e2": {
   "who": "jieun",
   "sig": "a6dc642db256",
-  "sim": 0.9936,
-  "rate": 4.73,
+  "sim": 0.9916,
+  "rate": 4.63,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 08:28"
  },
  "82ad4811": {
   "who": "jieun",
@@ -3960,24 +4148,26 @@
  "071c0d9e": {
   "who": "jieun",
   "sig": "e66131a4a649",
-  "sim": 0.9924,
-  "rate": 5.65,
+  "sim": 0.993,
+  "rate": 5.38,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 08:28"
  },
  "3e72fae4": {
   "who": "jieun",
   "sig": "3aaf1f30eb12",
-  "sim": 0.986,
-  "rate": 6.03,
+  "sim": 0.9916,
+  "rate": 5.65,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 11:00"
  },
  "62ae2a8a": {
   "who": "jieun",
@@ -4015,13 +4205,14 @@
  "a38dee67": {
   "who": "jieun",
   "sig": "ade3ffba2187",
-  "sim": 0.9944,
-  "rate": 4.14,
+  "sim": 0.9939,
+  "rate": 4.3,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 22:59"
+  "at": "2026-11-07 08:28"
  },
  "c00e6bf9": {
   "who": "jieun",
@@ -4037,24 +4228,26 @@
  "788daba2": {
   "who": "jieun",
   "sig": "57d2c68c700f",
-  "sim": 0.9928,
+  "sim": 0.9924,
   "rate": 4.87,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:28"
  },
  "c15dcf7e": {
   "who": "jieun",
   "sig": "5ab7bcc5bcc1",
-  "sim": 0.993,
-  "rate": 5.21,
+  "sim": 0.9918,
+  "rate": 5.47,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:30"
  },
  "1f2cb3b9": {
   "who": "jieun",
@@ -4070,24 +4263,26 @@
  "35ee9174": {
   "who": "jieun",
   "sig": "bab5b4a42ceb",
-  "sim": 0.9927,
-  "rate": 5.7,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.76,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "1b9e0b04": {
   "who": "jieun",
   "sig": "f6afe76c8955",
-  "sim": 0.9911,
-  "rate": 5.58,
+  "sim": 0.9925,
+  "rate": 5.31,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "d67490c4": {
   "who": "jieun",
@@ -4114,35 +4309,38 @@
  "e0c0436c": {
   "who": "jieun",
   "sig": "5659818c9389",
-  "sim": 0.9934,
-  "rate": 5.24,
-  "try": 1,
+  "sim": 0.9925,
+  "rate": 5.31,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:30"
  },
  "4e2e8eed": {
   "who": "jieun",
   "sig": "14c566b8b734",
-  "sim": 0.9906,
-  "rate": 5.91,
-  "try": 1,
+  "sim": 0.9917,
+  "rate": 5.53,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "0bc7b6f8": {
   "who": "jieun",
   "sig": "1c476f65e6d4",
-  "sim": 0.9928,
-  "rate": 5.91,
+  "sim": 0.9927,
+  "rate": 5.79,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "32f5f5f8": {
   "who": "jieun",
@@ -4169,24 +4367,26 @@
  "9fe31ae1": {
   "who": "jieun",
   "sig": "b13311644194",
-  "sim": 0.9915,
-  "rate": 5.67,
-  "try": 1,
+  "sim": 0.9914,
+  "rate": 5.7,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "cc9282e4": {
   "who": "jieun",
   "sig": "20f94629b8b5",
-  "sim": 0.991,
-  "rate": 5.98,
+  "sim": 0.9905,
+  "rate": 4.66,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "3c8b6570": {
   "who": "jieun",
@@ -4202,13 +4402,14 @@
  "128d70c6": {
   "who": "jieun",
   "sig": "a454736cd232",
-  "sim": 0.9941,
-  "rate": 5.26,
+  "sim": 0.9949,
+  "rate": 5.19,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:30"
  },
  "47855c88": {
   "who": "jieun",
@@ -4224,13 +4425,14 @@
  "5d99d0a3": {
   "who": "jieun",
   "sig": "32419889d3d9",
-  "sim": 0.9891,
-  "rate": 5.7,
+  "sim": 0.993,
+  "rate": 5.26,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "481c5819": {
   "who": "jieun",
@@ -4246,57 +4448,62 @@
  "6c4ad284": {
   "who": "jieun",
   "sig": "925bba40af4b",
-  "sim": 0.9949,
-  "rate": 5.73,
+  "sim": 0.9939,
+  "rate": 5.76,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "d2c134c9": {
   "who": "jieun",
   "sig": "4e11fdd8e662",
-  "sim": 0.9908,
-  "rate": 5.67,
+  "sim": 0.9912,
+  "rate": 5.61,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:30"
  },
  "94189bef": {
   "who": "jieun",
   "sig": "bd9139166c07",
-  "sim": 0.9901,
-  "rate": 6.15,
+  "sim": 0.9923,
+  "rate": 5.21,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:30"
  },
  "41adff66": {
   "who": "jieun",
   "sig": "b66a63f2a05b",
-  "sim": 0.9908,
-  "rate": 6.01,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.88,
+  "fall": 80,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:30"
  },
  "e806b7e0": {
   "who": "jieun",
   "sig": "9b1d4c7557f9",
-  "sim": 0.9911,
-  "rate": 5.82,
-  "try": 1,
+  "sim": 0.9917,
+  "rate": 5.64,
+  "fall": 80,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:31"
  },
  "60b8ac2c": {
   "who": "jieun",
@@ -4312,13 +4519,14 @@
  "201df07c": {
   "who": "jieun",
   "sig": "6085b4241c25",
-  "sim": 0.9914,
-  "rate": 6.21,
-  "try": 1,
+  "sim": 0.9886,
+  "rate": 4.76,
+  "fall": 90,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:31"
  },
  "82b4bdec": {
   "who": "jieun",
@@ -4334,13 +4542,14 @@
  "5ba4df3c": {
   "who": "jieun",
   "sig": "6c99a6e17606",
-  "sim": 0.9922,
-  "rate": 5.39,
-  "try": 1,
+  "sim": 0.993,
+  "rate": 5.85,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:34"
  },
  "be66fcd5": {
   "who": "jieun",
@@ -4378,46 +4587,50 @@
  "48d73ed4": {
   "who": "jieun",
   "sig": "97d613626975",
-  "sim": 0.9874,
-  "rate": 6.71,
-  "try": 1,
+  "sim": 0.9902,
+  "rate": 6.43,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:00"
+  "at": "2026-11-07 08:34"
  },
  "53cfbfb6": {
   "who": "jieun",
   "sig": "11902e0738fc",
-  "sim": 0.9922,
-  "rate": 5.73,
+  "sim": 0.9943,
+  "rate": 4.7,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "97a319d8": {
   "who": "jieun",
   "sig": "20a07a23b559",
-  "sim": 0.9922,
-  "rate": 5.64,
+  "sim": 0.9911,
+  "rate": 5.76,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "c5b42eb0": {
   "who": "jieun",
   "sig": "482f29302d62",
-  "sim": 0.9923,
-  "rate": 5.61,
+  "sim": 0.9937,
+  "rate": 5.82,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "775c51ad": {
   "who": "jieun",
@@ -4433,24 +4646,26 @@
  "53ad6a3a": {
   "who": "jieun",
   "sig": "f64f3e0bb51b",
-  "sim": 0.9903,
-  "rate": 6.29,
-  "try": 1,
+  "sim": 0.9892,
+  "rate": 6.11,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "feaddd52": {
   "who": "jieun",
   "sig": "d2f25d40f328",
-  "sim": 0.9929,
-  "rate": 6.47,
-  "try": 1,
+  "sim": 0.9851,
+  "rate": 7.97,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 11:00"
  },
  "d16d1587": {
   "who": "jieun",
@@ -4477,68 +4692,74 @@
  "0a242cd9": {
   "who": "jieun",
   "sig": "49fdb05df3c8",
-  "sim": 0.9909,
-  "rate": 5.45,
+  "sim": 0.9926,
+  "rate": 5.64,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "22c69917": {
   "who": "jieun",
   "sig": "c83fa98cdf08",
-  "sim": 0.9924,
-  "rate": 4.47,
+  "sim": 0.9936,
+  "rate": 5.42,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "87fad273": {
   "who": "jieun",
   "sig": "742917bb6709",
-  "sim": 0.9892,
-  "rate": 6.83,
+  "sim": 0.9921,
+  "rate": 5.85,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 11:00"
  },
  "3507e797": {
   "who": "jieun",
   "sig": "e6a724eac2a4",
-  "sim": 0.9914,
-  "rate": 5.42,
-  "try": 1,
+  "sim": 0.9866,
+  "rate": 5.95,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "b7b44c9a": {
   "who": "jieun",
   "sig": "2994a6e703f1",
-  "sim": 0.9931,
-  "rate": 4.72,
+  "sim": 0.9945,
+  "rate": 4.03,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "33864d15": {
   "who": "jieun",
   "sig": "d6a9abcf24cc",
-  "sim": 0.9924,
-  "rate": 5.61,
-  "try": 1,
+  "sim": 0.9929,
+  "rate": 6.63,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:02"
+  "at": "2026-11-07 08:34"
  },
  "f539e81a": {
   "who": "jieun",
@@ -4554,24 +4775,26 @@
  "4732aca9": {
   "who": "jieun",
   "sig": "42594057a97e",
-  "sim": 0.9936,
-  "rate": 6.25,
+  "sim": 0.9942,
+  "rate": 6.01,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 11:00"
  },
  "84d15623": {
   "who": "jieun",
   "sig": "6a4fabebdd68",
-  "sim": 0.9914,
-  "rate": 5.56,
+  "sim": 0.9933,
+  "rate": 5.05,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 11:00"
  },
  "866ad294": {
   "who": "jieun",
@@ -4587,24 +4810,26 @@
  "a430eb01": {
   "who": "jieun",
   "sig": "62056bb42d52",
-  "sim": 0.9949,
-  "rate": 5.2,
+  "sim": 0.9951,
+  "rate": 4.6,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 11:00"
  },
  "385906c5": {
   "who": "jieun",
   "sig": "d483aea875e2",
-  "sim": 0.9928,
-  "rate": 4.64,
+  "sim": 0.994,
+  "rate": 4.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 08:36"
  },
  "2ebe4f23": {
   "who": "jieun",
@@ -4631,24 +4856,26 @@
  "bf3bb0c8": {
   "who": "jieun",
   "sig": "f7318d01dbfd",
-  "sim": 0.9925,
-  "rate": 5.69,
-  "try": 1,
+  "sim": 0.9852,
+  "rate": 18.25,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
-  "flag": "",
-  "at": "2026-11-05 23:03"
+  "flag": "길이",
+  "at": "2026-11-07 08:36"
  },
  "09555bfc": {
   "who": "jieun",
   "sig": "a37dc7019e09",
-  "sim": 0.9942,
-  "rate": 4.23,
-  "try": 1,
+  "sim": 0.994,
+  "rate": 4.89,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 08:36"
  },
  "350ca8b9": {
   "who": "jieun",
@@ -4675,24 +4902,26 @@
  "5c89fe56": {
   "who": "jieun",
   "sig": "a9f7d7317b7c",
-  "sim": 0.9861,
-  "rate": 5.32,
+  "sim": 0.9925,
+  "rate": 5.64,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 08:36"
  },
  "d88dfbb6": {
   "who": "jieun",
   "sig": "3d5a05ad8949",
-  "sim": 0.9935,
-  "rate": 6.15,
+  "sim": 0.9938,
+  "rate": 4.83,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 08:36"
  },
  "4058f677": {
   "who": "jieun",
@@ -4719,13 +4948,14 @@
  "b95c0939": {
   "who": "jieun",
   "sig": "9d17a0fa2a02",
-  "sim": 0.9914,
-  "rate": 6.15,
+  "sim": 0.9926,
+  "rate": 6.02,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:03"
+  "at": "2026-11-07 11:00"
  },
  "e408b740": {
   "who": "jieun",
@@ -4741,13 +4971,14 @@
  "3258cc45": {
   "who": "jieun",
   "sig": "18c37ceab828",
-  "sim": 0.9899,
-  "rate": 5.61,
+  "sim": 0.9918,
+  "rate": 5.48,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "a6a8295a": {
   "who": "jieun",
@@ -4763,35 +4994,38 @@
  "29892a61": {
   "who": "jieun",
   "sig": "f7eabfe08b34",
-  "sim": 0.9924,
-  "rate": 5.56,
+  "sim": 0.9923,
+  "rate": 5.69,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "fc077154": {
   "who": "jieun",
   "sig": "7907f57aa518",
-  "sim": 0.9941,
+  "sim": 0.9945,
   "rate": 5.78,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "8f563955": {
   "who": "jieun",
   "sig": "915370bf7a9a",
-  "sim": 0.9921,
-  "rate": 6.15,
+  "sim": 0.9923,
+  "rate": 6.39,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "8657f3f1": {
   "who": "jieun",
@@ -4807,24 +5041,26 @@
  "05bcb48f": {
   "who": "jieun",
   "sig": "5a1a01d31b42",
-  "sim": 0.9904,
-  "rate": 5.84,
+  "sim": 0.9921,
+  "rate": 5.16,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "cbab4872": {
   "who": "jieun",
   "sig": "5e2390062eda",
-  "sim": 0.9908,
-  "rate": 5.2,
+  "sim": 0.994,
+  "rate": 4.96,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "bdbcbbef": {
   "who": "jieun",
@@ -4851,46 +5087,50 @@
  "0639bc99": {
   "who": "jieun",
   "sig": "f2e3c8f8e4ae",
-  "sim": 0.9918,
-  "rate": 5.75,
+  "sim": 0.9923,
+  "rate": 6.02,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 11:02"
  },
  "1848b0f5": {
   "who": "jieun",
   "sig": "f6b45cb681b8",
-  "sim": 0.9905,
-  "rate": 5.35,
+  "sim": 0.9925,
+  "rate": 5.56,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "4ec9da2d": {
   "who": "jieun",
   "sig": "a440c2ecd8a2",
-  "sim": 0.9919,
-  "rate": 5.3,
-  "try": 1,
+  "sim": 0.992,
+  "rate": 5.61,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "cf844d7d": {
   "who": "jieun",
   "sig": "664a3c585910",
-  "sim": 0.9928,
-  "rate": 5.0,
+  "sim": 0.9916,
+  "rate": 5.37,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:36"
  },
  "ebe89b84": {
   "who": "jieun",
@@ -4906,13 +5146,14 @@
  "226a37e8": {
   "who": "jieun",
   "sig": "98efb11f6c01",
-  "sim": 0.9911,
-  "rate": 5.48,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 5.61,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:04"
+  "at": "2026-11-07 08:38"
  },
  "bb3b0216": {
   "who": "jieun",
@@ -4983,13 +5224,14 @@
  "dabe5abd": {
   "who": "jieun",
   "sig": "608da703cdbe",
-  "sim": 0.9899,
-  "rate": 6.39,
+  "sim": 0.9927,
+  "rate": 5.9,
+  "fall": 110,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "db80768f": {
   "who": "jieun",
@@ -5005,57 +5247,62 @@
  "8eec39a2": {
   "who": "jieun",
   "sig": "5e2cc6a9032b",
-  "sim": 0.9911,
-  "rate": 6.46,
+  "sim": 0.994,
+  "rate": 5.04,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "942ac349": {
   "who": "jieun",
   "sig": "d30903f0d284",
-  "sim": 0.99,
-  "rate": 5.64,
+  "sim": 0.9901,
+  "rate": 5.56,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "b8307abe": {
   "who": "jieun",
   "sig": "03abba4d1a51",
-  "sim": 0.9936,
-  "rate": 4.81,
+  "sim": 0.9924,
+  "rate": 4.69,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "a8d3b518": {
   "who": "jieun",
   "sig": "a2a0fced83b4",
-  "sim": 0.9922,
-  "rate": 6.61,
-  "try": 1,
+  "sim": 0.9919,
+  "rate": 5.58,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "fc18bdbe": {
   "who": "jieun",
   "sig": "775eaf28729d",
-  "sim": 0.992,
-  "rate": 5.75,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 5.48,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "ea504bbf": {
   "who": "jieun",
@@ -5071,24 +5318,26 @@
  "6d2bd0ff": {
   "who": "jieun",
   "sig": "6161b02a8b08",
-  "sim": 0.9937,
-  "rate": 5.61,
-  "try": 2,
+  "sim": 0.9926,
+  "rate": 5.56,
+  "fall": 90,
+  "try": 1,
   "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "778d062e": {
   "who": "jieun",
   "sig": "5f6d5b235631",
-  "sim": 0.9921,
-  "rate": 4.81,
-  "try": 1,
+  "sim": 0.9877,
+  "rate": 4.55,
+  "fall": 100,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:05"
+  "at": "2026-11-07 08:38"
  },
  "745e76dc": {
   "who": "jieun",
@@ -5126,24 +5375,26 @@
  "9cbf0254": {
   "who": "jieun",
   "sig": "4bd51b93b921",
-  "sim": 0.9924,
-  "rate": 5.2,
-  "try": 1,
+  "sim": 0.9872,
+  "rate": 4.79,
+  "fall": 120,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 11:02"
  },
  "7620599a": {
   "who": "jieun",
   "sig": "027cad67b815",
-  "sim": 0.9923,
-  "rate": 5.69,
+  "sim": 0.9936,
+  "rate": 5.25,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "9e352ddc": {
   "who": "jieun",
@@ -5159,13 +5410,14 @@
  "2cb2b898": {
   "who": "jieun",
   "sig": "02db2b7b837b",
-  "sim": 0.991,
-  "rate": 6.25,
+  "sim": 0.9934,
+  "rate": 5.35,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "7a41b317": {
   "who": "jieun",
@@ -5203,24 +5455,26 @@
  "83f17445": {
   "who": "jieun",
   "sig": "0294a9f846d7",
-  "sim": 0.9941,
-  "rate": 4.96,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.33,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "da35b8b8": {
   "who": "jieun",
   "sig": "d8d33be38297",
-  "sim": 0.9943,
-  "rate": 5.58,
+  "sim": 0.9939,
+  "rate": 4.92,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "e2d17cd2": {
   "who": "jieun",
@@ -5236,24 +5490,26 @@
  "f8f7a9d4": {
   "who": "jieun",
   "sig": "d85f0a559113",
-  "sim": 0.984,
-  "rate": 6.78,
+  "sim": 0.9927,
+  "rate": 5.56,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "391ec8ce": {
   "who": "jieun",
   "sig": "cbd840a82b18",
-  "sim": 0.9917,
-  "rate": 5.63,
-  "try": 1,
+  "sim": 0.9926,
+  "rate": 5.38,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:06"
+  "at": "2026-11-07 08:38"
  },
  "d974c31a": {
   "who": "jieun",
@@ -5302,13 +5558,14 @@
  "38fc6a57": {
   "who": "jieun",
   "sig": "0d24719621b6",
-  "sim": 0.9938,
-  "rate": 4.98,
+  "sim": 0.9929,
+  "rate": 4.8,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 11:02"
  },
  "4cff8dae": {
   "who": "jieun",
@@ -5346,24 +5603,26 @@
  "f9d2be48": {
   "who": "jieun",
   "sig": "3faa8c1029b5",
-  "sim": 0.9927,
-  "rate": 5.43,
+  "sim": 0.9914,
+  "rate": 5.19,
+  "fall": 70,
   "try": 2,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 08:40"
  },
  "a96a1d7c": {
   "who": "jieun",
   "sig": "39226478fb8e",
-  "sim": 0.9937,
-  "rate": 5.06,
+  "sim": 0.9943,
+  "rate": 5.13,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 08:40"
  },
  "921e1194": {
   "who": "jieun",
@@ -5390,24 +5649,26 @@
  "11375ff8": {
   "who": "jieun",
   "sig": "8928c3eb5923",
-  "sim": 0.9935,
-  "rate": 5.48,
-  "try": 1,
+  "sim": 0.9925,
+  "rate": 5.74,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 08:40"
  },
  "7ac66dd0": {
   "who": "jieun",
   "sig": "c5170d337192",
-  "sim": 0.9914,
-  "rate": 5.17,
+  "sim": 0.9917,
+  "rate": 5.36,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 08:40"
  },
  "da55c68c": {
   "who": "jieun",
@@ -5423,13 +5684,14 @@
  "b1187053": {
   "who": "jieun",
   "sig": "2b5109b2ee35",
-  "sim": 0.9903,
-  "rate": 6.09,
+  "sim": 0.9936,
+  "rate": 5.63,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:08"
+  "at": "2026-11-07 08:40"
  },
  "482523de": {
   "who": "jieun",
@@ -5445,13 +5707,14 @@
  "286f6804": {
   "who": "jieun",
   "sig": "cce94b387929",
-  "sim": 0.9921,
-  "rate": 5.08,
+  "sim": 0.9945,
+  "rate": 4.78,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "835d2afb": {
   "who": "jieun",
@@ -5467,13 +5730,14 @@
  "9675cd30": {
   "who": "jieun",
   "sig": "ad1d62d27dd4",
-  "sim": 0.991,
-  "rate": 5.69,
+  "sim": 0.9916,
+  "rate": 5.58,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "c4c3a60c": {
   "who": "jieun",
@@ -5489,13 +5753,14 @@
  "bdc80fce": {
   "who": "jieun",
   "sig": "1aa2d887a8ad",
-  "sim": 0.9913,
-  "rate": 5.71,
+  "sim": 0.9924,
+  "rate": 4.82,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "3de663ac": {
   "who": "jieun",
@@ -5511,68 +5776,74 @@
  "172121dc": {
   "who": "jieun",
   "sig": "fbe13b91c2d3",
-  "sim": 0.993,
-  "rate": 5.11,
-  "try": 1,
+  "sim": 0.9922,
+  "rate": 5.5,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "047f424c": {
   "who": "jieun",
   "sig": "6d5d47b3df2a",
-  "sim": 0.9939,
-  "rate": 6.03,
+  "sim": 0.9919,
+  "rate": 5.74,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "484e6e08": {
   "who": "jieun",
   "sig": "11fd53ebfb49",
-  "sim": 0.9921,
-  "rate": 6.28,
+  "sim": 0.9941,
+  "rate": 5.41,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "0fc9495a": {
   "who": "jieun",
   "sig": "ed5912d9f35c",
-  "sim": 0.9933,
-  "rate": 5.53,
-  "try": 1,
+  "sim": 0.9931,
+  "rate": 5.83,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "d90a7520": {
   "who": "jieun",
   "sig": "2e1760c60eca",
-  "sim": 0.9929,
-  "rate": 5.43,
+  "sim": 0.9928,
+  "rate": 5.56,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "33f83ace": {
   "who": "jieun",
   "sig": "ca8c4fb96399",
-  "sim": 0.9927,
-  "rate": 5.38,
+  "sim": 0.9902,
+  "rate": 5.17,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "c1569b95": {
   "who": "jieun",
@@ -5588,13 +5859,14 @@
  "d570da13": {
   "who": "jieun",
   "sig": "244662c26fe8",
-  "sim": 0.9936,
-  "rate": 4.9,
-  "try": 1,
+  "sim": 0.9866,
+  "rate": 4.6,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 08:40"
  },
  "c64d105c": {
   "who": "jieun",
@@ -5610,13 +5882,14 @@
  "f426eefd": {
   "who": "jieun",
   "sig": "d1276ded8898",
-  "sim": 0.9918,
-  "rate": 5.69,
+  "sim": 0.9915,
+  "rate": 5.71,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:09"
+  "at": "2026-11-07 11:02"
  },
  "b2090761": {
   "who": "jieun",
@@ -5643,13 +5916,14 @@
  "47551291": {
   "who": "jieun",
   "sig": "8c0793b47f3b",
-  "sim": 0.985,
-  "rate": 6.78,
+  "sim": 0.991,
+  "rate": 4.94,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "9768c5c2": {
   "who": "jieun",
@@ -5665,13 +5939,14 @@
  "e67334a6": {
   "who": "jieun",
   "sig": "1cf49221f87c",
-  "sim": 0.9923,
-  "rate": 6.12,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 5.85,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "3c32963f": {
   "who": "jieun",
@@ -5687,35 +5962,38 @@
  "981b0925": {
   "who": "jieun",
   "sig": "5818357bab77",
-  "sim": 0.9928,
-  "rate": 5.45,
+  "sim": 0.9925,
+  "rate": 5.88,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "b4ffdc6b": {
   "who": "jieun",
   "sig": "10031555ff69",
-  "sim": 0.9946,
-  "rate": 5.83,
-  "try": 1,
+  "sim": 0.9941,
+  "rate": 5.88,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "ea86bbdd": {
   "who": "jieun",
   "sig": "86e573fc13d5",
-  "sim": 0.992,
-  "rate": 5.94,
-  "try": 1,
+  "sim": 0.9939,
+  "rate": 5.71,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:08"
+  "at": "2026-11-07 08:43"
  },
  "56f2adbd": {
   "who": "jieun",
@@ -5731,35 +6009,38 @@
  "64b18fab": {
   "who": "jieun",
   "sig": "f3b5ff957a32",
-  "sim": 0.9943,
-  "rate": 5.26,
+  "sim": 0.9933,
+  "rate": 5.41,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "7db6a593": {
   "who": "jieun",
   "sig": "f6951775f418",
-  "sim": 0.9903,
-  "rate": 5.33,
+  "sim": 0.9923,
+  "rate": 5.77,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 08:43"
  },
  "480d31ae": {
   "who": "jieun",
   "sig": "33a0d63d22bf",
-  "sim": 0.9906,
-  "rate": 6.06,
+  "sim": 0.9932,
+  "rate": 5.56,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 11:02"
  },
  "cee87788": {
   "who": "jieun",
@@ -5786,35 +6067,38 @@
  "90b2a4f6": {
   "who": "jieun",
   "sig": "cf4dafd64d43",
-  "sim": 0.9899,
-  "rate": 6.38,
-  "try": 1,
+  "sim": 0.9908,
+  "rate": 6.59,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:10"
+  "at": "2026-11-07 11:02"
  },
  "89ccb209": {
   "who": "jieun",
   "sig": "da42f2c755cc",
-  "sim": 0.9935,
-  "rate": 7.5,
+  "sim": 0.9942,
+  "rate": 5.0,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "4ce1682e": {
   "who": "jieun",
   "sig": "8c058e577de0",
-  "sim": 0.9938,
-  "rate": 4.98,
+  "sim": 0.9932,
+  "rate": 5.33,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "3e4ab478": {
   "who": "jieun",
@@ -5830,13 +6114,14 @@
  "c4914a97": {
   "who": "jieun",
   "sig": "5384300feee1",
-  "sim": 0.9935,
-  "rate": 5.8,
+  "sim": 0.9933,
+  "rate": 4.86,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "79361beb": {
   "who": "jieun",
@@ -5874,35 +6159,38 @@
  "1139df38": {
   "who": "jieun",
   "sig": "2a9bfa490d56",
-  "sim": 0.993,
-  "rate": 4.56,
+  "sim": 0.9948,
+  "rate": 4.24,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "e8ac5247": {
   "who": "jieun",
   "sig": "fe1cd584c840",
-  "sim": 0.9915,
-  "rate": 5.38,
-  "try": 1,
+  "sim": 0.9835,
+  "rate": 4.98,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "ac140f96": {
   "who": "jieun",
   "sig": "b3ea7a0bc0e1",
-  "sim": 0.9914,
-  "rate": 5.19,
+  "sim": 0.9931,
+  "rate": 5.31,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 08:43"
  },
  "9f16b523": {
   "who": "jieun",
@@ -5918,13 +6206,14 @@
  "b8224f59": {
   "who": "jieun",
   "sig": "6ab5bfd3ecd6",
-  "sim": 0.9904,
-  "rate": 5.61,
+  "sim": 0.9932,
+  "rate": 5.58,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 11:02"
  },
  "5db325cd": {
   "who": "jieun",
@@ -5962,13 +6251,14 @@
  "ea6f9571": {
   "who": "jieun",
   "sig": "a2421bfe5096",
-  "sim": 0.9927,
-  "rate": 5.81,
+  "sim": 0.9923,
+  "rate": 5.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:11"
+  "at": "2026-11-07 11:02"
  },
  "97cd761b": {
   "who": "jieun",
@@ -6017,24 +6307,26 @@
  "347c78a6": {
   "who": "jieun",
   "sig": "f9cdcc3c68b7",
-  "sim": 0.9916,
-  "rate": 6.01,
+  "sim": 0.9925,
+  "rate": 5.53,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:13"
+  "at": "2026-11-07 08:45"
  },
  "1b3b9df5": {
   "who": "jieun",
   "sig": "a0c1ef7bb998",
-  "sim": 0.9926,
-  "rate": 5.21,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.63,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:13"
+  "at": "2026-11-07 11:05"
  },
  "5a994142": {
   "who": "jieun",
@@ -6050,13 +6342,14 @@
  "786c53cf": {
   "who": "jieun",
   "sig": "205fe610f9d1",
-  "sim": 0.9934,
-  "rate": 5.51,
+  "sim": 0.9935,
+  "rate": 5.81,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:13"
+  "at": "2026-11-07 08:45"
  },
  "6f19cf8f": {
   "who": "jieun",
@@ -6105,13 +6398,14 @@
  "93d58a9e": {
   "who": "jieun",
   "sig": "481016b874d7",
-  "sim": 0.9933,
-  "rate": 5.39,
+  "sim": 0.9934,
+  "rate": 5.95,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:45"
  },
  "d819f576": {
   "who": "jieun",
@@ -6127,13 +6421,14 @@
  "65609f17": {
   "who": "jieun",
   "sig": "7ad8b2daddd4",
-  "sim": 0.9932,
-  "rate": 4.81,
+  "sim": 0.993,
+  "rate": 4.94,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:45"
  },
  "7f8cef84": {
   "who": "jieun",
@@ -6149,35 +6444,38 @@
  "ceed7533": {
   "who": "jieun",
   "sig": "c5ac1b22dc80",
-  "sim": 0.9934,
-  "rate": 5.25,
+  "sim": 0.9936,
+  "rate": 4.77,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "bee19b7f": {
   "who": "jieun",
   "sig": "5c17c0d836d0",
-  "sim": 0.9933,
-  "rate": 4.86,
+  "sim": 0.9941,
+  "rate": 5.46,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "51fd4f27": {
   "who": "jieun",
   "sig": "9c23fb8b8c5b",
-  "sim": 0.9912,
-  "rate": 5.41,
+  "sim": 0.9929,
+  "rate": 5.1,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "12ba6a2e": {
   "who": "jieun",
@@ -6193,24 +6491,26 @@
  "b3bcbcfd": {
   "who": "jieun",
   "sig": "d4f6cae0589e",
-  "sim": 0.9911,
-  "rate": 5.79,
+  "sim": 0.9943,
+  "rate": 5.39,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:45"
  },
  "d39a181c": {
   "who": "jieun",
   "sig": "430e6050b21f",
-  "sim": 0.9934,
-  "rate": 5.79,
+  "sim": 0.9932,
+  "rate": 6.01,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "9958d082": {
   "who": "jieun",
@@ -6237,24 +6537,26 @@
  "47101cfd": {
   "who": "jieun",
   "sig": "b7321a47b557",
-  "sim": 0.9931,
-  "rate": 5.58,
+  "sim": 0.993,
+  "rate": 5.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "3da902b8": {
   "who": "jieun",
   "sig": "ebdb0f6eb177",
-  "sim": 0.9922,
-  "rate": 6.07,
+  "sim": 0.9921,
+  "rate": 5.66,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:45"
  },
  "75a38391": {
   "who": "jieun",
@@ -6303,13 +6605,14 @@
  "c9a827ed": {
   "who": "jieun",
   "sig": "e94a9b2fff8a",
-  "sim": 0.9899,
-  "rate": 5.81,
-  "try": 1,
+  "sim": 0.9924,
+  "rate": 5.87,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:14"
+  "at": "2026-11-07 08:45"
  },
  "b51dbf70": {
   "who": "jieun",
@@ -6325,35 +6628,38 @@
  "606876bf": {
   "who": "jieun",
   "sig": "3d7dbe78edbc",
-  "sim": 0.991,
-  "rate": 6.19,
-  "try": 1,
+  "sim": 0.9926,
+  "rate": 5.81,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 10:28"
  },
  "0f78a30e": {
   "who": "jieun",
   "sig": "183d7cb5b1df",
-  "sim": 0.9885,
-  "rate": 6.68,
+  "sim": 0.9918,
+  "rate": 5.36,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "7a750547": {
   "who": "jieun",
   "sig": "0d1b1f52d2bc",
   "sim": 0.992,
-  "rate": 4.86,
+  "rate": 4.88,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "3a823e88": {
   "who": "jieun",
@@ -6380,13 +6686,14 @@
  "3aa86ed7": {
   "who": "jieun",
   "sig": "a56e08e648d3",
-  "sim": 0.9938,
-  "rate": 5.17,
+  "sim": 0.9934,
+  "rate": 4.79,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "53ae1c2c": {
   "who": "jieun",
@@ -6402,24 +6709,26 @@
  "a22edf6d": {
   "who": "jieun",
   "sig": "a77bbfa2d309",
-  "sim": 0.9923,
-  "rate": 6.28,
+  "sim": 0.994,
+  "rate": 6.13,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "76459aff": {
   "who": "jieun",
   "sig": "511cc8e6015d",
-  "sim": 0.9913,
-  "rate": 6.04,
+  "sim": 0.9939,
+  "rate": 5.73,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "94b4c111": {
   "who": "jieun",
@@ -6435,13 +6744,14 @@
  "94701adc": {
   "who": "jieun",
   "sig": "d0fb5d07031d",
-  "sim": 0.9948,
-  "rate": 5.0,
+  "sim": 0.9942,
+  "rate": 4.5,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "ff0fb403": {
   "who": "jieun",
@@ -6468,24 +6778,26 @@
  "07914e3d": {
   "who": "jieun",
   "sig": "d547e9cf85dc",
-  "sim": 0.995,
-  "rate": 5.12,
+  "sim": 0.9946,
+  "rate": 5.22,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:15"
+  "at": "2026-11-07 08:47"
  },
  "f6307fec": {
   "who": "jieun",
   "sig": "b585914597f8",
-  "sim": 0.9932,
-  "rate": 5.99,
+  "sim": 0.9944,
+  "rate": 5.44,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:47"
  },
  "20f7d16d": {
   "who": "jieun",
@@ -6512,35 +6824,38 @@
  "1031531b": {
   "who": "jieun",
   "sig": "e349a41b0137",
-  "sim": 0.9946,
-  "rate": 6.16,
+  "sim": 0.9947,
+  "rate": 5.6,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 08:47"
  },
  "4a7c568f": {
   "who": "jieun",
   "sig": "9e39bc7ea8e4",
-  "sim": 0.9933,
-  "rate": 5.65,
-  "try": 1,
+  "sim": 0.992,
+  "rate": 5.44,
+  "fall": 120,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 08:47"
  },
  "f003e858": {
   "who": "jieun",
   "sig": "163ce081c024",
-  "sim": 0.9922,
-  "rate": 5.75,
-  "try": 1,
+  "sim": 0.9883,
+  "rate": 6.6,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 10:28"
  },
  "fe45c754": {
   "who": "jieun",
@@ -6556,13 +6871,14 @@
  "6db0d0de": {
   "who": "jieun",
   "sig": "f46ae1981023",
-  "sim": 0.9889,
-  "rate": 5.53,
-  "try": 1,
+  "sim": 0.9911,
+  "rate": 5.02,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 10:28"
  },
  "9ac1af8f": {
   "who": "jieun",
@@ -6589,24 +6905,26 @@
  "14ec81a5": {
   "who": "jieun",
   "sig": "6e114211ff77",
-  "sim": 0.9858,
-  "rate": 6.44,
+  "sim": 0.9881,
+  "rate": 6.77,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 08:47"
  },
  "aa05aea3": {
   "who": "jieun",
   "sig": "503693a0181e",
-  "sim": 0.993,
-  "rate": 5.31,
+  "sim": 0.9943,
+  "rate": 5.12,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 08:47"
  },
  "db38f87c": {
   "who": "jieun",
@@ -6633,24 +6951,26 @@
  "352cc596": {
   "who": "jieun",
   "sig": "0a3ede3f47b3",
-  "sim": 0.9884,
-  "rate": 7.22,
+  "sim": 0.9909,
+  "rate": 7.26,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:47"
  },
  "907b7e66": {
   "who": "jieun",
   "sig": "e530945d39b7",
-  "sim": 0.9936,
-  "rate": 5.37,
+  "sim": 0.9931,
+  "rate": 5.16,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:16"
+  "at": "2026-11-07 08:47"
  },
  "f0715a87": {
   "who": "jieun",
@@ -6666,13 +6986,14 @@
  "371e12f7": {
   "who": "jieun",
   "sig": "3d9775128770",
-  "sim": 0.9943,
-  "rate": 6.53,
+  "sim": 0.9937,
+  "rate": 6.19,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:49"
  },
  "40467e6a": {
   "who": "jieun",
@@ -6688,24 +7009,26 @@
  "bc9a6b29": {
   "who": "jieun",
   "sig": "2bb5f3616a45",
-  "sim": 0.99,
+  "sim": 0.9915,
   "rate": 6.95,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 11:05"
  },
  "c2f3aa74": {
   "who": "jieun",
   "sig": "b6bfcf79229c",
-  "sim": 0.9921,
-  "rate": 6.19,
-  "try": 1,
+  "sim": 0.9916,
+  "rate": 6.1,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 10:28"
  },
  "7894caba": {
   "who": "jieun",
@@ -6743,13 +7066,14 @@
  "7e895cd7": {
   "who": "jieun",
   "sig": "b42d220244ff",
-  "sim": 0.9915,
-  "rate": 6.7,
-  "try": 1,
+  "sim": 0.9932,
+  "rate": 6.6,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 08:49"
  },
  "50dff867": {
   "who": "jieun",
@@ -6776,35 +7100,38 @@
  "4cf7cb76": {
   "who": "jieun",
   "sig": "1b10c370eaa9",
-  "sim": 0.9922,
-  "rate": 5.99,
-  "try": 1,
+  "sim": 0.9949,
+  "rate": 5.24,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 08:49"
  },
  "22402f0e": {
   "who": "jieun",
   "sig": "13222220ad4a",
-  "sim": 0.9895,
-  "rate": 6.88,
+  "sim": 0.9931,
+  "rate": 5.65,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 08:49"
  },
  "849e81cf": {
   "who": "jieun",
   "sig": "3ac9927eabbc",
-  "sim": 0.9923,
-  "rate": 5.86,
+  "sim": 0.9931,
+  "rate": 5.68,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 08:49"
  },
  "e757020f": {
   "who": "jieun",
@@ -6842,24 +7169,26 @@
  "d656746f": {
   "who": "jieun",
   "sig": "2e39ade258ec",
-  "sim": 0.9939,
-  "rate": 5.35,
+  "sim": 0.995,
+  "rate": 6.02,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:18"
+  "at": "2026-11-07 08:49"
  },
  "d134211f": {
   "who": "jieun",
   "sig": "39ed8eea0396",
-  "sim": 0.9937,
-  "rate": 5.65,
+  "sim": 0.993,
+  "rate": 6.07,
+  "fall": 50,
   "try": 2,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:19"
+  "at": "2026-11-07 08:49"
  },
  "1ec64624": {
   "who": "jieun",
@@ -6875,13 +7204,14 @@
  "fb6a465a": {
   "who": "jieun",
   "sig": "b43d754750c1",
-  "sim": 0.9893,
-  "rate": 5.58,
+  "sim": 0.9915,
+  "rate": 5.6,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:19"
+  "at": "2026-11-07 08:49"
  },
  "6c4cb2eb": {
   "who": "jieun",
@@ -6974,13 +7304,14 @@
  "1e3f5cec": {
   "who": "jieun",
   "sig": "4abf7f4436a6",
-  "sim": 0.991,
-  "rate": 5.53,
-  "try": 1,
+  "sim": 0.9907,
+  "rate": 4.94,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:19"
+  "at": "2026-11-07 08:49"
  },
  "0e817930": {
   "who": "jieun",
@@ -6996,24 +7327,26 @@
  "bbca4c38": {
   "who": "jieun",
   "sig": "50d092683215",
-  "sim": 0.9923,
-  "rate": 4.91,
+  "sim": 0.9939,
+  "rate": 5.42,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:19"
+  "at": "2026-11-07 08:49"
  },
  "ee9d79f4": {
   "who": "jieun",
   "sig": "b191254ca744",
-  "sim": 0.9905,
-  "rate": 5.58,
+  "sim": 0.9914,
+  "rate": 5.65,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:19"
+  "at": "2026-11-07 08:49"
  },
  "92a4af9e": {
   "who": "jieun",
@@ -7084,13 +7417,14 @@
  "39028c5b": {
   "who": "jieun",
   "sig": "bbd87f5ead3a",
-  "sim": 0.9893,
-  "rate": 5.94,
+  "sim": 0.9939,
+  "rate": 5.51,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 11:05"
  },
  "4e22a449": {
   "who": "jieun",
@@ -7106,57 +7440,62 @@
  "80c2f704": {
   "who": "jieun",
   "sig": "7302db1200cd",
-  "sim": 0.9938,
-  "rate": 5.91,
+  "sim": 0.9943,
+  "rate": 5.42,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 08:49"
  },
  "5b493e6b": {
   "who": "jieun",
   "sig": "2016cb0ca242",
-  "sim": 0.9919,
-  "rate": 5.53,
+  "sim": 0.992,
+  "rate": 5.86,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 08:49"
  },
  "0d8387b8": {
   "who": "jieun",
   "sig": "7d50ecbf55f2",
-  "sim": 0.9933,
-  "rate": 5.6,
+  "sim": 0.9914,
+  "rate": 5.96,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 08:51"
  },
  "c6608f29": {
   "who": "jieun",
   "sig": "04d23cd6e2ae",
-  "sim": 0.9937,
-  "rate": 5.78,
+  "sim": 0.9941,
+  "rate": 5.44,
+  "fall": 110,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 08:51"
  },
  "c743359d": {
   "who": "jieun",
   "sig": "a6419ead08c7",
-  "sim": 0.9931,
-  "rate": 5.0,
+  "sim": 0.993,
+  "rate": 5.16,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:20"
+  "at": "2026-11-07 08:51"
  },
  "737bb95c": {
   "who": "jieun",
@@ -7183,13 +7522,14 @@
  "62e5edde": {
   "who": "jieun",
   "sig": "888c502911f5",
-  "sim": 0.991,
-  "rate": 5.75,
+  "sim": 0.9925,
+  "rate": 5.7,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:51"
  },
  "2e51dc4c": {
   "who": "jieun",
@@ -7216,13 +7556,14 @@
  "445587f5": {
   "who": "jieun",
   "sig": "4979c7da0f8c",
-  "sim": 0.9922,
-  "rate": 5.38,
+  "sim": 0.9924,
+  "rate": 5.44,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:22"
+  "at": "2026-11-07 08:51"
  },
  "00b1aee7": {
   "who": "jieun",
@@ -7249,13 +7590,14 @@
  "b63cb82c": {
   "who": "jieun",
   "sig": "1035d6315456",
-  "sim": 0.9888,
-  "rate": 6.14,
+  "sim": 0.9937,
+  "rate": 5.31,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:22"
+  "at": "2026-11-07 08:51"
  },
  "fdeea0c5": {
   "who": "jieun",
@@ -7304,13 +7646,14 @@
  "1ac95d34": {
   "who": "jieun",
   "sig": "c4772ea8d32d",
-  "sim": 0.9927,
-  "rate": 6.0,
+  "sim": 0.9938,
+  "rate": 6.19,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:22"
+  "at": "2026-11-07 08:51"
  },
  "3ab30228": {
   "who": "jieun",
@@ -7414,13 +7757,14 @@
  "57187194": {
   "who": "jieun",
   "sig": "c4d1e1ea4277",
-  "sim": 0.9905,
-  "rate": 5.67,
+  "sim": 0.9908,
+  "rate": 6.05,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "1e18f3e1": {
   "who": "jieun",
@@ -7447,13 +7791,14 @@
  "25103b61": {
   "who": "jieun",
   "sig": "1a1907a99916",
-  "sim": 0.993,
-  "rate": 5.4,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 5.25,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "e49a6b0c": {
   "who": "jieun",
@@ -7491,35 +7836,38 @@
  "c923ae27": {
   "who": "jieun",
   "sig": "ac979a629236",
-  "sim": 0.9926,
-  "rate": 5.97,
+  "sim": 0.9928,
+  "rate": 6.0,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "51e2c497": {
   "who": "jieun",
   "sig": "45dab01115b8",
-  "sim": 0.9905,
-  "rate": 6.46,
-  "try": 1,
+  "sim": 0.9925,
+  "rate": 5.72,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "ec585f60": {
   "who": "jieun",
   "sig": "f92ec2444a60",
-  "sim": 0.9906,
-  "rate": 5.95,
+  "sim": 0.9938,
+  "rate": 5.19,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "70ab40c5": {
   "who": "jieun",
@@ -7535,79 +7883,86 @@
  "19e174f9": {
   "who": "jieun",
   "sig": "2de30585ef7f",
-  "sim": 0.9929,
-  "rate": 5.04,
+  "sim": 0.9946,
+  "rate": 5.44,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "8261bf7f": {
   "who": "jieun",
   "sig": "39e0dbb6aabd",
-  "sim": 0.9887,
-  "rate": 5.84,
-  "try": 1,
+  "sim": 0.9917,
+  "rate": 5.04,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:23"
+  "at": "2026-11-07 08:51"
  },
  "1d4be50f": {
   "who": "jieun",
   "sig": "2695caccfa69",
-  "sim": 0.992,
-  "rate": 6.05,
+  "sim": 0.9906,
+  "rate": 5.34,
+  "fall": 60,
   "try": 2,
-  "style": "desc",
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:51"
  },
  "799d419a": {
   "who": "jieun",
   "sig": "d05e82d2fb6c",
-  "sim": 0.9945,
-  "rate": 5.95,
+  "sim": 0.9931,
+  "rate": 5.29,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:51"
  },
  "1733a6a2": {
   "who": "jieun",
   "sig": "089c239c0e6d",
-  "sim": 0.9918,
-  "rate": 6.52,
+  "sim": 0.9922,
+  "rate": 6.16,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "43358f91": {
   "who": "jieun",
   "sig": "32bf7a062666",
-  "sim": 0.9927,
-  "rate": 6.37,
+  "sim": 0.9944,
+  "rate": 5.51,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "2787612a": {
   "who": "jieun",
   "sig": "d4214f4c61f6",
-  "sim": 0.9915,
-  "rate": 5.87,
+  "sim": 0.9927,
+  "rate": 6.0,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "69aa03ac": {
   "who": "jieun",
@@ -7623,24 +7978,26 @@
  "bfd6322a": {
   "who": "jieun",
   "sig": "ee797b94d54e",
-  "sim": 0.9918,
-  "rate": 5.62,
-  "try": 1,
+  "sim": 0.9928,
+  "rate": 5.6,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "5ffea809": {
   "who": "jieun",
   "sig": "1296f844863a",
-  "sim": 0.993,
-  "rate": 5.53,
+  "sim": 0.9916,
+  "rate": 5.92,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:53"
  },
  "d1631d21": {
   "who": "jieun",
@@ -7656,24 +8013,26 @@
  "adcf75c8": {
   "who": "jieun",
   "sig": "17ffc3173a57",
-  "sim": 0.9934,
-  "rate": 5.6,
+  "sim": 0.9923,
+  "rate": 6.16,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "9d979839": {
   "who": "jieun",
   "sig": "42fa23ba884f",
-  "sim": 0.9909,
-  "rate": 5.74,
+  "sim": 0.9901,
+  "rate": 5.29,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "3e9ca345": {
   "who": "jieun",
@@ -7689,24 +8048,26 @@
  "045904c8": {
   "who": "jieun",
   "sig": "7afd337d56f9",
-  "sim": 0.9904,
+  "sim": 0.9913,
   "rate": 5.51,
-  "try": 1,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "c620603d": {
   "who": "jieun",
   "sig": "f66f028dad96",
-  "sim": 0.9943,
-  "rate": 5.72,
+  "sim": 0.993,
+  "rate": 5.65,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:24"
+  "at": "2026-11-07 08:53"
  },
  "36c5b909": {
   "who": "jieun",
@@ -7733,13 +8094,14 @@
  "9969b589": {
   "who": "jieun",
   "sig": "e2dd9dd3da82",
-  "sim": 0.9942,
-  "rate": 5.7,
+  "sim": 0.9948,
+  "rate": 5.09,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 08:53"
  },
  "ffa1f41e": {
   "who": "jieun",
@@ -7755,13 +8117,14 @@
  "f0c9b60e": {
   "who": "jieun",
   "sig": "23c3f9efea96",
-  "sim": 0.9916,
-  "rate": 6.46,
+  "sim": 0.9936,
+  "rate": 6.14,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 11:05"
  },
  "69abf063": {
   "who": "jieun",
@@ -7777,24 +8140,26 @@
  "f2290185": {
   "who": "jieun",
   "sig": "75a19dc08c47",
-  "sim": 0.9916,
-  "rate": 6.03,
-  "try": 1,
+  "sim": 0.9941,
+  "rate": 5.21,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 10:28"
  },
  "a3e0463b": {
   "who": "jieun",
   "sig": "c9e22edb512b",
-  "sim": 0.9903,
-  "rate": 5.44,
+  "sim": 0.9909,
+  "rate": 6.25,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 08:53"
  },
  "3701ec59": {
   "who": "jieun",
@@ -7887,46 +8252,50 @@
  "9a560fcb": {
   "who": "jieun",
   "sig": "3362b8aa5d2f",
-  "sim": 0.9921,
-  "rate": 5.4,
+  "sim": 0.9929,
+  "rate": 6.19,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 08:53"
  },
  "35dff479": {
   "who": "jieun",
   "sig": "f8c3aaa5bd04",
-  "sim": 0.9927,
-  "rate": 5.25,
-  "try": 1,
+  "sim": 0.993,
+  "rate": 5.53,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:25"
+  "at": "2026-11-07 08:53"
  },
  "5f3f474d": {
   "who": "jieun",
   "sig": "35c599a380b4",
-  "sim": 0.992,
-  "rate": 5.36,
+  "sim": 0.9936,
+  "rate": 5.15,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:53"
  },
  "a4e0547d": {
   "who": "jieun",
   "sig": "e49c626e15aa",
-  "sim": 0.9936,
-  "rate": 5.74,
+  "sim": 0.9935,
+  "rate": 5.43,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "520f7ae7": {
   "who": "jieun",
@@ -7953,24 +8322,26 @@
  "9acfdd00": {
   "who": "jieun",
   "sig": "31d67255388d",
-  "sim": 0.9929,
-  "rate": 5.91,
+  "sim": 0.9938,
+  "rate": 5.38,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "bfd938ff": {
   "who": "jieun",
   "sig": "006a020e4f5f",
   "sim": 0.9929,
-  "rate": 6.67,
+  "rate": 5.81,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "bbdc90d0": {
   "who": "jieun",
@@ -7986,13 +8357,14 @@
  "2f41ee15": {
   "who": "jieun",
   "sig": "a8c8dc4017d3",
-  "sim": 0.9876,
-  "rate": 6.11,
+  "sim": 0.9903,
+  "rate": 5.53,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "bfda0718": {
   "who": "jieun",
@@ -8019,13 +8391,14 @@
  "bec5acb2": {
   "who": "jieun",
   "sig": "779a6d013e1b",
-  "sim": 0.9916,
-  "rate": 5.71,
+  "sim": 0.9939,
+  "rate": 4.76,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "78036a07": {
   "who": "jieun",
@@ -8063,24 +8436,26 @@
  "a9986511": {
   "who": "jieun",
   "sig": "dc5a48c6c151",
-  "sim": 0.9942,
-  "rate": 5.32,
+  "sim": 0.9918,
+  "rate": 4.95,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:27"
+  "at": "2026-11-07 08:56"
  },
  "9315502f": {
   "who": "jieun",
   "sig": "2f3f8f1509e0",
-  "sim": 0.9905,
-  "rate": 5.81,
+  "sim": 0.9906,
+  "rate": 5.53,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 08:56"
  },
  "69cf4714": {
   "who": "jieun",
@@ -8107,13 +8482,14 @@
  "4d4aa42d": {
   "who": "jieun",
   "sig": "a68b48e8161e",
-  "sim": 0.9937,
-  "rate": 5.96,
+  "sim": 0.9941,
+  "rate": 5.65,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:09"
+  "at": "2026-11-07 11:05"
  },
  "055ea94d": {
   "who": "jieun",
@@ -8140,13 +8516,14 @@
  "a3e97bc7": {
   "who": "jieun",
   "sig": "955efc2989f8",
-  "sim": 0.9914,
-  "rate": 6.19,
-  "try": 1,
+  "sim": 0.9863,
+  "rate": 6.97,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:28"
+  "at": "2026-11-07 08:56"
  },
  "66cfdf29": {
   "who": "jieun",
@@ -8173,13 +8550,14 @@
  "ee0ec063": {
   "who": "jieun",
   "sig": "44a1ead1b788",
-  "sim": 0.9936,
-  "rate": 5.41,
+  "sim": 0.9933,
+  "rate": 6.09,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:28"
+  "at": "2026-11-07 08:56"
  },
  "914feed3": {
   "who": "jieun",
@@ -8195,13 +8573,14 @@
  "3be8a0eb": {
   "who": "jieun",
   "sig": "32b505514476",
-  "sim": 0.9916,
-  "rate": 5.83,
+  "sim": 0.993,
+  "rate": 6.14,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:28"
+  "at": "2026-11-07 08:56"
  },
  "256eec96": {
   "who": "jieun",
@@ -8239,13 +8618,14 @@
  "ff35b167": {
   "who": "jieun",
   "sig": "75d65a0ae00b",
-  "sim": 0.9918,
-  "rate": 5.81,
+  "sim": 0.994,
+  "rate": 5.0,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:28"
+  "at": "2026-11-07 08:56"
  },
  "d4ffe90c": {
   "who": "jieun",
@@ -8360,24 +8740,26 @@
  "469ad686": {
   "who": "jieun",
   "sig": "d6f8d0714322",
-  "sim": 0.9921,
-  "rate": 5.86,
+  "sim": 0.9945,
+  "rate": 5.96,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:29"
+  "at": "2026-11-07 08:56"
  },
  "69d434d2": {
   "who": "jieun",
   "sig": "d33052c50db2",
-  "sim": 0.9946,
-  "rate": 4.53,
-  "try": 1,
+  "sim": 0.9932,
+  "rate": 5.04,
+  "fall": 140,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:29"
+  "at": "2026-11-07 08:56"
  },
  "246cb0c5": {
   "who": "jieun",
@@ -8415,13 +8797,14 @@
  "4e4e117b": {
   "who": "jieun",
   "sig": "84e7556f68ac",
-  "sim": 0.9917,
-  "rate": 5.32,
+  "sim": 0.991,
+  "rate": 5.6,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:29"
+  "at": "2026-11-07 08:56"
  },
  "8fe6cdb5": {
   "who": "jieun",
@@ -8470,13 +8853,14 @@
  "f016d074": {
   "who": "jieun",
   "sig": "4490e1b421a8",
-  "sim": 0.9946,
+  "sim": 0.9952,
   "rate": 5.26,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 08:56"
  },
  "2c2de2aa": {
   "who": "jieun",
@@ -8492,35 +8876,38 @@
  "22dad605": {
   "who": "jieun",
   "sig": "4d9697ee4c1b",
-  "sim": 0.9944,
-  "rate": 4.86,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.34,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "5dd7c923": {
   "who": "jieun",
   "sig": "1b67e5cbac89",
-  "sim": 0.9939,
-  "rate": 5.07,
+  "sim": 0.9948,
+  "rate": 5.11,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "1f47e772": {
   "who": "jieun",
   "sig": "0fcd636c4f93",
-  "sim": 0.9932,
-  "rate": 6.14,
+  "sim": 0.9934,
+  "rate": 6.22,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "503efb69": {
   "who": "jieun",
@@ -8547,13 +8934,14 @@
  "873140f3": {
   "who": "jieun",
   "sig": "ffaa6e6b41f7",
-  "sim": 0.9914,
-  "rate": 5.6,
+  "sim": 0.9922,
+  "rate": 4.87,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "358f16b0": {
   "who": "jieun",
@@ -8580,13 +8968,14 @@
  "3e12b186": {
   "who": "jieun",
   "sig": "7fd3d2e7a7ed",
-  "sim": 0.9931,
-  "rate": 6.5,
+  "sim": 0.9935,
+  "rate": 5.56,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "5901e4f3": {
   "who": "jieun",
@@ -8602,24 +8991,26 @@
  "b9b90ca7": {
   "who": "jieun",
   "sig": "059674233582",
-  "sim": 0.9923,
-  "rate": 5.31,
+  "sim": 0.9913,
+  "rate": 5.11,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:31"
+  "at": "2026-11-07 08:59"
  },
  "dc08e77c": {
   "who": "jieun",
   "sig": "b8c05db0aca0",
-  "sim": 0.9864,
-  "rate": 7.32,
-  "try": 1,
+  "sim": 0.9924,
+  "rate": 6.12,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "fbdeddee": {
   "who": "jieun",
@@ -8635,24 +9026,26 @@
  "e1e947ce": {
   "who": "jieun",
   "sig": "023514537ea9",
-  "sim": 0.9934,
-  "rate": 7.04,
+  "sim": 0.9937,
+  "rate": 5.62,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 08:59"
  },
  "c231caff": {
   "who": "jieun",
   "sig": "a4487deb652d",
-  "sim": 0.9896,
-  "rate": 7.07,
+  "sim": 0.992,
+  "rate": 5.43,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 11:05"
  },
  "727babd1": {
   "who": "jieun",
@@ -8679,57 +9072,62 @@
  "04881aa4": {
   "who": "jieun",
   "sig": "35a816f35511",
-  "sim": 0.9939,
-  "rate": 5.94,
+  "sim": 0.9928,
+  "rate": 5.92,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "5d86d111": {
   "who": "jieun",
   "sig": "481f7cbf014e",
-  "sim": 0.9926,
-  "rate": 4.72,
+  "sim": 0.9943,
+  "rate": 4.66,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "b4bca4de": {
   "who": "jieun",
   "sig": "54b8a715f070",
-  "sim": 0.9943,
-  "rate": 4.97,
+  "sim": 0.994,
+  "rate": 4.77,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "c4d2f7b5": {
   "who": "jieun",
   "sig": "6be1c9464a2c",
-  "sim": 0.9897,
-  "rate": 5.99,
-  "try": 1,
+  "sim": 0.9858,
+  "rate": 5.0,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "bcd6b5bc": {
   "who": "jieun",
   "sig": "23226726b732",
-  "sim": 0.9929,
-  "rate": 5.69,
+  "sim": 0.9933,
+  "rate": 4.98,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "8a000040": {
   "who": "jieun",
@@ -8745,24 +9143,26 @@
  "7a9820c2": {
   "who": "jieun",
   "sig": "3341a8086589",
-  "sim": 0.9925,
-  "rate": 5.8,
+  "sim": 0.9917,
+  "rate": 5.73,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "d8b9c9df": {
   "who": "jieun",
   "sig": "80960e1739b4",
-  "sim": 0.9918,
-  "rate": 6.87,
+  "sim": 0.9926,
+  "rate": 6.22,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 08:59"
  },
  "edfd422f": {
   "who": "jieun",
@@ -8778,13 +9178,14 @@
  "3799e5e2": {
   "who": "jieun",
   "sig": "73a34a829d85",
-  "sim": 0.9931,
-  "rate": 5.22,
+  "sim": 0.9942,
+  "rate": 5.05,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:32"
+  "at": "2026-11-07 09:02"
  },
  "e456926d": {
   "who": "jieun",
@@ -8811,24 +9212,26 @@
  "e9597c89": {
   "who": "jieun",
   "sig": "fb09c1bde62d",
-  "sim": 0.992,
-  "rate": 5.78,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 5.62,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "cf1c828d": {
   "who": "jieun",
   "sig": "263b4fd0c7ca",
-  "sim": 0.9944,
-  "rate": 4.95,
+  "sim": 0.9932,
+  "rate": 5.18,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "38d26594": {
   "who": "jieun",
@@ -8844,13 +9247,14 @@
  "fcc13984": {
   "who": "jieun",
   "sig": "78e743f63807",
-  "sim": 0.9927,
-  "rate": 5.69,
+  "sim": 0.991,
+  "rate": 6.09,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "65d7f1ae": {
   "who": "jieun",
@@ -8888,13 +9292,14 @@
  "62c7f117": {
   "who": "jieun",
   "sig": "35d1391d3449",
-  "sim": 0.9947,
-  "rate": 4.63,
+  "sim": 0.9941,
+  "rate": 5.05,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "1023fa02": {
   "who": "jieun",
@@ -8932,24 +9337,26 @@
  "4b460aa8": {
   "who": "jieun",
   "sig": "e195c3630e93",
-  "sim": 0.9937,
-  "rate": 5.56,
-  "try": 1,
+  "sim": 0.994,
+  "rate": 5.78,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "99e2f437": {
   "who": "jieun",
   "sig": "15408b4a2d59",
-  "sim": 0.9915,
-  "rate": 5.33,
+  "sim": 0.9933,
+  "rate": 5.03,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:33"
+  "at": "2026-11-07 09:02"
  },
  "90abcc69": {
   "who": "jieun",
@@ -8998,13 +9405,14 @@
  "5b86f92f": {
   "who": "jieun",
   "sig": "b2aca6bc3d7a",
-  "sim": 0.9902,
-  "rate": 6.12,
-  "try": 1,
+  "sim": 0.993,
+  "rate": 5.75,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "32a41180": {
   "who": "jieun",
@@ -9020,46 +9428,50 @@
  "9fddf83a": {
   "who": "jieun",
   "sig": "9e99d7eb7fd4",
-  "sim": 0.9934,
-  "rate": 5.4,
+  "sim": 0.9931,
+  "rate": 5.54,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "9a58b4ac": {
   "who": "jieun",
   "sig": "7ac1fde0975d",
-  "sim": 0.9928,
-  "rate": 5.54,
+  "sim": 0.9938,
+  "rate": 4.92,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 11:05"
  },
  "32a851fd": {
   "who": "jieun",
   "sig": "6f8c50572044",
-  "sim": 0.9913,
-  "rate": 5.86,
-  "try": 1,
+  "sim": 0.9903,
+  "rate": 5.54,
+  "fall": 80,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "540e1b57": {
   "who": "jieun",
   "sig": "6c93472a2217",
-  "sim": 0.9919,
-  "rate": 6.41,
+  "sim": 0.9909,
+  "rate": 6.28,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "932d12f2": {
   "who": "jieun",
@@ -9075,24 +9487,26 @@
  "5c8e5eeb": {
   "who": "jieun",
   "sig": "ae2d54a6e6b3",
-  "sim": 0.9924,
-  "rate": 6.17,
+  "sim": 0.994,
+  "rate": 4.98,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "661e3283": {
   "who": "jieun",
   "sig": "342a9332256b",
-  "sim": 0.9925,
-  "rate": 5.7,
-  "try": 2,
-  "style": "desc",
+  "sim": 0.9918,
+  "rate": 5.66,
+  "fall": 50,
+  "try": 3,
+  "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "3f2d1b45": {
   "who": "jieun",
@@ -9119,13 +9533,14 @@
  "987c3338": {
   "who": "jieun",
   "sig": "4a07b8af02d1",
-  "sim": 0.9923,
-  "rate": 4.63,
-  "try": 1,
+  "sim": 0.9921,
+  "rate": 4.76,
+  "fall": 40,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-07 09:02"
  },
  "6e352e4f": {
   "who": "jieun",
@@ -9185,24 +9600,26 @@
  "161e9c22": {
   "who": "jieun",
   "sig": "311885517dca",
-  "sim": 0.9916,
-  "rate": 6.41,
+  "sim": 0.9932,
+  "rate": 6.17,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 09:02"
  },
  "81439fc5": {
   "who": "jieun",
   "sig": "98fab1838e7b",
-  "sim": 0.9923,
-  "rate": 6.17,
+  "sim": 0.9915,
+  "rate": 6.82,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 11:05"
  },
  "09344a84": {
   "who": "jieun",
@@ -9218,35 +9635,38 @@
  "32a4f4eb": {
   "who": "jieun",
   "sig": "969a85ca266f",
-  "sim": 0.9927,
-  "rate": 5.68,
+  "sim": 0.9893,
+  "rate": 6.3,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 09:06"
  },
  "dd6c8a68": {
   "who": "jieun",
   "sig": "73b27d588985",
-  "sim": 0.9924,
-  "rate": 5.51,
+  "sim": 0.9913,
+  "rate": 6.2,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 09:06"
  },
  "3a23ac17": {
   "who": "jieun",
   "sig": "363c1141ec92",
-  "sim": 0.9913,
-  "rate": 5.88,
+  "sim": 0.9912,
+  "rate": 5.86,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 09:06"
  },
  "8390b7a4": {
   "who": "jieun",
@@ -9262,13 +9682,14 @@
  "3ca26d7b": {
   "who": "jieun",
   "sig": "ab7db5dd1603",
-  "sim": 0.9939,
-  "rate": 5.64,
-  "try": 1,
+  "sim": 0.9923,
+  "rate": 5.84,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 09:06"
  },
  "d875757e": {
   "who": "jieun",
@@ -9284,13 +9705,14 @@
  "4be56365": {
   "who": "jieun",
   "sig": "6699ac5aa760",
-  "sim": 0.993,
-  "rate": 6.07,
+  "sim": 0.9949,
+  "rate": 5.19,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:36"
+  "at": "2026-11-07 09:06"
  },
  "c16e5d0f": {
   "who": "jieun",
@@ -9350,13 +9772,14 @@
  "c18ba608": {
   "who": "jieun",
   "sig": "4743634600ad",
-  "sim": 0.9921,
-  "rate": 6.02,
-  "try": 1,
+  "sim": 0.9935,
+  "rate": 5.86,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:37"
+  "at": "2026-11-07 09:06"
  },
  "170c16c9": {
   "who": "jieun",
@@ -9394,35 +9817,38 @@
  "92f02844": {
   "who": "jieun",
   "sig": "bbb5da173273",
-  "sim": 0.9924,
-  "rate": 5.07,
-  "try": 1,
+  "sim": 0.9935,
+  "rate": 5.24,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:37"
+  "at": "2026-11-07 09:06"
  },
  "0fe90026": {
   "who": "jieun",
   "sig": "9f9e9af7d297",
-  "sim": 0.9931,
-  "rate": 5.81,
-  "try": 1,
+  "sim": 0.9933,
+  "rate": 5.46,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:37"
+  "at": "2026-11-07 09:06"
  },
  "00e91416": {
   "who": "jieun",
   "sig": "dd885e89bfb9",
-  "sim": 0.992,
-  "rate": 6.22,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.7,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 09:06"
  },
  "beecaabe": {
   "who": "jieun",
@@ -9438,13 +9864,14 @@
  "057366c7": {
   "who": "jieun",
   "sig": "3a6e81215fde",
-  "sim": 0.993,
-  "rate": 5.6,
+  "sim": 0.9925,
+  "rate": 4.94,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:37"
+  "at": "2026-11-07 09:06"
  },
  "fbdfe75f": {
   "who": "jieun",
@@ -9482,35 +9909,38 @@
  "08920849": {
   "who": "jieun",
   "sig": "42a9f131d3b6",
-  "sim": 0.9866,
-  "rate": 6.22,
+  "sim": 0.9925,
+  "rate": 6.08,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:37"
+  "at": "2026-11-07 09:06"
  },
  "4591949f": {
   "who": "jieun",
   "sig": "6ea29f7c6b0a",
   "sim": 0.9944,
-  "rate": 4.94,
-  "try": 1,
+  "rate": 4.95,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:39"
+  "at": "2026-11-07 09:06"
  },
  "e5a8cdb5": {
   "who": "jieun",
   "sig": "5adc1a4d6d43",
-  "sim": 0.9942,
-  "rate": 5.48,
+  "sim": 0.9936,
+  "rate": 5.36,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:39"
+  "at": "2026-11-07 09:06"
  },
  "b9ff1676": {
   "who": "jieun",
@@ -9548,13 +9978,14 @@
  "5e451146": {
   "who": "jieun",
   "sig": "57cab14e9767",
-  "sim": 0.9911,
-  "rate": 5.58,
+  "sim": 0.9936,
+  "rate": 5.13,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:39"
+  "at": "2026-11-07 09:06"
  },
  "c679a745": {
   "who": "jieun",
@@ -9669,13 +10100,14 @@
  "d4057ecf": {
   "who": "jieun",
   "sig": "562a69fd8ebf",
-  "sim": 0.9934,
-  "rate": 6.25,
-  "try": 1,
+  "sim": 0.9911,
+  "rate": 7.83,
+  "fall": 40,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 10:28"
  },
  "a13c0c84": {
   "who": "jieun",
@@ -9713,24 +10145,26 @@
  "3af6980e": {
   "who": "jieun",
   "sig": "703690aa05d8",
-  "sim": 0.9942,
-  "rate": 4.67,
+  "sim": 0.9926,
+  "rate": 4.7,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 09:09"
  },
  "49e3cdb3": {
   "who": "jieun",
   "sig": "354a95fff26a",
   "sim": 0.9896,
-  "rate": 5.74,
+  "rate": 5.62,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 09:09"
  },
  "f019eed1": {
   "who": "jieun",
@@ -9758,34 +10192,37 @@
   "who": "jieun",
   "sig": "f82e0c4d5ac9",
   "sim": 0.9951,
-  "rate": 5.38,
+  "rate": 5.24,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 09:09"
  },
  "2f0501b6": {
   "who": "jieun",
   "sig": "979f14e53bbb",
-  "sim": 0.9931,
-  "rate": 5.13,
+  "sim": 0.9929,
+  "rate": 5.18,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 09:09"
  },
  "c19dddaa": {
   "who": "jieun",
   "sig": "b41edb2293c7",
-  "sim": 0.9925,
-  "rate": 6.46,
-  "try": 1,
+  "sim": 0.9927,
+  "rate": 6.43,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 09:09"
  },
  "e81f1266": {
   "who": "jieun",
@@ -9823,24 +10260,26 @@
  "2434683c": {
   "who": "jieun",
   "sig": "cd0d45a3fbe0",
-  "sim": 0.9922,
-  "rate": 6.08,
-  "try": 1,
+  "sim": 0.9934,
+  "rate": 6.3,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 10:28"
  },
  "96ef4a7d": {
   "who": "jieun",
   "sig": "2ca63eb0e931",
-  "sim": 0.9933,
-  "rate": 5.74,
-  "try": 1,
+  "sim": 0.9934,
+  "rate": 5.29,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:40"
+  "at": "2026-11-07 10:28"
  },
  "15351b36": {
   "who": "jieun",
@@ -9878,13 +10317,14 @@
  "858de5b8": {
   "who": "jieun",
   "sig": "4e3d88f71308",
-  "sim": 0.994,
-  "rate": 5.14,
+  "sim": 0.9948,
+  "rate": 5.11,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:42"
+  "at": "2026-11-07 09:09"
  },
  "081c3233": {
   "who": "jieun",
@@ -9933,13 +10373,14 @@
  "da5551ab": {
   "who": "jieun",
   "sig": "68c7aba82ba8",
-  "sim": 0.9901,
-  "rate": 7.31,
+  "sim": 0.9931,
+  "rate": 5.71,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:42"
+  "at": "2026-11-07 11:08"
  },
  "99b5c832": {
   "who": "jieun",
@@ -9966,13 +10407,14 @@
  "ebf06714": {
   "who": "jieun",
   "sig": "c47f674c0f30",
-  "sim": 0.9931,
-  "rate": 5.5,
+  "sim": 0.9936,
+  "rate": 5.56,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:42"
+  "at": "2026-11-07 09:09"
  },
  "bad68ba5": {
   "who": "jieun",
@@ -9988,13 +10430,14 @@
  "eabe898d": {
   "who": "jieun",
   "sig": "8e8409fb6e95",
-  "sim": 0.9907,
-  "rate": 6.23,
+  "sim": 0.9934,
+  "rate": 5.67,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:42"
+  "at": "2026-11-07 09:09"
  },
  "a5348994": {
   "who": "jieun",
@@ -10032,13 +10475,14 @@
  "351cb2b2": {
   "who": "jieun",
   "sig": "804b7b308f89",
-  "sim": 0.9923,
-  "rate": 6.3,
-  "try": 1,
+  "sim": 0.9929,
+  "rate": 5.8,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:43"
+  "at": "2026-11-07 09:09"
  },
  "efbb31fa": {
   "who": "jieun",
@@ -10065,13 +10509,14 @@
  "4f1563c8": {
   "who": "jieun",
   "sig": "2cf6b54e9e0c",
-  "sim": 0.9939,
-  "rate": 5.32,
-  "try": 1,
+  "sim": 0.9938,
+  "rate": 5.3,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:43"
+  "at": "2026-11-07 09:09"
  },
  "664999a8": {
   "who": "jieun",
@@ -10098,13 +10543,14 @@
  "85b3e1a5": {
   "who": "jieun",
   "sig": "96288976fe11",
-  "sim": 0.9939,
-  "rate": 5.46,
+  "sim": 0.9932,
+  "rate": 5.03,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:43"
+  "at": "2026-11-07 09:09"
  },
  "0d09b6ca": {
   "who": "jieun",
@@ -10120,57 +10566,62 @@
  "7ca93280": {
   "who": "jieun",
   "sig": "2a7db0829114",
-  "sim": 0.9931,
-  "rate": 5.86,
-  "try": 1,
+  "sim": 0.9928,
+  "rate": 5.32,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:43"
+  "at": "2026-11-07 10:46"
  },
  "584ac475": {
   "who": "jieun",
   "sig": "4f7e58fc1083",
-  "sim": 0.9943,
-  "rate": 4.65,
+  "sim": 0.9928,
+  "rate": 5.71,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 18:59"
+  "at": "2026-11-07 09:09"
  },
  "f32b776d": {
   "who": "jieun",
   "sig": "8fe58f778d9d",
-  "sim": 0.9912,
+  "sim": 0.9925,
   "rate": 6.56,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:44"
+  "at": "2026-11-07 09:12"
  },
  "7bd48dfa": {
   "who": "jieun",
   "sig": "d33c6365fb15",
-  "sim": 0.9931,
-  "rate": 6.08,
-  "try": 1,
+  "sim": 0.9952,
+  "rate": 5.39,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:44"
+  "at": "2026-11-07 10:46"
  },
  "1d7406bb": {
   "who": "jieun",
   "sig": "06d3a4bb7d0a",
-  "sim": 0.9934,
-  "rate": 5.67,
+  "sim": 0.9931,
+  "rate": 5.76,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:44"
+  "at": "2026-11-07 09:12"
  },
  "0559d968": {
   "who": "jieun",
@@ -10186,24 +10637,26 @@
  "ae72e663": {
   "who": "jieun",
   "sig": "81da3f290f69",
-  "sim": 0.991,
-  "rate": 5.76,
+  "sim": 0.9943,
+  "rate": 4.92,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:44"
+  "at": "2026-11-07 11:08"
  },
  "3b91b053": {
   "who": "jieun",
   "sig": "94d6cd683ca4",
-  "sim": 0.9945,
-  "rate": 5.11,
+  "sim": 0.9935,
+  "rate": 5.06,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:46"
+  "at": "2026-11-07 09:12"
  },
  "07739dea": {
   "who": "jieun",
@@ -10219,24 +10672,26 @@
  "08910f13": {
   "who": "jieun",
   "sig": "fec1682002e5",
-  "sim": 0.9924,
-  "rate": 6.35,
+  "sim": 0.9938,
+  "rate": 5.39,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:46"
+  "at": "2026-11-07 09:12"
  },
  "cc97ac0b": {
   "who": "jieun",
   "sig": "dc6172c453a4",
-  "sim": 0.9894,
-  "rate": 6.37,
+  "sim": 0.9913,
+  "rate": 6.3,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:46"
+  "at": "2026-11-07 09:12"
  },
  "a575b11f": {
   "who": "jieun",
@@ -10307,13 +10762,14 @@
  "8e62b6cd": {
   "who": "jieun",
   "sig": "108065589eef",
-  "sim": 0.9921,
-  "rate": 5.9,
-  "try": 1,
+  "sim": 0.9924,
+  "rate": 5.67,
+  "fall": 80,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:46"
+  "at": "2026-11-07 09:12"
  },
  "b6fc8a60": {
   "who": "jieun",
@@ -10340,24 +10796,26 @@
  "7d8de461": {
   "who": "jieun",
   "sig": "5c6146cac58a",
-  "sim": 0.9897,
-  "rate": 5.78,
-  "try": 1,
+  "sim": 0.9915,
+  "rate": 5.03,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:46"
+  "at": "2026-11-07 09:12"
  },
  "9f8bede3": {
   "who": "jieun",
   "sig": "c89016540180",
-  "sim": 0.9949,
-  "rate": 4.9,
+  "sim": 0.994,
+  "rate": 4.95,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 20:10"
+  "at": "2026-11-07 09:12"
  },
  "999cb754": {
   "who": "jieun",
@@ -10373,13 +10831,14 @@
  "2fccf7c9": {
   "who": "jieun",
   "sig": "2e524bb87eee",
-  "sim": 0.9903,
-  "rate": 6.76,
+  "sim": 0.993,
+  "rate": 5.5,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:47"
+  "at": "2026-11-07 09:12"
  },
  "800de68f": {
   "who": "jieun",
@@ -10462,12 +10921,13 @@
   "who": "jieun",
   "sig": "b4242277308a",
   "sim": 0.9942,
-  "rate": 4.9,
+  "rate": 5.87,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:47"
+  "at": "2026-11-07 09:12"
  },
  "499eb6fa": {
   "who": "jieun",
@@ -10483,13 +10943,14 @@
  "5c41573e": {
   "who": "jieun",
   "sig": "59eca235c29e",
-  "sim": 0.9865,
-  "rate": 6.82,
-  "try": 1,
+  "sim": 0.9917,
+  "rate": 5.89,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:47"
+  "at": "2026-11-07 10:46"
  },
  "f120e70a": {
   "who": "jieun",
@@ -10505,13 +10966,14 @@
  "5531e1f2": {
   "who": "jieun",
   "sig": "a398b757ff91",
-  "sim": 0.992,
-  "rate": 5.24,
-  "try": 1,
+  "sim": 0.9887,
+  "rate": 5.14,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:47"
+  "at": "2026-11-07 09:12"
  },
  "c979f3fe": {
   "who": "jieun",
@@ -10549,24 +11011,26 @@
  "c4bb088c": {
   "who": "jieun",
   "sig": "79ac83cb8bba",
-  "sim": 0.9951,
-  "rate": 5.89,
+  "sim": 0.9944,
+  "rate": 6.18,
+  "fall": 70,
   "try": 2,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 10:46"
  },
  "c60990bd": {
   "who": "jieun",
   "sig": "c16480dbc65f",
-  "sim": 0.9932,
-  "rate": 5.37,
+  "sim": 0.9934,
+  "rate": 5.25,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 09:12"
  },
  "643c63eb": {
   "who": "jieun",
@@ -10593,13 +11057,14 @@
  "559c8601": {
   "who": "jieun",
   "sig": "1858797e61da",
-  "sim": 0.9922,
-  "rate": 5.43,
+  "sim": 0.9931,
+  "rate": 5.0,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 09:14"
  },
  "6f43c6bd": {
   "who": "jieun",
@@ -10648,13 +11113,14 @@
  "e73720e6": {
   "who": "jieun",
   "sig": "5b99494578c9",
-  "sim": 0.9934,
-  "rate": 5.91,
-  "try": 1,
+  "sim": 0.9937,
+  "rate": 5.87,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 09:14"
  },
  "a8d36a5a": {
   "who": "jieun",
@@ -10681,24 +11147,26 @@
  "fc4545c5": {
   "who": "jieun",
   "sig": "1e7ddfd578dc",
-  "sim": 0.9915,
-  "rate": 5.21,
+  "sim": 0.9924,
+  "rate": 4.88,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 09:14"
  },
  "2465504d": {
   "who": "jieun",
   "sig": "bd1ffd08a083",
-  "sim": 0.9929,
-  "rate": 5.5,
+  "sim": 0.9939,
+  "rate": 6.02,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:49"
+  "at": "2026-11-07 09:14"
  },
  "98b9bf30": {
   "who": "jieun",
@@ -10758,13 +11226,14 @@
  "26956ef1": {
   "who": "jieun",
   "sig": "517a98228206",
-  "sim": 0.9941,
-  "rate": 5.61,
+  "sim": 0.9937,
+  "rate": 6.16,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "63b6465a": {
   "who": "jieun",
@@ -10780,13 +11249,14 @@
  "e05c6b36": {
   "who": "jieun",
   "sig": "5fc3f7eda871",
-  "sim": 0.9932,
-  "rate": 5.31,
+  "sim": 0.9945,
+  "rate": 4.9,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "98955013": {
   "who": "jieun",
@@ -10802,13 +11272,14 @@
  "9a32f0ca": {
   "who": "jieun",
   "sig": "7f2f7852e861",
-  "sim": 0.9906,
-  "rate": 6.01,
+  "sim": 0.9923,
+  "rate": 6.8,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 18:59"
+  "at": "2026-11-07 09:14"
  },
  "5f455357": {
   "who": "jieun",
@@ -10824,24 +11295,26 @@
  "c415e088": {
   "who": "jieun",
   "sig": "6c35ad914b61",
-  "sim": 0.9943,
-  "rate": 5.43,
+  "sim": 0.9925,
+  "rate": 6.27,
+  "fall": 80,
   "try": 2,
-  "style": "desc",
+  "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "1f1a3381": {
   "who": "jieun",
   "sig": "d6bdba5702a7",
-  "sim": 0.9931,
-  "rate": 5.25,
+  "sim": 0.9926,
+  "rate": 5.31,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "4566d074": {
   "who": "jieun",
@@ -10857,13 +11330,14 @@
  "5213132a": {
   "who": "jieun",
   "sig": "d9aa3f1b5aa9",
-  "sim": 0.9899,
-  "rate": 5.63,
+  "sim": 0.9926,
+  "rate": 5.3,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "16c763d1": {
   "who": "jieun",
@@ -10879,24 +11353,26 @@
  "acf77a3e": {
   "who": "jieun",
   "sig": "ecddea3da2dc",
-  "sim": 0.9877,
-  "rate": 6.32,
+  "sim": 0.9912,
+  "rate": 6.01,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "af2f6228": {
   "who": "jieun",
   "sig": "6bfb41a240c9",
-  "sim": 0.9935,
-  "rate": 5.26,
+  "sim": 0.9921,
+  "rate": 5.88,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:52"
+  "at": "2026-11-07 09:14"
  },
  "7fbefd12": {
   "who": "jieun",
@@ -10923,13 +11399,14 @@
  "ba905942": {
   "who": "jieun",
   "sig": "f380d8c13957",
-  "sim": 0.9935,
+  "sim": 0.9944,
   "rate": 5.07,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:14"
  },
  "3f8d1aa1": {
   "who": "jieun",
@@ -10978,13 +11455,14 @@
  "d878a391": {
   "who": "jieun",
   "sig": "bfb776e6f47a",
-  "sim": 0.991,
-  "rate": 6.1,
+  "sim": 0.9914,
+  "rate": 6.25,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:14"
  },
  "6ad96d92": {
   "who": "jieun",
@@ -11000,13 +11478,14 @@
  "030f2478": {
   "who": "jieun",
   "sig": "946963e6ca9c",
-  "sim": 0.9948,
-  "rate": 5.19,
+  "sim": 0.995,
+  "rate": 4.99,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:14"
  },
  "cd218b78": {
   "who": "jieun",
@@ -11033,13 +11512,14 @@
  "f0b7c667": {
   "who": "jieun",
   "sig": "f5f244812642",
-  "sim": 0.9939,
-  "rate": 5.56,
-  "try": 1,
+  "sim": 0.9942,
+  "rate": 5.27,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:14"
  },
  "41d42f8c": {
   "who": "jieun",
@@ -11055,24 +11535,26 @@
  "c7c39cbf": {
   "who": "jieun",
   "sig": "a8de4fff7ec6",
-  "sim": 0.9939,
-  "rate": 5.42,
+  "sim": 0.9957,
+  "rate": 4.82,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:17"
  },
  "57062717": {
   "who": "jieun",
   "sig": "aa6d1e3ba7fe",
-  "sim": 0.9939,
-  "rate": 5.59,
+  "sim": 0.9937,
+  "rate": 5.29,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 09:17"
  },
  "9b172b94": {
   "who": "jieun",
@@ -11143,13 +11625,14 @@
  "ed2239d7": {
   "who": "jieun",
   "sig": "985b1bda92a2",
-  "sim": 0.9889,
-  "rate": 5.52,
+  "sim": 0.9937,
+  "rate": 5.7,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:55"
+  "at": "2026-11-07 09:17"
  },
  "773924b8": {
   "who": "jieun",
@@ -11187,13 +11670,14 @@
  "f6adc013": {
   "who": "jieun",
   "sig": "9b68ee6b14c1",
-  "sim": 0.9943,
-  "rate": 4.97,
+  "sim": 0.995,
+  "rate": 5.39,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:55"
+  "at": "2026-11-07 09:17"
  },
  "8034684c": {
   "who": "jieun",
@@ -11210,12 +11694,13 @@
   "who": "jieun",
   "sig": "46a174374d89",
   "sim": 0.9942,
-  "rate": 4.96,
-  "try": 1,
+  "rate": 4.97,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 18:59"
+  "at": "2026-11-07 09:17"
  },
  "8b5224c8": {
   "who": "jieun",
@@ -11231,24 +11716,26 @@
  "468e6198": {
   "who": "jieun",
   "sig": "65f588574090",
-  "sim": 0.9925,
-  "rate": 6.67,
+  "sim": 0.9919,
+  "rate": 6.77,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:55"
+  "at": "2026-11-07 09:17"
  },
  "94fbc69f": {
   "who": "jieun",
   "sig": "5430c5c2362b",
-  "sim": 0.9923,
-  "rate": 6.08,
-  "try": 1,
+  "sim": 0.9938,
+  "rate": 5.45,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:55"
+  "at": "2026-11-07 09:17"
  },
  "7748fb40": {
   "who": "jieun",
@@ -11264,13 +11751,14 @@
  "4f15a3b9": {
   "who": "jieun",
   "sig": "a5676c55e20c",
-  "sim": 0.9932,
-  "rate": 5.47,
+  "sim": 0.9936,
+  "rate": 5.42,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 09:17"
  },
  "9cde42ed": {
   "who": "jieun",
@@ -11319,24 +11807,26 @@
  "25ccc38a": {
   "who": "jieun",
   "sig": "f310a7c43058",
-  "sim": 0.9928,
-  "rate": 6.16,
+  "sim": 0.9933,
+  "rate": 5.71,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 09:17"
  },
  "4cc8dd9e": {
   "who": "jieun",
   "sig": "f10d93f10ca3",
-  "sim": 0.994,
-  "rate": 5.52,
+  "sim": 0.9949,
+  "rate": 4.75,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 09:17"
  },
  "5bd17cfc": {
   "who": "jieun",
@@ -11363,13 +11853,14 @@
  "072bd58f": {
   "who": "jieun",
   "sig": "3dd8b74b8e25",
-  "sim": 0.9923,
-  "rate": 6.19,
-  "try": 1,
+  "sim": 0.9946,
+  "rate": 5.68,
+  "fall": 90,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 10:46"
  },
  "a829415f": {
   "who": "jieun",
@@ -11385,13 +11876,14 @@
  "5047f6e6": {
   "who": "jieun",
   "sig": "b9d363008eaf",
-  "sim": 0.9936,
-  "rate": 6.58,
+  "sim": 0.9932,
+  "rate": 6.19,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 09:17"
  },
  "89081a28": {
   "who": "jieun",
@@ -11418,13 +11910,14 @@
  "4848762e": {
   "who": "jieun",
   "sig": "056771c92a7f",
-  "sim": 0.993,
-  "rate": 5.17,
-  "try": 1,
+  "sim": 0.9933,
+  "rate": 5.27,
+  "fall": 60,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:57"
+  "at": "2026-11-07 09:17"
  },
  "02c56cb2": {
   "who": "jieun",
@@ -11451,24 +11944,26 @@
  "52e00709": {
   "who": "jieun",
   "sig": "a99ef5b03e6a",
-  "sim": 0.9934,
-  "rate": 5.71,
-  "try": 1,
+  "sim": 0.9935,
+  "rate": 6.05,
+  "fall": 90,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:17"
  },
  "aa3ba3d9": {
   "who": "jieun",
   "sig": "bae2f7763b1d",
-  "sim": 0.9948,
-  "rate": 5.35,
+  "sim": 0.995,
+  "rate": 5.38,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 18:59"
+  "at": "2026-11-07 09:17"
  },
  "8d430b75": {
   "who": "jieun",
@@ -11484,35 +11979,38 @@
  "582a0375": {
   "who": "jieun",
   "sig": "95069004e5ac",
-  "sim": 0.9924,
-  "rate": 4.51,
-  "try": 1,
+  "sim": 0.9856,
+  "rate": 5.64,
+  "fall": 100,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:17"
  },
  "03438493": {
   "who": "jieun",
   "sig": "2512095aecc0",
-  "sim": 0.993,
-  "rate": 4.91,
+  "sim": 0.9941,
+  "rate": 5.39,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "6891d0c8": {
   "who": "jieun",
   "sig": "fe2ad8476fcb",
-  "sim": 0.9937,
-  "rate": 5.08,
+  "sim": 0.9942,
+  "rate": 5.14,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "f84fca2f": {
   "who": "jieun",
@@ -11539,68 +12037,74 @@
  "358186cf": {
   "who": "jieun",
   "sig": "d5b6778b498d",
-  "sim": 0.9941,
-  "rate": 5.41,
+  "sim": 0.9948,
+  "rate": 5.61,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "7f42a234": {
   "who": "jieun",
   "sig": "670556afcff9",
-  "sim": 0.9953,
-  "rate": 5.25,
+  "sim": 0.9951,
+  "rate": 5.16,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "ec102a72": {
   "who": "jieun",
   "sig": "bd4ac84b111e",
-  "sim": 0.9931,
-  "rate": 4.91,
+  "sim": 0.9935,
+  "rate": 5.01,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "6c0e77b0": {
   "who": "jieun",
   "sig": "88c89098a05e",
-  "sim": 0.9942,
-  "rate": 4.68,
+  "sim": 0.9952,
+  "rate": 4.3,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "31b555a0": {
   "who": "jieun",
   "sig": "350a4e7989b0",
-  "sim": 0.9936,
-  "rate": 5.04,
-  "try": 1,
+  "sim": 0.9913,
+  "rate": 5.35,
+  "fall": 90,
+  "try": 3,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 09:22"
  },
  "8a172d85": {
   "who": "jieun",
   "sig": "11e10c348c02",
-  "sim": 0.9917,
-  "rate": 6.05,
-  "try": 1,
+  "sim": 0.9882,
+  "rate": 5.62,
+  "fall": 120,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:59"
+  "at": "2026-11-07 10:46"
  },
  "ac3b0a7b": {
   "who": "jieun",
@@ -11627,35 +12131,38 @@
  "77d6b4ea": {
   "who": "jieun",
   "sig": "34cd122e7208",
-  "sim": 0.9909,
-  "rate": 5.43,
+  "sim": 0.9929,
+  "rate": 5.49,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "3106a1e5": {
   "who": "jieun",
   "sig": "71789e9b8cf5",
-  "sim": 0.9921,
-  "rate": 5.52,
-  "try": 1,
+  "sim": 0.9943,
+  "rate": 5.4,
+  "fall": 60,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "d8391b72": {
   "who": "jieun",
   "sig": "0a82ab081fc2",
-  "sim": 0.9939,
-  "rate": 5.21,
+  "sim": 0.9941,
+  "rate": 4.92,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 18:59"
+  "at": "2026-11-07 09:22"
  },
  "3babf0a3": {
   "who": "jieun",
@@ -11682,13 +12189,14 @@
  "d3b77459": {
   "who": "jieun",
   "sig": "072778c95639",
-  "sim": 0.9949,
-  "rate": 4.87,
+  "sim": 0.9943,
+  "rate": 5.15,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "225163c6": {
   "who": "jieun",
@@ -11704,24 +12212,26 @@
  "47505748": {
   "who": "jieun",
   "sig": "fbc663a8f23e",
-  "sim": 0.9943,
-  "rate": 5.44,
+  "sim": 0.9929,
+  "rate": 5.79,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "6b95fe3c": {
   "who": "jieun",
   "sig": "a6b678e7cfc2",
-  "sim": 0.9932,
-  "rate": 5.37,
+  "sim": 0.9947,
+  "rate": 5.25,
+  "fall": 110,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "9d7c3069": {
   "who": "jieun",
@@ -11737,13 +12247,14 @@
  "5a8254de": {
   "who": "jieun",
   "sig": "2b112f579a30",
-  "sim": 0.9935,
-  "rate": 5.05,
+  "sim": 0.994,
+  "rate": 5.01,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:22"
  },
  "12ce44d9": {
   "who": "jieun",
@@ -11759,24 +12270,26 @@
  "ce436631": {
   "who": "jieun",
   "sig": "c8ae3e0df03a",
-  "sim": 0.9933,
-  "rate": 4.18,
-  "try": 1,
+  "sim": 0.9962,
+  "rate": 3.36,
+  "fall": 40,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 10:46"
  },
  "24f97eed": {
   "who": "jieun",
   "sig": "538c3a391610",
-  "sim": 0.9895,
-  "rate": 6.74,
+  "sim": 0.9927,
+  "rate": 6.48,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:00"
+  "at": "2026-11-07 09:26"
  },
  "6102e169": {
   "who": "jieun",
@@ -11814,13 +12327,14 @@
  "76956c42": {
   "who": "jieun",
   "sig": "82dc634cfcfb",
-  "sim": 0.9938,
-  "rate": 4.16,
+  "sim": 0.9954,
+  "rate": 4.49,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "393e719c": {
   "who": "jieun",
@@ -11836,13 +12350,14 @@
  "a361a435": {
   "who": "jieun",
   "sig": "460b60b40d9e",
-  "sim": 0.9943,
-  "rate": 4.81,
+  "sim": 0.9938,
+  "rate": 5.43,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "9218152e": {
   "who": "jieun",
@@ -11869,13 +12384,14 @@
  "4287a175": {
   "who": "jieun",
   "sig": "9a12a350a7c2",
-  "sim": 0.9933,
-  "rate": 5.28,
+  "sim": 0.9934,
+  "rate": 5.57,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "fa5f5044": {
   "who": "jieun",
@@ -11891,13 +12407,14 @@
  "2182ba4a": {
   "who": "jieun",
   "sig": "d6fe60a4d69a",
-  "sim": 0.9938,
-  "rate": 5.4,
-  "try": 1,
+  "sim": 0.9937,
+  "rate": 5.6,
+  "fall": 80,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "ece98cf3": {
   "who": "jieun",
@@ -11913,35 +12430,38 @@
  "0fd944b3": {
   "who": "jieun",
   "sig": "c14dffbcdd83",
-  "sim": 0.993,
-  "rate": 5.37,
+  "sim": 0.9936,
+  "rate": 5.31,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "6cc5c29d": {
   "who": "jieun",
   "sig": "1449af4c2880",
-  "sim": 0.9929,
-  "rate": 5.36,
-  "try": 1,
+  "sim": 0.9935,
+  "rate": 4.89,
+  "fall": 100,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "00f80d37": {
   "who": "jieun",
   "sig": "b52412a18aa8",
-  "sim": 0.9941,
-  "rate": 5.06,
-  "try": 1,
+  "sim": 0.9933,
+  "rate": 5.19,
+  "fall": 90,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:02"
+  "at": "2026-11-07 09:26"
  },
  "1c776dce": {
   "who": "jieun",
@@ -11957,79 +12477,86 @@
  "b5a10b91": {
   "who": "jieun",
   "sig": "a65b9573edde",
-  "sim": 0.9932,
-  "rate": 5.4,
+  "sim": 0.9934,
+  "rate": 9.51,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
-  "flag": "",
-  "at": "2026-11-06 00:03"
+  "flag": "길이",
+  "at": "2026-11-07 09:26"
  },
  "733e0788": {
   "who": "jieun",
   "sig": "ba9ccc585745",
-  "sim": 0.9929,
-  "rate": 5.79,
+  "sim": 0.9934,
+  "rate": 5.59,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "e51fc921": {
   "who": "jieun",
   "sig": "98aab177ad7c",
-  "sim": 0.9933,
-  "rate": 5.2,
+  "sim": 0.994,
+  "rate": 5.31,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "6c09b99d": {
   "who": "jieun",
   "sig": "9b1948fab75a",
-  "sim": 0.9924,
-  "rate": 6.02,
+  "sim": 0.9927,
+  "rate": 5.97,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "1c9fbe32": {
   "who": "jieun",
   "sig": "90e851fe7fe8",
-  "sim": 0.9935,
-  "rate": 5.28,
-  "try": 1,
+  "sim": 0.9942,
+  "rate": 5.13,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "89e85008": {
   "who": "jieun",
   "sig": "4fead7d7dc57",
-  "sim": 0.99,
-  "rate": 7.91,
+  "sim": 0.991,
+  "rate": 4.71,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 11:08"
  },
  "99ee61cc": {
   "who": "jieun",
   "sig": "503512580e1a",
   "sim": 0.9932,
-  "rate": 5.95,
+  "rate": 5.76,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "5e91b3e7": {
   "who": "jieun",
@@ -12045,13 +12572,14 @@
  "c7f4ee95": {
   "who": "jieun",
   "sig": "d52d1c698299",
-  "sim": 0.989,
-  "rate": 6.45,
+  "sim": 0.9947,
+  "rate": 5.65,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:26"
  },
  "b672a131": {
   "who": "jieun",
@@ -12067,46 +12595,50 @@
  "c739cd23": {
   "who": "jieun",
   "sig": "08110e26a649",
-  "sim": 0.9924,
-  "rate": 6.51,
-  "try": 1,
+  "sim": 0.993,
+  "rate": 5.68,
+  "fall": 70,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:31"
  },
  "1ff73956": {
   "who": "jieun",
   "sig": "c3471663087d",
-  "sim": 0.9941,
-  "rate": 8.23,
-  "try": 1,
+  "sim": 0.9952,
+  "rate": 4.98,
+  "fall": 40,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 10:46"
  },
  "86243817": {
   "who": "jieun",
   "sig": "202cb6e39cf8",
-  "sim": 0.9912,
-  "rate": 6.29,
+  "sim": 0.9937,
+  "rate": 6.14,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:31"
  },
  "14e018d9": {
   "who": "jieun",
   "sig": "ed6f438c7077",
-  "sim": 0.9933,
-  "rate": 5.47,
-  "try": 1,
+  "sim": 0.9926,
+  "rate": 4.99,
+  "fall": 70,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:03"
+  "at": "2026-11-07 09:31"
  },
  "f35adf0b": {
   "who": "jieun",
@@ -12177,13 +12709,14 @@
  "ded2bb22": {
   "who": "jieun",
   "sig": "61d64f6ac1dc",
-  "sim": 0.9949,
-  "rate": 5.44,
+  "sim": 0.9947,
+  "rate": 5.56,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 09:31"
  },
  "baae0cbb": {
   "who": "jieun",
@@ -12210,13 +12743,14 @@
  "c4f60d44": {
   "who": "jieun",
   "sig": "a2610ea89571",
-  "sim": 0.9948,
-  "rate": 5.05,
+  "sim": 0.9955,
+  "rate": 5.08,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 09:31"
  },
  "372eeb0d": {
   "who": "jieun",
@@ -12232,24 +12766,26 @@
  "cbf19ac0": {
   "who": "jieun",
   "sig": "abeab5a17f18",
-  "sim": 0.995,
-  "rate": 5.06,
-  "try": 1,
+  "sim": 0.9943,
+  "rate": 5.09,
+  "fall": 50,
+  "try": 3,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 09:31"
  },
  "84f5f686": {
   "who": "jieun",
   "sig": "fd5f671f45d4",
-  "sim": 0.9925,
-  "rate": 6.42,
+  "sim": 0.9924,
+  "rate": 6.68,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 09:31"
  },
  "01f4580a": {
   "who": "jieun",
@@ -12276,24 +12812,26 @@
  "7fd3b984": {
   "who": "jieun",
   "sig": "65d6791c2a84",
-  "sim": 0.9921,
-  "rate": 5.68,
+  "sim": 0.9933,
+  "rate": 5.82,
+  "fall": 100,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 09:31"
  },
  "7de30c8c": {
   "who": "jieun",
   "sig": "72dcf3f8db7b",
-  "sim": 0.9913,
-  "rate": 6.27,
-  "try": 1,
+  "sim": 0.9948,
+  "rate": 5.32,
+  "fall": 50,
+  "try": 2,
   "style": "plain",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 10:46"
  },
  "e835ed46": {
   "who": "jieun",
@@ -12309,13 +12847,14 @@
  "6b951b14": {
   "who": "jieun",
   "sig": "78959063b333",
-  "sim": 0.9937,
-  "rate": 5.71,
+  "sim": 0.9935,
+  "rate": 5.54,
+  "fall": 60,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "f7cda28a": {
   "who": "jieun",
@@ -12353,57 +12892,62 @@
  "1d451dc8": {
   "who": "jieun",
   "sig": "c78f5edc37f8",
-  "sim": 0.9936,
-  "rate": 5.22,
+  "sim": 0.9937,
+  "rate": 5.31,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "bed217b6": {
   "who": "jieun",
   "sig": "d3f76d1bc4b1",
-  "sim": 0.9943,
-  "rate": 5.67,
-  "try": 1,
+  "sim": 0.9936,
+  "rate": 5.31,
+  "fall": 40,
+  "try": 2,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "6b4ab0aa": {
   "who": "jieun",
   "sig": "c9bfa980dcdc",
-  "sim": 0.9955,
-  "rate": 4.23,
+  "sim": 0.9944,
+  "rate": 4.25,
+  "fall": 90,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "514e6800": {
   "who": "jieun",
   "sig": "08e73f6f2721",
-  "sim": 0.9928,
-  "rate": 4.78,
+  "sim": 0.9948,
+  "rate": 4.59,
+  "fall": 80,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "83dd8576": {
   "who": "jieun",
   "sig": "323dbc33dd8b",
-  "sim": 0.9919,
-  "rate": 5.95,
+  "sim": 0.991,
+  "rate": 6.3,
+  "fall": 50,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:31"
  },
  "ed968059": {
   "who": "jieun",
@@ -12441,13 +12985,14 @@
  "b9ba55e0": {
   "who": "jieun",
   "sig": "15ac984c07da",
-  "sim": 0.9956,
-  "rate": 4.54,
+  "sim": 0.9949,
+  "rate": 5.03,
+  "fall": 70,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:32"
  },
  "153cc64a": {
   "who": "jieun",
@@ -12485,13 +13030,14 @@
  "d551d41e": {
   "who": "jieun",
   "sig": "1713a84c5d7f",
-  "sim": 0.9926,
-  "rate": 6.32,
+  "sim": 0.9844,
+  "rate": 5.58,
+  "fall": 40,
   "try": 1,
-  "style": "plain",
+  "style": "desc",
   "emo": true,
   "flag": "",
-  "at": "2026-11-06 00:06"
+  "at": "2026-11-07 09:32"
  },
  "ca89554b": {
   "who": "jieun",
