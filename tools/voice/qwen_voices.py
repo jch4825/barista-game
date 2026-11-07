@@ -13,6 +13,10 @@ Qwen3 TTS로 대사 음성 만들기(사용자 결정 2026-11-05 '새 ②', 검�
   5. 말 끝이 잘린 후보(마지막 소리가 아직 나는 채 끝남: 끝에서 '톡' 튐, 2026-11-06 사용자 검수 13.65)는 길이가 어긋난 것처럼 낮게 침.
      끝 소리가 반쯤에서 뚝 끊긴 후보(마지막 큰 소리가 30ms 안에 사라짐: '쌌다'의 '다'가 끊김, 2026-11-07 사용자 검수 13.68)도 같이 다시.
      고른 것은 말 끝 뒤 0.25초를 남기고 자르고, 파일 끝을 짧게 줄여(fade) 조용히 끝나게 함. 잘린 채 쓴 줄은 '끝' 표시.
+     끝 검사는 50ms(검수 13.69: 40 · 50ms 줄도 끊겨 들림), 후보 가운데 끝이 100ms 에 가까운 것을 고름(목소리가 닮은 것이 먼저).
+     ㄱ · ㄷ · ㅂ 소리 받침으로 끝나는 말('창밖' · '머그컵')은 원래 끝이 짧아 끝 검사를 하지 않음.
+  6. 그래도 끝이 50ms 안에 사라지는 줄은 '끝 늘이기'(stretch_end): 마지막 글자가 잦아드는 부분만 높낮이 그대로 늘여 0.1초쯤에 걸쳐 잦아들게
+     (사용자 2026-11-07 '끝 늘이기가 맞다'). 이미 만든 파일은 --stretch 로(모델 없이 몇 분).
 입력: tools/voice/lines.json(npm run lines) · qwen_cast.json · emotions.json
 출력: assets/voice/lines/{key}.ogg(Opus 40k, 게임과 같은 이름) · assets/voice/manifest.json
 기록: tools/voice/qwen_made.json(줄마다 사람 · 닮음 · 빠르기 · 시도 · 표시 · 서명). 서명(본보기 · 문장 · 감정 지시)이 바뀐 줄만 다시 만듦.
@@ -38,6 +42,7 @@ BASE_MODEL = "Qwen3-TTS-12Hz-1.7B-Base"
 LANG = "Korean"
 K = 2            # 다시 만들 때 한 줄의 후보 수(첫 시도는 하나: 대부분 첫 시도에 통과함)
 BATCH = 16       # 한 번에 만드는 줄 수
+SYL_BUDGET = 1024  # 한 묶음의 글자 수 합(후보마다 셈): 16줄 × 후보 2 × 32자. 긴 줄은 이보다 덜 묶음(검수 13.69)
 SIM_MIN = 0.975  # 본보기와 이만큼 닮지 않으면 다시(짧은 줄은 지문이 덜 정확해 0.97). 흔들린 사장님 줄은 0.96 ~ 0.97이었음
 SR_OUT = 24000
 TOKENS_PER_SEC = 12.5  # 12Hz 말소리 토큰
@@ -76,7 +81,8 @@ def cut_end(w, sr) -> bool:
     return bool(20 * np.log10(float(np.sqrt(np.mean(tail ** 2) + 1e-12)) + 1e-9) > CUT_DB)
 
 
-ABRUPT_MS = 30  # 말 끝이 이보다 빨리 사라지면 '끝 소리가 끊김'(마지막 '다' · '요'가 반쯤에서 뚝: 모델이 말을 다 하기 전에 멈춤, 검수 13.68)
+ABRUPT_MS = 50  # 말 끝이 이보다 빨리 사라지면 '끝 소리가 끊김'(마지막 '다' · '요'가 반쯤에서 뚝: 모델이 말을 다 하기 전에 멈춤, 검수 13.68. 처음 30 → 40 · 50ms 줄도 끊겨 들려 50, 검수 13.69)
+LONG_MS = 100   # 후보 가운데 고를 때 끝이 이만큼 천천히 잦아드는 것까지 더 낫게 침(사용자 2026-11-07 '100ms', 검수 13.69)
 
 
 def fall_ms(w, sr) -> int:
@@ -93,6 +99,81 @@ def fall_ms(w, sr) -> int:
         return 999
     after = np.where(db[strong[-1]:] < pk - 40)[0]
     return int(after[0]) * 10 if len(after) else 999
+
+
+STOP_JONG = {1, 2, 3, 9, 24, 7, 19, 20, 22, 23, 25, 27, 17, 18, 26, 14}  # 받침이 ㄱ · ㄷ · ㅂ 소리(컵 · 밖 · 컹 · 맛): 원래 끝이 짧게 닫힘
+
+
+def closed_end(text: str) -> bool:
+    """마지막 글자가 ㄱ · ㄷ · ㅂ 소리 받침으로 끝나는지('창밖' · '머그컵' · '덜컹!'): 이런 말은 끝이 빨리 닫히는 것이 자연스러워 끝 검사 · 끝 늘이기를 하지 않음(검수 13.69)"""
+    hs = re.findall(r"[가-힣]", text)
+    return bool(hs) and (ord(hs[-1]) - 0xAC00) % 28 in STOP_JONG
+
+
+def fall_ok(fall: int, text: str) -> bool:
+    return closed_end(text) or fall > ABRUPT_MS
+
+
+STRETCH_AIM = 130  # 끝 늘이기: 잦아드는 부분을 (이 값 / 지금 걸리는 시간)배로 늘임(2.6배까지). 실제로는 0.1초쯤에 걸쳐 잦아듦(검수 13.69 시험 16줄: 가운데 110ms)
+
+
+def _wsola(x, f, sr):
+    """높낮이는 그대로 두고 길이만 f 배로(WSOLA: 20ms 조각을 겹쳐 잇되, 앞 조각과 가장 잘 이어지는 자리를 ±4ms 안에서 찾음)"""
+    import numpy as np
+    N = int(sr * 0.02); Hs = N // 4; Ha = Hs / f; tol = int(sr * 0.004)
+    win = np.hanning(N).astype(np.float32)
+    n_out = int(len(x) * f)
+    y = np.zeros(n_out + N, np.float32); norm = np.zeros_like(y)
+    xp = np.concatenate([np.zeros(tol, np.float32), x, np.zeros(N + tol, np.float32)])
+    prev, k = 0, 0
+    while k * Hs < n_out:
+        nom = int(k * Ha) + tol
+        pos = nom
+        if k:
+            ref = xp[prev + Hs: prev + Hs + N]
+            if len(ref) < N:  # 소리 끝에서 앞 조각이 모자람(검수 13.69: 안내의 짧은 말에서 멈췄음)
+                break
+            best = -1e9
+            for off in range(-tol, tol + 1, 2):
+                c = xp[nom + off: nom + off + N]
+                if len(c) < N:
+                    break
+                v = float(np.dot(ref, c))
+                if v > best:
+                    best, pos = v, nom + off
+        seg = xp[pos: pos + N]
+        if len(seg) < N:
+            break
+        y[k * Hs: k * Hs + N] += seg * win; norm[k * Hs: k * Hs + N] += win
+        prev, k = pos, k + 1
+    norm[norm < 1e-3] = 1.0
+    return (y / norm)[:n_out]
+
+
+def stretch_end(w, sr, text=""):
+    """끝 늘이기(사용자 2026-11-07 '끝 늘이기가 맞다', 검수 13.69): 마지막 글자가 ABRUPT_MS 안에 사라지면, 마지막 큰 소리 30ms 앞부터 다 잦아든 뒤 20ms 까지만
+    높낮이는 그대로 천천히 늘임(모델을 쓰지 않아 목소리 · 말투는 그대로, 줄은 0.11 ~ 0.16초 길어짐). → (소리, 늘였으면 늘인 뒤의 fall_ms 아니면 None)"""
+    import numpy as np
+    if closed_end(text):
+        return w, None
+    h = max(1, int(sr * 0.01)); n = len(w) // h
+    if n < 10:
+        return w, None
+    db = 20 * np.log10(np.sqrt((np.asarray(w[: n * h], dtype=np.float32).reshape(n, h) ** 2).mean(1)) + 1e-9)
+    pk = float(db.max()); strong = np.where(db > pk - 20)[0]
+    if not len(strong):
+        return w, None
+    st = int(strong[-1]); after = np.where(db[st:] < pk - 40)[0]
+    if not len(after) or int(after[0]) * 10 > ABRUPT_MS:
+        return w, None
+    f = min(2.6, STRETCH_AIM / max(int(after[0]) * 10, 20))
+    a = max(0, (st - 3) * h); b = min(len(w), (st + int(after[0]) + 2) * h)
+    w = np.asarray(w, dtype=np.float32)
+    mid = _wsola(w[a:b], f, sr)
+    xf = min(len(mid), int(sr * 0.005)); r = np.linspace(0, 1, xf, dtype=np.float32)
+    mid[:xf] = mid[:xf] * r + w[a:a + xf] * (1 - r)  # 앞 이음매
+    out = np.concatenate([w[:a], mid, w[b:]]).astype(np.float32)
+    return out, fall_ms(out, sr)
 
 
 def check(w, sr, text):
@@ -132,6 +213,52 @@ def trim(w, sr, end):
     return np.concatenate([w, np.zeros(int(sr * 0.15), dtype=np.float32)])
 
 
+def stretch_existing(lines, owner, only, want_keys, manifest, made, voice_dir, manifest_path, made_path) -> int:
+    """--stretch: 이미 만든 파일의 끝 늘이기. 옛 파일은 assets/_src/_check/voice_redo/stretch_old/ 에 남김. 한 번 늘인 줄(기록의 long)은 다시 늘이지 않음"""
+    import numpy as np
+    import soundfile as sf
+    ffmpeg = find_ffmpeg()
+    if not ffmpeg:
+        print("ffmpeg 이 없어 끝 늘이기를 못 해요")
+        return 1
+    keep = ROOT / "assets" / "_src" / "_check" / "voice_redo" / "stretch_old"
+    keep.mkdir(parents=True, exist_ok=True)
+    n = seen = 0
+    for l in lines:
+        pid = owner.get(l["voice"])
+        rel = manifest["lines"].get(l["key"])
+        if not pid or not rel or (only and pid not in only) or (want_keys and l["key"] not in want_keys):
+            continue
+        rec = made.get(l["key"], {})
+        if rec.get("long") or not (voice_dir / rel).exists():
+            continue
+        seen += 1
+        w, sr = sf.read(str(voice_dir / rel))
+        w = (w.mean(axis=1) if w.ndim > 1 else w).astype(np.float32)
+        out, longer = stretch_end(w, sr, l["text"])
+        if not longer:
+            continue
+        shutil.copyfile(voice_dir / rel, keep / Path(rel).name)
+        wav = voice_dir / "lines" / f"{l['key']}.tmp.wav"
+        sf.write(str(wav), out, sr)
+        ogg = voice_dir / "lines" / f"{l['key']}.ogg"
+        r = subprocess.run([ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-ac", "1", "-c:a", "libopus", "-b:a", "40k", str(ogg)], capture_output=True)
+        wav.unlink(missing_ok=True)
+        if r.returncode != 0:
+            print(f"  ✗ {l['key']} 저장 못 함: {r.stderr[:120]}")
+            continue
+        manifest["lines"][l["key"]] = f"lines/{ogg.name}"
+        rec = {**rec, "long": longer}
+        if "끝" in rec.get("flag", ""):
+            rec["flag"] = "·".join(x for x in rec["flag"].split("·") if x != "끝")
+        made[l["key"]] = rec
+        n += 1
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    made_path.write_text(json.dumps(made, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"끝 늘이기: 살펴본 줄 {seen} · 늘인 줄 {n} (옛 파일 → {keep})")
+    return 0
+
+
 def sig_of(person, ref_file: Path, ref_text, emo_en, text):
     st = ref_file.stat()
     raw = f"{BASE_MODEL}|{person}|{ref_file.name}|{st.st_size}|{ref_text}|{emo_en}|{text}"
@@ -147,6 +274,7 @@ def main() -> int:
     ap.add_argument("--force", action="store_true", help="이미 만든 줄도 다시")
     ap.add_argument("--dry", action="store_true", help="만들지 않고 몇 줄인지 · 걸릴 시간만")
     ap.add_argument("--flagged", action="store_true", help="'들어 볼 줄'(qwen_made.json 의 flag)만 다시: 후보를 --k 개씩, 지금 것보다 나을 때만 바꿈")
+    ap.add_argument("--stretch", action="store_true", help="모델 없이: 이미 만든 파일 가운데 끝이 ABRUPT_MS 안에 사라지는 줄만 끝 늘이기(검수 13.69)")
     ap.add_argument("--k", type=int, default=0, help="모든 시도의 후보 수(기본: 첫 시도 1 · 다시 2, --flagged 면 4)")
     args = ap.parse_args()
     global K
@@ -179,6 +307,8 @@ def main() -> int:
 
     only = {s.strip() for s in args.only.split(",") if s.strip()}
     want_keys = {s.strip() for s in args.keys.split(",") if s.strip()}
+    if args.stretch:
+        return stretch_existing(lines, owner, only, want_keys, manifest, made, voice_dir, manifest_path, made_path)
     skipped = {}
     todo = []
     for l in lines:
@@ -283,8 +413,21 @@ def main() -> int:
         first = {"ok": 0, "n": 0}  # 첫 시도(감정 지시만)로 통과한 수: 절반 밑이면 그 사람은 목소리 설명부터(사장님)
         # 한 번에 만드는 소리는 평소(16줄 × 후보 2)만큼까지: --flagged(후보 4)에서 16줄씩이면 그래픽카드 메모리가 모자랐음(검수 13.68)
         step = max(1, min(BATCH, BATCH * 2 // K))
-        for b0 in range(0, len(items), step):
-            batch = items[b0:b0 + step]
+        # 긴 줄은 덜 묶음: 묶음의 글자 수 합(후보 K개를 셈)이 SYL_BUDGET 을 넘지 않게. 안내의 50 ~ 160자 줄을 16줄씩 묶으니
+        # 그래픽카드 메모리가 넘쳐 컴퓨터 메모리를 14GB 빌려 쓰며 묶음 하나에 12 ~ 15분이 걸렸음(검수 13.69, 짧은 줄은 1 ~ 2분)
+        spans, b0 = [], 0
+        while b0 < len(items):
+            n, total = 0, 0
+            while b0 + n < len(items) and n < step:
+                s = syllables(items[b0 + n]["text"]) * K
+                if n and total + s > SYL_BUDGET:
+                    break
+                total += s
+                n += 1
+            spans.append((b0, n))
+            b0 += n
+        for b0, n in spans:
+            batch = items[b0:b0 + n]
             best = {t["key"]: None for t in batch}
             desc_first = first["n"] >= 8 and first["ok"] < first["n"] / 2
             # 시도: plain = 감정 지시(있으면) · desc = 목소리 설명 + 감정 지시 · 마지막은 씨앗을 바꿔 plain 으로
@@ -313,11 +456,13 @@ def main() -> int:
                         w = np.asarray(wavs[j * kk + c], dtype=np.float32)
                         ok, rate, end = check(w, sr, t["text"])
                         cut = cut_end(w, sr)  # 말 끝이 잘린 후보는 길이가 어긋난 것처럼 낮게(검수 13.65)
-                        fall = fall_ms(w, sr)  # 끝 소리가 반쯤에서 뚝 끊긴 후보도 다시(검수 13.68: 지은의 줄 절반이 그랬음)
+                        fall = fall_ms(trim(w, sr, end), sr)  # 끝 소리가 반쯤에서 뚝 끊긴 후보도 다시(검수 13.68: 지은의 줄 절반이 그랬음). 파일에 들어갈 소리로 잼: 말 뒤 0.25초 밖의 잡음을 '긴 끝'으로 치지 않게(검수 13.69)
                         sim = float(a_emb @ emb(w, sr))
-                        cand = {"ok": ok and not cut and fall > ABRUPT_MS, "cut": cut or fall <= ABRUPT_MS, "fall": fall, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
+                        fine = fall_ok(fall, t["text"])  # ㄱ · ㄷ · ㅂ 받침으로 끝나는 말은 끝이 짧아도 괜찮음(검수 13.69)
+                        cand = {"ok": ok and not cut and fine, "len_ok": ok, "cut": cut or not fine, "fall": fall, "sim": round(sim, 4), "rate": rate, "try": attempt, "style": style, "w": w, "end": end}
                         cur = best[t["key"]]
-                        if cur is None or (cand["ok"], min(cand["fall"], 60), cand["sim"]) > (cur["ok"], min(cur["fall"], 60), cur["sim"]):
+                        rank = lambda c: (c["ok"], c["sim"] >= sim_min(t["text"]), 0 if closed_end(t["text"]) else min(c["fall"], LONG_MS), c["sim"])  # 목소리가 닮은 것이 끝 길이보다 먼저(아주 짧은 말이 흔들렸음, 검수 13.69)
+                        if cur is None or rank(cand) > rank(cur):
                             best[t["key"]] = cand
                     if attempt == 1:
                         b1 = best[t["key"]]
@@ -334,20 +479,23 @@ def main() -> int:
                     flagged += 1  # 다시 만든 것이 지금 것보다 낫지 않으면 지금 것을 그대로 둠
                     done_n += 1
                     continue
+                out, longer = stretch_end(trim(b["w"], sr, b["end"]), sr, t["text"])  # 끝이 빨리 사라진 채 고른 줄은 끝 늘이기(검수 13.69)
                 flag = []
-                if b.get("cut"):
-                    flag.append("끝")  # 후보가 모두 말 끝이 잘림: 끝을 줄여(trim) 튀지는 않지만 들어 볼 줄
-                elif not b["ok"]:
-                    flag.append("길이")
+                if b.get("cut") and not longer:
+                    flag.append("끝")  # 후보가 모두 끝이 잘렸고 늘이지도 못함(소리가 나는 채 끝남 등): 끝을 줄여(trim) 튀지는 않지만 들어 볼 줄
+                if not b.get("len_ok", b["ok"]):
+                    flag.append("길이")  # 글자 수에 비해 말이 너무 길거나 짧음(끝 검사와 따로, 검수 13.69)
                 if b["sim"] < sim_min(t["text"]):
                     flag.append("목소리")
                 flagged += bool(flag)
-                write_line(t, trim(b["w"], sr, b["end"]), sr, {
-                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "fall": b.get("fall"), "try": b["try"], "style": b["style"],
+                write_line(t, out, sr, {
+                    "who": pid, "sig": t["sig"], "sim": b["sim"], "rate": b["rate"], "fall": b.get("fall"), **({"long": longer} if longer else {}), "try": b["try"], "style": b["style"],
                     "emo": bool(t["emo"]), "flag": "·".join(flag), "at": time.strftime("%Y-%m-%d %H:%M"),
                 })
                 done_n += 1
             save()
+            del best
+            torch.cuda.empty_cache()  # 묶음마다 빈 메모리를 돌려줌(쌓여서 컴퓨터 메모리로 넘치지 않게)
             el = time.time() - t0
             print(f"  {done_n}/{len(todo)} · {pid} · {el / 60:.1f}분 · 남은 예상 {el / done_n * (len(todo) - done_n) / 60:.0f}분 · 들어 볼 줄 {flagged}", flush=True)
     save()
