@@ -1556,7 +1556,9 @@ export async function brew(opts = {}) {
       slots.push(b);
     }
     // 칸이 다섯 개 넘으면 조금 작게 해서 한 줄에(2026-11-07 사용자 '재료가 5개 이상부터는 이렇게 아래로 버튼이 내려오는데, 매우 보기 싫다', 검수 13.85)
-    return h('div', { class: `bw-hand${slots.length >= 5 ? ' is-many' : ''}`, role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
+    // 칸 넷까지 한 줄, 다섯은 한 줄에 조금 작게, 여섯부터(재료가 다섯까지 늘어남: 컵 + 재료 5 + 온도 = 일곱) 고르게 두 줄(3 + 3 · 4 + 3), 모두 왼쪽부터(검수 13.85 · 13.88)
+    const two = slots.length >= 6;
+    return h('div', { class: `bw-hand${two ? ' is-two' : slots.length >= 5 ? ' is-many' : ''}`, style: two ? { '--cols': String(Math.ceil(slots.length / 2)) } : null, role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
   }
 
   /** 기억(지은의 성장)이 오르면 단골의 '늘 먹던 거'를 한 번에 담음(재미 개편 6.1) */

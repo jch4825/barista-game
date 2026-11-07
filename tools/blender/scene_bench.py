@@ -3692,6 +3692,44 @@ def shot_ice_layer(sdir, preview, key='strawberry'):
     render_frames(sdir, sid, frame_rect(pts), 9, build)
 
 
+def shot_ice_tea(sdir, preview, cup='glass'):
+    """얼음 담기(아이스 보리차): 우린 보리차가 든 컵(티백은 꺼냄)에 얼음이 하나씩 떨어져 떠오름. 차는 얼음만큼 조금 차오르고, 얼음은 위쪽에 떠서
+    맨 위가 조금 드러남. 차 빛은 우리기 컷(steep_iced)의 '알맞아요' 가운데와 같게. 9단계(유리컵 0 ~ 8개 · 플라스틱 컵은 그만큼 나눠) × 떨어지는 얼음 있음/없음
+    (검수 13.90, 2026-11-08 사용자 \"보리차 메뉴에서 차가 안 들어 있는 컵에 얼음 담기가 나온다\")"""
+    sid = 'ice_barley' if cup == 'glass' else f'ice_{cup}_barley'
+    if cup == 'glass':
+        glass_scene(sid + '_static')
+        cupd = GLASS_CUP
+    else:
+        plastic_scene(sid + '_static')
+        cupd = PLASTIC_CUP
+    m, K = xm('tea_ice_barley', lambda: mat_blend('tea_ice_barley', ('#D9A84E', '#E6BC66'), ('#4E2208', '#66300C'), scale=10.0, rough=0.1))
+    at, pile = cupd['at'], cupd['pile']
+    lo, hi = cupd['full'] - 0.015, cupd['full'] - 0.006  # 유리컵: 우리기 컷이 끝난 높이(0.105) 쯤에서 얼음만큼 차오름
+
+    def build(k, p, flow):
+        K.outputs[0].default_value = 0.72  # 우리기 알맞아요(0.58 ~ 0.82)의 가운데 빛
+        n = round(p * len(pile))
+        h = lo + (hi - lo) * n / len(pile)
+        cupd['liquid'](h, m)
+        lift = (h + 0.007 - max(z for (_x, _y, z, *_r) in pile[:n])) if n else 0.0  # 얼음은 차 위쪽에 떠 있음(맨 위 얼음 가운데가 차 표면 조금 위)
+        build_ice(at, n, lift, 'shot_dyn', falling=flow, pile=pile, rim=cupd['rim'])
+    if preview:
+        clear_dyn()
+        build(5, 0.625, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    if cup == 'glass':
+        gx, gy, gz = GLASS_AT
+        rect = frame_rect([Vector((gx + dx, gy + dy, gz + zz)) for dx in (-0.04, 0.04) for dy in (-0.04, 0.04) for zz in (0.0, 0.17)])
+    else:
+        rect = plastic_rect()
+    render_frames(sdir, sid, rect, 9, build)
+
+
 def shot_water_ice(sdir, preview, cup='glass'):
     """찬물 붓기(아이스 아메리카노의 물 먼저): 얼음만 든 컵에 피처로 찬물(샷은 나중에 샷잔에서 옮겨 부음). 맑은 물, 컵의 4/5 쯤에서 알맞아요.
     17단계 × 물줄기 있음/없음"""
@@ -3885,6 +3923,7 @@ MORE_SHOTS.update({
     'hotwater_pitcher_yuja': lambda d, pv: shot_hotwater_pitcher(d, pv, 'yuja'),
     'stir_pitcher_yuja': lambda d, pv: shot_stir_pitcher(d, pv, 'yuja'),
     'ice_strawberry': lambda d, pv: shot_ice_layer(d, pv, 'strawberry'),
+    'ice_barley': lambda d, pv: shot_ice_tea(d, pv, 'glass'), 'ice_plastic_barley': lambda d, pv: shot_ice_tea(d, pv, 'plastic'),  # 우린 보리차 위에 얼음(검수 13.90)
     'water_glass_ice': lambda d, pv: shot_water_ice(d, pv, 'glass'), 'water_plastic_ice': lambda d, pv: shot_water_ice(d, pv, 'plastic'),
     'water_plastic_yuja': lambda d, pv: shot_water_plastic_tint(d, pv, 'yuja'),
     'pourin_glass_yuja': lambda d, pv: shot_pourin(d, pv, 'glass', 'yuja'), 'pourin_plastic_yuja': lambda d, pv: shot_pourin(d, pv, 'plastic', 'yuja'),

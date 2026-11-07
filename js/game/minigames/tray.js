@@ -5,6 +5,7 @@
  *  - 흔들림이 끝까지 차면 조금 흘림: "괜찮아요. 천천히 가요."(실패 없음 · 흘린 수만 기록). 도착하면 끝.
  *  - 흔들림 띠는 글자 칸(괜찮아요 · 조심 · 흔들려요)이 있어 색만으로 알리지 않음
  *  - 턴 방식(시간 제한 끄기 · 자동 스캔): [한 걸음] · [멈춰서 숨 고르기]. [보기]: 저절로 알맞게(보기로 기록)
+ *  - 장면(단추 밖) 아무 곳이나 꾹 눌러도 [누르고 걷기]와 같고, 턴 방식이면 톡 = [한 걸음](2026-11-08 사용자, 작업대 확대 창의 그림 = 단추와 같은 규칙)
  * 옵션: { title, items: [{ icon, name }], to: '창가 자리', steps?: 턴 방식 걸음 수(기본 8) }
  * 돌려줌: { ok, attempts: 1, mistakes(흘린 수), spills, watched, ms }
  * 자동 플레이(?debug): window.__mgAuto(흘리지 않게) · window.__mgBad(한 번 흘리게 계속 걸음)
@@ -158,6 +159,7 @@ export async function tray(opts = {}) {
       draw();
       if (d >= 1) arrive();
     });
+    f.body.addEventListener('click', (e) => { if (!e.target.closest('button')) goB.click(); }); // 장면을 톡 = [한 걸음]
     restB.addEventListener('click', (e) => {
       e.stopPropagation();
       if (over || mode !== 'play') return;
@@ -177,6 +179,19 @@ export async function tray(opts = {}) {
     goB.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); release(); } });
     goB.addEventListener('click', (e) => e.stopPropagation());
     goB.addEventListener('contextmenu', (e) => e.preventDefault());
+    // 장면 아무 곳이나 꾹 눌러도 [누르고 걷기]와 같음(2026-11-08 사용자 "누르고 걷기도 화면 누르면 게이지 올라가게 해줘요.")
+    let scenePid = null;
+    const sceneUp = (e) => { if (e.pointerId !== scenePid) return; scenePid = null; release(); };
+    f.body.addEventListener('pointerdown', (e) => {
+      if (e.button > 0 || scenePid !== null || e.target.closest('button')) return;
+      scenePid = e.pointerId;
+      f.body.setPointerCapture?.(e.pointerId);
+      press(e);
+    });
+    f.body.addEventListener('pointerup', sceneUp);
+    f.body.addEventListener('pointercancel', sceneUp);
+    f.body.addEventListener('lostpointercapture', sceneUp);
+    f.body.addEventListener('contextmenu', (e) => e.preventDefault());
   }
   watchB.addEventListener('click', (e) => {
     e.stopPropagation();

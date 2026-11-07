@@ -728,7 +728,8 @@ export function shotNames(id, made, soFar = new Set()) {
     return { ids: [`pourin${suf}_${kind}`, `pourin_glass_${kind}`], fit: 1 };
   }
   if (id === 'water' && !esp && ['espresso', 'decaf'].includes(m.base)) return { ids: [`water${suf}_ice`, 'water_glass_ice'], fit: 1 };
-  if (id === 'ice' && soFar.has(m.base) && ['strawberry'].includes(m.base) && !r?.pitcher) return { ids: [m.cup === 'glass' ? `ice_${m.base}` : `ice${suf}_${m.base}`, m.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'], fit: 1 };
+  // 청이 깔린 컵 · 우린 보리차 위에 얼음(검수 13.90)
+  if (id === 'ice' && soFar.has(m.base) && ['strawberry', 'barley'].includes(m.base) && !r?.pitcher) return { ids: [m.cup === 'glass' ? `ice_${m.base}` : `ice${suf}_${m.base}`, m.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'], fit: 1 };
   const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || m.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
   if (id === 'pour') return { ids: [tint ? `pour${suf}_${tint}` : null, `pour${suf}_${esp ? 'latte' : 'milk'}`, `pour_${esp ? 'latte' : 'milk'}`], fit: tint ? 1 : 2 };
   if (id === 'water') return { ids: [esp ? `water${suf}` : `water${suf}_${m.base}`, `water${suf}`, 'water'], fit: 1 }; // 에스프레소가 없는 잔은 바탕 이름을 붙여, 없으면 그 잔의 물 붓기

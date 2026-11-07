@@ -1473,5 +1473,161 @@
       800
     ],
     "levels": 17
+  },
+  "hotwater_pitcher_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1006,
+      0,
+      916,
+      800
+    ],
+    "levels": 17
+  },
+  "hotwater_pitcher_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1006,
+      0,
+      916,
+      800
+    ],
+    "levels": 17
+  },
+  "pourin_glass_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17
+  },
+  "pourin_glass_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      612,
+      800
+    ],
+    "levels": 17
+  },
+  "pourin_plastic_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17
+  },
+  "pourin_plastic_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 17
+  },
+  "powder_pitcher_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      994,
+      34,
+      928,
+      766
+    ],
+    "levels": 5
+  },
+  "powder_pitcher_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      994,
+      34,
+      928,
+      766
+    ],
+    "levels": 5
+  },
+  "stir_pitcher_cocoa": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1332,
+      0,
+      590,
+      800
+    ],
+    "levels": 17
+  },
+  "whisk_pitcher_matcha": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1332,
+      124,
+      590,
+      676
+    ],
+    "levels": 17
+  },
+  "ice_barley": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1365,
+      0,
+      465,
+      800
+    ],
+    "levels": 9
+  },
+  "ice_plastic_barley": {
+    "size": [
+      2944,
+      800
+    ],
+    "rect": [
+      1336,
+      0,
+      565,
+      800
+    ],
+    "levels": 9
   }
 }

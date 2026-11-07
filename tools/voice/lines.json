@@ -1386,15 +1386,15 @@
   "ep": "spring_1"
  },
  {
-  "key": "2d6dc886",
+  "key": "68837383",
   "voice": "sys",
-  "text": "뜨거운 물 조금. [누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이 잠길 만큼만 붓고 손을 떼요.",
+  "text": "뜨거운 물 조금. [누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이나 가루가 잠길 만큼만 붓고 손을 떼요.",
   "ep": "spring_1"
  },
  {
-  "key": "66f8c097",
+  "key": "21d6e7aa",
   "voice": "sys",
-  "text": "뜨거운 물 조금. 청이 잠길 만큼 물이 차면 [멈추기]를 눌러요.",
+  "text": "뜨거운 물 조금. 청이나 가루가 잠길 만큼 물이 차면 [멈추기]를 눌러요.",
   "ep": "spring_1"
  },
  {
@@ -1647,6 +1647,18 @@
   "key": "6ca65f9a",
   "voice": "sys",
   "text": "피처에 녹인 유자청을 얼음 위에 부었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "50a8a7b2",
+  "voice": "sys",
+  "text": "피처에 푼 말차를 얼음 위에 부었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "aa1e1187",
+  "voice": "sys",
+  "text": "피처에 녹인 코코아를 얼음 위에 부었어요.",
   "ep": "spring_1"
  },
  {
@@ -6156,9 +6168,9 @@
   "ep": "summer_1"
  },
  {
-  "key": "1debdbf6",
+  "key": "b2150270",
   "voice": "jian",
-  "text": "아래에 청이 조금 남았네요.",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
   "ep": "summer_1"
  },
  {
@@ -17076,9 +17088,9 @@
   "ep": "free"
  },
  {
-  "key": "4826adc8",
+  "key": "3ea4a71e",
   "voice": "customer-stripe",
-  "text": "아래에 청이 조금 남았네요.",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
   "ep": "free"
  },
  {
@@ -18216,6 +18228,12 @@
   "ep": "free"
  },
  {
+  "key": "3a92f8a0",
+  "voice": "customer-olive",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
+  "ep": "free"
+ },
+ {
   "key": "5c915468",
   "voice": "customer-olive",
   "text": "거품이 조금 많네요.",
@@ -18252,6 +18270,12 @@
   "ep": "free"
  },
  {
+  "key": "26140e65",
+  "voice": "customer-coffee",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
+  "ep": "free"
+ },
+ {
   "key": "0b55d963",
   "voice": "customer-coffee",
   "text": "거품이 조금 많네요.",
@@ -18273,12 +18297,6 @@
   "key": "bd02d010",
   "voice": "customer-coffee",
   "text": "상큼해요. 고마워요.",
-  "ep": "free"
- },
- {
-  "key": "26e4f3c5",
-  "voice": "customer-coffee",
-  "text": "아래에 청이 조금 남았네요.",
   "ep": "free"
  },
  {
@@ -18402,9 +18420,9 @@
   "ep": "free"
  },
  {
-  "key": "bbbb6baa",
+  "key": "a155cd84",
   "voice": "customer-arms",
-  "text": "아래에 청이 조금 남았네요.",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
   "ep": "free"
  },
  {
@@ -19152,6 +19170,12 @@
   "ep": "free"
  },
  {
+  "key": "29a15e7e",
+  "voice": "customer-sporty",
+  "text": "아래에 덜 녹은 게 조금 있네요.",
+  "ep": "free"
+ },
+ {
   "key": "50eabd17",
   "voice": "customer-sporty",
   "text": "아이스로요.",
@@ -19356,12 +19380,6 @@
   "ep": "free"
  },
  {
-  "key": "4d6a3928",
-  "voice": "customer-sporty",
-  "text": "아래에 청이 조금 남았네요.",
-  "ep": "free"
- },
- {
   "key": "f5e7417a",
   "voice": "customer-coffee",
   "text": "아이스 라테요.",
@@ -19473,12 +19491,6 @@
   "key": "b1d90e14",
   "voice": "customer-olive",
   "text": "유자차, 차갑게요.",
-  "ep": "free"
- },
- {
-  "key": "84534886",
-  "voice": "customer-olive",
-  "text": "아래에 청이 조금 남았네요.",
   "ep": "free"
  },
  {
