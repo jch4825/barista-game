@@ -78,12 +78,17 @@ function growView(ep, say) {
   grow.receive(pay);
   const rise = grow.dayRise();
   const rows = [];
-  if (pay) {
+  if (pay?.none) {
+    // 봄 1일은 면접 날: 일하지 않아 받은 돈이 없음(검수 13.73). 두 문장은 grow.js 의 NO_PAY_SAY(음성 목록 tools/export-lines.mjs 도 같은 것을 씀)
+    rows.push(h('p', { class: 'rs-pay' }, h('i', { html: ICON('coin') }), h('span', { text: grow.NO_PAY_SAY.join(' ') })));
+    say.push(...grow.NO_PAY_SAY);
+  } else if (pay) {
     rows.push(h('p', { class: 'rs-pay' }, h('i', { html: ICON('coin') }),
       h('span', { text: `시급 ${grow.won(pay.hourly)} × ${pay.hours}시간 = ${grow.won(pay.wage)}` })));
     say.push(`오늘 받은 돈은 ${grow.won(pay.total)}이에요.`);
   }
-  rows.push(h('p', { class: 'rs-pay-total' }, h('b', { text: pay ? `오늘 받은 돈 ${grow.won(pay.total)}` : '오늘 받은 돈은 이미 받았어요' }), h('span', { text: `모은 돈 ${grow.won(grow.money())}` })));
+  const head = pay?.none ? '오늘 받은 돈 없음' : pay ? `오늘 받은 돈 ${grow.won(pay.total)}` : '오늘 받은 돈은 이미 받았어요';
+  rows.push(h('p', { class: 'rs-pay-total' }, h('b', { text: head }), h('span', { text: `모은 돈 ${grow.won(grow.money())}` })));
   for (const st of rise.stats) {
     const text = `${josa(st.name, '이/가')} ${st.level}단계가 되었어요! ${st.effect}`;
     rows.push(h('p', { class: 'rs-rise' }, h('i', { html: ICON(st.icon) }), h('span', { text })));

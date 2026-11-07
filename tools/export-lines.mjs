@@ -31,7 +31,7 @@ const { REGULARS } = await imp('js/data/regulars.js');
 const { albumLines, eyesLines, creditSpeech } = await imp('js/data/eyes.js');
 const { metSpeech } = await imp('js/screens/result.js');
 const { usualOf } = await imp('js/data/eyes.js');
-const { STATS, MAX_LEVEL, RANKS, won, PAY_HOURS } = await imp('js/core/grow.js');
+const { STATS, MAX_LEVEL, RANKS, won, PAY_HOURS, NO_PAY_SAY } = await imp('js/core/grow.js');
 const { josa } = await imp('js/core/text.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
 const cast = JSON.parse(fs.readFileSync(path.join(root, 'tools', 'voice', 'voice_cast.json'), 'utf8'));
@@ -199,6 +199,7 @@ for (const who of Object.keys(REGULARS)) for (const sc of [0, 1, 2]) add('sys', 
 for (const sk of Object.values(SKILLS)) for (const lv of Object.values(LEVELS)) add('sys', `${sk.name}, ${lv.name}.`, 'result');
 // 하루 끝 '오늘의 일'(result.js growView): 받은 돈(해마다 시급 × 6시간) · 능력치가 오른 말(두 문장: tts 가 문장마다 나눠 읽음) · 새 단계(검수 13.63: 모두 브라우저 음성이었음)
 for (const hourly of Object.values(CONFIG.WAGE_TABLE)) add('sys', `오늘 받은 돈은 ${won(hourly * PAY_HOURS)}이에요.`, 'result');
+for (const t of NO_PAY_SAY) add('sys', t, 'result'); // 봄 1일(면접 날)은 받은 돈이 없음(검수 13.73)
 for (const st of STATS) {
   add('sys', st.effect, 'result');
   for (let lv = 2; lv <= MAX_LEVEL; lv++) add('sys', `${josa(st.name, '이/가')} ${lv}단계가 되었어요!`, 'result');

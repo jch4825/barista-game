@@ -8,7 +8,7 @@
  * 저장 칸은 store 의 grow(newGrow · normalizeGrow · mergeGrow).
  */
 
-import { store } from './store.js';
+import { store, NO_PAY_DAYS } from './store.js';
 import { currentWage } from '../config.js';
 
 export const STATS = [
@@ -27,6 +27,8 @@ export const UNLOCK = { memoryUsual: 3, serviceAsk: 3 };
 
 /** 하루에 일한 시간(결과 화면의 시급 계산). 가게는 아침 8시에 열고, 지은은 손님이 많은 6시간을 일함 */
 export const PAY_HOURS = 6;
+/** 일급이 없는 날(봄 1일 면접)의 하루 끝 말: 문장마다 음성 파일(tools/export-lines.mjs) */
+export const NO_PAY_SAY = ['오늘은 면접을 본 날이라 받은 돈이 없어요.', '내일부터 일한 만큼 받아요.'];
 
 export const RANKS = ['견습 바리스타', '새내기 바리스타', '바리스타', '마을의 바리스타', '우리 카페의 바리스타'];
 const SEASON_LAST = ['spring_7', 'summer_7', 'autumn_7', 'winter_7'];
@@ -115,8 +117,9 @@ export function rank() {
   return { index: n, name: RANKS[n] };
 }
 
-/** 오늘의 일급(시급 × 6시간, 팁은 없음). 이미 받은 날이면 null */
+/** 오늘의 일급(시급 × 6시간, 팁은 없음). 이미 받은 날이면 null, 일급이 없는 날(봄 1일 면접, store 의 NO_PAY_DAYS)이면 { none: true } */
 export function payFor(key) {
+  if (NO_PAY_DAYS.includes(key)) return { none: true };
   const k = `${store.year()}:${key}`;
   if (store.grow().paid[k] !== undefined) return null;
   const { hourly } = currentWage();
@@ -125,7 +128,7 @@ export function payFor(key) {
 }
 
 export function receive(pay) {
-  if (!pay) return;
+  if (!pay || pay.none) return;
   store.updateGrow((g) => {
     if (g.paid[pay.key] !== undefined) return;
     g.paid[pay.key] = pay.total;

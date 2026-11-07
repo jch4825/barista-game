@@ -20292,6 +20292,18 @@
   "ep": "result"
  },
  {
+  "key": "bf48b5f5",
+  "voice": "sys",
+  "text": "오늘은 면접을 본 날이라 받은 돈이 없어요.",
+  "ep": "result"
+ },
+ {
+  "key": "86e92e1c",
+  "voice": "sys",
+  "text": "내일부터 일한 만큼 받아요.",
+  "ep": "result"
+ },
+ {
   "key": "713aff80",
   "voice": "sys",
   "text": "알맞아요 칸이 조금씩 넓어져요.",

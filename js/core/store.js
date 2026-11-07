@@ -112,6 +112,8 @@ const obj = (v) => (isObj(v) ? v : {});
 const list = (v) => (Array.isArray(v) ? v : []);
 const ids = (v) => list(v).filter((x) => typeof x === 'string');
 const num = (v, d = 0) => (Number.isFinite(v) ? v : d);
+/** 일급이 없는 날: 봄 1일은 면접을 본 날이라 일하지 않음(2026-11-07 사용자 "당연히 첫날에는 월급을 받지 않는데", 검수 13.73) */
+export const NO_PAY_DAYS = ['spring_1'];
 
 /**
  * 파일에서 읽은 학생 한 명 → 이 판의 모양(없는 칸은 기본값, 모양이 다른 칸은 고침). id 가 이상하면 null
@@ -163,14 +165,24 @@ function normalizeGrow(raw) {
   const g = obj(raw);
   const base = newGrow();
   const nums = (v) => Object.fromEntries(Object.entries(obj(v)).filter(([, n]) => Number.isFinite(n)));
+  const paid = nums(g.paid);
+  let money = Math.max(0, num(g.money));
+  let earned = Math.max(0, num(g.earned));
+  for (const k of Object.keys(paid)) {
+    if (!NO_PAY_DAYS.includes(k.slice(k.indexOf(':') + 1))) continue;
+    // 예전 판(13.73 전)에서 첫날 받은 돈은 빼 둠: 받은 날 기록을 지우니 한 번만 뺌
+    money = Math.max(0, money - paid[k]);
+    earned = Math.max(0, earned - paid[k]);
+    delete paid[k];
+  }
   return {
     ...g,
     counts: nums(g.counts),
     skills: nums(g.skills),
     handoff: obj(g.handoff),
-    money: Math.max(0, num(g.money)),
-    earned: Math.max(0, num(g.earned)),
-    paid: nums(g.paid),
+    money,
+    earned,
+    paid,
     owned: ids(g.owned),
     apron: typeof g.apron === 'string' ? g.apron : base.apron,
     perfect: ids(g.perfect),
