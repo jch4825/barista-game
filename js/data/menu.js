@@ -196,6 +196,16 @@ export const HAND_SKILLS = {
     labels: { low: '적어요', good: '알맞아요', high: '많아요' },
     react: { low: '조금 진하네요.', high: '조금 싱겁네요.' },
   },
+  hotwater: { // 아이스 유자차: 피처의 청에 뜨거운 물을 조금(청이 잠길 만큼). 컵에 바로 부으면 유리컵이 깨지거나 플라스틱 컵이 휨(2026-11-07 사용자, 검수 13.81)
+    name: '뜨거운 물 조금', act: 'hold', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'pour', temp: 'iced',
+    howto: '[누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이 잠길 만큼만 붓고 손을 떼요.',
+    howtoTurn: '청이 잠길 만큼 물이 차면 [멈추기]를 눌러요.',
+    howtoCue: '[누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 화면에 "지금!"이 뜨면 손을 떼요.',
+    safety: '주전자와 김은 뜨거워요. 손잡이만 잡아요.',
+    zone: [0.25, 0.5], // 블렌더 컷 hotwater_pitcher_yuja: 띠 0.25 ~ 0.5 = 청이 잠길 만큼, 1 = 피처 절반 넘게
+    labels: { low: '적어요', good: '알맞아요', high: '많아요' },
+    react: { low: '아래에 청이 조금 남았네요.', high: '조금 싱겁네요.' },
+  },
   boil: {
     name: '물 끓이기', act: 'wait', of: 'water', obj: 'obj_kettle', icon: 'water', sfx: 'bubbles', temp: 'hot', ms: 4600,
     howto: '물이 끓기를 기다려요. 보글보글 끓으면 [지금!]을 눌러요.',
@@ -282,6 +292,7 @@ export const RECIPES = {
   americano: {
     name: '아메리카노', icon: 'coffee',
     base: 'espresso', adds: ['water'], temps: ['iced', 'hot'], steps: ['ice', 'grind', 'tamp', 'extract', 'water'],
+    iced: ['ice', 'water', 'grind', 'tamp', 'extract', 'pourin:espresso'], // 물 · 얼음이 먼저, 샷은 샷잔에 내려 옮겨 부음(검수 13.81)
     look: { mug: 'cup_mug_americano', glass: 'cup_glass_ice', plastic: 'cup_plastic_americano' },
     color: '#4A2C1B',
     thanks: '향이 좋네요. 고마워요.',
@@ -290,6 +301,7 @@ export const RECIPES = {
   latte: {
     name: '라테', icon: 'coffee',
     base: 'espresso', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
+    iced: ['ice', 'pour', 'tamp', 'extract', 'pourin:espresso'], // 얼음 · 우유가 먼저, 샷은 위에 부음(검수 13.81)
     look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' },
     art: { heart: 'cup_mug_heart', tulip: 'cup_mug_tulip', leaf: 'cup_mug_leaf' },
     color: '#C79A6B', foam: '#F4E7D3',
@@ -300,6 +312,7 @@ export const RECIPES = {
   vanilla_latte: {
     name: '바닐라 라테', icon: 'coffee',
     base: 'espresso', adds: ['milk', 'syrup'], temps: ['hot', 'iced'], steps: ['syrup', 'ice', 'tamp', 'extract', 'steam', 'pour'],
+    iced: ['syrup', 'ice', 'pour', 'tamp', 'extract', 'pourin:espresso'],
     look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, art: { heart: 'cup_mug_heart' }, // 겉보기는 라테와 같음(2026-11-01)
     color: '#CFA373', foam: '#F6EAD6',
     thanks: '딱 좋게 다네요. 고마워요.',
@@ -308,6 +321,7 @@ export const RECIPES = {
   decaf_latte: {
     name: '디카페인 라테', icon: 'coffee',
     base: 'decaf', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
+    iced: ['ice', 'pour', 'tamp', 'extract', 'pourin:decaf'],
     look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, // 겉보기는 라테와 같음
     color: '#C49A70', foam: '#F4E7D3',
     thanks: '이거면 마음 놓고 마셔요. 고마워요.',
@@ -348,7 +362,9 @@ export const RECIPES = {
   },
   yuja_tea: {
     name: '유자차', icon: 'tea',
-    base: 'yuja', adds: ['water'], temps: ['hot', 'iced'], steps: ['ice', 'boil', 'jam', 'water', 'stir'],
+    base: 'yuja', adds: ['water'], temps: ['hot', 'iced'], steps: ['boil', 'jam', 'water', 'stir'],
+    // 아이스: 피처에 청 → 뜨거운 물 조금 → 저어 녹임 → 컵에 얼음 → 녹인 청을 얼음 위에 → 찬물(카페 레시피, 2026-11-07 사용자 · 검수 13.81)
+    iced: ['jam', 'hotwater', 'stir', 'ice', 'pourin:yuja', 'water'], pitcher: ['jam', 'hotwater', 'stir'],
     look: { mug: 'cup_mug_yuja', glass: 'cup_glass_yuja', plastic: 'cup_plastic_yuja' },
     color: '#F2C230', tag: 'yellow',
     thanks: '상큼해요. 고마워요.',
@@ -364,7 +380,7 @@ export const RECIPES = {
   },
   strawberry_milk: {
     name: '딸기우유', icon: 'juice',
-    base: 'strawberry', adds: ['milk'], temps: ['iced'], steps: ['ice', 'jam', 'pour', 'stir'],
+    base: 'strawberry', adds: ['milk'], temps: ['iced'], steps: ['jam', 'ice', 'pour', 'stir'], // 청이 먼저(검수 13.81)
     look: { glass: 'cup_glass_strawberry', plastic: 'cup_plastic_strawberry' },
     color: '#F7B6C8', tag: 'pink',
     thanks: '달콤해요. 고마워요.',
@@ -395,6 +411,14 @@ export const PANTRY = {
 
 export const RECIPE_STEPS = ['cup', 'base', 'adds', 'temp'];
 export const STEP_NAMES = { cup: '컵', base: '바탕', adds: '더하기', temp: '온도' };
+/** 옮겨 붓기(레시피 steps 의 'pourin:재료', 손 동작 없이 저절로): 샷잔의 에스프레소 · 피처에 녹인 청을 컵에(검수 13.81) */
+export const POURIN_SAY = {
+  espresso: '샷잔의 에스프레소를 컵에 부었어요.',
+  decaf: '샷잔의 디카페인 에스프레소를 컵에 부었어요.',
+  yuja: '피처에 녹인 유자청을 얼음 위에 부었어요.',
+};
+/** 그 메뉴 · 온도의 손 동작 차례(아이스는 iced 가 있으면 그것) */
+export const stepsOf = (r, temp) => (temp === 'iced' && r.iced) || r.steps;
 export const MAX_ADDS = 2;
 
 /* ------------------------------------------------------------------ */
@@ -601,6 +625,8 @@ export function skillInLevel(id, level = 'normal') {
 
 /** 레시피 steps 의 'auto:재료'(손 동작 없이 그 자리에서 넣음) */
 const isAuto = (id) => String(id).startsWith('auto:');
+/** 레시피 steps 의 'pourin:재료'(샷잔 · 피처에서 컵으로 옮겨 붓기, 손 동작 없이) */
+const isPourin = (id) => String(id).startsWith('pourin:');
 
 /** 이 온도에서 하는 손 동작인가 */
 const skillInTemp = (id, temp) => !HAND_SKILLS[id]?.temp || HAND_SKILLS[id].temp === temp;
@@ -626,11 +652,16 @@ function derivedSkills(made) {
 export function prepSteps(made = {}, level = 'normal') {
   const menu = findMenu(made);
   const ings = [...new Set([made.base, ...(made.adds || [])])].filter((id) => INGREDIENTS[id]);
-  const want = (menu ? RECIPES[menu].steps : derivedSkills(made))
-    .filter((id) => isAuto(id) || (HAND_SKILLS[id] && skillInLevel(id, level) && skillInTemp(id, made.temp)));
+  const want = (menu ? stepsOf(RECIPES[menu], made.temp) : derivedSkills(made))
+    .filter((id) => isAuto(id) || isPourin(id) || (HAND_SKILLS[id] && skillInLevel(id, level) && skillInTemp(id, made.temp)));
   const steps = [];
   const covered = new Set();
   for (const id of want) {
+    if (isPourin(id)) { // 옮겨 붓기: 그 재료가 잔에 있을 때만
+      const x = id.slice(7);
+      if (ings.includes(x)) steps.push({ pourin: x });
+      continue;
+    }
     if (isAuto(id)) { // 'auto:mix': 손 동작 없이 이 자리에서 넣음
       const x = id.slice(5);
       if (ings.includes(x)) { covered.add(x); steps.push({ auto: x }); }
@@ -682,6 +713,16 @@ export function shotNames(id, made, soFar = new Set()) {
   const m = made || {};
   const suf = SHOT_CUP[m.cup] ?? '';
   const esp = soFar.has('espresso') || soFar.has('decaf');
+  // 검수 13.81: 피처에서 하는 손 동작(아이스 유자차: 청 · 뜨거운 물 조금 · 젓기) · 옮겨 붓기 · 물 먼저(아이스 아메리카노) · 청이 깔린 컵의 얼음(딸기우유)
+  const r = RECIPES[findMenu(m)];
+  const pitcher = m.temp === 'iced' && r?.pitcher?.includes(id);
+  if (pitcher || id === 'hotwater') return { ids: [`${id}_pitcher_${m.base}`], fit: 1 };
+  if (id === 'pourin') {
+    const kind = ['espresso', 'decaf'].includes(m.base) ? (soFar.has('milk') ? 'latte' : 'americano') : m.base;
+    return { ids: [`pourin${suf}_${kind}`, `pourin_glass_${kind}`], fit: 1 };
+  }
+  if (id === 'water' && !esp && ['espresso', 'decaf'].includes(m.base)) return { ids: [`water${suf}_ice`, 'water_glass_ice'], fit: 1 };
+  if (id === 'ice' && soFar.has(m.base) && ['strawberry'].includes(m.base) && !r?.pitcher) return { ids: [m.cup === 'glass' ? `ice_${m.base}` : `ice${suf}_${m.base}`, m.cup === 'glass' ? 'ice' : `ice${suf}`, 'ice'], fit: 1 };
   const tint = ['strawberry', 'matcha', 'cocoa'].find((x) => soFar.has(x) || m.base === x); // 딸기청 · 코코아는 붓기 뒤 젓기가 마지막 손 동작이라 붓는 동안엔 soFar 에 아직 없음
   if (id === 'pour') return { ids: [tint ? `pour${suf}_${tint}` : null, `pour${suf}_${esp ? 'latte' : 'milk'}`, `pour_${esp ? 'latte' : 'milk'}`], fit: tint ? 1 : 2 };
   if (id === 'water') return { ids: [esp ? `water${suf}` : `water${suf}_${m.base}`, `water${suf}`, 'water'], fit: 1 }; // 에스프레소가 없는 잔은 바탕 이름을 붙여, 없으면 그 잔의 물 붓기
@@ -748,7 +789,9 @@ export function menuProblems() {
     for (const a of r.adds) if (!INGREDIENTS[a]?.roles.includes('add')) errs.push(`${id}: 더하기로 못 쓰는 재료 ${a}`);
     if (r.adds.length > MAX_ADDS) errs.push(`${id}: 더하기는 ${MAX_ADDS}개까지`);
     if (!r.temps?.length || r.temps.some((t) => !TEMPS[t])) errs.push(`${id}: temps 가 비었거나 없는 온도`);
-    for (const s of r.steps || []) if (isAuto(s) ? !INGREDIENTS[s.slice(5)] : !HAND_SKILLS[s]) errs.push(`${id}: 없는 손 동작 ${s}`);
+    for (const s of [...(r.steps || []), ...(r.iced || [])]) if (isAuto(s) ? !INGREDIENTS[s.slice(5)] : isPourin(s) ? !POURIN_SAY[s.slice(7)] : !HAND_SKILLS[s]) errs.push(`${id}: 없는 손 동작 ${s}`);
+    if (r.iced && !r.temps.includes('iced')) errs.push(`${id}: iced 차례가 있는데 아이스가 없음`);
+    for (const s of r.pitcher || []) if (!(r.iced || []).includes(s)) errs.push(`${id}: pitcher 의 ${s} 가 아이스 차례에 없음`);
     if (r.tag && !COLORS[r.tag]) errs.push(`${id}: 없는 색 ${r.tag}`);
     // 한 잔 4~6동작(✅ Q-R3, 보통 단계): 믹스커피 · 보리차처럼 짧은 잔은 그대로 둠
     for (const t of r.temps) {

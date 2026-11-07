@@ -125,7 +125,7 @@ for (const r of Object.values(RECIPES)) for (const temp of r.temps) for (const s
     const steps = prepSteps(made, level);
     const soFar = new Set();
     steps.forEach((st, i) => {
-      const id = st.skill || (st.auto === 'water' ? 'water' : null); // 저절로 붓는 물도 컷으로 차오름(brew.js autoShot)
+      const id = st.skill || (st.auto === 'water' ? 'water' : null) || (st.pourin ? 'pourin' : null); // 저절로 붓는 물 · 옮겨 붓기도 컷으로 차오름(brew.js autoShot)
       if (id) {
         const { ids, fit } = shotNames(id, made, soFar);
         const at = ids.findIndex((x) => x && shots[x]);
@@ -135,6 +135,7 @@ for (const r of Object.values(RECIPES)) for (const temp of r.temps) for (const s
         if (got && st.skill === 'ice' && !shots[got].drag) note(dragMiss, got, { kind: 'drag_ice', uses: new Set() }, useOf(r, made));
       }
       if (st.auto) soFar.add(st.auto);
+      else if (st.pourin) soFar.add(st.pourin);
       else if (!steps.slice(i + 1).some((x) => x.ing === st.ing)) soFar.add(st.ing);
     });
   }

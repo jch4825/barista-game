@@ -1386,6 +1386,30 @@
   "ep": "spring_1"
  },
  {
+  "key": "2d6dc886",
+  "voice": "sys",
+  "text": "뜨거운 물 조금. [누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 청이 잠길 만큼만 붓고 손을 떼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "66f8c097",
+  "voice": "sys",
+  "text": "뜨거운 물 조금. 청이 잠길 만큼 물이 차면 [멈추기]를 눌러요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "653814f0",
+  "voice": "sys",
+  "text": "뜨거운 물 조금. [누르고 있기]를 꾹 누르면 피처에 뜨거운 물을 부어요. 화면에 \"지금!\"이 뜨면 손을 떼요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "6124e43f",
+  "voice": "sys",
+  "text": "주전자와 김은 뜨거워요. 손잡이만 잡아요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "c0c87a98",
   "voice": "sys",
   "text": "물 끓이기. 물이 끓기를 기다려요. 보글보글 끓으면 [지금!]을 눌러요.",
@@ -1395,12 +1419,6 @@
   "key": "d1f7e803",
   "voice": "sys",
   "text": "물 끓이기. [기다리기]를 누르면 물이 데워져요. 끓으면 [지금!]을 눌러요.",
-  "ep": "spring_1"
- },
- {
-  "key": "6124e43f",
-  "voice": "sys",
-  "text": "주전자와 김은 뜨거워요. 손잡이만 잡아요.",
   "ep": "spring_1"
  },
  {
@@ -1614,6 +1632,24 @@
   "ep": "spring_1"
  },
  {
+  "key": "22f9395b",
+  "voice": "sys",
+  "text": "샷잔의 에스프레소를 컵에 부었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "b6214759",
+  "voice": "sys",
+  "text": "샷잔의 디카페인 에스프레소를 컵에 부었어요.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "6ca65f9a",
+  "voice": "sys",
+  "text": "피처에 녹인 유자청을 얼음 위에 부었어요.",
+  "ep": "spring_1"
+ },
+ {
   "key": "2365c93b",
   "voice": "jieun",
   "text": "이제 원두 갈기는 눈 감고도 할 수 있겠다.",
@@ -1695,6 +1731,12 @@
   "key": "c8693605",
   "voice": "jieun",
   "text": "이제 물 붓기는 눈 감고도 할 수 있겠다.",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3e5569fc",
+  "voice": "jieun",
+  "text": "이제 뜨거운 물 조금은 눈 감고도 할 수 있겠다.",
   "ep": "spring_1"
  },
  {
@@ -2832,18 +2874,6 @@
   "ep": "spring_2"
  },
  {
-  "key": "6f023ca0",
-  "voice": "geum",
-  "text": "조금 연하네요.",
-  "ep": "spring_2"
- },
- {
-  "key": "86ea3e18",
-  "voice": "geum",
-  "text": "조금 쓰네요.",
-  "ep": "spring_2"
- },
- {
   "key": "190229c4",
   "voice": "geum",
   "text": "조금 진하네요.",
@@ -2853,6 +2883,18 @@
   "key": "f5a6e6a4",
   "voice": "geum",
   "text": "조금 싱겁네요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "6f023ca0",
+  "voice": "geum",
+  "text": "조금 연하네요.",
+  "ep": "spring_2"
+ },
+ {
+  "key": "86ea3e18",
+  "voice": "geum",
+  "text": "조금 쓰네요.",
   "ep": "spring_2"
  },
  {
@@ -3600,18 +3642,6 @@
   "ep": "spring_3"
  },
  {
-  "key": "55370159",
-  "voice": "do",
-  "text": "조금 연하네요.",
-  "ep": "spring_3"
- },
- {
-  "key": "9cfe6f27",
-  "voice": "do",
-  "text": "조금 쓰네요.",
-  "ep": "spring_3"
- },
- {
   "key": "318cefcd",
   "voice": "do",
   "text": "조금 진하네요.",
@@ -3621,6 +3651,18 @@
   "key": "c58f1399",
   "voice": "do",
   "text": "조금 싱겁네요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "55370159",
+  "voice": "do",
+  "text": "조금 연하네요.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "9cfe6f27",
+  "voice": "do",
+  "text": "조금 쓰네요.",
   "ep": "spring_3"
  },
  {
@@ -3924,18 +3966,6 @@
   "ep": "spring_4"
  },
  {
-  "key": "3ceb4605",
-  "voice": "student",
-  "text": "조금 연하네요.",
-  "ep": "spring_4"
- },
- {
-  "key": "815be0f3",
-  "voice": "student",
-  "text": "조금 쓰네요.",
-  "ep": "spring_4"
- },
- {
   "key": "e10cd9f1",
   "voice": "student",
   "text": "조금 진하네요.",
@@ -3945,6 +3975,18 @@
   "key": "f9d03b2d",
   "voice": "student",
   "text": "조금 싱겁네요.",
+  "ep": "spring_4"
+ },
+ {
+  "key": "3ceb4605",
+  "voice": "student",
+  "text": "조금 연하네요.",
+  "ep": "spring_4"
+ },
+ {
+  "key": "815be0f3",
+  "voice": "student",
+  "text": "조금 쓰네요.",
   "ep": "spring_4"
  },
  {
@@ -4428,18 +4470,6 @@
   "ep": "spring_5"
  },
  {
-  "key": "5a3515ab",
-  "voice": "agent",
-  "text": "조금 연하네요.",
-  "ep": "spring_5"
- },
- {
-  "key": "03482cad",
-  "voice": "agent",
-  "text": "조금 쓰네요.",
-  "ep": "spring_5"
- },
- {
   "key": "e1d3ae77",
   "voice": "agent",
   "text": "조금 진하네요.",
@@ -4449,6 +4479,18 @@
   "key": "e9f3e61b",
   "voice": "agent",
   "text": "조금 싱겁네요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "5a3515ab",
+  "voice": "agent",
+  "text": "조금 연하네요.",
+  "ep": "spring_5"
+ },
+ {
+  "key": "03482cad",
+  "voice": "agent",
+  "text": "조금 쓰네요.",
   "ep": "spring_5"
  },
  {
@@ -5112,18 +5154,6 @@
   "ep": "spring_6"
  },
  {
-  "key": "e4faaeee",
-  "voice": "customer-sporty",
-  "text": "얼음이 조금 적네요.",
-  "ep": "spring_6"
- },
- {
-  "key": "65ebc143",
-  "voice": "customer-sporty",
-  "text": "얼음이 조금 많네요.",
-  "ep": "spring_6"
- },
- {
   "key": "6740dbd9",
   "voice": "customer-sporty",
   "text": "조금 덜 다네요.",
@@ -5133,6 +5163,18 @@
   "key": "e5ae7572",
   "voice": "customer-sporty",
   "text": "조금 많이 다네요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "e4faaeee",
+  "voice": "customer-sporty",
+  "text": "얼음이 조금 적네요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "65ebc143",
+  "voice": "customer-sporty",
+  "text": "얼음이 조금 많네요.",
   "ep": "spring_6"
  },
  {
@@ -5184,18 +5226,6 @@
   "ep": "spring_6"
  },
  {
-  "key": "00200af2",
-  "voice": "customer-sporty",
-  "text": "조금 연하네요.",
-  "ep": "spring_6"
- },
- {
-  "key": "f04bee86",
-  "voice": "customer-sporty",
-  "text": "조금 쓰네요.",
-  "ep": "spring_6"
- },
- {
   "key": "fc41b506",
   "voice": "customer-sporty",
   "text": "조금 진하네요.",
@@ -5205,6 +5235,18 @@
   "key": "1c597ff6",
   "voice": "customer-sporty",
   "text": "조금 싱겁네요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "00200af2",
+  "voice": "customer-sporty",
+  "text": "조금 연하네요.",
+  "ep": "spring_6"
+ },
+ {
+  "key": "f04bee86",
+  "voice": "customer-sporty",
+  "text": "조금 쓰네요.",
   "ep": "spring_6"
  },
  {
@@ -5760,18 +5802,6 @@
   "ep": "summer_1"
  },
  {
-  "key": "dee81946",
-  "voice": "yeonwoo",
-  "text": "조금 연하네요.",
-  "ep": "summer_1"
- },
- {
-  "key": "092638ba",
-  "voice": "yeonwoo",
-  "text": "조금 쓰네요.",
-  "ep": "summer_1"
- },
- {
   "key": "0c13856a",
   "voice": "yeonwoo",
   "text": "양이 조금 적네요.",
@@ -5781,6 +5811,18 @@
   "key": "fa1e144b",
   "voice": "yeonwoo",
   "text": "조금 넘쳤네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "dee81946",
+  "voice": "yeonwoo",
+  "text": "조금 연하네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "092638ba",
+  "voice": "yeonwoo",
+  "text": "조금 쓰네요.",
   "ep": "summer_1"
  },
  {
@@ -5856,18 +5898,6 @@
   "ep": "summer_1"
  },
  {
-  "key": "e53cdcad",
-  "voice": "dohyun",
-  "text": "조금 연하네요.",
-  "ep": "summer_1"
- },
- {
-  "key": "e5e4d94b",
-  "voice": "dohyun",
-  "text": "조금 쓰네요.",
-  "ep": "summer_1"
- },
- {
   "key": "e2939559",
   "voice": "dohyun",
   "text": "조금 진하네요.",
@@ -5877,6 +5907,18 @@
   "key": "8f7e0c75",
   "voice": "dohyun",
   "text": "조금 싱겁네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "e53cdcad",
+  "voice": "dohyun",
+  "text": "조금 연하네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "e5e4d94b",
+  "voice": "dohyun",
+  "text": "조금 쓰네요.",
   "ep": "summer_1"
  },
  {
@@ -6102,18 +6144,6 @@
   "ep": "summer_1"
  },
  {
-  "key": "636d30a0",
-  "voice": "jian",
-  "text": "얼음이 조금 적네요.",
-  "ep": "summer_1"
- },
- {
-  "key": "a9cb6229",
-  "voice": "jian",
-  "text": "얼음이 조금 많네요.",
-  "ep": "summer_1"
- },
- {
   "key": "9a5a2333",
   "voice": "jian",
   "text": "조금 덜 다네요.",
@@ -6126,9 +6156,9 @@
   "ep": "summer_1"
  },
  {
-  "key": "62e84a64",
+  "key": "1debdbf6",
   "voice": "jian",
-  "text": "조금 진하네요.",
+  "text": "아래에 청이 조금 남았네요.",
   "ep": "summer_1"
  },
  {
@@ -6147,6 +6177,24 @@
   "key": "9093cadc",
   "voice": "jian",
   "text": "조금 흘렀네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "636d30a0",
+  "voice": "jian",
+  "text": "얼음이 조금 적네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "a9cb6229",
+  "voice": "jian",
+  "text": "얼음이 조금 많네요.",
+  "ep": "summer_1"
+ },
+ {
+  "key": "62e84a64",
+  "voice": "jian",
+  "text": "조금 진하네요.",
   "ep": "summer_1"
  },
  {
@@ -10032,18 +10080,6 @@
   "ep": "autumn_2"
  },
  {
-  "key": "510491f5",
-  "voice": "customer-coffee",
-  "text": "조금 연하네요.",
-  "ep": "autumn_2"
- },
- {
-  "key": "80023d03",
-  "voice": "customer-coffee",
-  "text": "조금 쓰네요.",
-  "ep": "autumn_2"
- },
- {
   "key": "25b62b21",
   "voice": "customer-coffee",
   "text": "조금 진하네요.",
@@ -10053,6 +10089,18 @@
   "key": "ce0d4b1d",
   "voice": "customer-coffee",
   "text": "조금 싱겁네요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "510491f5",
+  "voice": "customer-coffee",
+  "text": "조금 연하네요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "80023d03",
+  "voice": "customer-coffee",
+  "text": "조금 쓰네요.",
   "ep": "autumn_2"
  },
  {
@@ -10254,18 +10302,6 @@
   "ep": "autumn_3"
  },
  {
-  "key": "3ab920a6",
-  "voice": "customer",
-  "text": "조금 연하네요.",
-  "ep": "autumn_3"
- },
- {
-  "key": "1b0e071a",
-  "voice": "customer",
-  "text": "조금 쓰네요.",
-  "ep": "autumn_3"
- },
- {
   "key": "886fa5d2",
   "voice": "customer",
   "text": "조금 진하네요.",
@@ -10275,6 +10311,18 @@
   "key": "ad924b12",
   "voice": "customer",
   "text": "조금 싱겁네요.",
+  "ep": "autumn_3"
+ },
+ {
+  "key": "3ab920a6",
+  "voice": "customer",
+  "text": "조금 연하네요.",
+  "ep": "autumn_3"
+ },
+ {
+  "key": "1b0e071a",
+  "voice": "customer",
+  "text": "조금 쓰네요.",
   "ep": "autumn_3"
  },
  {
@@ -10788,18 +10836,6 @@
   "ep": "autumn_4"
  },
  {
-  "key": "0877cb52",
-  "voice": "customer-stripe",
-  "text": "조금 연하네요.",
-  "ep": "autumn_4"
- },
- {
-  "key": "78dfc066",
-  "voice": "customer-stripe",
-  "text": "조금 쓰네요.",
-  "ep": "autumn_4"
- },
- {
   "key": "e0f2a1e6",
   "voice": "customer-stripe",
   "text": "조금 진하네요.",
@@ -10809,6 +10845,18 @@
   "key": "6ece8d96",
   "voice": "customer-stripe",
   "text": "조금 싱겁네요.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "0877cb52",
+  "voice": "customer-stripe",
+  "text": "조금 연하네요.",
+  "ep": "autumn_4"
+ },
+ {
+  "key": "78dfc066",
+  "voice": "customer-stripe",
+  "text": "조금 쓰네요.",
   "ep": "autumn_4"
  },
  {
@@ -16548,18 +16596,6 @@
   "ep": "free"
  },
  {
-  "key": "c49f4c30",
-  "voice": "customer-olive",
-  "text": "조금 연하네요.",
-  "ep": "free"
- },
- {
-  "key": "5d43e7c8",
-  "voice": "customer-olive",
-  "text": "조금 쓰네요.",
-  "ep": "free"
- },
- {
   "key": "1bcc9614",
   "voice": "customer-olive",
   "text": "양이 조금 적네요.",
@@ -16569,6 +16605,18 @@
   "key": "3401b549",
   "voice": "customer-olive",
   "text": "조금 넘쳤네요.",
+  "ep": "free"
+ },
+ {
+  "key": "c49f4c30",
+  "voice": "customer-olive",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "5d43e7c8",
+  "voice": "customer-olive",
+  "text": "조금 쓰네요.",
   "ep": "free"
  },
  {
@@ -17028,6 +17076,12 @@
   "ep": "free"
  },
  {
+  "key": "4826adc8",
+  "voice": "customer-stripe",
+  "text": "아래에 청이 조금 남았네요.",
+  "ep": "free"
+ },
+ {
   "key": "d3aeb921",
   "voice": "customer-stripe",
   "text": "아이스 라테요.",
@@ -17286,18 +17340,6 @@
   "ep": "free"
  },
  {
-  "key": "34d56f95",
-  "voice": "sora",
-  "text": "얼음이 조금 적네요.",
-  "ep": "free"
- },
- {
-  "key": "200b5a04",
-  "voice": "sora",
-  "text": "얼음이 조금 많네요.",
-  "ep": "free"
- },
- {
   "key": "21769b9e",
   "voice": "sora",
   "text": "조금 덜 다네요.",
@@ -17307,6 +17349,18 @@
   "key": "f8c523ab",
   "voice": "sora",
   "text": "조금 많이 다네요.",
+  "ep": "free"
+ },
+ {
+  "key": "34d56f95",
+  "voice": "sora",
+  "text": "얼음이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "200b5a04",
+  "voice": "sora",
+  "text": "얼음이 조금 많네요.",
   "ep": "free"
  },
  {
@@ -17490,18 +17544,6 @@
   "ep": "free"
  },
  {
-  "key": "484d2cb2",
-  "voice": "minjae",
-  "text": "조금 연하네요.",
-  "ep": "free"
- },
- {
-  "key": "e8611246",
-  "voice": "minjae",
-  "text": "조금 쓰네요.",
-  "ep": "free"
- },
- {
   "key": "b3b748c6",
   "voice": "minjae",
   "text": "조금 진하네요.",
@@ -17511,6 +17553,18 @@
   "key": "79a70cb6",
   "voice": "minjae",
   "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "484d2cb2",
+  "voice": "minjae",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "e8611246",
+  "voice": "minjae",
+  "text": "조금 쓰네요.",
   "ep": "free"
  },
  {
@@ -17808,18 +17862,6 @@
   "ep": "free"
  },
  {
-  "key": "026353ad",
-  "voice": "daeri",
-  "text": "조금 연하네요.",
-  "ep": "free"
- },
- {
-  "key": "4b16de4b",
-  "voice": "daeri",
-  "text": "조금 쓰네요.",
-  "ep": "free"
- },
- {
   "key": "ffba0c59",
   "voice": "daeri",
   "text": "조금 진하네요.",
@@ -17829,6 +17871,18 @@
   "key": "aca48375",
   "voice": "daeri",
   "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "026353ad",
+  "voice": "daeri",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "4b16de4b",
+  "voice": "daeri",
+  "text": "조금 쓰네요.",
   "ep": "free"
  },
  {
@@ -18222,6 +18276,12 @@
   "ep": "free"
  },
  {
+  "key": "26e4f3c5",
+  "voice": "customer-coffee",
+  "text": "아래에 청이 조금 남았네요.",
+  "ep": "free"
+ },
+ {
   "key": "c3f0d218",
   "voice": "grandma",
   "text": "우리 동네에도 이런 카페가 있으면 좋겠네.",
@@ -18339,6 +18399,12 @@
   "key": "fce6b0d7",
   "voice": "customer-arms",
   "text": "상큼해요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "bbbb6baa",
+  "voice": "customer-arms",
+  "text": "아래에 청이 조금 남았네요.",
   "ep": "free"
  },
  {
@@ -18816,18 +18882,6 @@
   "ep": "free"
  },
  {
-  "key": "6ba2ae36",
-  "voice": "jiho",
-  "text": "조금 연하네요.",
-  "ep": "free"
- },
- {
-  "key": "f6e4d7ca",
-  "voice": "jiho",
-  "text": "조금 쓰네요.",
-  "ep": "free"
- },
- {
   "key": "9c6acb62",
   "voice": "jiho",
   "text": "조금 진하네요.",
@@ -18837,6 +18891,18 @@
   "key": "0c6858e2",
   "voice": "jiho",
   "text": "조금 싱겁네요.",
+  "ep": "free"
+ },
+ {
+  "key": "6ba2ae36",
+  "voice": "jiho",
+  "text": "조금 연하네요.",
+  "ep": "free"
+ },
+ {
+  "key": "f6e4d7ca",
+  "voice": "jiho",
+  "text": "조금 쓰네요.",
   "ep": "free"
  },
  {
@@ -19290,6 +19356,12 @@
   "ep": "free"
  },
  {
+  "key": "4d6a3928",
+  "voice": "customer-sporty",
+  "text": "아래에 청이 조금 남았네요.",
+  "ep": "free"
+ },
+ {
   "key": "f5e7417a",
   "voice": "customer-coffee",
   "text": "아이스 라테요.",
@@ -19401,6 +19473,12 @@
   "key": "b1d90e14",
   "voice": "customer-olive",
   "text": "유자차, 차갑게요.",
+  "ep": "free"
+ },
+ {
+  "key": "84534886",
+  "voice": "customer-olive",
+  "text": "아래에 청이 조금 남았네요.",
   "ep": "free"
  },
  {

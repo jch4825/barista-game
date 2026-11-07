@@ -63,7 +63,7 @@ import {
   LEVELS, CUPS, INGREDIENTS, TEMPS, HAND_SKILLS, RECIPES, LATTE_ART, STARTER_BOOK, PANTRY, STEP_NAMES, MAX_ADDS,
   SERVICES, COLORS, ASK_SAY, CUP_RULE,
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
-  orderTemp, orderService, orderAsk, cupFor, replyOf, repeatBack, drinkName, skillFor,
+  orderTemp, orderService, orderAsk, cupFor, POURIN_SAY, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
   TODAY_SAY, todayTags, lackOf, todayLines, shotNames, TILT_SKILLS, KID_CUP,
 } from '../../data/menu.js';
@@ -309,6 +309,7 @@ export function brewLines(opts = {}) {
   }
   for (const ing of Object.values(INGREDIENTS)) for (const t of Object.values(ing.auto || {})) out.push(line.sys(t));
   for (const t of Object.values(TEMPS)) if (t.auto) out.push(line.sys(t.auto));
+  for (const t of Object.values(POURIN_SAY)) out.push(line.sys(t)); // 옮겨 붓기(검수 13.81)
   // 지은의 성장: 처음 익숙해진 손 기술의 한마디 · 엉뚱한 잔(사장님의 맛보기)
   for (const sk of Object.values(HAND_SKILLS)) out.push(line.say('jieun', mastered(sk)));
   out.push(line.say('owner', ODD_FIRST.owner), line.say('jieun', ODD_FIRST.jieun), line.say('owner', ODD_FIRST.joke));
@@ -1552,7 +1553,8 @@ export async function brew(opts = {}) {
       ui.tempChip = b;
       slots.push(b);
     }
-    return h('div', { class: 'bw-hand', role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
+    // 칸이 다섯 개 넘으면 조금 작게 해서 한 줄에(2026-11-07 사용자 '재료가 5개 이상부터는 이렇게 아래로 버튼이 내려오는데, 매우 보기 싫다', 검수 13.85)
+    return h('div', { class: `bw-hand${slots.length >= 5 ? ' is-many' : ''}`, role: 'group', 'aria-label': '컵에 넣을 것' }, ...slots);
   }
 
   /** 기억(지은의 성장)이 오르면 단골의 '늘 먹던 거'를 한 번에 담음(재미 개편 6.1) */
@@ -1571,7 +1573,9 @@ export async function brew(opts = {}) {
   function renderRecipe() {
     renderHots();
     const foot = [];
-    if (cur?.usual && !fix && opts.maker !== 'owner' && grow.level('memory') >= grow.UNLOCK.memoryUsual) {
+    // '한 잔 더'(more)도 앞 주문이 늘 먹던 것이면 같은 단추(2026-11-07 사용자 "해순 할머니 두 번째 우유잔 … 늘 시키는 대로 버튼이 없네", 검수 13.84)
+    const usualLike = (i) => Boolean(orders[i]?.usual || (orders[i]?.more && i > 0 && usualLike(i - 1)));
+    if (usualLike(curIndex) && !fix && opts.maker !== 'owner' && grow.level('memory') >= grow.UNLOCK.memoryUsual) {
       const usualB = btn('book', '늘 드시던 거', 'btn-soft bw-usual');
       onTap(usualB, fillUsual);
       ui.usual = usualB;
@@ -2714,6 +2718,23 @@ export async function brew(opts = {}) {
     await w(pauseMs(1300));
   }
 
+  /** 옮겨 붓기(손 동작 없이, 검수 13.81): 샷잔에 내린 에스프레소 · 피처에 녹인 청을 컵에. 블렌더 컷(pourin_{잔}_{음료})이 저절로 차오름 */
+  async function pourinStep(x, soFar, res) {
+    const text = POURIN_SAY[x] || POURIN_SAY.espresso;
+    const sid = shotIdFor('pourin', soFar);
+    const shot = sid ? shotView(sid) : null;
+    soFar.add(x);
+    if (shot) {
+      await autoShot(shot, '옮겨 붓기', text);
+      return;
+    }
+    setPanel(askRow('', text));
+    setScene({ center: drinkArt(made, res, soFar, 'big'), right: objArt(x === 'yuja' ? 'obj_pitcher_milk' : 'cup_shot', 'mid is-on'), mode: 'auto' });
+    audio.sfx('pour');
+    talkAfter(sysV(text));
+    await w(pauseMs(1300));
+  }
+
   /** 저절로 하는 일의 한 컷: 손 기술처럼 확대 창에 띄우되 띠 · 단추 없이 잔이 차오름(붓기와 같은 단계 수라 알맞아요 칸 가운데까지) */
   async function autoShot(shot, name, text) {
     setPanel();
@@ -2899,6 +2920,7 @@ export async function brew(opts = {}) {
     for (let i = 0; i < steps.length; i++) {
       const st = steps[i];
       if (st.auto) { await autoStep(st.auto, soFar, res); continue; }
+      if (st.pourin) { await pourinStep(st.pourin, soFar, res); continue; }
       n += 1;
       const c = await runSkill(st.skill, n, skillSteps.length, soFar, res, menu);
       res.checks.push(c);

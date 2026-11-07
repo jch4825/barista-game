@@ -3112,7 +3112,7 @@ def shot_syrup(sdir, preview, iced=False):
 
 def shot_spoonful(sdir, preview, act, key, iced):
     """청 떠 넣기 · 가루 떠 넣기(박자 두 번): 잔 위 찻숟가락. 톡 할 때마다 숟가락이 기울어 청 · 가루가 떨어지고(줄기) 잔 바닥에 쌓임. 5단계.
-    아이스 청은 얼음이 먼저 든 잔(딸기우유 · 아이스 유자차), 아이스 가루는 빈 유리컵(가루가 먼저)"""
+    아이스 청 · 가루는 빈 유리컵(딸기우유는 청 먼저, 검수 13.81. 아이스 유자차는 피처에서: shot_jam_pitcher)"""
     sid = f'{act}{"_iced" if iced else ""}_{key}'
     c = sid + '_static'
     jam = act == 'jam'
@@ -3130,8 +3130,6 @@ def shot_spoonful(sdir, preview, act, key, iced):
         at = (mx, my)
 
     def build(k, p, flow):
-        if iced and jam:
-            build_ice(GLASS_AT, len(ICE_PILE), 0.0, 'shot_dyn')
         if jam:
             h = 0.009 * p
             if iced:
@@ -3496,7 +3494,7 @@ def shot_water_plain(sdir, preview, key, cup):
         lip = glass_scene(c, pitcher=M['water'])
         ice = key == 'yuja'
         cupd = GLASS_CUP if ice else {**GLASS_CUP, 'pile': [], 'top': 1.0}
-        lo = GLASS_CUP['bottom'] + (0.009 if key == 'yuja' else 0.0)
+        lo = GLASS_CUP['bottom'] + (0.034 if key == 'yuja' else 0.0)  # 유자차: 피처에 녹여 옮겨 부은 청 위에서 시작(검수 13.81)
         base = iced_build(lip, liquid, lo, M['water'], spill, cup=cupd)
 
         def build(k, p, flow):
@@ -3550,6 +3548,275 @@ MORE_SHOTS.update({
     'water_barley': lambda d, pv: shot_water_plain(d, pv, 'barley', 'mug'), 'water_glass_barley': lambda d, pv: shot_water_plain(d, pv, 'barley', 'glass'),
     'water_yuja': lambda d, pv: shot_water_plain(d, pv, 'yuja', 'mug'), 'water_glass_yuja': lambda d, pv: shot_water_plain(d, pv, 'yuja', 'glass'),
     'water_paper_mix': lambda d, pv: shot_water_plain(d, pv, 'mix', 'paper'),
+})
+
+
+# ---------------- 청 음료 · 아이스 커피의 차례 다시 짜기(검수 13.81, 2026-11-07 사용자 "청으로 만드는 아이스 음료는 사실 방식이 틀렸다" ·
+#  "유리컵에 뜨거운 것 넣고, 찬 것 넣으면 컵 깨진다" · "아이스 아메리카노도 보통 테이크 아웃 할 때는 그렇게 하고 플라스틱 컵에 옮기던데" · "라테도 함께")
+#  아이스 유자차: 피처에 청 → 뜨거운 물 조금 → 젓기(녹이기) → 컵에 얼음 → 녹인 청 옮겨 붓기 → 찬물
+#  딸기우유: 빈 유리컵에 청 → 얼음 → 우유 → 젓기 · 아이스 아메리카노: 얼음 → 찬물 → 샷잔에 샷 → 옮겨 붓기 · 아이스 라테: 얼음 → 우유 → 샷잔에 샷 → 옮겨 붓기
+YUJA_JAM_H = 0.012   # 피처 바닥에서 잰 떠 넣은 유자청 높이(바닥 판 0.003 위)
+YUJA_HOT_SPAN = 0.06  # 뜨거운 물 조금: 띠 1 이면 청 위로 이만큼(알맞아요 칸 0.25 ~ 0.5 = 청이 잠길 만큼)
+YUJA_DONE_H = 0.035  # 녹인 청(피처에서 젓는 높이)
+YUJA_DONE = ('#E7AE22', '#F1C445')  # 녹인 유자청 빛(어두운, 밝은)
+
+
+def pitcher_liquid(h, mat, name='PITY_liquid'):
+    """작업대 위 피처(PITCHER_AT) 안 음료: 바닥에서 높이 h 까지, 윗면 평평. 돌려줌: 윗면 높이(세상)"""
+    px, py, pz = PITCHER_AT
+    if h <= 0.0036:
+        return pz + 0.003
+    prof = [(0.0, 0.003), (pitcher_inner_r(0.003) - 0.0006, 0.003)]
+    for hh in (0.0065, 0.018, 0.035, 0.055, 0.075, 0.088):
+        if hh < h - 0.001:
+            prof.append((pitcher_inner_r(hh) - 0.0006, hh))
+    prof += [(pitcher_inner_r(h) - 0.0006, h), (0.0, h)]
+    lathe(name, prof, mat, PITCHER_AT, 'shot_dyn', segs=96)
+    return pz + h
+
+
+def yuja_done_mat():
+    return xm('yuja_done', lambda: basic('yuja_done', lin(YUJA_DONE[0]), rough=0.12, sss=0.05))
+
+
+def shot_jam_pitcher(sdir, preview, key='yuja'):
+    """피처에 청 떠 넣기(박자 두 번): 작업대 위 빈 스팀 피처에 찻숟가락으로 청. 위에서 내려다봄(피처에 우유 붓기와 같은 카메라). 5단계"""
+    sid = f'jam_pitcher_{key}'
+    c = sid + '_static'
+    pitcher_counter_scene(c)
+    px, py, pz = PITCHER_AT
+    mat = jam_mat(key)
+    bowl = (px - 0.004, py, pz + 0.1062 + 0.022)
+
+    def build(k, p, flow):
+        h = 0.003 + (YUJA_JAM_H - 0.003) * p
+        surf = pitcher_liquid(h, mat)
+        build_teaspoon(bowl, 55.0 if flow else 0.0, heap=0.0 if flow else (0.006 if p < 1 else 0.0), heap_mat=mat)
+        if flow:
+            tube('JAM_fall', [(bowl[0] + 0.006, bowl[1], bowl[2] - 0.004), (bowl[0] + 0.007, bowl[1], (bowl[2] + surf) / 2), (bowl[0] + 0.007, bowl[1], surf)],
+                 0.0035, mat, 'shot_dyn')
+    if preview:
+        clear_dyn()
+        build(2, 0.5, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    extra = [(bowl[0] - 0.13, bowl[1] - 0.05, bowl[2] + 0.08), (bowl[0] + 0.02, bowl[1] + 0.02, bowl[2] + 0.02)]
+    render_frames(sdir, sid, pitcher_rect(extra), 5, build)
+
+
+def shot_hotwater_pitcher(sdir, preview, key='yuja'):
+    """피처에 뜨거운 물 조금(누르고 있다가 떼기): 청이 든 피처에 드립 주전자로 뜨거운 물. 물이 들수록 청이 풀려 맑은 노랑, 조금만(청이 잠길 만큼) 부음.
+    17단계 × 물줄기 있음/없음. 끝(1)은 피처 절반 넘게(많이 부으면 얼음이 금방 녹음)"""
+    sid = f'hotwater_pitcher_{key}'
+    c = sid + '_static'
+    pitcher_counter_scene(c)
+    px, py, pz = PITCHER_AT
+    tip = (px - 0.012, py, pz + 0.1062 + 0.035)
+    build_pour_kettle(tip, 24.0, c)
+    m, K = water_tint_mat(key)
+    jam = jam_mat(key)
+
+    def build(k, p, flow):
+        K.outputs[0].default_value = sstep(p / 0.45)
+        h = YUJA_JAM_H + YUJA_HOT_SPAN * p
+        surf = pitcher_liquid(h, m if k > 0 else jam)
+        if flow:
+            kettle_stream(tip, surf)
+    if preview:
+        clear_dyn()
+        build(6, 0.375, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, pitcher_rect((tip, (tip[0] - 0.012, tip[1], tip[2] + 0.012), (tip[0] - 0.16, tip[1], tip[2] + 0.09))), 17, build)
+
+
+def shot_stir_pitcher(sdir, preview, key='yuja'):
+    """피처에서 젓기(원 그리기): 뜨거운 물에 잠긴 청을 바 스푼으로 저어 녹임. 굵은 결(청 · 물)이 고른 노랑으로. 17단계 × 젓는 중 있음/없음"""
+    sid = f'stir_pitcher_{key}'
+    c = sid + '_static'
+    pitcher_counter_scene(c)
+    px, py, pz = PITCHER_AT
+    a, b, final = MIX[key]
+    m, K = xm(f'mix_{key}_pitcher', lambda: mat_mix(f'mix_{key}_pitcher', a, b, final, scale=30.0))
+    top = pz + YUJA_DONE_H
+
+    def build(k, p, flow):
+        K.outputs[0].default_value = sstep(p / 0.62)
+        pitcher_liquid(YUJA_DONE_H, m)
+        build_bar_spoon((px, py), top, flow, k, depth=0.026)
+    if preview:
+        clear_dyn()
+        build(4, 0.25, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, pitcher_rect([(px - 0.08, py + 0.05, top + 0.14), (px + 0.02, py - 0.02, top + 0.02)]), 17, build)
+
+
+def shot_ice_layer(sdir, preview, key='strawberry'):
+    """얼음 담기(청이 먼저 깔린 유리컵, 딸기우유): 바닥의 딸기청 위로 얼음이 하나씩 떨어져 쌓임. 9단계(0~8개) × 떨어지는 얼음 있음/없음"""
+    sid = f'ice_{key}'
+    glass_scene(sid + '_static')
+    mat = jam_mat(key)
+
+    def build(k, p, flow):
+        cup_layer_iced(0.009, mat)
+        build_ice(GLASS_AT, round(p * len(ICE_PILE)), 0.0, 'shot_dyn', falling=flow)
+    if preview:
+        clear_dyn()
+        build(5, 0.625, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    gx, gy, gz = GLASS_AT
+    pts = [Vector((gx + dx, gy + dy, gz + zz)) for dx in (-0.04, 0.04) for dy in (-0.04, 0.04) for zz in (0.0, 0.17)]
+    render_frames(sdir, sid, frame_rect(pts), 9, build)
+
+
+def shot_water_ice(sdir, preview, cup='glass'):
+    """찬물 붓기(아이스 아메리카노의 물 먼저): 얼음만 든 컵에 피처로 찬물(샷은 나중에 샷잔에서 옮겨 부음). 맑은 물, 컵의 4/5 쯤에서 알맞아요.
+    17단계 × 물줄기 있음/없음"""
+    sid = f'water_{cup}_ice'
+    if cup == 'glass':
+        lip = glass_scene(sid + '_static', pitcher=M['water'])
+        cupd, rect = {**GLASS_CUP, 'full': 0.100}, None
+    else:
+        lip = plastic_scene(sid + '_static', pitcher=M['water'])
+        cupd = {**PLASTIC_CUP, 'full': 0.122}
+    build = iced_build(lip, lambda p: M['water'], 0.0, M['water'], M['water'], cup=cupd)
+    if preview:
+        clear_dyn()
+        build(13, 0.8125, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, glass_rect(lip) if cup == 'glass' else plastic_rect(lip), 17, build)
+
+
+def build_pour_shotglass(lip, theta, c, fill):
+    """기운 샷잔(샷 내리기의 샷잔과 같은 모양): 테두리 끝이 lip 에 오게, 오른쪽(+X)으로 theta° 기울임 + 남은 에스프레소(수평면 아래만)"""
+    t = math.radians(theta)
+    sx, sz = 0.0277, 0.0655
+    ox = lip[0] - (sx * math.cos(t) + sz * math.sin(t))
+    oz = lip[2] - (-sx * math.sin(t) + sz * math.cos(t))
+    o = (ox, lip[1], oz)
+    lathe('SHOTP_glass', SHOT_GLASS, M['glass'], o, c).rotation_euler = (0, t, 0)
+    inner = [(0.0, 0.0095), (0.0214, 0.0096), (0.0232, 0.0135), (0.0248, 0.035), (0.0259, 0.062), (0.0, 0.062)]
+    esp = lathe('SHOTP_esp', inner, fill, o, c)
+    esp.rotation_euler = (0, t, 0)
+    cut = box('SHOTP_cut', (0.3, 0.3, 0.3), (ox, lip[1], lip[2] - 0.002 - 0.15), M['milk'], 'rig', bev=0.0)
+    cut.hide_render = True
+    md = esp.modifiers.new('Cut', 'BOOLEAN')
+    md.operation = 'INTERSECT'
+    md.object = cut
+
+
+def band_lathe(name, at, inner_r, z0, z1, mat):
+    """컵 안의 띠(아래 z0 ~ 위 z1, 컵 바닥에서 잼): 찬물 · 우유 위에 뜬 에스프레소"""
+    if z1 - z0 <= 0.0004:
+        return
+    prof = [(0.0, z0), (inner_r(z0) - 0.0004, z0)]
+    for hh in (0.02, 0.04, 0.06, 0.08, 0.1, 0.12):
+        if z0 + 0.001 < hh < z1 - 0.001:
+            prof.append((inner_r(hh) - 0.0004, hh))
+    prof += [(inner_r(z1) - 0.0004, z1), (0.0, z1)]
+    lathe(name, prof, mat, at, 'shot_dyn', segs=96)
+
+
+def shot_pourin(sdir, preview, cup, kind):
+    """옮겨 붓기(저절로): 샷잔의 에스프레소를 얼음 + 찬물(americano) · 얼음 + 우유(latte) 위에 · 피처에 녹인 유자청을 얼음만 든 컵(yuja)에.
+    에스프레소는 위에 뜬 갈색 띠로 쌓임(층이 보이게). 17단계 × 줄기 있음/없음, 작업대는 0.8125 까지 저절로 차오름"""
+    sid = f'pourin_{cup}_{kind}'
+    c = sid + '_static'
+    yuja = kind == 'yuja'
+    if cup == 'glass':
+        cupd, at, scene_fn, rect_fn = GLASS_CUP, GLASS_AT, glass_scene, glass_rect
+        inner_r = glass_inner_r
+    else:
+        cupd, at, scene_fn, rect_fn = PLASTIC_CUP, PLASTIC_AT, plastic_scene, plastic_rect
+        inner_r = lambda hh: table_r(PLASTIC_INNER, hh)
+    if yuja:
+        lip = scene_fn(c, pitcher=yuja_done_mat())
+        hi = cupd['bottom'] + (0.034 if cup == 'glass' else 0.040)
+        lo = 0.0
+        base_mat, top_mat, stream = None, yuja_done_mat(), yuja_done_mat()
+    else:
+        scene_fn(c)
+        lip = (at[0] - 0.022, at[1], at[2] + cupd['rim'] + 0.012)  # 샷잔이 화면 위로 잘리지 않게 낮고 눕게
+        build_pour_shotglass(lip, 122.0, c, M['americano'])
+        lo = 0.100 if cup == 'glass' else 0.122  # 찬물 · 우유가 찬 높이(찬물 붓기 water_*_ice 의 알맞아요 쯤)
+        hi = lo + 0.016
+        base_mat = M['water'] if kind == 'americano' else M['milk']
+        top_mat, stream = M['americano'], M['americano']
+
+    def build(k, p, flow):
+        q = min(1.0, p / 0.8125)
+        if yuja:
+            h = hi * q if k > 0 else 0.0
+            surf = at[2] + cupd['base']
+            if h > cupd['bottom'] + 0.001:
+                surf = cupd['liquid'](h, top_mat)
+            build_ice(at, len(cupd['pile']), max(0.0, h + 0.001 - cupd['top']), 'shot_dyn', pile=cupd['pile'], rim=cupd['rim'])
+        else:
+            h = lo + (hi - lo) * q
+            cupd['liquid'](lo, base_mat)
+            band_lathe('POURIN_band', at, inner_r, lo, h, top_mat)
+            surf = at[2] + h
+            build_ice(at, len(cupd['pile']), max(0.0, h + 0.001 - cupd['top']), 'shot_dyn', pile=cupd['pile'], rim=cupd['rim'])
+        if flow:
+            build_pour_stream(lip, (at[0] - 0.01, at[1], surf), 'shot_dyn', stream)
+    if preview:
+        clear_dyn()
+        build(10, 0.625, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, rect_fn(lip), 17, build)
+
+
+def shot_water_plastic_tint(sdir, preview, key='yuja'):
+    """찬물 붓기(플라스틱 컵 · 에스프레소가 없는 잔): 얼음 + 녹인 유자청이 든 컵에 피처로 찬물. 물이 들수록 옅은 노랑. 17단계 × 물줄기 있음/없음"""
+    sid = f'water_plastic_{key}'
+    lip = plastic_scene(sid + '_static', pitcher=M['water'])
+    m, K = water_tint_mat(key)
+    spill = xm(f'wt_spill_{key}', lambda: basic(f'wt_spill_{key}', lin(WATER_TINT[key][1][1]), rough=0.2))
+    liquid = lambda p: (K.outputs[0].__setattr__('default_value', sstep(p / 0.55)), m)[1]
+    build = iced_build(lip, liquid, PLASTIC_CUP['bottom'] + 0.040, M['water'], spill, cup=PLASTIC_CUP)
+    if preview:
+        clear_dyn()
+        build(10, 0.62, True)
+        render(os.path.join(sdir, f'preview_{sid}.jpg'), (1472, 400), 64, fmt='JPEG')
+        return
+    clear_dyn()
+    build(0, 0.0, False)
+    render(os.path.join(sdir, f'{sid}_plate.png'), SHOT_RES, 384)
+    render_frames(sdir, sid, plastic_rect(lip), 17, build)
+
+
+MORE_SHOTS.update({
+    'jam_pitcher_yuja': lambda d, pv: shot_jam_pitcher(d, pv, 'yuja'),
+    'hotwater_pitcher_yuja': lambda d, pv: shot_hotwater_pitcher(d, pv, 'yuja'),
+    'stir_pitcher_yuja': lambda d, pv: shot_stir_pitcher(d, pv, 'yuja'),
+    'ice_strawberry': lambda d, pv: shot_ice_layer(d, pv, 'strawberry'),
+    'water_glass_ice': lambda d, pv: shot_water_ice(d, pv, 'glass'), 'water_plastic_ice': lambda d, pv: shot_water_ice(d, pv, 'plastic'),
+    'water_plastic_yuja': lambda d, pv: shot_water_plastic_tint(d, pv, 'yuja'),
+    'pourin_glass_yuja': lambda d, pv: shot_pourin(d, pv, 'glass', 'yuja'), 'pourin_plastic_yuja': lambda d, pv: shot_pourin(d, pv, 'plastic', 'yuja'),
+    'pourin_glass_americano': lambda d, pv: shot_pourin(d, pv, 'glass', 'americano'), 'pourin_plastic_americano': lambda d, pv: shot_pourin(d, pv, 'plastic', 'americano'),
+    'pourin_glass_latte': lambda d, pv: shot_pourin(d, pv, 'glass', 'latte'), 'pourin_plastic_latte': lambda d, pv: shot_pourin(d, pv, 'plastic', 'latte'),
 })
 
 
