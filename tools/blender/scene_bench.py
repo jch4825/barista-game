@@ -4158,6 +4158,236 @@ def discard(kind, preview=False):
     log('잔 버리기', kind, n, '장 →', sdir, '사건(초)', {k: round(v / DISCARD_FPS, 2) for k, v in sorted(events.items(), key=lambda kv: kv[1])})
 
 
+
+# ------------------------------------------------------------------ 옮겨 담기 영상(… move [glass_plastic,mug_paper] · move_preview)
+# 2026-11-07 사용자 "옮겨 닮기 … 아직 자체적으로 만든 이미지가 남아있는데?" → "블렌더 영상으로"(검수 13.79): 매장 잔에 받은 음료를 손님이
+# 가져간다고 할 때(작업대 change) 확대 창에 트는 영상. 잔 버리기와 같은 아일랜드 작업대 · 카메라 · 식기 건조대(개수대는 없음).
+# 매장 잔이 왼쪽에서 들어와 뚜껑을 연 포장 컵 위에서 기울여 부음(유리컵의 얼음도 하나씩 넘어감) → 쓴 잔은 엎어서 건조대에 →
+# 옆에 놓인 뚜껑이 포장 컵을 덮음(플라스틱 컵은 빨대를 꽂음). 손은 그리지 않음. 렌더 장면은 OUT/move/{이름}/f0000.png …
+MOVES = {  # 이름: (매장 잔, 포장 컵, 음료) — 이야기의 두 장면(봄 6일 아아 · 겨울 1일 따뜻한 라테)
+    'glass_plastic': ('glass', 'plastic', 'americano'),
+    'mug_paper': ('mug', 'paper', 'latte'),
+}
+MOVE_TX = 0.10  # 포장 컵 자리(x): 건조대(RIGHT_X) 쪽으로 모아 카메라를 가까이(컵이 작게 보이지 않게)
+MOVE_LID_X = MOVE_TX + 0.17  # 뚜껑이 놓인 자리(포장 컵과 건조대 사이 작업대 위)
+
+
+def move_camera():
+    """잔 버리기보다 가깝고 조금 낮게: 포장 컵 · 붓는 잔 · 건조대가 한 화면에, 붓는 잔이 위로 잘리지 않게"""
+    cam.data.lens = 40
+    tgt = Vector((0.19, CUP_Y, 0.115))
+    el, az, d = math.radians(20), math.radians(3), 1.06
+    cam.location = tgt + d * Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
+    look(cam, tgt)
+    cam.data.dof.use_dof = False
+    cy.seed = 11
+
+
+def move_from_cup(kind, drink, c):
+    """매장 잔(discard_cup 과 같음) + 음료 재질만 바꿈(유리컵의 아이스 아메리카노)"""
+    cup = discard_cup(kind, c)
+    if drink == 'americano':
+        for o in cup['liquid']:
+            o.data.materials.clear()
+            o.data.materials.append(M['americano'])
+        cup['mat'] = M['americano']
+        cup['stream_mat'] = M['stream']
+    return cup
+
+
+def move_to_cup(kind, drink, c):
+    """뚜껑을 연 포장 컵(빈 컵) · 차오르는 음료 · 옆에 놓인 뚜껑(플라스틱 컵은 빨대 따로). 돌려줌: dict"""
+    at = (MOVE_TX, CUP_Y, 0.0)
+    mat = M['americano'] if drink == 'americano' else basic('m_latte', lin('#B98856'), rough=0.22, sss=0.1)
+    if kind == 'paper':
+        build_paper_cup(at, c)
+        build_cup_liquid('M_to_liquid', at, PAPER_INNER, 0.100, mat, c)
+        info = dict(rim=PAPER_RIM, bottom=PAPER_INNER[0][0], full=0.094)
+    else:
+        lathe('M_plastic', PLASTIC, M['pet'], at, c)
+        build_cup_liquid('M_to_liquid', at, PLASTIC_INNER, 0.140, mat, c)
+        info = dict(rim=PLASTIC_RIM, bottom=PLASTIC_INNER[0][0], full=0.118)
+    liquid = bpy.data.objects['M_to_liquid']
+    cutter = box('M_level', (1.2, 1.2, 1.0), (MOVE_TX, CUP_Y, -5.5), M['steel'], 'rig', bev=0.0)
+    cutter.hide_render = True
+    md = liquid.modifiers.new('Level', 'BOOLEAN')
+    md.operation = 'INTERSECT'
+    md.object = cutter
+    # 뚜껑: 작업대 위에 바로 놓여 있음(가장 낮은 곳이 작업대에 닿게)
+    lid_root = bpy.data.objects.new('M_lid_root', None)
+    coll(c).objects.link(lid_root)
+    lm = basic('m_lid', lin('#F7F6F2'), rough=0.35) if kind == 'paper' else basic('m_pet_lid', lin('#E9F0F3'), rough=0.16, trans=0.75, ior=1.45)
+    lathe('M_lid', DLID[kind], lm, (0, 0, 0), c).parent = lid_root
+    if kind == 'paper':
+        cyl('M_lid_hole', 0.0045, 0.002, (0.03, 0.0, 0.0107), M['rubber'], c, bev=0.0).parent = lid_root
+    low = -min(z for _, z in DLID[kind])
+    straw = None
+    if kind == 'plastic':
+        straw = bpy.data.objects.new('M_straw_root', None)
+        coll(c).objects.link(straw)
+        sm = basic('m_straw', lin('#F4F1EA'), rough=0.6)
+        cyl('M_straw', 0.0034, 0.215, (0.012, 0.004, -0.045), sm, c, rot=(0, math.radians(-8), 0), bev=0.0).parent = straw
+    info.update(liquid=liquid, cutter=cutter, lid=lid_root, lid_low=low + 0.0004, straw=straw, mat=mat)
+    return info
+
+
+def move_plan(fk, tk):
+    """장마다 매장 잔(x, z, th) · 뚜껑(x, z) · 빨대(내려온 정도). 매장 잔은 붓는 동안 테두리(입)가 포장 컵 위 한 점에 머물게"""
+    r, rim = (0.042, 0.0913) if fk == 'mug' else (0.0385, 0.1255)
+    trim = PAPER_RIM if tk == 'paper' else PLASTIC_RIM
+    lip = Vector((MOVE_TX - 0.014, 0, trim + 0.026))   # 붓는 입의 자리(포장 컵 입구 조금 왼쪽 위)
+    pre = Vector((MOVE_TX - 0.17, 0, trim + 0.035))    # 기울이기 전 자리(포장 컵 왼쪽 조금 위: 화면 위로 잘리지 않게)
+    th_end = 140.0
+    t_in, t_tilt, t_move, t_land = (0, 16), (16, 62), (68, 94), (94, 100)
+    t_lid = (96, 118)
+    t_straw = (120, 130) if tk == 'plastic' else None
+    n = (t_straw[1] if t_straw else t_lid[1]) + 12
+
+    def lip_root(th):
+        t = math.radians(th)
+        return Vector((lip.x - (r * math.cos(t) + rim * math.sin(t)), 0, lip.z - (-r * math.sin(t) + rim * math.cos(t))))
+
+    def at(f):
+        e = d_seg(f, *t_in)
+        x, z = d_lerp(-0.42, pre.x, e), d_lerp(0.012, pre.z, e)
+        th = 0.0
+        tt = d_seg(f, *t_tilt)
+        if tt > 0:
+            th = th_end * tt
+            b = d_seg(th, 0.0, 80.0)  # 처음에는 기울이기 전 자리에서, 80° 부터는 입이 한 점에 머물게
+            p = pre.lerp(lip_root(max(th, 80.0)), b)
+            x, z = p.x, p.z
+        m = d_seg(f, *t_move)
+        land_z = RACK_Z + rim + 0.002
+        if m > 0:
+            th = d_lerp(th_end, 180.0, m)
+            x = d_lerp(lip_root(th_end).x, RIGHT_X - 0.04 if fk == 'mug' else RIGHT_X + 0.03, m)
+            z = d_lerp(lip_root(th_end).z, land_z + 0.03, m) + 0.02 * math.sin(math.pi * m)
+            if m >= 1.0:
+                z = d_lerp(land_z + 0.03, land_z, d_seg(f, *t_land))
+        # 뚜껑: 들어 올려 → 포장 컵 위로 → 내려 덮음
+        lu = d_seg(f, t_lid[0], t_lid[0] + 8)
+        lm = d_seg(f, t_lid[0] + 4, t_lid[1] - 6)
+        ld = d_seg(f, t_lid[1] - 7, t_lid[1])
+        lx = d_lerp(MOVE_LID_X, MOVE_TX, lm)
+        lz = d_lerp(d_lerp(0.0, 0.05, lu), trim + 0.03, lm)
+        if f >= t_lid[1] - 7:
+            lz = d_lerp(trim + 0.03, trim, ld)
+        straw = d_seg(f, *t_straw) if t_straw else None
+        return dict(x=x, z=z, th=th, lid=(lx, lz), straw=straw)
+    return n, at, (t_move, t_lid)
+
+
+def move(name, preview=False):
+    """옮겨 담기 영상 한 편: OUT/move/{name}/f0000.png … (preview 면 몇 장만 작게)"""
+    fk, tk, drink = MOVES[name]
+    c, cd = 'move_static', 'move_cup'
+    for nm in (c, cd, 'discard_cup', 'discard_dyn'):
+        for ob in list(coll(nm).objects):
+            bpy.data.objects.remove(ob, do_unlink=True)
+    # 잔 버리기와 같은 아일랜드(아래 장은 바다빛 초록 칠, build_sink 와 같은 색). 개수대는 만들지 않음
+    for nd in M['cabinet'].node_tree.nodes:
+        if nd.type == 'TEX_BRICK':
+            nd.inputs['Color1'].default_value = lin('#3F6B5C')
+            nd.inputs['Color2'].default_value = lin('#3A6556')
+            nd.inputs['Mortar'].default_value = lin('#22403A')
+    build_rack(c)
+    src = move_from_cup(fk, drink, 'discard_cup')
+    dst = move_to_cup(tk, drink, cd)
+    show_only((c, cd, 'discard_cup', 'discard_dyn'))
+    move_camera()
+    n, at, (t_move, t_lid) = move_plan(fk, tk)
+    sdir = os.path.join(OUT, 'move', name + ('_preview' if preview else ''))
+    os.makedirs(sdir, exist_ok=True)
+    frames = [0, 16, 30, 40, 50, 62, 80, 96, 108, 118, n - 1] if preview else list(range(n))
+    root, cutter = src['root'], src['cutter']
+    rim, r, full = src['rim'], src['r'], src['full']
+    deficit, emptied = 0.0, False
+    trim = dst['rim']
+    slots = ICE_PILE_PL if tk == 'plastic' else []
+    ice = [dict(ob=o, free=False, t0=0, p0=None, r0=None, done=False) for o in src['ice']]
+    events = {}
+    norender = bool(os.environ.get('DISCARD_NORENDER'))
+    resume = bool(os.environ.get('DISCARD_RESUME')) and not preview
+    for f in range(n):
+        s = at(f)
+        root.location = (s['x'], CUP_Y, s['z'])
+        root.rotation_euler = (0, math.radians(s['th']), 0)
+        bpy.context.view_layer.update()
+        lip = lip_of(s['x'], s['z'], s['th'], r, rim)
+        base_full = s['z'] + full * math.cos(math.radians(s['th']))
+        need = base_full - (lip.z - 0.0015)
+        pouring = need > deficit + 1e-5 and s['th'] < 170 and f < t_move[0]
+        deficit = max(deficit, need)
+        emptied = emptied or s['th'] > 132.0
+        gone = emptied or deficit > full * 0.95
+        cutter.location = (s['x'], CUP_Y, ((base_full - deficit) if not gone else -5.0) - 0.5)
+        for o in src['liquid']:
+            o.hide_render = gone
+        # 포장 컵의 음료: 붓는 동안(82° ~ 133°) 바닥에서 다 찬 높이까지
+        frac = 1.0 if f >= t_move[0] else d_seg(s['th'], 82.0, 133.0)
+        level = dst['bottom'] + dst['full'] * frac
+        dst['cutter'].location = (MOVE_TX, CUP_Y, (level if frac > 0.004 else -5.0) - 0.5)
+        dst['liquid'].hide_render = frac <= 0.004
+        if frac > 0.004:
+            events.setdefault('fill', f)
+        # 얼음: 거의 다 기울면 하나씩 포장 컵 안 자리로 넘어감(포물선)
+        for i, it in enumerate(ice):
+            o = it['ob']
+            if not it['free'] and s['th'] > 112.0 + 2.5 * i:
+                mw = o.matrix_world.copy()
+                o.parent = None
+                o.matrix_world = mw
+                it.update(free=True, t0=f, p0=o.location.copy(), r0=Vector(o.rotation_euler[:]))
+            if it['free'] and not it['done']:
+                k = min(1.0, (f - it['t0']) / 8.0)
+                dx, dy, dz, rx, ry, rz = slots[i] if i < len(slots) else (0, 0, 0.02 + 0.02 * i, 0, 0, 0)
+                p1 = Vector((MOVE_TX + dx, CUP_Y + dy, dz))
+                p = it['p0'].lerp(p1, k)
+                p.z += 0.035 * math.sin(math.pi * k)
+                o.location = p
+                o.rotation_euler = tuple(a + (math.radians(b) - a) * k for a, b in zip(it['r0'], (rx, ry, rz)))
+                if k >= 1.0:
+                    it['done'] = True
+                    events.setdefault('ice', f)
+        # 뚜껑 · 빨대
+        lx, lz = s['lid']
+        dst['lid'].location = (lx, CUP_Y, max(lz, dst['lid_low']))
+        if f >= t_lid[1]:
+            events.setdefault('lid', f)
+        if dst['straw'] is not None:
+            k = s['straw'] or 0.0
+            dst['straw'].location = (MOVE_TX, CUP_Y, trim + 0.30 * (1.0 - k))
+            for ch in dst['straw'].children:
+                ch.hide_render = k <= 0.0
+            if k >= 1.0:
+                events.setdefault('straw', f)
+        # 줄기: 입에서 포장 컵 음료 면까지
+        for ob in list(coll('discard_dyn').objects):
+            bpy.data.objects.remove(ob, do_unlink=True)
+        if pouring and not gone and frac < 1.0:
+            events.setdefault('pour', f)
+            pts = []
+            for kk in range(8):
+                tt = kk * 0.03
+                p = Vector((lip.x + 0.003 + 0.10 * tt, CUP_Y, lip.z - 0.5 * G * tt * tt))
+                if p.z < level + 0.001:
+                    p.z = level + 0.001
+                    pts.append(p)
+                    break
+                pts.append(p)
+            if len(pts) >= 2:
+                tube('D_stream', [tuple(p) for p in pts], 0.0040, src['stream_mat'], 'discard_dyn')
+        if s['th'] >= 179.9 and abs(s['z'] - (RACK_Z + rim + 0.002)) < 1e-4:
+            events.setdefault('rack', f)
+        if f in frames and not norender:
+            path = os.path.join(sdir, f'f{f:04d}.png')
+            if resume and os.path.exists(path) and os.path.getsize(path) > 0:
+                continue
+            render(path, (DISCARD_RES[0] // 2, DISCARD_RES[1] // 2) if preview else DISCARD_RES, 24 if preview else 56, fmt='PNG')
+    log('옮겨 담기', name, n, '장 →', sdir, '사건(초)', {k: round(v / DISCARD_FPS, 2) for k, v in sorted(events.items(), key=lambda kv: kv[1])})
+
+
 def Matrix_T(v):
     from mathutils import Matrix
     return Matrix.Translation(Vector(v))
@@ -4166,8 +4396,9 @@ def Matrix_T(v):
 ALL = ('machine', 'mug', 'pitcher', 'tamper', 'shot')
 modes =['full', 'bg', 'extract', 'sprites'] if MODE == 'all' else [MODE]  # 물건 그림은 보이기 설정을 바꾸므로 맨 끝
 blend = os.path.join(OUT, 'bench_test.blend')
-bpy.ops.wm.save_as_mainfile(filepath=blend, compress=True)
-log('저장', blend)
+if not os.environ.get('BENCH_NOSAVE'):  # BENCH_NOSAVE=1: 장면 파일을 덮어쓰지 않음(다른 작업이 그 파일을 고치는 중일 때)
+    bpy.ops.wm.save_as_mainfile(filepath=blend, compress=True)
+    log('저장', blend)
 for mode in modes:
     if mode in ('preview', 'full'):
         main_camera()
@@ -4205,6 +4436,10 @@ for mode in modes:
         # 잔 버리기 영상(셋째 인자: mug,glass,paper,plastic 가운데 쉼표로, 없으면 넷 모두) 예) ... -- assets/_src/blender discard_preview mug
         for kind in (ARGS[2] if len(ARGS) > 2 else 'mug,glass,paper,plastic').split(','):
             discard(kind, mode == 'discard_preview')
+    elif mode in ('move', 'move_preview'):
+        # 옮겨 담기 영상(셋째 인자: glass_plastic,mug_paper 가운데 쉼표로, 없으면 둘 다) 예) ... -- assets/_src/blender move_preview glass_plastic
+        for name in (ARGS[2] if len(ARGS) > 2 else ','.join(MOVES)).split(','):
+            move(name, mode == 'move_preview')
     elif mode == 'drag_ice':
         sdir = os.path.join(OUT, 'shots')
         os.makedirs(sdir, exist_ok=True)

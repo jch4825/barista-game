@@ -2697,6 +2697,10 @@
     "discard_paper": "movies/discard_paper.webm",
     "discard_paper_end": "movies/discard_paper_end.png",
     "discard_plastic": "movies/discard_plastic.webm",
-    "discard_plastic_end": "movies/discard_plastic_end.png"
+    "discard_plastic_end": "movies/discard_plastic_end.png",
+    "move_glass_plastic": "movies/move_glass_plastic.webm",
+    "move_glass_plastic_end": "movies/move_glass_plastic_end.png",
+    "move_mug_paper": "movies/move_mug_paper.webm",
+    "move_mug_paper_end": "movies/move_mug_paper_end.png"
   }
 }

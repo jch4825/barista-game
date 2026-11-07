@@ -107,6 +107,19 @@
   "at": "2026-11-06 01:31",
   "long": 80
  },
+ "15427209": {
+  "who": "customer-sporty",
+  "sig": "1775bb6d8bae",
+  "sim": 0.9855,
+  "rate": 5.6,
+  "fall": 40,
+  "long": 120,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-07 21:11"
+ },
  "15732946": {
   "who": "jieun",
   "sig": "9f1b515ed7e2",
@@ -12589,13 +12602,15 @@
  "cd218b78": {
   "who": "jieun",
   "sig": "d0402802dd4a",
-  "sim": 0.989,
-  "rate": 5.47,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9942,
+  "rate": 5.76,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:53"
+  "at": "2026-11-07 21:20",
+  "heard": "2026-11-07 사용자가 듣고 고름(후보 1, 뒤 문장의 목소리가 바뀌었음, 검수 13.80)"
  },
  "940779d3": {
   "who": "jieun",
@@ -13816,13 +13831,15 @@
  "baae0cbb": {
   "who": "jieun",
   "sig": "2b9005ddeb7d",
-  "sim": 0.9907,
-  "rate": 5.72,
-  "try": 1,
-  "style": "plain",
+  "sim": 0.9936,
+  "rate": 5.45,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
   "emo": false,
   "flag": "",
-  "at": "2026-11-06 00:04"
+  "at": "2026-11-07 21:24",
+  "heard": "2026-11-07 사용자가 듣고 고름(후보 1, 뒤 문장의 목소리가 바뀌었음, 검수 13.80)"
  },
  "90c17887": {
   "who": "jieun",
@@ -41477,19 +41494,6 @@
   "sim": 0.9857,
   "rate": 6.31,
   "fall": 60,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 21:11"
- },
- "15427209": {
-  "who": "customer-sporty",
-  "sig": "1775bb6d8bae",
-  "sim": 0.9855,
-  "rate": 5.6,
-  "fall": 40,
-  "long": 120,
   "try": 2,
   "style": "desc",
   "emo": false,

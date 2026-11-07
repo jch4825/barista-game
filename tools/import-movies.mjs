@@ -34,6 +34,9 @@ const MOVIES = {
   discard_glass: { plain: true, crf: 33 },
   discard_paper: { plain: true, crf: 33 },
   discard_plastic: { plain: true, crf: 33 },
+  // 옮겨 담기(블렌더, 검수 13.79): 매장 잔 → 포장 컵(봄 6일 유리컵 → 플라스틱 컵 아아 · 겨울 1일 머그 → 종이컵 라테)
+  move_glass_plastic: { plain: true, crf: 33 },
+  move_mug_paper: { plain: true, crf: 33 },
 };
 
 function run(bin, args) {

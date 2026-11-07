@@ -183,6 +183,14 @@ const TOSS_CUES = {
   paper: [[1.6, 'tap'], [1.95, 'pour'], [2.6, 'water'], [4.8, 'stack']],
   plastic: [[1.6, 'tap'], [2.0, 'pour'], [2.6, 'water'], [3.05, 'ice'], [4.8, 'stack']],
 };
+/**
+ * 옮겨 담는 영상(assets/movies/move_{매장 잔}_{포장 컵}, 블렌더 tools/blender/scene_bench.py … move, 검수 13.79): 이야기의 두 장면만 있음 →
+ * 음료(drink: 주문 메뉴)가 같을 때만 틀고, 아니면 그림 움직임. cues: 효과음 때(초, 렌더가 알려 주는 '사건(초)')
+ */
+const MOVE_MOVIES = {
+  glass_plastic: { drink: 'americano', cues: [[1.1, 'pour'], [2.4, 'ice'], [4.15, 'clink'], [4.9, 'tap'], [5.4, 'tap']] }, // 봄 6일 아아
+  mug_paper: { drink: 'latte', cues: [[0.95, 'pour'], [4.15, 'clink'], [4.9, 'tap']] }, // 겨울 1일 따뜻한 라테
+};
 /** 손 기술에 처음 익숙해졌을 때 지은의 말(재미 개편 6.2) */
 const mastered = (sk) => `이제 ${josa(sk.name, '은/는')} 눈 감고도 할 수 있겠다.`;
 /** 박자 동작의 단추 이름 */
@@ -885,11 +893,39 @@ function drinkArt(made, res = {}, soFar = null, cls = '') {
     if (spec.steam) el.append(h('i', { class: `bw-wisp n${spec.steam}`, 'aria-hidden': 'true' }));
     return el;
   }
+  // 레시피에 없는 잔(엉뚱한 잔 · 컵이 다른 잔): 그 컵의 잔 그림 가운데 넣은 것이 가장 비슷한 것, 겹치는 것이 없으면 빈 컵 그림(임시 그림을 쓰지 않음, 검수 13.79)
+  if (!soFar) {
+    const near = nearLook(made);
+    if (near) {
+      const el = objArt(near, `bw-drink ${cls}`);
+      if (spec.spill) el.append(h('i', { class: 'bw-spill', 'aria-hidden': 'true' }));
+      if (spec.steam) el.append(h('i', { class: `bw-wisp n${spec.steam}`, 'aria-hidden': 'true' }));
+      return el;
+    }
+  }
   // 만드는 도중: 빈 컵이거나 컵 그림 파일이 있으면 그 컵(만드는 중의 그림은 시트에 없어 그림체를 섞지 않음)
   if (soFar && (!spec.color || img.has('objects', cupArtId(made.cup)))) return objArt(cupArtId(made.cup), `bw-drink ${cls}`);
   const el = h('span', { class: `bw-art bw-drink ${cls}`.trim(), 'data-art': 'drink' });
   el.innerHTML = drinkSVG(spec);
   return el;
+}
+
+/** 레시피에 없는 잔의 그림: 그 컵의 잔 그림(RECIPES.look) 가운데 넣은 재료가 가장 많이 겹치는 것(넣은 것 +2, 더 넣은 것 · 빠진 것 -1), 겹치는 것이 없으면 빈 컵 그림 */
+function nearLook(made) {
+  const have = new Set([made.base, ...(made.adds || [])].filter(Boolean));
+  let best = null;
+  let score = 0;
+  for (const r of Object.values(RECIPES)) {
+    const id = r.look?.[made.cup];
+    if (!id || !img.has('objects', id)) continue;
+    const want = new Set([r.base, ...(r.adds || [])].filter(Boolean));
+    let n = 0;
+    for (const x of have) n += want.has(x) ? 2 : -1;
+    for (const x of want) if (!have.has(x)) n -= 1;
+    if (n > score) { score = n; best = id; }
+  }
+  const empty = cupArtId(made.cup);
+  return best || (img.has('objects', empty) ? empty : null);
 }
 
 /** 뚜껑이 있는 포장 컵(종이컵 · 플라스틱 컵) */
@@ -2774,6 +2810,31 @@ export async function brew(opts = {}) {
    * 버리는 장면: 개수대 위로 → 기울여 쏟음(얼음이면 얼음도) → 머그 · 유리컵은 식기 건조대에 엎어 둠, 종이컵 · 플라스틱 컵은 쓰레기통에.
    * 영상(assets/movies/discard_{mug|glass|paper|plastic}, 요청서 docs/image_requests.md 9장)이 오면 그 영상을 틀고, 움직임 줄이기면 마지막 장면만
    */
+  /** 확대 창의 영상: 움직임 줄이기가 아니면 영상(효과음은 그 순간에), 움직임 줄이기면 마지막 장면만. 영상이 없으면 false */
+  async function sceneMovie(view, id, cues) {
+    const movie = id ? img.url('movies', id) : null;
+    if (!movie) return false;
+    if (!document.body.classList.contains('reduce-motion')) {
+      const v = h('video', { class: 'bw-toss-movie', src: movie, muted: '', playsinline: '', autoplay: '', preload: 'auto' });
+      v.muted = true;
+      view.append(v);
+      const left = (cues || [[0, 'pour']]).slice();
+      const tick = setInterval(() => {
+        if (!v.isConnected || stopped() || over) { clearInterval(tick); return; }
+        while (left.length && v.currentTime >= left[0][0]) audio.sfx(left.shift()[1]);
+      }, 40);
+      await w(Promise.race([new Promise((r) => { v.addEventListener('ended', r, { once: true }); v.addEventListener('error', r, { once: true }); }), sleep(robot ? 300 : 12000)]));
+      clearInterval(tick);
+      await w(pauseMs(300));
+      return true;
+    }
+    const end = img.url('movies', `${id}_end`);
+    if (!end) return false;
+    view.append(h('img', { class: 'bw-toss-movie', src: end, alt: '' }));
+    await w(pauseMs(2200));
+    return true;
+  }
+
   async function tossScene() {
     const kind = TOSS_KIND[made.cup] || 'mug';
     const wash = kind === 'mug' || kind === 'glass';
@@ -2789,27 +2850,8 @@ export async function brew(opts = {}) {
     bench.classList.add('is-close');
     setScene({ mode: 'toss', keep: true });
     talkAfter(sysV(text));
-    const still = document.body.classList.contains('reduce-motion');
-    const movie = img.url('movies', `discard_${kind}`);
-    if (movie && !still) {
-      const v = h('video', { class: 'bw-toss-movie', src: movie, muted: '', playsinline: '', autoplay: '', preload: 'auto' });
-      v.muted = true;
-      view.append(v);
-      // 효과음은 영상의 그 순간에(블렌더 영상, 검수 13.67): 쏟기 · 얼음이 개수대에 · 뚜껑 · 잔이 건조대 · 쓰레기통에
-      const cues = (TOSS_CUES[kind] || [[0, 'pour']]).slice();
-      const tick = setInterval(() => {
-        if (!v.isConnected || stopped() || over) { clearInterval(tick); return; }
-        while (cues.length && v.currentTime >= cues[0][0]) audio.sfx(cues.shift()[1]);
-      }, 40);
-      await w(Promise.race([new Promise((r) => { v.addEventListener('ended', r, { once: true }); v.addEventListener('error', r, { once: true }); }), sleep(robot ? 300 : 12000)]));
-      clearInterval(tick);
-      await w(pauseMs(300));
-      closeUpOff();
-      return;
-    }
-    if (movie && img.url('movies', `discard_${kind}_end`)) {
-      view.append(h('img', { class: 'bw-toss-movie', src: img.url('movies', `discard_${kind}_end`), alt: '' }));
-      await w(pauseMs(2200));
+    // 효과음은 영상의 그 순간에(블렌더 영상, 검수 13.67): 쏟기 · 얼음이 개수대에 · 뚜껑 · 잔이 건조대 · 쓰레기통에
+    if (await sceneMovie(view, `discard_${kind}`, TOSS_CUES[kind])) {
       closeUpOff();
       return;
     }
@@ -2953,6 +2995,12 @@ export async function brew(opts = {}) {
     bench.classList.add('is-close');
     setScene({ mode: 'toss', keep: true });
     talkAfter(sysV(SYS.move));
+    const mk = `${TOSS_KIND[made.cup] || 'mug'}_${toCup}`;
+    const mv = MOVE_MOVIES[mk];
+    if (mv && mv.drink === cur.menu && (await sceneMovie(view, `move_${mk}`, mv.cues))) {
+      closeUpOff();
+      return;
+    }
     const spec = drinkSpec(made, res);
     const lidded = LIDDED.has(toCup); // 가져가는 컵: 뚜껑을 연 채로 붓고, 다 부으면 뚜껑을 덮음
     const fromBox = h('div', { class: 'bw-move-from' }, drinkArt(made, res, null, 'toss'));
@@ -2960,7 +3008,7 @@ export async function brew(opts = {}) {
     const toBox = h('div', { class: 'bw-move-to' }, lidded ? openArt(toCup) : objArt(cupArtId(toCup), 'toss'), lid);
     const stream = h('i', { class: 'bw-move-stream', style: { '--c': spec.color || '#B98A5E' } });
     const ice = spec.ice ? h('i', { class: 'bw-move-ice' }, h('b'), h('b'), h('b')) : null;
-    const rack = h('span', { class: 'bw-toss-dest is-rack', html: rackSVG() });
+    const rack = h('span', { class: 'bw-toss-dest is-rack', html: img.has('objects', 'obj_rack') ? `<img src="${img.url('objects', 'obj_rack')}" alt="" draggable="false">` : rackSVG() });
     const stage = h('div', { class: 'bw-move' }, rack, toBox, stream, ice, fromBox);
     view.append(stage);
     await w(pauseMs(350));
