@@ -4,6 +4,8 @@
  *   - city : 봄 1일 도시 카페의 기억. 주문 종이가 점점 빨리 쌓이고, 끝내 라테가 쏟아짐(이야기의 일: 실패가 아니라 '이곳은 너무 빨랐다')
  *   - cafe : 우리 카페의 몰림 시간(Q-44). 오래 둔 주문은 사장님이 "이건 내가 할게요" 하고 받아 줌(실패 없음). 차분함이 오를수록 사장님이 더 일찍 도와줌
  *   - gull : 그 갈매기 쫓기(웃음 줄기 3.2). 빵을 문 갈매기가 테라스를 이리저리 뛰고, 세 번 맞히면 빵을 떨어뜨림. 오래 걸리면 빵을 물고 날아감(그래도 끝)
+ *            갈매기는 테라스 안을 빠르게 뛰어다님(가끔 후다닥 · 잠깐 멈춤, 맞으면 멀리 달아남, 왼쪽으로 가면 그림을 뒤집음). 13초(2026-11-07 사용자 '갈매기가 상당히 빠르게 여기 저기로 움직이는 로직' · '시간을 반으로', 검수 13.77)
+ *            움직임 줄이기 · 차분 모드는 예전처럼 자리를 건너뛰기만(hop), 턴 방식은 누를 때만 옮김. 쉬운 길은 0.6배 · 깊은 길은 1.15배 빠르기
  *  실시간이 아니면(설정 시간 제한 끄기 · 자동 스캔) 턴 방식: 하나씩 나오고, 누를 때마다 다음 것이 나옴
  * 옵션: { title, theme, seconds?, bg?: [배경 id, 변형], quit? } · 돌려줌: { ok, attempts: 1, mistakes: 0, cleared, helped, ms }
  * 자동 플레이(?debug): window.__mgAuto
@@ -47,10 +49,11 @@ const THEMES = {
     say: { start: '손님이 한꺼번에 몰려와요. 하나씩 해요.', owner: '이건 내가 할게요.', end: '몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!', alone: '사장님이 안 계셔도 차근차근 해냈어요!' },
   },
   gull: {
-    title: '그 갈매기를 쫓아라', bg: ['cafe_front', 'morning'], seconds: 26, icon: 'bread',
+    title: '그 갈매기를 쫓아라', bg: ['cafe_front', 'morning'], seconds: 13, icon: 'bread', // 26초는 너무 늘어졌음(2026-11-07 사용자 '시간을 반으로 줄여라')
     howto: '빵을 문 갈매기를 눌러요. 세 번 누르면 빵을 떨어뜨려요.',
     spots: [[22, 66], [36, 58], [50, 70], [64, 60], [78, 68], [30, 78], [58, 80], [72, 52]],
     hits: 3, hop: 1300,
+    area: [18, 82, 54, 80], run: 42, dash: 80, // 뛰어다니는 테라스(그림의 %: x 왼쪽 · 오른쪽, y 위 · 아래) · 빠르기(1초에 그림 너비의 %): 보통 · 후다닥
     say: { start: '앗, 갈매기가 빵을 물고 간다!', hit: '꽥!', got: '빵을 되찾았어요! 갈매기는 아쉬운 듯 날아갔어요.', fled: '갈매기가 빵을 물고 바다로 날아갔어요. …내일 또 오겠지.' },
   },
 };
@@ -174,6 +177,12 @@ export async function rush(opts = {}) {
   /* ---- 갈매기(gull) ---- */
   let gullAt = 0;
   let hop = 0;
+  // 뛰어다니기(run): 움직임 줄이기 · 차분 모드 · 턴 방식이 아니면. 자리는 그림의 %(y 는 높이의 %라 거리를 잴 때 16:9 로 맞춤)
+  const runMode = kind === 'gull' && !turn && !isReducedMotion() && !document.body.classList.contains('theme-calm');
+  const spd = (store.path() === 'easy' ? 0.6 : store.path() === 'deep' ? 1.15 : 1) / k;
+  const YR = 9 / 16;
+  const run = { x: 0, y: 0, tx: 0, ty: 0, v: 0, rest: 0, autoT: 0 };
+  const rand = (a, b) => a + Math.random() * (b - a);
   const art = kind === 'gull' && gullArt();
   const gullPic = art ? h('img', { class: 'ru-gull-img', src: img.url('objects', GULL_ART.stand), alt: '', draggable: 'false' }) : null;
   const gullShow = (pose) => { if (gullPic) gullPic.src = img.url('objects', GULL_ART[pose]); };
@@ -185,10 +194,39 @@ export async function rush(opts = {}) {
     gullAt = i;
     gull.style.left = `${S[i][0]}%`;
     gull.style.top = `${S[i][1]}%`;
+    run.x = S[i][0]; run.y = S[i][1];
+  }
+  /** 다음 갈 곳: far 이면 지금 자리에서 멀리(맞고 달아날 때). 열에 셋은 후다닥 */
+  function runTo(far = false) {
+    const [x0, x1, y0, y1] = th.area;
+    let x = 0, y = 0;
+    for (let n = 0; n < 12; n++) {
+      x = rand(x0, x1); y = rand(y0, y1);
+      if (Math.hypot(x - run.x, (y - run.y) * YR) >= (far ? 32 : 12)) break;
+    }
+    run.tx = x; run.ty = y;
+    run.v = (far ? th.dash * 1.2 : Math.random() < 0.3 ? th.dash : th.run) * spd;
+  }
+  function runStep(dt) {
+    if (run.rest > 0) { run.rest -= dt; return; }
+    const dx = run.tx - run.x, dy = run.ty - run.y;
+    const d = Math.hypot(dx, dy * YR);
+    const len = run.v * dt / 1000;
+    if (d <= len) {
+      run.x = run.tx; run.y = run.ty;
+      if (Math.random() < 0.4) run.rest = rand(120, 380) * k; // 잠깐 멈춰 두리번
+      runTo();
+    } else {
+      run.x += (dx / d) * len; run.y += (dy / d) * len;
+    }
+    if (Math.abs(dx) > 0.3) gull.classList.toggle('is-left', dx < 0); // 그림은 오른쪽을 봄: 왼쪽으로 가면 뒤집음
+    gull.style.left = `${run.x}%`;
+    gull.style.top = `${run.y}%`;
   }
   if (gull) {
     field.append(gull);
     placeGull(0);
+    if (runMode) { gull.classList.add('is-run'); runTo(); }
     gull.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!started || over) return;
@@ -204,7 +242,8 @@ export async function rush(opts = {}) {
       paint();
       if (cleared >= th.hits) { finish('got'); return; }
       gullBack = setTimeout(() => { if (!over) gullShow('stand'); }, dur(450));
-      placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt)));
+      if (runMode) { run.rest = 0; runTo(true); } // 놀라서 멀리 후다닥
+      else placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt)));
       hop = 0;
     });
   }
@@ -224,9 +263,13 @@ export async function rush(opts = {}) {
     tAcc += dt;
     timeBar.style.setProperty('--t', String(Math.min(1, tAcc / total)));
     if (kind === 'gull') {
-      hop += dt;
-      if (hop >= th.hop * k) { hop = 0; placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt))); }
-      if (auto && hop > 200) gull.click();
+      if (runMode) runStep(dt);
+      else {
+        hop += dt;
+        if (hop >= th.hop * k) { hop = 0; placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt))); }
+      }
+      run.autoT += dt;
+      if (auto && run.autoT > 200) { run.autoT = 0; gull.click(); }
       if (tAcc >= total) finish('fled');
       return;
     }
@@ -273,6 +316,7 @@ export async function rush(opts = {}) {
       audio.sfx(how === 'got' ? 'great' : 'whoosh');
       clearTimeout(gullBack);
       gullShow(how === 'got' ? 'hit' : 'fly'); // 빵을 떨어뜨림 · 빵을 물고 날아감
+      gull?.classList.remove('is-run', 'is-left'); // 날아가는 모습은 오른쪽 위로(옮김 애니메이션을 다시 켬)
       gull?.classList.add(how === 'got' ? 'is-gone' : 'is-fled');
     } else {
       audio.sfx('great');
