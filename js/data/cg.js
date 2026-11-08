@@ -6,7 +6,7 @@
  *   (예전: 2026-10-28 감성적인 대사·상황마다 CG. 그때 만든 그림은 assets/_src/cg_unused/ · 대본 기록은 git).
  *   그림 요청서는 docs/requests_full.md · docs/추가 제작.md
  *  ep: 처음 나오는 날 · title: 수첩 · 임시 그림의 제목
- *  ph: 임시 그림 { bg, v(배경 변형), cast: ['인물:표정'], props: [아이콘], desc(한 줄), night, board(칠판) }
+ *  ph: 임시 그림 { bg, v(배경 변형), cast: ['인물:표정'], props: [아이콘], desc(한 줄), night, board(칠판), refs(요청서의 참조 그림을 더함) }
  *  chalk: 칠판 글씨 자리 { x, y, w, rot }(%) — chalk() 비트가 씀
  */
 
@@ -43,9 +43,9 @@ export const CGS = {
   eye_2: { ep: 'ending', title: '사장의 눈 2 · 한 칸 내린 선반', ph: P('hall', 'morning', [], ['cup', 'hand'], '새벽, 컵을 한 칸 아래로 옮기는 손', { night: true }) },
   eye_3: { ep: 'ending', title: '사장의 눈 3 · 맛은 시간이 만든다', ph: P('hall', 'spring', ['jieun:nervous', 'geum'], ['clock'], '카운터 앞으로 나가며 본 두 사람') },
   eye_4: { ep: 'ending', title: '사장의 눈 4 · 빈 컵만', ph: P('hall', 'spring', ['jieun:determined'], ['cup', 'icecup'], '그 아이 뒤에 빈 컵을 놓는 손') },
-  eye_5: { ep: 'ending', title: '사장의 눈 5 · 칠판의 빈칸', ph: P('hall', 'evening', [], ['memo', 'pen'], '오른쪽 아래만 비워 둔 칠판', { board: true, night: true }) },
+  eye_5: { ep: 'ending', title: '사장의 눈 5 · 칠판의 빈칸', ph: P('hall', 'evening', [], ['memo', 'pen'], '오른쪽 아래만 비워 둔 칠판', { board: true, night: true, refs: ['hall_wall'] }) },
   eye_7: { ep: 'ending', title: '사장의 눈 7 · 앞치마 끈', ph: P('hall', 'evening', ['jieun'], ['apron', 'hand'], '등 뒤에서 다시 매 주는 끈', { night: true }) },
-  eye_6: { ep: 'ending', title: '사장의 눈 6 · 저 친구가 내립니다', ph: P('hall', 'busy_summer', ['jieun:nervous', 'customer'], ['coffee'], '앞치마 주머니에서 손을 꺼내며') },
+  eye_6: { ep: 'ending', title: '사장의 눈 6 · 저 친구가 내립니다', ph: P('hall', 'busy_summer', ['jieun:nervous', 'customer'], ['coffee'], '앞치마 주머니에서 손을 꺼내며', { refs: ['customer-sporty_normal'] }) },
   eye_8: { ep: 'ending', title: '사장의 눈 8 · 동네 시간', ph: P('hall', 'evening', ['jieun'], ['cup', 'memo'], '선반의 단골 잔들, 칠판 앞의 분필', { board: true, night: true }) },
   eye_9: { ep: 'ending', title: '사장의 눈 9 · 열쇠', ph: P('hall', 'evening', ['jieun:nervous'], ['lock', 'hand'], '주머니에서 꺼낸 낡은 열쇠', { night: true }) },
   eye_10: { ep: 'ending', title: '사장의 눈 10 · 서두르면 쏟는다', ph: P('hall', 'evening', [], ['note', 'cup'], '마감 선반에 붙이는 작은 메모', { night: true }) },

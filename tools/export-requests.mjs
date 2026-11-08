@@ -218,7 +218,7 @@ const refList = (id) => {
   const ph = CGS[id].ph || {};
   const people = [...new Set((ph.cast || []).map((v) => String(v).split(':')[0]))].filter((w) => w !== 'customer');
   const bgRef = ph.bg ? `${ph.bg === 'hall' ? 'hall' : ph.bg}_${ph.v || 'morning'}` : '';
-  return [...people.map((w) => (CHARS[w]?.stand ? `${CHARS[w].stand}_normal` : `${w}_sheet`)), bgRef].filter(Boolean); // 빌려 쓰는 인물은 그 스탠딩이 참조
+  return [...people.map((w) => (CHARS[w]?.stand ? `${CHARS[w].stand}_normal` : `${w}_sheet`)), ...(ph.refs || []), bgRef].filter(Boolean); // 빌려 쓰는 인물은 그 스탠딩이 참조
 };
 const refOf = (id) => refList(id).map((x) => `\`${x}\``).join(' · ');
 cgNew.forEach((id, i) => P(`| ${i + 1} | \`${id}\` | ${CGS[id].title} | ${epLabel(CGS[id].ep)} | ${refOf(id)} |`));

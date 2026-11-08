@@ -237,6 +237,15 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_ending_last_cup.jpg` | `Mug_of_milk_on_windowsill_dfdb4e95_2K.jpg` (2026-11-08 23:25 · 다시 만든 그림: 머그가 대화창에 가리지 않게, 대본의 저녁 항구로. 첫 그림은 `_src/cg_unused/cg_ending_last_cup_v1.jpg`) |
 | `stand/granddaughter_normal.jpg` | `Redraw_girl_character_art_style_bd5047db_2K.jpg` (2026-11-08 23:18) |
 | `stand/granddaughter_smile.jpg` | `Redraw_girl_character_art_style_d6541ccc_2K.jpg` (2026-11-08 23:14) |
+| `cg/cg_eye_3.jpg` | `Man_and_woman_in_cafe_fe2391e0_2K.jpg` (2026-11-09 00:07) |
+| `cg/cg_eye_4.jpg` | `Jieun_making_drinks_in_cafe_dc63d361_2K.jpg` (2026-11-09 00:09) |
+| `cg/cg_eye_7.jpg` | `workbench_morning.jpg_df6edef7.jpg` (2026-11-09 00:45) |
+| `cg/cg_eye_9.jpg` | `Owner_handing_key_to_Jieun_7c5894ad_2K.jpg` (2026-11-09 00:59) |
+| `cg/cg_eye_10.jpg` | `Man_taping_paper_in_cafe_bab934f6_2K.jpg` (2026-11-09 01:03) |
+| `cg/cg_eye_8.jpg` | `Man_holding_chalk_at_board_94703fd4_2K.jpg` (2026-11-09 01:06) |
+| `cg/cg_eye_11.jpg` | `Old_man_looking_at_snow_597c7ec7_2K.jpg` (2026-11-09 01:06) |
+| `cg/cg_eye_12.jpg` | `Man_feeding_seagull_outside_cafe_320f3ed8.jpg` (2026-11-09 01:10) |
+| `ref/hall_wall.jpg` | `따뜻한 해변 카페 벽면 인테리어.png` (2026-11-09 00:35 · 칠판이 있는 벽을 정면에서 본 그림, 칠판 장면의 참조 그림) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):
 - `Character_design_sheet_of_barista_20261028002548.jpg`: 지은 설정화의 남색 앞치마 첫 판(2026-10-28). 게임은 초록 앞치마 설정화(`ref/jieun_sheet.jpg`)를 씀

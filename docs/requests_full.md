@@ -11,7 +11,7 @@
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 0명) | 설정화 0 + 표정 0장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 11장 + `docs/추가 제작.md`에 이미 있는 1장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 장면 그림(CG) | 새로 3장 + `docs/추가 제작.md`에 이미 있는 1장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 · 다 만든 잔 시트 | 0개를 시트 0장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 0(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
@@ -26,7 +26,7 @@
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 11장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 1장(`winter_chalk_name`)도 아직 없습니다.
+- 새로 요청하는 3장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 1장(`winter_chalk_name`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -35,16 +35,8 @@
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
 | 1 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 2 | `eye_3` | 사장의 눈 3 · 맛은 시간이 만든다 | 엔딩 | `jieun_sheet` · `geum_sheet` · `hall_spring` |
-| 3 | `eye_4` | 사장의 눈 4 · 빈 컵만 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 4 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
-| 5 | `eye_7` | 사장의 눈 7 · 앞치마 끈 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 6 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `hall_busy_summer` |
-| 7 | `eye_8` | 사장의 눈 8 · 동네 시간 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 8 | `eye_9` | 사장의 눈 9 · 열쇠 | 엔딩 | `jieun_sheet` · `hall_evening` |
-| 9 | `eye_10` | 사장의 눈 10 · 서두르면 쏟는다 | 엔딩 | `hall_evening` |
-| 10 | `eye_11` | 사장의 눈 11 · 먼 창의 불빛 | 엔딩 | `alley_morning` |
-| 11 | `eye_12` | 사장의 눈 덤 · 그 갈매기 | 엔딩 | `owner_sheet` · `cafe_front_morning` |
+| 2 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_wall` · `hall_evening` |
+| 3 | `eye_6` | 사장의 눈 6 · 저 친구가 내립니다 | 엔딩 | `jieun_sheet` · `customer-sporty_normal` · `hall_busy_summer` |
 
 ### 2.1 프롬프트
 
@@ -58,104 +50,23 @@ Scene: Bright spring morning inside the cafe, cherry blossoms outside the window
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 2. `eye_3` · 사장의 눈 3 · 맛은 시간이 만든다
+#### 2. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
-- 나오는 날: 엔딩 · 장면: 카운터 앞으로 나가며 본 두 사람 · 참조: `jieun_sheet` · `geum_sheet` · `hall_spring`
+- 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_wall` · `hall_evening`
 
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-New characters (match their character sheets): GEUM: Korean man in his forties, a busy office worker who commutes by ferry, neat short black hair, dark charcoal suit with a slightly loosened tie, a smartphone in hand, a wristwatch.
-Scene: Spring daytime inside the cafe, seen from behind the oak counter. On the left, close to us and behind the counter, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) is seen from the waist up, turned three-quarters toward us. She holds a white cup tightly with both hands, shoulders tense, eyebrows drawn together, looking down at the cup, nervous. On the right, on the far side of the counter, GEUM (Korean man in his forties, neat short black hair, dark charcoal suit with a slightly loosened tie, wristwatch) stands waiting and looks at the wristwatch on his raised left wrist, impatient but not angry. In the foreground, entering from the bottom center of the picture, only one forearm and hand reaches forward between the two of them: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand is raised at the middle height of the picture, open and calm, palm toward GEUM, in a quiet gesture that says please wait. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the oak counter top, calm and empty, with no cups on it.
+Scene: Night after closing. A close, straight-on view of the dark green chalkboard in its oak frame on the cream plaster wall of the cafe, lit from above by one warm brass wall lamp, the surroundings fallen into deep navy shadow. The board is placed high, and its lower edge is at about two thirds of the picture height. The upper and left parts of the board are filled with neat, friendly chalk drawings instead of words: small coffee cups with steam, a little milk bottle, a leaf, and tidy rows of plain wavy chalk lines. There are no letters or numbers anywhere. Only the bottom right corner of the board has been kept completely empty, and that small empty space is framed by a thin square drawn in chalk, so it clearly looks like a blank saved for something important. In the foreground, entering from the bottom right corner, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The fingertips rest lightly on the oak frame right next to the empty square. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark teal wall tiles in shadow, calm and empty. The wall, the chalkboard, the shelves and the door look exactly like the straight-on wall reference image.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
-#### 3. `eye_4` · 사장의 눈 4 · 빈 컵만
+#### 3. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
 
-- 나오는 날: 엔딩 · 장면: 그 아이 뒤에 빈 컵을 놓는 손 · 참조: `jieun_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Busy bright spring afternoon inside the cafe, seen from behind the oak counter, from just behind JIEUN. At the center left, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) stands with her back three-quarters toward us at the counter, her head bent in concentration, the brown apron straps crossing her back, pouring coffee from a small steel pitcher into a cup in front of her. She does not notice us. To her right, at the height of her elbow, is a clean wooden side shelf. In the foreground, entering from the bottom right corner, we see only two forearms and hands: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hands quietly set a clean, empty white mug down at the end of a neat row of five empty white mugs on the side shelf, just behind her, so that she can reach them without looking. The row of mugs and the hands are at the middle height of the picture. The hands are steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark lower cabinet of the counter in shadow, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 4. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
-
-- 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_evening`
+- 나오는 날: 엔딩 · 장면: 앞치마 주머니에서 손을 꺼내며 · 참조: `jieun_sheet` · `customer-sporty_normal` · `hall_busy_summer`
 
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Night after closing. A close, straight-on view of the dark green chalkboard in its oak frame on the cream plaster wall of the cafe, lit from above by one warm brass wall lamp, the surroundings fallen into deep navy shadow. The board is placed high, and its lower edge is at about two thirds of the picture height. The upper and left parts of the board are filled with neat, friendly chalk drawings instead of words: small coffee cups with steam, a little milk bottle, a leaf, and tidy rows of plain wavy chalk lines. There are no letters or numbers anywhere. Only the bottom right corner of the board has been kept completely empty, and that small empty space is framed by a thin square drawn in chalk, so it clearly looks like a blank saved for something important. In the foreground, entering from the bottom right corner, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The fingertips rest lightly on the oak frame right next to the empty square. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark teal wall tiles in shadow, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 5. `eye_7` · 사장의 눈 7 · 앞치마 끈
-
-- 나오는 날: 엔딩 · 장면: 등 뒤에서 다시 매 주는 끈 · 참조: `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Summer evening after closing, one warm lamp on, the cafe softly out of focus behind. A close view from directly behind JIEUN, framed from her shoulders down to her hips, so that her back fills the middle of the picture. JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) is wiping a white cup with a cloth, seen only from behind, her head bowed and her low ponytail visible at the top of the picture. Her back is tired and she has not noticed that her apron strings came loose. Entering from the bottom edge of the picture, we see only two forearms and hands: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The two hands slowly and carefully tie the two brown fabric apron strings into a firm, neat bow at the small of her back. The bow and the fingers are exactly at the center of the picture. The hands are steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark green apron fabric and shadow, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 6. `eye_6` · 사장의 눈 6 · 저 친구가 내립니다
-
-- 나오는 날: 엔딩 · 장면: 앞치마 주머니에서 손을 꺼내며 · 참조: `jieun_sheet` · `hall_busy_summer`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: The busiest summer day: blazing daylight, and through the window and the glass door the silhouettes of a long line of waiting people. We look from behind the oak counter. In the center, on the far side of the counter, a friendly tourist customer (Korean woman in her thirties, straw hat, striped summer shirt) looks straight toward us and reaches out one open hand toward us, hopeful, asking for the owner to make her coffee. On the right, behind the counter next to an old two-group espresso machine in stainless steel with green enamel side panels, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) stands from the waist up, holding a portafilter in both hands. She has just looked up, eyes wide, surprised and nervous. In the foreground, entering from the bottom left corner, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand has just come out of a dark brown apron pocket and is held out at the middle height of the picture, palm up, presenting JIEUN to the customer. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the oak counter top, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 7. `eye_8` · 사장의 눈 8 · 동네 시간
-
-- 나오는 날: 엔딩 · 장면: 선반의 단골 잔들, 칠판 앞의 분필 · 참조: `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Night after closing. A quiet view of the cream plaster wall on the right side of the cafe, looking straight at the wall from about two steps away, at standing eye level. Only one warm brass wall lamp is lit, and the rest of the cafe has fallen into deep navy shadow. In the center of the picture hangs the dark green chalkboard in its oak frame, large, filling about half of the picture width. The whole board is completely blank, with only faint old chalk smudges and no writing at all. To the right of the board are the oak wall shelves. The middle shelf holds a neat row of eight different everyday ceramic mugs that clearly belong to eight different people: a thick cream mug, a tall pale blue mug, a chipped white mug, a small mustard mug, a dark brown mug, a forest green mug, a speckled grey mug and a short round white mug. All of them are clean and empty, with their handles turned the same way, softly lit as if waiting for their owners. In the foreground, entering from the bottom right corner, we see only one forearm and hand: the OWNER's right hand, an old man's hand with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand is raised to the height of the middle of the board and holds a short stick of white chalk between the thumb and two fingers, with the tip just about to touch the blank board. The hand is steady and natural. We never see his face, head, shoulders or body. At the far left of the picture, a few steps away and slightly out of focus, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) stands quietly with a folded cloth in both hands, turned toward the board and watching with a calm, attentive face. The lower third of the picture is only the dark teal wall tiles in shadow, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 8. `eye_9` · 사장의 눈 9 · 열쇠
-
-- 나오는 날: 엔딩 · 장면: 주머니에서 꺼낸 낡은 열쇠 · 참조: `jieun_sheet` · `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Autumn night after the festival, the cafe closed and dim, one warm lamp on, a dark blue window behind. Across the oak counter from us stands JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist), seen from the waist up and facing us, her eyes lowered to what she is being given, nervous but brave. She holds out her right hand, palm up, at the middle height of the picture. In the foreground, entering from the bottom right corner, only one forearm and hand reaches toward her: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. Between the thumb and two fingers it holds an old brass key on a small metal ring, lowering it into her open palm. The key and the two hands are exactly at the center of the picture, sharp and clear. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark oak counter top, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 9. `eye_10` · 사장의 눈 10 · 서두르면 쏟는다
-
-- 나오는 날: 엔딩 · 장면: 마감 선반에 붙이는 작은 메모 · 참조: `hall_evening`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Night after closing. A close view looking straight into the open wooden closing shelf under the counter, lit by one warm lamp from the upper left, the rest in deep navy shadow. On the shelf, a row of six clean white mugs stands upside down on a folded cream cloth, drying. On the plain oak back wall of the shelf, just above the mugs and exactly at the center of the picture, is a small square of cream paper. The paper shows only two short wavy pen lines, with no letters, numbers or readable marks. Entering from the right side of the picture, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The thumb gently presses a small piece of tape on the corner of the paper to stick it to the wood. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark front edge of the shelf board in shadow, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 10. `eye_11` · 사장의 눈 11 · 먼 창의 불빛
-
-- 나오는 날: 엔딩 · 장면: 깜깜한 마을, 불이 켜진 창 하나 · 참조: `alley_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Night of the winter blackout. The view from the upstairs window of a house at the top of the same sloping alley as the background reference, looking down the alley toward the sea. Thick snow lies on all the tiled roofs and steps, and snow is falling gently. The whole seaside village is completely dark, in deep navy and blue-grey: every other window is black, the street lamps are off, the sea is only a dark band. Exactly at the center of the picture, far down the alley, one small building with a green awning has one window glowing with warm golden candle light, the only light in the entire village. The glow is small and soft, with no rays. The dark wooden window frame surrounds the view from inside the room. At the bottom right of the frame only one forearm and hand rests on the window sill: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand is relaxed and steady. We never see his face, head, shoulders or body. The lower third of the picture is only the dark window sill and the shadowed snowy roofs just below it, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 11. `eye_12` · 사장의 눈 덤 · 그 갈매기
-
-- 나오는 날: 엔딩 · 장면: 사장님이 몰래 갈매기에게 빵을 준다 · 참조: `owner_sheet` · `cafe_front_morning`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Early spring morning in front of the cafe, before opening, soft clear light. The cafe's green awning and closed glass door are behind, with the blank A-frame board and potted plants beside the door, and the calm sea at the end of the street. The camera is low, at the height of a crouching person, so the figures are at the middle of the picture. On the left, the OWNER (Korean man, 66, neatly combed back white hair, short white beard, white shirt, charcoal grey knit vest, dark brown apron, reading glasses on a cord) crouches beside the wooden bench with a folded newspaper tucked under one arm. He holds out one small piece of bread between two fingers, with a tiny secret smile, glancing over his shoulder toward the door as if nobody must see this. On the right, on the stone doorstep, a chubby round white seagull with grey wings and a yellow beak stretches its neck and takes the bread, looking very pleased with itself. His hands are steady and natural. The lower third of the picture is only the plain paving stones in soft shadow, calm and empty. No sun rays.
+Scene: The busiest summer day: blazing daylight, and through the window and the glass door the silhouettes of a long line of waiting people. We look from behind the oak counter. In the center, on the far side of the counter, the tourist customer from the reference image (Korean woman with black hair in a high ponytail, mint green zip-up track jacket with the sleeves pushed up, white wristband on her right wrist) looks straight toward us and points at us with one finger, politely but firmly asking the owner, not JIEUN, to make her coffee. On the right, behind the counter next to an old two-group espresso machine in stainless steel with green enamel side panels, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) stands from the waist up, holding a portafilter in both hands. She has just looked up, eyes wide, surprised and nervous. In the foreground, entering from the bottom left corner, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand has just come out of a dark brown apron pocket and is held out at the middle height of the picture, palm up, presenting JIEUN to the customer. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the oak counter top, calm and empty.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 

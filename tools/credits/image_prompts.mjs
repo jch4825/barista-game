@@ -311,6 +311,14 @@ const SIZE_1K = '1376×768';
 Object.assign(IMAGE_PROMPTS, {
   ...Object.fromEntries([
     ['eye_2', '사장의 눈 2 · 한 칸 내린 선반', [], 'hall_morning', SIZE_1K],
+    ['eye_3', '사장의 눈 3 · 맛은 시간이 만든다', ['geum'], 'jieun_sheet · geum_sheet · hall_spring', SIZE_2K],
+    ['eye_4', '사장의 눈 4 · 빈 컵만', [], 'jieun_sheet · hall_spring', SIZE_2K],
+    ['eye_7', '사장의 눈 7 · 앞치마 끈', [], 'jieun_sheet · workbench_morning', SIZE_1K],
+    ['eye_8', '사장의 눈 8 · 동네 시간', [], 'jieun_sheet · hall_evening', SIZE_2K],
+    ['eye_9', '사장의 눈 9 · 열쇠', [], 'jieun_sheet · hall_evening', SIZE_2K],
+    ['eye_10', '사장의 눈 10 · 서두르면 쏟는다', [], 'hall_evening', SIZE_2K],
+    ['eye_11', '사장의 눈 11 · 먼 창의 불빛', [], 'alley_morning', SIZE_2K],
+    ['eye_12', '사장의 눈 덤 · 그 갈매기', [], 'owner_sheet · cafe_front_morning', SIZE_1K],
     ['sumin_secret', '합격 통지서', ['sumin'], 'sumin_sheet · jieun_sheet · hall_winter', SIZE_2K],
     ['winter_gathering', '겨울 · 단골 여덟 명', ['kang', 'do'], 'haesun_sheet · kang_sheet · do_sheet · jian_sheet · hall_blackout', SIZE_2K],
     ['do_secret', '마지막 우편', ['do'], 'do_sheet · jieun_sheet · hall_winter', SIZE_2K],
