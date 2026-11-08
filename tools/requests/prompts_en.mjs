@@ -155,3 +155,24 @@ export const CG_EN = {
   kang_peekaboo: 'Blackout night in the candle-lit cafe: KANG, the big weathered old fisherman, crouches in front of a baby held by EUNJU and plays peekaboo with both rough hands, his face soft and silly; the baby laughs, EUNJU smiles in relief; warm candle and lantern light, snow at the window.',
   eye_12: 'Early spring morning in front of the cafe: the OWNER (Korean man, 66, neatly combed back white hair, short white beard, white shirt, charcoal apron) crouches by the terrace and quietly gives a small piece of bread to a chubby white seagull, with a tiny secret smile; the cafe door is still closed, soft morning light, calm sea behind. No sun rays.',
 };
+
+/* 다시 만들 장면 그림(2026-11-08 사용자 "프롬프트 고치기", 검수 13.100): 파일은 있지만 중요한 물건이 대화창(화면 아래 26%)에 가려 새로 요청.
+   파일이 있어도 docs/아직 없는 그림.md 에 나옴. 새 그림을 받으면 여기서 빼고, scene 은 CG_EN(추가 제작에 상자가 있으면 그 상자)으로 옮김 */
+export const CG_REDO = {
+  han_secret: {
+    why: '쪽지가 대화창에 가렸고, 대본은 쉬는 날의 외투 차림인데 그림은 운전복이라 다시 요청',
+    refs: ['han_sheet', 'hall_winter'],
+    scene: "A snowy morning inside the cafe. HAN (Korean man in his mid forties, short black hair, tired kind eyes with faint dark circles, a wristwatch on his left wrist) has come in on his day off: he wears a thick dark brown winter coat over a gray sweater, with no uniform, no tie and no cap. Medium shot from the waist up: HAN sits at the counter facing the viewer and proudly holds up two small folded paper notes side by side, raised to the height of his chin, one in his handwriting and one in his daughter's handwriting (no readable text), smiling proudly. Both notes and both hands are clearly in the middle of the picture, high above the counter. The counter in the lower third of the picture is completely bare.",
+  },
+  winter_milk_handover: {
+    why: '잔을 감싼 두 손이 대화창에 가려 다시 요청',
+    refs: ['owner_sheet', 'jieun_sheet', 'hall_evening'],
+    scene: "Night after closing, one warm lamp in the cafe. JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) and the OWNER (Korean man, 66, neatly combed back white hair, short white beard, white shirt, charcoal grey knit vest, dark brown apron, reading glasses on a cord) stand facing each other, seen from the side. Medium shot from the waist up, not a close-up, with a little empty space above their heads. She gently places a white mug of warm milk into the OWNER's hands, her two hands wrapped around his, thin steam rising. They hold the mug up in the air at chest height, not resting on anything: the mug and all four hands are exactly at the vertical center of the picture. The OWNER looks at the cup quietly, his eyes softened. Below their hands there are only their aprons and the dark empty edge of the counter. Warm golden light, dark blue window behind. All hands steady and natural.",
+  },
+  ending_last_cup: {
+    why: '머그 아래 절반이 대화창에 가렸고, 대본은 저녁인데 그림은 아침이라 다시 요청',
+    refs: ['hall_evening'],
+    noPeople: true,
+    scene: "Evening at the cafe's window seat, nobody in the picture. A single white mug of warm milk stands on a wide wooden windowsill. The windowsill runs across the middle of the picture, so the mug stands at the vertical center of the picture, seen straight on from the height of the sill. A thin wisp of steam rises from it. Behind the mug, through the window: the calm harbor at dusk, a deep blue sky with a little soft warm color at the horizon, and the first few small warm lights of fishing boats just coming on. Below the windowsill, the lower third of the picture is only plain dark wood paneling, calm and empty. Simple, quiet and hopeful.",
+  },
+};

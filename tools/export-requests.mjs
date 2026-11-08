@@ -18,7 +18,7 @@ const { HAND_SKILLS, RECIPES, LEVELS, SERVICE_CUP, CUPS, TEMPS, prepSteps, shotN
 const { EPISODES, ENDING, getEpisode } = await imp('js/data/episodes/index.js');
 const { REGULARS } = await imp('js/data/regulars.js');
 const { freeDay } = await imp('js/data/episodes/free.js');
-const { PEOPLE_EN, FACE_EN, CG_EN } = await imp('tools/requests/prompts_en.mjs');
+const { PEOPLE_EN, FACE_EN, CG_EN, CG_REDO } = await imp('tools/requests/prompts_en.mjs');
 const { MISSING } = await imp('tools/audio/audio_map.mjs');
 const { OBJ_SHEETS, KEY_EN, sheetItems, objPrompt } = await imp('tools/requests/obj_sheets.mjs');
 const { BGM_VARIANTS } = await imp('js/av/audio.js');
@@ -357,9 +357,10 @@ const todo = []; // { group, id, title, ratio, bg, refs, file, use, prompt }
 // 1) 인물: 추가 제작의 사람(손녀 등) → 새 인물의 빠진 것
 for (const [, id] of extraText.matchAll(/^\| \d+ \| `([a-z_0-9]+)`/gm)) {
   if (id.endsWith('_sheet') ? haveRef.has(id) : haveStand.has(id)) continue;
+  if (id === 'granddaughter_smile') continue; // 손녀의 보통 + 웃음은 한 장에(추가 제작 9번 상자, 검수 13.100): 받으면 둘로 잘라 넣음
   const it = extraItem(id);
   // 사람 그림(설정화 · 스탠딩)만: 대본에서 뺀 CG 와 시트로 옮긴 물건은 게임 파일 자리가 달라 걸러짐
-  if (it?.prompt && /^assets\/_src\/(ref|stand)\//.test(it.file)) todo.push({ group: '인물', id, title: it.title, ratio: id.endsWith('_sheet') ? '1:1' : '9:16', bg: '흰 바탕', refs: it.refs, file: it.file, use: '', prompt: it.prompt });
+  if (it?.prompt && /^assets\/_src\/(ref|stand)\//.test(it.file)) todo.push({ group: '인물', id, title: it.title, ratio: id.endsWith('_sheet') || id === 'granddaughter_normal' ? '1:1' : '9:16', bg: '흰 바탕', refs: it.refs, file: it.file, use: '', prompt: it.prompt });
 }
 for (const id of newPeople) {
   const c = CHARS[id];
@@ -368,6 +369,11 @@ for (const id of newPeople) {
   if (need.sheet) todo.push({ group: '인물', id: `${id}_sheet`, title: `${c.name} · 설정화`, ratio: '1:1', bg: '흰 바탕', refs: [], file: `assets/_src/ref/${id}_sheet.jpg`, use: `처음 나오는 날: ${epLabel(firstEp[id])}`, prompt: sheetPrompt(id, fl) });
   if (need.normal) todo.push({ group: '인물', id: `${id}_normal`, title: `${c.name} · 보통`, ratio: '9:16', bg: '흰 바탕', refs: [`${id}_sheet`], file: `assets/_src/stand/${id}_normal.jpg`, use: '', prompt: normalPrompt(id) });
   for (const f of need.faces) todo.push({ group: '인물', id: `${id}_${f}`, title: `${c.name} · ${FACE_KO[f] || f}`, ratio: '9:16', bg: '흰 바탕', refs: [`${id}_normal`], file: `assets/_src/stand/${id}_${f}.jpg`, use: '', prompt: facePrompt(FACE_EN[f] || f) });
+}
+// 2-0) 다시 만들 장면 그림: 파일은 있지만 새로 요청(prompts_en.mjs 의 CG_REDO, 검수 13.100)
+for (const [id, r] of Object.entries(CG_REDO)) {
+  const c = CGS[id];
+  todo.push({ group: '장면 그림', id, title: `${c.title} (다시 만들기)`, ratio: '16:9', bg: '', refs: r.refs, file: `assets/cg/cg_${id}.jpg`, use: [epLabel(c.ep), r.why].join(' · '), prompt: `${SCENE}\n${r.scene}\n${r.noPeople ? AVOID_S.replace('extra people', 'people') : AVOID_S}` });
 }
 // 2) 장면 그림(CG): js/data/cg.js 차례
 for (const id of cgMissing) {
