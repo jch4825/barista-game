@@ -19,7 +19,11 @@ const sfxBuffers = new Map();
 // 장면 속 소리 목록 (귀마개 영향을 받음)
 const ENV_SFX = new Set(['bell', 'knock', 'door', 'phone', 'alarm', 'bus', 'card_beep', 'pen', 'seal', 'water', 'bubbles', 'towel',
   'clink', 'stack', 'pour', 'ice', 'espresso', 'steam', 'spill', 'wipe', 'mop', 'sign', 'tray', 'pos', 'mixer', 'oven', 'beep',
-  'shutter_phone', 'highfive', 'mug', 'slip', 'glass_break', 'crowd_angry', 'crash_small', 'tick_fast', 'sweep']);
+  'shutter_phone', 'highfive', 'mug', 'slip', 'glass_break', 'crowd_angry', 'crash_small', 'tick_fast', 'sweep',
+  'k_stir', 'k_whisk', 'k_hand', 'k_pour', 'k_bottle', 'k_shot', 'k_wand', 'k_spoon', 'k_pump']);
+
+// 실제 주방 소리(사서 쓰는 팩이라 비공개 서브모듈에만 있음): 파일이 없으면 전에 쓰던 합성음으로(검수 13.106)
+const SFX_FALLBACK = { k_stir: 'wipe', k_whisk: 'wipe', k_hand: 'mixer', k_pour: 'pour', k_bottle: 'pour', k_shot: 'pour', k_wand: 'bubbles', k_spoon: 'stack', k_pump: 'stack' };
 
 /* ------------------------------------------------------------------ */
 /* 초기화                                                              */
@@ -642,7 +646,7 @@ function playSfx(name) {
     src.start();
     return;
   }
-  const fn = SYN[name];
+  const fn = SYN[name] || SYN[SFX_FALLBACK[name]];
   if (fn) fn();
 }
 
@@ -739,6 +743,6 @@ bus.on('profile', () => applyVolumes());
 
 /** 도구(검사·에셋 목록)용 */
 // 합성음이 없고 파일로만 있는 효과음(재미 개편 새 놀이 · 웃음 줄기, 2026-11-01). 파일이 없으면 조용히 넘어감
-export const SFX_NAMES = [...new Set([...Object.keys(SYN), 'poof', 'boom', 'squawk', 'bus', 'pang'])];
+export const SFX_NAMES = [...new Set([...Object.keys(SYN), 'poof', 'boom', 'squawk', 'bus', 'pang', ...Object.keys(SFX_FALLBACK)])];
 export const BGM_NAMES = [...new Set([...Object.keys(MOODS), ...Object.keys(BGM_VARIANTS)])];
 export const AMB_NAMES = ['cafe', 'crowd', 'street', 'kitchen', 'home', 'classroom'];

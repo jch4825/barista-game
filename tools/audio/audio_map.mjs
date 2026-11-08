@@ -20,6 +20,9 @@ const IS = 'interfaceanditemsounds/';
 const TW = 'userinterfacesoundfxscifitech/';
 const VN = 'visualnovelanimemusicpack_v2/WAV/';
 const OVV = 'OVANI/Vehicles Heavy Sound FX Pack/Vehicles Heavy/'; // 버스(2026-11-01)
+const OVF = 'OVANI/Foley Props Sound FX Pack/Foley Props/'; // 그라인더 · 카메라 셔터(2026-11-08)
+const OVS = 'OVANI/Steampunk Sound FX Pack Vol. 2/Steampunk Vol 2/'; // 증기(2026-11-08)
+const OVE = 'OVANI/Environmental Ambiences Sound FX Pack Vol. 2/Environments 2/'; // 먼 바다(2026-11-08)
 const AIM = 'BGM/'; // 저작자가 AI 음악 모델로 만든 배경음악(프로젝트의 BGM/ 폴더)
 // AI 음악은 곡마다 만든 모델을 적음(entry 의 pack). 지금 곡은 모두 Suno(2026-11-01 사용자). Gemini로 만든 곡이 오면 Gemini 팩을 더함
 const SUNO = 'ai:suno';
@@ -49,6 +52,9 @@ export const PACKS = {
   [IS]: { name: 'Interface & Item Sounds (320개, V1~V3)', author: 'GameDev Market', license: GDM, bundle: HB21 },
   [TW]: { name: 'User Interface Sound FX - Scifi & Tech', author: 'TomWinandySFX (tomwinandy.com)', license: GDM, bundle: HB21 },
   [OVV]: { name: 'Vehicles Heavy Sound FX Pack', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
+  [OVF]: { name: 'Foley Props Sound FX Pack', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
+  [OVS]: { name: 'Steampunk Sound FX Pack Vol. 2', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
+  [OVE]: { name: 'Environmental Ambiences Sound FX Pack Vol. 2', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
   /* 2026-11-01 사용자: "AI로 만든 음악은 꼭 자를 필요도, 따로 올려서 저작권을 보호할 필요도 없다. 전부 저작자가 만든 음악이므로
    * SUNO나 Gemini 음악 모델로 만든 것이라는 것만 명시하면 된다."
    * 사용자(같은 날 고침): "Rising Glow, Galactic Waltz, Untitled, Across the Horizon 모두 SUNO로 만든 곡이야." → 지금 곡은 모두 Suno
@@ -145,6 +151,22 @@ export const AUDIO_MAP = [
   { id: 'card_beep', kind: 'sfx', src: `${TW}TomWinandySFX_UI_ScifiTech_Confirm_06.wav`, target: { peak: -12 }, note: '높이가 변하지 않는 짧은 삑' },
   { id: 'pen', kind: 'sfx', src: `${IS}V1.0/MISC/Writing (2).wav`, target: { peak: -12 }, note: '종이에 쓰는 사각 소리' },
   { id: 'seal', kind: 'sfx', src: `${AC}Misc/AC_Drum_Hit_Single.wav`, target: { peak: -6 }, note: '도장과 같은 쿵(계약서)' },
+  // 2026-11-08 사용자 "효과음은 소리 팩에서 찾아보고 없으면 말해라": 합성음 대신 실제 소리(검수 13.106)
+  { id: 'mixer', kind: 'sfx', layers: [{ src: `${OVF}Kitchen/Coffee Grinder Grinding Coffee.wav`, trim: [0.2, 3.0], rate: 0.82 }], keepSilence: true, fadeOut: 0.35, target: { peak: -13 }, note: '기계 그라인더로 원두 가는 소리, 조금 낮춰 굵게(사용자가 고름)' },
+  { id: 'k_hand', kind: 'sfx', layers: [{ src: `${OVF}Kitchen/Coffee Grinder Sounds.wav`, trim: [0, 2.4], rate: 0.75 }], keepSilence: true, lowpass: 4000, fadeOut: 0.3, target: { peak: -13 }, note: '손 그라인더: 덜그럭거리며 낮게 갈리는 소리(사용자가 고름)' },
+  { id: 'snap', kind: 'sfx', src: `${OVF}Cameras and Cables/Camera Shutter Normal Click.wav`, target: { peak: -12 }, note: '카메라 셔터' },
+  { id: 'shutter_phone', kind: 'sfx', src: `${OVF}Cameras and Cables/Camera Shutter Normal Click.wav`, highpass: 1400, target: { peak: -14 }, note: '같은 셔터 소리의 낮은 음을 덜어 휴대전화처럼' },
+  { id: 'steam', kind: 'sfx', src: `${OVS}Clockwork/Tiny Clockwork Steam Release.wav`, target: { peak: -16 }, note: '증기가 빠지는 소리 → 스팀 노즐(쉬익)' },
+  { id: 'street', kind: 'amb', src: `${OVE}Subtropical/Subtropical Distant Sea Loop B.wav`, loop: 3, trim: [0, 46], target: { lufs: -30 }, bitrate: '64k', note: '멀리서 들리는 바다(넷 가운데 벌레 소리 같은 높은 음이 가장 적은 것) → 바닷가 골목. 갈매기 소리는 팩에 없음' },
+  // 2026-11-08 사용자 "실제 주방 소리 추가할 수 있으면 추가하면 좋다": 손 동작마다 실제 소리(k_ = 주방, 검수 13.106). 팩에 없으면 audio.js 의 SFX_FALLBACK 합성음
+  { id: 'k_stir', kind: 'sfx', src: `${OVF}Kitchen/Spoon Normal Stirring.wav`, trim: [0, 2.6], fadeOut: 0.35, target: { peak: -15 }, note: '숟가락으로 잔을 젓는 소리 → 젓기' },
+  { id: 'k_whisk', kind: 'sfx', src: `${OVF}Kitchen/Whisk Beating Gentle Whisking.wav`, trim: [0, 2.6], fadeOut: 0.35, target: { peak: -15 }, note: '거품기로 살살 젓는 소리 → 말차 풀기' },
+  { id: 'k_pour', kind: 'sfx', src: `${OVF}Kitchen/Tea Infuser Pouring Sounds.wav`, trim: [0, 2.2], fadeOut: 0.3, target: { peak: -14 }, note: '따르는 소리 → 붓기 · 물 붓기 · 뜸 붓기' },
+  { id: 'k_bottle', kind: 'sfx', src: `${OVF}Kitchen/Bottle Cap Liquid Pouring.wav`, target: { peak: -14 }, note: '병에서 따르는 소리 → 피처에 우유 붓기' },
+  { id: 'k_shot', kind: 'sfx', src: `${OVF}Lab Like/Test Tube Liquid Pouring.wav`, target: { peak: -16 }, note: '가는 줄기로 떨어지는 소리 → 샷 내리기' },
+  { id: 'k_wand', kind: 'sfx', src: `${OVF}Arty Items/Spray Paint Hiss.wav`, lowpass: 7000, fadeOut: 0.4, target: { peak: -20 }, note: '일정하게 쉬익 하는 소리 → 우유 데우기 · 거품 내기' },
+  { id: 'k_spoon', kind: 'sfx', src: `${OVF}Kitchen/Spoon Tapping A.wav`, target: { peak: -14 }, note: '숟가락이 톡 닿는 소리 → 청 · 가루 떠 넣기' },
+  { id: 'k_pump', kind: 'sfx', src: `${OVF}Lab Like/Pipetting A.wav`, target: { peak: -14 }, note: '눌러서 짜는 소리 → 시럽 펌프' },
   { id: 'water', kind: 'sfx', src: `${CY}Various/SFX_waterSplash.wav`, target: { peak: -12 }, note: '물 튀는 소리(실제 소리에 가까운 잡음)' },
   { id: 'bubbles', kind: 'sfx', src: `${AC}Bubble/AC_Funny_Bubble_02.wav`, target: { peak: -12 }, note: '보글보글' },
   { id: 'towel', kind: 'sfx', src: `${AC}Whooshes Swishes Slides Transitions/AC_Fast_Swish_03.wav`, target: { peak: -14 }, note: '짧게 스치는 소리 → 종이 타월 뽑기' },
@@ -221,6 +243,6 @@ export const AUDIO_MAP = [
 /** 아직 알맞은 원본이 없어 합성음으로 두는 ID (사용자에게 요청할 목록) */
 export const MISSING = {
   bgm: [],
-  sfx: ['snap', 'espresso', 'steam', 'mixer', 'shutter_phone', 'mug'],
-  amb: ['street', 'kitchen', 'classroom'],
+  sfx: ['espresso', 'mug'], // 팩에 에스프레소 추출 · 도자기 잔 소리가 없음(2026-11-08 3,210개 이름으로 찾음). 둘 다 지금 게임에서 울리지 않음
+  amb: ['kitchen', 'classroom'], // 지금 대본에 없음
 };

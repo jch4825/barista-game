@@ -15,7 +15,7 @@
 | 작업대 물건 · 다 만든 잔 시트 | 0개를 시트 0장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 15(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 5 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
-| 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
+| 효과음 · 환경음 | 효과음 2 · 환경음 2 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
 
@@ -226,13 +226,8 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 
 | 종류 | id | 쓰는 곳 | 바라는 소리 |
 | :--- | :--- | :--- | :--- |
-| 효과음 | `snap` | 작업대 · 화면 | 사진 스냅 연출 |
 | 효과음 | `espresso` | 작업대 · 화면 | 에스프레소가 나오는 소리 |
-| 효과음 | `steam` | 봄 1일 | 스팀 노즐(쉬익) |
-| 효과음 | `mixer` | 작업대 · 화면 | 그라인더 가는 소리 |
-| 효과음 | `shutter_phone` | 봄 6일 | 휴대전화 사진 찍는 소리 |
 | 효과음 | `mug` | 작업대 · 화면 | 머그를 내려놓는 소리 |
-| 환경음 | `street` | 봄 1일 · 봄 2일 · 봄 3일 · 봄 4일 · 봄 7일 · 여름 2일 · 여름 6일 · 여름 7일 외 4일 | 바닷가 골목(갈매기 · 먼 파도 · 발소리) |
 | 환경음 | `kitchen` | 지금 대본에는 없음 | 주방 |
 | 환경음 | `classroom` | 지금 대본에는 없음 | 교실 |
 
