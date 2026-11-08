@@ -232,7 +232,8 @@ function diaryView() {
  */
 function growView() {
   const wrap = h('div', { class: 'nb-grow' });
-  const draw = () => {
+  // focusId: 다시 그린 뒤 그 물건의 줄로 초점을 돌려 둠(사기 · 입기를 누르면 목록을 새로 그려 초점이 사라지고, 키보드 · 스캔이 처음 자리로 돌아가던 문제, 검수 13.97)
+  const draw = (focusId = null) => {
     const g = store.grow();
     const st = grow.stats(g);
     const rk = grow.rank();
@@ -265,27 +266,28 @@ function growView() {
       class: 'btn btn-small btn-main', disabled: g.money < it.price,
       onclick: async (e) => {
         e.stopPropagation();
+        const me = e.currentTarget;
         const ok = await ov.confirm({ text: `${josa(it.name, '을/를')} ${grow.won(it.price)}에 살까요?`, detail: `모은 돈 ${grow.won(g.money)} → ${grow.won(g.money - it.price)}`, yes: it.kind === 'gift' ? '사서 선물하기' : '사기', no: '그만두기' });
-        if (!ok || !grow.buy(it.id)) return;
+        if (!ok || !grow.buy(it.id)) { if (me.isConnected) me.focus({ preventScroll: true }); return; } // 그만두기: 누른 단추로 초점을 돌려 둠
         audio.sfx('coin');
         if (it.kind === 'gift') await showGift(it);
         else if (it.kind === 'apron') ov.toast(`${josa(it.name, '을/를')} 입었어요!`, 'apron');
         else await showPlaced(it);
-        draw();
+        draw(it.id);
       },
     }, h('i', { html: ICON(it.kind === 'gift' ? 'gift' : 'coin') }), h('span', { text: g.money < it.price ? `${grow.won(it.price)} · 돈이 모자라요` : `${grow.won(it.price)}에 ${label}` }));
-    const again = (label, fn) => h('button', { class: 'btn btn-small btn-soft', onclick: async (e) => { e.stopPropagation(); await fn(); } }, h('i', { html: ICON('repeat') }), h('span', { text: label }));
+    const again = (label, fn) => h('button', { class: 'btn btn-small btn-soft', onclick: async (e) => { e.stopPropagation(); const me = e.currentTarget; await fn(); if (me.isConnected) me.focus({ preventScroll: true }); } }, h('i', { html: ICON('repeat') }), h('span', { text: label }));
     const itemRow = (it) => {
       const owned = grow.owns(it.id);
       const wearing = it.kind === 'apron' && g.apron === it.id;
       let act;
       if (it.kind === 'apron' && owned) {
-        act = h('button', { class: `btn btn-small ${wearing ? 'btn-main' : 'btn-soft'}`, disabled: wearing, onclick: (e) => { e.stopPropagation(); audio.sfx('towel'); grow.wearApron(it.id); draw(); } }, h('span', { text: wearing ? '입고 있어요' : '입기' }));
+        act = h('button', { class: `btn btn-small ${wearing ? 'btn-main' : 'btn-soft'}`, disabled: wearing, onclick: (e) => { e.stopPropagation(); audio.sfx('towel'); grow.wearApron(it.id); draw(it.id); } }, h('span', { text: wearing ? '입고 있어요' : '입기' }));
       } else if (owned && it.kind === 'gift') act = h('div', { class: 'gr-acts' }, h('span', { class: 'gr-owned', text: it.to === 'owner' ? '드렸어요' : '보냈어요' }), again('다시 보기', () => showGift(it)));
       else if (owned) act = h('div', { class: 'gr-acts' }, h('span', { class: 'gr-owned', text: '가게에 있어요' }), again('보기', () => showPlaced(it)));
       else act = buyBtn(it, it.kind === 'gift' ? '선물하기' : '사기');
       const toTag = it.kind === 'gift' ? h('em', { class: `gr-to to-${it.to}`, text: `${grow.GIFT_TO[it.to]?.name || ''}에게` }) : null;
-      return h('div', { class: `gr-item k-${it.kind} ${owned ? 'is-owned' : ''}`.trim(), style: it.color ? { '--c': it.color } : {} },
+      return h('div', { class: `gr-item k-${it.kind} ${owned ? 'is-owned' : ''}`.trim(), 'data-item': it.id, style: it.color ? { '--c': it.color } : {} },
         h('i', { class: 'gr-item-ico', html: decoPic(it, it.kind === 'apron' ? 'apron' : it.icon) }),
         h('div', {}, h('b', {}, toTag, h('span', { text: it.name })), h('small', { text: it.desc })), act);
     };
@@ -307,6 +309,13 @@ function growView() {
         ? h('div', { class: 'gr-odd-card got' }, h('b', { text: o.name }), h('p', { text: `사장님: ${o.say}` }))
         : h('div', { class: 'gr-odd-card' }, h('i', { html: ICON('lock') }), h('b', { text: '???' }))))));
     wrap.replaceChildren(head, stats, hand, shop, odd);
+    if (focusId) {
+      // 그 줄의 누를 수 있는 단추로(다시 보기 · 보기 · 입기), 없으면('입고 있어요') 그 줄 자체로
+      const row = wrap.querySelector(`.gr-item[data-item="${focusId}"]`);
+      const b = row?.querySelector('button:not([disabled])');
+      if (b) b.focus({ preventScroll: true });
+      else if (row) { row.tabIndex = -1; row.focus({ preventScroll: true }); }
+    }
   };
   draw();
   return wrap;

@@ -566,18 +566,6 @@
   "flag": "",
   "at": "2026-11-07 09:17"
  },
- "57187194": {
-  "who": "jieun",
-  "sig": "c4d1e1ea4277",
-  "sim": 0.9908,
-  "rate": 6.05,
-  "fall": 70,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:51"
- },
  "59744030": {
   "who": "customer-arms",
   "sig": "49a94b50d6c3",
@@ -3889,19 +3877,6 @@
   "flag": "",
   "at": "2026-11-05 22:55"
  },
- "55a1fba4": {
-  "who": "jieun",
-  "sig": "0133c086a00d",
-  "sim": 0.993,
-  "rate": 5.31,
-  "fall": 60,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:21",
-  "long": 130
- },
  "75db47d7": {
   "who": "jieun",
   "sig": "4fe8d1ee076e",
@@ -5561,17 +5536,6 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-07 08:34"
- },
- "775c51ad": {
-  "who": "jieun",
-  "sig": "ef14b220304d",
-  "sim": 0.9906,
-  "rate": 5.53,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 20:08"
  },
  "53ad6a3a": {
   "who": "jieun",
@@ -9773,18 +9737,6 @@
   "flag": "",
   "at": "2026-11-07 08:56"
  },
- "69d434d2": {
-  "who": "jieun",
-  "sig": "d33052c50db2",
-  "sim": 0.9932,
-  "rate": 5.04,
-  "fall": 140,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 08:56"
- },
  "246cb0c5": {
   "who": "jieun",
   "sig": "84733ee99f73",
@@ -11270,20 +11222,6 @@
   "flag": "",
   "at": "2026-11-07 09:09",
   "long": 110
- },
- "c19dddaa": {
-  "who": "jieun",
-  "sig": "b41edb2293c7",
-  "sim": 0.9927,
-  "rate": 6.43,
-  "fall": 50,
-  "try": 2,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-07 12:05",
-  "long": 120,
-  "heard": "2026-11-07 사용자가 듣고 고름(끝 늘이기)"
  },
  "e81f1266": {
   "who": "jieun",
@@ -42318,5 +42256,90 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-08 14:13"
+ },
+ "c60c6e5a": {
+  "who": "jieun",
+  "sig": "52327c8049dd",
+  "sim": 0.9887,
+  "rate": 6.5,
+  "fall": 80,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "f5176f7b": {
+  "who": "jieun",
+  "sig": "239bbee8754f",
+  "sim": 0.9932,
+  "rate": 5.35,
+  "fall": 50,
+  "long": 100,
+  "try": 3,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "fd9d26ad": {
+  "who": "jieun",
+  "sig": "2e9437077f25",
+  "sim": 0.9887,
+  "rate": 4.8,
+  "fall": 100,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "a9f52caf": {
+  "who": "jieun",
+  "sig": "eb819365407e",
+  "sim": 0.9947,
+  "rate": 5.26,
+  "fall": 70,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "754d8c2b": {
+  "who": "jieun",
+  "sig": "ddaf1513ab31",
+  "sim": 0.9953,
+  "rate": 5.36,
+  "fall": 90,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "3b29d483": {
+  "who": "jieun",
+  "sig": "0e7a4a1476fc",
+  "sim": 0.9938,
+  "rate": 5.26,
+  "fall": 70,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 15:01"
+ },
+ "bcc74804": {
+  "who": "jieun",
+  "sig": "6356c08ee18e",
+  "sim": 0.9944,
+  "rate": 4.94,
+  "fall": 70,
+  "try": 1,
+  "style": "plain",
+  "emo": true,
+  "flag": "",
+  "at": "2026-11-08 15:01"
  }
 }

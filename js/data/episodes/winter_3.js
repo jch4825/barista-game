@@ -28,6 +28,7 @@ export default {
     show({ left: 'jieun:normal', center: 'han:normal', right: 'han_daughter:normal' }),
     sfx('bus'),
     sfx('bell'),
+    narr('겨울 방학, 여섯 시 십 분에 한 씨가 들어온다. 오늘은 그 뒤로 패딩을 입은 아이가 따라 들어온다.'), // 대응 장면에 있던 것을 주문 앞으로(검수 13.97)
     mini('brew', {
       id: 'winter_3_han', title: '한 씨의 늘 먹던 거', level: 'normal', book: WINTER_BOOK,
       orders: [{ who: 'han', say: '늘 먹던 거요. 오늘은 가져가지 않고 여기서 마실게요.', menu: 'vanilla_latte', temp: 'hot', togo: false, usual: true, thanks: '고마워요.' }],

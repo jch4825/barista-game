@@ -102,7 +102,8 @@ export async function rush(opts = {}) {
 
   const S = th.spots;
   const live = new Map(); // 자리 → { el, age }
-  const free = () => S.map((_, i) => i).filter((i) => !live.has(i));
+  const fading = new Set(); // 사라지는 중인 종이의 자리: 새 종이가 그 위에 겹쳐 나오지 않게(자리 11곳이 다 찬 몰림 시간, 검수 13.97)
+  const free = () => S.map((_, i) => i).filter((i) => !live.has(i) && !fading.has(i));
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
   // 글자(펑! · 꽥!)를 띄울 자리: 그 요소의 가운데를 field 안 좌표로(무대가 화면에 맞춰 줄어 있어도)
   const posOf = (el) => {
@@ -141,7 +142,9 @@ export async function rush(opts = {}) {
     live.delete(i);
     s.el.disabled = true;
     s.el.classList.add(cls);
-    setTimeout(() => s.el.remove(), isReducedMotion() ? 0 : dur(380));
+    const gone = () => { s.el.remove(); fading.delete(i); };
+    if (isReducedMotion()) gone();
+    else { fading.add(i); setTimeout(gone, dur(380)); }
   }
   // 주문 종이를 누르면 펑 터지고 배경이 조금 흔들림(2026-11-01 사용자). 쌓인 종이가 많을수록 조금 더 흔들림.
   // 움직임 줄이기 · 차분 모드: 흔들림 없이 종이만 사라짐(vfx 도 저절로 줄어듦)
@@ -262,11 +265,14 @@ export async function rush(opts = {}) {
   /** 사장님이 주문 하나를 받아 줌(오래 둔 주문 · 자리가 다 찼을 때). 처음 한 번만 "이건 내가 할게요." */
   function ownerTake(i, s) {
     const { x, y } = posOf(s.el);
+    // 키보드 · 스캔: 초점은 가장 오래된 종이에 있는데 사장님도 그 종이를 받아 감 → 다음 종이로 옮김(초점이 사라져 Enter 가 먹지 않던 문제, 검수 13.97)
+    const hadFocus = s.el === document.activeElement;
     popText(field, '사장님이 받았어요', x, y - 40);
     if (!helped) tts.speak(th.say.owner, 'owner');
     helped += 1;
     removeSlip(i, 'is-owner');
     paint();
+    if (hadFocus) focusNext();
   }
   function step(dt) {
     if (over || !started) return;
