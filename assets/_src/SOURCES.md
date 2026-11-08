@@ -245,6 +245,7 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_eye_8.jpg` | `Man_holding_chalk_at_board_94703fd4_2K.jpg` (2026-11-09 01:06) |
 | `cg/cg_eye_11.jpg` | `Old_man_looking_at_snow_597c7ec7_2K.jpg` (2026-11-09 01:06) |
 | `cg/cg_eye_12.jpg` | `Man_feeding_seagull_outside_cafe_320f3ed8.jpg` (2026-11-09 01:10) |
+| `cg/cg_eye_6.jpg` | `Barista_and_customer_in_cafe_c4c1a626_2K.jpg` (2026-11-09 01:14 · 그 손님 customer-sporty 를 참조로 다시 만든 그림) |
 | `ref/hall_wall.jpg` | `따뜻한 해변 카페 벽면 인테리어.png` (2026-11-09 00:35 · 칠판이 있는 벽을 정면에서 본 그림, 칠판 장면의 참조 그림) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):

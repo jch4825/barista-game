@@ -313,6 +313,7 @@ Object.assign(IMAGE_PROMPTS, {
     ['eye_2', '사장의 눈 2 · 한 칸 내린 선반', [], 'hall_morning', SIZE_1K],
     ['eye_3', '사장의 눈 3 · 맛은 시간이 만든다', ['geum'], 'jieun_sheet · geum_sheet · hall_spring', SIZE_2K],
     ['eye_4', '사장의 눈 4 · 빈 컵만', [], 'jieun_sheet · hall_spring', SIZE_2K],
+    ['eye_6', '사장의 눈 6 · 저 친구가 내립니다', [], 'jieun_sheet · customer-sporty_normal · hall_busy_summer', SIZE_2K],
     ['eye_7', '사장의 눈 7 · 앞치마 끈', [], 'jieun_sheet · workbench_morning', SIZE_1K],
     ['eye_8', '사장의 눈 8 · 동네 시간', [], 'jieun_sheet · hall_evening', SIZE_2K],
     ['eye_9', '사장의 눈 9 · 열쇠', [], 'jieun_sheet · hall_evening', SIZE_2K],
