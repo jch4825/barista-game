@@ -153,7 +153,7 @@ const SYS = {
   scoopDrop: '얼음은 컵 위에 놓아요. 다시 해 봐요.',
   seeFirst: '처음 하는 일이면 [보기]로 먼저 봐도 좋아요.',
   // 지은의 성장(재미 개편 6장): 익숙해진 손 기술 맡기기 · 완벽한 한 잔 · 한 번에 묻기 · 늘 드시던 거
-  handoff: '익숙한 일이라 손이 알아서 해요.', // [맡기기]: 처음 HANDOFF_SAY 번만 읽음
+  handoff: '익숙한 일이라 손이 알아서 해요.', // [손에 익은 대로]: 처음 HANDOFF_SAY 번만 읽음
   perfectCup: '완벽한 한 잔이에요! 메뉴 도감에 금빛 별이 붙었어요.',
   usualFill: '늘 드시던 걸로 담았어요.',
   taste: '사장님이 한 모금 맛보세요.',
@@ -171,7 +171,7 @@ const SYS = {
   move: '새 컵에 옮겨 담고 뚜껑을 덮어요. 쓴 컵은 씻어요.',
   moveServe: '다 옮겨 담았어요. 손님에게 드려요.',
 };
-/** [맡기기]를 누를 때 '익숙한 일이라 손이 알아서 해요.'를 읽는 횟수(그 뒤로는 효과음만, 검수 13.87) */
+/** [손에 익은 대로]를 누를 때 '익숙한 일이라 손이 알아서 해요.'를 읽는 횟수(그 뒤로는 효과음만, 검수 13.87) */
 const HANDOFF_SAY = 5;
 /** 휘리릭 글자(화면에만, 소리는 효과음) · 버리는 장면의 컵 종류(영상 assets/movies/discard_{종류}) */
 const WHIRL_WORD = '휘리릭!';
@@ -1791,8 +1791,8 @@ export async function brew(opts = {}) {
     const seeFirst = path === 'easy' && !turn && grow.skillCount(sk.id || '') < 2;
     const go = btn('play', '시작!', `btn-big ${seeFirst ? 'btn-soft' : 'btn-main'} mg-go`);
     const see = btn(EYE, '보기', `btn-big ${seeFirst ? 'btn-main' : 'btn-soft'} bw-gate-watch`);
-    // 익숙해진 손 기술(10번 넘게 함): [맡기기]를 누르면 손이 알아서 알맞게(재미 개편 6.2 · Q-41). 직접 할지는 학생이 고름
-    const hand = canHand ? btn('sparkle', '맡기기', 'btn-big btn-soft bw-gate-hand') : null;
+    // 익숙해진 손 기술(10번 넘게 함): [손에 익은 대로]를 누르면(전에는 [맡기기]: 컴퓨터에게 맡기는 말이 아니라 내가 손에 익어 쉽게 하는 말로, 2026-11-08 사용자 · 검수 13.94) 손이 알아서 알맞게(재미 개편 6.2 · Q-41). 직접 할지는 학생이 고름
+    const hand = canHand ? btn('sparkle', '손에 익은 대로', 'btn-big btn-soft bw-gate-hand') : null;
     const wrap = h('div', { class: 'bw-gate', role: 'group', 'aria-label': `${sk.name} 시작` },
       h('div', { class: 'bw-gate-card' },
         h('h3', {}, h('i', { html: ICON(sk.icon) }), sk.name),
@@ -1800,7 +1800,7 @@ export async function brew(opts = {}) {
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
         seeFirst ? h('p', { class: 'bw-hand-note' }, h('i', { html: EYE }), SYS.seeFirst) : null,
-        hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [맡기기]를 누르면 손이 알아서 해요.`) : null,
+        hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [손에 익은 대로]를 누르면 손이 알아서 해요.`) : null,
         h('div', { class: 'bw-row' }, see, hand, go)));
     (closeEl || bench).append(wrap);
     ui.gateGo = go;

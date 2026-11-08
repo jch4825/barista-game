@@ -258,7 +258,7 @@ function growView() {
       skills.length ? h('div', { class: 'gr-skill-list' }, ...skills.map(([id, sk]) => {
         const n = g.skills[id];
         const done = n >= grow.MASTER_AT;
-        return h('span', { class: `gr-skill ${done ? 'is-done' : ''}`.trim() }, h('i', { html: ICON(done ? 'sparkle' : sk.icon || 'hand') }), h('b', { text: sk.name }), h('small', { text: done ? '익숙해짐 · [맡기기] 가능' : `${n} / ${grow.MASTER_AT}번` }));
+        return h('span', { class: `gr-skill ${done ? 'is-done' : ''}`.trim() }, h('i', { html: ICON(done ? 'sparkle' : sk.icon || 'hand') }), h('b', { text: sk.name }), h('small', { text: done ? '익숙해짐 · [손에 익은 대로] 가능' : `${n} / ${grow.MASTER_AT}번` }));
       })) : h('p', { class: 'nb-empty', text: '커피를 만들면 손 기술이 하나씩 쌓여요. 열 번 하면 익숙해져요.' }));
     // 선물 · 카운터 꾸미기 · 가게 앞 꾸미기 · 앞치마(검수 13.91, Q-54): 사면 바로 그 결과가 보임(선물 장면 · 놓은 자리 · 지은의 앞치마)
     const buyBtn = (it, label) => h('button', {

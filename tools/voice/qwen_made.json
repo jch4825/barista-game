@@ -3785,17 +3785,6 @@
   "at": "2026-11-05 22:54",
   "long": 100
  },
- "f4fe9332": {
-  "who": "jieun",
-  "sig": "ee5286b9d108",
-  "sim": 0.9912,
-  "rate": 4.61,
-  "try": 2,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:54"
- },
  "c5b64c7e": {
   "who": "jieun",
   "sig": "aeaf4a1ea906",
@@ -4709,15 +4698,14 @@
  "3d99fd94": {
   "who": "jieun",
   "sig": "607726803206",
-  "sim": 0.9921,
-  "rate": 4.91,
-  "fall": 60,
-  "try": 3,
+  "sim": 0.9925,
+  "rate": 5.02,
+  "fall": 70,
+  "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-07 08:26",
-  "long": 120
+  "at": "2026-11-08 14:04"
  },
  "dd2dc2d9": {
   "who": "jieun",
@@ -8051,18 +8039,6 @@
   "flag": "",
   "at": "2026-11-05 23:18"
  },
- "7eb2c69f": {
-  "who": "jieun",
-  "sig": "d879c867e16b",
-  "sim": 0.9937,
-  "rate": 5.12,
-  "try": 1,
-  "style": "plain",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 23:18",
-  "long": 120
- },
  "7e895cd7": {
   "who": "jieun",
   "sig": "b42d220244ff",
@@ -10582,13 +10558,14 @@
  "3f2d1b45": {
   "who": "jieun",
   "sig": "574ebe8fd9e0",
-  "sim": 0.9887,
-  "rate": 4.78,
+  "sim": 0.9877,
+  "rate": 4.87,
+  "fall": 80,
   "try": 1,
   "style": "plain",
   "emo": false,
   "flag": "",
-  "at": "2026-11-05 23:35"
+  "at": "2026-11-08 14:04"
  },
  "881b46ed": {
   "who": "jieun",
@@ -21101,18 +21078,6 @@
   "at": "2026-11-06 00:31",
   "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.72)"
  },
- "df93e4a3": {
-  "who": "sys",
-  "sig": "6fde4bf68794",
-  "sim": 0.989,
-  "rate": 5.43,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:31",
-  "long": 60
- },
  "7470629d": {
   "who": "sys",
   "sig": "882ffa1ae1b7",
@@ -24472,18 +24437,6 @@
   "flag": "",
   "at": "2026-11-06 00:52"
  },
- "f7d12137": {
-  "who": "owner",
-  "sig": "25b56e3e6a23",
-  "sim": 0.9899,
-  "rate": 5.35,
-  "fall": 60,
-  "try": 2,
-  "style": "desc",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-07 16:08"
- },
  "dc4c81f2": {
   "who": "owner",
   "sig": "8ddb801a0353",
@@ -27832,17 +27785,6 @@
   "flag": "",
   "at": "2026-11-06 01:10",
   "long": 80
- },
- "42d4e0ef": {
-  "who": "do",
-  "sig": "8be5d7a17351",
-  "sim": 0.9892,
-  "rate": 3.55,
-  "try": 1,
-  "style": "plain",
-  "emo": true,
-  "flag": "",
-  "at": "2026-11-06 01:10"
  },
  "be3fd9dc": {
   "who": "do",
@@ -42279,5 +42221,89 @@
   "emo": false,
   "flag": "",
   "at": "2026-11-08 08:39"
+ },
+ "d82d0450": {
+  "who": "sys",
+  "sig": "871c990697fe",
+  "sim": 0.9752,
+  "rate": 5.09,
+  "fall": 80,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:03"
+ },
+ "5f2433f0": {
+  "who": "jieun",
+  "sig": "e2a2cb3bb03c",
+  "sim": 0.9888,
+  "rate": 6.53,
+  "fall": 60,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
+ },
+ "9c0aa377": {
+  "who": "jieun",
+  "sig": "477a1d6cbd3c",
+  "sim": 0.9946,
+  "rate": 5.04,
+  "fall": 80,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
+ },
+ "3a957594": {
+  "who": "jieun",
+  "sig": "d58886bc8c1e",
+  "sim": 0.9913,
+  "rate": 6.25,
+  "fall": 60,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
+ },
+ "f18e61cd": {
+  "who": "jieun",
+  "sig": "cbc465368bf6",
+  "sim": 0.9953,
+  "rate": 5.31,
+  "fall": 60,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
+ },
+ "c3164e4a": {
+  "who": "owner",
+  "sig": "0c0255adbf89",
+  "sim": 0.9897,
+  "rate": 5.56,
+  "fall": 70,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
+ },
+ "343420b7": {
+  "who": "do",
+  "sig": "a651f856bd93",
+  "sim": 0.9911,
+  "rate": 4.88,
+  "fall": 60,
+  "try": 1,
+  "style": "plain",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-08 14:04"
  }
 }

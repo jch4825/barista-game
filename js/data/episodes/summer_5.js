@@ -1,5 +1,5 @@
 /**
- * 여름 5일 · 가방 걸이: 소포가 많은 계절, 터질 듯한 도 씨의 가방(대응 D3: 다음 날 문 옆에 가방 걸이 못)
+ * 여름 5일 · 가방 걸이: 소포가 많은 계절, 터질 듯한 도 씨의 가방(대응 D3: 도 씨가 가신 뒤 문 옆에 가방 걸이 못, 도 씨는 여름 7일에 발견)
  * → 두꺼운 컵의 은주, "요즘은 아기랑만 이야기해요"(대응 E2)
  */
 
@@ -35,11 +35,15 @@ export default {
       orders: [{ who: 'do', say: '늘 먹던 거요.', menu: 'americano', temp: 'iced', togo: false, usual: true, thanks: '캬, 살겠다.' }],
     }),
     respond('do', 'summer_hook'),
+    leave('do'),
+    // 가방 걸이 못(대응 D3 'hook'): 도 씨가 가신 뒤 그날 박음. 도 씨는 다음에 들어올 때(여름 7일) 발견함(검수 13.93)
     ...onlyIf({ pick: 'do.summer_hook=hook' },
-      say('owner', 'normal', '아침에 못 박는 소리가 나더니, 그거였군요.'),
+      show({ left: 'jieun:normal', right: 'owner:normal' }),
+      narr('도 씨가 가신 뒤, 사장님께 여쭙고 문 옆 벽에 튼튼한 못을 하나 박았다.'),
+      sfx('knock'),
+      say('owner', 'smile', '도 씨 가방 걸이군요. 다음에 오시면 좋아하겠어요.'),
       narr('사장님이 문 옆의 못을 한 번 보고, 작게 웃는다.'),
     ),
-    leave('do'),
 
     // 오후: 은주
     place('여름 오후 13:40', '바닷가 마을 카페'),

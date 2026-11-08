@@ -65,6 +65,13 @@ export default {
     // 도 씨 · 노 씨 · 해순 할머니
     show({ left: 'jieun:normal', center: 'do:smile', right: 'noh:normal' }),
     sfx('bell'),
+    // 그저께 박아 둔 가방 걸이 못(여름 5일 대응 D3 'hook'): 어제는 줄 때문에 못 들어와, 오늘 처음 봄(검수 13.93)
+    ...onlyIf({ pick: 'do.summer_hook=hook' },
+      narr('도 씨가 들어오다 문 옆에서 멈춘다. 새 못을 오래 바라본다.'),
+      narr('도 씨가 못에 가방을 걸고, 어깨를 크게 한 바퀴 돌린다.'),
+      say('do', 'smile', '이거 지은 씨가 박았어요? 어깨가 다 가볍네, 고마워요.'),
+      motion('jieun', 'nod'),
+    ),
     say('do', 'smile', '허허, 동네 시간이라면서요? 늘 먹던 거 줘요.'),
     say('noh', 'normal', '나는 그 잔.'),
     mini('brew', {
