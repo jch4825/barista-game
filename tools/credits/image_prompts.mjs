@@ -336,6 +336,8 @@ Object.assign(IMAGE_PROMPTS, {
   ].map(([id, title, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', ...extraBox(id), note: `참조 이미지: ${ref} · docs/추가 제작.md · ${size}` }])),
 });
 
+IMAGE_PROMPTS.cg_winter_chalk_name = { ...IMAGE_PROMPTS.cg_eye_5, title: '장면 · 마지막 컷 · 칠판의 빈칸', note: '사장의 눈 5(cg_eye_5)의 오른쪽 아래를 잘라 확대한 그림 · 글씨는 게임이 얹음' };
+
 /* 손녀 스탠딩(2026-11-08): 요청서의 글로는 Flow에서 막혀 사용자가 직접 만듦 */
 Object.assign(IMAGE_PROMPTS, {
   granddaughter_normal: { title: '손녀 · 보통', from: 'none', prompt: '', neg: '', note: '사용자가 Flow에서 직접 만든 그림 · 프롬프트 기록 없음' },

@@ -36,7 +36,7 @@ export const CGS = {
   jian_secret: { ep: 'winter_6', title: '지은의 손', ph: P('hall', 'winter', ['jian:smile', 'jieun:surprised'], ['book', 'hand'], '커피 내리는 손') },
   winter_owner_return: { ep: 'winter_7', title: '겨울 · 컵 닦았냐', ph: P('hall', 'winter', ['owner:smile', 'jieun:surprised'], ['door'], '눈이 그친 아침') },
   winter_milk_handover: { ep: 'winter_7', title: '겨울 · 두 손에 쥐여 준 우유', ph: P('hall', 'evening', ['jieun:smile', 'owner:smile'], ['milk'], '받던 사람이 받치는 사람이 된다', { night: true }) },
-  winter_chalk_name: { ep: 'winter_7', title: '마지막 컷 · 칠판의 빈칸', ph: P('hall', 'morning', ['owner:smile'], ['memo'], '오른쪽 아래 빈칸', { board: true }), chalk: { x: 74, y: 52, w: 20, rot: -4 } },
+  winter_chalk_name: { ep: 'winter_7', title: '마지막 컷 · 칠판의 빈칸', ph: P('hall', 'morning', ['owner:smile'], ['memo'], '오른쪽 아래 빈칸', { board: true }), chalk: { x: 51, y: 60, w: 14, rot: -4 } },
   ending_last_cup: { ep: 'ending', title: '엔딩 · 따뜻한 우유 한 컵', ph: P('hall', 'morning', ['jieun:smile', 'owner:smile'], ['milk', 'milk'], '나란히 앉아 마시는 따뜻한 우유') },
   // 엔딩 '사장의 눈' 11컷(js/data/eyes.js): 같은 장면을 사장님 자리에서 본 그림. 지은은 조금 멀리, 사장님의 손이 앞에 보임
   eye_1: { ep: 'ending', title: '사장의 눈 1 · 컵을 깬 날', ph: P('hall', 'spring', ['jieun:sad'], ['mop'], '빗자루를 두 손으로 꼭 쥔 아이') },

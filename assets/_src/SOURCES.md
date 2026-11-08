@@ -245,6 +245,7 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_eye_8.jpg` | `Man_holding_chalk_at_board_94703fd4_2K.jpg` (2026-11-09 01:06) |
 | `cg/cg_eye_11.jpg` | `Old_man_looking_at_snow_597c7ec7_2K.jpg` (2026-11-09 01:06) |
 | `cg/cg_eye_12.jpg` | `Man_feeding_seagull_outside_cafe_320f3ed8.jpg` (2026-11-09 01:10) |
+| `cg/cg_winter_chalk_name.jpg` | `Man_touching_chalkboard_in_cafe_136f9c86.jpg` (2026-11-09 01:24 · `cg_eye_5`의 칠판 오른쪽 아래를 잘라 확대) |
 | `cg/cg_eye_5.jpg` | `Man_touching_chalkboard_in_cafe_136f9c86.jpg` (2026-11-09 01:24) |
 | `cg/cg_eye_1.jpg` | `Woman_sweeping_broken_cup_26f3663d_2K.jpg` (2026-11-09 01:18) |
 | `cg/cg_eye_6.jpg` | `Barista_and_customer_in_cafe_c4c1a626_2K.jpg` (2026-11-09 01:14 · 그 손님 customer-sporty 를 참조로 다시 만든 그림) |
