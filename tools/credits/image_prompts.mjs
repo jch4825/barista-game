@@ -331,5 +331,12 @@ for (const [id, title] of [['bus_far', '버스 창밖 ① 먼 바다 마을'], [
   IMAGE_PROMPTS[id] ||= { title: `배경 · ${title}`, from: 'doc', prompt: playPrompt(id), neg: '', note: `참조 이미지: cafe_front_morning · docs/image_requests.md 8.3${id === 'bus_far' ? ' · 받은 그림은 가운데에 카페가 있는 바닷가 마을이라 이어 붙이지 않고 천천히 옆으로 움직임' : id === 'bus_hills' ? ' · 위쪽 초록을 지우고 좌우로 뒤집어 붙임' : ' · 유리 자리의 초록을 지움'}` };
 }
 
+// 산 앞치마를 입은 지은(검수 13.91): 새로 만들지 않고 지은의 스탠딩에서 초록 앞치마만 다시 칠함(tools/recolor-stand-apron.py)
+const APRON_KO = { navy: '남색', brown: '갈색', coral: '산호색', stripe: '줄무늬' };
+const FACE_KO = { normal: '보통', smile: '웃음', nervous: '긴장', determined: '다짐', surprised: '놀람', sad: '슬픔' };
+for (const [c, ck] of Object.entries(APRON_KO)) for (const [f, fk] of Object.entries(FACE_KO)) {
+  IMAGE_PROMPTS[`jieun-${c}_${f}`] ||= { title: `지은 · ${ck} 앞치마 · ${fk}`, from: 'derived', prompt: '', neg: '', note: `jieun_${f} 에서 초록 앞치마만 ${ck}으로 다시 칠함(tools/recolor-stand-apron.py, 새 AI 그림 아님)` };
+}
+
 /** 원래 파일 이름이 SOURCES.md 에 없는 그림 */
 export const NO_SOURCE_NOTE = '원래 파일 이름 기록 없음';

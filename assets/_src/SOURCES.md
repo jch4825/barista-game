@@ -249,3 +249,12 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `bg/bus_window_frame.jpg` | `Bus_interior_with_green_window_2973c69e_2K.jpg` (버스 창밖 ③ 버스 창틀 · 2026-11-06 20:25) |
 
 - 먼 바다(`bus_far`)는 요청서의 '좌우가 이어지는 먼 바다'가 아니라 가운데에 카페가 있는 바닷가 마을 그림이라, 이어 붙이지 않고 타는 동안 천천히 옆으로 움직여 끝에 카페가 창 가운데 오게 씀(`js/game/minigames/bus.js`).
+
+## 2026-11-08 선물 · 카운터 꾸미기 시트 · 빈 우유병 시트(Google Flow, 다운로드 폴더의 2K 원본: 검수 13.91)
+
+`npm run objects`(`tools/import-objects.py`)가 칸마다 잘라 `assets/objects/{id}.webp`로 만듭니다. 빈 우유병은 몸통 전체가 유리라 그 칸만 초록 정도만큼 고르게 비치게(`SHEET_OPT` 의 `glass_cells`).
+
+| 게임 파일 | Flow 원래 이름 (받은 시각) |
+| :--- | :--- |
+| `objects/sheet_gift.jpg` | `Cafe_items_grid_game_asset_dd4d7fc2_2K.jpg` (선물 · 카운터 꾸미기 시트 11칸 · 2026-11-08 13:31) |
+| `objects/sheet_empty.jpg` | `Glass_bottle_and_coffee_grinder_5e39b59d_2K.jpg` (빈 우유병 · 손 그라인더 · 바 스푼, 첫 줄 세 칸 · 2026-11-08 13:41) |

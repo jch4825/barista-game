@@ -12,7 +12,7 @@
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 1명) | 설정화 0 + 표정 1장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
 | 장면 그림(CG) | 새로 17장 + `docs/추가 제작.md`에 이미 있는 5장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
-| 작업대 물건 · 다 만든 잔 시트 | 14개를 시트 2장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
+| 작업대 물건 · 다 만든 잔 시트 | 0개를 시트 0장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 15(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 5 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 6 · 환경음 3 | `tools/audio/audio_map.mjs` | `npm run audio` |
@@ -248,36 +248,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 - 시트 규칙은 `docs/image_requests.md` 2장 ①·②와 같습니다(4칸 × 3줄 · 칸마다 물건 하나 · 마지막 칸 비움). 바탕은 크로마키 초록이고, **초록 물건(녹차라테 · 말차)이 든 `sheet_drinks_blue`만 파란 바탕**입니다(초록 바탕이면 초록 물건이 바탕과 함께 지워짐).
 - 참조 그림(`assets/_src/objects/sheet_tools.jpg` · `sheet_cups.jpg`)을 꼭 붙여 같은 그림체 · 시점 · 빛으로 만듭니다. 같은 컵(머그 · 유리컵 · 플라스틱 컵)은 한 줄에 모아 모양 · 크기를 맞춥니다. 김(steam)은 게임이 그리므로 넣지 않습니다.
 - 받은 그림은 `assets/_src/objects/{시트 이름}.jpg`로 두거나 `assets/flow/`에 두고 알려 주세요 → `npm run objects`(점검은 `python tools/import-objects.py --check`). 칸 순서는 `tools/import-objects.py`의 `SHEETS`와 같습니다.
-- 아직 없는 것: `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon` · `counter_plant` · `counter_shells` · `counter_flowers` · `counter_hourglass` · `counter_lighthouse` · `gift_bread` · `gift_mug` · `gift_scarf` · `gift_postcard` · `gift_beans` · `gift_blanket`
-
-### `sheet_empty` · 1:1 · 초록 바탕 · 참조: `sheet_tools`(우유병이 있는 시트)
-
-- 우유가 다 떨어진 날(오늘의 칠판 · 자유 영업) 카운터의 빈 우유병 + 거의 보이지 않는 손 도구 둘(손 기술 컷이 없을 때만). **첫 줄 세 칸만** 그리고 나머지는 비움
-- 칸: 1줄 `obj_milk_bottle_empty` · `obj_hand_grinder` · `obj_spoon` / 나머지 칸 모두 비움
-
-```
-Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
-The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each used cell with wide empty margins; nothing touches or overlaps.
-Row 1: the same glass milk bottle as in the reference image, now empty: clear glass with only a thin trace of milk at the bottom, the same cap; a wooden manual hand coffee grinder with a metal crank handle; a long stainless steel bar spoon lying diagonally; the remaining cells of this row completely empty.
-Rows 2 to 3: every cell completely empty. Only 3 objects in the whole image.
-Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
-```
-
-### `sheet_gift` · 1:1 · 초록 바탕 · 참조: `sheet_tools` · `sheet_cups`
-
-- 수첩 '나의 성장'에서 사는 것(검수 13.91): 카운터 꾸미기 다섯(작업대 카운터 오른쪽 창틀 위에 놓임, 머그와 같은 배율) + 선물 여섯(선물 장면에서 상자가 열리면 보임). 초록 바탕이라 초록이 거의 없게(다육이는 청회색, 꽃은 말린 들꽃). 그림이 오기 전에는 동그라미 아이콘
-- 칸: 1줄 `counter_plant` · `counter_shells` · `counter_flowers` · `counter_hourglass` / 2줄 `counter_lighthouse` · `gift_bread` · `gift_mug` · `gift_scarf` / 3줄 `gift_postcard` · `gift_beans` · `gift_blanket` / 마지막 칸 비움
-
-```
-Same art style, angle, lighting and rendering as the reference images (barista equipment and cup sheets): highly detailed semi-realistic 2D game asset illustration with a soft 3D-rendered look, three-quarter view from slightly above, single soft key light from the upper left, no black outlines.
-The square image is divided into an invisible grid of 4 columns and 3 rows. Exactly one object is centered in each cell with wide empty margins; nothing touches or overlaps.
-Row 1 (small decorations for a cafe window sill, each about as tall as a mug or a little taller): a small round terracotta pot with one plump pale blue-grey echeveria succulent (dusty blue-grey, not bright green); a small clear glass jar with a cork lid, filled with little seashells in cream, peach and pale pink; a small cream ceramic vase with a loose bunch of dried seaside wildflowers: lavender purple sea lavender, cream and pale yellow blossoms, muted olive-brown stems; an hourglass with a warm oak wood frame and pale sand, the sand halfway fallen.
-Row 2: a small table lamp shaped like a lighthouse with red and white stripes and a softly glowing warm yellow window at the top; a kraft paper bakery bag with the top folded open, two round golden bread rolls and the end of a baguette poking out; a new ceramic mug in deep sea blue with a cream inside and a thin cream wave line around the middle, empty; a neatly folded soft knit wool scarf in warm mustard and cream stripes with short tassels.
-Row 3: a postcard with a painted calm blue sea and small islands, leaning on a plain cream envelope with a small sea-blue stamp shape, no writing anywhere; a kraft paper coffee bean bag with a fold-over top and a tin tie, standing upright, a few roasted coffee beans beside it; a neatly folded soft fleece lap blanket in warm oatmeal beige with a cream tartan check pattern; the last cell (bottom right) completely empty.
-Flat solid chroma key green background (#00B140) everywhere, no gradients, no cast shadows on the background, no green reflections.
-Avoid: text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines.
-```
+- 아직 없는 것: 없음
 
 ## 4. 새 놀이의 그림 (재미 개편)
 

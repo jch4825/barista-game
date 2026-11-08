@@ -105,7 +105,9 @@ SHEETS: dict[str, list[str | None]] = {
 SHEET_DIR = {'sheet_play': 'play', 'sheet_deco': 'play'}  # assets/_src/{여기} (적지 않은 시트는 objects)
 # 시트마다 다른 값: 손그림 시트는 짙은 선이 테두리라 안쪽 초록빛 누르기를 하지 않음(초록 앞치마 · 가방의 초록 담요가 회색이 되지 않게),
 #  물건 안쪽의 구멍도 아주 초록인 곳만(초록 앞치마가 뚫리지 않게)
-SHEET_OPT = {'sheet_play': {'hole': 0.85, 'spill_in': None}, 'sheet_deco': {'hole': 0.85, 'spill_in': None}}
+SHEET_OPT = {'sheet_play': {'hole': 0.85, 'spill_in': None}, 'sheet_deco': {'hole': 0.85, 'spill_in': None},
+             # 빈 우유병(칸 0)은 몸통 전체가 유리라 초록이 비침: 그 칸은 초록 정도만큼 고르게 비치게(구멍만 뚫으면 얼룩이 됨, 검수 13.91)
+             'sheet_empty': {'glass_cells': (0,)}}
 
 # 버스 창밖(docs/image_requests.md 8.3, 2026-11-06 받음): 시트가 아닌 한 장 그림 → assets/bg/{id}.webp
 #  key: 크고 이어진 초록 덩어리(하늘 자리 · 유리 자리)만 투명으로(동산의 풀빛 초록은 그대로) · mirror: 좌우로 뒤집은 그림을 옆에 붙여 끝없이 이어지게
@@ -237,8 +239,9 @@ def resize_rgba(im: Image.Image, size: tuple[int, int]) -> Image.Image:
 
 
 # ---------------------------------------------------------------- 초록 지우기 (시트 한 장)
-def key_sheet(a: np.ndarray, hole_k: float = HOLE, spill_in: int | None = SPILL_IN):
-    """→ (색, 투명도, 바탕 모형, 칸 크기). hole_k · spill_in 은 시트마다(SHEET_OPT), spill_in=None 이면 안쪽은 그대로"""
+def key_sheet(a: np.ndarray, hole_k: float = HOLE, spill_in: int | None = SPILL_IN, glass_cells=()):
+    """→ (색, 투명도, 바탕 모형, 칸 크기). hole_k · spill_in · glass_cells 는 시트마다(SHEET_OPT), spill_in=None 이면 안쪽은 그대로.
+    glass_cells: 몸통이 유리인 물건의 칸 번호(0 부터) → 그 칸은 물건 안쪽도 초록 정도만큼 반투명(유리 너머가 고르게 비침)"""
     H, W, _ = a.shape
     cw, ch = W / COLS, H / ROWS
     k = greenness(a)
@@ -270,6 +273,12 @@ def key_sheet(a: np.ndarray, hole_k: float = HOLE, spill_in: int | None = SPILL_
     clear = bg | hole
     edge = dilate(clear, EDGE_PX) & ~clear  # 바깥 배경·구멍과 맞닿은 테두리
     soft = clear | edge
+    if glass_cells:
+        gm = np.zeros((H, W), bool)
+        for c in glass_cells:
+            cx, cy = c % COLS, c // COLS
+            gm[round(cy * ch):round((cy + 1) * ch), round(cx * cw):round((cx + 1) * cw)] = True
+        soft = soft | (gm & (k > KEY_LO))
     alpha = np.ones((H, W), np.float32)
     alpha[soft] = alpha_key[soft]
     alpha[alpha < 0.06] = 0
@@ -493,7 +502,7 @@ def main() -> int:
             H, W, _ = a.shape
             if abs(W - H) > max(W, H) * 0.02:
                 say(f'  (주의) {path.name}: 정사각형이 아니에요({W}x{H}). 4칸 x 3줄로 나눠 봅니다.')
-            rgb, alpha, _, cell = key_sheet(a, opt.get('hole', HOLE), opt.get('spill_in', SPILL_IN))
+            rgb, alpha, _, cell = key_sheet(a, opt.get('hole', HOLE), opt.get('spill_in', SPILL_IN), opt.get('glass_cells', ()))
             objs, empty = split_objects(rgb, alpha, cell, ids)
         except Exception as ex:  # noqa: BLE001
             failed += 1
