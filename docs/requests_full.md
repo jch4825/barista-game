@@ -34,17 +34,17 @@
 
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
-| 1 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_wall` · `hall_evening` |
+| 1 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_evening` |
 
 ### 2.1 프롬프트
 
 #### 1. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
-- 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_wall` · `hall_evening`
+- 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_evening`
 
 ```
 Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Night after closing. A close, straight-on view of the dark green chalkboard in its oak frame on the cream plaster wall of the cafe, lit from above by one warm brass wall lamp, the surroundings fallen into deep navy shadow. The board is placed high, and its lower edge is at about two thirds of the picture height. The upper and left parts of the board are filled with neat, friendly chalk drawings instead of words: small coffee cups with steam, a little milk bottle, a leaf, and tidy rows of plain wavy chalk lines. There are no letters or numbers anywhere. Only the bottom right corner of the board has been kept completely empty, and that small empty space is framed by a thin square drawn in chalk, so it clearly looks like a blank saved for something important. In the foreground, entering from the bottom right corner, only one forearm and hand: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The fingertips rest lightly on the oak frame right next to the empty square. The hand is steady and natural. We never see his face, head, shoulders or body. The lower third of the picture is only the dark teal wall tiles in shadow, calm and empty. The wall, the chalkboard, the shelves and the door look exactly like the straight-on wall reference image.
+Scene: First-person view: we see exactly what the old OWNER sees with his own eyes, standing close in front of the cafe wall at night after closing. His own right arm reaches into the picture from the bottom right corner, large and close to us: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm, the sleeve softly out of focus and the hand sharp. The arm runs diagonally up to the middle of the picture and takes up about a quarter of the picture. His index finger is stretched out and is just about to touch the empty square on the board. The hand is steady and natural. We never see his face, head, shoulders or body. In front of him hangs the dark green chalkboard in its oak frame on the cream plaster wall, filling most of the picture, lit from above by one warm brass wall lamp, with the surroundings fallen into deep navy shadow. The lower edge of the board is at about two thirds of the picture height. The upper and left parts of the board are filled with neat, friendly chalk drawings instead of words: small coffee cups with steam, a little milk bottle, a leaf, and tidy rows of plain wavy chalk lines. There are no letters or numbers anywhere. Only the bottom right corner of the board has been kept completely empty, and that small empty space is framed by a thin square drawn in chalk, so it clearly looks like a blank saved for something important. The lower third of the picture is only the dark teal wall tiles in shadow, calm and empty.
 Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
 ```
 
