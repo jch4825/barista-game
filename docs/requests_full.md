@@ -14,7 +14,7 @@
 | 장면 그림(CG) | 새로 11장 + `docs/추가 제작.md`에 이미 있는 1장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 · 다 만든 잔 시트 | 0개를 시트 0장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
-| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 15(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 5 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
+| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 0(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 2 · 환경음 2 | `tools/audio/audio_map.mjs` | `npm run audio` |
 | 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
@@ -177,7 +177,7 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 
 ## 5. 블렌더 한 컷 (손 동작)
 
-지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja` · `steam_kid` · `hotwater_pitcher_yuja` · `ice_strawberry` · `jam_pitcher_yuja` · `pourin_glass_americano` · `pourin_glass_latte` · `pourin_glass_yuja` · `pourin_plastic_americano` · `pourin_plastic_latte` · `pourin_plastic_yuja` · `stir_pitcher_yuja` · `water_glass_ice` · `water_plastic_ice` · `water_plastic_yuja` · `hotwater_pitcher_cocoa` · `hotwater_pitcher_matcha` · `pourin_glass_cocoa` · `pourin_glass_matcha` · `pourin_plastic_cocoa` · `pourin_plastic_matcha` · `powder_pitcher_cocoa` · `powder_pitcher_matcha` · `stir_pitcher_cocoa` · `whisk_pitcher_matcha` · `ice_barley` · `ice_plastic_barley`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
+지금 컷이 있는 것: `extract` · `steam` · `pour_latte` · `pour_milk` · `foam` · `water` · `ice` · `pour_glass_latte` · `pour_glass_milk` · `water_glass` · `ice_plastic` · `pour_cocoa` · `pour_glass_cocoa` · `pour_glass_matcha` · `pour_glass_strawberry` · `pour_matcha` · `pour_paper_cocoa` · `pour_paper_latte` · `pour_paper_matcha` · `pour_paper_milk` · `pour_plastic_cocoa` · `pour_plastic_latte` · `pour_plastic_matcha` · `pour_plastic_milk` · `pour_plastic_strawberry` · `water_paper` · `water_plastic` · `milk_in` · `tap` · `bloom` · `bloom_wait` · `boil` · `grind` · `hand_grind` · `jam_iced_strawberry` · `jam_iced_yuja` · `jam_yuja` · `powder_cocoa` · `powder_iced_cocoa` · `powder_iced_matcha` · `powder_matcha` · `spiral` · `steep` · `steep_iced` · `stir_cocoa` · `stir_iced_cocoa` · `stir_iced_strawberry` · `stir_iced_yuja` · `stir_paper_mix` · `stir_yuja` · `syrup` · `syrup_iced` · `tamp` · `whisk` · `whisk_iced` · `water_barley` · `water_glass_barley` · `water_glass_yuja` · `water_paper_mix` · `water_yuja` · `steam_kid` · `hotwater_pitcher_yuja` · `ice_strawberry` · `jam_pitcher_yuja` · `pourin_glass_americano` · `pourin_glass_latte` · `pourin_glass_yuja` · `pourin_plastic_americano` · `pourin_plastic_latte` · `pourin_plastic_yuja` · `stir_pitcher_yuja` · `water_glass_ice` · `water_plastic_ice` · `water_plastic_yuja` · `hotwater_pitcher_cocoa` · `hotwater_pitcher_matcha` · `pourin_glass_cocoa` · `pourin_glass_matcha` · `pourin_plastic_cocoa` · `pourin_plastic_matcha` · `powder_pitcher_cocoa` · `powder_pitcher_matcha` · `stir_pitcher_cocoa` · `whisk_pitcher_matcha` · `ice_barley` · `ice_plastic_barley` · `jam_paper_yuja` · `jam_plastic_strawberry` · `powder_paper_cocoa` · `powder_paper_matcha` · `steep_paper_barley` · `steep_plastic_barley` · `stir_paper_cocoa` · `stir_paper_yuja` · `stir_plastic_strawberry` · `syrup_paper_espresso` · `syrup_plastic_espresso` · `water_paper_barley` · `water_paper_yuja` · `water_plastic_barley` · `whisk_paper_matcha`. 만드는 법은 `docs/recipes.md` 6장 · CLAUDE.md 7장(`scene_bench.py … shots <id>` → `shots_post.py` → `npm run assets`).
 게임은 `shots.json`에 맞는 이름의 컷이 있으면 저절로 씁니다(`js/data/menu.js`의 `shotNames`, 작업대 `brew.js`의 `shotIdFor`). 손 동작 id 와 같은 이름이면 그 컷, 붓기 · 물 붓기 · 얼음 담기는 잔마다 `pour{잔}_{latte|milk|색}` · `water{잔}` · `ice{잔}`(잔 = 머그는 없음 · `_glass` · `_paper` · `_plastic`, `docs/recipes.md` 6.7), 컵에 넣기 · 젓기 · 우리기는 `{동작}[_iced]_{바탕}`(포장 컵은 `{동작}{잔}_{바탕}`, 6.10). 이름만 맞으면 코드를 고치지 않아도 됩니다.
 아래 목록은 메뉴마다 온도 · 매장/포장 · 단계를 모두 따라가며 작업대가 고를 컷을 셈한 것입니다.
 
@@ -190,35 +190,13 @@ Avoid: text, letters, numbers, writing on boards, readable signs, logos, waterma
 - 이 잔들도 지금 블렌더 컷이 나옵니다. 다만 다른 잔(포장 컵인데 머그 · 유리컵)이나 다른 음료(보리차 · 유자차인데 아메리카노)의 컷이라, 만들면 더 꼭 맞습니다. 급하지 않습니다(`docs/recipes.md` 6.10 🙋).
 - 만드는 법: 지금 나오는 컷과 같은 장면에서 잔만 바꿉니다. 종이컵은 `water_paper`, 플라스틱 컵은 `water_plastic`과 같은 카메라 · 빛(얼음 24개), 물 붓기는 음료 색만 그 바탕으로(보리차 = 호박색 · 티백, 유자차 = 청이 풀림).
 
-| 만들 컷 | 손 동작 | 쓰는 잔 | 지금 나오는 컷 |
-| :--- | :--- | :--- | :--- |
-| `syrup_paper_espresso` | 시럽 넣기 | 바닐라 라테 · 따뜻하게 · 종이컵 | `syrup` |
-| `syrup_plastic_espresso` | 시럽 넣기 | 바닐라 라테 · 아이스 · 플라스틱 컵 | `syrup_iced` |
-| `water_paper_barley` | 물 붓기 | 보리차 · 따뜻하게 · 종이컵 | `water_paper` |
-| `steep_paper_barley` | 우리기 | 보리차 · 따뜻하게 · 종이컵 | `steep` |
-| `water_plastic_barley` | 물 붓기 | 보리차 · 아이스 · 플라스틱 컵 | `water_plastic` |
-| `steep_plastic_barley` | 우리기 | 보리차 · 아이스 · 플라스틱 컵 | `steep_iced` |
-| `jam_paper_yuja` | 청 떠 넣기 | 유자차 · 따뜻하게 · 종이컵 | `jam_yuja` |
-| `water_paper_yuja` | 물 붓기 | 유자차 · 따뜻하게 · 종이컵 | `water_paper` |
-| `stir_paper_yuja` | 젓기 | 유자차 · 따뜻하게 · 종이컵 | `stir_yuja` |
-| `powder_paper_matcha` | 가루 떠 넣기 | 녹차라테 · 따뜻하게 · 종이컵 | `powder_matcha` |
-| `whisk_paper_matcha` | 말차 풀기 | 녹차라테 · 따뜻하게 · 종이컵 | `whisk` |
-| `jam_plastic_strawberry` | 청 떠 넣기 | 딸기우유 · 플라스틱 컵 | `jam_iced_strawberry` |
-| `stir_plastic_strawberry` | 젓기 | 딸기우유 · 플라스틱 컵 | `stir_iced_strawberry` |
-| `powder_paper_cocoa` | 가루 떠 넣기 | 코코아 · 따뜻하게 · 종이컵 | `powder_cocoa` |
-| `stir_paper_cocoa` | 젓기 | 코코아 · 따뜻하게 · 종이컵 | `stir_cocoa` |
+- 없습니다.
 
 ### 5.3 조작법 '드래그 활용'의 그림 (`docs/recipes.md` 6.11)
 
 - 붓는 컷에 덜 기운 그릇(`… tilt`)이 없으면 끌어 붓기는 되지만 그릇이 기울어 보이지 않고, 얼음 담기 컷에 얼음 통 · 국자(`… drag_ice`)가 없으면 터치 기반처럼 눌러서 담습니다.
 
-| 컷 | 필요한 그림 | 쓰는 잔 |
-| :--- | :--- | :--- |
-| `water_glass_ice` | `scene_bench.py … tilt` (덜 기운 그릇) | 아메리카노 · 아이스 · 유리컵 |
-| `water_plastic_ice` | `scene_bench.py … tilt` (덜 기운 그릇) | 아메리카노 · 아이스 · 플라스틱 컵 |
-| `ice_barley` | `scene_bench.py … drag_ice` (얼음 통 · 국자) | 보리차 · 아이스 · 유리컵 |
-| `ice_plastic_barley` | `scene_bench.py … drag_ice` (얼음 통 · 국자) | 보리차 · 아이스 · 플라스틱 컵 |
-| `water_plastic_yuja` | `scene_bench.py … tilt` (덜 기운 그릇) | 유자차 · 아이스 · 플라스틱 컵 |
+- 모두 있습니다.
 
 ## 6. 소리
 
