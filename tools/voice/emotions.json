@@ -193,12 +193,6 @@
    "ko": "작은 설렘과 결심이 묻어나게",
    "en": "With a small flutter of hope and quiet resolve."
   },
-  "d551d41e": {
-   "who": "think",
-   "text": "가슴이 두근거려서 가만히 앉아 있을 수가 없다. 창밖으로 지나가는 갈매기랑 고깃배를 하나씩 세어 보면, 마음이 조금 가라앉을 것 같다.",
-   "ko": "두근거리고 설레서 조금 들뜬 혼잣말",
-   "en": "Excited and nervous, a little breathless, talking to herself."
-  },
   "00b1aee7": {
    "who": "think",
    "text": "여기 사람들은 기다려 주는구나. 그것만으로도 마음이 조금 놓인다.",
@@ -7308,6 +7302,18 @@
    "text": "사장님이 어제 마감하고 박아 두신 못이다. 나도 그 빈 벽을 봤는데, 사장님은 말없이 먼저 해 두셨다.",
    "ko": "조용히 깨닫듯, 조금 부끄럽고 고마운 마음",
    "en": "Quietly realizing, a little embarrassed and grateful."
+  },
+  "4ef69db5": {
+   "who": "think",
+   "text": "가슴이 두근거려서 가만히 앉아 있을 수가 없다.",
+   "ko": "두근거리고 설레서 조금 들뜬 혼잣말",
+   "en": "Excited and nervous, a little breathless, talking to herself."
+  },
+  "f9e65478": {
+   "who": "think",
+   "text": "창밖으로 지나가는 갈매기랑 고깃배를 하나씩 세어 보면, 마음이 조금 가라앉을 것 같다.",
+   "ko": "들뜬 마음을 달래듯 조용한 혼잣말",
+   "en": "Quietly talking to herself, trying to settle her nerves."
   }
  }
 }
