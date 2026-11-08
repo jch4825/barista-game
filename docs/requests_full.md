@@ -11,7 +11,7 @@
 | 무엇 | 남은 수 | 넣는 곳 | 그다음 |
 | :--- | :--- | :--- | :--- |
 | 인물 스탠딩(새 인물 0명) | 설정화 0 + 표정 0장 | `assets/_src/stand/{id}_{표정}.jpg` | `npm run images` → `python tools/face-boxes.py` |
-| 장면 그림(CG) | 새로 2장 + `docs/추가 제작.md`에 이미 있는 1장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
+| 장면 그림(CG) | 새로 1장 + `docs/추가 제작.md`에 이미 있는 1장 | `assets/cg/cg_{id}.jpg` | `npm run assets` |
 | 작업대 물건 · 다 만든 잔 시트 | 0개를 시트 0장에 | `assets/_src/objects/{시트}.jpg` | `npm run objects` |
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 0(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
@@ -26,7 +26,7 @@
 
 ## 2. 장면 그림 · 이벤트 CG
 
-- 새로 요청하는 2장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 1장(`winter_chalk_name`)도 아직 없습니다.
+- 새로 요청하는 1장입니다. 이 밖에 `docs/추가 제작.md`에 프롬프트가 이미 있는 1장(`winter_chalk_name`)도 아직 없습니다.
 - 넣는 곳 `assets/cg/cg_{id}.jpg`(16:9, 2K) → `npm run assets`. 나오는 사람의 설정화와 그 장소의 배경을 **참조 이미지로 함께** 넣습니다.
 - 사장의 눈(`eye_*`)은 사장님 자리에서 본 그림입니다. 지은은 조금 멀리, 사장님의 손이 앞에 보이고, 기억처럼 조금 따뜻한 빛입니다.
 
@@ -34,22 +34,11 @@
 
 | # | id | 제목 | 나오는 날 | 참조 |
 | ---: | :--- | :--- | :--- | :--- |
-| 1 | `eye_1` | 사장의 눈 1 · 컵을 깬 날 | 엔딩 | `jieun_sheet` · `hall_spring` |
-| 2 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_wall` · `hall_evening` |
+| 1 | `eye_5` | 사장의 눈 5 · 칠판의 빈칸 | 엔딩 | `hall_wall` · `hall_evening` |
 
 ### 2.1 프롬프트
 
-#### 1. `eye_1` · 사장의 눈 1 · 컵을 깬 날
-
-- 나오는 날: 엔딩 · 장면: 빗자루를 두 손으로 꼭 쥔 아이 · 참조: `jieun_sheet` · `hall_spring`
-
-```
-Cinematic story-game event illustration (CG) in clean modern anime cel-shading with bold clean outlines, matching the reference images exactly: the same faces, hairstyles, outfits and body proportions as the character sheets, and the same cafe as the background reference. Quiet, warm, emotional mood; soft diffused light; gentle depth of field. A small old cafe in a quiet seaside village in Korea; palette of deep sea teal and navy shadows, warm golden lamp light, cream walls, warm oak wood, small forest green accents. 16:9, high resolution. Composition: faces, hands and key objects stay in the upper two thirds; the lower third is calm and a little darker (table top or floor) because a translucent dialogue box will cover it.
-Scene: Bright spring morning inside the cafe, cherry blossoms outside the window. We look from behind the oak counter, slightly downward, across the empty cafe floor. In the center of the picture, about two steps beyond the counter, JIEUN (Korean woman, 21, straight black hair in a low ponytail with short side bangs, calm dark brown eyes, cream long-sleeve henley with rolled-up sleeves, forest green canvas barista apron with a brown leather strap, mustard hair tie on her right wrist) stands on the wooden floor and sweeps up the pieces of a broken white cup into a small dustpan. She grips the worn wooden broom handle tightly with both hands. Her lips are pressed together and her eyes are fixed on the floor: she is not crying, she is determined to pick up every last piece. The white ceramic shards and the head of the broom are at the middle height of the picture. In the foreground at the bottom right corner, only one forearm and hand rests quietly on the counter edge: an old man's arm with gentle wrinkles and a white shirt sleeve rolled up to the forearm. The hand is relaxed and steady. We never see his face, head, shoulders or body. The lower third of the picture is only the dark oak counter top, calm and empty.
-Avoid: text, letters, numbers, writing on boards, readable signs, logos, watermark, extra people, distorted hands, extra fingers, trembling lines, sickly look, red awning, bakery display case, harsh contrast, sunburst, radial rays.
-```
-
-#### 2. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
+#### 1. `eye_5` · 사장의 눈 5 · 칠판의 빈칸
 
 - 나오는 날: 엔딩 · 장면: 오른쪽 아래만 비워 둔 칠판 · 참조: `hall_wall` · `hall_evening`
 

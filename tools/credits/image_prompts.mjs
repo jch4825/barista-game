@@ -310,6 +310,7 @@ const SIZE_2K = '2K 2752×1536';
 const SIZE_1K = '1376×768';
 Object.assign(IMAGE_PROMPTS, {
   ...Object.fromEntries([
+    ['eye_1', '사장의 눈 1 · 컵을 깬 날', [], 'jieun_sheet · hall_spring', SIZE_2K],
     ['eye_2', '사장의 눈 2 · 한 칸 내린 선반', [], 'hall_morning', SIZE_1K],
     ['eye_3', '사장의 눈 3 · 맛은 시간이 만든다', ['geum'], 'jieun_sheet · geum_sheet · hall_spring', SIZE_2K],
     ['eye_4', '사장의 눈 4 · 빈 컵만', [], 'jieun_sheet · hall_spring', SIZE_2K],
