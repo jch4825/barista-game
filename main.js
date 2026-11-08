@@ -25,7 +25,7 @@ function createWindow() {
     minWidth: 960,
     minHeight: 560,
     title: '직업 ε바리스타3', // js/config.js 의 TITLE 과 같게
-    // 앱 아이콘은 새 게임 그림이 생기면 assets/icon.png(창)과 build/icon.ico(설치 파일)로 넣고 icon 을 다시 적습니다
+    icon: path.join(__dirname, 'assets', 'icon.png'), // 커피컵 아이콘(tools/make-icon.py, 설치 파일은 build/icon.ico)
     backgroundColor: '#0E0C12',
     autoHideMenuBar: true,
     webPreferences: {

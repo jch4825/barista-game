@@ -28,7 +28,7 @@ npm run voices       # 목록 + Supertonic 3 로컬 TTS로 음성 생성(없는 
 npm run voices:qwen  # 목록 + Qwen3 TTS로 음성 생성(정한 방법 '새 ②', 바뀐 줄만, 이 컴퓨터에서만). --dry 세기만 · --limit N · --only 사람 · --keys key,… · --out 시험 폴더
 npm run credits      # 선생님 모드 '제작·저작권 정보' 자료 → assets/credits/credits.json
 npm run build:web    # 웹판 배포용 폴더(dist/). 웹판은 새 Vercel 프로젝트로만, 공개(정식 배포)는 사용자 허락 뒤에만
-npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘은 아직 없음
+npm run build:win    # 설치용 앱(appId kr.barista-game.app). 앱 아이콘은 커피컵: python -X utf8 tools/make-icon.py → assets/icon.png(창) · build/icon.ico(설치 파일)
 ```
 
 - 브라우저 확인: 미리 보기 설정 `barista-web`(5175). 원본 직업 마1스톤은 `job-milestone-original`(5173)로 따로 띄웁니다. 두 게임은 저장 키(`barista.v1` / `jobms.v2`), 기록 파일 표시(`barista-game` / `job-milestone`), 포트가 달라 섞이지 않습니다.
