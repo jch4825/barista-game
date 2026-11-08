@@ -53,8 +53,17 @@ const by = new Map(); // key → Map(말하는 사람 → Set(나오는 곳))
 const stream = [];
 const firstAt = new Map();
 
+/**
+ * 통째로 읽히면 뒤 문장에서 목소리가 다른 사람처럼 바뀌는 줄: 문장마다 따로 만듦.
+ * 게임은 통째 파일이 없으면 문장 파일을 차례로 이어 읽음(js/av/tts.js 의 playParts). 사람의 귀로 찾은 줄만 적음(검수 13.95)
+ */
+const SPLIT = new Set([
+  '은주 씨가 유모차를 밀고 들어온다. 다행히 오늘은 아기가 곤히 잠들어 있다.', // 여름 5일: 뒤 문장의 목소리가 바뀜(2026-11-08 사용자 "소리가 완전 다른데? 아직도")
+]);
+
 function add(voice, text, ep, who = voice, face = '') {
   if (!text || /\{player/.test(text)) return; // 이름이 들어가는 줄은 실행할 때 브라우저 음성으로
+  if (SPLIT.has(text) && sentencesOf(text).length > 1) { for (const part of sentencesOf(text)) add(voice, part, ep, who, face); return; }
   const spoken = speakable(text).trim();
   if (!spoken) return;
   const key = hashKey(`${voice}|${spoken}`);
