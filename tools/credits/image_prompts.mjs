@@ -314,15 +314,21 @@ Object.assign(IMAGE_PROMPTS, {
     ['sumin_secret', '합격 통지서', ['sumin'], 'sumin_sheet · jieun_sheet · hall_winter', SIZE_2K],
     ['winter_gathering', '겨울 · 단골 여덟 명', ['kang', 'do'], 'haesun_sheet · kang_sheet · do_sheet · jian_sheet · hall_blackout', SIZE_2K],
     ['do_secret', '마지막 우편', ['do'], 'do_sheet · jieun_sheet · hall_winter', SIZE_2K],
-    ['han_secret', '컵 속의 쪽지', ['han'], 'han_sheet · hall_winter', SIZE_2K],
+    ['han_secret', '컵 속의 쪽지', [], 'han_sheet · hall_winter · 다시 만든 그림(장면 문장에 쉬는 날의 옷차림까지 적음)', SIZE_2K],
     ['jian_secret', '지은의 손', [], 'jian_sheet · jieun_sheet · hall_winter', SIZE_2K],
   ].map(([id, title, cast, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', prompt: cgFrom(id, cast), neg: CG_NEG, note: `참조 이미지: ${ref} · ${size}` }])),
   ...Object.fromEntries([
     ['autumn_key', '가을 · 가게 열쇠', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
     ['winter_owner_return', '겨울 · 컵 닦았냐', 'owner_sheet · jieun_sheet · hall_winter', SIZE_2K],
     ['winter_milk_handover', '겨울 · 두 손에 쥐여 준 우유', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
-    ['ending_last_cup', '엔딩 · 따뜻한 우유 한 컵', 'hall_morning', SIZE_1K],
+    ['ending_last_cup', '엔딩 · 따뜻한 우유 한 컵', 'hall_evening', SIZE_2K],
   ].map(([id, title, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', ...extraBox(id), note: `참조 이미지: ${ref} · docs/추가 제작.md · ${size}` }])),
+});
+
+/* 손녀 스탠딩(2026-11-08): 요청서의 글로는 Flow에서 막혀 사용자가 직접 만듦 */
+Object.assign(IMAGE_PROMPTS, {
+  granddaughter_normal: { title: '손녀 · 보통', from: 'none', prompt: '', neg: '', note: '사용자가 Flow에서 직접 만든 그림 · 프롬프트 기록 없음' },
+  granddaughter_smile: { title: '손녀 · 웃음', from: 'none', prompt: '', neg: '', note: '사용자가 Flow에서 직접 만든 그림 · 프롬프트 기록 없음' },
 });
 
 /* ===== 작업대 시트 · 놀이 그림 (2026-11-06 받음: tools/import-objects.py 가 칸마다 잘라 냄) =====

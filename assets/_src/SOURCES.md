@@ -232,6 +232,11 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_winter_owner_return.jpg` | `Man_smiling_at_woman_in_6ac047b9_2K.jpg` (2026-11-08 20:21) |
 | `cg/cg_winter_milk_handover.jpg` | `Woman_serving_warm_milk_to_7d593bd9_2K.jpg` (2026-11-08 20:22) |
 | `cg/cg_ending_last_cup.jpg` | `Mug_of_warm_milk_on_c594a0cf.jpg` (2026-11-08 20:29) |
+| `cg/cg_han_secret.jpg` | `Man_holding_notes_in_cafe_c80e5a0f_2K.jpg` (2026-11-08 23:21 · 다시 만든 그림: 쪽지가 대화창에 가리지 않게, 쉬는 날의 외투 차림. 첫 그림은 `_src/cg_unused/cg_han_secret_v1.jpg`) |
+| `cg/cg_winter_milk_handover.jpg` | `Woman_serving_mug_to_man_5b441ece_2K.jpg` (2026-11-08 23:24 · 다시 만든 그림: 잔을 감싼 두 손이 대화창에 가리지 않게. 첫 그림은 `_src/cg_unused/cg_winter_milk_handover_v1.jpg`) |
+| `cg/cg_ending_last_cup.jpg` | `Mug_of_milk_on_windowsill_dfdb4e95_2K.jpg` (2026-11-08 23:25 · 다시 만든 그림: 머그가 대화창에 가리지 않게, 대본의 저녁 항구로. 첫 그림은 `_src/cg_unused/cg_ending_last_cup_v1.jpg`) |
+| `stand/granddaughter_normal.jpg` | `Redraw_girl_character_art_style_bd5047db_2K.jpg` (2026-11-08 23:18) |
+| `stand/granddaughter_smile.jpg` | `Redraw_girl_character_art_style_d6541ccc_2K.jpg` (2026-11-08 23:14) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):
 - `Character_design_sheet_of_barista_20261028002548.jpg`: 지은 설정화의 남색 앞치마 첫 판(2026-10-28). 게임은 초록 앞치마 설정화(`ref/jieun_sheet.jpg`)를 씀

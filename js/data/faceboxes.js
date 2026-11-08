@@ -188,6 +188,16 @@ export const FACE_BOX = {
   51.2,
   7.5
  ],
+ "granddaughter_normal": [
+  260,
+  47.8,
+  8.0
+ ],
+ "granddaughter_smile": [
+  260,
+  47.8,
+  8.2
+ ],
  "grandma-cardigan_normal": [
   260,
   50.2,
@@ -257,6 +267,126 @@ export const FACE_BOX = {
   260,
   50.5,
   8.2
+ ],
+ "jieun-brown_determined": [
+  248,
+  51.9,
+  8.4
+ ],
+ "jieun-brown_nervous": [
+  232,
+  52.0,
+  8.8
+ ],
+ "jieun-brown_normal": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-brown_sad": [
+  229,
+  52.0,
+  8.9
+ ],
+ "jieun-brown_smile": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-brown_surprised": [
+  228,
+  52.0,
+  8.8
+ ],
+ "jieun-coral_determined": [
+  248,
+  51.9,
+  8.4
+ ],
+ "jieun-coral_nervous": [
+  232,
+  52.0,
+  8.8
+ ],
+ "jieun-coral_normal": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-coral_sad": [
+  229,
+  52.0,
+  8.9
+ ],
+ "jieun-coral_smile": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-coral_surprised": [
+  228,
+  52.0,
+  8.8
+ ],
+ "jieun-navy_determined": [
+  248,
+  51.9,
+  8.4
+ ],
+ "jieun-navy_nervous": [
+  232,
+  52.0,
+  8.8
+ ],
+ "jieun-navy_normal": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-navy_sad": [
+  229,
+  52.0,
+  8.9
+ ],
+ "jieun-navy_smile": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-navy_surprised": [
+  228,
+  52.0,
+  8.8
+ ],
+ "jieun-stripe_determined": [
+  248,
+  51.9,
+  8.4
+ ],
+ "jieun-stripe_nervous": [
+  232,
+  52.0,
+  8.8
+ ],
+ "jieun-stripe_normal": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-stripe_sad": [
+  229,
+  52.0,
+  8.9
+ ],
+ "jieun-stripe_smile": [
+  234,
+  51.9,
+  8.8
+ ],
+ "jieun-stripe_surprised": [
+  228,
+  52.0,
+  8.8
  ],
  "jieun_determined": [
   248,
@@ -691,6 +821,16 @@ export const PORTRAIT_BOX = {
   52.1,
   3.6
  ],
+ "granddaughter_normal": [
+  144,
+  45.6,
+  3.4
+ ],
+ "granddaughter_smile": [
+  144,
+  45.6,
+  3.6
+ ],
  "grandma-cardigan_normal": [
   144,
   50.4,
@@ -760,6 +900,126 @@ export const PORTRAIT_BOX = {
   144,
   51.1,
   3.6
+ ],
+ "jieun-brown_determined": [
+  137,
+  54.1,
+  3.5
+ ],
+ "jieun-brown_nervous": [
+  128,
+  55.1,
+  3.3
+ ],
+ "jieun-brown_normal": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-brown_sad": [
+  126,
+  55.3,
+  3.2
+ ],
+ "jieun-brown_smile": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-brown_surprised": [
+  126,
+  55.4,
+  3.0
+ ],
+ "jieun-coral_determined": [
+  137,
+  54.1,
+  3.5
+ ],
+ "jieun-coral_nervous": [
+  128,
+  55.1,
+  3.3
+ ],
+ "jieun-coral_normal": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-coral_sad": [
+  126,
+  55.3,
+  3.2
+ ],
+ "jieun-coral_smile": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-coral_surprised": [
+  126,
+  55.4,
+  3.0
+ ],
+ "jieun-navy_determined": [
+  137,
+  54.1,
+  3.5
+ ],
+ "jieun-navy_nervous": [
+  128,
+  55.1,
+  3.3
+ ],
+ "jieun-navy_normal": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-navy_sad": [
+  126,
+  55.3,
+  3.2
+ ],
+ "jieun-navy_smile": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-navy_surprised": [
+  126,
+  55.4,
+  3.0
+ ],
+ "jieun-stripe_determined": [
+  137,
+  54.1,
+  3.5
+ ],
+ "jieun-stripe_nervous": [
+  128,
+  55.1,
+  3.3
+ ],
+ "jieun-stripe_normal": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-stripe_sad": [
+  126,
+  55.3,
+  3.2
+ ],
+ "jieun-stripe_smile": [
+  129,
+  54.9,
+  3.3
+ ],
+ "jieun-stripe_surprised": [
+  126,
+  55.4,
+  3.0
  ],
  "jieun_determined": [
   137,

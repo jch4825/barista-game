@@ -82,6 +82,8 @@ POCKETS: dict[str, list[tuple[int, int]]] = {
     'do_normal': [(273, 786)],
     'do_surprised': [(273, 785)],
     'eunju_worried': [(389, 1146)],
+    'granddaughter_normal': [(632, 439)],  # 왼쪽 머리카락 가닥과 머리 사이
+    'granddaughter_smile': [(632, 439)],
     'geum_normal': [(520, 527)],
     'geum_surprised': [(514, 538)],
     'han_normal': [(508, 670), (257, 679)],

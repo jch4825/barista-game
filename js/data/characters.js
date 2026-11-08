@@ -48,6 +48,7 @@ export const CHARS = {
   granddaughter: {
     name: '손녀', role: '해순 할머니의 손녀', color: '#C77D8E', voice: 'granddaughter', // 2026-11-05 자기 목소리(Qwen3, 검수 13.58): 전에는 여자 손님(customer_f)과 나눠 씀
     standScale: 0.85,
+    look: 'left', // 2026-11-08 스탠딩(Flow): 얼굴이 보는 사람의 왼쪽으로 살짝 돌아 있음
     svg: { skin: '#F6D5C0', hair: '#2E2420', style: 'ponytail', outfit: '#E8A9B8', acc: [], bg: '#FCE8EE' },
   },
 
