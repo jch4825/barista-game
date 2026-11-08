@@ -45,7 +45,8 @@ const THEMES = {
     howtoAlone: '주문 종이를 눌러서 하나씩 처리해요. 오늘은 사장님이 안 계셔서 주문이 기다려 줘요.',
     spots: [[20, 30], [38, 24], [56, 28], [74, 24], [26, 54], [46, 50], [66, 54], [82, 46], [30, 74], [52, 74], [72, 72]],
     slips: ['아이스 아메리카노 하나요!', '라테 두 잔이요.', '유자차 하나요.', '포장이요!', '딸기우유 하나요.', '따뜻한 우유요.', '아아 둘이요!'],
-    spawn: [1900, 1000], max: 6, life: 5200,
+    // 주문이 나오는 사이(처음 → 끝, ms): 4배 빠르게(2026-11-08 사용자 "몰림 시간의 요청을 4배 빠르게 만들어라. 그래야 사장님의 도움을 받을 수 있다", 검수 13.96). 전에는 [1900, 1000]이라 1초에 두 번만 눌러도 사장님 도움이 없었음
+    spawn: [475, 250], max: 11, life: 5200, // max: 한꺼번에 놓이는 주문 종이(자리 11곳 모두). 6장으로 막으면 빨리 누르는 학생은 오래된 종이가 늘 5.2초 안에 처리돼 사장님 도움이 없었음(검수 13.96)
     say: { start: '손님이 한꺼번에 몰려와요. 하나씩 해요.', owner: '이건 내가 할게요.', end: '몰림 시간을 넘겼어요. 사장님과 함께 해냈어요!', alone: '사장님이 안 계셔도 차근차근 해냈어요!' },
   },
   gull: {
@@ -258,6 +259,15 @@ export async function rush(opts = {}) {
   const alone = opts.today?.owner === false;
   // 사장님이 받아 주는 때에는 깊은 길 배율(pk)을 곱하지 않음: 곱하면 더 일찍 받아 줘서 깊은 길이 오히려 쉬웠음(검수 13.39 31번)
   const life = alone ? Infinity : th.life ? th.life * k * Math.max(0.6, 1 - (grow.level('calm') - 1) * 0.05) : 0;
+  /** 사장님이 주문 하나를 받아 줌(오래 둔 주문 · 자리가 다 찼을 때). 처음 한 번만 "이건 내가 할게요." */
+  function ownerTake(i, s) {
+    const { x, y } = posOf(s.el);
+    popText(field, '사장님이 받았어요', x, y - 40);
+    if (!helped) tts.speak(th.say.owner, 'owner');
+    helped += 1;
+    removeSlip(i, 'is-owner');
+    paint();
+  }
   function step(dt) {
     if (over || !started) return;
     tAcc += dt;
@@ -277,20 +287,16 @@ export async function rush(opts = {}) {
     spawnIn -= dt;
     if (spawnIn <= 0) {
       if (kind === 'city' && live.size >= th.max) { finish(); return; } // 쌓이고 쌓여서 와르르
+      // 우리 카페: 자리가 다 찼는데 또 손님이 오면 사장님이 가장 오래된 주문을 받아 주고 새 주문을 놓음(사장님 외출 날은 기다림).
+      // 손이 빠른 학생도 몰림이 가장 셀 때는 사장님과 함께 하게(2026-11-08 사용자 "그래야 사장님의 도움을 받을 수 있다", 검수 13.96)
+      if (kind === 'cafe' && !alone && live.size >= th.max) { const [i, s] = [...live].reduce((a, b) => (b[1].age > a[1].age ? b : a)); ownerTake(i, s); }
       if (live.size < (kind === 'city' ? S.length : th.max)) addSlip();
       spawnIn = (th.spawn[0] + (th.spawn[1] - th.spawn[0]) * prog) * k * pk;
     }
     if (kind === 'cafe') {
       for (const [i, s] of [...live]) {
         s.age += dt;
-        if (s.age >= life) {
-          const { x, y } = posOf(s.el);
-          popText(field, '사장님이 받았어요', x, y - 40);
-          if (!helped) tts.speak(th.say.owner, 'owner');
-          helped += 1;
-          removeSlip(i, 'is-owner');
-          paint();
-        }
+        if (s.age >= life) ownerTake(i, s);
       }
     }
     if (auto) { const first = [...live.keys()][0]; if (first !== undefined && Math.random() < 0.35) tapSlip(first); }
