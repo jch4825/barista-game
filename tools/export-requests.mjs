@@ -432,7 +432,7 @@ Q('# 아직 없는 그림 · 프롬프트 모음', '',
   '> 사용자(2026-11-06): "아직 없는 그림들의 프롬프트를 모아서 새 문서로 만들어라." 흩어져 있던 프롬프트(`docs/requests_full.md` · `docs/추가 제작.md` · `docs/image_requests.md` 8 · 9장)를 여기 한곳에 모았습니다. 빈칸은 모두 채워 두었습니다.', '',
   `**아직 없는 그림 ${pics.length}장**${todo.length > pics.length ? ` + 영상 ${todo.length - pics.length}개(있으면 좋음)` : ''}: ${groups.map((g) => `${g} ${todo.filter((t) => t.group === g).length}`).join(' · ')}`, '',
   '## 만드는 법', '',
-  '1. **위에서부터 차례로** 만듭니다. 앞에서 만든 그림이 뒤의 참조 그림이 됩니다(예: 손녀 설정화 → 손녀 보통 → 손녀가 나오는 장면).',
+  `1. **위에서부터 차례로** 만듭니다.${todo.some((t) => t.refs.some((r) => todo.some((x) => x.id === r))) ? ' 앞에서 만든 그림이 뒤의 참조 그림이 됩니다.' : ''}`,
   '2. 상자 안의 글을 **통째로 복사**해 Flow에 붙입니다. 마지막 줄 `Avoid: …`까지 함께 넣습니다.',
   '3. 항목마다 적은 **비율**로 만들고, **참조** 그림을 Flow의 참조 이미지(재료)로 함께 넣습니다. 한 번에 다 못 넣으면 인물 그림을 먼저 넣습니다.',
   '4. 여러 장이 나오면 얼굴 · 옷 · 물건 모양이 참조와 가장 같은 것을 고르고 **2K로 키워서** 받습니다.',
@@ -454,5 +454,14 @@ for (const g of groups) {
       `- 게임 파일: \`${t.file}\``, '', '```', t.prompt, '```', '');
   });
 }
-fs.writeFileSync(path.join(root, 'docs/아직 없는 그림.md'), `${D.join('\n')}\n`);
+// 업데이트 일시(2026-11-08 사용자, 검수 13.105): 제목 바로 아래. 목록이 바뀐 때만 새로 적고, 내용이 같으면 먼저 적힌 일시를 그대로 둠
+const LIST_FILE = path.join(root, 'docs/아직 없는 그림.md');
+const LIST_STAMP = /^\*\*업데이트: (.+?)\*\*\n\n/m;
+const listBody = `${D.join('\n')}\n`;
+const listPrev = fs.existsSync(LIST_FILE) ? fs.readFileSync(LIST_FILE, 'utf8').replace(/\r\n/g, '\n') : '';
+const listPad = (n) => String(n).padStart(2, '0');
+const listDate = new Date();
+const listNow = `${listDate.getFullYear()}-${listPad(listDate.getMonth() + 1)}-${listPad(listDate.getDate())} ${listPad(listDate.getHours())}:${listPad(listDate.getMinutes())}`;
+const listStamp = (listPrev.replace(LIST_STAMP, '') === listBody && LIST_STAMP.exec(listPrev)?.[1]) || listNow;
+fs.writeFileSync(LIST_FILE, listBody.replace('\n\n', `\n\n**업데이트: ${listStamp}**\n\n`));
 console.log(`아직 없는 그림: ${pics.length}장 + 영상 ${todo.length - pics.length} (${groups.map((g) => `${g} ${todo.filter((t) => t.group === g).length}`).join(' · ')}) → docs/아직 없는 그림.md`);
