@@ -2019,3 +2019,11 @@
 - "도 씨가 들어오다 문 옆에서 멈춘다. 빈 벽에 새 못이 하나 박혀 있다.": 은주 줄(13.95)처럼 `tools/export-lines.mjs` 의 `SPLIT`에 더해 문장마다 따로 만듦(`10f2c002` · `6b8b35ef`, 앞뒤 ✅ 후보 1). 통째 파일 `fd9d26ad`는 뺐고, 게임은 두 파일을 이어 읽음(`tts.js` 의 `playParts`).
 - 옛 파일은 `assets/_src/_check/voice_redo/user_1398/`(이 PC에만), 기록의 `heard`에 까닭.
 - 확인: 검사기 오류 · 경고 0, 음성 목록과 기록이 맞음(`voices:qwen --dry` 만들 줄 0), 보이지 않는 창에서 두 줄을 읽혀 고른 파일을 차례대로 트는 것을 봄.
+
+### 13.99 받은 장면 그림 9장 (2026-11-08 사용자 "cg에 일부 추가해두었다.")
+
+- `assets/cg/`에 원래 이름으로 들어온 9장을 그림을 보고 요청서 3 ~ 10번 · 12번과 맞춰 이름을 바꿈: 가게 열쇠 `autumn_key` · 합격 통지서 `sumin_secret` · 단골 여덟 명 `winter_gathering` · 마지막 우편 `do_secret` · 컵 속의 쪽지 `han_secret` · 지은의 손 `jian_secret` · 컵 닦았냐 `winter_owner_return` · 두 손에 쥐여 준 우유 `winter_milk_handover` · 따뜻한 우유 한 컵 `ending_last_cup`(이 한 장만 1K 1376×768, 나머지 2K). 원래 이름 · 받은 시각은 `assets/_src/SOURCES.md`, 프롬프트는 `tools/credits/image_prompts.mjs`.
+- 11월 6일에 받아 두고 커밋하지 않았던 `cg_eye_2` · `eunju_nervous` · 손녀 설정화도 함께 올림.
+- 이제 CG 18장 / 30장. 아직 없는 그림 14장(손녀 2 · 칠판의 빈칸 1 · 사장의 눈 11).
+- 확인: 보이지 않는 창(1920 × 1080)에서 대화창을 띄운 채 9장 모두 실제 그림으로 뜸(임시 그림 아님), 실행 오류 0, 지은의 앞치마는 모두 초록.
+- 검수 포인트: ① 세 장은 중요한 물건이 '위쪽 2/3'보다 아래에 그려져 대화창에 가림: `han_secret`(쪽지 두 장이 거의 다) · `winter_milk_handover`(잔을 감싼 두 손) · `ending_last_cup`(머그 아래 절반). 그대로 둘지, 물건을 위로 올려 다시 만들지. ② `ending_last_cup`은 요청서대로 머그 한 잔인데, 그 위의 나레이션은 "두 잔의 따뜻한 우유에서 김이 천천히 오른다."

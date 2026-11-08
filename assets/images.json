@@ -27,6 +27,7 @@
     "do_smile": "stand/do_smile.webp",
     "do_surprised": "stand/do_surprised.webp",
     "do_worried": "stand/do_worried.webp",
+    "eunju_nervous": "stand/eunju_nervous.webp",
     "eunju_normal": "stand/eunju_normal.webp",
     "eunju_sad": "stand/eunju_sad.webp",
     "eunju_smile": "stand/eunju_smile.webp",
@@ -155,14 +156,24 @@
     "workbench_morning": "bg/workbench_morning.jpg"
   },
   "cg": {
+    "cg_autumn_key": "cg/cg_autumn_key.jpg",
     "cg_blackout_cafe_lit": "cg/cg_blackout_cafe_lit.jpg",
+    "cg_do_secret": "cg/cg_do_secret.jpg",
+    "cg_ending_last_cup": "cg/cg_ending_last_cup.jpg",
     "cg_eunju_secret": "cg/cg_eunju_secret.jpg",
+    "cg_eye_2": "cg/cg_eye_2.jpg",
     "cg_haesun_secret": "cg/cg_haesun_secret.jpg",
+    "cg_han_secret": "cg/cg_han_secret.jpg",
+    "cg_jian_secret": "cg/cg_jian_secret.jpg",
     "cg_kang_secret": "cg/cg_kang_secret.jpg",
     "cg_noh_secret": "cg/cg_noh_secret.jpg",
     "cg_spring_crew": "cg/cg_spring_crew.jpg",
     "cg_spring_first_cup": "cg/cg_spring_first_cup.jpg",
-    "cg_summer_line": "cg/cg_summer_line.jpg"
+    "cg_sumin_secret": "cg/cg_sumin_secret.jpg",
+    "cg_summer_line": "cg/cg_summer_line.jpg",
+    "cg_winter_gathering": "cg/cg_winter_gathering.jpg",
+    "cg_winter_milk_handover": "cg/cg_winter_milk_handover.jpg",
+    "cg_winter_owner_return": "cg/cg_winter_owner_return.jpg"
   },
   "photos": {},
   "sd": {},

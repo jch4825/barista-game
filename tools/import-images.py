@@ -117,7 +117,7 @@ COORD_W: dict[str, int] = {k: 1376 for k in (
 # 2026-11-04 새 인물 38장은 768px 원본으로 적음(2K 업스케일로 바꾸면 좌표가 저절로 늘어남)
 COORD_W.update({f'{cid}_{face}': 768 for cid, faces in {
     'do': ('normal', 'smile', 'surprised', 'worried'), 'kang': ('normal', 'smile', 'angry', 'sad'),
-    'han': ('normal', 'smile', 'surprised', 'worried'), 'eunju': ('normal', 'sad', 'smile', 'surprised', 'worried'),
+    'han': ('normal', 'smile', 'surprised', 'worried'), 'eunju': ('normal', 'sad', 'smile', 'surprised', 'worried', 'nervous'),
     'sumin': ('normal', 'surprised', 'nervous', 'smile'), 'noh': ('normal', 'smile', 'surprised', 'nervous'),
     'geum': ('normal', 'angry', 'surprised', 'smile'), 'actor': ('normal', 'smile', 'surprised'), 'agent': ('normal', 'angry'),
     'mom2': ('normal', 'nervous', 'smile'), 'young_fisher': ('normal',)}.items() for face in faces})

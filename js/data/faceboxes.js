@@ -138,6 +138,11 @@ export const FACE_BOX = {
   51.2,
   7.2
  ],
+ "eunju_nervous": [
+  236,
+  51.7,
+  8.6
+ ],
  "eunju_normal": [
   237,
   51.7,
@@ -635,6 +640,11 @@ export const PORTRAIT_BOX = {
   154,
   52.2,
   2.8
+ ],
+ "eunju_nervous": [
+  130,
+  54.3,
+  3.1
  ],
  "eunju_normal": [
   131,

@@ -28,6 +28,7 @@ const DOHYUN = 'Korean man age 26, neat black hair, black rectangular glasses, w
 const MANAGER = 'Korean man age 42, short slate grey-green hair, short stubble beard, white shirt with rolled sleeves, black vest, navy necktie, gold pocket watch chain with a small crescent charm, dark grey trousers, small spiral notepad and pen';
 
 /* ---------- 2026-11-04 새 인물 11명 · 장면 그림: 요청서(docs/requests_full.md)와 같은 글 ---------- */
+import fs from 'node:fs';
 import { PEOPLE_EN, FACE_EN, CG_EN } from '../requests/prompts_en.mjs';
 import { OBJ_SHEETS, sheetItems, objPrompt, playPrompt } from '../requests/obj_sheets.mjs';
 
@@ -295,6 +296,33 @@ Object.assign(IMAGE_PROMPTS, {
   cg_kang_secret: { ...IMAGE_PROMPTS.cg_kang_window_sea, title: '장면 · 배를 판 날', note: '처음에는 봄 6일 「바다 안 나가요」(cg_kang_window_sea)로 만든 그림 · 새벽 항구의 빈자리 · 참조 이미지: kang_sheet · harbor_dawn · 1376×768' },
   cg_eunju_secret: { title: '장면 · 일주일의 말', from: 'doc', prompt: cgFrom('eunju_thick_cup', ['eunju']), neg: CG_NEG, note: '처음에는 여름 3일(은주가 처음 온 날) 「두꺼운 컵」으로 만든 그림 · "여름에 내가 처음 왔던 날" · 참조 이미지: eunju_sheet · hall_summer · 1376×768' },
   cg_noh_secret: { title: '장면 · 처음 떨린 날', from: 'doc', prompt: cgFrom('noh_spoon', ['noh']), neg: CG_NEG, note: '처음에는 여름 4일 「떨리는 숟가락」으로 만든 그림 · 숟가락으로 잔을 젓는 사장님 옆의 노 씨 · 참조 이미지: noh_sheet · owner_sheet · hall_summer · 1376×768' },
+});
+
+/* ===== 받은 장면 그림 (2026-11-06 · 11-08): 요청서(docs/아직 없는 그림.md)에 있던 글 그대로.
+   '추가 제작'에 상자가 있는 그림은 그 상자를 씀(요청서도 그 상자를 앞세움) */
+const extraText = fs.readFileSync(new URL('../../docs/추가 제작.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+const extraBox = (id) => {
+  const m = new RegExp('^### \\d+\\. `' + id + '` ·[\\s\\S]*?```\\n([\\s\\S]*?)\\n```', 'm').exec(extraText);
+  const [prompt, neg = ''] = (m ? m[1] : '').split(/\nAvoid: /);
+  return { prompt, neg: neg.replace(/\.$/, '') };
+};
+const SIZE_2K = '2K 2752×1536';
+const SIZE_1K = '1376×768';
+Object.assign(IMAGE_PROMPTS, {
+  ...Object.fromEntries([
+    ['eye_2', '사장의 눈 2 · 한 칸 내린 선반', [], 'hall_morning', SIZE_1K],
+    ['sumin_secret', '합격 통지서', ['sumin'], 'sumin_sheet · jieun_sheet · hall_winter', SIZE_2K],
+    ['winter_gathering', '겨울 · 단골 여덟 명', ['kang', 'do'], 'haesun_sheet · kang_sheet · do_sheet · jian_sheet · hall_blackout', SIZE_2K],
+    ['do_secret', '마지막 우편', ['do'], 'do_sheet · jieun_sheet · hall_winter', SIZE_2K],
+    ['han_secret', '컵 속의 쪽지', ['han'], 'han_sheet · hall_winter', SIZE_2K],
+    ['jian_secret', '지은의 손', [], 'jian_sheet · jieun_sheet · hall_winter', SIZE_2K],
+  ].map(([id, title, cast, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', prompt: cgFrom(id, cast), neg: CG_NEG, note: `참조 이미지: ${ref} · ${size}` }])),
+  ...Object.fromEntries([
+    ['autumn_key', '가을 · 가게 열쇠', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
+    ['winter_owner_return', '겨울 · 컵 닦았냐', 'owner_sheet · jieun_sheet · hall_winter', SIZE_2K],
+    ['winter_milk_handover', '겨울 · 두 손에 쥐여 준 우유', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
+    ['ending_last_cup', '엔딩 · 따뜻한 우유 한 컵', 'hall_morning', SIZE_1K],
+  ].map(([id, title, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', ...extraBox(id), note: `참조 이미지: ${ref} · docs/추가 제작.md · ${size}` }])),
 });
 
 /* ===== 작업대 시트 · 놀이 그림 (2026-11-06 받음: tools/import-objects.py 가 칸마다 잘라 냄) =====

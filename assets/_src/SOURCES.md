@@ -223,6 +223,15 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | `cg/cg_kang_secret.jpg` | `Man_holding_coffee_in_cafe_63bf8629.jpg` (2026-11-04 21:28 · 위의 `cg_kang_window_sea`와 같은 그림, 2026-11-06 강 씨의 비밀 장면 「배를 판 날」로 옮겨 씀: 새벽 항구의 빈자리) |
 | `cg/cg_eunju_secret.jpg` | `Woman_holding_mug_in_cafe_c9f7e446.jpg` (2026-11-05 22:27 · 처음에는 여름 3일 「두꺼운 컵」으로 만든 그림, 2026-11-06 은주의 비밀 장면 「일주일의 말」로 씀: "여름에 내가 처음 왔던 날") |
 | `cg/cg_noh_secret.jpg` | `Man_watching_woman_make_drink_e9a89317.jpg` (2026-11-05 22:41 · 처음에는 여름 4일 「떨리는 숟가락」으로 만든 그림, 2026-11-06 노 씨의 비밀 장면 「처음 떨린 날」로 씀: 잔을 젓는 사장님 옆) |
+| `cg/cg_autumn_key.jpg` | `Owner_handing_key_to_Jieun_5e374d96_2K.jpg` (2026-11-08 19:38) |
+| `cg/cg_sumin_secret.jpg` | `Girl_reading_letter_in_cafe_ea007cf8_2K.jpg` (2026-11-08 19:41) |
+| `cg/cg_winter_gathering.jpg` | `Villagers_gathered_inside_candle…_596b4edb_2K.jpg` (2026-11-08 19:45) |
+| `cg/cg_do_secret.jpg` | `Man_handing_letter_in_cafe_517d6af1_2K.jpg` (2026-11-08 19:49) |
+| `cg/cg_han_secret.jpg` | `Man_showing_notes_on_counter_e520dc7c_2K.jpg` (2026-11-08 19:50) |
+| `cg/cg_jian_secret.jpg` | `Jian_showing_sketchbook_to_Jieun_9deae911_2K.jpg` (2026-11-08 20:05) |
+| `cg/cg_winter_owner_return.jpg` | `Man_smiling_at_woman_in_6ac047b9_2K.jpg` (2026-11-08 20:21) |
+| `cg/cg_winter_milk_handover.jpg` | `Woman_serving_warm_milk_to_7d593bd9_2K.jpg` (2026-11-08 20:22) |
+| `cg/cg_ending_last_cup.jpg` | `Mug_of_warm_milk_on_c594a0cf.jpg` (2026-11-08 20:29) |
 
 쓰지 않은 것(`assets/_src/flow_unused/`):
 - `Character_design_sheet_of_barista_20261028002548.jpg`: 지은 설정화의 남색 앞치마 첫 판(2026-10-28). 게임은 초록 앞치마 설정화(`ref/jieun_sheet.jpg`)를 씀
