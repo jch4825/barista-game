@@ -26,3 +26,5 @@ docs/design/ref_*
 __pycache__/
 assets/_src/blender/move/
 assets/music_local/
+# Suno 구독 캡처: 이메일 · 생일이 보임(공개 저장소에 올리지 않음, 검수 13.113)
+docs/SUNO pro subscribtion*.png

@@ -16,7 +16,7 @@
 | 새 놀이의 그림 | 0장(없음) | `assets/flow/`에 두고 알려 주기 → `assets/_src/play/{id}.jpg` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |
 | 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 0 · 🙋 있으면 더 맞는 컷 0(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 0 | `tools/blender/scene_bench.py` | `shots_post.py` → `npm run assets` |
 | 효과음 · 환경음 | 효과음 2 · 환경음 2 | `tools/audio/audio_map.mjs` | `npm run audio` |
-| 배경음악 | 0곡(✅ 저작자가 AI 음악 모델 Suno로 만든 곡으로 채움, 2026-11-01) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
+| 배경음악 | 0곡(✅ 저작자가 Suno Pro 요금제로 만든 곡으로 채움, 2026-11-09) | `BGM/` → `tools/audio/audio_map.mjs` 의 bgm | `npm run audio` |
 | 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |
 
 ## 1. 인물 스탠딩 (새 인물)
@@ -91,7 +91,7 @@
 
 | mood | 쓰는 곳 | 느낌 · 악기 | 길이 |
 | :--- | :--- | :--- | :--- |
-| 모두 있음 | ✅ 저작자가 AI 음악 모델 Suno로 만든 곡(2026-11-01, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.29) | | |
+| 모두 있음 | ✅ 저작자가 Suno Pro 요금제로 만든 곡(2026-11-09, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.113) | | |
 
 - 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.
 

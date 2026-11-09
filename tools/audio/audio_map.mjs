@@ -24,7 +24,7 @@ const OVF = 'OVANI/Foley Props Sound FX Pack/Foley Props/'; // 그라인더 · �
 const OVS = 'OVANI/Steampunk Sound FX Pack Vol. 2/Steampunk Vol 2/'; // 증기(2026-11-08)
 const OVE = 'OVANI/Environmental Ambiences Sound FX Pack Vol. 2/Environments 2/'; // 먼 바다(2026-11-08)
 const AIM = 'BGM/'; // 저작자가 AI 음악 모델로 만든 배경음악(프로젝트의 BGM/ 폴더)
-// AI 음악은 곡마다 만든 모델을 적음(entry 의 pack). 지금 곡은 모두 Suno(2026-11-01 사용자). Gemini로 만든 곡이 오면 Gemini 팩을 더함
+// AI 음악은 곡마다 만든 모델을 적음(entry 의 pack). 지금 곡 11개는 모두 Suno Pro 요금제로 만듦(2026-11-09 사용자, 검수 13.113). Gemini로 만든 곡이 오면 Gemini 팩을 더함
 const SUNO = 'ai:suno';
 
 /**
@@ -57,11 +57,10 @@ export const PACKS = {
   [OVE]: { name: 'Environmental Ambiences Sound FX Pack Vol. 2', author: 'Ovani Sound (ovanisound.com)', license: OVL, bundle: HB24, ai: OVAI },
   /* 2026-11-01 사용자: "AI로 만든 음악은 꼭 자를 필요도, 따로 올려서 저작권을 보호할 필요도 없다. 전부 저작자가 만든 음악이므로
    * SUNO나 Gemini 음악 모델로 만든 것이라는 것만 명시하면 된다."
-   * 사용자(같은 날 고침): "Rising Glow, Galactic Waltz, Untitled, Across the Horizon 모두 SUNO로 만든 곡이야." → 지금 곡은 모두 Suno
-   * 가사가 있는 「아이에게 보내는 편지」는 엔딩 크레디트나 오프닝에서만(사용자) */
+   * 2026-11-09 곡을 모두 바꿈: 11곡 모두 Suno Pro 요금제로 만듦(MP3 안의 표시 made with suno; created=2026-11-09). 무료 요금제 곡은 더 쓰지 않음 */
   [SUNO]: {
     name: 'Suno로 만든 곡', author: '이 제품의 저작자', composer: '저작자가 Suno(AI)로 만듦',
-    license: '저작자가 만든 곡', bundle: '', ai: 'AI로 만든 음악(Suno)',
+    license: '저작자가 Suno Pro 요금제로 만든 곡', bundle: '', ai: 'AI로 만든 음악(Suno)',
   },
 };
 
@@ -72,24 +71,20 @@ export const AUDIO_MAP = [
   /* ---------------- 배경음악 ----------------
    * 새 게임은 배경음악을 모두 새로 넣습니다(2026-10-27 사용자: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음).
    * 새 곡은 { id, kind: 'bgm', src, use, track, … } 로 여기에 더하고, 쓰는 팩을 PACKS 에 적습니다.
-   * 2026-11-01 저작자가 AI 음악 모델로 만든 곡(모두 Suno, 한 곡에 두 판씩: _a · _b). 어느 분위기에 무엇을 트는지는 js/av/audio.js 의 BGM_VARIANTS.
-   * 고른 기준: 곡 페이지의 스타일 글 + 길이 · 음량 · 밝기 · 조 분석(사람이 들어 보고 확정). 끝의 무음만 잘라 내고 음량을 맞춤 */
-  { id: 'glow_a', kind: 'bgm', pack: SUNO, src: S('Rising Glow'), track: 'Rising Glow', use: '처음 화면 · 엔딩 · 한 해의 마지막 마감', trim: [0, 320.1], fadeOut: 1.5, target: { lufs: -18 }, note: '「Rising Glow」(다장조, 5분 20초): 스타일 "tranquil and hopeful · harp · cello · slow tempo with piano · warm". 고르고 차분해(음량 폭 5.9) 처음 화면과 엔딩에 같은 곡(한 해를 여닫는 곡)' },
-  { id: 'glow_b', kind: 'bgm', pack: SUNO, src: S('Rising Glow (1)'), track: 'Rising Glow (2)', use: '아침(가게 열기 전)', trim: [0, 256.4], fadeOut: 1.5, target: { lufs: -18 }, note: '「Rising Glow」의 다른 판(내림마장조, 더 밝음 1063Hz) → 해 뜨는 아침' },
-  // 2026-11-07 사용자 "봄의 아침2곡을 넣어놨어. 게임에서 대체하고 한 번 해보자. 두 곡 다 넣는다." · "몰리는 타이밍에 danger 넣는 것도 잊지마요~"(검수 13.83)
-  // local: Suno 무료 요금제로 만든 곡(사용자 2026-11-07 "무료로 만듦"). 무료 곡은 Suno 가 소유하고 개인적 · 비상업적 이용만 되어 공개하지 않음:
-  //   assets/music_local/(git · 웹판 · 설치판에 넣지 않음) → 이 컴퓨터에서만 들림. 유료 요금제로 다시 만들면 local 을 지우고 다시 npm run audio
-  { id: 'spring_morning_a', kind: 'bgm', pack: SUNO, local: true, src: S('봄의 아침1(suno)'), track: '봄의 아침 1', use: '봄 아침(가게 열기 · 아침 손님, 돌려 듣기 1)', trim: [0.85, 186.45], fadeOut: 1.5, target: { lufs: -19 }, note: '「봄의 아침 1」(라장조, 약 92 BPM, 3분 6초): 밝기 995Hz · 세기 고름(LRA 3.1) → 봄의 아침(Rising Glow 대신, 봄만)' },
-  { id: 'spring_morning_b', kind: 'bgm', pack: SUNO, local: true, src: S('봄의 아침2(suno)'), track: '봄의 아침 2', use: '봄 아침(돌려 듣기 2)', trim: [1.15, 154.4], fadeOut: 1.5, target: { lufs: -19 }, note: '「봄의 아침 2」(가단조 쪽, 약 92 BPM, 2분 33초): 밝기 1061Hz · 세기 고름(LRA 3.8) → 봄의 아침' },
-  { id: 'danger', kind: 'bgm', pack: SUNO, local: true, src: S('Danger-BGM(누보탱고, SUNO)'), track: 'Danger', use: '몰림 시간(몰림 놀이 · 도시 카페 점심시간)', fadeOut: 2, target: { lufs: -20 }, note: '「Danger」(피아졸라풍 누보 탱고, 사단조, 약 129 BPM, 2분 40초): 다른 곡보다 밝고(1,800Hz) 박이 세며 내내 고르게 셈 → 짧은 몰림 놀이에만, 음량은 한 단계 낮게(-20 LUFS)' },
-  { id: 'waltz', kind: 'bgm', pack: SUNO, src: S('Galactic Waltz'), track: 'Galactic Waltz', use: '일하는 카페 · 하루 끝(결과 화면)', trim: [0, 173.6], fadeOut: 1, target: { lufs: -19 }, note: '「Galactic Waltz」(내림마장조 왈츠): "grand piano · classical · start with simple rhythm · growing fast tempo · grand ending" → 손님이 오가는 낮의 카페, 하루를 마친 결과 화면' },
-  { id: 'ballad_a', kind: 'bgm', pack: SUNO, src: S('Untitled'), track: 'Untitled', use: '따뜻한 장면 · 일기(돌려 듣기 1)', trim: [0, 226.2], fadeOut: 1.5, target: { lufs: -19 }, note: '이름 없는 곡(다장조): "ballad · piano pop", 아주 부드러움(밝기 609Hz) → 단골의 마음 · 마감 · 일기' },
-  { id: 'ballad_b', kind: 'bgm', pack: SUNO, src: S('Untitled (1)'), track: 'Untitled (2)', use: '따뜻한 장면(돌려 듣기 2) · 첫날 밤의 작은 방', trim: [0, 200.4], fadeOut: 1.5, target: { lufs: -19 }, note: '같은 곡의 다른 판(다단조, 더 조용함 -16.6 LUFS) → 조금 쓸쓸한 따뜻함, 낯선 마을의 첫날 밤' },
-  { id: 'horizon_a', kind: 'bgm', pack: SUNO, src: S('Across the Horizon'), track: 'Across the Horizon', use: '계절의 큰 사건(돌려 듣기 1)', trim: [0, 141.4], fadeOut: 1, target: { lufs: -19 }, note: '「Across the Horizon」(가단조): "soundtrack · cinematic · orchestral", 조용히 시작해 커짐(음량 폭 12) → 촬영 · 줄 · 큰 사건' },
-  { id: 'horizon_b', kind: 'bgm', pack: SUNO, src: S('Across the Horizon (1)'), track: 'Across the Horizon (2)', use: '계절의 큰 사건(돌려 듣기 2) · 가을 축제', fadeOut: 3, target: { lufs: -19 }, note: '같은 곡의 다른 판(사단조, 3분 14초로 더 길게 쌓임) → 위기 넷이 겹치는 가을 축제' },
-  { id: 'chant_a', kind: 'bgm', pack: SUNO, src: S('그레고리안 찬송가'), track: '그레고리안 찬송가', use: '정전 밤(돌려 듣기 1)', trim: [0, 158.4], fadeOut: 1.5, target: { lufs: -20 }, note: '「그레고리안 찬송가」(바장조): "그레고리안 찬트 · 찬송가 · 무거운" → 폭설로 마을 불이 꺼지고 촛불을 켜는 밤' },
-  { id: 'chant_b', kind: 'bgm', pack: SUNO, src: S('그레고리안 찬송가 (1)'), track: '그레고리안 찬송가 (2)', use: '정전 밤(돌려 듣기 2)', trim: [0, 114.4], fadeOut: 1.5, target: { lufs: -20 }, note: '같은 곡의 다른 판(가단조, 1분 54초)' },
-  { id: 'letter', kind: 'bgm', pack: SUNO, src: S('아이에게 보내는 편지 (Remastered)'), track: '아이에게 보내는 편지 (Remastered)', use: '엔딩 크레디트(가사가 있는 곡이라 여기서만, 한 번만)', trim: [0, 198.0], fadeOut: 2, target: { lufs: -18 }, note: '가사가 있는 노래(여성 목소리 · 발라드): 사용자 결정으로 엔딩 크레디트 · 오프닝에서만 → 이야기 중에는 대사와 겹치므로 크레디트에서만 한 번 틂' },
+   * 2026-11-09 사용자 "기존 곡 모두 삭제하고 새 음악을 맞춰서 넣어줘. … 모두 SUNO에서 제작하였다.": 곡 11개를 모두 바꿈(검수 13.113).
+   * 어느 분위기에 무엇을 트는지는 js/av/audio.js 의 BGM_VARIANTS. 끝의 조용한 곳만 잘라 내고 음량을 맞춤.
+   * 음량: 밝은 곡(Cafe_A · 여름 · 갈매기 · RUSH TIME)은 -20 LUFS 로 한 단계 낮게, 사장의 눈은 -18 LUFS, 나머지는 -19 LUFS */
+  { id: 'morning_spring', kind: 'bgm', pack: SUNO, src: S('봄의 아침'), track: '봄의 아침', use: '봄 아침 · 처음 화면 · 마을에 오는 장면 · 엔딩 크레디트(한 해를 여닫는 곡)', fadeOut: 1.5, target: { lufs: -19 }, note: '「봄의 아침」(3분 24초): 밝기 1,251Hz · 세기 변화가 작음(LRA 5.2) → 날마다 듣는 처음 화면과 봄 아침, 다시 봄으로 이어지는 크레디트' },
+  { id: 'morning_summer', kind: 'bgm', pack: SUNO, src: S('여름, 그 무더운 열정'), track: '여름, 그 무더운 열정', use: '여름 아침', trim: [0, 192.35], fadeOut: 1.5, target: { lufs: -20 }, note: '「여름, 그 무더운 열정」(3분 12초): 밝고(2,695Hz) 세기가 고름(LRA 3.4) → 여름 아침, 음량은 한 단계 낮게' },
+  { id: 'morning_autumn', kind: 'bgm', pack: SUNO, src: S('가을 하늘이 이끄는 곳'), track: '가을 하늘이 이끄는 곳', use: '가을 아침', trim: [0, 218.1], fadeOut: 1.5, target: { lufs: -19 }, note: '「가을 하늘이 이끄는 곳」(3분 38초): 밝기 1,160Hz · LRA 7.5 → 가을 아침' },
+  { id: 'morning_winter', kind: 'bgm', pack: SUNO, src: S('겨울, 그 차갑고도 따뜻한'), track: '겨울, 그 차갑고도 따뜻한', use: '겨울 아침 · 겨울 정전 밤 · 겨울 7일 마감 · 엔딩 앞부분(단골 앨범)', fadeOut: 1.5, target: { lufs: -19 }, note: '「겨울, 그 차갑고도 따뜻한」(3분 18초): 밝기 1,274Hz · LRA 8.4 → 겨울 아침, 촛불을 켜는 정전 밤, 한 해를 돌아보는 엔딩 앞부분' },
+  { id: 'cafe_a', kind: 'bgm', pack: SUNO, src: S('Cafe_A'), track: 'Cafe_A', use: '손님이 오가는 낮', trim: [0, 175.85], fadeOut: 1.5, target: { lufs: -20 }, note: '「Cafe_A」(2분 56초): 세기가 아주 고름(LRA 2.4) · 밝음(2,857Hz) → 대사와 작업대 소리 밑에 깔리도록 음량을 한 단계 낮게' },
+  { id: 'warm_a', kind: 'bgm', pack: SUNO, src: S('단골의 마음'), track: '단골의 마음', use: '단골의 마음 · 마감 · 일기', fadeOut: 1.5, target: { lufs: -19 }, note: '「단골의 마음」(3분 28초): 11곡 가운데 가장 부드러움(972Hz) · LRA 5.1 → 따뜻한 장면 전부' },
+  { id: 'rush_time', kind: 'bgm', pack: SUNO, src: S('RUSH TIME'), track: 'RUSH TIME', use: '몰림 시간(몰림 놀이 · 도시 카페 점심시간)', fadeOut: 1, target: { lufs: -20 }, note: '「RUSH TIME」(56초): 세기가 고름(LRA 2.8) → 짧은 몰림 놀이에만, 음량은 한 단계 낮게' },
+  { id: 'gull', kind: 'bgm', pack: SUNO, src: S('갈매기 소동'), track: '갈매기 소동', use: '그 갈매기를 쫓아라', fadeOut: 1, target: { lufs: -20 }, note: '「갈매기 소동」(53초): 밝음(2,116Hz) → 13초 놀이에만, 음량은 한 단계 낮게' },
+  { id: 'day_end', kind: 'bgm', pack: SUNO, src: S('하루의 끝'), track: '하루의 끝', use: '하루 끝 결과 화면', fadeOut: 1.5, target: { lufs: -19 }, note: '「하루의 끝」(2분 12초): 왈츠 · 세기가 고름(LRA 3.5) → 날마다 나오는 결과 화면' },
+  { id: 'burst', kind: 'bgm', pack: SUNO, src: S('폭발'), track: '폭발', use: '계절의 큰 사건 · 가을 축제', fadeOut: 2, target: { lufs: -19 }, note: '「폭발」(3분 13초): 밝기 1,433Hz · LRA 6.0 → 봄 촬영 · 여름 줄 · 가을 축제' },
+  { id: 'owner_eye', kind: 'bgm', pack: SUNO, src: S("owner's eye"), track: "owner's eye", use: "엔딩 '사장의 눈' · 마지막 한 잔", fadeOut: 2, target: { lufs: -18 }, note: "「owner's eye」(3분 17초): 세기 변화가 가장 큼(LRA 9.5) → 사장님이 몰래 도운 장면을 한꺼번에 보여 주는 때에만" },
 
   /* ---------------- 환경음(버스, 2026-11-01) ---------------- */
   { id: 'bus', kind: 'amb', src: `${OVV}Diesel/Diesel Engine Interior Loop.wav`, loop: 1.5, lowpass: 3200, target: { lufs: -26 }, bitrate: '64k', note: '디젤 엔진 실내 소리(19초 반복) → 바닷가로 가는 버스 안' },

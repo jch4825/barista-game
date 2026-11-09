@@ -1,14 +1,15 @@
 {
   "bgm": {
-    "ballad_a": "ballad_a.ogg",
-    "ballad_b": "ballad_b.ogg",
-    "chant_a": "chant_a.ogg",
-    "chant_b": "chant_b.ogg",
-    "glow_a": "glow_a.ogg",
-    "glow_b": "glow_b.ogg",
-    "horizon_a": "horizon_a.ogg",
-    "horizon_b": "horizon_b.ogg",
-    "letter": "letter.ogg",
-    "waltz": "waltz.ogg"
+    "burst": "burst.ogg",
+    "cafe_a": "cafe_a.ogg",
+    "day_end": "day_end.ogg",
+    "gull": "gull.ogg",
+    "morning_autumn": "morning_autumn.ogg",
+    "morning_spring": "morning_spring.ogg",
+    "morning_summer": "morning_summer.ogg",
+    "morning_winter": "morning_winter.ogg",
+    "owner_eye": "owner_eye.ogg",
+    "rush_time": "rush_time.ogg",
+    "warm_a": "warm_a.ogg"
   }
 }

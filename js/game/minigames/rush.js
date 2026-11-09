@@ -309,8 +309,9 @@ export async function rush(opts = {}) {
     if (tAcc >= total) finish();
   }
 
-  // 몰림 시간의 음악(2026-11-07 사용자 '몰리는 타이밍에 danger 넣는 것도 잊지마요~', 검수 13.83): [시작!] 뒤 Danger, 끝나면 앞의 곡. 차분 모드 · 갈매기는 그대로
-  const rushMusic = kind !== 'gull' && !document.body.classList.contains('theme-calm') && audio.hasMood('rush'); // 곡이 없는 판(공개판)에서는 바꾸지 않음
+  // 몰림 시간의 음악(2026-11-07 사용자, 검수 13.83 · 13.113): [시작!] 뒤 RUSH TIME(그 갈매기는 갈매기 소동), 끝나면 앞의 곡. 차분 모드는 그대로
+  const rushMood = kind === 'gull' ? 'gull' : 'rush';
+  const rushMusic = !document.body.classList.contains('theme-calm') && audio.hasMood(rushMood); // 곡이 없으면 바꾸지 않음
   let prevMood = null;
   let switched = false;
   const musicBack = () => { if (switched) { switched = false; audio.bgm(prevMood); } };
@@ -355,7 +356,7 @@ export async function rush(opts = {}) {
   await Promise.race([startGate(f.body, { note: turn ? '하나씩 차례로 나와요.' : '', ready: f.told }), doneP]);
   if (!stopped() && !over) {
     started = true;
-    if (rushMusic) { prevMood = audio.state().mood; switched = true; audio.bgm('rush'); } // 몰림 시간에는 Danger(검수 13.83)
+    if (rushMusic) { prevMood = audio.state().mood; switched = true; audio.bgm(rushMood); }
     if (!howto.includes(th.say.start)) tts.speak(th.say.start, 'sys');
     if (kind !== 'gull') { addSlip(); if (!turn) addSlip(); }
     // 턴 방식은 시계를 돌리지 않음: 종이는 누를 때마다 다음 한 장(tapSlip), 갈매기는 누를 때만 자리를 옮김.

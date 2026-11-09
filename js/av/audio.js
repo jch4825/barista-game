@@ -108,7 +108,7 @@ async function loadManifest() {
       return {};
     }
   };
-  // 배경음악: 공개 목록 + 이 컴퓨터에만 있는 곡(assets/music_local, Suno 무료 요금제라 공개하지 않음: 없으면 빈 목록, 검수 13.83)
+  // 배경음악: 공개 목록 + 이 컴퓨터에만 있는 곡(assets/music_local, Suno 무료 요금제 곡을 쓸 때만. 지금은 없어 빈 목록, 검수 13.83 · 13.113)
   const [sounds, music, local] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json'), get('./assets/music_local/manifest.json')]);
   const under = (dir, list) => Object.fromEntries(Object.entries(list || {}).map(([k, f]) => [k, `${dir}/${f}`]));
   manifest = { sfx: {}, amb: {}, ...sounds, bgm: { ...under('music', music.bgm), ...under('music_local', local.bgm) } };
@@ -477,22 +477,27 @@ function stopFileBgm() {
  *  - 그 분위기로 들어올 때마다 다음 곡, 한 곡이 끝나면 다음 곡으로 이어서(파일이 있는 곡만)
  *  - 상황 곡은 한 곡 그대로
  * 배경음악은 모두 새 곡을 씁니다(2026-10-27 사용자 결정). 새 곡을 넣으면 { 분위기: [곡 id, …] } 를 적습니다(PRD.md 11.1).
- * 2026-11-01 저작자가 AI 음악 모델 Suno로 만든 곡(tools/audio/audio_map.mjs 의 note 에 고른 까닭). 가사가 있는 letter 는 엔딩 크레디트에서만(사용자 결정)
+ * 2026-11-09 저작자가 Suno Pro 요금제로 만든 곡 11개로 모두 바꿈(tools/audio/audio_map.mjs 의 note 에 고른 까닭, 검수 13.113)
  */
 export const BGM_VARIANTS = {
-  title: ['glow_a'],              // Rising Glow: 처음 화면과 엔딩에 같은 곡(한 해를 여닫음)
-  ending: ['glow_a'],
-  morning: ['glow_b'],            // Rising Glow 다른 판: 해 뜨는 아침(계절 아침 곡이 없는 계절)
-  morning_spring: ['spring_morning_a', 'spring_morning_b'], // 봄의 아침 두 곡(2026-11-07 사용자, 검수 13.83): 봄에 bgm('morning') 이면 이것(seasonMood)
-  rush: ['danger'],               // 몰림 시간(피아졸라풍 누보 탱고, 2026-11-07 사용자): 몰림 놀이가 시작하면 이것, 끝나면 앞의 곡(rush.js)
-  cafe: ['waltz'],                // Galactic Waltz: 손님이 오가는 낮
-  celebrate: ['waltz'],           // 하루 끝 결과 화면
-  warm: ['ballad_a', 'ballad_b'], // 피아노 발라드 두 판을 돌려 가며: 단골의 마음 · 마감 · 일기
-  home: ['ballad_b'],             // 첫날 밤의 작은 방
-  tension: ['horizon_a', 'horizon_b'], // Across the Horizon: 계절의 큰 사건
-  peak: ['horizon_b'],            // 가을 축제
-  blackout: ['chant_a', 'chant_b'],    // 그레고리안 찬송가: 겨울 정전 밤
-  credits: ['letter'],            // 아이에게 보내는 편지(가사 있음): 엔딩 크레디트에서만, 한 번
+  title: ['morning_spring'],      // 봄의 아침: 처음 화면(크레디트와 같은 곡으로 한 해를 여닫음)
+  morning: ['morning_spring', 'morning_summer', 'morning_autumn', 'morning_winter'], // 계절을 모를 때만 돌려 듣기(대본의 아침은 아래 계절 곡으로)
+  morning_spring: ['morning_spring'], // 봄 · 여름 · 가을 · 겨울에 bgm('morning') 이면 그 계절 곡(seasonMood)
+  morning_summer: ['morning_summer'],
+  morning_autumn: ['morning_autumn'],
+  morning_winter: ['morning_winter'],
+  home: ['morning_spring'],       // 봄 1일, 도시를 떠나 바닷가 마을로 오는 장면
+  cafe: ['cafe_a'],               // Cafe_A: 손님이 오가는 낮
+  warm: ['warm_a'],               // 단골의 마음: 단골의 마음 · 마감 · 일기
+  celebrate: ['day_end'],         // 하루의 끝: 하루 끝 결과 화면
+  rush: ['rush_time'],            // RUSH TIME: 몰림 놀이가 시작하면 이것, 끝나면 앞의 곡(rush.js)
+  gull: ['gull'],                 // 갈매기 소동: 그 갈매기를 쫓아라(rush.js)
+  tension: ['burst'],             // 폭발: 계절의 큰 사건
+  peak: ['burst'],                // 가을 축제
+  blackout: ['morning_winter'],   // 겨울 곡: 겨울 정전 밤
+  ending: ['morning_winter'],     // 겨울 곡: 겨울 7일 마감 · 엔딩 앞부분(단골 앨범)
+  eyes: ['owner_eye'],            // owner's eye: 엔딩 '사장의 눈' · 마지막 한 잔
+  credits: ['morning_spring'],    // 봄의 아침: 엔딩 크레디트에서 한 번(다시 봄으로)
 };
 /** 계절 곡이 있으면 그 계절의 분위기('morning' → 'morning_spring'), 없으면 그대로 */
 export function seasonMood(mood, season) {
@@ -500,8 +505,8 @@ export function seasonMood(mood, season) {
   const m = `${mood}_${season}`;
   return BGM_VARIANTS[m] && variantsOf(m).length ? m : mood;
 }
-// 반복하지 않고 한 번만 트는 곡(끝나면 조용히)
-const ONCE = ['letter'];
+// 반복하지 않고 한 번만 트는 분위기(끝나면 조용히). 곡이 아니라 분위기로 정함: 봄의 아침은 처음 화면에서는 되풀이해야 함
+const ONCE = ['credits'];
 const variantTurn = {};
 const variantsOf = (m) => (BGM_VARIANTS[m] || [m]).filter((id) => manifest.bgm?.[id]);
 function nextVariant(m) {
@@ -519,7 +524,7 @@ function startFileBgm(id, moodName = id) {
   const el = new Audio(`./assets/${manifest.bgm[id]}`);
   const playlist = variantsOf(moodName).length > 1;
   const from = LOOP_FROM[id];
-  el.loop = !ONCE.includes(id) && !playlist && !from;
+  el.loop = !ONCE.includes(moodName) && !playlist && !from;
   if (from) {
     el.addEventListener('ended', () => {
       if (bgmEl !== el) return;
@@ -698,7 +703,7 @@ export const audio = {
     }, 850);
   },
 
-  /** 읽어 주는 말 아래로 배경음악을 낮춤(엔딩 크레디트: 가사가 있는 노래와 읽어 주기가 겹치지 않게). 분위기가 바뀌면 저절로 풀림 */
+  /** 읽어 주는 말 아래로 배경음악을 낮춤(엔딩 크레디트: 읽어 주는 말이 잘 들리게). 분위기가 바뀌면 저절로 풀림 */
   duck(on) {
     if (!ensure() || !duckGain) return;
     const now = ctx.currentTime;
