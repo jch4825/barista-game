@@ -168,9 +168,9 @@ function writeCredits() {
     return `| \`${e.kind === 'bgm' ? 'music' : e.kind}/${e.id}.ogg\` | ${src} | ${e.note || ''} |`;
   });
   const packs = Object.values(PACKS).map((p) => `| ${p.name} | ${p.author} | ${p.license} | ${p.bundle || ''} | ${p.ai || ''} |`);
-  // 배경음악은 새 게임에 맞춰 모두 새로 넣음(직업 마1스톤 곡·「The Carousel Turn」은 2026-10-27 뺌). 2026-11-09부터 저작자가 Suno Pro 요금제로 만든 곡 11개
+  // 배경음악은 새 게임에 맞춰 모두 새로 넣음(직업 마1스톤 곡·「The Carousel Turn」은 2026-10-27 뺌). 2026-11-09부터 저작자가 Suno 유료 요금제로 만든 곡 12개
   const noBgm = AUDIO_MAP.some((e) => e.kind === 'bgm')
-    ? '\n- 배경음악은 이 제품의 저작자가 AI 음악 모델 Suno의 Pro 요금제로 만든 곡입니다(2026-11-09). 끝의 무음만 잘라 음량을 맞춘 Opus(.ogg)로 넣었습니다.'
+    ? '\n- 배경음악은 이 제품의 저작자가 AI 음악 모델 Suno의 유료 요금제로 만든 곡입니다(2026-11-09 곡을 바꿈). 끝의 무음만 잘라 음량을 맞춘 Opus(.ogg)로 넣었습니다.'
     : '\n- 배경음악은 새 게임에 맞춰 모두 새로 넣습니다(직업 마1스톤의 곡은 쓰지 않음). 지금은 배경음악 파일이 없습니다.';
   const md = `# 음악·효과음 출처와 라이선스
 

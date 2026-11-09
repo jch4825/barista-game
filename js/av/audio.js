@@ -477,10 +477,10 @@ function stopFileBgm() {
  *  - 그 분위기로 들어올 때마다 다음 곡, 한 곡이 끝나면 다음 곡으로 이어서(파일이 있는 곡만)
  *  - 상황 곡은 한 곡 그대로
  * 배경음악은 모두 새 곡을 씁니다(2026-10-27 사용자 결정). 새 곡을 넣으면 { 분위기: [곡 id, …] } 를 적습니다(PRD.md 11.1).
- * 2026-11-09 저작자가 Suno Pro 요금제로 만든 곡 11개로 모두 바꿈(tools/audio/audio_map.mjs 의 note 에 고른 까닭, 검수 13.113)
+ * 2026-11-09 저작자가 Suno Pro 요금제로 만든 곡 11개로 바꿈(tools/audio/audio_map.mjs 의 note 에 고른 까닭, 검수 13.113). 가사가 있는 letter 는 엔딩 크레디트에서만(사용자 결정)
  */
 export const BGM_VARIANTS = {
-  title: ['morning_spring'],      // 봄의 아침: 처음 화면(크레디트와 같은 곡으로 한 해를 여닫음)
+  title: ['morning_spring'],      // 봄의 아침: 처음 화면
   morning: ['morning_spring', 'morning_summer', 'morning_autumn', 'morning_winter'], // 계절을 모를 때만 돌려 듣기(대본의 아침은 아래 계절 곡으로)
   morning_spring: ['morning_spring'], // 봄 · 여름 · 가을 · 겨울에 bgm('morning') 이면 그 계절 곡(seasonMood)
   morning_summer: ['morning_summer'],
@@ -497,7 +497,7 @@ export const BGM_VARIANTS = {
   blackout: ['morning_winter'],   // 겨울 곡: 겨울 정전 밤
   ending: ['morning_winter'],     // 겨울 곡: 겨울 7일 마감 · 엔딩 앞부분(단골 앨범)
   eyes: ['owner_eye'],            // owner's eye: 엔딩 '사장의 눈' · 마지막 한 잔
-  credits: ['morning_spring'],    // 봄의 아침: 엔딩 크레디트에서 한 번(다시 봄으로)
+  credits: ['letter'],            // 아이에게 보내는 편지(가사 있음): 엔딩 크레디트에서만, 한 번
 };
 /** 계절 곡이 있으면 그 계절의 분위기('morning' → 'morning_spring'), 없으면 그대로 */
 export function seasonMood(mood, season) {
@@ -505,8 +505,8 @@ export function seasonMood(mood, season) {
   const m = `${mood}_${season}`;
   return BGM_VARIANTS[m] && variantsOf(m).length ? m : mood;
 }
-// 반복하지 않고 한 번만 트는 분위기(끝나면 조용히). 곡이 아니라 분위기로 정함: 봄의 아침은 처음 화면에서는 되풀이해야 함
-const ONCE = ['credits'];
+// 반복하지 않고 한 번만 트는 곡(끝나면 조용히)
+const ONCE = ['letter'];
 const variantTurn = {};
 const variantsOf = (m) => (BGM_VARIANTS[m] || [m]).filter((id) => manifest.bgm?.[id]);
 function nextVariant(m) {
@@ -524,7 +524,7 @@ function startFileBgm(id, moodName = id) {
   const el = new Audio(`./assets/${manifest.bgm[id]}`);
   const playlist = variantsOf(moodName).length > 1;
   const from = LOOP_FROM[id];
-  el.loop = !ONCE.includes(moodName) && !playlist && !from;
+  el.loop = !ONCE.includes(id) && !playlist && !from;
   if (from) {
     el.addEventListener('ended', () => {
       if (bgmEl !== el) return;
@@ -703,7 +703,7 @@ export const audio = {
     }, 850);
   },
 
-  /** 읽어 주는 말 아래로 배경음악을 낮춤(엔딩 크레디트: 읽어 주는 말이 잘 들리게). 분위기가 바뀌면 저절로 풀림 */
+  /** 읽어 주는 말 아래로 배경음악을 낮춤(엔딩 크레디트: 가사가 있는 노래와 읽어 주기가 겹치지 않게). 분위기가 바뀌면 저절로 풀림 */
   duck(on) {
     if (!ensure() || !duckGain) return;
     const now = ctx.currentTime;

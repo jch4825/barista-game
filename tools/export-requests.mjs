@@ -22,7 +22,7 @@ const { PEOPLE_EN, FACE_EN, CG_EN, CG_REDO } = await imp('tools/requests/prompts
 const { MISSING } = await imp('tools/audio/audio_map.mjs');
 const { OBJ_SHEETS, KEY_EN, sheetItems, objPrompt } = await imp('tools/requests/obj_sheets.mjs');
 const { BGM_VARIANTS } = await imp('js/av/audio.js');
-// 곡 파일이 있는 분위기(2026-11-09 저작자가 Suno Pro 요금제로 만든 곡으로 모두 바꿈): 요청서에서 뺌
+// 곡 파일이 있는 분위기(2026-11-09 저작자가 Suno 유료 요금제로 만든 곡으로 바꿈): 요청서에서 뺌
 let bgmFiles = {};
 try { bgmFiles = JSON.parse(fs.readFileSync(path.join(root, 'assets/music/manifest.json'), 'utf8')).bgm || {}; } catch { /* 목록이 없으면 모두 요청 */ }
 const bgmHas = (mood) => (BGM_VARIANTS[mood] || [mood]).some((id) => bgmFiles[id]);
@@ -167,7 +167,7 @@ P('# 요청서 · 풀 버전 (그림 · 물건 · 블렌더 컷 · 소리 · 음
   `| 새 놀이의 그림 | ${playMissing.length}장(${playMissing.map(([id]) => `\`${id}\``).join(' · ') || '없음'}) | \`assets/flow/\`에 두고 알려 주기 → \`assets/_src/play/{id}.jpg\` | 초록 바탕 지우기 · 자르기(그림이 오면 넣는 길을 만듦) |`,
   `| 블렌더 한 컷(손 동작) | 컷이 없는 손 동작 ${shotNone.length} · 🙋 있으면 더 맞는 컷 ${shotStandIn.length}(지금은 비슷한 컷이 나옴) · 드래그 활용 그림 ${dragMiss.size} | \`tools/blender/scene_bench.py\` | \`shots_post.py\` → \`npm run assets\` |`,
   `| 효과음 · 환경음 | 효과음 ${MISSING.sfx.length} · 환경음 ${MISSING.amb.length} | \`tools/audio/audio_map.mjs\` | \`npm run audio\` |`,
-  `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 저작자가 Suno Pro 요금제로 만든 곡으로 채움, 2026-11-09) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
+  `| 배경음악 | ${Object.keys(BGM_KO).filter((m) => !bgmHas(m)).length}곡(✅ 저작자가 Suno 유료 요금제로 만든 곡으로 채움, 2026-11-09) | \`BGM/\` → \`tools/audio/audio_map.mjs\` 의 bgm | \`npm run audio\` |`,
   '| 음성 | 바뀐 줄만 | `tools/voice/lines.json` | `npm run voices` |', '');
 
 // 프롬프트: 이 요청서와 '아직 없는 그림' 문서(docs/아직 없는 그림.md)가 같은 글을 씀
@@ -308,7 +308,7 @@ for (const id of MISSING.amb) P(`| 환경음 | \`${id}\` | ${ambUse[id] ? [...am
 P('', '### 6.2 배경음악 (✅ 새로 만듦: 직업 마1스톤 곡과 「The Carousel Turn」은 쓰지 않음)', '',
   '| mood | 쓰는 곳 | 느낌 · 악기 | 길이 |', '| :--- | :--- | :--- | :--- |');
 const bgmLeft = Object.entries(BGM_KO).filter(([mood]) => !bgmHas(mood));
-if (!bgmLeft.length) P('| 모두 있음 | ✅ 저작자가 Suno Pro 요금제로 만든 곡(2026-11-09, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.113) | | |');
+if (!bgmLeft.length) P('| 모두 있음 | ✅ 저작자가 Suno 유료 요금제로 만든 곡(2026-11-09, 배정은 `js/av/audio.js` 의 BGM_VARIANTS · 검수 13.113) | | |');
 for (const [mood, [where, feel, len]] of bgmLeft) P(`| \`${mood}\` | ${where}${bgmUse[mood] ? `(${bgmUse[mood].size}일)` : ''} | ${feel} | ${len} |`);
 P('', '- 판매 페이지에 AI 관련 금지 조건이 있는 음악 팩은 쓰지 않습니다(CLAUDE.md 7장). 음악 파일이 없으면 게임은 조용히 넘어갑니다.', '');
 
