@@ -62,11 +62,21 @@ const SPLIT = new Set([
   '도 씨가 들어오다 문 옆에서 멈춘다. 빈 벽에 새 못이 하나 박혀 있다.', // 여름 7일: '빈 벽에'부터 목소리가 바뀜(2026-11-08 사용자, 검수 13.98)
   '가슴이 두근거려서 가만히 앉아 있을 수가 없다. 창밖으로 지나가는 갈매기랑 고깃배를 하나씩 세어 보면, 마음이 조금 가라앉을 것 같다.', // 봄 1일: 뒤 문장의 목소리가 흔들림(2026-11-08 사용자, 검수 13.101)
   '노 씨가 카운터 앞 의자에 앉는다. 메뉴판은 보지도 않는다.', // 여름 4일: 다시 뽑을 때마다 '메' · '앉는다'가 번갈아 이상하게 나와 문장마다 고름(2026-11-08 사용자, 검수 13.103)
+  '사장님이 하얀 잔을 내 두 손에 쥐여 준다. 잔이 따뜻하고, 달콤한 우유 냄새가 난다.', // 봄 1일: 뒤 문장의 소리가 흔들림(2026-11-10 사용자, 검수 13.115)
+  '골목의 벚나무에 꽃봉오리가 부풀어 있다. 바다 쪽에서 갈매기 소리가 들린다.', // 봄 2일: 뒤 문장의 소리가 흔들림(2026-11-10 사용자, 검수 13.115)
+  '컵 선반이 높아서, 나는 까치발을 하고 컵을 꺼낸다. 사장님이 그런 나를 잠깐 보고, 아무 말 없이 고개를 돌린다.', // 봄 2일: 뒤 문장(2026-11-10 사용자, 검수 13.115)
+  '은빛 머리의 할머니가 천천히 들어온다. 메뉴판은 보지도 않고, 곧장 창가 자리로 간다.', // 봄 2일: 뒤 문장(2026-11-10 사용자, 검수 13.115)
 ]);
+// 엔딩은 귀로 확인하지 못한 채 통째로 읽혀 문장 사이에서 목소리가 흔들린 줄이 많았음(2026-11-09 사용자 "매우 문제가 많다", 검수 13.115): 안내(sys)를 뺀 줄을 모두 문장마다 만듦
+const SPLIT_ALL_IN = new Set(['ending']);
+// 서술 · 속마음 · 주인공 대사는 두 문장 이상이면 문장마다 만듦: 뒤 문장에서 목소리가 흔들려도 줄 전체의 목소리 지문으로는 드러나지 않음(2026-11-10 사용자 "전체 다시 만들기", 검수 13.115). 귀로 듣고 고른 통째 줄(기록의 heard)은 그대로
+const SPLIT_VOICES = new Set(['narr', 'think', 'jieun']);
+const qwenMade = JSON.parse(fs.readFileSync(path.join(root, 'tools/voice/qwen_made.json'), 'utf8'));
+const heardWhole = (voice, text) => Boolean(qwenMade[hashKey(`${voice}|${speakable(text).trim()}`)]?.heard);
 
 function add(voice, text, ep, who = voice, face = '') {
   if (!text || /\{player/.test(text)) return; // 이름이 들어가는 줄은 실행할 때 브라우저 음성으로
-  if (SPLIT.has(text) && sentencesOf(text).length > 1) { for (const part of sentencesOf(text)) add(voice, part, ep, who, face); return; }
+  if ((SPLIT.has(text) || (SPLIT_ALL_IN.has(ep) && voice !== 'sys') || (SPLIT_VOICES.has(voice) && !heardWhole(voice, text))) && sentencesOf(text).length > 1) { for (const part of sentencesOf(text)) add(voice, part, ep, who, face); return; }
   const spoken = speakable(text).trim();
   if (!spoken) return;
   const key = hashKey(`${voice}|${spoken}`);

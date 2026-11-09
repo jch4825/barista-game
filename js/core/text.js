@@ -107,7 +107,17 @@ export function plain(str) {
  * tts 가 문장마다 나눠 그 문장의 파일로 읽음(검수 13.63). tools/export-lines.mjs 도 같은 나누기로 문장마다 줄을 만듦
  */
 export function sentencesOf(text) {
-  return (String(text).match(/[^.!?…]+(?:[.!?…]+["'”’」)]*|$)/g) || []).map((p) => p.trim()).filter(Boolean);
+  const parts = (String(text).match(/[^.!?…]+(?:[.!?…]+["'”’」)]*|$)/g) || []).map((p) => p.trim()).filter(Boolean);
+  // 말줄임표만 남은 조각('웃었다. …그 녀석도'의 '…')은 읽을 말이 없어 다음 문장 앞에 붙임(검수 13.115)
+  const out = [];
+  let carry = '';
+  for (const part of parts) {
+    if (/^[.!?…"'”’」)\s]+$/.test(part)) { carry += part; continue; }
+    out.push(carry + part);
+    carry = '';
+  }
+  if (carry) { if (out.length) out[out.length - 1] += carry; else out.push(carry); }
+  return out;
 }
 
 export function hashKey(str) {
