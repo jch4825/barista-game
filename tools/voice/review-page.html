@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>음성 검수</title>
+<style>
+@font-face { font-family: 'Pretendard'; src: url('/assets/fonts/PretendardVariable.woff2') format('woff2'); font-weight: 100 900; }
+:root {
+  --bg: #0F2A30; --bg2: #0A1F24; --line: #2C4C52; --ink: #F4EAD2; --ink2: #BFB396;
+  --paper: #FFFAF0; --paper2: #F4EAD2; --text: #2A1D12; --text2: #6B5A44;
+  --gold: #C9A45C; --main: #25844A; --main-d: #1B5E35; --bad: #B3261E; --bad-bg: #FBE4E1; --warn: #9A6A00;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 Pretendard, system-ui, sans-serif; }
+button, select, input { font: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 18px 16px 40px; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; }
+@media (max-width: 900px) { .wrap { grid-template-columns: 1fr; } .side { order: 2; } }
+header { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+h1 { font-size: 22px; margin: 0; color: var(--gold); font-weight: 800; }
+.prog { flex: 1 1 260px; min-width: 220px; }
+.bar { height: 10px; border-radius: 5px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; display: flex; }
+.bar i { display: block; height: 100%; }
+.bar .ok { background: var(--main); } .bar .bad { background: var(--bad); }
+.prog small { color: var(--ink2); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tools label { color: var(--ink2); font-size: 15px; }
+.tools select { background: var(--bg2); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
+.card { background: var(--paper); color: var(--text); border-radius: 16px; padding: 18px 20px 20px; border: 2px solid #8E6C33; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; color: var(--text2); font-size: 15px; }
+.meta b { color: var(--text); font-size: 16px; }
+.tag { font-size: 13px; padding: 1px 8px; border-radius: 99px; background: var(--paper2); }
+.tag.flag { background: #FFF0C7; color: var(--warn); }
+.tag.picked { background: #DCEFE2; color: var(--main-d); }
+.sents { margin: 14px 0 10px; display: grid; gap: 8px; }
+.sent { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--paper2); border: 2px solid transparent; }
+.sent .no { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 2px solid #CDB98E; font-weight: 800; }
+.sent .tx { font-size: 21px; line-height: 1.45; }
+@media (max-width: 640px) {
+  .sent { grid-template-columns: 34px 1fr 1fr; }
+  .sent .tx { grid-column: 2 / 4; font-size: 19px; }
+  .sent [data-play] { grid-column: 2; }
+  .sent [data-bad] { grid-column: 3; }
+}
+.sent.playing { border-color: var(--main); background: #E9F4EC; }
+.sent.bad { border-color: var(--bad); background: var(--bad-bg); }
+.sent.bad .no { background: var(--bad); color: #fff; border-color: var(--bad); }
+.sbtn { border: 2px solid #CDB98E; background: #fff; color: var(--text); border-radius: 10px; padding: 6px 12px; font-weight: 700; white-space: nowrap; }
+.sbtn[aria-pressed="true"] { background: var(--bad); border-color: var(--bad); color: #fff; }
+.row-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 12px; }
+.big { border: none; border-radius: 12px; padding: 12px 18px; font-weight: 800; font-size: 18px; }
+.play { background: var(--main); color: #fff; }
+.play:hover { background: var(--main-d); }
+.ghost { background: var(--paper2); color: var(--text); border: 2px solid #CDB98E; }
+.why { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 10px; }
+.why span { color: var(--text2); font-size: 15px; margin-right: 4px; }
+.chip { border: 2px solid #CDB98E; background: #fff; color: var(--text); border-radius: 99px; padding: 4px 12px; font-size: 15px; }
+.chip[aria-pressed="true"] { background: var(--bad); border-color: var(--bad); color: #fff; }
+.memo { width: 100%; border: 2px solid #CDB98E; border-radius: 10px; padding: 8px 10px; background: #fff; color: var(--text); }
+.nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.nav .next { flex: 1 1 260px; background: var(--main); color: #fff; }
+.nav .next.has-bad { background: var(--bad); }
+.keys { margin-top: 12px; color: var(--text2); font-size: 14px; }
+.keys kbd { background: var(--paper2); border: 1px solid #CDB98E; border-bottom-width: 2px; border-radius: 5px; padding: 0 6px; font: 13px/1.6 Pretendard, system-ui; }
+.state { margin-left: auto; font-weight: 800; }
+.state.ok { color: var(--main-d); } .state.bad { color: var(--bad); }
+.side { background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 10px; max-height: calc(100vh - 120px); position: sticky; top: 12px; display: flex; flex-direction: column; min-height: 0; }
+.side h2 { font-size: 15px; margin: 2px 4px 8px; color: var(--ink2); font-weight: 700; }
+.list { overflow: auto; min-height: 0; flex: 1; }
+.item { display: grid; grid-template-columns: 12px 64px minmax(0, 1fr); gap: 8px; align-items: center; width: 100%; text-align: left; background: none; border: none; color: var(--ink); padding: 5px 6px; border-radius: 8px; font-size: 14px; }
+.item:hover { background: #163840; }
+.item.cur { background: #1F4A52; outline: 2px solid var(--gold); }
+.item .dot { width: 10px; height: 10px; border-radius: 50%; background: #48656A; }
+.item .dot.ok { background: var(--main); } .item .dot.bad { background: var(--bad); }
+.item .ep { color: var(--ink2); }
+.item .tx { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side .foot { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.side .foot button { flex: 1; background: var(--paper2); color: var(--text); border: none; border-radius: 10px; padding: 9px 10px; font-weight: 700; }
+dialog { max-width: 900px; width: calc(100% - 32px); border: 2px solid #8E6C33; border-radius: 16px; background: var(--paper); color: var(--text); padding: 18px; }
+dialog::backdrop { background: rgba(0, 0, 0, .55); }
+dialog textarea { width: 100%; height: 50vh; border: 2px solid #CDB98E; border-radius: 10px; padding: 10px; font: 14px/1.5 Pretendard, system-ui; }
+dialog .row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; align-items: center; }
+.empty { color: var(--text2); padding: 30px 0; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>음성 검수</h1>
+    <div class="prog"><div class="bar" aria-hidden="true"><i class="ok" id="barOk"></i><i class="bad" id="barBad"></i></div><small id="progText"></small></div>
+    <div class="tools">
+      <label>계절 <select id="season"><option value="all">전체</option><option value="spring">봄</option><option value="summer">여름</option><option value="autumn">가을</option><option value="winter">겨울</option><option value="ending">엔딩</option><option value="other">그 밖</option></select></label>
+      <label>보기 <select id="view"><option value="all">모든 줄</option><option value="todo">아직 안 들은 줄</option><option value="bad">이상하다고 표시한 줄</option><option value="flag">도구가 표시한 줄</option></select></label>
+      <label>빠르기 <select id="speed"><option value="1">1배</option><option value="1.25">1.25배</option><option value="1.5">1.5배</option></select></label>
+      <label><input type="checkbox" id="auto"> 다음 줄 바로 듣기</label>
+    </div>
+  </header>
+  <main>
+    <section class="card" id="card" aria-live="polite"></section>
+  </main>
+  <aside class="side">
+    <h2 id="listTitle">줄 목록</h2>
+    <div class="list" id="list"></div>
+    <div class="foot"><button type="button" id="firstTodo">안 들은 줄로</button><button type="button" id="exportBtn">표시한 줄 모아 보기</button></div>
+  </aside>
+</div>
+<dialog id="exportDlg">
+  <b>이상하다고 표시한 줄</b>
+  <p style="margin:6px 0 10px;color:var(--text2)">이 글을 복사해 대화창에 붙여 주세요. 표시는 이 브라우저에 저장되어 있어 붙이지 않아도 제가 읽을 수 있습니다.</p>
+  <textarea id="exportText" readonly></textarea>
+  <div class="row"><span id="copyMsg" style="color:var(--main-d)"></span><button type="button" class="big ghost" id="copyBtn">복사</button><button type="button" class="big play" id="closeDlg">닫기</button></div>
+</dialog>
+<script src="data.js"></script>
+<script>
+(() => {
+  const R = window.REVIEW;
+  const KEY = `barista.voiceReview.${R.name}`;
+  const WHY = ['흔들림 · 목소리 바뀜', '발음', '끊김 · 잘림', '빠르기', '감정 · 말투', '기타'];
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { st = {}; }
+  st.marks = st.marks || {};
+  if (st.auto === undefined) st.auto = true;
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) { /* 저장소를 못 쓰면 이 화면에서만 */ } };
+  const rows = R.rows;
+  const byId = new Map(rows.map((r, i) => [r.id, i]));
+  const seasonOf = (ep) => { const m = /^(spring|summer|autumn|winter)_/.exec(ep || ''); return m ? m[1] : ep === 'ending' ? 'ending' : 'other'; };
+  const markOf = (r) => st.marks[r.id] || (r.parts.every((p) => p.picked) ? { s: 'ok', picked: true } : null);
+  const isBad = (m) => Boolean(m && ((m.bad && m.bad.length) || (m.why && m.why.length) || m.note || m.older));
+  const status = (r) => { const m = markOf(r); return !m ? '' : isBad(m) ? 'bad' : m.s === 'ok' ? 'ok' : ''; };
+  const flagged = (r) => r.parts.some((p) => p.flag);
+
+  let list = [];
+  let cur = 0;
+  function filter() {
+    const season = $('season').value;
+    const view = $('view').value;
+    list = rows.map((r, i) => i).filter((i) => {
+      const r = rows[i];
+      if (season !== 'all' && seasonOf(r.ep) !== season) return false;
+      if (view === 'todo') return !status(r);
+      if (view === 'bad') return status(r) === 'bad';
+      if (view === 'flag') return flagged(r);
+      return true;
+    });
+  }
+
+  let token = null;
+  let playingIdx = -1;
+  function stop() { if (token && token.audio) token.audio.pause(); token = null; setPlaying(-1); }
+  function setPlaying(i) { playingIdx = i; document.querySelectorAll('.sent').forEach((el, k) => el.classList.toggle('playing', k === i)); }
+  const one = (src, t) => new Promise((res) => {
+    const a = new Audio(src);
+    a.playbackRate = Number(st.speed || 1);
+    a.preservesPitch = true;
+    t.audio = a;
+    a.onended = res; a.onerror = res;
+    a.play().catch(res);
+  });
+  async function play(idxs, srcs) {
+    stop();
+    const t = {};
+    token = t;
+    for (let k = 0; k < srcs.length; k++) {
+      if (token !== t) return;
+      setPlaying(idxs[k]);
+      await one(srcs[k], t);
+    }
+    if (token === t) { token = null; setPlaying(-1); }
+  }
+  const row = () => rows[list[cur]];
+  const playRow = () => { const r = row(); if (r) play(r.parts.map((_, i) => i), r.parts.map((p) => `/assets/voice/${p.file}`)); };
+  const playOne = (i) => { const r = row(); if (r) play([i], [`/assets/voice/${r.parts[i].file}`]); };
+  const playOld = () => { const r = row(); if (r && r.old) play([-1], [`/${r.old}`]); };
+
+  function mark(r) { const m = st.marks[r.id] || (st.marks[r.id] = { s: '', bad: [], why: [], note: '' }); m.bad = m.bad || []; m.why = m.why || []; return m; }
+  function touch(r) { const m = mark(r); m.t = Date.now(); m.s = isBad(m) ? 'bad' : m.s; save(); }
+
+  function render() {
+    const r = row();
+    const card = $('card');
+    if (!r) { card.innerHTML = '<p class="empty">이 조건에 맞는 줄이 없어요. 위의 계절 · 보기를 바꿔 보세요.</p>'; renderList(); renderProg(); return; }
+    const m = markOf(r) || {};
+    const bad = new Set(m.bad || []);
+    const why = new Set(m.why || []);
+    const s = status(r);
+    card.innerHTML = `
+      <div class="meta"><b>${cur + 1} / ${list.length}</b><span>${esc(r.epLabel)}</span><span>${esc(r.who)}</span>
+        ${r.parts.length > 1 ? `<span class="tag">문장 ${r.parts.length}개</span>` : ''}
+        ${flagged(r) ? `<span class="tag flag">도구 표시: ${esc([...new Set(r.parts.filter((p) => p.flag).map((p) => p.flag))].join(', '))}</span>` : ''}
+        ${m.picked ? '<span class="tag picked">전에 고르신 것</span>' : ''}
+        <span class="state ${s}">${s === 'ok' ? '✓ 좋아요' : s === 'bad' ? '✗ 이상함' : '아직 안 들음'}</span></div>
+      <div class="sents">${r.parts.map((p, i) => `
+        <div class="sent ${bad.has(i) ? 'bad' : ''}">
+          <span class="no">${i + 1}</span><span class="tx">${esc(p.text)}</span>
+          <button type="button" class="sbtn" data-play="${i}" aria-label="${i + 1}번 문장 듣기">▶ 듣기</button>
+          <button type="button" class="sbtn" data-bad="${i}" aria-pressed="${bad.has(i)}">${bad.has(i) ? '✗ 이상함' : '이상함'} <small>(${i + 1})</small></button>
+        </div>`).join('')}</div>
+      <div class="row-tools">
+        <button type="button" class="big play" id="playRow">▶ 줄 전체 듣기 <small>(Space)</small></button>
+        ${r.old ? `<button type="button" class="big ghost" id="playOld">전 소리 듣기 <small>(O)</small></button>
+        <button type="button" class="chip" id="older" aria-pressed="${Boolean(m.older)}">전 소리가 더 나아요</button>` : ''}
+      </div>
+      <div class="why"><span>무엇이 이상한가요?</span>${WHY.map((w) => `<button type="button" class="chip" data-why="${esc(w)}" aria-pressed="${why.has(w)}">${esc(w)}</button>`).join('')}</div>
+      <input class="memo" id="memo" type="text" placeholder="메모(예: '봄에'가 '봅에'로 들림)" value="${esc(m.note || '')}">
+      <div class="nav">
+        <button type="button" class="big ghost" id="prev">← 이전</button>
+        <button type="button" class="big next ${isBad(m) ? 'has-bad' : ''}" id="next">${isBad(m) ? '이상함으로 두고 다음 →' : '좋아요, 다음 →'} <small>(Enter)</small></button>
+        <button type="button" class="big ghost" id="skip">건너뛰기 →</button>
+      </div>
+      <div class="keys"><kbd>Space</kbd> 줄 듣기 · <kbd>1</kbd>~<kbd>9</kbd> 그 문장 이상함 · <kbd>Enter</kbd> 확인하고 다음 · <kbd>→</kbd> 건너뛰기 · <kbd>←</kbd> 이전${r.old ? ' · <kbd>O</kbd> 전 소리' : ''}</div>`;
+    card.querySelectorAll('[data-play]').forEach((b) => b.onclick = () => playOne(Number(b.dataset.play)));
+    card.querySelectorAll('[data-bad]').forEach((b) => b.onclick = () => toggleBad(Number(b.dataset.bad)));
+    card.querySelectorAll('[data-why]').forEach((b) => b.onclick = () => { const mm = mark(r); const w = b.dataset.why; mm.why = mm.why.includes(w) ? mm.why.filter((x) => x !== w) : [...mm.why, w]; touch(r); render(); });
+    $('playRow').onclick = playRow;
+    if (r.old) { $('playOld').onclick = playOld; $('older').onclick = () => { const mm = mark(r); mm.older = !mm.older; touch(r); render(); }; }
+    $('memo').oninput = (e) => { const mm = mark(r); mm.note = e.target.value; touch(r); renderList(); renderProg(); const nb = $('next'); nb.classList.toggle('has-bad', isBad(mm)); };
+    $('prev').onclick = () => go(cur - 1);
+    $('next').onclick = confirmNext;
+    $('skip').onclick = () => go(cur + 1);
+    setPlaying(-1);
+    renderList();
+    renderProg();
+    st.cur = r.id; save();
+  }
+
+  function toggleBad(i) {
+    const r = row();
+    if (!r || i >= r.parts.length) return;
+    const m = mark(r);
+    m.bad = m.bad.includes(i) ? m.bad.filter((x) => x !== i) : [...m.bad, i].sort();
+    touch(r);
+    const was = playingIdx;
+    render();
+    if (was >= 0) setPlaying(was);
+  }
+  function confirmNext() {
+    const r = row();
+    if (r) { const m = mark(r); if (!isBad(m)) m.s = 'ok'; touch(r); }
+    const view = $('view').value;
+    if (view === 'todo') { filter(); go(Math.min(cur, list.length - 1), true); } else go(cur + 1, true);
+  }
+  let armed = false;
+  function go(i, autoplay) {
+    stop();
+    if (!list.length) { cur = 0; render(); return; }
+    cur = Math.max(0, Math.min(list.length - 1, i));
+    render();
+    if (autoplay && st.auto && armed) playRow();
+  }
+  function renderProg() {
+    const total = rows.length;
+    let ok = 0, bad = 0;
+    rows.forEach((r) => { const s = status(r); if (s === 'ok') ok += 1; else if (s === 'bad') bad += 1; });
+    $('barOk').style.width = `${(ok / total) * 100}%`;
+    $('barBad').style.width = `${(bad / total) * 100}%`;
+    const n = rows.reduce((a, r) => a + r.parts.length, 0);
+    $('progText').textContent = `들은 줄 ${ok + bad} / ${total}(문장 ${n}) · 좋아요 ${ok} · 이상함 ${bad}`;
+  }
+  let listSig = '';
+  function renderList() {
+    const box = $('list');
+    $('listTitle').textContent = `줄 목록(${list.length})`;
+    const sig = list.join(',');
+    if (sig !== listSig) {
+      listSig = sig;
+      box.innerHTML = list.map((i, k) => { const r = rows[i]; return `<button type="button" class="item" data-k="${k}"><span class="dot"></span><span class="ep">${esc(r.epLabel)}</span><span class="tx">${esc(r.parts.map((p) => p.text).join(' '))}</span></button>`; }).join('');
+      box.querySelectorAll('.item').forEach((b) => b.onclick = () => { armed = true; go(Number(b.dataset.k), false); });
+    }
+    box.querySelectorAll('.item').forEach((b, k) => {
+      const r = rows[list[k]];
+      b.querySelector('.dot').className = `dot ${status(r)}`;
+      b.classList.toggle('cur', k === cur);
+    });
+    const c = box.querySelector('.item.cur');
+    if (c) c.scrollIntoView({ block: 'nearest' });
+  }
+  function exportText() {
+    const out = [];
+    rows.forEach((r) => {
+      const m = markOf(r);
+      if (!isBad(m)) return;
+      const idx = m.bad && m.bad.length ? m.bad : r.parts.map((_, i) => i);
+      const which = m.bad && m.bad.length ? m.bad.map((i) => `${i + 1}번 문장`).join(' · ') : '줄 전체';
+      out.push(`${r.epLabel} · ${r.who} · ${which}${m.why && m.why.length ? ` · ${m.why.join(', ')}` : ''}${m.older ? ' · 전 소리가 나음' : ''}${m.note ? ` · 메모: ${m.note}` : ''}`);
+      idx.forEach((i) => out.push(`  ${r.parts[i].key} | ${r.parts[i].text}`));
+    });
+    return out.length ? out.join('\n') : '이상하다고 표시한 줄이 아직 없어요.';
+  }
+
+  $('season').onchange = $('view').onchange = () => { st.season = $('season').value; st.view = $('view').value; save(); const keep = row() && row().id; filter(); const k = list.indexOf(byId.get(keep)); go(k >= 0 ? k : 0, false); };
+  $('speed').onchange = () => { st.speed = Number($('speed').value); save(); };
+  $('auto').onchange = () => { st.auto = $('auto').checked; save(); };
+  $('firstTodo').onclick = () => { armed = true; const k = list.findIndex((i) => !status(rows[i])); go(k >= 0 ? k : 0, false); };
+  $('exportBtn').onclick = () => { $('exportText').value = exportText(); $('copyMsg').textContent = ''; $('exportDlg').showModal(); };
+  $('closeDlg').onclick = () => $('exportDlg').close();
+  $('copyBtn').onclick = async () => {
+    const ta = $('exportText');
+    try { await navigator.clipboard.writeText(ta.value); $('copyMsg').textContent = '복사했어요.'; }
+    catch (e) { ta.focus(); ta.select(); document.execCommand && document.execCommand('copy'); $('copyMsg').textContent = '글을 골라 두었어요. Ctrl+C 로 복사하세요.'; }
+  };
+  document.addEventListener('pointerdown', () => { armed = true; }, { capture: true });
+  document.addEventListener('keydown', (e) => {
+    armed = true;
+    if ($('exportDlg').open) return;
+    const typing = e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT');
+    if (typing) { if (e.key === 'Escape' || (e.key === 'Enter' && e.target.id === 'memo')) { e.preventDefault(); e.target.blur(); if (e.key === 'Enter') confirmNext(); } return; }
+    if (e.key === ' ') { e.preventDefault(); playRow(); }
+    else if (e.key === 'Enter') { e.preventDefault(); confirmNext(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1, true); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1, true); }
+    else if (/^[1-9]$/.test(e.key)) { e.preventDefault(); toggleBad(Number(e.key) - 1); }
+    else if (e.key === 'o' || e.key === 'O' || e.key === 'ㅐ') { e.preventDefault(); playOld(); }
+  });
+
+  $('season').value = st.season || 'all';
+  $('view').value = st.view || 'all';
+  $('speed').value = String(st.speed || 1);
+  $('auto').checked = st.auto !== false;
+  filter();
+  const start = st.cur && byId.has(st.cur) ? list.indexOf(byId.get(st.cur)) : list.findIndex((i) => !status(rows[i]));
+  cur = start >= 0 ? start : 0;
+  render();
+  window.__review = { key: KEY, marks: () => st.marks, exportText };
+})();
+</script>
+</body>
+</html>
