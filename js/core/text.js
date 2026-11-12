@@ -182,7 +182,7 @@ function sayNumbers(s) {
     .replace(/(\d+)\s?시간/g, (m, a) => `${Number(a) <= 24 ? nativeNum(a) : sinoNum(a)} 시간`)
     .replace(/(\d+)\s?시(?![작즌험])/g, (m, a) => `${Number(a) <= 12 ? nativeNum(a) : sinoNum(a)} 시`)
     .replace(/(\d+)\s?번째/g, (m, a) => `${a === '1' ? '첫' : nativeNum(a)} 번째`)
-    .replace(/(\d+)\s?(개(?!월)|명|잔|가지|살|마리|척|군데|달(?!러))/g, (m, a, c) => `${nativeNum(a)} ${c}`)
+    .replace(/(\d+)\s?(개(?!월)|명|잔|가지|살|마리|척|군데|칸|달(?!러))/g, (m, a, c) => `${nativeNum(a)} ${c}`) // 칸: '6칸' = 여섯 칸(육칸으로 읽었음)
     .replace(/(?<!\d)0\d+/g, digitByDigit)
     .replace(/\d+/g, sinoNum);
 }

@@ -15,16 +15,15 @@
 
 export const TUT = [
   /* ---------- 처음 화면 · 이름 정하기 (학생이 정해지기 전에도) ---------- */
-  { key: 'title-start', sel: '.title-screen .tt-btn.primary', need: true, hand: 'on', tip: '눌러서 시작해요' },
+  // 시작 단추의 '눌러서 시작해요'는 뺌: 글자를 덮고, 없어도 다 알아봄(사용자 2026-11-12)
   { key: 'profile-next', sel: '.scr-profile .btn-big.btn-main', need: true, hand: 'on', tip: '다 하면 눌러요' },
 
   /* ---------- 이야기: 꼭 눌러야 이어지는 것 ---------- */
-  { key: 'start', sel: '.ov-schedule .btn-big', need: true, hand: 'on', tip: '눌러서 시작해요' },
   { key: 'next', sel: '#layer-dock .dlg', when: '#layer-dock .dlg-next.on', need: true, hand: 'on', handAt: '.dlg-next', tip: '화면을 톡 눌러요' },
   { key: 'card', sel: '#layer-task .cards-wrap.is-in .card', not: '.card-say', need: true, hand: 'group', tip: '하나를 골라 눌러요', tipTwo: '한 번 누르면 읽고, 또 누르면 골라요' },
   { key: 'rewind', sel: '.ov-oops .btn-rewind', need: true, hand: 'on', tip: '눌러서 시간을 되돌려요' },
   { key: 'act', sel: '.ov-act .act-btn', need: true, hand: 'on', tip: '직접 눌러요' },
-  { key: 'ok', sel: '.ov-phone .btn-big, .ov-gloss .gloss-btns .btn-big, .ov-crew .btn-big, .ov-info .btn-big, .ov-brief .btn-big, .ov-pay .btn-big', need: true, hand: 'on', tip: '다 보면 눌러요' },
+  { key: 'ok', sel: '.ov-phone .btn-big, .ov-gloss .gloss-btns .btn-big, .ov-crew .btn-big, .ov-info .btn-big', need: true, hand: 'on', tip: '다 보면 눌러요' },
   { key: 'continue', sel: '#layer-overlay .ov-next', need: true, max: 3, tip: '눌러서 넘겨요' },
   { key: 'breathe-done', sel: '.ov-breathe .br-btns .btn-big', need: true, hand: 'on', tip: '다 하면 눌러요' },
   { key: 'doc-next', sel: '.doc-next', need: true, hand: 'on', tip: '다 읽으면 눌러요' },
@@ -89,7 +88,7 @@ export const TUT = [
 
   /* ---------- 늘 있는 버튼: 프롤로그 guide() 로 소개 ---------- */
   { key: 'hud-memo', sel: '.hud .hud-btn[aria-label="메모"]', guide: true, hand: 'on', tip: '메모: 할 일 칠판을 접고 펴요' },
-  { key: 'hud-rewind', sel: '.hud .hud-rewind', guide: true, hand: 'on', tip: '되감기: 판단 장면 앞으로 돌아가요' },
+  { key: 'hud-rewind', sel: '.hud .hud-rewind', guide: true, hand: 'on', tip: '되감기: 지난 장면 앞으로 돌아가요' },
   { key: 'dlg-replay', sel: '#layer-dock .dlg-btn[aria-label="다시 듣기"]', guide: true, hand: 'on', tip: '다시 듣기: 한 번 더 읽어 줘요' },
   { key: 'dlg-backlog', sel: '#layer-dock .dlg-btn[aria-label="지난 대화"]', guide: true, hand: 'on', tip: '지난 대화: 지나간 말을 다시 봐요' },
   { key: 'hud-notebook', sel: '.hud .hud-notebook', guide: true, hand: 'on', tip: '수첩: 도장과 말 사전을 봐요' },

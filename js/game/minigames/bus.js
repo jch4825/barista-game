@@ -1,8 +1,10 @@
 /**
  * 미니게임: 바닷가로 가는 버스(재미 개편 7장 · 봄 1일, 2026-11-01) — 도시의 몰림(rush city) 뒤의 느긋한 놀이
  *  - 버스 창밖으로 바다 풍경이 흘러가요. 지나가는 갈매기 · 고깃배 · 등대 · 뛰어오르는 물고기를 눌러서 세요(세기만, 틀림 없음).
- *  - 가끔 버스가 덜컹해요. "덜컹!" 소리가 나면 [손잡이 잡기]. 못 잡으면 지은의 가방이 데굴데굴(웃음, 감점 없음).
- *  - 끝나면 본 것을 말해 줘요. 실시간이 아니면 턴 방식: [다음 풍경]을 누를 때마다 하나씩 지나감
+ *  - 가끔 버스가 덜컹해요. "덜컹!" 하면 그림 속 손잡이에 원이 생겨 빠르게 줄어들어요. 원이 사라지기 전에 원을 누르면 잡음.
+ *    못 잡으면 지은의 가방이 데굴데굴(웃음, 감점 없음). 원이 곧 단추(장면 밖 단추 없음: 2026-11-12 사용자 "이런 게임에선 외부 버튼은 독이다")
+ *  - 끝나면 본 것을 말해 줘요. 실시간이 아니면 턴 방식: 창(장면)을 톡 = [다음 풍경](장면 안 화살표)마다 하나씩 지나감.
+ *    턴 방식의 원은 손잡이 크기까지 줄고 누를 때까지 기다림
  *  - 움직임 줄이기: 흔들림 없이, 풍경은 미끄러지지 않고 제자리에 나타났다 사라짐
  * 옵션: { title, seconds?, quit? } · 돌려줌: { ok, attempts: 1, mistakes: 0, seen: { gull, boat, … }, held, ms }
  */
@@ -18,7 +20,7 @@ import { bus as evBus } from '../../core/bus.js';
 import { img } from '../../core/assets.js';
 
 const TITLE = '바닷가로 가는 버스';
-const HOWTO = '창밖으로 지나가는 것을 눌러서 세어요. "덜컹!" 하면 [손잡이 잡기]를 눌러요.';
+const HOWTO = '창밖으로 지나가는 것을 눌러서 세어요. "덜컹!" 하면 손잡이에 생긴 원이 사라지기 전에 눌러요.';
 const SAY = {
   start: '버스가 바닷가 마을로 달려요. 창밖을 봐요.',
   bump: '덜컹!',
@@ -41,6 +43,7 @@ const picOf = (id, art) => (art && img.has('objects', ART[id]) ? `<img src="${im
 const ORDER = ['gull', 'boat', 'gull', 'fish', 'lighthouse', 'gull', 'boat', 'fish', 'gull'];
 const FIRST_MS = 400;            // 첫 풍경이 나오는 때
 const GAP_MS = [2600, 1400];     // 다음 풍경까지: 2.6초 + 0~1.4초(× 빠르기 k)
+const BUMP_MS = 1800;            // 덜컹한 뒤 손잡이의 원이 다 줄어들기까지(× 빠르기 k): 이 안에 누르면 잡음
 const SUMMARY = '창밖에서 본 것을 세어 봤어요.'; // 마지막 요약의 첫 말(요약은 조각마다 음성 파일로 읽음)
 const countSay = (id, n) => `${SIGHTS[id].name} ${n}`; // 누를 때 세는 말
 const totalSay = (id, n) => `${SIGHTS[id].name} ${n}${SIGHTS[id].unit}`; // 요약 조각
@@ -107,11 +110,14 @@ export async function bus(opts = {}) {
   // 먼 바다 마을이 타는 동안 천천히 옆으로(0 → 1: 끝에 카페가 창 가운데). 움직임 줄이기는 처음부터 끝 자리
   const farAt = (p) => { if (far) far.style.setProperty('--p', String(still ? 1 : Math.min(1, Math.max(0, p)))); };
   farAt(0);
-  const strap = h('button', { class: 'btn btn-big btn-main bs-strap' }, h('i', { html: ICON('hand') }), h('span', { text: '손잡이 잡기' }));
-  const nextB = turn ? h('button', { class: 'btn btn-big btn-soft bs-next' }, h('i', { html: ICON('arrow_right') }), h('span', { text: '다음 풍경' })) : null;
+  // 손잡이의 원(단추): 덜컹할 때만 그림 속 손잡이 고리 위에 뜸(자리는 minigames.css 의 .bs-grip). 턴 방식은 원이 손잡이 크기에서 기다림
+  const grip = h('button', { class: `bs-grip${turn ? ' is-wait' : ''}`, 'aria-label': '손잡이 잡기' });
+  grip.hidden = true;
+  // 턴 방식: 창 오른쪽의 화살표(장면 안). 장면 아무 곳이나 톡 해도 같음
+  const nextB = turn ? h('button', { class: 'bs-next', 'aria-label': '다음 풍경' }, h('i', { html: ICON('arrow_right') }), h('span', { text: '다음 풍경' })) : null;
   const tally = h('p', { class: 'bs-tally', 'aria-live': 'polite' });
-  f.body.append(h('div', { class: `bs-scene${art ? ' has-art' : ''}` }, ...(art ? [view] : [view, lane, frameEl, bag])), h('div', { class: 'bs-foot' }, tally, nextB, strap));
-  strap.disabled = true;
+  if (art) view.append(grip);
+  f.body.append(h('div', { class: `bs-scene${art ? ' has-art' : ''}` }, ...(art ? [view] : [view, lane, frameEl, bag, grip]), nextB), h('div', { class: 'bs-foot' }, tally));
 
   const paint = () => {
     const parts = Object.entries(seen).filter(([, n]) => n).map(([id, n]) => `${SIGHTS[id].name} ${n}${SIGHTS[id].unit}`);
@@ -160,25 +166,30 @@ export async function bus(opts = {}) {
   function bumpStart() {
     bumpOn = true;
     bumpT = 0;
-    strap.disabled = false;
-    strap.classList.add('is-ready');
+    if (nextB) nextB.disabled = true; // 턴 방식: 덜컹하는 동안은 손잡이의 원만(스캔이 눌리지 않는 [다음 풍경]을 가리키지 않게)
+    grip.replaceChildren(h('i', { class: 'bs-ring', style: { '--ms': `${(BUMP_MS * k) / 1000}s` } })); // 원을 새로: 줄어드는 움직임이 처음부터
+    grip.classList.remove('is-got');
+    grip.hidden = false;
     audio.sfx('bump');
     f.el.classList.remove('is-bump');
     void f.el.offsetWidth;
     if (!still) f.el.classList.add('is-bump');
     tts.speak(SAY.bump, 'sys');
-    setTimeout(() => { if (strap.isConnected && !strap.disabled) strap.focus({ preventScroll: true }); }, 40);
+    setTimeout(() => { if (grip.isConnected && bumpOn) grip.focus({ preventScroll: true }); }, 40);
   }
   function bumpEnd(ok) {
     if (!bumpOn) return;
     bumpOn = false;
-    strap.disabled = true;
-    strap.classList.remove('is-ready');
+    if (nextB && !over) nextB.disabled = false;
     if (ok) {
+      // 잡은 원은 잠깐 손잡이 크기로 남았다가 사라짐
+      grip.classList.add('is-got');
+      setTimeout(() => { if (!bumpOn) grip.hidden = true; }, dur(320));
       held += 1;
       audio.sfx('good');
       tts.speak(SAY.held, 'sys');
     } else {
+      grip.hidden = true;
       audio.sfx('slip');
       bag.classList.remove('is-roll');
       void bag.offsetWidth;
@@ -186,7 +197,7 @@ export async function bus(opts = {}) {
       tts.speak(SAY.bag, 'sys');
     }
   }
-  strap.addEventListener('click', (e) => { e.stopPropagation(); if (bumpOn) bumpEnd(true); });
+  grip.addEventListener('click', (e) => { e.stopPropagation(); if (bumpOn) bumpEnd(true); });
 
   /* ---- 시간 ---- */
   const total = (opts.seconds || 38) * 1000 * k;
@@ -209,7 +220,7 @@ export async function bus(opts = {}) {
     if (bumpOn) {
       bumpT += dt;
       if (auto && bumpT > 300) bumpEnd(true);
-      if (bumpT >= 1800 * k) bumpEnd(false);
+      if (bumpT >= BUMP_MS * k) bumpEnd(false);
     }
     if (tAcc >= total) finish();
   }
@@ -227,14 +238,17 @@ export async function bus(opts = {}) {
     curTurn = addSight();
     if (turnN % 3 === 0) bumpStart();
   });
-  if (turn) strap.addEventListener('click', () => setTimeout(() => nextB?.focus({ preventScroll: true }), 40));
+  if (turn) {
+    grip.addEventListener('click', () => setTimeout(() => nextB?.focus({ preventScroll: true }), 40));
+    f.body.addEventListener('click', (e) => { if (started && !over && !e.target.closest('button')) nextB.click(); }); // 장면을 톡 = [다음 풍경]
+  }
 
   async function finish() {
     if (over) return;
     over = true;
     curLoop?.stop();
     if (bumpOn) bumpEnd(true);
-    strap.disabled = true;
+    grip.hidden = true;
     if (nextB) nextB.disabled = true;
     for (const it of flying) it.b.disabled = true;
     const parts = Object.entries(seen).filter(([, n]) => n).map(([id, n]) => totalSay(id, n));
@@ -254,7 +268,7 @@ export async function bus(opts = {}) {
 
   paint();
   // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(검수 13.39 15번)
-  await Promise.race([startGate(f.body, { note: turn ? '[다음 풍경]을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.', ready: f.told }), doneP]);
+  await Promise.race([startGate(f.body, { note: turn ? '창을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.', ready: f.told }), doneP]);
   if (!stopped() && !over) {
     started = true;
     tts.speak(SAY.start, 'sys');
@@ -264,7 +278,7 @@ export async function bus(opts = {}) {
         (async () => {
           while (!over && !stopped()) {
             await sleep(90);
-            if (bumpOn) strap.click();
+            if (bumpOn) grip.click();
             else if (curTurn && !curTurn.b.disabled) curTurn.b.click();
             else nextB.click();
           }

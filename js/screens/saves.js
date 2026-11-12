@@ -1,6 +1,6 @@
 /**
  * 저장하기 · 불러오기 (세이브 슬롯) — 기초 틀: AGY 설계안(2026-10-11)
- *  - 학생(프로필)마다 수동 저장 6칸 + 자동 저장 1칸(판단 장면마다 덮어씀, 불러오기만 됨)
+ *  - 학생(프로필)마다 수동 저장 6칸 + 자동 저장 1칸(고르는 장면 · 단골 대응 · 미니게임을 시작할 때마다 덮어씀, 불러오기만 됨)
  *  - 저장: 게임 중 [멈춤] 메뉴. 진행 중인 장면이 시작된 순간을 저장합니다(면접 중이면 면접 처음, runner.captureSave)
  *  - 불러오기: 처음 화면·[멈춤] 메뉴. 칸을 고르면 확인 창 → 그 장면부터 다시 시작
  *  - 덮어쓰기·불러오기·지우기는 늘 확인을 받습니다. 모든 조작은 버튼(키보드·스캔)
@@ -75,7 +75,7 @@ function card({ label, data, mode, empty, onPick, onDelete, fresh = false, auto 
   },
   h('span', { class: `sv-thumb ${i?.bg ? '' : 'blank'}`, html: i?.bg || ICON(mode === 'save' ? 'pen' : 'resume') }, h('b', { class: 'sv-no', text: label })),
   empty
-    ? h('span', { class: 'sv-text' }, h('b', { class: 'sv-title', text: mode === 'save' ? '+ 여기에 저장하기' : '빈 칸' }), h('small', { text: auto ? '판단 장면을 지나면 자동으로 저장돼요' : '아직 저장한 것이 없어요' }))
+    ? h('span', { class: 'sv-text' }, h('b', { class: 'sv-title', text: mode === 'save' ? '+ 여기에 저장하기' : '빈 칸' }), h('small', { text: auto ? '카드를 고르거나 일을 시작하면 자동으로 저장돼요' : '아직 저장한 것이 없어요' }))
     : h('span', { class: 'sv-text' },
       h('b', { class: 'sv-title', text: i.title }),
       i.where ? h('span', { class: 'sv-where' }, h('i', { html: ICON('home') }), h('span', { text: i.where })) : null,

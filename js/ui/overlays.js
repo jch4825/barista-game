@@ -127,13 +127,13 @@ export const ov = {
 
   /* ---------- 에피소드 완료: 완료 영수증이 나오고 모서리에 도장 ----------
    * 붉은 바탕 + 가운데 원 + 퍼지거나 도는 빛살은 욱일기를 떠올리게 하므로 쓰지 않습니다(CLAUDE.md 2-8). */
-  async finish({ title = '오늘의 마일스톤 완료!', sub = '' }) {
+  async finish({ title = '오늘 하루 끝!', sub = '' }) {
     const go = h('button', { class: 'btn btn-small ov-next' }, '계속 ▶');
-    const seal = h('div', { class: 'fin-seal', 'aria-hidden': 'true' }, h('small', { text: 'MILESTONE' }), h('b', { text: '완료' }));
+    const seal = h('div', { class: 'fin-seal', 'aria-hidden': 'true' }, h('small', { text: '오늘' }), h('b', { text: '완료' }));
     const el = h('section', { class: 'ov ov-finish', role: 'dialog', 'aria-label': `${title} ${sub}` },
       h('div', { class: 'fin-receipt' },
-        h('p', { class: 'fin-shop', text: '카페 마일스톤' }),
-        h('p', { class: 'fin-kicker', text: '오늘의 마일스톤' }),
+        h('p', { class: 'fin-shop', text: '카페' }), // 카페 이름은 짓지 않음(Q-3)
+        h('p', { class: 'fin-kicker', text: '오늘 한 일' }),
         h('h2', { class: 'fin-title', text: title }),
         sub ? h('p', { class: 'fin-sub', text: sub }) : null,
         h('div', { class: 'fin-code', 'aria-hidden': 'true' }),
@@ -228,7 +228,7 @@ export const ov = {
     const el = h('section', { class: 'ov ov-gloss', role: 'dialog', 'aria-label': `말 사전: ${t.word}` },
       h('div', { class: 'gloss-card' },
         h('div', { class: `gloss-ico ${itemOf(art) ? 'art' : ''}`, html: artHTML(art) }),
-        h('div', { class: 'gloss-tag', text: isNew && fromText ? '말 사전에 새로 들어왔어요!' : '마일스톤 말 사전' }),
+        h('div', { class: 'gloss-tag', text: isNew && fromText ? '말 사전에 새로 들어왔어요!' : '말 사전' }),
         h('h2', { text: t.word }),
         h('p', { class: 'gloss-easy', text: fill(t.easy) }),
         h('p', { class: 'gloss-ex', text: fill(t.ex) }),
@@ -292,56 +292,6 @@ export const ov = {
     requestAnimationFrame(() => vfx.sparkleAt(el.querySelector('.got-art'), { n: 16, colors: ['#FFD43B', '#FFFFFF', '#FFE9A8'] }));
     go.focus({ preventScroll: true });
     await waitButton(go, 2600);
-    close();
-    await sleep(dur(200));
-  },
-
-  /* ---------- 아침 브리핑: 오늘의 조건 카드 (v3 근무) ---------- */
-  async briefing({ title = '오늘의 조건', day = '', cards = [], note = '' }) {
-    const go = bigBtn('근무판 짜러 가기', 'calendar', 'btn-main');
-    const el = h('section', { class: 'ov ov-brief', role: 'dialog', 'aria-label': `${day} ${title}` },
-      h('div', { class: 'bf-card' },
-        h('div', { class: 'bf-head' }, h('span', { class: 'bf-day', text: day }), h('h2', { text: title })),
-        h('ul', { class: 'bf-list' }, ...cards.map(([icon, label, value]) => h('li', {}, h('i', { class: itemOf(icon) ? 'art' : '', html: artHTML(icon) }), h('small', { text: label }), h('b', { text: value })))),
-        note ? h('p', { class: 'bf-note' }, h('i', { class: itemOf('memo') ? 'art' : '', html: artHTML('memo') }), h('span', { text: note })) : null,
-        go));
-    const close = mount(el);
-    audio.sfx('page');
-    go.focus({ preventScroll: true });
-    announce(`${day} ${title}`);
-    tts.speakSeq([`${day}. ${title}.`, ...cards.map(([, label, value]) => `${label}, ${value}.`), ...(note ? [note] : [])], 'sys');
-    await waitButton(go);
-    tts.stop();
-    close();
-    await sleep(dur(150));
-  },
-
-  /* ---------- 퇴근 정산 (v3 근무): 영수증 ---------- */
-  async payout({ day = '', plan = 1, handle = 1, smiles = 0, guests = 0, waited = 0, hours = 4, hourly = 0, money = 0 }) {
-    const stars = (n) => `${'★'.repeat(n)}${'☆'.repeat(3 - n)}`;
-    const won = (n) => `${n.toLocaleString('ko-KR')}원`;
-    const go = bigBtn('계속', 'arrow_right', 'btn-main');
-    const row = (icon, label, value, sub = '') => h('li', {}, h('i', { html: ICON(icon) }), h('span', { text: label }), h('b', { text: value }), sub ? h('small', { text: sub }) : null);
-    const el = h('section', { class: 'ov ov-pay', role: 'dialog', 'aria-label': '퇴근 정산' },
-      h('div', { class: 'pay-receipt' },
-        h('p', { class: 'pay-shop', text: '카페 마일스톤 · 퇴근 정산' }),
-        h('p', { class: 'pay-day', text: day }),
-        h('ul', { class: 'pay-list' },
-          row('calendar', '계획', stars(plan), plan === 3 ? '계획 덕분에 문제가 없었어요' : '근무판을 바꾸면 더 좋아져요'),
-          row('shield', '수습', stars(handle), handle === 3 ? '침착하게 해냈어요' : '되감아 다시 해냈어요'),
-          row('smile', '웃으며 나간 손님', `${smiles} / ${guests}명`, waited ? `준비가 늦어 기다린 손님 ${waited}명` : ''),
-          row('clock', '오늘 일한 시간', `${hours}시간`),
-          row('coin', '오늘 번 돈', won(money), `시급 ${won(hourly)} × ${hours}시간`)),
-        h('div', { class: 'pay-code', 'aria-hidden': 'true' }),
-        go));
-    const close = mount(el);
-    audio.sfx('coin');
-    setTimeout(() => audio.sfx('jingle_payday'), dur(400));
-    go.focus({ preventScroll: true });
-    announce(`퇴근 정산. 계획 별 ${plan}개, 수습 별 ${handle}개, 웃으며 나간 손님 ${smiles}명, 오늘 번 돈 ${won(money)}`);
-    tts.speakSeq(['퇴근 정산.', `계획 별 ${plan}개.`, `수습 별 ${handle}개.`, `웃으며 나간 손님 ${smiles}명.`, `오늘 번 돈 ${won(money)}.`], 'sys');
-    await waitButton(go);
-    tts.stop();
     close();
     await sleep(dur(200));
   },

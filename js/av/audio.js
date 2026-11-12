@@ -9,7 +9,7 @@ import { store } from '../core/store.js';
 import { bus } from '../core/bus.js';
 
 let ctx = null;
-let master, uiBus, envIn, envFilter, envGain, bgmBus, musicGain, duckGain, sfxBus, ambBus, delay, delayFb, delayWet;
+let master, uiBus, envIn, envFilter, envGain, bgmBus, musicGain, duckGain, sfxBus, ambBus;
 let noiseBuf = null;
 let brownBuf = null;
 
@@ -59,17 +59,6 @@ function ensure() {
   sfxBus.connect(envIn);
   ambBus = ctx.createGain();
   ambBus.connect(envIn);
-
-  delay = ctx.createDelay(1.0);
-  delay.delayTime.value = 0.34;
-  delayFb = ctx.createGain();
-  delayFb.gain.value = 0.26;
-  delayWet = ctx.createGain();
-  delayWet.gain.value = 0.2;
-  delay.connect(delayFb);
-  delayFb.connect(delay);
-  delay.connect(delayWet);
-  delayWet.connect(musicGain);
 
   const len = ctx.sampleRate * 2;
   noiseBuf = ctx.createBuffer(1, len, ctx.sampleRate);
@@ -268,202 +257,12 @@ const SYN = {
 };
 
 /* ------------------------------------------------------------------ */
-/* 합성 배경음악 (파일이 없을 때)                                        */
+/* 배경음악 (파일만: 파일이 없으면 조용히)                               */
 /* ------------------------------------------------------------------ */
-const MOODS = {
-  home: { bpm: 64, style: 'bell', chords: [[53, [0, 4, 7, 11]], [52, [0, 3, 7, 10]], [50, [0, 3, 7, 10]], [48, [0, 4, 7, 11]]] },
-  morning: { bpm: 84, style: 'arp', chords: [[48, [0, 4, 7, 12]], [47, [0, 3, 8, 12]], [45, [0, 3, 7, 12]], [41, [0, 4, 7, 12]]] },
-  title: { bpm: 92, style: 'arp', chords: [[41, [0, 4, 7, 12]], [43, [0, 4, 7, 12]], [45, [0, 3, 7, 12]], [48, [0, 4, 7, 12]]] },
-  cafe: { bpm: 76, style: 'jazz', chords: [[50, [0, 3, 7, 10, 14]], [43, [0, 4, 10, 14, 16]], [48, [0, 4, 7, 11, 14]], [45, [0, 4, 7, 10, 13]]] },
-  interview: { bpm: 70, style: 'pulse', chords: [[48, [0, 4, 7, 11]], [45, [0, 3, 7, 10]], [41, [0, 4, 7, 11]], [43, [0, 4, 7]]] },
-  tension: { bpm: 72, style: 'pulse', chords: [[45, [0, 3, 7]], [41, [0, 4, 7]], [50, [0, 3, 7]], [40, [0, 4, 7]]] },
-  overload: { bpm: 60, style: 'drone', chords: [[40, [0, 7, 13]], [41, [0, 6, 12]]] },
-  peak: { bpm: 104, style: 'bounce', chords: [[48, [0, 4, 7, 12]], [45, [0, 3, 7, 12]], [41, [0, 4, 7, 12]], [43, [0, 4, 7, 12]]] },
-  warm: { bpm: 62, style: 'pad', chords: [[41, [0, 4, 7, 11]], [43, [0, 4, 7, 10]], [40, [0, 3, 7, 10]], [45, [0, 3, 7, 10]], [38, [0, 3, 7, 10]], [43, [0, 4, 7]], [48, [0, 4, 7, 11]], [48, [0, 4, 7]]],
-    melody: [76, null, 74, 72, 74, null, 76, null, 79, null, 76, 74, 72, null, 71, null, 72, null, 74, 76, 74, null, 72, null, 71, null, 72, 74, 72, null, null, null] },
-  tea: { bpm: 80, style: 'bell', chords: [[48, [0, 4, 7, 11]], [45, [0, 3, 7, 10]], [50, [0, 3, 7, 10]], [43, [0, 4, 7, 10]]] },
-  celebrate: { bpm: 110, style: 'bounce', chords: [[48, [0, 4, 7, 12]], [41, [0, 4, 7, 12]], [43, [0, 4, 7, 12]], [48, [0, 4, 7, 12]]] },
-  ending: { bpm: 70, style: 'pad', chords: [[41, [0, 4, 7, 11]], [43, [0, 4, 7, 10]], [40, [0, 3, 7, 10]], [45, [0, 3, 7, 10]], [38, [0, 3, 7, 10]], [43, [0, 4, 7]], [48, [0, 4, 7, 11]], [48, [0, 4, 7, 11]]],
-    melody: [72, 74, 76, null, 79, null, 76, null, 77, 76, 74, null, 72, null, 74, null, 76, null, 74, 72, 71, null, 72, null, 74, null, 76, 79, 84, null, null, null] },
-};
-
 let mood = null;
 let targetMood = null;
 let pendingSwitch = null;
-let schedTimer = null;
-let nextTime = 0;
-let step = 0;
 let bgmEl = null; // 파일 BGM
-
-function epNote(m, t, d, v = 0.06) {
-  const f = N(m);
-  const o1 = ctx.createOscillator();
-  const o2 = ctx.createOscillator();
-  o1.frequency.value = f;
-  o2.frequency.value = f * 2;
-  const g2 = ctx.createGain();
-  g2.gain.value = 0.25;
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(v, t + 0.008);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + d);
-  const lp = ctx.createBiquadFilter();
-  lp.type = 'lowpass';
-  lp.frequency.value = 2600;
-  o1.connect(g);
-  o2.connect(g2);
-  g2.connect(g);
-  g.connect(lp);
-  lp.connect(musicGain);
-  lp.connect(delay);
-  o1.start(t); o2.start(t);
-  o1.stop(t + d + 0.05); o2.stop(t + d + 0.05);
-}
-
-function bellNote(m, t, v = 0.05) {
-  const f = N(m);
-  for (const [mul, gv, dd] of [[1, v, 1.6], [2.76, v * 0.25, 0.7], [5.4, v * 0.08, 0.35]]) {
-    const o = ctx.createOscillator();
-    o.frequency.value = f * mul;
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(gv, t + 0.006);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dd);
-    o.connect(g);
-    g.connect(musicGain);
-    g.connect(delay);
-    o.start(t);
-    o.stop(t + dd + 0.05);
-  }
-}
-
-function bassNote(m, t, d, v = 0.08) {
-  const o = ctx.createOscillator();
-  o.type = 'triangle';
-  o.frequency.value = N(m);
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(v, t + 0.015);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + d);
-  const lp = ctx.createBiquadFilter();
-  lp.type = 'lowpass';
-  lp.frequency.value = 520;
-  o.connect(g);
-  g.connect(lp);
-  lp.connect(musicGain);
-  o.start(t);
-  o.stop(t + d + 0.05);
-}
-
-function padChord(notes, t, d, v = 0.018, cutoff = 950) {
-  const lp = ctx.createBiquadFilter();
-  lp.type = 'lowpass';
-  lp.frequency.value = cutoff;
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(v, t + 0.9);
-  g.gain.setValueAtTime(v, t + Math.max(1, d - 0.6));
-  g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.4);
-  g.connect(lp);
-  lp.connect(musicGain);
-  for (const m of notes) {
-    for (const det of [-7, 7]) {
-      const o = ctx.createOscillator();
-      o.type = 'sawtooth';
-      o.frequency.value = N(m);
-      o.detune.value = det;
-      o.connect(g);
-      o.start(t);
-      o.stop(t + d + 0.5);
-    }
-  }
-}
-
-function hat(t, v = 0.012) {
-  const src = ctx.createBufferSource();
-  src.buffer = noiseBuf;
-  const hp = ctx.createBiquadFilter();
-  hp.type = 'highpass';
-  hp.frequency.value = 7000;
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(v, t + 0.003);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
-  src.connect(hp);
-  hp.connect(g);
-  g.connect(musicGain);
-  src.start(t, Math.random());
-  src.stop(t + 0.08);
-}
-
-function scheduleStep(def, s, t) {
-  const eighth = 60 / def.bpm / 2;
-  const bar = Math.floor(s / 8) % def.chords.length;
-  const pos = s % 8;
-  const [root, iv] = def.chords[bar];
-  const tones = iv.map((x) => root + 12 + x);
-  switch (def.style) {
-    case 'bell': {
-      if (pos === 0) { bassNote(root, t, eighth * 8, 0.06); padChord(tones.slice(0, 3), t, eighth * 8, 0.01); }
-      const seq = [0, null, 1, 2, null, 3, 2, null];
-      const k = seq[pos];
-      if (k !== null) bellNote(tones[k % tones.length] + 12, t, 0.035);
-      break;
-    }
-    case 'arp': {
-      if (pos === 0 || pos === 4) bassNote(root, t, eighth * 4, 0.07);
-      const order = [0, 1, 2, 3, 2, 1, 2, 3];
-      epNote(tones[order[pos] % tones.length] + 12, t, eighth * 3, 0.035);
-      break;
-    }
-    case 'jazz': {
-      if (pos % 2 === 0) bassNote(root + [0, 7, 12, 7][pos / 2], t, eighth * 2, 0.07);
-      if (pos === 1 || pos === 4) tones.slice(1).forEach((m) => epNote(m, t, eighth * 2.5, 0.02));
-      if (pos === 6 && Math.random() < 0.5) epNote(tones[tones.length - 1] + 12, t, eighth * 2, 0.025);
-      if (pos % 2 === 1) hat(t, 0.008);
-      break;
-    }
-    case 'pulse': {
-      bassNote(root, t, eighth * 0.9, 0.05);
-      if (pos === 0) padChord(tones, t, eighth * 8, 0.012);
-      if (pos === 6 && Math.random() < 0.6) bellNote(tones[2] + 12, t, 0.025);
-      break;
-    }
-    case 'drone': {
-      if (pos === 0) padChord(tones, t, eighth * 8, 0.02, 500);
-      break;
-    }
-    case 'bounce': {
-      bassNote(root + (pos % 2 ? 12 : 0), t, eighth * 0.9, 0.06);
-      const order = [0, 2, 1, 3, 2, 1, 3, 2];
-      epNote(tones[order[pos] % tones.length] + 12, t, eighth * 1.6, 0.03);
-      if (pos % 2 === 1) hat(t, 0.012);
-      break;
-    }
-    case 'pad': {
-      if (pos === 0) { padChord(tones, t, eighth * 8, 0.016); bassNote(root, t, eighth * 8, 0.06); }
-      const mel = def.melody;
-      if (mel) {
-        const idx = Math.floor(s / 2) % mel.length;
-        if (s % 2 === 0 && mel[idx]) bellNote(mel[idx], t, 0.04);
-      }
-      if (pos === 2 || pos === 6) epNote(tones[1] + 12, t, eighth * 3, 0.018);
-      break;
-    }
-    default: break;
-  }
-}
-
-function scheduler() {
-  if (!ctx || !mood || !MOODS[mood]) return;
-  const def = MOODS[mood];
-  const eighth = 60 / def.bpm / 2;
-  while (nextTime < ctx.currentTime + 0.25) {
-    scheduleStep(def, step, nextTime);
-    nextTime += eighth;
-    step += 1;
-  }
-}
 
 function stopFileBgm() {
   if (!bgmEl) return;
@@ -689,7 +488,6 @@ export const audio = {
     musicGain.gain.linearRampToValueAtTime(0, now + 0.8);
     clearTimeout(pendingSwitch);
     pendingSwitch = setTimeout(() => {
-      clearInterval(schedTimer);
       stopFileBgm();
       mood = targetMood;
       if (!mood) return;
@@ -697,7 +495,7 @@ export const audio = {
       musicGain.gain.cancelScheduledValues(t);
       musicGain.gain.setValueAtTime(0, t);
       musicGain.gain.linearRampToValueAtTime(1, t + 1.2);
-      // 파일이 없는 곡은 조용히 둡니다. 합성 배경음악(MOODS)은 직업 마1스톤 장면에 맞춘 것이라 쓰지 않습니다(배경음악은 모두 새 곡)
+      // 파일이 없는 곡은 조용히 둡니다(직업 마1스톤의 합성 배경음악은 지움: 배경음악은 모두 새 곡)
       const file = nextVariant(mood);
       if (file) startFileBgm(file, mood);
     }, 850);
@@ -749,5 +547,5 @@ bus.on('profile', () => applyVolumes());
 /** 도구(검사·에셋 목록)용 */
 // 합성음이 없고 파일로만 있는 효과음(재미 개편 새 놀이 · 웃음 줄기, 2026-11-01). 파일이 없으면 조용히 넘어감
 export const SFX_NAMES = [...new Set([...Object.keys(SYN), 'poof', 'boom', 'squawk', 'bus', 'pang', ...Object.keys(SFX_FALLBACK)])];
-export const BGM_NAMES = [...new Set([...Object.keys(MOODS), ...Object.keys(BGM_VARIANTS)])];
+export const BGM_NAMES = Object.keys(BGM_VARIANTS);
 export const AMB_NAMES = ['cafe', 'crowd', 'street', 'kitchen', 'home', 'classroom'];

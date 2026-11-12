@@ -486,7 +486,7 @@ export const store = {
   },
   unlockedAll() { return Boolean(active()?.progress.unlockedAll); },
   setUnlockedAll(id, v) {
-    if (db.profiles[id]) { db.profiles[id].progress.unlockedAll = v; saveNow(); }
+    if (db.profiles[id]) { db.profiles[id].progress.unlockedAll = v; touch(db.profiles[id]); saveNow(); } // 바꾼 시각: 기록 파일 합치기가 새 쪽을 앎
   },
   checkpoint() { return active()?.progress.checkpoint || null; },
   setCheckpoint(cp) {

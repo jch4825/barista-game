@@ -931,28 +931,6 @@
   "at": "2026-11-05 22:29",
   "long": 100
  },
- "dd6a3cd7": {
-  "who": "sys",
-  "sig": "bb7f4ca15e5a",
-  "sim": 0.9806,
-  "rate": 3.9,
-  "try": 1,
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:29",
-  "long": 80
- },
- "b491fde3": {
-  "who": "sys",
-  "sig": "e66c18775e6a",
-  "sim": 0.9869,
-  "rate": 4.41,
-  "try": 1,
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-05 22:29",
-  "long": 70
- },
  "eddfc961": {
   "who": "jieun",
   "sig": "bbb23c066288",
@@ -15890,18 +15868,6 @@
   "flag": "",
   "at": "2026-11-06 00:42",
   "long": 90
- },
- "31969eb4": {
-  "who": "sys",
-  "sig": "a77a43626608",
-  "sim": 0.9918,
-  "rate": 6.29,
-  "try": 1,
-  "style": "desc",
-  "emo": false,
-  "flag": "",
-  "at": "2026-11-06 00:42",
-  "heard": "2026-11-07 사용자가 듣고 고름(13.69 전 파일, 검수 13.72)"
  },
  "1ce2758d": {
   "who": "sys",
@@ -50379,5 +50345,47 @@
   "emo": false,
   "flag": "목소리",
   "at": "2026-11-10 02:32"
+ },
+ "1f664e81": {
+  "who": "sys",
+  "sig": "d9f964bb39a7",
+  "sim": 0.9935,
+  "rate": 5.73,
+  "fall": 40,
+  "long": 70,
+  "phon": true,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-12 21:34"
+ },
+ "c966a68d": {
+  "who": "sys",
+  "sig": "2590781c3e6c",
+  "sim": 0.9933,
+  "rate": 5.43,
+  "fall": 40,
+  "long": 70,
+  "phon": true,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-12 21:34"
+ },
+ "854befde": {
+  "who": "sys",
+  "sig": "40b7e9619d48",
+  "sim": 0.9901,
+  "rate": 6.32,
+  "fall": 30,
+  "long": 60,
+  "phon": true,
+  "try": 2,
+  "style": "desc",
+  "emo": false,
+  "flag": "",
+  "at": "2026-11-12 21:34"
  }
 }

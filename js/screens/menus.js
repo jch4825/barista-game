@@ -45,7 +45,7 @@ export function showPause() {
           nav.go('title');
         }
       })),
-    h('p', { class: 'pause-note', text: '판단 장면마다 자동으로 저장돼요. [저장하기]로 원하는 장면을 6칸에 따로 저장할 수 있어요.' }));
+    h('p', { class: 'pause-note', text: '카드를 고르는 장면과 커피 만들기 같은 일을 시작할 때 자동으로 저장돼요. [저장하기]로 원하는 장면을 6칸에 따로 저장할 수 있어요.' }));
 }
 
 export function showBacklog() {
@@ -66,7 +66,7 @@ export function showBacklog() {
 export function showRewindList() {
   const pts = runner.rewindPoints();
   if (!pts.length) {
-    ov.toast('아직 되감을 곳이 없어요. 판단 장면을 지나면 생겨요.', 'rewind');
+    ov.toast('아직 되감을 곳이 없어요. 카드를 고르는 장면이나 커피 만들기 같은 일을 지나면 생겨요.', 'rewind');
     return;
   }
   const scr = openScreen({ cls: 'scr-rewind', title: '어디로 되감을까요?', icon: 'rewind' });

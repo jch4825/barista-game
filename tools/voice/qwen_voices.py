@@ -443,16 +443,32 @@ def main() -> int:
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         made_path.write_text(json.dumps(made, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
+    wav_left = {}  # ogg 로 바꾸지 못해 wav 로 남은 줄: key → wav 파일
+
+    def to_ogg(wav, tries=2):
+        """wav → ogg(Opus 40k). Windows 에서 ffmpeg 가 가끔 실패해, 한 번 더 해 봄. 되면 wav 를 지우고 True"""
+        ogg = wav.with_suffix(".ogg")
+        err = b""
+        for n in range(tries):
+            if n:
+                time.sleep(0.5)
+            r = subprocess.run([ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-ac", "1", "-c:a", "libopus", "-b:a", "40k", str(ogg)], capture_output=True)
+            if r.returncode == 0 and ogg.exists() and ogg.stat().st_size > 0:
+                wav.unlink(missing_ok=True)
+                return True
+            err = r.stderr or err
+        print(f"  ! {wav.stem} ogg 로 바꾸지 못함(wav 로 둠, 용량 7 ~ 8배): {err.decode('utf-8', 'replace').strip()[:160]}", flush=True)
+        return False
+
     def write_line(t, w, sr, info):
         wav = out_dir / f"{t['key']}.wav"
         sf.write(str(wav), w, sr)
         rel = f"lines/{wav.name}"
-        if ffmpeg:
-            ogg = wav.with_suffix(".ogg")
-            r = subprocess.run([ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-ac", "1", "-c:a", "libopus", "-b:a", "40k", str(ogg)], capture_output=True)
-            if r.returncode == 0 and ogg.exists():
-                wav.unlink(missing_ok=True)
-                rel = f"lines/{ogg.name}"
+        # ffmpeg 가 실패하면 알리고 끝에 한 번 더(검수 13.117 시험 폴더: 20줄 중 뒤 12줄이 알림 없이 wav 로 남았음)
+        if ffmpeg and to_ogg(wav):
+            rel = f"lines/{wav.with_suffix('.ogg').name}"
+        elif ffmpeg:
+            wav_left[t["key"]] = wav
         manifest["lines"][t["key"]] = rel
         made[t["key"]] = info
 
@@ -567,8 +583,17 @@ def main() -> int:
             torch.cuda.empty_cache()  # 묶음마다 빈 메모리를 돌려줌(쌓여서 컴퓨터 메모리로 넘치지 않게)
             el = time.time() - t0
             print(f"  {done_n}/{len(todo)} · {pid} · {el / 60:.1f}분 · 남은 예상 {el / done_n * (len(todo) - done_n) / 60:.0f}분 · 들어 볼 줄 {flagged}", flush=True)
+    # wav 로 남은 줄(이번 것 + 전에 남은 것)을 마지막에 한 번 더 ogg 로. 그래도 안 되면 목록을 알림: 게임 · 배포에 큰 wav 가 들어가지 않게
+    if ffmpeg:
+        wav_left.update({k: voice_dir / rel for k, rel in manifest["lines"].items() if rel.endswith(".wav") and (voice_dir / rel).exists()})
+        for key, wav in list(wav_left.items()):
+            if wav.exists() and to_ogg(wav, tries=3):
+                manifest["lines"][key] = f"lines/{wav.with_suffix('.ogg').name}"
+                del wav_left[key]
     save()
     print(f"끝! 이번에 {done_n}줄 · 들어 볼 줄(목소리 · 길이 표시) {flagged} → {manifest_path}", flush=True)
+    if wav_left:
+        print(f"주의: ogg 로 바꾸지 못해 wav 로 남은 줄 {len(wav_left)}개(다음에 만들 줄이 있을 때 다시 바꿔 봐요): {', '.join(wav_left)}", flush=True)
     return 0
 
 

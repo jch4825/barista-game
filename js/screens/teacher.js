@@ -17,7 +17,7 @@ import { HAND_SKILLS, LEVEL_NAMES, RECIPES } from '../data/menu.js';
 import { CONFIG, isElectron } from '../config.js';
 import { tts } from '../av/tts.js';
 import { ov } from '../ui/overlays.js';
-import { openScreen, segmented, row } from './screen.js';
+import { openScreen, topScreen, segmented, row } from './screen.js';
 import { bus } from '../core/bus.js';
 import { nav } from '../core/nav.js';
 import { runner } from '../core/runner.js';
@@ -26,7 +26,16 @@ import { saveRecordFile, loadRecordFiles } from './records.js';
 
 function pinPad() {
   return new Promise((resolve) => {
-    const scr = openScreen({ cls: 'scr-pin', title: '선생님 모드', icon: 'lock' });
+    // 키보드의 숫자 · Backspace 도 받음(화면 숫자판과 같은 일). [닫기] · Esc 로 닫으면 false
+    const onKey = (e) => {
+      if (topScreen() !== scr || document.querySelector('#layer-modal .ov')) return;
+      const k = /^[0-9]$/.test(e.key) ? e.key : e.key === 'Backspace' ? 'del' : null;
+      if (!k) return;
+      e.preventDefault();
+      press(k);
+    };
+    const scr = openScreen({ cls: 'scr-pin', title: '선생님 모드', icon: 'lock', onClose: () => { document.removeEventListener('keydown', onKey); resolve(false); } });
+    document.addEventListener('keydown', onKey);
     let val = '';
     const disp = h('div', { class: 'pin-disp', 'aria-live': 'polite' });
     const msg = h('p', { class: 'pin-msg', text: '선생님 번호 4자리를 눌러 주세요.' });
@@ -36,7 +45,7 @@ function pinPad() {
       else if (val.length < 4) val += k;
       upd();
       if (val.length === 4) {
-        if (store.checkPin(val)) { scr.close(); resolve(true); } else { msg.textContent = '번호가 달라요. 다시 눌러 주세요.'; val = ''; upd(); disp.classList.add('shake'); setTimeout(() => disp.classList.remove('shake'), 400); }
+        if (store.checkPin(val)) { resolve(true); scr.close(); } else { msg.textContent = '번호가 달라요. 다시 눌러 주세요.'; val = ''; upd(); disp.classList.add('shake'); setTimeout(() => disp.classList.remove('shake'), 400); }
       }
     };
     const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'del', '0'];
@@ -83,9 +92,16 @@ function miniExtra(l) {
   return parts.join(' · ');
 }
 
+/** 이야기 이름. 자유 영업은 날마다 id 가 'free' 라 getEpisode 로 찾지 못함: 몇 번째 날은 일기의 day 나 미니게임 id(free_{날}_…)에서 */
+function epName(l) {
+  if (l.ep !== 'free') return getEpisode(l.ep)?.label || l.ep;
+  const day = l.day || Number(/^free_(\d+)_/.exec(l.id || '')?.[1]) || 0;
+  return day ? `자유 영업 ${day}번째 날` : '자유 영업';
+}
+
 function decisionRows(p) {
   return p.log.filter((l) => ['decide', 'ask', 'mini'].includes(l.type)).map((l) => ({
-    ep: getEpisode(l.ep)?.label || l.ep,
+    ep: epName(l),
     what: l.type === 'mini' ? `미니게임: ${l.title || l.name}` : (l.q || l.id),
     skill: l.skill ? SKILLS[l.skill]?.name : '',
     rewinds: l.type === 'mini' ? (l.attempts || 1) - 1 : (l.rewinds || 0),
@@ -103,7 +119,7 @@ const kindsText = (kinds) => Object.entries(kinds).filter(([, n]) => n).map(([k,
 
 function respondRows(p) {
   return p.log.filter((l) => l.type === 'respond').map((l) => ({
-    ep: getEpisode(l.ep)?.label || l.ep,
+    ep: epName(l),
     who: REGULARS[l.who]?.name || l.who,
     what: touchOf(l.who, l.touch)?.title || l.touch,
     chosen: l.chosen || l.choice,
@@ -153,10 +169,11 @@ function report(p) {
         h('tbody', {}, ...resp.map((r) => h('tr', {}, h('td', { text: r.ep }), h('td', { text: r.who }), h('td', { text: r.what }), h('td', { text: r.chosen }),
           h('td', { text: `${r.score} · ${r.kind}` }), h('td', { text: String(r.replays) })))))
       : null,
-    h('h3', { text: `아차 노트 (실패 결과 탐색) ${ALL_OOPS.filter((o) => got.has(o.id)).length} / ${ALL_OOPS.length}` }),
-    h('ul', { class: 'tc-oops' }, ...ALL_OOPS.filter((o) => got.has(o.id)).map((o) => h('li', { text: `[${getEpisode(o.ep)?.label || o.ep}] ${o.title}` }))),
+    // 아차 노트: 이 게임은 실패 분기가 없어(감점 없음, 원칙 2) 아차가 있는 이야기를 넣었을 때만 보임
+    ALL_OOPS.length ? h('h3', { text: `아차 노트 (실패 결과 탐색) ${ALL_OOPS.filter((o) => got.has(o.id)).length} / ${ALL_OOPS.length}` }) : null,
+    ALL_OOPS.length ? h('ul', { class: 'tc-oops' }, ...ALL_OOPS.filter((o) => got.has(o.id)).map((o) => h('li', { text: `[${getEpisode(o.ep)?.label || o.ep}] ${o.title}` }))) : null,
     h('h3', { text: '기분 기록' }),
-    h('ul', { class: 'tc-feel' }, ...(p.diary || []).map((d) => h('li', { text: `${getEpisode(d.ep)?.label || d.ep}: 지은 ${fl[d.feeling] || '-'} / 학생 ${fl[d.myFeeling] || '고르지 않음'}` }))),
+    h('ul', { class: 'tc-feel' }, ...(p.diary || []).map((d) => h('li', { text: `${epName(d)}: 지은 ${fl[d.feeling] || '-'} / 학생 ${fl[d.myFeeling] || '고르지 않음'}` }))),
     (p.interview || []).length ? h('h3', { text: '면접 답변 (저장 허용 시)' }) : null,
     (p.interview || []).length ? h('ul', { class: 'tc-iv' }, ...p.interview.map((iv) => h('li', { text: `${iv.q} → ${iv.answer} (${iv.mode})` }))) : null,
     h('h3', { text: '연계 성취기준 (2022 개정 특수교육 기본교육과정 고등학교 진로와 직업)' }),

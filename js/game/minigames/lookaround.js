@@ -15,6 +15,7 @@ import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { store } from '../../core/store.js';
 import { input } from '../../core/input.js';
+import { bus } from '../../core/bus.js';
 import { renderBg } from '../../data/backgrounds.js';
 import { frame, line, abortGeneration } from './frame.js';
 import { isDebug } from './arcade.js';
@@ -59,6 +60,7 @@ export async function lookaround(opts = {}) {
   let doneRes;
   const doneP = new Promise((res) => { doneRes = res; });
   let card = null;
+  let offEsc = null; // 글 카드가 떠 있는 동안 Esc = 그만 보고 닫기
 
   const scene = h('div', { class: 'sc-bg', html: renderBg(bgId, bgVar) });
   const btns = spots.map((s, i) => {
@@ -91,7 +93,15 @@ export async function lookaround(opts = {}) {
     document.getElementById('layer-overlay').append(card);
     input.pushScope(card);
     requestAnimationFrame(() => card?.classList.add('is-in'));
-    for (let k = 0; k < lines.length; k++) {
+    // Esc: 끝까지 읽지 않고 닫음(본 것으로 세지 않아 다시 열 수 있음). 확인 창 · 멈춤 창이 위에 있으면 그 창이 먼저
+    let wake = null;
+    let esc = false;
+    offEsc = bus.on('escape', () => {
+      if (document.querySelector('#layer-modal .ov, #layer-screen .scr')) return;
+      esc = true;
+      wake?.();
+    });
+    for (let k = 0; k < lines.length && !esc; k++) {
       const l = lines[k];
       who.textContent = l.t === 'think' ? '지은의 속마음' : '';
       text.className = `lk-text ${l.t === 'think' ? 'is-think' : ''}`;
@@ -99,21 +109,26 @@ export async function lookaround(opts = {}) {
       next.querySelector('span').textContent = k === lines.length - 1 ? '닫기' : '다음';
       setTimeout(() => next.focus({ preventScroll: true }), 40);
       tts.speak(l.text, l.t === 'think' ? 'think' : 'narr');
-      await new Promise((res) => next.addEventListener('click', (e) => { e.stopPropagation(); audio.sfx('tap'); res(); }, { once: true }));
+      await new Promise((res) => { wake = res; next.addEventListener('click', (e) => { e.stopPropagation(); audio.sfx('tap'); res(); }, { once: true }); });
       if (stopped()) return;
     }
+    offEsc?.();
+    offEsc = null;
     tts.stop();
-    // 숨은 뒷받침: 알림 없이 기록만
-    if (s.seen) store.setFlag('seen', { ...(store.flag('seen') || {}), [s.seen]: true });
-    looked.add(i);
-    btns[i].classList.add('is-seen');
-    paintCount();
+    if (esc) audio.sfx('close');
+    else {
+      // 숨은 뒷받침: 알림 없이 기록만
+      if (s.seen) store.setFlag('seen', { ...(store.flag('seen') || {}), [s.seen]: true });
+      looked.add(i);
+      btns[i].classList.add('is-seen');
+      paintCount();
+    }
     const el = card;
     card = null;
     input.popScope(el);
     el.classList.add('is-out');
     setTimeout(() => el.remove(), dur(180));
-    setTimeout(() => (btns[i + 1] || finish).focus({ preventScroll: true }), 60);
+    setTimeout(() => (esc ? btns[i] : btns[i + 1] || finish).focus({ preventScroll: true }), 60);
   }
 
   if (isDebug()) {
@@ -127,7 +142,7 @@ export async function lookaround(opts = {}) {
       await doneP;
     };
   }
-  f.onAbort(() => { over = true; if (card) { input.popScope(card); card.remove(); card = null; } doneRes('abort'); });
+  f.onAbort(() => { over = true; offEsc?.(); offEsc = null; if (card) { input.popScope(card); card.remove(); card = null; } doneRes('abort'); });
 
   const how = await doneP;
   if (isDebug()) delete window.__mgAuto;

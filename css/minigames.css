@@ -379,10 +379,27 @@ body:is(.reduce-motion, .theme-calm) .mg-rush :is(.ru-slip, .ru-gull, .sc-bg) { 
 @keyframes bs-bump { 30% { transform: translateY(-14px) rotate(-1deg); } 60% { transform: translateY(8px) rotate(1deg); } }
 .mg-bus .bs-foot { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(1500px, calc(100% - 60px)); display: flex; align-items: center; gap: 18px; padding: 12px 20px; border-radius: 16px; border: 2px solid var(--gold-d, #8E6C33); background: rgba(255, 253, 247, .96); box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
 .mg-bus .bs-tally { flex: 1; margin: 0; font-size: 26px; font-weight: 800; color: #2A1D12; }
-.mg-bus .bs-strap.is-ready { box-shadow: 0 0 0 6px rgba(240, 217, 162, .7), 0 0 30px rgba(255, 220, 140, .8); }
+/* 손잡이의 원(2026-11-12 사용자: [손잡이 잡기] 단추 대신 그림 속 손잡이에 빠르게 줄어드는 원, 원이 사라지기 전에 누름).
+   자리는 창틀 그림의 손잡이 고리(그림 너비 29.4% · 높이 25.6%). 단추는 원이 줄어도 그대로 230px 라 누르기 쉬움 */
+.mg-bus .bs-grip { position: absolute; left: 29.4%; top: 25.6%; width: 230px; height: 230px; transform: translate(-50%, -50%); padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; z-index: 3; }
+.mg-bus .bs-grip[hidden] { display: none; }
+.mg-bus .bs-grip::before { content: ''; position: absolute; left: 50%; top: 50%; width: 104px; height: 104px; transform: translate(-50%, -50%); border-radius: 50%; border: 4px dashed rgba(255, 233, 176, .95); box-shadow: 0 0 18px rgba(255, 220, 140, .7); }
+.mg-bus .bs-ring { position: absolute; inset: 0; border-radius: 50%; border: 9px solid #FFE9B0; box-shadow: 0 0 0 3px rgba(42, 29, 18, .55), 0 0 26px rgba(255, 220, 140, .85); animation: bs-shrink var(--ms, 1.8s) linear forwards; }
+@keyframes bs-shrink { to { transform: scale(0); } }
+.mg-bus .bs-grip.is-wait .bs-ring { animation-name: bs-shrink-wait; } /* 턴 방식: 손잡이 크기까지 줄고 기다림 */
+@keyframes bs-shrink-wait { to { transform: scale(.45); } }
+.mg-bus .bs-grip.is-got .bs-ring { animation: none; transform: scale(.45); border-color: #A8E6B8; }
+.mg-bus .bs-grip:focus-visible { outline: none; }
+.mg-bus .bs-grip:focus-visible::before { border-style: solid; border-color: #FFF4D6; }
+/* 턴 방식의 [다음 풍경]: 창 오른쪽 기둥 위의 화살표(장면 안) */
+.mg-bus .bs-next { position: absolute; right: 2.5%; top: 34%; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 16px 10px; border-radius: 22px; border: 2px solid rgba(255, 233, 176, .85); background: rgba(20, 34, 42, .74); color: #FFF4D6; font-size: 22px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 24px rgba(0, 0, 0, .4); }
+.mg-bus .bs-next i, .mg-bus .bs-next i svg { width: 48px; height: 48px; }
+.mg-bus .bs-next:disabled { opacity: .35; cursor: default; }
+.mg-bus .bs-next:focus-visible { outline: 4px solid #FFF4D6; outline-offset: 4px; }
 .mg-bus.is-still .bs-sight { animation: bs-fade var(--dur, 6s) linear forwards; left: 60%; }
 @keyframes bs-fade { 0% { opacity: 0; } 10%, 85% { opacity: 1; } 100% { opacity: 0; } }
 body:is(.reduce-motion, .theme-calm) .mg-bus :is(.bs-sea, .bs-road, .bs-scene, .bs-bag) { animation: none !important; }
+body:is(.reduce-motion, .theme-calm) .mg-bus .bs-ring { animation: none !important; transform: scale(.6); } /* 움직임 줄이기: 줄어들지 않는 원 */
 .mg-bus .bs-sight.is-hold { animation: none; left: 55%; }
 /* 그림이 있을 때(2026-11-06 받음, bus.js 의 ART): 창틀 그림(1935×1080)을 판 너비에 맞추고(아래는 잘림), 풍경 · 지나가는 것은 창 유리 자리(.bs-glass) 안에만.
    유리 자리는 tools/import-objects.py 가 잰 초록 칸(x 26~86% · y 6.7~84.1%). 옆 창 조각에는 하늘 · 바다 색만 */

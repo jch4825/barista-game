@@ -185,7 +185,7 @@ for (const o of MINIGAME_OOPS) add('sys', `아차! ${o.title}. ${o.lesson}`, 'mi
 
 // 저장하기·불러오기 (screens/saves.js 의 SAVE_SAY, 확인 창 문장 포함)
 for (const t of saveLines()) add('sys', t, 'saves');
-add('sys', '판단 장면마다 자동으로 저장돼요. [저장하기]로 원하는 장면을 6칸에 따로 저장할 수 있어요.', 'saves');
+add('sys', '카드를 고르는 장면과 커피 만들기 같은 일을 시작할 때 자동으로 저장돼요. [저장하기]로 원하는 장면을 6칸에 따로 저장할 수 있어요.', 'saves');
 // 기록 파일 저장·불러오기 (screens/records.js 의 RECORD_SAY: 확인 창·알림. 별명은 화면에만)
 for (const t of recordLines()) add('sys', t, 'saves');
 

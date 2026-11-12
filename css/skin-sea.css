@@ -502,7 +502,8 @@ body.skin-sea :is(.nb-stamp, .nb-word, .nb-oops-card) { background: linear-gradi
 body.skin-sea :is(.nb-stamp.got, .nb-oops-card.got) { border: 3px solid var(--gold-d); box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
 body.skin-sea .nb-word:not(:disabled) { border: 2px solid var(--gold-d); }
 body.skin-sea .nb-say { background: var(--sea-2); color: var(--gold-l); border: 2px solid var(--gold); }
-body.skin-sea .nb-diary-item { background: repeating-linear-gradient(transparent 0 52px, rgba(142, 108, 51, .2) 52px 54px), linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); }
+body.skin-sea .nb-diary-item { background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); }
+body.skin-sea .nb-diary-text { background-image: repeating-linear-gradient(transparent 0 52px, rgba(142, 108, 51, .25) 52px 54px); } /* 일기 줄은 글 칸에: 글자 줄마다 아래(screens.css) */
 body.skin-sea :is(.nb-pol, .nb-bigpol, .nb-print) { transform: none; background: linear-gradient(180deg, #FFF9EC, #F1E3C8); border: 3px solid var(--gold-d); border-radius: 10px; color: var(--ink); }
 body.skin-sea .nb-print::before { display: none; }
 body.skin-sea .nb-li { position: relative; background: var(--plate); color: var(--foam); border: 2px solid var(--gold-line); border-radius: 12px; }
@@ -545,7 +546,8 @@ body.skin-sea .log-list li { background: linear-gradient(180deg, var(--parch), v
 body.skin-sea .log-listen { background: var(--sea-2); color: var(--gold-l); border: 2px solid var(--gold); }
 body.skin-sea .rw-lead { color: var(--foam); }
 body.skin-sea .rw-item { background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
-body.skin-sea .rs-paper { background: repeating-linear-gradient(transparent 0 58px, rgba(142, 108, 51, .2) 58px 60px), linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); }
+body.skin-sea .rs-paper { background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); }
+body.skin-sea .rs-diary { background-image: repeating-linear-gradient(transparent 0 58px, rgba(142, 108, 51, .25) 58px 60px); }
 body.skin-sea .rs-q { font-family: var(--font-title); font-weight: 800; color: var(--gold-l); }
 body.skin-sea .rs-feel-btn { background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
 body.skin-sea :is(.hub-daily, .hub-clear) { background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px solid var(--gold-d); box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }

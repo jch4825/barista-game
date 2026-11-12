@@ -1,7 +1,7 @@
 /**
  * 웹판 배포용 폴더 만들기 → dist/{package.json 의 name}/   (npm run build:web, 지금은 dist/barista-game/)
  *  - 게임에 필요한 파일만 모읍니다: index.html · css · js · assets
- *    (원본 그림 assets/_src, 문서 *.md 는 뺌. 도구 tools · 문서 docs · 원본 소리는 넣지 않음)
+ *    (원본 그림 assets/_src, Flow 에서 받아 옮기기 전의 그림 assets/flow, 문서 *.md 는 뺌. 도구 tools · 문서 docs · 원본 소리는 넣지 않음)
  *  - 폴더 이름이 Vercel 프로젝트 이름이 됩니다. GitHub Pages 에도 쓸 수 있게 .nojekyll 을 넣습니다. 저장은 그 브라우저에만 남습니다.
  *  - Vercel 연결 정보(.vercel)는 남기지도 복사하지도 않습니다(2026-10-27): 직업 마1스톤의 job-milestone 프로젝트에 올라가지 않게
  *    매번 폴더를 통째로 지우고 새로 만듭니다. 배포는 새 Vercel 프로젝트로만(연결을 물으면 기존 프로젝트를 고르지 않음).
@@ -20,7 +20,7 @@ if (!NAME || NAME === 'job-milestone') {
 }
 const OUT = path.join(root, 'dist', NAME);
 const PARTS = ['index.html', 'css', 'js', 'assets'];
-const skip = (rel) => rel.startsWith('assets/_src/') || rel.startsWith('assets/music_local/') || rel.endsWith('.md') || rel.split('/').includes('.vercel') || path.basename(rel) === '.DS_Store' || path.basename(rel) === 'Thumbs.db';
+const skip = (rel) => rel.startsWith('assets/_src/') || rel.startsWith('assets/flow/') || rel.startsWith('assets/music_local/') || rel.endsWith('.md') || rel.split('/').includes('.vercel') || path.basename(rel) === '.DS_Store' || path.basename(rel) === 'Thumbs.db';
 
 // 지난 결과를 통째로 지움(Vercel 연결 정보 .vercel 도 함께 → 다음 배포가 옛 프로젝트에 붙지 않음)
 fs.rmSync(OUT, { recursive: true, force: true });
