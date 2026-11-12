@@ -160,11 +160,5 @@ export const CG_EN = {
 /* 다시 만들 장면 그림(2026-11-08 사용자 "프롬프트 고치기", 검수 13.100): 파일은 있지만 중요한 물건이 대화창(화면 아래 26%)에 가려 새로 요청.
    파일이 있어도 docs/아직 없는 그림.md 에 나옴. 새 그림을 받으면 여기서 빼고, scene 은 CG_EN(추가 제작에 상자가 있으면 그 상자)으로 옮김 */
 export const CG_REDO = {
-  // 2026-11-12 사용자 "이미지를 새로 만들자 … 사람 없이 두 잔과 따뜻함이 강조되는 형태로": 그림은 머그 한 잔인데 대본은 "두 잔의 따뜻한 우유"
-  ending_last_cup: {
-    why: '그림은 머그 한 잔인데 대본은 "두 잔의 따뜻한 우유"라 다시 요청(사람 없이 두 잔과 따뜻함)',
-    refs: ['hall_evening'],
-    noPeople: true,
-    scene: "Evening after closing at the cafe's window seat, nobody in the picture. Two white ceramic mugs of warm milk stand close together side by side on a wide wooden windowsill, almost touching; one mug is a little older and more worn than the other. Two thin wisps of steam rise from them and softly curl into each other. The windowsill runs across the middle of the picture, so both mugs stand at the vertical center of the picture, seen straight on from the height of the sill. A small lamp inside the cafe casts warm golden light on the mugs and the wood, so the inside feels cozy and warm against the cool blue outside, and the lower edge of the window glass is softly fogged by the warmth. Behind the mugs, through the window: the calm harbor at dusk, a deep blue sky with a little soft warm color at the horizon, and the first few small warm lights of fishing boats just coming on. At the left and right edges, the tops of two empty wooden chair backs are pulled close together, facing the window. Below the windowsill, the lower third of the picture is only plain dark wood paneling, calm and empty. Simple, quiet and warm. No sun rays.",
-  },
+  // 2026-11-12 엔딩 두 잔(ending_last_cup)을 받아 비어 있음(검수 13.119). 장면 글은 docs/추가 제작.md 26번 상자로 옮김
 };

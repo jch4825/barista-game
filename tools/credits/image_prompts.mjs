@@ -58,12 +58,7 @@ const face = (ref, what) => P([same(ref), what + '.', STYLE + '.']);
  */
 export const IMAGE_PROMPTS = {
   /* ===== 주요 3인 스탠딩 (896×1200, 설정화를 참조 이미지로) ===== */
-  yeonwoo_normal: { title: '연우 · 보통', from: 'doc', prompt: main(YEONWOO, 'yeonwoo_sheet.jpg', 'right', 'hands lightly together in front of the apron, calm neutral expression, mouth closed'), neg: NEG },
-  yeonwoo_smile: { title: '연우 · 웃음', from: 'doc', prompt: face('yeonwoo_normal', 'bright open smile with eyes closed in joy, one hand raised in a small cheerful fist near the shoulder'), neg: NEG_SAME },
-  yeonwoo_nervous: { title: '연우 · 긴장', from: 'doc', prompt: face('yeonwoo_normal', 'nervous expression, eyebrows drawn together, small sweat drop, fingers touching a shirt button at the collar'), neg: NEG_SAME },
-  yeonwoo_determined: { title: '연우 · 다짐', from: 'doc', prompt: face('yeonwoo_normal', 'determined expression, firm mouth, focused eyes, one hand in a small fist at shoulder height'), neg: NEG_SAME },
-  yeonwoo_surprised: { title: '연우 · 놀람', from: 'doc', prompt: face('yeonwoo_normal', 'surprised expression, eyes wide, small open mouth, one open hand raised near the shoulder'), neg: NEG_SAME },
-  yeonwoo_sad: { title: '연우 · 슬픔', from: 'doc', prompt: face('yeonwoo_normal', 'teary sad expression, lips pressed together, eyes glistening, not crying loudly, hands together in front of the apron'), neg: NEG_SAME },
+  yeonwoo_normal: { title: '연우 · 쉬는 날', from: 'none', prompt: '', neg: '', note: '사용자가 Flow에서 옷을 바꿔 만든 그림(2026-11-12: 빨간 앞치마가 작업복 같아 쉬는 날의 분홍 원피스로, 표정은 이 한 장) · 프롬프트 기록 없음' },
   'yeonwoo-interview_normal': { title: '연우 면접 복장 · 보통', from: 'doc', prompt: main(YEONWOO_IV, 'yeonwoo_sheet.jpg', 'right', 'hands lightly together in front, calm neutral expression, mouth closed'), neg: NEG, note: '앞치마를 받기 전(프롤로그·1장)에 입는 옷' },
   'yeonwoo-interview_smile': { title: '연우 면접 복장 · 웃음', from: 'doc', prompt: face('yeonwoo-interview_normal', 'bright open smile with eyes closed in joy, hands together in front'), neg: NEG_SAME },
   'yeonwoo-interview_nervous': { title: '연우 면접 복장 · 긴장', from: 'doc', prompt: face('yeonwoo-interview_normal', 'nervous expression, eyebrows drawn together, fingers touching the blouse collar button'), neg: NEG_SAME },
@@ -332,7 +327,7 @@ Object.assign(IMAGE_PROMPTS, {
     ['autumn_key', '가을 · 가게 열쇠', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
     ['winter_owner_return', '겨울 · 컵 닦았냐', 'owner_sheet · jieun_sheet · hall_winter', SIZE_2K],
     ['winter_milk_handover', '겨울 · 두 손에 쥐여 준 우유', 'owner_sheet · jieun_sheet · hall_evening', SIZE_2K],
-    ['ending_last_cup', '엔딩 · 따뜻한 우유 한 컵', 'hall_evening', SIZE_2K],
+    ['ending_last_cup', '엔딩 · 따뜻한 우유 두 잔', 'hall_evening', SIZE_2K],
   ].map(([id, title, ref, size]) => [`cg_${id}`, { title: `장면 · ${title}`, from: 'doc', ...extraBox(id), note: `참조 이미지: ${ref} · docs/추가 제작.md · ${size}` }])),
 });
 

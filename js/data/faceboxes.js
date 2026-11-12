@@ -190,12 +190,12 @@ export const FACE_BOX = {
  ],
  "granddaughter_normal": [
   260,
-  47.8,
+  48.2,
   8.0
  ],
  "granddaughter_smile": [
   260,
-  47.8,
+  48.2,
   8.2
  ],
  "grandma-cardigan_normal": [
@@ -598,34 +598,9 @@ export const FACE_BOX = {
   50.2,
   8.0
  ],
- "yeonwoo_determined": [
-  261,
-  49.6,
-  8.0
- ],
- "yeonwoo_nervous": [
-  260,
-  50.2,
-  8.2
- ],
  "yeonwoo_normal": [
   260,
-  50.0,
-  8.0
- ],
- "yeonwoo_sad": [
-  260,
   50.2,
-  8.2
- ],
- "yeonwoo_smile": [
-  260,
-  50.7,
-  8.0
- ],
- "yeonwoo_surprised": [
-  260,
-  50.9,
   8.0
  ],
  "young_fisher_normal": [
@@ -823,12 +798,12 @@ export const PORTRAIT_BOX = {
  ],
  "granddaughter_normal": [
   144,
-  45.6,
+  46.3,
   3.4
  ],
  "granddaughter_smile": [
   144,
-  45.6,
+  46.3,
   3.6
  ],
  "grandma-cardigan_normal": [
@@ -1231,34 +1206,9 @@ export const PORTRAIT_BOX = {
   50.4,
   3.4
  ],
- "yeonwoo_determined": [
-  144,
-  49.3,
-  3.4
- ],
- "yeonwoo_nervous": [
-  144,
-  50.4,
-  3.6
- ],
  "yeonwoo_normal": [
   144,
-  50.0,
-  3.4
- ],
- "yeonwoo_sad": [
-  144,
   50.4,
-  3.6
- ],
- "yeonwoo_smile": [
-  144,
-  51.5,
-  3.4
- ],
- "yeonwoo_surprised": [
-  144,
-  51.8,
   3.4
  ],
  "young_fisher_normal": [

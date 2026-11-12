@@ -285,3 +285,10 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | :--- | :--- |
 | `objects/sheet_gift.jpg` | `Cafe_items_grid_game_asset_dd4d7fc2_2K.jpg` (선물 · 카운터 꾸미기 시트 11칸 · 2026-11-08 13:31) |
 | `objects/sheet_empty.jpg` | `Glass_bottle_and_coffee_grinder_5e39b59d_2K.jpg` (빈 우유병 · 손 그라인더 · 바 스푼, 첫 줄 세 칸 · 2026-11-08 13:41) |
+
+## 2026-11-12 연우 쉬는 날 옷 · 엔딩 두 잔(Google Flow, `assets/flow/`로 받은 것: 검수 13.119)
+
+| 게임 파일 | Flow 원래 이름 (받은 시각) |
+| :--- | :--- |
+| `stand/yeonwoo_normal.jpg` | `yeonwoo_normal.webp_6b32b25b.jpg` (2026-11-12 21:58 · 사용자가 옷을 바꿔 만든 그림: 빨간 앞치마가 작업복 같아 쉬는 날의 분홍 원피스로. 앞치마 그림 여섯 장은 `_src/stand_old/`) |
+| `cg/cg_ending_last_cup.jpg` | `Two_mugs_on_wooden_windowsill_464cc0f3_2K.jpg` (2026-11-12 21:57 · 다시 만든 그림: 대본의 "두 잔의 따뜻한 우유"에 맞춰 사람 없이 두 잔. 한 잔 그림은 `_src/cg_unused/cg_ending_last_cup_v2.jpg`) |

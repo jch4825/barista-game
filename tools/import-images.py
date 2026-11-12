@@ -46,9 +46,8 @@ POCKETS: dict[str, list[tuple[int, int]]] = {
     'manager_smile': [(450, 926), (352, 468)],
     'manager_strict': [(353, 506)],
     'manager_think': [(482, 953)],
-    'yeonwoo_nervous': [(452, 941)],
-    'yeonwoo_determined': [(552, 553)],
-    'yeonwoo_surprised': [(531, 423)],
+    # 2026-11-12 연우 쉬는 날 옷(분홍 원피스, 빨간 앞치마 그림은 _src/stand_old): 가방끈과 팔 · 몸 사이, 두 다리 사이
+    'yeonwoo_normal': [(381, 525), (354, 556), (463, 974)],
     'yeonwoo-interview_smile': [(454, 912)],
     'yeonwoo-interview_determined': [(471, 961), (552, 587), (535, 491)],
     'yeonwoo-interview_nervous': [(451, 911)],
