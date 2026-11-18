@@ -15,6 +15,7 @@
                cup_paper cup_shot obj_tray (빈 칸)
   sheet_more : 카운터 물건 11개(벽 선반의 병 · 통 · 상자 · 봉지 · 플라스틱 컵 · 얼음 통(가득 · 빈 것) · 레시피 수첩)
   sheet_empty: 빈 우유병(우유가 다 떨어진 날) · 손 그라인더 · 바 스푼(첫 줄 세 칸만)
+  sheet_mix  : 믹스커피 스틱 하나(첫 줄 넷째 칸만 씀: 2026-11-18 사용자가 sheet_empty 를 다시 만들며 더함. 앞 세 칸은 그림이 달라 쓰지 않음)
   sheet_drinks · sheet_drinks_blue: 다 만든 잔 18가지(cup_{컵}_{음료}) + 버리는 장면의 건조대 · 개수대 · 쓰레기통(2026-11-06, 검수 13.62)
   칸 순서 · 프롬프트는 tools/export-requests.mjs 의 OBJ_SHEETS 와 같아야 함(docs/requests_full.md 3장)
   (튤립·나뭇잎 라테아트 cup_mug_tulip · cup_mug_leaf 는 아직 게임에서 만들 수 없어 요청하지 않음)
@@ -79,6 +80,12 @@ SHEETS: dict[str, list[str | None]] = {
     # 모자란 날(오늘의 칠판: 우유가 다 떨어짐)의 빈 우유병 + 거의 보이지 않는 손 도구 둘(2026-11-06, 검수 13.62). 빈 얼음 통은 가득 찬 통과 같은 sheet_more 에
     'sheet_empty': [
         'obj_milk_bottle_empty', 'obj_hand_grinder', 'obj_spoon', None,
+        None, None, None, None,
+        None, None, None, None,
+    ],
+    # 믹스커피 스틱(2026-11-18 사용자 "믹스커피 스틱 이미지다."): 컵에 털어 넣는 한 봉지. 선반의 상자(obj_mix)는 그대로
+    'sheet_mix': [
+        None, None, None, 'obj_mix_stick',
         None, None, None, None,
         None, None, None, None,
     ],

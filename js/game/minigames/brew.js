@@ -725,6 +725,7 @@ const ART = {
   obj_decaf: () => tinSVG('#5B3A29', '#E9D9B8'),
   obj_drip_beans: () => beanBagSVG(),
   obj_mix: () => boxSVG('#E0A63A', '#C8462F'),
+  obj_mix_stick: () => boxSVG('#E0A63A', '#C8462F'),
   obj_barley: () => boxSVG('#B98A4E', '#F4E3C2'),
   obj_yuja: () => jarSVG(INGREDIENTS.yuja.color, '#2E6E4C'),
   obj_strawberry: () => jarSVG(INGREDIENTS.strawberry.color, '#C8462F'),
@@ -837,7 +838,7 @@ const CUP_W = { mug: 4.84, thick: 4.95, paper: 4.38, glass: 4.27, plastic: 4.3, 
 const BOARD_BOTTLES = [77, 98]; // 오른쪽 나무판(왼쪽 끝 · 오른쪽 끝 %)
 const BOARD_SHELF = [7, 46.2]; // 벽 선반
 /** 재료를 꺼내는 물건(수첩 · 넣은 것 칸의 그림은 menu.js 의 obj 그대로): 에스프레소는 머신, 물은 주전자 */
-const HOT_ART = { espresso: 'obj_machine', decaf: 'obj_decaf', milk: 'obj_milk_bottle', water: 'obj_kettle', syrup: 'obj_syrup', iced: 'obj_ice_bucket' };
+const HOT_ART = { espresso: 'obj_machine', decaf: 'obj_decaf', milk: 'obj_milk_bottle', water: 'obj_kettle', syrup: 'obj_syrup', iced: 'obj_ice_bucket', mix: 'obj_mix' }; // 믹스커피: 선반에는 스틱이 든 상자, 넣은 것 · 넣는 장면은 스틱 하나(obj_mix_stick)
 const hotStyle = ([x, b, w]) => ({ left: `${x}%`, bottom: `${b}%`, width: `${w}%` });
 
 /**

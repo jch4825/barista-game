@@ -356,6 +356,8 @@ const SHEET_KO = {
   gift_bread: '선물 · 갓 구운 빵 한 봉지', gift_mug: '선물 · 바다색 머그컵', gift_scarf: '선물 · 털목도리', gift_postcard: '선물 · 바다 엽서와 편지', gift_beans: '선물 · 우리 카페 원두', gift_blanket: '선물 · 포근한 무릎 담요',
 };
 const OBJ_NEG = 'text, letters, numbers, labels, logos, brand names, watermark, people, hands, steam, latte art, black outlines';
+// 믹스커피 스틱(2026-11-18): 사용자가 sheet_empty 를 다시 만들며 넷째 칸에 더한 그림. 그 시트의 넷째 칸만 잘라 냄(sheet_mix, 앞 세 칸은 쓰지 않음)
+IMAGE_PROMPTS.obj_mix_stick ||= { title: '작업대 · 믹스커피 스틱', from: 'doc', sheet: 'sheet_mix', prompt: '', neg: OBJ_NEG, note: '사용자가 Google Flow 로 만든 그림(sheet_empty 의 프롬프트에 넷째 칸을 더함, 쓴 글은 기록 없음) · sheet_mix 시트의 넷째 칸에서 잘라 냄 · 초록 바탕' };
 for (const sh of OBJ_SHEETS) {
   for (const [id] of sheetItems(sh)) IMAGE_PROMPTS[id] ||= { title: `작업대 · ${SHEET_KO[id] || id}`, from: 'doc', sheet: sh.id, prompt: objPrompt(sh), neg: OBJ_NEG, note: `${sh.id} 시트(4칸 × 3줄)에서 잘라 냄 · ${sh.key === 'blue' ? '파란 바탕' : '초록 바탕'} · 참조 이미지: ${sh.ref.replace(/`/g, '')}` };
 }

@@ -285,6 +285,7 @@ Flow 파일 이름에 시각이 없어 받은 시각(파일 시각)을 비고에
 | :--- | :--- |
 | `objects/sheet_gift.jpg` | `Cafe_items_grid_game_asset_dd4d7fc2_2K.jpg` (선물 · 카운터 꾸미기 시트 11칸 · 2026-11-08 13:31) |
 | `objects/sheet_empty.jpg` | `Glass_bottle_and_coffee_grinder_5e39b59d_2K.jpg` (빈 우유병 · 손 그라인더 · 바 스푼, 첫 줄 세 칸 · 2026-11-08 13:41) |
+| `objects/sheet_mix.jpg` | 대화창에 붙여 넣은 그림(원래 이름 없음, 2000×2000 · 2026-11-18): sheet_empty 를 다시 만들며 넷째 칸에 믹스커피 스틱을 더한 것. 넷째 칸 `obj_mix_stick`만 씀(앞 세 칸은 지금 게임 그림과 달라 쓰지 않음) |
 
 ## 2026-11-12 연우 쉬는 날 옷 · 엔딩 두 잔(Google Flow, `assets/flow/`로 받은 것: 검수 13.119)
 

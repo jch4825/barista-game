@@ -45,7 +45,8 @@ export const INGREDIENTS = {
   espresso: { name: '에스프레소', icon: 'coffee', obj: 'cup_shot', roles: ['base', 'add'], prep: 2, color: '#3A2214', skills: ['grind', 'tamp', 'extract'] },
   decaf: { name: '디카페인 원두', icon: 'coffee', obj: 'obj_decaf', roles: ['base'], prep: 2, color: '#4A2A18', skills: ['grind', 'tamp', 'extract'], shelf: true },
   drip: { name: '드립 원두', icon: 'coffee', obj: 'obj_drip_beans', roles: ['base'], prep: 2, color: '#24160C', skills: ['hand_grind', 'boil', 'bloom', 'bloom_wait', 'spiral'], shelf: true },
-  mix: { name: '믹스커피', icon: 'coffee', obj: 'obj_mix', roles: ['base'], prep: 1, color: '#B07F52', skills: [], auto: { hot: '믹스커피 가루를 컵에 털어 넣었어요.' }, shelf: true },
+  mix: { name: '믹스커피', icon: 'coffee', obj: 'obj_mix_stick', // 컵에 넣는 것은 스틱 하나(선반에는 상자: brew.js HOT_ART, 2026-11-18)
+    roles: ['base'], prep: 1, color: '#B07F52', skills: [], auto: { hot: '믹스커피 가루를 컵에 털어 넣었어요.' }, shelf: true },
   barley: { name: '보리차 티백', icon: 'tea', obj: 'obj_barley', roles: ['base'], prep: 1, color: '#C98E4E', skills: ['steep'], shelf: true },
   yuja: { name: '유자청', icon: 'tea', obj: 'obj_yuja', roles: ['base'], prep: 1, color: '#F2C230', skills: ['jam'], shelf: true },
   strawberry: { name: '딸기청', icon: 'juice', obj: 'obj_strawberry', roles: ['base'], prep: 1, color: '#EE7F9C', skills: ['jam'], shelf: true },
