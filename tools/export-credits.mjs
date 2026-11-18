@@ -328,6 +328,19 @@ for (const [k, label] of Object.entries(DISCARD_TITLES)) {
     note: DISCARD_NOTES[k],
   });
 }
+// 마감 설거지(블렌더 3D 렌더, 생성 AI 아님, 2026-11-18): 개수대의 머그 · 얼룩 단계 · 거품 · 헹굼 물줄기 · 수세미(js/game/minigames/wash.js)
+if (shotFiles.wash_mug_plate) {
+  const n = Object.keys(shotFiles).filter((k) => k.startsWith('wash_mug_') && k !== 'wash_mug_plate').length;
+  imageList.push({
+    id: 'shot_wash_mug', kind: 'shots', group: '작업대 장면(블렌더)', title: `마감 설거지 장면 · 배경판 + 얼룩 · 거품 · 헹굼 · 수세미 ${n}장`,
+    file: `assets/${shotFiles.wash_mug_plate}`,
+    tool: 'Blender 5.2 (Cycles) · 이 저장소의 스크립트', made: '', flow: '블렌더로 렌더(생성 AI 아님): tools/blender/scene_bench.py 의 wash', first: '', firstMade: '', upscaled: false,
+    from: 'blender',
+    prompt: 'BENCH_NOSAVE=1 blender --background --factory-startup --python tools/blender/scene_bench.py -- C:/AI/game3/assets/_src/blender wash\npython -X utf8 tools/blender/wash_post.py assets/_src/blender/wash assets/shots',
+    neg: '',
+    note: '개수대 바닥의 머그를 위에서(74°) 본 한 컷. 입이 닿는 곳(테두리 · 안쪽 테두리 아래의 커피 줄 · 입술 자국)과 안쪽 가운데(마른 커피 고리 · 막)의 얼룩 5단계씩, 거품 3단계씩, 헹굼 물줄기 2장, 수세미. 얼룩 · 물줄기는 배경판과 달라진 곳만 남긴 투명 그림',
+  });
+}
 const portraits = fs.readdirSync(path.join(root, 'assets', 'portraits')).filter((f) => f.endsWith('.jpg'));
 
 /* ---------------- 4. 음악·효과음 ---------------- */

@@ -72,6 +72,8 @@ export default {
     think('누군가에게는 이 카페가, 하루에 한 번 어른과 이야기하는 곳이다.'),
     narr('창밖 골목에 관광객이 점점 늘어난다. 내일은 주말이라, 여름에서 가장 바쁜 날이 될 거라고 한다.'),
     say('owner', 'normal', '내일은 각오해요. 그래도 서두르지는 말고요.'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'summer_5_wash' }),
     motion('jieun', 'nod'),
     end(),
   ],

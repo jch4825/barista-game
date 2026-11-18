@@ -23,7 +23,7 @@ import { ov } from '../ui/overlays.js';
 import { breathe as breatheUI } from '../ui/breathe.js';
 import { audio, seasonMood } from '../av/audio.js';
 import { tts } from '../av/tts.js';
-import { MINIGAMES } from '../game/minigames/index.js';
+import { MINIGAMES, MINIGAME_TITLES } from '../game/minigames/index.js';
 import { abortMinigame } from '../game/minigames/frame.js';
 import { SKILLS } from '../data/skills.js';
 import { vfx } from '../ui/vfx.js';
@@ -560,7 +560,7 @@ async function respondBeat(s, b, index, w) {
 async function miniBeat(s, b, index, w) {
   const id = b.id || `${s.ep.id}@${index}`;
   const snap = snapshot(s);
-  addPoint(s, index, b.title || b.name, snap);
+  addPoint(s, index, b.title || MINIGAME_TITLES[b.name] || b.name, snap);
   save(s, index, id, snap);
   const fn = MINIGAMES[b.name];
   if (!fn) { console.warn('[runner] 없는 미니게임', b.name); return undefined; }
@@ -574,7 +574,7 @@ async function miniBeat(s, b, index, w) {
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
   // 미니게임이 돌려준 자세한 기록(커피 만들기: 만든 메뉴·다시 만들기·보기·손 기술마다 알맞음 수·라테아트·단계·턴 방식)
   const detail = {};
-  for (const k of ['served', 'made', 'cups', 'remakes', 'kept', 'watched', 'skills', 'art', 'turn', 'asked', 'spills', 'looked', 'cleared', 'helped', 'seen', 'held', 'moved', 'kid']) if (r?.[k] !== undefined) detail[k] = r[k];
+  for (const k of ['served', 'made', 'cups', 'remakes', 'kept', 'watched', 'skills', 'art', 'turn', 'asked', 'spills', 'looked', 'cleared', 'helped', 'seen', 'held', 'moved', 'kid', 'early']) if (r?.[k] !== undefined) detail[k] = r[k];
   if (r?.adapted?.length) detail.adapted = r.adapted; // 오늘의 칠판에 맞춰 손님에게 권한 것(선생님 화면 비고)
   if (r?.level !== undefined) detail.stage = r.level;
   if (r?.quit) { // [그만하기]: 남은 일은 지은이 알아서 함(frame.js QUIT_ASK). 축하·별 없이 다음 장면으로

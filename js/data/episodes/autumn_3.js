@@ -95,6 +95,7 @@ export default {
     bgm('warm'),
     place('가을 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'autumn_3_wash' }),
     say('owner', 'normal', '내일은 바다 축제예요. 일 년에 한 번, 골목이 사람으로 가득 차는 날이에요.'),
     say('owner', 'normal', '오늘은 일찍 자요. 내일은 하루 종일 서 있어야 해요.'),
     narr('사장님이 마감 우유를 두 손으로 든다. 그래도 잔이 조금 흔들린다.'),

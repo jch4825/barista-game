@@ -106,6 +106,7 @@ export default {
     bgm('warm'),
     place('봄 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'spring_2_wash' }),
     say('owner', 'normal', '닫기 전에 가게를 한 번 둘러봐요.'),
     say('owner', 'normal', '무엇이 어디 있는지 알아 두면, 바쁠 때 손이 덜 헤매요.'),
     mini('lookaround', {

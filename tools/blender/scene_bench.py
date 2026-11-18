@@ -3,6 +3,7 @@
 - 오래된 2그룹 에스프레소 머신(스테인리스 + 초록 법랑 옆판) · 머그와 받침 · 스팀 피처 · 탬퍼 · 샷 잔
 - 빛: 왼쪽 위 큰 창빛(주광) + 오른쪽 약한 채움 + 뒤쪽 테두리 빛. 반사는 블렌더에 든 실내 HDRI
 - 쓰는 법: blender --background --factory-startup --python scene_bench.py -- <출력 폴더> <preview|full|bg|sprites|extract|shots_preview|shots|all>
+- wash · wash_preview: 설거지 미니게임의 한 컷(개수대의 머그 · 얼룩 단계 · 거품 · 헹굼 · 수세미) → tools/blender/wash_post.py
 - shots [extract,steam,pour,foam,…]: 동작마다 한 컷(샷 내리기 · 우유 데우기 · 붓기 · 거품 내기 · 물 붓기 · 얼음 담기 + 컵 · 음료 색, SHOTS) 배경판 + 프레임 → tools/blender/shots_post.py 가 assets/shots/ 로
 """
 import bpy, bmesh, math, os, sys, json, random, shutil
@@ -4953,6 +4954,382 @@ def move(name, preview=False):
     log('옮겨 담기', name, n, '장 →', sdir, '사건(초)', {k: round(v / DISCARD_FPS, 2) for k, v in sorted(events.items(), key=lambda kv: kv[1])})
 
 
+# ------------------------------------------------------------------ 설거지(… wash · wash_preview, 2026-11-18 사용자 "매일 종료 전 설거지하는 미니 게임 …
+# 블랜더로 제작하고, 입이 닿는 곳과 안쪽 중심으로 씻는 활동"): 개수대 바닥의 머그를 거의 위에서(약 74°) 내려다봄(안쪽 바닥 가운데까지 보이게).
+# 배경판(깨끗한 머그) + 얼룩 단계(입이 닿는 곳 · 안쪽 가운데, 각 5단계) + 거품(각 3단계) + 헹굼 물줄기(2장) + 수세미 그림 + 자리 정보(wash_mug.json)
+# → python -X utf8 tools/blender/wash_post.py assets/_src/blender/wash assets/shots → assets/shots/wash_mug_* · wash.json(설거지 미니게임 js/game/minigames/wash.js)
+WASH_RES = (1920, 1080)          # 장면 미니게임 판(16:9) 그대로
+WASH_AT = (0.116, -0.066)        # 머그 바닥 가운데(x, y): 수도꼭지 끝(0.116, -0.036) 앞, 물줄기가 머그 안 뒤쪽에 떨어짐(개수대 뒤 벽에 닿지 않게)
+WASH_HANDLE = -20.0              # 손잡이(°): 오른쪽 조금 앞
+WASH_MOUTH = 100.0               # 입술 자국(°): 먼 쪽 테두리(안쪽 벽이 보이는 쪽) 조금 왼편
+WASH_LEVELS = 5                  # 얼룩 단계 1 ~ 5(0 = 깨끗 = 배경판)
+WASH_REVEAL = [0.0, 0.2, 0.38, 0.56, 0.77, 1.0]  # 단계마다 남은 얼룩(조각조각 지워짐)
+SPONGE_AT = (0.022, -0.072)      # 수세미가 놓인 곳(머그 왼쪽 개수대 바닥)
+SPOUT = Vector((0.116, -0.036, 0.24))  # build_sink 의 수도꼭지 끝
+WASH = {}
+
+
+def wash_mat():
+    """머그 재질 + 커피 얼룩. 값 노드 RIM · IN(0 ~ 1)이 남은 얼룩(입이 닿는 곳: 테두리 윗면 · 안쪽 테두리 아래 마른 줄 · 입술 자국, 안쪽 가운데: 바닥의 고리 · 막 · 모서리 줄)"""
+    m, nt, b = new_mat('wash_ceramic')
+    S(b, color=lin('#F3F0E9'), rough=0.08, coat=0.6, coat_rough=0.02, sss=0.03)
+    N, L = nt.nodes, nt.links
+
+    def mth(op, a, b_=None):
+        n = N.new('ShaderNodeMath')
+        n.operation = op
+        for i, v in enumerate((a, b_)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L.new(v, n.inputs[i])
+        return n.outputs[0]
+
+    def sm(x, a0, a1, b0=0.0, b1=1.0):
+        mr = map_range(N, a0, a1, b0, b1)
+        mr.interpolation_type = 'SMOOTHSTEP'
+        L.new(x, mr.inputs['Value'])
+        return mr.outputs['Result']
+
+    tc = N.new('ShaderNodeTexCoord')
+
+    def noise(scale, detail, rough=0.5):
+        nz = N.new('ShaderNodeTexNoise')
+        nz.inputs['Scale'].default_value = scale
+        nz.inputs['Detail'].default_value = detail
+        nz.inputs['Roughness'].default_value = rough
+        L.new(tc.outputs['Object'], nz.inputs['Vector'])
+        return nz.outputs['Fac']
+
+    sep = N.new('ShaderNodeSeparateXYZ')
+    L.new(tc.outputs['Object'], sep.inputs['Vector'])
+    x, y, z = sep.outputs['X'], sep.outputs['Y'], sep.outputs['Z']
+    r = mth('SQRT', mth('ADD', mth('MULTIPLY', x, x), mth('MULTIPLY', y, y)))
+    rr = mth('MAXIMUM', r, 0.0005)
+    geo = N.new('ShaderNodeNewGeometry')
+    vt = N.new('ShaderNodeVectorTransform')
+    vt.vector_type, vt.convert_from, vt.convert_to = 'NORMAL', 'WORLD', 'OBJECT'
+    L.new(geo.outputs['Normal'], vt.inputs['Vector'])
+    ns = N.new('ShaderNodeSeparateXYZ')
+    L.new(vt.outputs['Vector'], ns.inputs['Vector'])
+    radial = mth('DIVIDE', mth('ADD', mth('MULTIPLY', ns.outputs['X'], x), mth('MULTIPLY', ns.outputs['Y'], y)), rr)
+    inner = sm(mth('MULTIPLY', radial, -1.0), 0.15, 0.45)      # 안쪽 벽(축을 향함)
+    up = sm(ns.outputs['Z'], 0.45, 0.8)                          # 위를 보는 면(안쪽 바닥)
+    mottle = sm(noise(240.0, 6.0, 0.6), 0.32, 0.68, 0.45, 1.0)   # 얼룩 안의 짙고 옅음
+    # 입이 닿는 곳
+    ma = math.radians(WASH_MOUTH)
+    cosd = mth('DIVIDE', mth('ADD', mth('MULTIPLY', x, math.cos(ma)), mth('MULTIPLY', y, math.sin(ma))), rr)
+    lip_top = mth('MULTIPLY', sm(z, 0.0884, 0.0902), 0.95)
+    line_in = mth('MULTIPLY', mth('MULTIPLY', sm(z, 0.0800, 0.0812), mth('SUBTRACT', 1.0, sm(z, 0.0826, 0.0838))), inner)  # 마른 커피 줄(안쪽 테두리 아래)
+    blot = sm(noise(48.0, 3.0, 0.5), 0.5, 0.62)  # 방울 자국
+    drip = mth('MULTIPLY', mth('MULTIPLY', sm(z, 0.070, 0.080), inner), blot)
+    mouth = mth('MULTIPLY', mth('MULTIPLY', sm(cosd, 0.5, 0.86), sm(z, 0.063, 0.076)), sm(noise(30.0, 4.0, 0.6), 0.4, 0.55, 0.35, 1.0))
+    rim_raw = mth('MAXIMUM', mth('MAXIMUM', mth('MAXIMUM', lip_top, line_in), drip), mouth)
+    rim_mask = mth('MULTIPLY', rim_raw, sm(noise(200.0, 5.0, 0.6), 0.3, 0.7, 0.8, 1.0))
+    # 안쪽 가운데
+    low = mth('SUBTRACT', 1.0, sm(z, 0.017, 0.021))
+    floor = mth('MULTIPLY', up, low)
+    ring = mth('MULTIPLY', floor, mth('MULTIPLY', sm(r, 0.0165, 0.0205), mth('SUBTRACT', 1.0, sm(r, 0.0255, 0.0295))))
+    film = mth('MULTIPLY', mth('MULTIPLY', floor, mth('SUBTRACT', 1.0, sm(r, 0.017, 0.021))), sm(noise(70.0, 3.0), 0.36, 0.56, 0.35, 0.95))
+    corner = mth('MULTIPLY', mth('MULTIPLY', inner, sm(z, 0.0118, 0.0135)), mth('SUBTRACT', 1.0, sm(z, 0.019, 0.024)))
+    in_raw = mth('MAXIMUM', mth('MAXIMUM', mth('MULTIPLY', ring, 0.95), film), mth('MULTIPLY', corner, 0.55))
+    in_mask = mth('MULTIPLY', in_raw, mottle)
+    # 남은 얼룩: 값(0 ~ 1)이 줄면 조각조각 지워짐(수세미가 지나간 곳부터)
+    reveal = noise(55.0, 2.0, 0.45)
+
+    def keep(v):
+        t = mth('ADD', mth('MULTIPLY', v, 0.7), 0.17)
+        return mth('MULTIPLY', sm(mth('SUBTRACT', t, reveal), -0.035, 0.035), sm(v, 0.0, 0.03))
+
+    v_rim, v_in = N.new('ShaderNodeValue'), N.new('ShaderNodeValue')
+    v_rim.name, v_in.name = 'RIM', 'IN'
+    v_rim.outputs[0].default_value = 0.0
+    v_in.outputs[0].default_value = 0.0
+    k_rim = mth('MULTIPLY', rim_mask, keep(v_rim.outputs[0]))
+    k_in = mth('MULTIPLY', in_mask, keep(v_in.outputs[0]))
+
+    def lerp_col(base, col, k):
+        d = N.new('ShaderNodeVectorMath')
+        d.operation = 'SUBTRACT'
+        d.inputs[0].default_value = col[:3]
+        if isinstance(base, tuple):
+            d.inputs[1].default_value = base[:3]
+        else:
+            L.new(base, d.inputs[1])
+        sc = N.new('ShaderNodeVectorMath')
+        sc.operation = 'SCALE'
+        L.new(d.outputs['Vector'], sc.inputs[0])
+        L.new(k, sc.inputs['Scale'])
+        ad = N.new('ShaderNodeVectorMath')
+        ad.operation = 'ADD'
+        if isinstance(base, tuple):
+            ad.inputs[0].default_value = base[:3]
+        else:
+            L.new(base, ad.inputs[0])
+        L.new(sc.outputs['Vector'], ad.inputs[1])
+        return ad.outputs['Vector']
+
+    c1 = lerp_col(lin('#F3F0E9'), lin('#4F2E16'), mth('MULTIPLY', k_rim, 0.9))
+    c2 = lerp_col(c1, lin('#4E2C14'), mth('MULTIPLY', k_in, 0.95))
+    L.new(c2, b.inputs['Base Color'])
+    dirt = mth('MAXIMUM', k_rim, k_in)
+    L.new(mth('ADD', 0.08, mth('MULTIPLY', dirt, 0.3)), b.inputs['Roughness'])
+    if 'Coat Weight' in b.inputs:  # 얼룩진 곳은 유약 반사가 덮지 않게(밝은 반사에 테두리 얼룩이 옅어 보였음)
+        L.new(mth('MULTIPLY', 0.6, mth('SUBTRACT', 1.0, mth('MINIMUM', mth('MULTIPLY', dirt, 1.6), 1.0))), b.inputs['Coat Weight'])
+    return m, v_rim, v_in
+
+
+def build_sponge(c):
+    """수세미: 노란 스펀지 + 초록 거친 면(글자 · 표시 없음)"""
+    x, y = SPONGE_AT
+    z = SINK_FLOOR
+    m, nt, bsdf = new_mat('sponge_y')
+    S(bsdf, color=lin('#EFC23A'), rough=0.92, sss=0.15)
+    N, L = nt.nodes, nt.links
+    tc = N.new('ShaderNodeTexCoord')
+    vor = N.new('ShaderNodeTexVoronoi')
+    vor.inputs['Scale'].default_value = 900.0
+    L.new(tc.outputs['Object'], vor.inputs['Vector'])
+    bp = N.new('ShaderNodeBump')
+    bp.inputs['Strength'].default_value = 0.6
+    bp.inputs['Distance'].default_value = 0.0006
+    L.new(vor.outputs['Distance'], bp.inputs['Height'])
+    L.new(bp.outputs['Normal'], bsdf.inputs['Normal'])
+    g = basic('sponge_g', lin('#2F7D52'), rough=0.97)
+    rot = (0, 0, math.radians(68))
+    box('WASH_sponge', (0.070, 0.045, 0.019), (x, y, z + 0.0095), m, c, bev=0.005, rot=rot)
+    box('WASH_scrub', (0.070, 0.045, 0.006), (x, y, z + 0.0215), g, c, bev=0.0022, rot=rot)
+
+
+def wash_scene():
+    """개수대 · 머그(얼룩 재질) · 수세미를 한 번 만듦"""
+    if WASH:
+        return
+    if 'SINK_floor' not in bpy.data.objects:
+        build_sink('discard_sink')
+    m, v_rim, v_in = wash_mat()
+    x0, y0 = WASH_AT
+    z0 = SINK_FLOOR
+    lathe('WASH_mug', MUG, m, (x0, y0, z0), 'wash')
+    a = math.radians(WASH_HANDLE)
+
+    def rot(px, pz):
+        return (x0 + px * math.cos(a), y0 + px * math.sin(a), z0 + pz)
+    tube('WASH_handle', [rot(0.0405, 0.074), rot(0.064, 0.079), rot(0.0755, 0.058), rot(0.068, 0.031), rot(0.0400, 0.025)], 0.0066, m, 'wash')
+    build_sponge('wash_sponge')
+    fm = basic('foam', lin('#FFFDF7'), rough=0.38, sss=0.45, spec=0.55)
+    fb = fm.node_tree.nodes['Principled BSDF']
+    if 'Emission Color' in fb.inputs:  # 머그 안 그늘에서도 거품이 희게(잿빛 구슬처럼 보였음)
+        fb.inputs['Emission Color'].default_value = lin('#FFFFFF')
+        fb.inputs['Emission Strength'].default_value = 0.22
+    WASH.update(rim=v_rim, inn=v_in, foam=fm)
+
+
+def wash_camera():
+    cam.data.lens = 50
+    cam.data.sensor_fit = 'AUTO'
+    el, az, d = math.radians(74), math.radians(-2), 0.56
+    tgt = Vector((0.098, -0.044, SINK_FLOOR + 0.035))
+    cam.location = tgt + d * Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
+    look(cam, tgt)
+    cam.data.dof.use_dof = True
+    cam.data.dof.focus_distance = (cam.location - Vector((WASH_AT[0], WASH_AT[1], SINK_FLOOR + 0.05))).length
+    cam.data.dof.aperture_fstop = 7.0
+    cy.seed = 11
+    bpy.context.view_layer.update()  # 카메라 자리를 바로 반영(배경판을 렌더하지 않고 자리를 잴 때 낡은 자리로 쟀음)
+
+
+def wash_px(p):
+    """장면 좌표 → 판 픽셀(위 왼쪽이 0)"""
+    scene.render.resolution_x, scene.render.resolution_y = WASH_RES
+    v = world_to_camera_view(scene, cam, Vector(p))
+    return [round(v.x * WASH_RES[0], 1), round((1 - v.y) * WASH_RES[1], 1)]
+
+
+def wash_ellipse(r, z, n=72):
+    """머그 둘레 원(반지름 r, 높이 z)의 판 위 타원: 가운데 · 반지름(가로 · 세로)"""
+    x0, y0 = WASH_AT
+    pts = [wash_px((x0 + r * math.cos(2 * math.pi * k / n), y0 + r * math.sin(2 * math.pi * k / n), SINK_FLOOR + z)) for k in range(n)]
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    return {'cx': round((min(xs) + max(xs)) / 2, 1), 'cy': round((min(ys) + max(ys)) / 2, 1), 'rx': round((max(xs) - min(xs)) / 2, 1), 'ry': round((max(ys) - min(ys)) / 2, 1)}
+
+
+def wash_clear():
+    for ob in list(coll('wash_dyn').objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
+
+
+def wash_foam(zone, amount, c='wash_dyn'):
+    """거품(amount 1 ~ 3: 많을수록 앞 송이에 더해짐): 작은 방울이 겹친 송이. 입이 닿는 곳은 테두리 둘레(입술 자국 쪽에 더 많이), 안쪽 가운데는 바닥.
+    흰 거품(빛이 스밈)과 맑은 방울(뒤가 비침)을 섞음"""
+    rnd = random.Random(5 if zone == 'rim' else 9)
+    x0, y0 = WASH_AT
+    z0 = SINK_FLOOR
+    n_cl = 30 if zone == 'rim' else 22
+    clusters = []
+    for _ in range(n_cl):
+        if zone == 'rim':
+            a = math.radians(WASH_MOUTH) + rnd.gauss(0, 0.6) if rnd.random() < 0.45 else rnd.uniform(0, 2 * math.pi)
+            clusters.append(('rim', a))
+        else:
+            a = rnd.uniform(0, 2 * math.pi)
+            clusters.append(('in', a, 0.022 * math.sqrt(rnd.random())))
+    i = 0
+    for cl in clusters[:max(1, round(n_cl * amount / 3))]:
+        n = rnd.randint(26, 40)
+        for _ in range(n):
+            if cl[0] == 'rim':
+                a = cl[1] + rnd.gauss(0, 0.07)
+                rad = 0.0416 + rnd.gauss(0, 0.0017)
+                br = rnd.uniform(0.0004, 0.0016)
+                zz = 0.0912 + rnd.uniform(-0.0008, 0.0016)
+                px, py = x0 + rad * math.cos(a), y0 + rad * math.sin(a)
+            else:
+                cx, cy_ = x0 + cl[2] * math.cos(cl[1]), y0 + cl[2] * math.sin(cl[1])
+                px, py = cx + rnd.gauss(0, 0.0034), cy_ + rnd.gauss(0, 0.0034)
+                br = rnd.uniform(0.0005, 0.0019)
+                zz = 0.0108 + br * 0.5 + rnd.uniform(0.0, 0.0018)
+            mat = M['bubble'] if rnd.random() < 0.15 else WASH['foam']
+            ball(f'WASH_foam{i}', br, (px, py, z0 + zz), mat, c)
+            i += 1
+        # 송이 밑의 흰 거품 덩어리(납작한 방울): 방울만이면 구슬처럼 보였음
+        for _ in range(2):
+            if cl[0] == 'rim':
+                a = cl[1] + rnd.gauss(0, 0.05)
+                px, py, zz, br = x0 + 0.0416 * math.cos(a), y0 + 0.0416 * math.sin(a), 0.0910, rnd.uniform(0.0022, 0.0032)
+            else:
+                px, py = x0 + cl[2] * math.cos(cl[1]) + rnd.gauss(0, 0.002), y0 + cl[2] * math.sin(cl[1]) + rnd.gauss(0, 0.002)
+                zz, br = 0.0110, rnd.uniform(0.003, 0.0048)
+            ball(f'WASH_foam{i}', br, (px, py, z0 + zz), WASH['foam'], c, scale=(1.0, 1.0, 0.45))
+            i += 1
+
+
+def wash_stream(seed, c='wash_dyn'):
+    """헹굼: 수도꼭지에서 머그 안 뒤쪽으로 떨어지는 물줄기 + 바닥의 물 · 튀는 물방울(씨앗마다 조금 다름)"""
+    rnd = random.Random(seed)
+    land = Vector((SPOUT.x, SPOUT.y, SINK_FLOOR + 0.0105 + 0.007))
+    pts = []
+    for k in range(9):
+        t = k / 8
+        pts.append((SPOUT.x + rnd.uniform(-0.0004, 0.0004) * k, SPOUT.y, SPOUT.z + (land.z - SPOUT.z) * t))
+    tube('WASH_stream', pts, 0.0034, M['water'], c)
+    x0, y0 = WASH_AT
+    cyl('WASH_pool', 0.029, 0.007, (x0, y0, SINK_FLOOR + 0.0105 + 0.0035), M['water'], c, bev=0.0015)
+    for i in range(14):
+        a = rnd.uniform(0, 2 * math.pi)
+        d = rnd.uniform(0.005, 0.016)
+        ball(f'WASH_drop{i}', rnd.uniform(0.0007, 0.0016), (land.x + d * math.cos(a), land.y + d * math.sin(a) * 0.6, land.z + rnd.uniform(0.001, 0.012)), M['water'], c)
+
+
+def wash_region(rect):
+    x0, y0, x1, y1 = rect
+    W, H = WASH_RES
+    r = scene.render
+    r.use_border = True
+    r.use_crop_to_border = False
+    r.border_min_x, r.border_max_x = x0 / W, x1 / W
+    r.border_min_y, r.border_max_y = (H - y1) / H, (H - y0) / H
+
+
+def wash_holdout(on, keep=('wash_dyn',)):
+    """거품만 투명 바탕에(나머지는 구멍: 가려지는 곳은 가려짐)"""
+    for cname, cl in COLL.items():
+        if cname == 'rig' or cname in keep:
+            continue
+        for ob in cl.objects:
+            ob.is_holdout = on
+
+
+def wash(preview=False):
+    """설거지 한 컷: OUT/wash/ 에 배경판 · 단계 그림 · 자리 정보(wash_mug.json)"""
+    wash_scene()
+    wash_clear()
+    show_only(('discard_sink', 'wash', 'wash_dyn'))
+    for name in ('SINK_drain', 'SINK_drain_ring'):  # 배수구는 이 장면에서 빼 둠(위에서 보면 또 하나의 컵처럼 보였음)
+        if name in bpy.data.objects:
+            bpy.data.objects[name].hide_render = True
+    wash_camera()
+    sdir = os.path.join(OUT, 'wash' + ('_preview' if preview else ''))
+    os.makedirs(sdir, exist_ok=True)
+    if preview:
+        WASH['rim'].outputs[0].default_value = 1.0
+        WASH['inn'].outputs[0].default_value = 1.0
+        render(os.path.join(sdir, 'preview_dirty.jpg'), (960, 540), 48, fmt='JPEG')
+        wash_foam('rim', 3)
+        wash_foam('in', 3)
+        render(os.path.join(sdir, 'preview_foam.jpg'), (960, 540), 48, fmt='JPEG')
+        wash_clear()
+        WASH['rim'].outputs[0].default_value = 0.0
+        WASH['inn'].outputs[0].default_value = 0.0
+        wash_stream(1)
+        render(os.path.join(sdir, 'preview_rinse.jpg'), (960, 540), 48, fmt='JPEG')
+        wash_clear()
+        show_only(('discard_sink', 'wash', 'wash_sponge'))
+        for name in ('SINK_drain', 'SINK_drain_ring'):
+            bpy.data.objects[name].hide_render = True
+        render(os.path.join(sdir, 'preview_clean.jpg'), (960, 540), 48, fmt='JPEG')
+        log('설거지 미리 보기', sdir, 'rim', wash_ellipse(0.0418, 0.0913), 'in', wash_ellipse(0.024, 0.0105), 'spout', wash_px(SPOUT))
+        return
+    SAMP = 320
+    only = set((os.environ.get('WASH_ONLY') or 'plate,rim,in,foam,rinse,sponge').split(','))  # 고친 것만 다시(예: WASH_ONLY=rim,foam)
+    WASH['rim'].outputs[0].default_value = 0.0
+    WASH['inn'].outputs[0].default_value = 0.0
+    if 'plate' in only:
+        render(os.path.join(sdir, 'wash_mug_plate.png'), WASH_RES, SAMP)
+    rim_e, in_e = wash_ellipse(0.0418, 0.0913), wash_ellipse(0.024, 0.0105)
+    out_e = wash_ellipse(0.0435, 0.0)
+    pad = 26
+    mug_rect = (max(0, int(min(rim_e['cx'] - rim_e['rx'], out_e['cx'] - out_e['rx'])) - pad), max(0, int(rim_e['cy'] - rim_e['ry']) - pad),
+                min(WASH_RES[0], int(max(rim_e['cx'] + rim_e['rx'], out_e['cx'] + out_e['rx'])) + pad), min(WASH_RES[1], int(out_e['cy'] + out_e['ry']) + pad))
+    wash_region(mug_rect)
+    for zone, node in (('rim', WASH['rim']), ('in', WASH['inn'])):
+        if zone not in only:
+            continue
+        for k in range(1, WASH_LEVELS + 1):
+            node.outputs[0].default_value = WASH_REVEAL[k]
+            render(os.path.join(sdir, f'wash_mug_{zone}_l{k}.png'), WASH_RES, SAMP)
+        node.outputs[0].default_value = 0.0
+    # 거품: 투명 바탕(머그 · 개수대는 구멍)
+    wash_holdout(True)
+    for zone in (('rim', 'in') if 'foam' in only else ()):
+        for a in (1, 2, 3):
+            wash_clear()
+            wash_foam(zone, a)
+            render(os.path.join(sdir, f'wash_mug_foam_{zone}_{a}.png'), WASH_RES, 192, transparent=True)
+    wash_holdout(False)
+    wash_clear()
+    # 헹굼 물줄기(두 장을 번갈아): 수도꼭지 끝부터 머그 바닥까지
+    sp = wash_px(SPOUT)
+    rinse_rect = (min(mug_rect[0], int(sp[0]) - 60), max(0, int(sp[1]) - 30), max(mug_rect[2], int(sp[0]) + 60), mug_rect[3])
+    wash_region(rinse_rect)
+    for i in ((0, 1) if 'rinse' in only else ()):
+        wash_clear()
+        wash_stream(1 + i * 6)
+        render(os.path.join(sdir, f'wash_mug_rinse_{i}.png'), WASH_RES, SAMP)
+    wash_clear()
+    scene.render.use_border = False
+    # 수세미 그림: 수세미만(그림자 없음, 게임에서 그림자를 그림)
+    show_only(('wash_sponge',), set_visible=False)
+    if 'sponge' in only:
+        render(os.path.join(sdir, 'wash_mug_sponge.png'), WASH_RES, 256, transparent=True)
+    show_only(('discard_sink', 'wash'))
+    for name in ('SINK_drain', 'SINK_drain_ring'):
+        bpy.data.objects[name].hide_render = True
+    meta = {
+        'size': list(WASH_RES), 'mugRect': list(mug_rect), 'rinseRect': list(rinse_rect), 'levels': WASH_LEVELS,
+        'rim': rim_e, 'inside': in_e, 'bottom': out_e,
+        'mouth': wash_px((WASH_AT[0] + 0.0418 * math.cos(math.radians(WASH_MOUTH)), WASH_AT[1] + 0.0418 * math.sin(math.radians(WASH_MOUTH)), SINK_FLOOR + 0.0905)),
+        'spout': sp, 'land': wash_px((SPOUT.x, SPOUT.y, SINK_FLOOR + 0.02)),
+        'lever': wash_px((SINK_X + 0.17 + 0.026, SINK_Y + SINK_D / 2 + 0.05 + 0.006, 0.075)),
+        'tap': wash_px((SINK_X + 0.17, SINK_Y + SINK_D / 2 + 0.05, 0.02)),  # 판 위쪽에 보이는 수도꼭지 밑동(헹굼 단추 자리)
+    }
+    with open(os.path.join(sdir, 'wash_mug.json'), 'w', encoding='utf-8') as fp:
+        json.dump(meta, fp, ensure_ascii=False, indent=1)
+    log('설거지 컷', sdir, meta)
+
+
 def Matrix_T(v):
     from mathutils import Matrix
     return Matrix.Translation(Vector(v))
@@ -5005,6 +5382,9 @@ for mode in modes:
         # 옮겨 담기 영상(셋째 인자: glass_plastic,mug_paper 가운데 쉼표로, 없으면 둘 다) 예) ... -- assets/_src/blender move_preview glass_plastic
         for name in (ARGS[2] if len(ARGS) > 2 else ','.join(MOVES)).split(','):
             move(name, mode == 'move_preview')
+    elif mode in ('wash', 'wash_preview'):
+        # 설거지(머그, 입이 닿는 곳 · 안쪽 가운데) 예) BENCH_NOSAVE=1 blender … -- C:/AI/game3/assets/_src/blender wash_preview
+        wash(mode == 'wash_preview')
     elif mode == 'drag_ice':
         sdir = os.path.join(OUT, 'shots')
         os.makedirs(sdir, exist_ok=True)

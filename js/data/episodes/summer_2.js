@@ -78,6 +78,8 @@ export default {
     leave('haesun'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     say('owner', 'normal', '여름에는 그 의자가 제일 인기예요. 바다가 제일 잘 보이는 자리니까.'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'summer_2_wash' }),
     think('할머니에게는 바다보다 그 의자가 더 소중한 것 같다. 여름 내내 그 자리를 어떻게 지켜 드릴 수 있을까.'),
     motion('jieun', 'nod'),
     end(),

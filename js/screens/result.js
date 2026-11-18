@@ -90,7 +90,7 @@ function growView(ep, say) {
   const head = pay?.none ? '오늘 받은 돈 없음' : pay ? `오늘 받은 돈 ${grow.won(pay.total)}` : '오늘 받은 돈은 이미 받았어요';
   rows.push(h('p', { class: 'rs-pay-total' }, h('b', { text: head }), h('span', { text: `모은 돈 ${grow.won(grow.money())}` })));
   for (const st of rise.stats) {
-    const text = `${josa(st.name, '이/가')} ${st.level}단계가 되었어요! ${st.effect}`;
+    const text = `${josa(st.name, '이/가')} ${st.level}단계가 되었어요! ${grow.effectAt(st, st.level)}`;
     rows.push(h('p', { class: 'rs-rise' }, h('i', { html: ICON(st.icon) }), h('span', { text })));
     say.push(text);
   }

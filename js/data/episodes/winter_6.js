@@ -125,6 +125,7 @@ export default {
     bg('hall', 'evening'),
     place('겨울 저녁 19:00', '마감'),
     show({ center: 'jieun:smile' }),
+    mini('wash', { id: 'winter_6_wash' }),
     narr('눈이 완전히 그쳤다. 하늘이 맑다.'),
     narr('창가 의자 위에, 할머니가 두고 간 담요가 곱게 개켜져 있다.'),
     think('내일은 맑다고 한다. 왠지 좋은 일이 있을 것 같다.'),

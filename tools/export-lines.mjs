@@ -224,6 +224,7 @@ for (const hourly of Object.values(CONFIG.WAGE_TABLE)) add('sys', `오늘 받은
 for (const t of NO_PAY_SAY) add('sys', t, 'result'); // 봄 1일(면접 날)은 받은 돈이 없음(검수 13.73)
 for (const st of STATS) {
   add('sys', st.effect, 'result');
+  if (st.soon) add('sys', st.soon, 'result'); // 쓸모가 열리기 전의 단계(grow.js effectAt)
   for (let lv = 2; lv <= MAX_LEVEL; lv++) add('sys', `${josa(st.name, '이/가')} ${lv}단계가 되었어요!`, 'result');
 }
 for (const r of RANKS.slice(1)) add('sys', `이제 ${r}예요!`, 'result');

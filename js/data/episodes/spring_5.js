@@ -120,6 +120,7 @@ export default {
     bgm('warm'),
     place('봄 저녁 19:10', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'spring_5_wash' }),
     branch('spring_seat', {
       keep: [say('owner', 'normal', '아까, 할머니 자리를 지킨 거.'), say('owner', 'smile', '…잘했어요. 단골의 자리는 그 사람의 하루예요.')],
       give: [say('owner', 'normal', '아까, 배우가 스스로 일어난 거요.'), say('owner', 'smile', '할머니가 말없이 기다려 줘서예요. 지은 씨도 할머니가 어떻게 하시는지 잘 봤어요.')],

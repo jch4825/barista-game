@@ -159,6 +159,7 @@ export default {
     place('여름 밤 20:30', '늦은 마감'),
     show({ left: 'jieun:sad', right: 'owner:normal' }),
     narr('손님이 다 갔다. 하루 종일 시끄럽던 가게 안이 갑자기 조용하다.'),
+    mini('wash', { id: 'summer_6_wash' }),
     narr('사장님이 선반에 놓인 컵들을 본다. 단골들이 늘 쓰는 잔이다.'),
     branch('summer_line', {
       queue: [narr('오늘 한 번도 쓰지 않은 잔들이 그대로 놓여 있다.'), say('owner', 'normal', '줄을 지킨 건 잘했어요. 그런데 오늘은 줄이 이겼네요.')],

@@ -109,6 +109,7 @@ export default {
     bgm('warm'),
     place('가을 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'autumn_1_wash' }),
     narr('사장님이 마감 우유를 든다. 오늘은 처음부터 두 손으로 잔을 감싼다.'),
     face('jieun', 'think'),
     think('봄에는 한 손으로 드셨는데. 언제부터 두 손으로 드셨을까.'),

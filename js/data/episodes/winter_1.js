@@ -104,6 +104,7 @@ export default {
     place('겨울 저녁 19:00', '마감'),
     show({ center: 'jieun:normal' }),
     narr('혼자 하는 마감이다. 창밖에는 눈이 그치지 않고 내린다.'),
+    mini('wash', { id: 'winter_1_wash' }),
     narr('사장님의 하얀 잔을 닦아서, 늘 놓던 자리에 둔다.'),
     face('jieun', 'think'),
     think('사장님은 잘 지내실까. 가을에 떠나신 뒤로 연락이 한 번도 없다.'),

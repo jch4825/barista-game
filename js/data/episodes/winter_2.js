@@ -87,6 +87,7 @@ export default {
     bg('hall', 'evening'),
     place('겨울 저녁 19:00', '마감'),
     show({ center: 'jieun:normal' }),
+    mini('wash', { id: 'winter_2_wash' }),
     narr('라디오에서, 이틀 뒤부터 큰 눈이 온다는 소식이 나온다. 몇 년 만의 폭설이라고 한다.'),
     think('눈이 많이 오면 정전이 될 수도 있다. 뒷방 선반에 사장님이 모아 둔 초가 있었던 것 같다.'),
     motion('jieun', 'nod'),

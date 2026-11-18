@@ -253,6 +253,7 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
       bgm('warm'),
       place(`${sName} 저녁`, '마감'),
       show({ center: 'jieun:smile' }),
+      mini('wash', { id: `free_${day}_wash`, quit: true }), // 마감 설거지(2026-11-18: 날마다 하루를 닫기 전에)
       narr('손님이 모두 갔다. 컵을 닦고, 내일 쓸 우유를 냉장고에 채운다.'),
       think('오늘도 한 잔씩, 천천히. 내일도 평소대로 문을 열자.'),
       end(),

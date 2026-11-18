@@ -129,6 +129,7 @@ export default {
     bg('hall', 'evening'),
     place('겨울 저녁 19:00', '마감'),
     show({ center: 'jieun:smile' }),
+    mini('wash', { id: 'winter_5_wash' }),
     narr('눈이 그쳐 간다. 라디오에서 내일은 맑다고 한다.'),
     think('정전 밤에 모였던 사람들이, 오늘은 평소대로 왔다. 평소대로라는 게 이렇게 고마운 일이었다.'),
     motion('jieun', 'nod'),

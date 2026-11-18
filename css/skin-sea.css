@@ -123,6 +123,7 @@ body.skin-sea .scr:is(.scr-teacher, .scr-pin, .scr-credits) .scr-head { backgrou
 /* 설정 */
 body.skin-sea .set-row { border-bottom: 1px solid rgba(212, 174, 98, .22); }
 body.skin-sea .set-label small { color: var(--foam-2); }
+body.skin-sea .scr:is(.scr-teacher, .scr-credits) .set-label small { color: #6B5D48; } /* 밝은 종이 위: 바닷빛 글자색이면 거의 보이지 않았음(2026-11-18) */
 body.skin-sea .set-sample { background: linear-gradient(180deg, var(--parch), var(--parch-2)); color: var(--ink); border: 2px solid var(--gold-d); border-radius: 10px; }
 
 /* 근무표 */
@@ -512,10 +513,11 @@ body.skin-sea .nb-li.on::after { content: ''; position: absolute; right: 12px; t
 body.skin-sea .nb-li.locked { background: rgba(10, 34, 42, .55); border: 2px dashed rgba(212, 174, 98, .35); color: var(--foam-2); }
 body.skin-sea .nb-face { border: 2px solid var(--gold); }
 body.skin-sea .nb-card {
-  background: repeating-linear-gradient(transparent 0 62px, rgba(142, 108, 51, .2) 62px 65px), linear-gradient(180deg, var(--parch), var(--parch-2));
+  background: linear-gradient(180deg, var(--parch), var(--parch-2));
   color: var(--ink); border: 3px solid var(--gold-d); box-shadow: 0 0 0 4px var(--accent), 0 18px 36px rgba(0, 0, 0, .45);
 }
 body.skin-sea .nb-card-head b { font-family: var(--font-title); font-weight: 800; }
+body.skin-sea .nb-card-lines { background-image: repeating-linear-gradient(transparent 0 50px, rgba(142, 108, 51, .22) 50px 52px); }
 
 /* ---------- 저장하기 · 불러오기 ---------- */
 body.skin-sea .sv-lead, body.skin-sea .sv-file-note span { color: var(--foam-2); }
@@ -808,6 +810,13 @@ body.skin-sea.contrast .ey-stage { filter: none; }
 .cal-head p { margin: 0; font-size: 21px; color: var(--foam-2); }
 .hub-eps.cal7 { grid-template-columns: repeat(7, 1fr); gap: 12px; }
 .hub-eps.cal-end { grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: stretch; }
+/* 엔딩 뒤 안내 글은 한 줄을 다 씀: 네 칸 가운데 한 칸에 들어가 글자가 한두 자씩 아래로 길게 내려왔음(2026-11-18 사용자) */
+.hub-eps.cal-end .hub-clear { grid-column: 1 / -1; padding: 20px 28px; gap: 22px; }
+.hub-eps.cal-end .hub-clear-ico svg { width: 60px; height: 60px; }
+.hub-eps.cal-end .hub-clear-text b { font-size: 30px; }
+.hub-eps.cal-end .hub-clear-text p { margin-top: 6px; font-size: 23px; }
+.hub-eps.cal-end .hub-clear-text p span { display: inline; }
+.hub-eps.cal-end .hub-clear-text p span + span::before { content: ' '; }
 .scr-cal .hub-ep { min-height: 0; gap: 4px; padding: 12px 14px 14px; }
 .scr-cal .hub-thumb { width: calc(100% + 28px); margin: -12px -14px 4px; }
 .scr-cal .hub-label { font-size: 18px; padding: 2px 10px; }
@@ -847,6 +856,7 @@ body.contrast .rs-grow { background: #000; border-color: #FFE14D; }
 .gr-stats, .gr-skills, .gr-shop, .gr-odd { padding: 16px 20px; border-radius: 14px; background: rgba(4, 18, 23, .55); border: 1px solid var(--gold-line); }
 .gr-stat { display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 10px 0; border-top: 1px dashed rgba(240, 217, 162, .25); }
 .gr-stat:first-of-type { border-top: 0; }
+.gr-stat .nb-say { position: static; } /* 능력치마다 [읽어 주기]는 그 줄 오른쪽 칸에: 절대 자리라 넷이 모두 화면 오른쪽 위 [닫기] 위에 겹쳐 있었음(2026-11-18) */
 .gr-stat-ico svg { width: 46px; height: 46px; color: var(--gold-l); }
 .gr-stat-name { display: flex; align-items: baseline; gap: 14px; margin: 0; font-size: 26px; color: #F4EAD2; }
 .gr-stat-name span { font-weight: 900; color: #FFE9B0; }
@@ -873,6 +883,21 @@ body.contrast .rs-grow { background: #000; border-color: #FFE14D; }
 .gr-odd-card.got { background: var(--parch, #FFFDF7); color: #2A1D12; }
 .gr-odd-card p { margin: 4px 0 0; font-size: 18px; }
 .gr-odd-card i svg { width: 22px; height: 22px; }
+/* 메뉴 도감(js/screens/notebook.js menuView): 만들어 본 잔은 그림 · 이름 · 온도 · 한 줄 설명. 판 모양이 없어 카드가 가는 띠로 겹쳐 보였음(2026-11-18) */
+.nb-menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.nb-menu-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 16px 18px; border-radius: 16px; text-align: center; color: var(--ink); background: linear-gradient(180deg, var(--parch), var(--parch-2)); border: 2px dashed rgba(142, 108, 51, .5); }
+.nb-menu-card.got { border: 2px solid var(--gold-d); box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
+.nb-menu-pic { display: grid; place-items: center; width: 100%; height: 150px; }
+.nb-menu-pic img { display: block; width: 100%; height: 150px; object-fit: contain; filter: drop-shadow(0 6px 8px rgba(60, 40, 20, .3)); }
+.nb-menu-pic svg { width: 70px; height: 70px; color: var(--gold-d); }
+.nb-menu-card:not(.got) .nb-menu-pic svg { color: #BDB19A; }
+.nb-menu-dot { display: block; width: 74px; height: 74px; border-radius: 50%; background: var(--c); border: 6px solid #FFF8EC; box-shadow: 0 0 0 2px var(--gold-d); }
+.nb-menu-card b { font-size: 28px; font-weight: 900; line-height: 1.25; }
+.nb-menu-card small { font-size: 20px; font-weight: 700; color: #6B5D48; }
+.nb-menu-desc { margin: 6px 0 0; font-size: 20px; line-height: 1.45; color: #4E4434; }
+.nb-menu-star { position: absolute; top: 10px; right: 12px; }
+body.contrast .nb-menu-card { background: #000; color: #fff; border-color: #FFE14D; }
+body.contrast :is(.nb-menu-card small, .nb-menu-desc) { color: #fff; }
 .nb-menu-card.is-gold { box-shadow: 0 0 0 3px #E2B84A, 0 0 18px rgba(226, 184, 74, .5); }
 .nb-menu-star svg { width: 26px; height: 26px; color: #E2B84A; }
 body.contrast .gr-item, body.contrast .gr-odd-card.got { background: #000; color: #fff; border: 2px solid #FFE14D; }

@@ -99,6 +99,7 @@ export default {
     bgm('ending'),
     place('겨울 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'winter_7_wash' }),
     // 그 갈매기(웃음 줄기 4/4: 겨울 — 사장님의 주머니). 엔딩 '사장의 눈' 덤 12번째 컷과 이어짐
     narr('사장님이 앞치마를 벗어 걸자, 주머니에서 빵 부스러기가 우수수 떨어진다.'),
     sfx('squawk'),

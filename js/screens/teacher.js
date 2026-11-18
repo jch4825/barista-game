@@ -23,6 +23,7 @@ import { nav } from '../core/nav.js';
 import { runner } from '../core/runner.js';
 import { showCredits } from './credits.js';
 import { saveRecordFile, loadRecordFiles } from './records.js';
+import { MINIGAME_TITLES } from '../game/minigames/index.js';
 
 function pinPad() {
   return new Promise((resolve) => {
@@ -87,6 +88,7 @@ function miniExtra(l) {
   if (l.seen) parts.push(`본 것 ${Object.values(l.seen).reduce((a, n) => a + n, 0)}${l.held !== undefined ? ` · 손잡이 ${l.held}` : ''}`);
   // 오늘의 칠판에 맞춰 손님에게 사정을 말하고 권한 것(얼음 · 우유가 떨어짐 · 머신이 데워지는 중)
   for (const a of l.adapted || []) parts.push(`칠판 대처: ${ADAPT_TEXT[a.kind] || a.kind}${a.to && a.to !== a.from ? ` → ${RECIPES[a.to]?.name || a.to}` : ''}`);
+  if (l.early) parts.push(`다 닦기 전에 누른 수도꼭지 ${l.early}`); // 설거지(wash.js)
   if (l.stage) parts.push(`단계 ${LEVEL_NAMES[l.stage] || l.stage}`);
   if (l.turn) parts.push('턴 방식');
   return parts.join(' · ');
@@ -102,7 +104,7 @@ function epName(l) {
 function decisionRows(p) {
   return p.log.filter((l) => ['decide', 'ask', 'mini'].includes(l.type)).map((l) => ({
     ep: epName(l),
-    what: l.type === 'mini' ? `미니게임: ${l.title || l.name}` : (l.q || l.id),
+    what: l.type === 'mini' ? `미니게임: ${l.title || MINIGAME_TITLES[l.name] || l.name}` : (l.q || l.id),
     skill: l.skill ? SKILLS[l.skill]?.name : '',
     rewinds: l.type === 'mini' ? (l.attempts || 1) - 1 : (l.rewinds || 0),
     extra: l.type === 'mini' ? miniExtra(l) : l.type === 'ask' ? `대답: ${l.mode === 'chips' ? '골라서' : l.mode === 'type' ? '글자' : '말'}` : (l.helps ? `도와주세요 ${l.helps}` : ''),

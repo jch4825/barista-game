@@ -93,6 +93,8 @@ export default {
     say('jieun', 'surprised', '서른 해 동안 서서요? 무거운 가방을 메고, 다리가 아프지 않으실까요.'),
     say('owner', 'normal', '사람마다 앉는 때가 있어요. 그때까지는, 앉을 자리만 비워 두면 돼요.'),
     motion('owner', 'nod'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'spring_3_wash' }),
     think('오늘 만난 두 분은 모두 말이 적었다. 그 대신 눈과 손이 많은 것을 말해 주었다.'),
     end(),
   ],

@@ -91,6 +91,7 @@ export default {
     bgm('warm'),
     place('봄 저녁 19:00', '봄의 마지막 마감'),
     show({ left: 'jieun:smile', right: 'owner:normal' }),
+    mini('wash', { id: 'spring_7_wash' }),
     say('owner', 'normal', '아까 할머니가 이름을 부르셨죠.'),
     say('jieun', 'smile', '네. 사장님도 들으셨어요?'),
     say('owner', 'smile', '할머니는 이름을 쉽게 안 불러요. 일주일 동안 지은 씨를 지켜보신 거예요.'),

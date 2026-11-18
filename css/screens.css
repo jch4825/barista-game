@@ -388,13 +388,14 @@ body.reduce-motion .title-screen .tt-movie video { transition-duration: .4s !imp
 
 /* 함께 일하는 사람 */
 .nb-person { display: grid; grid-template-columns: 1fr 470px; gap: 30px; align-items: start; }
-.nb-card { padding: 0 40px 30px; background: var(--paper); background-image: repeating-linear-gradient(transparent 0 62px, var(--paper-line) 62px 65px); border: 5px solid var(--ink); border-radius: 18px; box-shadow: 10px 10px 0 var(--accent); overflow: hidden; }
+.nb-card { padding: 0 40px 30px; background: var(--paper); border: 5px solid var(--ink); border-radius: 18px; box-shadow: 10px 10px 0 var(--accent); overflow: hidden; }
 .nb-card-head { display: flex; align-items: baseline; gap: 18px; margin: 0 -40px 24px; padding: 18px 40px; background: var(--accent); color: #fff; }
 .nb-card-head b { font-size: 52px; font-weight: 900; }
 .nb-card-head span { font-size: 28px; font-weight: 800; }
-.nb-card-lines { list-style: none; margin: 0 0 20px; padding: 0; }
-.nb-card-lines li { display: flex; align-items: center; gap: 14px; min-height: 65px; font-size: 34px; font-weight: 800; }
-.nb-card-lines li::before { content: ''; flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); }
+/* 줄은 글 칸에, 글자 줄과 같은 간격으로(줄이 두 줄로 접힐 때 글자 가운데를 지나던 것, 2026-11-18 · 일기와 같은 까닭 13.118) */
+.nb-card-lines { list-style: none; margin: 0 0 20px; padding: 0; background-image: repeating-linear-gradient(transparent 0 50px, var(--paper-line) 50px 52px); }
+.nb-card-lines li { display: flex; align-items: flex-start; gap: 14px; min-height: 52px; font-size: 32px; line-height: 52px; font-weight: 800; }
+.nb-card-lines li::before { content: ''; flex: none; width: 16px; height: 16px; margin-top: 18px; border-radius: 50%; background: var(--accent); }
 .nb-bigpol { margin: 0; padding: 18px 18px 0; background: #fff; box-shadow: 0 16px 30px rgba(0, 0, 0, .3); transform: rotate(3deg); }
 .nb-bigpol .pol-photo { width: 100%; height: 500px; }
 .nb-bigpol figcaption { height: 80px; display: grid; place-items: center; font-size: 34px; font-weight: 900; }

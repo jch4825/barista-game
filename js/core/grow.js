@@ -13,8 +13,9 @@ import { currentWage } from '../config.js';
 
 export const STATS = [
   { id: 'hand', name: '손맛', icon: 'coffee', how: '커피를 만들고 손 기술을 할수록 올라요.', effect: '알맞아요 칸이 조금씩 넓어져요.' },
-  { id: 'memory', name: '기억', icon: 'book', how: '단골을 만나고, 늘 먹던 것을 만들수록 올라요.', effect: '단골의 늘 먹던 것을 한 번에 담을 수 있어요.' },
-  { id: 'service', name: '응대', icon: 'speech', how: '손님에게 묻고 대답을 들을수록 올라요.', effect: '온도와 매장 · 포장을 한 번에 물어볼 수 있어요.' },
+  // soon: 쓸모가 열리는 단계(UNLOCK) 전에 보여 줄 말(2단계에서 '한 번에 물어볼 수 있어요'라고 했지만 단추는 3단계부터였음, 2026-11-18)
+  { id: 'memory', name: '기억', icon: 'book', how: '단골을 만나고, 늘 먹던 것을 만들수록 올라요.', effect: '단골의 늘 먹던 것을 한 번에 담을 수 있어요.', soon: '3단계가 되면 단골의 늘 먹던 것을 한 번에 담을 수 있어요.' },
+  { id: 'service', name: '응대', icon: 'speech', how: '손님에게 묻고 대답을 들을수록 올라요.', effect: '온도와 매장 · 포장을 한 번에 물어볼 수 있어요.', soon: '3단계가 되면 온도와 매장 · 포장을 한 번에 물어볼 수 있어요.' },
   { id: 'calm', name: '차분함', icon: 'breathe', how: '바쁜 시간과 쟁반 나르기를 끝까지 할수록 올라요.', effect: '바쁜 시간에 사장님이 더 일찍 도와줘요.' },
 ];
 
@@ -24,6 +25,9 @@ export const MAX_LEVEL = STEPS.length;
 export const MASTER_AT = 10;
 /** 레벨마다 쓸모(작업대 · 몰림 시간이 읽음) */
 export const UNLOCK = { memoryUsual: 3, serviceAsk: 3 };
+const UNLOCK_AT = { memory: UNLOCK.memoryUsual, service: UNLOCK.serviceAsk };
+/** 그 단계에서 할 수 있는 것: 쓸모가 열리기 전이면 '3단계가 되면 …'(STATS 의 soon) */
+export const effectAt = (st, lv) => (UNLOCK_AT[st.id] && lv < UNLOCK_AT[st.id] && st.soon ? st.soon : st.effect);
 
 /** 하루에 일한 시간(결과 화면의 시급 계산). 가게는 아침 8시에 열고, 지은은 손님이 많은 6시간을 일함 */
 export const PAY_HOURS = 6;
@@ -42,7 +46,7 @@ export function statPoints(g = store.grow()) {
     hand: c(g, 'cups') + Math.floor(skillTotal(g) / 2),
     memory: c(g, 'respond') * 2 + c(g, 'usual'),
     service: c(g, 'asks') + c(g, 'respond'),
-    calm: c(g, 'rush') * 3 + c(g, 'tray') * 2 + c(g, 'routine'),
+    calm: c(g, 'rush') * 3 + c(g, 'tray') * 2 + c(g, 'routine') + c(g, 'wash'), // wash: 마감 설거지(2026-11-18)
   };
 }
 

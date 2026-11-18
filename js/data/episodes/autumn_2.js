@@ -78,6 +78,8 @@ export default {
     say('owner', 'smile', '겨울에도 찾아요. 이 동네 사람들한테 아아는 계절이 없어요.'),
     say('jieun', 'normal', '그런데 사장님, 강 씨가 오늘 양복을 입고 오셨어요. 항구 말고 버스 쪽으로 가셨고요.'),
     say('owner', 'normal', '…사람마다 말하지 않는 사정이 있어요. 강 씨가 말할 때까지는, 늘 그 잔이면 돼요.'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'autumn_2_wash' }),
     think('사장님은 무언가 알고 계신 것 같다. 그래도 끝까지 말하지 않으신다.'),
     motion('jieun', 'nod'),
     end(),

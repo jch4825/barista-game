@@ -88,6 +88,7 @@ export default {
     bgm('warm'),
     place('봄 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'spring_6_wash' }),
     say('owner', 'normal', '오늘도 닫기 전에 한 번 둘러봐요. 낮이랑 밤은 가게가 달라 보여요.'),
     mini('lookaround', {
       id: 'spring_6_look', title: '닫을 때 둘러보기', bg: ['hall', 'evening'],

@@ -103,6 +103,7 @@ export default {
     sfx('door'),
     show({ center: 'jieun:smile' }),
     narr('창밖의 은행잎이 다 떨어졌다. 저녁 바람이 차다.'),
+    mini('wash', { id: 'autumn_7_wash' }),
     think('곧 겨울이다. 사장님이 돌아오신다고 한 계절이다.'),
     motion('jieun', 'nod'),
     end(),

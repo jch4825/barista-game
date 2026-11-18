@@ -89,11 +89,17 @@ function menuView() {
     h('div', { class: 'nb-menu' }, ...ids.map((id) => {
       const r = RECIPES[id];
       const on = made.has(id);
+      // 그림: 다 만든 잔(머그 → 유리컵 → 플라스틱 컵 차례), 그림이 없으면 음료 색 동그라미, 아직이면 자물쇠
+      const pic = [...Object.values(r.look || {}), r.cup === 'paper' ? 'cup_paper' : null].find((x) => x && img.has('objects', x)); // 종이컵 잔(믹스커피)은 뚜껑 덮인 종이컵 그림
       return h('div', { class: `nb-menu-card ${on ? 'got' : ''} ${gold.has(id) ? 'is-gold' : ''}`.trim() },
-        h('i', { class: 'nb-menu-dot', style: { '--c': r.color || '#B08A5A' } }),
+        h('span', { class: 'nb-menu-pic', 'aria-hidden': 'true' },
+          !on ? h('i', { html: ICON('lock') })
+            : pic ? h('img', { src: img.url('objects', pic), alt: '', draggable: 'false' })
+              : h('i', { class: 'nb-menu-dot', style: { '--c': r.color || '#B08A5A' } })),
         gold.has(id) ? h('i', { class: 'nb-menu-star', 'aria-label': '완벽한 한 잔', html: ICON('star') }) : null,
         h('b', { text: on ? r.name : '???' }),
-        on ? h('small', { text: r.temps.map((t) => TEMPS[t]?.name || t).join(' · ') }) : h('small', { text: '아직 만들어 보지 않았어요' }));
+        on ? h('small', { text: r.temps.map((t) => TEMPS[t]?.name || t).join(' · ') }) : h('small', { text: '아직 만들어 보지 않았어요' }),
+        on && r.desc ? h('p', { class: 'nb-menu-desc', text: r.desc }) : null);
     })));
 }
 
@@ -245,13 +251,13 @@ function growView() {
       h('div', { class: 'gr-money' }, h('i', { html: ICON('coin') }), h('b', { text: `모은 돈 ${grow.won(g.money)}` }), h('small', { text: `지금까지 번 돈 ${grow.won(g.earned)}` })));
     const stats = h('section', { class: 'gr-stats' }, h('h3', { text: '능력치' }), ...grow.STATS.map((s) => {
       const v = st[s.id];
-      const say = `${s.name} ${v.level}단계. ${s.how} ${s.effect}`;
+      const say = `${s.name} ${v.level}단계. ${s.how} ${grow.effectAt(s, v.level)}`;
       return h('div', { class: 'gr-stat' },
         h('i', { class: 'gr-stat-ico', html: ICON(s.icon) }),
         h('div', { class: 'gr-stat-main' },
           h('p', { class: 'gr-stat-name' }, h('b', { text: s.name }), h('span', { text: `${v.level}단계` }), v.next ? h('small', { text: `다음 단계까지 ${v.next}` }) : h('small', { text: '가장 높은 단계' })),
           h('span', { class: 'gr-pips', 'aria-hidden': 'true' }, ...Array.from({ length: grow.MAX_LEVEL }, (_, i) => h('i', { class: i < v.level ? 'on' : '' }))),
-          h('p', { class: 'gr-stat-how', text: `${s.how} ${s.effect}` })),
+          h('p', { class: 'gr-stat-how', text: `${s.how} ${grow.effectAt(s, v.level)}` })),
         h('button', { class: 'nb-say', 'aria-label': `${s.name} 읽어 주기`, html: ICON('volume'), onclick: (e) => { e.stopPropagation(); tts.speak(say, 'sys', { force: true }); } }));
     }));
     const skills = Object.entries(HAND_SKILLS).filter(([id]) => g.skills[id]);

@@ -171,6 +171,8 @@ export default {
     sfx('beep'),
     narr('새벽, 냉장고가 웅 하고 다시 돌기 시작한다. 전기가 들어왔다.'),
     narr('사람들이 박수를 친다. 창밖에는 아직 눈이 조금씩 내린다.'),
+    narr('밤새 쓴 잔이 개수대에 가득하다. 하나씩 천천히 씻는다.'),
+    mini('wash', { id: 'winter_4_wash', title: '밤새 쓴 잔 설거지' }),
     face('jieun', 'smile'),
     think('밤새 몇 잔을 내렸는지 모르겠다. 그래도 한 잔도 쏟지 않았다.'),
     cg(null),

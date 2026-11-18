@@ -96,6 +96,7 @@ export default {
     bgm('warm'),
     place('봄 저녁 19:00', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
+    mini('wash', { id: 'spring_4_wash' }),
     narr('마감 뒤, 사장님이 우유를 데운다. 그런데 오늘은 잔이 두 개다.'),
     say('owner', 'normal', '한 잔은 지은 씨 거예요. 오늘 하루, 잘 버텼어요.'),
     say('jieun', 'smile', '고맙습니다. 잘 마실게요.'),

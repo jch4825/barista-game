@@ -104,6 +104,7 @@ export default {
     place('가을 저녁 19:10', '마감'),
     show({ center: 'jieun:sad' }),
     narr('혼자 하는 마감이다. 낮에 라테를 쏟은 일이 자꾸 떠오른다.'),
+    mini('wash', { id: 'autumn_6_wash' }),
     mini('lookaround', {
       id: 'autumn_6_look', title: '닫을 때 둘러보기', bg: ['hall', 'evening'],
       spots: [

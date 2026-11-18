@@ -109,6 +109,7 @@ export default {
     place('가을 밤 21:00', '축제가 끝난 밤'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('손님이 모두 갔다. 골목에서 축제 음악이 점점 멀어진다.'),
+    mini('wash', { id: 'autumn_4_wash' }),
     say('owner', 'normal', '지은아.'),
     think('사장님이 처음으로 말을 놓으셨다. 이름을 부르는 목소리가 다정하다.'),
     narr('사장님이 주머니에서 낡은 열쇠를 꺼낸다.'),

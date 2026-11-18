@@ -86,6 +86,7 @@ export default {
     say('jieun', 'normal', '그런데 스케치북을 한 번도 안 펴셨어요.'),
     say('owner', 'normal', '…그림이 안 그려지는 날도 있겠지요. 사람마다 그런 계절이 있어요.'),
     say('owner', 'normal', '오늘 많이 팔았네요. 수고했어요.'),
+    mini('wash', { id: 'summer_1_wash' }),
     narr('사장님이 의자에 앉아 손목을 천천히 주무른다. 오늘따라 많이 피곤해 보인다.'),
     motion('owner', 'nod'),
     end(),

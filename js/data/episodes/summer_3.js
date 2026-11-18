@@ -67,6 +67,8 @@ export default {
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     say('owner', 'normal', '저 학생은 수민이에요. 고3인데, 매일 학교가 끝나면 저 구석에서 공부해요.'),
     say('owner', 'normal', '사람마다 편한 거리가 있어요. 가까이 와 주길 바라는 사람도 있고, 조금 떨어져 있어 주길 바라는 사람도 있어요.'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'summer_3_wash' }),
     think('은주 씨에게는 말을 걸어 주는 사람이 필요했고, 수민에게는 조용히 두는 사람이 필요했다.'),
     think('맞는 친절은 사람마다 다르다. 그 사람이 무엇을 말하고, 무엇을 하는지 잘 봐야 한다.'),
     motion('jieun', 'nod'),

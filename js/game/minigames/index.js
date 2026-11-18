@@ -7,6 +7,7 @@
  *  - tray: 쟁반 나르기(서두르면 쏟는다)
  *  - rush: 몰림(재미 개편 4.4: 도시 카페의 점심시간 · 우리 카페의 몰림 시간 · 그 갈매기 쫓기)
  *  - bus: 바닷가로 가는 버스(재미 개편 7장: 창밖 풍경 세기 · 덜컹하면 손잡이)
+ *  - wash: 마감 설거지(2026-11-18: 하루를 마치기 전 머그의 입이 닿는 곳 · 안쪽 가운데를 닦고 헹굼, 블렌더 한 컷)
  */
 
 import { brew, brewLines, brewProblems } from './brew.js';
@@ -15,14 +16,18 @@ import { lookaround, lookaroundLines, lookaroundProblems } from './lookaround.js
 import { tray, trayLines, trayProblems } from './tray.js';
 import { rush, rushLines, rushProblems } from './rush.js';
 import { bus, busLines, busProblems } from './bus.js';
+import { wash, washLines, washProblems } from './wash.js';
 
-export const MINIGAMES = { brew, routine, lookaround, tray, rush, bus };
+export const MINIGAMES = { brew, routine, lookaround, tray, rush, bus, wash };
 
 /** 미니게임이 읽어 주는 문장 (tools/export-lines.mjs 가 mini 비트의 옵션으로 호출) */
-export const MINIGAME_LINES = { brew: brewLines, routine: routineLines, lookaround: lookaroundLines, tray: trayLines, rush: rushLines, bus: busLines };
+export const MINIGAME_LINES = { brew: brewLines, routine: routineLines, lookaround: lookaroundLines, tray: trayLines, rush: rushLines, bus: busLines, wash: washLines };
 
 /** 미니게임 옵션 검사 (tools/validate-scenarios.mjs 가 mini 비트마다 부름): 문제 글 목록 */
-export const MINIGAME_CHECKS = { brew: brewProblems, routine: routineProblems, lookaround: lookaroundProblems, tray: trayProblems, rush: rushProblems, bus: busProblems };
+export const MINIGAME_CHECKS = { brew: brewProblems, routine: routineProblems, lookaround: lookaroundProblems, tray: trayProblems, rush: rushProblems, bus: busProblems, wash: washProblems };
+
+/** 대본에 제목(title)을 적지 않은 미니게임의 이름: 되감기 · 저장 칸 · 선생님 기록에 나옴(마감 설거지는 날마다 같은 이름) */
+export const MINIGAME_TITLES = { wash: '마감 설거지' };
 
 /** 미니게임의 모양(skin) 이름 (검사기용) */
 export const MINIGAME_SKINS = {};

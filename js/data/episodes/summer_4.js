@@ -75,6 +75,7 @@ export default {
     place('여름 저녁 19:20', '마감'),
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('하루 종일 손님이 끊이지 않았다. 바쁘게 움직이는 사이, 앞치마 끈이 풀려 늘어져 있다.'),
+    mini('wash', { id: 'summer_4_wash' }),
     narr('컵을 닦고 있는데, 등 뒤에서 누가 끈을 살며시 잡는다.'),
     narr('사장님이 아무 말 없이 내 앞치마 끈을 다시 매 준다.'),
     seen(7),

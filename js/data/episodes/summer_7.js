@@ -116,6 +116,8 @@ export default {
     narr('사장님이 내 앞치마의 배지 옆에, 배지를 하나 더 달아 준다.'),
     say('owner', 'smile', '그 줄을 끝까지 버텼으니, 이제 그냥 바리스타라고 해도 되겠네요.'),
     info('새 배지', '「바리스타」 배지를 받았어요!', 'badge'),
+    narr('마감 시간이다. 오늘 쓴 잔을 하나씩 씻는다.'),
+    mini('wash', { id: 'summer_7_wash' }),
     motion('owner', 'nod'),
     end(),
   ],

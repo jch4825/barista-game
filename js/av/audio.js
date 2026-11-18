@@ -98,7 +98,9 @@ async function loadManifest() {
     }
   };
   // 배경음악: 공개 목록 + 이 컴퓨터에만 있는 곡(assets/music_local, Suno 무료 요금제 곡을 쓸 때만. 지금은 없어 빈 목록, 검수 13.83 · 13.113)
-  const [sounds, music, local] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json'), get('./assets/music_local/manifest.json')]);
+  // 이 컴퓨터에만 있는 곡 목록은 공개 목록에 local: true 가 있을 때만 찾음(없는 목록을 찾으면 켤 때마다 콘솔에 404, tools/scan-assets.mjs)
+  const [sounds, music] = await Promise.all([get('./assets/audio/manifest.json'), get('./assets/music/manifest.json')]);
+  const local = music.local ? await get('./assets/music_local/manifest.json') : {};
   const under = (dir, list) => Object.fromEntries(Object.entries(list || {}).map(([k, f]) => [k, `${dir}/${f}`]));
   manifest = { sfx: {}, amb: {}, ...sounds, bgm: { ...under('music', music.bgm), ...under('music_local', local.bgm) } };
 }

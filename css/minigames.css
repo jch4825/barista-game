@@ -433,3 +433,59 @@ body:is(.reduce-motion, .theme-calm) .mg-bus :is(.bs-hills-track, .bs-far) { ani
 .mg-pop.big { font-size: 56px; color: #FFE08A; }
 @keyframes mg-pop { 0% { opacity: 0; translate: 0 10px; scale: .6; } 20% { opacity: 1; scale: 1.15; } 40% { scale: 1; } 100% { opacity: 0; translate: 0 -46px; } }
 body.reduce-motion .mg-pop { animation: none !important; }
+
+/* ---------- 마감 설거지(js/game/minigames/wash.js, 2026-11-18): 개수대의 머그(블렌더 한 컷) 위의 닦을 곳 · 수도꼭지가 곧 단추 ---------- */
+.mg.mg-scene.mg-wash .mg-head { left: 24px; transform: none; } /* 머리글은 왼쪽 위: 가운데 위쪽의 수도꼭지를 가리지 않게 */
+.mg-wash .ws-scene { position: absolute; inset: 0; overflow: hidden; display: grid; place-items: center; background: #8E979C; }
+.mg-wash .ws-box { position: relative; flex: none; }
+.mg-wash .ws-plate, .mg-wash .ws-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.mg-wash .ws-layer { position: absolute; display: block; pointer-events: none; }
+.mg-wash .ws-layer[hidden] { display: none; }
+.mg-wash .ws-foam { animation: ws-in .35s ease-out both; }
+.mg-wash .ws-box.is-rinsing .ws-foam { opacity: 0; transition: opacity 1.6s ease-in; animation: none; }
+.mg-wash .ws-svg-foam, .mg-wash .ws-svg-stain { transition: opacity .3s; }
+.mg-wash .ws-svg-stream { opacity: 0; }
+.mg-wash .ws-box.is-rinse-svg .ws-svg-stream { opacity: .8; }
+@keyframes ws-in { from { opacity: 0; } to { opacity: 1; } }
+/* 수세미: 놓인 자리 → 닦는 곳에서 돎(위치는 wash.js 가 % 로) */
+.mg-wash .ws-sponge { position: absolute; z-index: 3; pointer-events: none; transform: rotate(var(--r, 0deg)) scale(var(--s, 1)); transition: left .12s linear, top .12s linear, transform .2s; filter: drop-shadow(6px 10px 8px rgba(20, 24, 26, .45)); }
+.mg-wash .ws-sponge.is-scrub { --s: .5; } /* 닦는 동안은 작게: 얼룩이 지워지는 것이 가려지지 않게(손에 쥔 귀퉁이로 문지르는 느낌) */
+.mg-wash .ws-sponge img { display: block; width: 100%; height: 100%; }
+.mg-wash .ws-sponge.is-svg { border-radius: 14px; background: linear-gradient(180deg, #2F7D52 0 28%, #EFC23A 28% 100%); }
+/* 닦을 곳(단추): 그림 속 테두리의 고리 · 바닥의 동그라미. 금빛 점선 고리가 숨 쉬듯, 다 닦으면 초록 실선 + 깨끗해요 */
+.mg-wash :is(.ws-zone, .ws-tap) { position: absolute; z-index: 2; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent; }
+.mg-wash .ws-zone.is-in { z-index: 4; }
+.mg-wash .ws-ring { position: absolute; inset: 0; border-radius: 50%; border: 7px dashed rgba(255, 226, 150, .95); box-shadow: 0 0 0 3px rgba(42, 29, 18, .35), 0 0 24px rgba(255, 214, 120, .55); animation: ws-breathe 1.8s ease-in-out infinite; }
+.mg-wash .ws-zone.is-rim .ws-ring { border-width: 9px; }
+.mg-wash .ws-zone.is-on .ws-ring { border-style: solid; border-color: #FFF1C2; animation: none; box-shadow: 0 0 0 3px rgba(42, 29, 18, .35), 0 0 34px rgba(255, 230, 160, .9); }
+.mg-wash .ws-zone.is-clean { cursor: default; }
+.mg-wash .ws-zone.is-clean .ws-ring { border: 6px solid rgba(124, 214, 152, .95); animation: none; box-shadow: 0 0 18px rgba(124, 214, 152, .6); }
+.mg-wash .ws-zone.is-nudge .ws-ring { animation: ws-nudge .45s ease 2; }
+.mg-wash :is(.ws-zone, .ws-tap):focus-visible { outline: none; }
+.mg-wash :is(.ws-zone, .ws-tap):focus-visible .ws-ring { box-shadow: 0 0 0 6px #FFFFFF, 0 0 0 10px #1B5E35; }
+@keyframes ws-breathe { 0%, 100% { opacity: .65; transform: scale(1); } 50% { opacity: 1; transform: scale(1.025); } }
+@keyframes ws-nudge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+/* 이름표: 고리 위쪽 바깥(입이 닿는 곳) · 동그라미 아래(안쪽 가운데) */
+.mg-wash .ws-tag { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 6px 18px; border-radius: 999px; background: rgba(4, 18, 23, .82); border: 2px solid rgba(212, 174, 98, .8); color: #FFF4D6; font-size: 28px; font-weight: 800; pointer-events: none; }
+.mg-wash .ws-zone.is-rim .ws-tag { top: -64px; }
+.mg-wash .ws-zone.is-in .ws-tag { bottom: -14px; translate: 0 100%; }
+.mg-wash .ws-zone.is-clean .ws-tag::after { content: ' ✓'; color: #9BE3B2; }
+/* 수도꼭지: 다 닦기 전에는 흐린 고리, 다 닦으면 금빛으로 */
+.mg-wash .ws-tap .ws-ring { border: 6px dashed rgba(255, 255, 255, .35); box-shadow: none; animation: none; }
+.mg-wash .ws-tap .ws-tag { bottom: -12px; translate: 0 100%; font-size: 24px; opacity: .7; }
+.mg-wash .ws-tap.is-ready .ws-ring { border: 8px dashed rgba(255, 226, 150, .95); box-shadow: 0 0 0 3px rgba(42, 29, 18, .35), 0 0 30px rgba(255, 214, 120, .7); animation: ws-breathe 1.4s ease-in-out infinite; }
+.mg-wash .ws-tap.is-ready .ws-tag { opacity: 1; }
+/* 헹군 뒤 반짝(빛살 없이 부드러운 빛) */
+.mg-wash .ws-box.is-shine :is(.ws-ring, .ws-tag) { opacity: 0; transition: opacity .8s; }
+.mg-wash .ws-box.is-shine::after { content: ''; position: absolute; left: 41%; top: 26%; width: 28%; height: 50%; border-radius: 50%; pointer-events: none; background: radial-gradient(ellipse at center, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 70%); animation: ws-shine 1.4s ease-out both; }
+@keyframes ws-shine { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; } }
+/* [보기] · 지금 할 일: 장면 오른쪽 아래 */
+.mg-wash .ws-watch { position: absolute; z-index: 5; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 8px 22px; border-radius: 999px; background: rgba(4, 18, 23, .8); border: 2px solid rgba(212, 174, 98, .8); color: #FFF4D6; font-size: 26px; font-weight: 800; }
+.mg-wash .ws-watch svg { width: 32px; height: 32px; }
+.mg-wash .ws-watch:disabled { opacity: .45; }
+.mg-wash .ws-status { position: absolute; z-index: 5; left: 24px; bottom: 24px; margin: 0; padding: 8px 20px; border-radius: 999px; background: rgba(4, 18, 23, .72); color: #F0D9A2; font-size: 24px; font-weight: 800; }
+body:is(.reduce-motion, .theme-calm) .mg-wash :is(.ws-ring, .ws-foam, .ws-tap .ws-ring) { animation: none !important; }
+body:is(.reduce-motion, .theme-calm) .mg-wash .ws-sponge { transition: none; }
+body:is(.reduce-motion, .theme-calm) .mg-wash .ws-box.is-shine::after { animation: none; opacity: 0; }
+body.contrast .mg-wash :is(.ws-tag, .ws-watch, .ws-status) { background: #000; border-color: #FFE14D; color: #fff; }
+body.contrast .mg-wash .ws-ring { border-color: #FFE14D; }

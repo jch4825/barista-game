@@ -92,6 +92,7 @@ export default {
     leave('do'),
     sfx('door'),
     show({ center: 'jieun:normal' }),
+    mini('wash', { id: 'winter_3_wash' }),
     think('내일도 오시면 좋겠다. 우편이 없어도, 앉으실 의자는 늘 그 자리에 있다.'),
     motion('jieun', 'nod'),
     end(),

@@ -124,6 +124,7 @@ export default {
     place('가을 저녁 19:00', '혼자 하는 마감'),
     show({ center: 'jieun:normal' }),
     narr('혼자 하는 마감이다. 사장님이 없으니 가게가 더 넓게 느껴진다.'),
+    mini('wash', { id: 'autumn_5_wash' }),
     narr('늘 사장님이 마시던 시간에, 나도 우유를 데워 본다.'),
     face('jieun', 'smile'),
     think('손님들은 정말 평소대로 오셨다. "손님은 평소대로 온다." 사장님 말씀이 맞았다.'),
