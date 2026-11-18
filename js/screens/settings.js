@@ -51,6 +51,8 @@ export function showSettings() {
     row('카드 고르기', segmented([['one', '한 번 눌러 고르기'], ['two', '두 번 눌러 고르기']], s.selectMode, set('selectMode'), { disabled: locked }), '두 번: 처음 누르면 읽어 주고, 한 번 더 누르면 골라요.'),
     row('되감은 뒤 도움', segmented([['many', '많이'], ['some', '보통'], ['self', '스스로']], s.help, set('help'), { disabled: locked }), '실패하고 되감은 뒤 메모 강조와 카드 반짝임을 얼마나 줄지 정해요.'),
     row('시간 제한', segmented([['normal', '보통'], ['slow', '넉넉히'], ['off', '끄기']], s.timer || 'normal', set('timer'), { disabled: locked }), '급한 장면(손님이 기다리거나 바닥이 젖었을 때 등)에 줄어드는 막대가 나와요. 넉넉히는 2배, 자동 스캔을 켜면 시간 제한이 없어요.'),
+    // 숙련자 템포(2026-11-18 사용자 "숙련자 템포를 넣는다.", js/game/minigames/frame.js isFamiliar)
+    row('익숙한 놀이', segmented([['quick', '빠르게'], ['full', '늘 처음처럼']], s.tempo === 'full' ? 'full' : 'quick', set('tempo'), { disabled: locked }), '세 번 넘게 한 놀이와 손 기술은 설명을 소리 내어 읽지 않고 곧 시작해요. 늘 처음처럼: 언제나 설명을 다 읽고 [시작!]을 기다려요.'),
     // 조작법(2026-11-02 사용자 "터치 기반, 드래그 활용까지로 구분하여 설정에서 조작법을 조정할 수 있게")
     row('조작법', segmented([['touch', '터치 기반'], ['drag', '드래그 활용']], s.control === 'drag' ? 'drag' : 'touch', set('control'), { disabled: locked }), '커피 만들기의 손 기술이에요. 드래그 활용은 피처를 끌어 기울이고 얼음을 국자로 옮기듯 물건을 직접 끌어요. 시간 제한을 끄면 터치 기반이에요.'),
     // 재미 개편(2026-11-01): 손 기술의 띠는 도움 표시(Q-38) · 손맛이 오르면 알맞아요 칸이 넓어짐(Q-41)

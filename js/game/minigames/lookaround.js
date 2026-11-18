@@ -53,7 +53,7 @@ export async function lookaround(opts = {}) {
   const title = opts.title || '둘러보기';
   const [bgId, bgVar] = opts.bg || ['hall', 'morning'];
   const spots = opts.spots || [];
-  const f = frame({ title, instruction: HOWTO, icon: 'watch', cls: 'mg-scene mg-look', quit: false });
+  const f = frame({ title, instruction: HOWTO, icon: 'watch', cls: 'mg-scene mg-look', quit: false, kind: 'lookaround', opts });
 
   const looked = new Set();
   let over = false;

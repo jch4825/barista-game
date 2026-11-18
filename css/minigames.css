@@ -489,3 +489,12 @@ body:is(.reduce-motion, .theme-calm) .mg-wash .ws-sponge { transition: none; }
 body:is(.reduce-motion, .theme-calm) .mg-wash .ws-box.is-shine::after { animation: none; opacity: 0; }
 body.contrast .mg-wash :is(.ws-tag, .ws-watch, .ws-status) { background: #000; border-color: #FFE14D; color: #fff; }
 body.contrast .mg-wash .ws-ring { border-color: #FFE14D; }
+
+/* [시작!] 창: 화면을 눌러도 시작한다는 설명 · 숙련자 템포(익숙한 놀이는 곧 저절로 시작, 단추 아래 줄이 줄어듦: 빛살 없이), 2026-11-18 */
+.mg-gate .mg-gate-tap { display: flex; align-items: center; gap: 10px; font-size: 24px; }
+.mg-gate .mg-gate-tap svg { width: 28px; height: 28px; color: #F0D9A2; }
+.mg-gate .mg-go.is-quick { position: relative; overflow: hidden; }
+.mg-gate .mg-go.is-quick::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: rgba(255, 244, 214, .85); transform-origin: left center; animation: mg-quick var(--quick, 1.6s) linear forwards; }
+@keyframes mg-quick { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+body:is(.reduce-motion, .theme-calm) .mg-gate .mg-go.is-quick::after { animation: none; opacity: .5; }
+body.contrast .mg-gate .mg-gate-tap { background: #000; color: #fff; }

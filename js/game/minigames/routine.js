@@ -100,7 +100,7 @@ export async function routine(opts = {}) {
   const steps = stepsOf(opts);
   const title = opts.title || r.title;
   const [bgId, bgVar] = opts.bg || r.bg;
-  const f = frame({ title, instruction: r.howto, icon: 'checklist', cls: 'mg-scene mg-routine', quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: r.howto, icon: 'checklist', cls: 'mg-scene mg-routine', quit: Boolean(opts.quit), kind: 'routine', opts });
 
   let next = 0;
   let mistakes = 0;

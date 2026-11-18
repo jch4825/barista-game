@@ -12,13 +12,15 @@
  */
 
 import { bg, bgm, amb, sfx, big, place, show, leave, say, narr, think, memo, mini, end, info, today } from '../../core/dsl.js';
-import { RECIPES, KID_CUP } from '../menu.js';
+import { RECIPES, KID_CUP, PANTRY_ALL } from '../menu.js';
 import { REGULARS } from '../regulars.js';
 
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 const SEASON_NAME = { spring: '봄', summer: '여름', autumn: '가을', winter: '겨울' };
 const COSTUMES = ['sporty', 'olive', 'coffee', 'stripe', 'arms'];
 const FULL_BOOK = Object.keys(RECIPES);
+// 자유 영업의 카운터는 모든 재료를 꺼내 둠(그날 주문에 든 것만 보이면 답이 드러나고 고를 것이 없었음, 2026-11-18 사용자)
+const ALL = { cups: PANTRY_ALL.cups, bases: PANTRY_ALL.bases, adds: PANTRY_ALL.adds, temps: PANTRY_ALL.temps };
 
 /** 시드 난수(mulberry32): 같은 날은 늘 같은 손님 */
 function rng(seed) {
@@ -210,6 +212,7 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
   return {
     id: 'free',
     season, // 손맛 단계(frame.js TIMING)도 그 날의 계절
+    week: Math.floor((day - 1) / 7), // 주가 바뀔수록 살짝 빨라짐(frame.js weekSpeed, 7일마다 한 주)
     label: '자유 영업',
     title: `${day}번째 날`,
     when: `${sName} · 하루`,
@@ -235,12 +238,12 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
       memo('오늘의 도전', [challenge]),
       news(r1),
       ...(board.rush ? [mini('rush', { id: `free_${day}_rush`, theme: 'cafe', title: board.id === 'owner' ? '혼자 맞는 몰림 시간' : '행사 날의 몰림 시간', bg: ['hall', season], quit: true })] : []),
-      mini('brew', { id: `free_${day}_am`, title: '오전 손님', level: 'normal', quit: true, book: FULL_BOOK, orders: am }),
+      mini('brew', { id: `free_${day}_am`, title: '오전 손님', level: 'normal', quit: true, book: FULL_BOOK, pantry: ALL, orders: am }),
       ...(cameo ? [
         show({ left: 'jieun:normal', right: `${cameo.who}:smile` }),
         sfx('bell'),
         say(cameo.who, 'smile', cameo.line),
-        mini('brew', { id: `free_${day}_cameo`, title: '바다를 보러 온 손님', level: 'normal', quit: true, book: FULL_BOOK, orders: [{ who: cameo.who, ...cameo.order }] }),
+        mini('brew', { id: `free_${day}_cameo`, title: '바다를 보러 온 손님', level: 'normal', quit: true, book: FULL_BOOK, pantry: ALL, orders: [{ who: cameo.who, ...cameo.order }] }),
         leave(cameo.who),
       ] : []),
       place(`${sName} 오후`, '바닷가 마을 카페'),
@@ -248,7 +251,7 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
       ...(board.until ? [narr(board.until), today({})] : []), // 모자랐던 것이 채워짐 · 사장님이 돌아옴
       ...(board.id === 'owner' ? [show({ left: 'jieun:normal', right: 'owner:smile' }), say('owner', 'smile', '혼자서도 잘했네요. 오후는 같이 해요.')] : []),
       news(r2),
-      mini('brew', { id: `free_${day}_pm`, title: '오후 손님', level: 'normal', quit: true, book: FULL_BOOK, orders: pm }),
+      mini('brew', { id: `free_${day}_pm`, title: '오후 손님', level: 'normal', quit: true, book: FULL_BOOK, pantry: ALL, orders: pm }),
       bg('hall', 'evening'),
       bgm('warm'),
       place(`${sName} 저녁`, '마감'),

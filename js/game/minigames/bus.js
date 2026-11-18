@@ -14,7 +14,7 @@ import { ICON } from '../../data/icons.js';
 import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { josaOnly } from '../../core/text.js';
-import { frame, line, abortGeneration, abortMinigame } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus as evBus } from '../../core/bus.js';
 import { img } from '../../core/assets.js';
@@ -73,7 +73,8 @@ export async function bus(opts = {}) {
   const title = opts.title || TITLE;
   const { turn, k } = pace();
   const still = isReducedMotion();
-  const f = frame({ title, instruction: HOWTO, icon: 'bus', cls: `mg-scene mg-bus${still ? ' is-still' : ''}`, quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: HOWTO, icon: 'bus', cls: `mg-scene mg-bus${still ? ' is-still' : ''}`, quit: Boolean(opts.quit), kind: 'bus', opts });
+  const ws = timingOf(opts).week; // 주가 바뀔수록 살짝 빨라짐: 손잡이의 원 · 풍경
 
   let over = false;
   let started = false;
@@ -167,7 +168,7 @@ export async function bus(opts = {}) {
     bumpOn = true;
     bumpT = 0;
     if (nextB) nextB.disabled = true; // 턴 방식: 덜컹하는 동안은 손잡이의 원만(스캔이 눌리지 않는 [다음 풍경]을 가리키지 않게)
-    grip.replaceChildren(h('i', { class: 'bs-ring', style: { '--ms': `${(BUMP_MS * k) / 1000}s` } })); // 원을 새로: 줄어드는 움직임이 처음부터
+    grip.replaceChildren(h('i', { class: 'bs-ring', style: { '--ms': `${(BUMP_MS * k) / ws / 1000}s` } })); // 원을 새로: 줄어드는 움직임이 처음부터
     grip.classList.remove('is-got');
     grip.hidden = false;
     audio.sfx('bump');
@@ -209,7 +210,7 @@ export async function bus(opts = {}) {
     tAcc += dt;
     farAt(tAcc / total);
     sightIn -= dt;
-    if (sightIn <= 0) { addSight(); sightIn = (GAP_MS[0] + Math.random() * GAP_MS[1]) * k; }
+    if (sightIn <= 0) { addSight(); sightIn = ((GAP_MS[0] + Math.random() * GAP_MS[1]) * k) / ws; }
     for (const it of [...flying]) {
       it.t += dt;
       if (auto && !it.b.disabled && it.t > 1200) it.b.click();
@@ -220,7 +221,7 @@ export async function bus(opts = {}) {
     if (bumpOn) {
       bumpT += dt;
       if (auto && bumpT > 300) bumpEnd(true);
-      if (bumpT >= BUMP_MS * k) bumpEnd(false);
+      if (bumpT >= (BUMP_MS * k) / ws) bumpEnd(false);
     }
     if (tAcc >= total) finish();
   }
@@ -268,7 +269,7 @@ export async function bus(opts = {}) {
 
   paint();
   // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(검수 13.39 15번)
-  await Promise.race([startGate(f.body, { note: turn ? '창을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.', ready: f.told }), doneP]);
+  await Promise.race([startGate(f.body, { note: turn ? '창을 누를 때마다 하나씩 지나가요.' : '천천히 봐도 괜찮아요.', ready: f.told, quick: f.familiar }), doneP]);
   if (!stopped() && !over) {
     started = true;
     tts.speak(SAY.start, 'sys');

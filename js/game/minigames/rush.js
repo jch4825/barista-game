@@ -16,7 +16,7 @@ import { ICON } from '../../data/icons.js';
 import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { renderBg } from '../../data/backgrounds.js';
-import { frame, line, abortGeneration, abortMinigame } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus } from '../../core/bus.js';
 import * as grow from '../../core/grow.js';
@@ -84,7 +84,8 @@ export async function rush(opts = {}) {
   const { turn, k } = pace();
   const [bgId, bgVar] = opts.bg || th.bg;
   const howto = opts.today?.owner === false && th.howtoAlone ? th.howtoAlone : th.howto;
-  const f = frame({ title, instruction: howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: howto, icon: th.icon, cls: `mg-scene mg-rush rs-${kind}`, quit: Boolean(opts.quit), kind: 'rush', opts });
+  const ws = timingOf(opts).week; // 주가 바뀔수록 살짝 빨라짐: 주문이 나오는 사이 · 갈매기
 
   let over = false;
   let started = false;
@@ -183,7 +184,7 @@ export async function rush(opts = {}) {
   let hop = 0;
   // 뛰어다니기(run): 움직임 줄이기 · 차분 모드 · 턴 방식이 아니면. 자리는 그림의 %(y 는 높이의 %라 거리를 잴 때 16:9 로 맞춤)
   const runMode = kind === 'gull' && !turn && !isReducedMotion() && !document.body.classList.contains('theme-calm');
-  const spd = (store.path() === 'easy' ? 0.6 : store.path() === 'deep' ? 1.15 : 1) / k;
+  const spd = ((store.path() === 'easy' ? 0.6 : store.path() === 'deep' ? 1.15 : 1) * ws) / k;
   const YR = 9 / 16;
   const run = { x: 0, y: 0, tx: 0, ty: 0, v: 0, rest: 0, autoT: 0 };
   const rand = (a, b) => a + Math.random() * (b - a);
@@ -282,7 +283,7 @@ export async function rush(opts = {}) {
       if (runMode) runStep(dt);
       else {
         hop += dt;
-        if (hop >= th.hop * k) { hop = 0; placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt))); }
+        if (hop >= (th.hop * k) / ws) { hop = 0; placeGull(pick(S.map((_, i) => i).filter((i) => i !== gullAt))); }
       }
       run.autoT += dt;
       if (auto && run.autoT > 200) { run.autoT = 0; gull.click(); }
@@ -297,7 +298,7 @@ export async function rush(opts = {}) {
       // 손이 빠른 학생도 몰림이 가장 셀 때는 사장님과 함께 하게(2026-11-08 사용자 "그래야 사장님의 도움을 받을 수 있다", 검수 13.96)
       if (kind === 'cafe' && !alone && live.size >= th.max) { const [i, s] = [...live].reduce((a, b) => (b[1].age > a[1].age ? b : a)); ownerTake(i, s); }
       if (live.size < (kind === 'city' ? S.length : th.max)) addSlip();
-      spawnIn = (th.spawn[0] + (th.spawn[1] - th.spawn[0]) * prog) * k * pk;
+      spawnIn = ((th.spawn[0] + (th.spawn[1] - th.spawn[0]) * prog) * k * pk) / ws;
     }
     if (kind === 'cafe') {
       for (const [i, s] of [...live]) {
@@ -353,7 +354,7 @@ export async function rush(opts = {}) {
 
   paint();
   // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(같은 말이 할 일에 들어 있으면 생략, 검수 13.39 15번)
-  await Promise.race([startGate(f.body, { note: turn ? '하나씩 차례로 나와요.' : '', ready: f.told }), doneP]);
+  await Promise.race([startGate(f.body, { note: turn ? '하나씩 차례로 나와요.' : '', ready: f.told, quick: f.familiar }), doneP]);
   if (!stopped() && !over) {
     started = true;
     if (rushMusic) { prevMood = audio.state().mood; switched = true; audio.bgm(rushMood); }

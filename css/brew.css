@@ -754,3 +754,11 @@ body.theme-calm .mg.mg-brew .bw-move-from { transition-duration: .9s; }
 .bw-deco:not(.has-art) { height: 6.4% !important; aspect-ratio: 1; }
 .bw-deco .dc-ico { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: rgba(255, 248, 230, .92); box-shadow: 0 0 0 3px rgba(212, 174, 98, .85); color: #6B4E1E; }
 .bw-deco .dc-ico svg { width: 60%; height: 60%; }
+
+/* 화면을 눌러도 된다는 설명(2026-11-18 사용자): 손 기술 [시작!] 카드의 한 줄 */
+.mg.mg-brew .bw-tap-note { display: flex; align-items: center; gap: 8px; margin: 4px 0 0; font-size: 21px; font-weight: 700; color: #5E5446; }
+.mg.mg-brew .bw-tap-note i svg { width: 24px; height: 24px; color: var(--main); }
+body.contrast .mg.mg-brew .bw-tap-note { color: #fff; }
+
+/* 벽 선반의 이름표: 긴 이름(디카페인 원두 · 보리차 티백 · 코코아 가루)은 두 줄로, 옆 칸과 겹치지 않게(2026-11-18) */
+.mg.mg-brew .bw-hot.is-shelf .bw-hot-name { width: max-content; max-width: 5.2em; white-space: normal; word-break: keep-all; text-align: center; line-height: 1.15; padding: 3px 10px; font-size: 18px; border-radius: 12px; }

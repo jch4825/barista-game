@@ -54,13 +54,19 @@ export function loop(step, speed = () => 1) {
  * 앞 대사를 넘기던 손이 바로 시작해 버리지 않게 잠깐(0.7초) 뒤부터, ready(틀의 처음 설명 told)가 있으면 설명을 다 들은 뒤부터.
  * 그 전에 단추 밖을 누르면 [시작!]이 살짝 커졌다 돌아옴. 쟁반은 단추만 누름(css 의 pointer-events)
  */
-export function startGate(host, { label = '시작!', note = '', ready = null } = {}) {
-  const btn = h('button', { class: 'btn btn-big btn-main mg-go' }, h('i', { html: ICON('play') }), h('span', { text: label }));
-  const wrap = h('div', { class: 'mg-gate' }, btn, note ? h('p', { text: note }) : null);
+export const QUICK_MS = 1600; // 숙련자 템포: [시작!]이 저절로 눌리기까지
+export const GATE_TAP = '화면 아무 곳이나 눌러도 시작해요.'; // 화면을 눌러도 이어진다는 설명(2026-11-18 사용자 "화면을 눌러도 게임이 진행된다는 설명이 없다")
+export function startGate(host, { label = '시작!', note = '', ready = null, quick = false, tap = true } = {}) {
+  // quick(숙련자 템포 · 익숙한 놀이): 설명을 기다리지 않고 곧 저절로 시작(턴 방식은 시간이 가지 않으므로 저절로 시작하지 않음)
+  const auto = quick && !pace().turn;
+  const btn = h('button', { class: `btn btn-big btn-main mg-go${auto ? ' is-quick' : ''}`, style: { '--quick': `${QUICK_MS / 1000}s` } }, h('i', { html: ICON('play') }), h('span', { text: label }));
+  const tapNote = tap ? h('p', { class: 'mg-gate-tap' }, h('i', { html: ICON('hand') }), h('span', { text: auto ? '곧 저절로 시작해요. 화면을 누르면 바로 시작해요.' : GATE_TAP })) : null;
+  const wrap = h('div', { class: 'mg-gate' }, btn, note ? h('p', { text: note }) : null, tapNote);
   host.append(wrap);
-  const shownAt = performance.now();
-  let told = !ready;
+  const shownAt = performance.now() - (quick ? 700 : 0);
+  let told = !ready || quick;
   ready?.then(() => { told = true; });
+  const autoT = auto ? setTimeout(() => { if (btn.isConnected) btn.click(); }, QUICK_MS) : 0;
   setTimeout(() => btn.focus({ preventScroll: true }), 60);
   wrap.addEventListener('click', () => { // 단추는 누름을 위로 보내지 않음
     if (told && performance.now() - shownAt > 700) { btn.click(); return; }
@@ -71,6 +77,7 @@ export function startGate(host, { label = '시작!', note = '', ready = null } =
   return new Promise((resolve) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
+      clearTimeout(autoT);
       audio.sfx('tap');
       tts.stop();
       wrap.classList.add('is-out');

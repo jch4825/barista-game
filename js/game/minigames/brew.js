@@ -57,7 +57,7 @@ import { bus } from '../../core/bus.js';
 import { store } from '../../core/store.js';
 import { CHARS, faceHTML, voiceOf } from '../../data/characters.js';
 import { vfx, centerOf } from '../../ui/vfx.js';
-import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf, tempoQuick, FAMILIAR_AT, quietIntro } from './frame.js';
 import { pace, loop, isDebug } from './arcade.js';
 import {
   LEVELS, CUPS, INGREDIENTS, TEMPS, HAND_SKILLS, RECIPES, LATTE_ART, STARTER_BOOK, PANTRY, STEP_NAMES, MAX_ADDS,
@@ -71,6 +71,7 @@ import { REGULARS } from '../../data/regulars.js';
 import * as grow from '../../core/grow.js';
 import { josa } from '../../core/text.js';
 import { counterDecos } from '../../ui/gift.js';
+import { attachTrail } from '../../ui/trail.js';
 
 const TITLE = '커피 만들기';
 const HOWTO = '주문을 듣고 레시피대로 만들어요. 다 만들면 손님에게 드려요.';
@@ -831,12 +832,13 @@ const HOT_POS = {
 };
 /* 벽 선반(2026-10-31): 청 · 가루 · 티백 · 원두처럼 작은 병 · 통은 카운터 뒤 벽의 선반 한 줄에(그날 주문에 든 것만 보임). 자리는 늘 같음 */
 const SHELF = 44;
-const SHELF_X = { decaf: 10, drip: 14.8, mix: 19.6, barley: 24.4, yuja: 29.2, strawberry: 34, matcha: 38.8, cocoa: 43.6 };
+// 여덟 칸이 다 놓일 때(자유 영업은 모두 꺼내 둠, 2026-11-18)에도 이름표가 겹치지 않게 칸을 조금 넓히고, 긴 이름은 두 줄(.is-shelf)
+const SHELF_X = { decaf: 9.6, drip: 14.9, mix: 20.2, barley: 25.5, yuja: 30.8, strawberry: 36.1, matcha: 41.4, cocoa: 46.7 };
 for (const [id, x] of Object.entries(SHELF_X)) HOT_POS[id] = [x, SHELF, 4.2];
 const CUP_ROW = { x: 13, step: 5.4, bottom: BACK };
 const CUP_W = { mug: 4.84, thick: 4.95, paper: 4.38, glass: 4.27, plastic: 4.3, shot: 3.7 };
 const BOARD_BOTTLES = [77, 98]; // 오른쪽 나무판(왼쪽 끝 · 오른쪽 끝 %)
-const BOARD_SHELF = [7, 46.2]; // 벽 선반
+const BOARD_SHELF = [7, 49.3]; // 벽 선반
 /** 재료를 꺼내는 물건(수첩 · 넣은 것 칸의 그림은 menu.js 의 obj 그대로): 에스프레소는 머신, 물은 주전자 */
 const HOT_ART = { espresso: 'obj_machine', decaf: 'obj_decaf', milk: 'obj_milk_bottle', water: 'obj_kettle', syrup: 'obj_syrup', iced: 'obj_ice_bucket', mix: 'obj_mix' }; // 믹스커피: 선반에는 스틱이 든 상자, 넣은 것 · 넣는 장면은 스틱 하나(obj_mix_stick)
 const hotStyle = ([x, b, w]) => ({ left: `${x}%`, bottom: `${b}%`, width: `${w}%` });
@@ -1065,7 +1067,10 @@ export async function brew(opts = {}) {
   const title = opts.title || TITLE;
   const debug = isDebug();
 
-  const f = frame({ title, instruction: HOWTO, icon: 'coffee', cls: 'mg-brew', speech: speechOf(opts), quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: HOWTO, icon: 'coffee', cls: 'mg-brew', speech: speechOf(opts), quit: Boolean(opts.quit), kind: 'brew', opts });
+  // 첫 주가 지나면(또는 세 번 넘게 했으면) 단계마다 하는 방법 말(주문 확인을 눌러요 · 컵을 찾아 눌러요 …)을 읽지 않음. 글은 그대로(frame.js quietIntro, 2026-11-18 사용자)
+  const quiet = f.quiet;
+  const howV = (t) => (quiet ? null : sysV(t));
   // 레시피 수첩에 들어온 메뉴(위쪽 띠의 [레시피] · 자유 영업 · 메뉴 도감이 씀)
   const knownBook = store.flag('menuBook') || [];
   if (book.some((id) => !knownBook.includes(id))) store.setFlag('menuBook', [...new Set([...knownBook, ...book])]);
@@ -1499,7 +1504,7 @@ export async function brew(opts = {}) {
       const pos = HOT_POS[id];
       if (!pos) continue;
       const on = ings.includes(id);
-      const b = hotBtn(`ing:${id}`, HOT_ART[id] || INGREDIENTS[id].obj, INGREDIENTS[id].name, pos, on, id === 'espresso' ? 'is-machine' : '', runOut(id));
+      const b = hotBtn(`ing:${id}`, HOT_ART[id] || INGREDIENTS[id].obj, INGREDIENTS[id].name, pos, on, id === 'espresso' ? 'is-machine' : id in SHELF_X ? 'is-shelf' : '', runOut(id));
       onTap(b, () => press(b, INGREDIENTS[id].name, () => pickIng(id)));
       map.set(`ing:${id}`, b);
       kids.push(b);
@@ -1656,7 +1661,7 @@ export async function brew(opts = {}) {
     } else {
       ings.push(id);
       audio.sfx('pickup');
-      talk(sysV(INGREDIENTS[id].name), ings.length === 1 && made.cup ? sysV(PROMPT.adds) : null);
+      talk(sysV(INGREDIENTS[id].name), ings.length === 1 && made.cup ? howV(PROMPT.adds) : null);
     }
     keepFocus(`ing:${id}`);
   }
@@ -1747,7 +1752,7 @@ export async function brew(opts = {}) {
     ings = [];
     renderRecipe();
     focusLater(ui.hot.values().next().value);
-    talk(sysV(PROMPT.cup));
+    talk(howV(PROMPT.cup));
   }
 
   /* ---- 손 기술이 모자라거나 넘쳤을 때(2026-10-31 사용자 "더 화려하게 · 주인공의 시무룩한 표정 · 효과음도 더 극적이게") ----
@@ -1786,8 +1791,13 @@ export async function brew(opts = {}) {
   }
 
   /* ---- 손 기술: 띠 ---- */
-  function gate(sk, turn, canHand = false, drag = false, cue = false) {
+  function gate(sk, turn, canHand = false, drag = false, cue = false, act = 'hold') {
     phase = 'gate';
+    // 숙련자 템포(frame.js): 세 번 넘게 한 손 기술은 설명을 읽지 않고, 카드 밖을 누르면 바로 시작(글은 그대로 · 쉬운 길 · '늘 처음처럼'은 그대로)
+    const quick = tempoQuick() && (grow.skillCount(sk.id || '') >= FAMILIAR_AT || quiet); // 첫 주가 지났거나 세 번 넘게 한 손 기술
+    // 화면을 눌러도 된다는 설명(2026-11-18 사용자): 그림 = 단추(꾹 = 누르고 있기, 톡 = 지금 · 담기 …) · 카드 밖 = [시작!]
+    const tapLine = drag ? '이 카드 밖을 누르면 바로 시작해요.'
+      : `시작하면 그림을 ${turn || act === 'wait' || act === 'beats' ? '톡' : '꾹'} 눌러도 돼요. 이 카드 밖을 누르면 바로 시작해요.`;
     // 쉬운 길(선생님이 정함): 아직 두 번도 안 해 본 손 기술은 [보기]를 앞에(먼저 보고 따라 하게). [시작!]도 그대로 있음
     const seeFirst = path === 'easy' && !turn && grow.skillCount(sk.id || '') < 2;
     const go = btn('play', '시작!', `btn-big ${seeFirst ? 'btn-soft' : 'btn-main'} mg-go`);
@@ -1802,16 +1812,20 @@ export async function brew(opts = {}) {
         turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
         seeFirst ? h('p', { class: 'bw-hand-note' }, h('i', { html: EYE }), SYS.seeFirst) : null,
         hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [손에 익은 대로]를 누르면 손이 알아서 해요.`) : null,
+        h('p', { class: 'bw-tap-note' }, h('i', { html: ICON('hand') }), tapLine),
         h('div', { class: 'bw-row' }, see, hand, go)));
     (closeEl || bench).append(wrap);
     ui.gateGo = go;
     ui.gateSee = see;
     ui.gateSkill = sk.id;
     // 카드 밖을 눌러 시작하는 것은 설명을 다 들은 뒤부터(대사를 넘기듯 누르던 손에 설명이 끊기지 않게, 검수 13.39 17번). [시작!]은 늘 됨
-    const shownAt = performance.now();
-    let told = false;
-    talkAfter(sysV(skillSpeech(sk, turn, drag, cue)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null)
-      .then(() => { told = true; });
+    const shownAt = performance.now() - (quick ? 1200 : 0);
+    let told = quick;
+    if (quick) { if (sk.safety && !safetySaid) talkAfter(sysV(sk.safety)); } // 익숙한 손 기술: 안전 한 줄만(처음이면)
+    else {
+      talkAfter(sysV(skillSpeech(sk, turn, drag, cue)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null)
+        .then(() => { told = true; });
+    }
     if (sk.safety) safetySaid = true;
     focusLater(seeFirst ? see : go);
     return new Promise((resolve) => {
@@ -2063,7 +2077,7 @@ export async function brew(opts = {}) {
       if (turn || how === 'watch' || act === 'wait') audio.sfx(sk.sfx);
       focusLater(turn ? stepB : stopB);
       if (how === 'watch') talk(sysV(watchLine));
-      else if (act === 'circle' && !turn) talk(sysV(SYS.drag));
+      else if (act === 'circle' && !turn && !quiet) talk(sysV(SYS.drag));
       let mode = how;
       let finished = false;
       let tick = 0;
@@ -2207,6 +2221,8 @@ export async function brew(opts = {}) {
         view.onlostpointercapture = pauseHold;
       } else if (act === 'circle') {
         // 원 그리기: 장면 위에서 손가락 · 마우스로 원을 그리면 그만큼 돎. 손가락이 거의 그대로면 [누르고 있기]처럼 저절로 돎. 손을 떼면 정함
+        // 저을 때 손가락 뒤를 따라오는 흐르는 선(2026-11-18 사용자, js/ui/trail.js): 흰 우유 · 짙은 커피 위 어디서나 보이게 금빛 선 + 갈색 번짐. 장면(view)이 닫히면 함께 사라짐
+        attachTrail(view, { color: '255, 206, 110', glow: '120, 70, 20' });
         const angleAt = (e) => {
           const r = view.getBoundingClientRect();
           return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2));
@@ -2407,7 +2423,7 @@ export async function brew(opts = {}) {
           return;
         }
         if (!turn) {
-          q += dt / (BEAT_MS * k);
+          q += (dt * tm.beat) / (BEAT_MS * k); // 주가 바뀔수록 살짝 빨라짐(frame.js timingOf 의 beat)
           drawBeat();
           if (q >= 1) { judge(1.5); return; }
           if (robot && !robotMiss && q >= BEAT_HIT - 0.01) judge(q);
@@ -2590,7 +2606,7 @@ export async function brew(opts = {}) {
       talkAfter([mastered(sk), 'jieun']);
     };
     let how = 'watch';
-    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk), saysNow));
+    if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk), saysNow, act));
     if (how === 'hand') {
       // 맡기기: 손이 알아서 알맞아요 칸 가운데까지(실패 없음, '딱 좋아요'는 직접 했을 때만)
       // 말은 처음 HANDOFF_SAY 번만, 그 뒤로는 효과음만(2026-11-07 사용자 '버튼 누를 때마다 나오니까 어색하다. 처음 5번 정도는 그렇게 하고 그 이후에는', 검수 13.87)
@@ -2960,7 +2976,7 @@ export async function brew(opts = {}) {
     ui.serve = give;
     const say = again ? SYS.moveServe : PROMPT.serve;
     setPanel(askRow('', say), resultBox(res), h('div', { class: 'bw-row' }, give));
-    talkAfter(sysV(say));
+    if (again || !quiet) talkAfter(sysV(say)); // 첫 주가 지나면 '손님에게 드려요'는 읽지 않음(글은 그대로)
     focusLater(give);
     await w(waitTap(give));
     phase = 'busy';
@@ -3458,12 +3474,12 @@ export async function brew(opts = {}) {
       renderHots();
       // 처음 손님은 소개 말 다음에 주문(틀이 읽던 소개를 처음부터 이어서), 다음 손님은 바로 주문 → 주문 받기 → 레시피 고르기
       const ordering = takeOrder();
-      talk(i === 0 ? sysV(speechOf(opts)) : null, guestV(cur.say), sysV(orderAsk(cur).length ? PROMPT.order : PROMPT.orderDone));
+      talk(i === 0 && !quiet ? sysV(speechOf(opts)) : null, guestV(cur.say), howV(orderAsk(cur).length ? PROMPT.order : PROMPT.orderDone));
       await w(ordering);
       target = orderTarget(cur); // 오늘의 칠판으로 바뀐 주문
       setReact('');
       let pending = pickRecipe(false);
-      talk(sysV(PROMPT.cup));
+      talk(howV(PROMPT.cup));
       fix = null;
       for (;;) {
         await w(pending);
@@ -3507,7 +3523,7 @@ export async function brew(opts = {}) {
         // 다시 만들기: 레시피가 틀렸으면 처음부터, 손 기술만 벗어났으면 같은 레시피로(고친 것만 다시 고를 수 있음)
         const keep = how === 'keep';
         pending = pickRecipe(keep);
-        talk(guestV(SAY.wait), sysV(keep ? PROMPT.confirm : PROMPT.cup));
+        talk(guestV(SAY.wait), keep ? sysV(PROMPT.confirm) : howV(PROMPT.cup));
       }
     }
     phase = 'done';

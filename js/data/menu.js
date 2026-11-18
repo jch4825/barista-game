@@ -413,6 +413,16 @@ export const PANTRY = {
   adds: ['water', 'milk', 'syrup'],
   temps: ['hot', 'iced'],
 };
+/**
+ * 모든 것을 꺼내 둔 카운터(자유 영업, 2026-11-18 사용자 "자유영업에서는 모든 재료, 청, 믹스커피 등이 모두 화면에 떠 있는 상태에서 고를 수 있어야"):
+ * 컵 다섯 · 바탕 · 더하기 재료 모두(벽 선반의 청 · 가루 · 티백 · 원두 · 믹스커피도). 이야기의 날은 그날 주문에 든 것만(PANTRY + 주문, brew.js pantryOf)
+ */
+export const PANTRY_ALL = {
+  get cups() { return Object.keys(CUPS); },
+  get bases() { return Object.keys(INGREDIENTS).filter((id) => INGREDIENTS[id].roles.includes('base')); },
+  get adds() { return Object.keys(INGREDIENTS).filter((id) => INGREDIENTS[id].roles.includes('add')); },
+  temps: ['hot', 'iced'],
+};
 
 export const RECIPE_STEPS = ['cup', 'base', 'adds', 'temp'];
 export const STEP_NAMES = { cup: '컵', base: '바탕', adds: '더하기', temp: '온도' };

@@ -57,7 +57,7 @@ export async function tray(opts = {}) {
   const items = opts.items || [{ icon: 'cup', name: '잔' }];
   const nSteps = opts.steps || 8;
   const [bgId, bgVar] = opts.bg || ['hall', 'morning'];
-  const f = frame({ title, instruction: turn ? HOWTO_TURN : HOWTO, icon: 'tray', cls: 'mg-scene mg-tray' });
+  const f = frame({ title, instruction: turn ? HOWTO_TURN : HOWTO, icon: 'tray', cls: 'mg-scene mg-tray', kind: 'tray', opts });
 
   let d = 0;       // 걸은 거리 0~1
   let wob = 0;     // 흔들림 0~1
@@ -143,7 +143,7 @@ export async function tray(opts = {}) {
   let earlyAbort = false;
   f.onAbort(() => { earlyAbort = true; doneRes('abort'); });
   // [시작!]은 화면 가운데에 크게(2026-11-01 사용자: 높이는 그대로, 가로는 가운데, 크기 2배)
-  await Promise.race([startGate(f.body, { note: '천천히 해도 괜찮아요.' }), doneP]);
+  await Promise.race([startGate(f.body, { note: turn ? '천천히 해도 괜찮아요. 장면을 톡 눌러도 한 걸음 걸어요.' : '천천히 해도 괜찮아요. 장면 아무 곳이나 꾹 눌러도 걸어요.', quick: f.familiar, tap: false }), doneP]); // 쟁반은 [시작!] 단추만(장면은 걷기)
   if (earlyAbort || stopped()) { if (isDebug()) { delete window.__mgAuto; delete window.__mgBad; } f.close(); return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; }
   [goB, restB, watchB].forEach((b) => { if (b) b.disabled = false; });
   setTimeout(() => goB.focus({ preventScroll: true }), 40);
@@ -224,7 +224,7 @@ export async function tray(opts = {}) {
     }
     if (!turn) {
       if (holding) {
-        d = Math.min(1, d + dt / (WALK_MS * k));
+        d = Math.min(1, d + dt / ((WALK_MS * k) / timingOf(opts).week)); // 주가 바뀔수록 살짝 빨리 걸음(흔들림도 timingOf 의 tray)
         wob = Math.min(1, wob + dt / ((WOBBLE_UP * k) / timingOf(opts).tray)); // 가을부터 조금 빨리 흔들림(frame.js TIMING)
         if (wob >= 1) spill();
       } else wob = Math.max(0, wob - dt / (WOBBLE_DOWN * k));

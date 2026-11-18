@@ -22,9 +22,10 @@ import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { store } from '../../core/store.js';
 import { img } from '../../core/assets.js';
-import { frame, line, abortGeneration } from './frame.js';
+import { frame, line, abortGeneration, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import * as grow from '../../core/grow.js';
+import { attachTrail } from '../../ui/trail.js';
 
 const TITLE = '마감 설거지';
 const HOWTO = '입이 닿는 곳과 안쪽 가운데를 꾹 누르고 있으면 수세미로 닦아요. 다 닦으면 수도꼭지를 눌러 헹궈요.';
@@ -69,7 +70,8 @@ export async function wash(opts = {}) {
   const still = isReducedMotion();
   const title = opts.title || TITLE;
   const howto = turn ? HOWTO_TURN : drag ? HOWTO_DRAG : HOWTO;
-  const f = frame({ title, instruction: howto, icon: 'cup', cls: `mg-scene mg-wash${still ? ' is-still' : ''}`, quit: Boolean(opts.quit) });
+  const f = frame({ title, instruction: howto, icon: 'cup', cls: `mg-scene mg-wash${still ? ' is-still' : ''}`, quit: Boolean(opts.quit), kind: 'wash', opts });
+  const ws = timingOf(opts).week; // 주가 바뀔수록 살짝 빨라짐: 수세미가 도는 빠르기 · 닦이는 빠르기
   const meta = (await Promise.race([metaP, sleep(1500)]))?.mug || null;
   const art = meta && img.has('shots', meta.plate) ? meta : null;
   const [W, H] = art ? art.size : [1920, 1080];
@@ -150,6 +152,8 @@ export async function wash(opts = {}) {
   const status = h('p', { class: 'ws-status', 'aria-live': 'polite' });
   const scene = h('div', { class: 'ws-scene' }, box);
   f.body.append(scene, watchB, status);
+  // 닦을 곳을 누른 채 문지르면 손가락 뒤를 따라오는 흐르는 선(2026-11-18 사용자, js/ui/trail.js): 흰 머그 위에서도 보이게 비눗물빛 파랑 + 짙은 물빛 번짐
+  const trail = attachTrail(scene, { color: '96, 196, 255', glow: '20, 96, 170', when: (e) => Boolean(e.target.closest?.('.ws-zone')) });
   [zb.rim, zb.in, tapB, watchB].forEach((b) => { b.disabled = true; });
 
   // 칸에 꽉 차게(위아래가 조금 잘림): 판 좌표 % 가 늘 그림과 맞음
@@ -269,7 +273,7 @@ export async function wash(opts = {}) {
   }
   let earlyAbort = false;
   f.onAbort(() => { earlyAbort = true; over = true; doneRes('abort'); });
-  await Promise.race([startGate(f.body, { note: '천천히 닦아도 괜찮아요.', ready: f.told }), doneP]);
+  await Promise.race([startGate(f.body, { note: '천천히 닦아도 괜찮아요.', ready: f.told, quick: f.familiar }), doneP]);
   if (earlyAbort || stopped()) { cleanup(); f.close(); return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; }
   [zb.rim, zb.in, tapB, watchB].forEach((b) => { b.disabled = false; });
   if (!robot) setTimeout(() => zb.rim.focus({ preventScroll: true }), 40);
@@ -340,15 +344,16 @@ export async function wash(opts = {}) {
       holding = true;
     }
     if (!holding || !active) return;
-    angle += (dt / LAP_MS) * Math.PI * 2;
+    angle += ((dt * ws) / LAP_MS) * Math.PI * 2;
     if (!drag || robot) {
       spongeOn(active, angle);
-      scrub(active, dt / (SCRUB_MS * (robot === 'watch' ? 1.2 : k)));
+      scrub(active, (dt * ws) / (SCRUB_MS * (robot === 'watch' ? 1.2 : k)));
     }
   }, () => (robot === 'auto' || robot === 'bad' ? 4 : 1));
 
   function cleanup() {
     curLoop?.stop?.();
+    trail.stop();
     ro?.disconnect();
     if (isDebug()) { delete window.__mgAuto; delete window.__mgBad; }
   }

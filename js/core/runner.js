@@ -570,7 +570,8 @@ async function miniBeat(s, b, index, w) {
   dialogue.hide();
   stage.cover({ fade: true });
   // 그 날의 계절 = 손맛 단계(frame.js TIMING) · 오늘의 칠판(today: 같은 날의 미니게임이 함께 씀, 남은 얼음 · 우유가 이어짐)
-  const r = await w(fn({ ...b, season: b.season || s.ep.season || null, today: b.today || s.today || null }));
+  // week: 자유 영업의 7일 묶음(free.js, 주가 바뀔수록 살짝 빨라짐 frame.js weekSpeed). 이야기는 계절로 셈
+  const r = await w(fn({ ...b, season: b.season || s.ep.season || null, week: b.week ?? s.ep.week ?? null, today: b.today || s.today || null }));
   if (r?.aborted) return undefined; // 도중에 정리됨(되감기·나가기): 이 장면은 이미 끝남
   // 미니게임이 돌려준 자세한 기록(커피 만들기: 만든 메뉴·다시 만들기·보기·손 기술마다 알맞음 수·라테아트·단계·턴 방식)
   const detail = {};

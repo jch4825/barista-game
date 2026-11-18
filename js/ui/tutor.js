@@ -38,6 +38,7 @@ const TEXT_SEL = [
   '#layer-overlay .ov :is(p, h2, h3, li, figcaption)',
   '#layer-task .cards-wrap.is-in :is(.card-label, .card-q, p)',
   '#layer-task .mg .mg-head :is(h2, p)',
+  '#layer-screen .scr :is(input, textarea)', // 글을 적는 칸(이름 정하기: 쪽지가 '예: 별빛, 민트, 연필'을 덮었음, 2026-11-18)
   '#layer-task :is(.bw-gate-card, .mg-gate) :is(h3, p)',
   '#layer-task .bw-close-head :is(h3, p)',
   '#layer-task .mg-brew :is(.bw-ask-t, .bw-me, .bw-status, .bw-order-text, .bw-react-text, .bw-name, .bw-lack-say)',
@@ -206,6 +207,8 @@ function textRects(sr, s, targets) {
   const holders = [];
   const typed = Boolean(document.querySelector('#layer-dock .dlg-next.on')); // 대사가 다 나왔음
   for (const el of document.querySelectorAll(TEXT_SEL)) {
+    const field = el.matches('input, textarea'); // 글을 적는 칸: 글자(값 · 예시)가 칸 안에 있으므로 칸 전체를 피함
+    if (field) { const r = el.getBoundingClientRect(); if (r.width > 2 && r.height > 2) rects.push(conv(r, sr, s)); continue; }
     if (!el.textContent.trim()) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || Number(cs.opacity) < 0.1) continue;

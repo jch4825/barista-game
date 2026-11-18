@@ -75,10 +75,15 @@ async function typeOut(targets) {
   typing = false;
 }
 
+/** 화면을 눌러도 넘어간다는 설명(2026-11-18 사용자 "화면을 눌러도 게임이 진행된다는 설명이 없다"): 처음 NEXT_HINT 줄 동안은 '다음' 대신 */
+const NEXT_HINT = 40;
+const NEXT_HINT_TEXT = '화면을 톡 누르면 다음';
+const nextLabel = () => ((store.flag('nextSeen') || 0) < NEXT_HINT ? NEXT_HINT_TEXT : '다음');
+
 function setQueued(on) {
   queued = on;
   nextEl.classList.toggle('is-queued', on);
-  nextEl.firstChild.textContent = on ? '말이 끝나면 넘어가요' : '다음';
+  nextEl.firstChild.textContent = on ? '말이 끝나면 넘어가요' : nextLabel();
 }
 
 function waitAdvance(voiceP, len) {
@@ -239,6 +244,9 @@ export const dialogue = {
       return;
     }
 
+    nextEl.firstChild.textContent = nextLabel();
+    nextEl.classList.toggle('is-hint', nextEl.firstChild.textContent === NEXT_HINT_TEXT);
+    if (store.hasProfile()) store.setFlag('nextSeen', (store.flag('nextSeen') || 0) + 1);
     nextEl.classList.add('on');
     if (!document.activeElement || document.activeElement === document.body || document.activeElement.closest('#layer-dock') || document.activeElement.closest('#layer-stage')) {
       box.focus({ preventScroll: true });

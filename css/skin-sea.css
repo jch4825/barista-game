@@ -193,6 +193,9 @@ body.skin-sea .tt-ai { background: rgba(4, 18, 23, .82); color: var(--foam); bor
 body.skin-sea .tt-ai svg { color: var(--gold-l); }
 body.skin-sea .tt-who { background: rgba(4, 18, 23, .6); border: 1px solid var(--gold-line); }
 body.skin-sea .tt-who small { color: var(--gold-l); }
+/* 긴 별명: 한 줄로 줄이고 끝을 … 로(두 줄로 접혀 '…학생입니 / 다 님'처럼 보였음, 2026-11-18). 전체 이름은 학생 고르기 화면에 */
+.tt-who > span { max-width: 15em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tt-who small { white-space: nowrap; }
 
 /* ---------- 이야기 위쪽 띠(HUD): 높이 절반(48px)의 반투명 길쭉한 띠 + 가로로 긴 알약 단추(아이콘은 그대로, 2026-10-28 사용자 요청) ---------- */
 body.skin-sea .hud {
@@ -275,6 +278,7 @@ body.skin-sea .dlg.k-think .dlg-face { border-style: dashed; box-shadow: 0 0 0 2
 body.skin-sea .dlg.k-sys { --dlg-rgb: 3, 30, 30; }
 body.skin-sea .dlg.k-sys .dlg-text { color: #DFF7F2; }
 body.skin-sea .dlg-next { right: 56px; bottom: 28px; color: var(--gold-l); text-shadow: 0 2px 6px rgba(0, 0, 0, .7); }
+body.skin-sea .dlg-next.is-hint span { font-size: 22px; } /* 처음 40줄: '화면을 톡 누르면 다음'(dialogue.js NEXT_HINT) */
 body.skin-sea .dlg-ctrl { left: auto; right: 52px; top: 20px; bottom: auto; gap: 8px; }
 body.skin-sea .dlg-btn { height: 42px; padding: 0 14px; font-size: 19px; background: rgba(10, 32, 38, .5); border: 1px solid rgba(212, 174, 98, .45); border-radius: 21px; color: var(--foam); }
 body.skin-sea .dlg-btn svg { width: 24px; height: 24px; color: var(--gold-l); }
@@ -490,9 +494,10 @@ body.skin-sea .cc-board {
 }
 body.skin-sea .cc-clip { display: none; }
 body.skin-sea .cc-paper {
-  background: repeating-linear-gradient(transparent 0 66px, rgba(142, 108, 51, .2) 66px 69px) 0 6px, linear-gradient(180deg, var(--parch), var(--parch-2));
+  background: linear-gradient(180deg, var(--parch), var(--parch-2));
   border: 2px solid var(--gold-d); border-radius: 10px;
 }
+body.skin-sea .cc-lines { background-image: repeating-linear-gradient(transparent 0 66px, rgba(142, 108, 51, .22) 66px 69px); }
 body.skin-sea .cc-kicker { background: var(--gold-l); color: #0A2630; }
 body.skin-sea .cc-name { font-family: var(--font-title); font-weight: 800; }
 body.skin-sea .cc-photo { transform: none; background: linear-gradient(180deg, #FFF9EC, #F1E3C8); border: 3px solid var(--gold-d); border-radius: 10px; outline: 1px solid rgba(142, 108, 51, .5); outline-offset: -8px; }
