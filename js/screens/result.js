@@ -25,8 +25,8 @@ import { josa } from '../core/text.js';
 export const REACT_TEXT = { 2: '오래 바라봤어요', 1: '살짝 웃었어요', 0: '작게 고개를 끄덕였어요' };
 export const metSpeech = (who, score) => `${REGULARS[who]?.name || ''}, ${REACT_TEXT[score] || REACT_TEXT[0]}.`;
 
-/** 이번 판의 기록(store.log): 대응(같은 기회는 마지막 것) · 커피 만들기에서 드린 잔 */
-function todayOf(ep, result) {
+/** 이번 판의 기록(store.log): 대응(같은 기회는 마지막 것) · 커피 만들기에서 드린 잔(같은 작업대는 마지막 것: 되감아 다시 한 잔을 두 번 세지 않게). 자유 영업의 하루 잔 수(main.js)도 이것 */
+export function todayOf(ep, result) {
   // 그날을 시작한 때부터(이어 하기로 마친 날도 아침의 단골 · 잔까지, runner 의 dayAt, 검수 13.39 27번)
   const since = (result.dayAt || Date.now() - (result.ms || 0)) - 3000;
   const logs = store.logs().filter((l) => l.ep === ep.id && (l.at || 0) >= since);
@@ -37,7 +37,14 @@ function todayOf(ep, result) {
     if (i >= 0) met.splice(i, 1);
     met.push(l);
   }
-  const cups = logs.filter((l) => l.type === 'mini' && Array.isArray(l.cups)).flatMap((l) => l.cups);
+  const minis = new Map();
+  for (const l of logs) {
+    if (l.type !== 'mini' || !Array.isArray(l.cups)) continue;
+    const id = l.id ?? l.at;
+    minis.delete(id); // 다시 한 것은 뒤로(마지막 것)
+    minis.set(id, l);
+  }
+  const cups = [...minis.values()].flatMap((l) => l.cups);
   return { met, cups };
 }
 
@@ -189,7 +196,8 @@ export async function showResult(ep, result, { ending = false, again = '' } = {}
   tts.speak('나는 오늘 어땠나요?', 'sys');
   const f2 = await Promise.race([fp2.promise, waitBtn(skip).then(() => null)]);
   tts.stop();
-  store.addDiary({ ep: ep.id, feeling: f1, myFeeling: f2 || null, ...(ep.free ? { day: ep.free } : {}) });
+  // season: 그날의 계절(자유 영업은 날 번호로 계절을 다시 셈하지 않고 이것을 씀)
+  store.addDiary({ ep: ep.id, feeling: f1, myFeeling: f2 || null, ...(ep.free ? { day: ep.free } : {}), ...(ep.season ? { season: ep.season } : {}) });
   if (f2) fp2.wrap.replaceChildren(h('p', { class: 'rs-q', text: `나의 기분: ${FEELINGS.find((f) => f.id === f2).label}` }));
   else fp2.wrap.remove();
 

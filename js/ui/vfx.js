@@ -9,6 +9,8 @@ import { $, h } from '../core/dom.js';
 import { img } from '../core/assets.js';
 
 let layer = null;
+let topLayer = null; // 전체 화면 창 · 확인 창(#layer-screen · #layer-modal) 위의 반짝이: #layer-vfx 는 그 아래라 수첩의 선물 · 말 사전에서 가려졌음
+let gen = 0;         // clear() 마다 오름: 날아가던 별이 지워진 뒤 도착 반짝이를 터뜨리지 않게
 
 const C = { red: '#E3262E', yellow: '#FFD43B', mint: '#16A99A', sky: '#3D8BD9', ink: '#17141C', cream: '#FFF7E8', gold: '#F2C230' };
 
@@ -53,13 +55,13 @@ export function centerOf(el) {
   return { x: (r.left + r.width / 2 - scr.left) / s, y: (r.top + r.height / 2 - scr.top) / s };
 }
 
-function part(kind, x, y, size, color) {
+function part(kind, x, y, size, color, host = layer) {
   const el = h('i', { class: `vfx-p vfx-${kind}`, html: tex(kind, color) });
   el.style.left = `${x - size / 2}px`;
   el.style.top = `${y - size / 2}px`;
   el.style.width = `${size}px`;
   el.style.height = `${size}px`;
-  layer.append(el);
+  host.append(el);
   return el;
 }
 
@@ -71,17 +73,19 @@ function run(el, frames, ms, easing = 'cubic-bezier(.2,.8,.3,1)') {
 export const vfx = {
   init() {
     layer = h('div', { id: 'layer-vfx', 'aria-hidden': 'true' });
-    $('#screen').append(layer);
+    topLayer = h('div', { id: 'layer-vfx-top', 'aria-hidden': 'true' });
+    $('#screen').append(layer, topLayer);
   },
 
-  /** 한 점에서 사방으로 터지기 */
-  burst(kind, x, y, { n = 12, dist = [80, 220], size = [28, 64], ms = [600, 1000], gravity = 0, spin = true, colors = null } = {}) {
+  /** 한 점에서 사방으로 터지기. top: 전체 화면 창 · 확인 창 위에 */
+  burst(kind, x, y, { n = 12, dist = [80, 220], size = [28, 64], ms = [600, 1000], gravity = 0, spin = true, colors = null, top = false } = {}) {
     const lv = level();
     if (!lv || !layer) return;
+    const host = top && topLayer ? topLayer : layer;
     const count = Math.max(1, Math.round(n * lv));
     for (let i = 0; i < count; i++) {
       const s = rand(size[0], size[1]);
-      const el = part(kind, x, y, s, colors ? pick(colors) : undefined);
+      const el = part(kind, x, y, s, colors ? pick(colors) : undefined, host);
       const ang = (Math.PI * 2 * i) / count + rand(-0.3, 0.3);
       const d = rand(dist[0], dist[1]);
       const dx = Math.cos(ang) * d;
@@ -97,11 +101,12 @@ export const vfx = {
 
   /** 요소 가운데에서 반짝 */
   sparkleAt(el, opts = {}) {
-    if (!el) return;
+    if (!el || !layer || !el.isConnected) return;
     const { x, y } = centerOf(el);
-    vfx.burst('sparkle', x, y, { n: 14, colors: ['#FFFFFF', '#FFF2B0', C.yellow], ...opts });
+    const top = Boolean(el.closest('#layer-screen, #layer-modal')); // 수첩 · 선물 창 안의 것은 그 창 위에
+    vfx.burst('sparkle', x, y, { n: 14, colors: ['#FFFFFF', '#FFF2B0', C.yellow], top, ...opts });
     if (level() === 1) {
-      const g = part('glow', x, y, 260);
+      const g = part('glow', x, y, 260, undefined, top && topLayer ? topLayer : layer);
       run(g, [{ transform: 'scale(.3)', opacity: 0.9 }, { transform: 'scale(1.3)', opacity: 0 }], 700);
     }
   },
@@ -112,6 +117,7 @@ export const vfx = {
     if (!lv || !layer || !toEl) return;
     const a = from instanceof Element ? centerOf(from) : from;
     const b = centerOf(toEl);
+    const my = gen;
     const jobs = [];
     for (let i = 0; i < n; i++) {
       const el = part('star', a.x, a.y, 70);
@@ -124,6 +130,7 @@ export const vfx = {
       ], 780 + i * 120, 'cubic-bezier(.5,0,.4,1)'));
     }
     await Promise.all(jobs);
+    if (my !== gen || !toEl.isConnected) return; // 그사이 clear()(되감기 · 나가기)
     vfx.burst('sparkle', b.x, b.y, { n: 8, dist: [30, 80], size: [20, 40], colors: [C.yellow, '#fff'] });
     toEl.classList.remove('vfx-hit');
     void toEl.offsetWidth;
@@ -185,5 +192,5 @@ export const vfx = {
     }
   },
 
-  clear() { layer?.replaceChildren(); },
+  clear() { gen += 1; layer?.replaceChildren(); topLayer?.replaceChildren(); },
 };

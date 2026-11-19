@@ -66,7 +66,24 @@ export function startGate(host, { label = '시작!', note = '', ready = null, qu
   const shownAt = performance.now() - (quick ? 700 : 0);
   let told = !ready || quick;
   ready?.then(() => { told = true; });
-  const autoT = auto ? setTimeout(() => { if (btn.isConnected) btn.click(); }, QUICK_MS) : 0;
+  // 저절로 시작: 다른 창(멈춤 · 설정 · [그만하기] 물음)이 열린 동안은 세지 않고, 닫힌 뒤 다시 QUICK_MS(띠도 처음부터).
+  // 틀이 닫히는 중(그만하기 · 되감기의 사라지는 0.22초)이면 그만둠
+  let calmAt = performance.now();
+  const autoT = auto ? setInterval(() => {
+    if (!btn.isConnected || btn.closest('.is-out')) { clearInterval(autoT); return; }
+    if (blockedNow()) { calmAt = performance.now(); btn.classList.remove('is-quick'); return; }
+    btn.classList.add('is-quick');
+    if (performance.now() - calmAt >= QUICK_MS) { clearInterval(autoT); btn.click(); }
+  }, 100) : 0;
+  // [설명 듣기]를 누르면 저절로 시작하지 않음: 설명을 끝까지 듣고 [시작!] · 화면을 눌러 시작
+  const sayB = auto ? host.closest('.mg')?.querySelector('.mg-say') : null;
+  const noAuto = () => {
+    clearInterval(autoT);
+    btn.classList.remove('is-quick');
+    const t = tapNote?.querySelector('span');
+    if (t) t.textContent = GATE_TAP;
+  };
+  sayB?.addEventListener('click', noAuto);
   setTimeout(() => btn.focus({ preventScroll: true }), 60);
   wrap.addEventListener('click', () => { // 단추는 누름을 위로 보내지 않음
     if (told && performance.now() - shownAt > 700) { btn.click(); return; }
@@ -77,7 +94,8 @@ export function startGate(host, { label = '시작!', note = '', ready = null, qu
   return new Promise((resolve) => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      clearTimeout(autoT);
+      clearInterval(autoT);
+      sayB?.removeEventListener('click', noAuto);
       audio.sfx('tap');
       tts.stop();
       wrap.classList.add('is-out');

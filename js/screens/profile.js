@@ -22,7 +22,9 @@ export const PROFILE_SAY = {
 };
 
 export function showProfileSetup() {
-  const scr = openScreen({ cls: 'scr-profile', title: '처음 시작하기', icon: 'idcard' });
+  // 별명을 정한 뒤(새 학생이 이미 골라짐) [시작하기] 없이 닫으면 표지를 다시 그림: 앞 학생의 이름 · [이어하기]가 남아 새 학생으로 앞 학생의 날을 열었음
+  const state = { made: false, started: false };
+  const scr = openScreen({ cls: 'scr-profile', title: '처음 시작하기', icon: 'idcard', onClose: () => { if (state.made && !state.started) nav.go('title'); } });
   const nameIn = h('input', { class: 'pf-input', type: 'text', maxlength: '12', placeholder: '예: 별빛, 민트, 연필', 'aria-label': '별명' });
   const next = h('button', { class: 'btn btn-big btn-main' }, h('i', { html: ICON('arrow_right') }), h('span', { text: '다음' }));
   const skip = h('button', { class: 'btn btn-soft' }, h('span', { text: '별명 없이 시작' }));
@@ -43,14 +45,15 @@ export function showProfileSetup() {
 
   const go = (name) => {
     const p = store.createProfile(name || '플레이어');
+    state.made = true;
     setTextContext({ player: p.name });
-    step2(scr);
+    step2(scr, state);
   };
   next.addEventListener('click', (e) => { e.stopPropagation(); audio.unlock(); go(nameIn.value.trim()); });
   skip.addEventListener('click', (e) => { e.stopPropagation(); audio.unlock(); go(''); });
 }
 
-function step2(scr) {
+function step2(scr, state) {
   const s = store.settings();
   const set = (k) => (v) => { store.setSetting(k, v); applySettingsToBody(); };
   // 읽어 주기 빠르기 견본(음성 파일: tools/export-lines.mjs EXTRA). 지은의 목소리를 정하면 그 목소리로 바꿈
@@ -70,6 +73,7 @@ function step2(scr) {
   setTimeout(() => start.focus({ preventScroll: true }), 250);
   start.addEventListener('click', (e) => {
     e.stopPropagation();
+    state.started = true;
     scr.close();
     hideTitle();
     nav.go('play', EPISODES[0].id); // 직업 마1스톤의 '프롤로그'는 지웠으므로 이야기 순서의 첫 편(2026-10-30 고침: 없는 편을 불러 빈 화면에서 멈췄음)

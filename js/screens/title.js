@@ -24,6 +24,8 @@ import { AI_NOTICE } from '../data/credits.js';
 import { ov } from '../ui/overlays.js';
 import * as grow from '../core/grow.js';
 import { frontDecos } from '../ui/gift.js';
+import { freeDay } from '../data/episodes/free.js';
+import { bus } from '../core/bus.js';
 
 let titleEl = null;
 // 표지 영상(assets/movies/title_intro): 앱을 켜고 처음 본 표지에서만 끝까지 틀고, 그 뒤로는 마지막 장면. 영상이 없으면 그림만
@@ -89,6 +91,16 @@ export function hideTitle() {
 /** 가게 앞 꾸미기(지은의 성장 · 재미 개편 Q-42): 산 것이 카페 앞 그림 위 제자리에(js/ui/gift.js frontDecos, 수첩의 '놓은 자리 보기'와 같은 그림) */
 const decoLayer = () => frontDecos();
 
+/** 표지 위에 연 수첩에서 가게 앞 꾸미기를 사면 표지의 카페 앞에도 곧바로(수첩을 닫으면 보이게) */
+bus.on('grow', () => {
+  if (!titleEl) return;
+  const old = titleEl.querySelector('.tt-deco');
+  const now = decoLayer();
+  if (old && now) old.replaceWith(now);
+  else if (old) old.remove();
+  else if (now) titleEl.querySelector('.tt-shade')?.before(now);
+});
+
 export function showTitle() {
   hideTitle();
   hud.hide();
@@ -100,7 +112,8 @@ export function showTitle() {
 
   const p = store.active();
   const cp = store.checkpoint();
-  const cpEp = cp ? getEpisode(cp.ep) : null;
+  // 자유 영업은 날마다 id 가 'free' 라 이야기 목록에 없음: 저장한 그날(cp.free)을 만들어 [이어하기]를 보임(빠지면 [다음 이야기]가 그 저장을 덮었음)
+  const cpEp = cp ? (cp.ep === 'free' ? freeDay(cp.free || store.free().day + 1) : getEpisode(cp.ep)) : null;
   const firstUndone = EPISODES.find((e) => !store.isDone(e.id));
   // 마지막 이야기를 마쳤는데 이번 해의 엔딩을 아직 못 봤으면 엔딩부터 · 본 뒤에는 근무표에서 골라 하기
   // (몇 번째 해인지 봄: 둘째 해부터 결과 화면에서 [엔딩 보기]를 건너뛰어도 여기서 다시 권함, 검수 13.39 26번)
@@ -135,7 +148,7 @@ export function showTitle() {
   }
   if (p) {
     // 엔딩을 본 뒤에는 근무표가 맨 위 큰 버튼이므로 여기서는 빼요
-    if (!(cleared && !cpEp)) menu.append(menuBtn('calendar', '달력', store.ending() ? '원하는 날 골라 하기' : '이야기 골라 하기', () => nav.go('hub')));
+    if (!(cleared && !cpEp)) menu.append(menuBtn('calendar', '달력', seenThisYear ? '원하는 날 골라 하기' : '이야기 골라 하기', () => nav.go('hub'))); // 모든 날이 열리는 것은 이번 해의 엔딩을 본 뒤(hub.js isUnlocked)
     menu.append(
       menuBtn('book', '수첩', '단골 · 메뉴 도감 · 장면 앨범', () => nav.go('notebook')),
       menuBtn('settings', '설정', '글자 · 소리 · 읽어 주기', () => nav.go('settings')),

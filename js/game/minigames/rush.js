@@ -65,7 +65,8 @@ export function rushLines(opts = {}) {
   const th = themeOf(opts);
   const out = [...line.intro(opts.title || th.title, th.howto)];
   if (th.howtoAlone) out.push(...line.intro(opts.title || th.title, th.howtoAlone)); // 사장님이 안 계신 날: 틀이 '제목. 할 일'로 읽음(검수 13.63: 이 짝이 없어 브라우저 음성이었음)
-  for (const t of Object.values(th.say)) out.push(line.sys(t));
+  // 사장님의 말("이건 내가 할게요.")은 사장님 목소리로 읽으므로(ownerTake 의 tts.speak(…, 'owner')) 사장님 목소리 파일로
+  for (const [key, t] of Object.entries(th.say)) out.push(key === 'owner' ? line.say('owner', t) : line.sys(t));
   for (const t of th.slips || []) out.push(line.sys(t));
   return out;
 }
@@ -328,8 +329,8 @@ export async function rush(opts = {}) {
     if (kind === 'city') {
       audio.sfx('boom');
       f.el.classList.add('is-crash');
-      setTimeout(() => audio.sfx('spill'), dur(200));
-      setTimeout(() => audio.sfx('glass_break'), dur(420));
+      setTimeout(() => { if (!stopped()) audio.sfx('spill'); }, dur(200)); // 그사이 정리되면(되감기 · 나가기) 다른 장면 위에 소리를 내지 않음
+      setTimeout(() => { if (!stopped()) audio.sfx('glass_break'); }, dur(420));
     } else if (kind === 'gull') {
       text = how === 'got' ? th.say.got : th.say.fled;
       audio.sfx(how === 'got' ? 'great' : 'whoosh');

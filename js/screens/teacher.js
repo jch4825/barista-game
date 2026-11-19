@@ -150,8 +150,10 @@ function report(p) {
       h('thead', {}, h('tr', {}, ...['스킬', '별', '단계', '횟수', '연계 성취기준'].map((t) => h('th', { text: t })))),
       h('tbody', {}, ...SKILL_ORDER.map((k) => {
         const s = st[k];
-        return h('tr', {}, h('td', { text: SKILLS[k].name }), h('td', { text: s ? '★'.repeat(s.best) + '☆'.repeat(3 - s.best) : '-' }),
-          h('td', { text: s ? LEVELS[s.best].short : '-' }), h('td', { text: s ? String(s.count) : '0' }), h('td', { text: SKILLS[k].std.join(' ') }));
+        // 별은 0 ~ 3 으로 맞춤: 가져온 기록 파일의 이상한 값(4 · -1 · 글자)에 repeat · LEVELS 가 오류를 내어 선생님 화면이 멈췄음
+        const best = s ? Math.max(0, Math.min(3, Math.round(Number(s.best)) || 0)) : 0;
+        return h('tr', {}, h('td', { text: SKILLS[k].name }), h('td', { text: s ? '★'.repeat(best) + '☆'.repeat(3 - best) : '-' }),
+          h('td', { text: s ? LEVELS[best]?.short || '-' : '-' }), h('td', { text: s ? String(s.count) : '0' }), h('td', { text: SKILLS[k].std.join(' ') }));
       }))),
     h('h3', { text: '판단 기록 (되감기 = 다시 시도한 횟수)' }),
     rows.length
@@ -193,6 +195,13 @@ function toCSV(p) {
   for (const [, r] of rows) lines.push(r);
   return `﻿${lines.map((l) => l.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\r\n')}`;
 }
+
+/** 오늘 날짜(이 컴퓨터의 시각): toISOString 은 세계 표준시라 한국 새벽 0 ~ 9시에 전날 날짜가 붙었음 */
+function localDay(d = new Date()) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+/** 파일 이름에 쓸 수 없는 글자(\ / : * ? " < > |)는 _ 로 */
+const fileSafe = (name) => String(name || '').replace(/[\\/:*?"<>|]/g, '_').trim() || '학생';
 
 function download(name, text) {
   const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
@@ -287,7 +296,7 @@ function dashboard() {
     main.replaceChildren(
       h('div', { class: 'tc-actions' },
         h('button', { class: 'btn btn-main', onclick: (e) => { e.stopPropagation(); printReport(p); } }, h('i', { html: ICON('note') }), h('span', { text: '보고서 인쇄' })),
-        h('button', { class: 'btn', onclick: (e) => { e.stopPropagation(); download(`바리스타_${p.name}_${new Date().toISOString().slice(0, 10)}.csv`, toCSV(p)); } }, h('i', { html: ICON('checklist') }), h('span', { text: 'CSV로 저장' })),
+        h('button', { class: 'btn', onclick: (e) => { e.stopPropagation(); download(`바리스타_${fileSafe(p.name)}_${localDay()}.csv`, toCSV(p)); } }, h('i', { html: ICON('checklist') }), h('span', { text: 'CSV로 저장' })),
         h('button', { class: 'btn', onclick: (e) => { e.stopPropagation(); saveRecordFile([p.id]); } }, h('i', { html: ICON('file_save') }), h('span', { text: '기록 파일로 저장' })),
         h('button', { class: 'btn', onclick: (e) => { e.stopPropagation(); store.selectProfile(p.id); ov.toast(`${p.name} 학생으로 바꿨어요`, 'idcard'); renderAll(); } }, h('i', { html: ICON('idcard') }), h('span', { text: active ? '지금 하는 학생' : '이 학생으로 하기' }))),
       row('모든 이야기 열기', segmented([[false, '순서대로'], [true, '모두 열기']], Boolean(p.progress.unlockedAll), (v) => store.setUnlockedAll(p.id, v)), '수업에서 원하는 에피소드로 바로 갈 수 있어요.'),

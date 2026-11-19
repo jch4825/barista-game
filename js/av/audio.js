@@ -335,7 +335,8 @@ function startFileBgm(id, moodName = id) {
   }
   if (playlist) {
     el.addEventListener('ended', () => {
-      if (bgmEl !== el || mood !== moodName) return;
+      // 다른 분위기로 바뀌는 중(targetMood, 0.85초 뒤에 mood)이면 다음 곡을 틀지 않음: 줄어들던 소리가 다시 커지지 않게
+      if (bgmEl !== el || targetMood !== moodName) return;
       const t = ctx.currentTime;
       musicGain.gain.cancelScheduledValues(t);
       musicGain.gain.setValueAtTime(0, t);
@@ -378,6 +379,7 @@ function startAmbience(kind, level = 1) {
   if (!kind) return;
   const gain = ctx.createGain();
   gain.gain.value = 0;
+  gain.gain.setValueAtTime(0, ctx.currentTime); // 아래 linearRamp 가 0 에서 시작하게(앞 일정이 없으면 브라우저에 따라 곧바로 커짐)
   gain.connect(ambBus);
   const nodes = [];
   let el = null;
@@ -470,6 +472,7 @@ export const audio = {
     if (ctx.state === 'suspended') ctx.resume();
     // 첫 누름 전에 틀려다 막혀 멈춰 있던 배경음악(예: 표지)을 다시
     if (bgmEl && bgmEl.paused && !bgmEl.ended) bgmEl.play().catch(() => {});
+    if (amb?.el && amb.el.paused) amb.el.play().catch(() => {}); // 환경음 파일도
   },
 
 

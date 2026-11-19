@@ -222,7 +222,8 @@ function diaryView() {
   if (!list.length) return h('p', { class: 'nb-empty', text: '아직 일기가 없어요. 에피소드를 마치면 지은의 일기가 생겨요.' });
   const fl = Object.fromEntries(FEELINGS.map((f) => [f.id, f]));
   return h('div', { class: 'nb-diary' }, ...list.map((d) => {
-    const ep = d.ep === 'free' ? freeDay(d.day || 1) : getEpisode(d.ep);
+    // 자유 영업: 적어 둔 그날의 계절(season)로(엔딩 전에 일찍 연 날은 날 번호로 다시 세면 다른 계절이 나왔음). 옛 일기는 날 번호로
+    const ep = d.ep === 'free' ? freeDay(d.day || 1, d.season ? { seasons: [d.season] } : {}) : getEpisode(d.ep);
     return h('article', { class: 'nb-diary-item' },
       h('h3', { text: ep ? `${ep.label} · ${ep.title}` : d.ep }),
       h('p', { class: 'nb-diary-text', text: ep?.diary || '' }),

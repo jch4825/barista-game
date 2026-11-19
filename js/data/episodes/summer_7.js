@@ -106,6 +106,8 @@ export default {
       queue: [say('haesun', 'smile', '어제는 못 들어왔는데. 오늘은 앉을 자리가 있네요.')],
       regulars: [say('haesun', 'smile', '어제 뒷문 계단에서 마신 우유도 참 따뜻했어요.')],
     }),
+    // 지은과 사장님(배지 장면): 무대에 세운 뒤에 표정 · 몸짓(세우지 않으면 face · motion 이 아무것도 하지 않았음)
+    show({ left: 'jieun:normal', right: 'owner:normal' }),
     narr('사장님이 오랜만에 의자에 앉아, 창밖을 본다.'),
     face('jieun', 'smile'),
     think('어제의 시끄러운 줄과는 전혀 다르다. 이 조용함이 이 가게의 진짜 모습인 것 같다.'),

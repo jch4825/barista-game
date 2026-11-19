@@ -65,7 +65,8 @@ function stepper(btn, label) {
     e.stopPropagation();
     const c = cur;
     if (!c || btn.disabled) return;
-    if (c.reading && !c.queued) {
+    // 목소리가 꺼져 있으면(끄기 · 버튼으로만) 끝날 말이 없으니 바로 넘어감
+    if (c.reading && !c.queued && store.settings().voice === 'auto') {
       c.queued = true;
       btn.classList.add('is-queued');
       setLabel('말이 끝나면 넘어가요');
@@ -91,7 +92,8 @@ function stepper(btn, label) {
         cur = c;
         btn.classList.remove('is-queued');
         setLabel(label);
-        run({ cancelled: () => c.cancelled, queued: () => c.queued }).then(() => { c.reading = false; if (c.queued) c.release(); });
+        // 되감기 · 나가기로 창이 지워졌으면(ov.clearAll) 읽기를 그만둠: 지운 뒤에도 다른 화면 위로 읽어 주었음
+        run({ cancelled: () => c.cancelled || !btn.isConnected, queued: () => c.queued }).then(() => { c.reading = false; if (c.queued) c.release(); });
       });
     },
   };
@@ -197,6 +199,7 @@ export async function eyes() {
   /** 한 장면: CG 를 바꾸고 줄을 하나씩. 다 읽으면 [다음]을 기다림 */
   const page = async ({ cg = null, head = '', n = 0, isFresh = false, body = [] }) => {
     stageEl.replaceChildren(cg ? cgView(cg) : h('div', { class: 'ey-dark' }));
+    if (cg) store.unlockPhoto(`cg_${cg}`); // 본 장면은 수첩 '장면 앨범'에(대본의 cg() 비트와 같이)
     stageEl.classList.remove('on');
     requestAnimationFrame(() => stageEl.classList.add('on'));
     chip.textContent = head;

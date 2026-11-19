@@ -38,6 +38,7 @@ export function openScreen({ cls = '', title = '', icon = 'star', closable = tru
       el.classList.remove('is-in');
       setTimeout(() => el.remove(), dur(220));
       audio.sfx('close');
+      tts.stop(); // 창에서 [듣기]로 읽던 말(수첩 · 설정 견본 등)이 닫은 뒤 이야기 · 처음 화면 위로 이어지지 않게
       onClose?.();
       setTimeout(() => input.refocus(), 70);
     },

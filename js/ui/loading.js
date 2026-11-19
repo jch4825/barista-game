@@ -13,6 +13,8 @@ import { img } from '../core/assets.js';
 import { CHARS } from '../data/characters.js';
 import { PHOTOS } from '../data/photos.js';
 import { store } from '../core/store.js';
+import { REGULARS, touchOf } from '../data/regulars.js';
+import { ALBUM_ORDER, EYES, EYES_BONUS } from '../data/eyes.js';
 
 const MIN_MS = 900; // 화면이 번쩍 지나가지 않게
 const MAX_MS = 15000;
@@ -28,7 +30,7 @@ function fetchImage(url, low = false) {
       const im = new Image();
       if (low) im.fetchPriority = 'low';
       im.onload = () => resolve(im);
-      im.onerror = () => resolve(null);
+      im.onerror = () => { PRELOADED.delete(url); resolve(null); }; // 못 받은 그림은 기억하지 않음: 다음에 다시 받아 봄
       im.src = url;
     }));
   }
@@ -59,13 +61,17 @@ export function episodeImages(ep) {
     const id = s.split(':')[0];
     if (CHARS[id]) who.add(id);
   };
-  walk(ep.script || [], (b) => {
+  const visit = (b) => {
     if (b.t === 'bg') bgs.add(b.variant ? `${b.id}_${b.variant}` : b.id);
     else if (b.t === 'photo') photos.add(b.id);
     else if (b.t === 'cg' && b.id) cgs.add(b.id);
     else if (b.t === 'show') Object.values(b.cast || {}).forEach(addWho);
+    else if (b.t === 'respond') walk(touchOf(b.who, b.touch), visit); // 대응의 장면 · 힌트 · 뒤 장면은 regulars.js 에 있음(나오는 사람 · CG)
+    else if (b.t === 'album') for (const w of ALBUM_ORDER) if (REGULARS[w]?.album?.cg) cgs.add(REGULARS[w].album.cg); // 엔딩 앨범 · 사장의 눈의 CG(js/ui/ending.js)
+    else if (b.t === 'eyes') { for (const cut of EYES) if (cut.cg) cgs.add(cut.cg); cgs.add('winter_chalk_name'); if (EYES_BONUS.cg) cgs.add(EYES_BONUS.cg); }
     for (const k of ['who', 'mentor', 'helper', 'from']) addWho(b[k]);
-  });
+  };
+  walk(ep.script || [], visit);
 
   const urls = [];
   const stand = Object.keys(img.list('stand'));
@@ -88,18 +94,18 @@ export function episodeImages(ep) {
 
 /**
  * 모든 그림을 뒤에서 미리 받기(앱을 켤 때 한 번). first: 먼저 받을 이야기(이어 하기)
- *  - 순서: 그 이야기 → 소품·효과·되감기 방 → 배경 → 스탠딩 → 초상·사진·CG. 동시에 6개씩, 낮은 우선순위.
+ *  - 순서: 그 이야기 → 소품·효과·되감기 방 → 배경 → 스탠딩 → 초상·사진·CG → 손 기술의 한 컷(shots: 수천 장이라 맨 뒤). 동시에 6개씩, 낮은 우선순위.
  *  - 받기만 하고 풀지(decode)는 않습니다: 모두 풀어 두면 메모리가 수백 MB(스탠딩 한 장 = 4MB). 그날 그림은 출근 중 화면이 풉니다.
  */
 export function warmAll(first = null) {
   if (warming) return warming;
   const urls = new Set(first ? episodeImages(first) : []);
   const add = (u) => { if (u) urls.add(u); };
-  for (const kind of ['items', 'vfx', 'ui', 'emotes', 'sd', 'objects', 'shots']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
+  for (const kind of ['items', 'vfx', 'ui', 'emotes', 'sd', 'objects']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
   add(img.url('bg', 'rewind_room'));
   for (const kind of ['bg', 'stand']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
   for (const [id, c] of Object.entries(CHARS)) if (!img.has('stand', `${c.stand || id}_normal`)) for (const f of c.faces || []) add(`./assets/portraits/${id}_${f}.jpg`);
-  for (const kind of ['photos', 'cg']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k));
+  for (const kind of ['photos', 'cg', 'shots']) for (const k of Object.keys(img.list(kind))) add(img.url(kind, k)); // shots(약 3,700장 · 110MB)는 맨 뒤: 배경 · 인물 · CG 를 먼저
   const list = [...urls];
   let i = 0;
   warm.total = list.length;

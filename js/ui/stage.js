@@ -28,6 +28,7 @@ let chalkEl;
 let coverEl;
 let cgTok = 0;
 let covered = false;
+let coverTok = 0; // 덮기 · 곧바로 치우기마다 오름: 늦게 끝난 uncover 가 그 뒤의 가림막을 건드리지 않게
 let blinkTimer = null;
 let talkTimer = null;
 let talkWho = null;
@@ -120,7 +121,7 @@ export const stage = {
   async setBg(id, variant, { keepCg = false } = {}) {
     if (state.cg && !keepCg) stage.setCg(null);
     if (state.chalk && !keepCg) stage.chalk(null);
-    if (state.bg === id && state.variant === variant) return;
+    if (state.bg === id && state.variant === (variant || null)) return; // 변형 없이 부르면(undefined) 저장된 null 과 같음: 같은 배경을 다시 그리지 않음
     state.bg = id;
     state.variant = variant || null;
     const next = showingA ? bgB : bgA;
@@ -180,16 +181,18 @@ export const stage = {
     coverEl.classList.add('is-on');
     $('#screen').classList.add('is-snap');
     covered = true;
+    coverTok += 1;
   },
   isCovered() { return covered; },
   /** 가림막 걷기: 그 아래 바뀐 장면이 다 그려진 뒤(다음 프레임에 붙는 CG 등) 0.4초에 걸쳐 */
   async uncover() {
     if (!covered) return;
     covered = false;
+    const tok = coverTok;
     await nextFrame();
     await nextFrame();
     await Promise.race([decodeShown(), sleep(400)]);
-    if (covered) return; // 그사이 다시 덮음(이어지는 미니게임)
+    if (covered || tok !== coverTok) return; // 그사이 다시 덮음(이어지는 미니게임) · 곧바로 치움(되감기 · 이어 하기)
     stage.settle();
     $('#screen').classList.remove('is-snap');
     coverEl.classList.remove('is-instant', 'is-on');
@@ -202,6 +205,7 @@ export const stage = {
   /** 곧바로 치움(되감기 · 이어 하기 · 처음 화면) */
   dropCover() {
     covered = false;
+    coverTok += 1;
     coverEl?.classList.add('is-instant');
     coverEl?.classList.remove('is-on');
     $('#screen')?.classList.remove('is-snap');
@@ -241,6 +245,8 @@ export const stage = {
       if (!want) {
         if (el && (covered || state.cg)) el.remove(); // 가림막 · CG 아래(숨어 있음): 움직임 없이 곧바로
         else if (el) {
+          // 표정 바꿈(m-pop) · 몸짓(m-nod 등)이 남아 있으면 CSS 에서 뒤에 적힌 그 움직임이 이겨 퇴장이 보이지 않음
+          el.classList.remove(...[...el.classList].filter((c) => c.startsWith('m-')));
           el.classList.add('m-out');
           setTimeout(() => el.remove(), dur(320));
         }
@@ -282,6 +288,8 @@ export const stage = {
           el.classList.remove('m-pop');
           void el.offsetWidth;
           el.classList.add('m-pop');
+          // 끝나면 뗌: 남아 있으면 몸짓(motion)이 끝난 뒤 다시 튀고, 퇴장(m-out)을 덮음
+          setTimeout(() => el.classList.remove('m-pop'), dur(320));
         }
       } else {
         const photo = el?.querySelector('.pol-photo');
@@ -303,7 +311,7 @@ export const stage = {
 
   /** 감정 이모트 (무대에 없으면 false). CG 에 가려 있으면 그 사람의 대화창 얼굴에 띄움(dialogue.js, 검수 13.39 12번) */
   emote(who, kind) {
-    const el = stageEl.querySelector(`[data-char="${who}"]`);
+    const el = stageEl.querySelector(`[data-char="${who}"]:not(.m-out)`); // 자리를 옮기는 중이면 나가는 그림 말고 새 그림
     if (!el) return false;
     if (state.cg) bus.emit('emote:hidden', { who, kind });
     else popEmote(el, kind);
@@ -326,7 +334,7 @@ export const stage = {
     stageEl.querySelectorAll('.stand.talking').forEach((el) => el.classList.remove('talking', 'mouth'));
     talkWho = on ? who : null;
     if (!on) return;
-    const el = stageEl.querySelector(`.stand[data-char="${who}"]`);
+    const el = stageEl.querySelector(`.stand[data-char="${who}"]:not(.m-out)`);
     if (!el?.querySelector('.st-talk')) return;
     el.classList.add('talking');
     talkTimer = setInterval(() => {
@@ -336,7 +344,7 @@ export const stage = {
   },
 
   motion(who, type) {
-    stageEl.querySelectorAll(`[data-char="${who}"]`).forEach((el) => {
+    stageEl.querySelectorAll(`[data-char="${who}"]:not(.m-out)`).forEach((el) => {
       const cls = `m-${type}`;
       el.classList.remove(cls);
       void el.offsetWidth;
@@ -387,6 +395,11 @@ export const stage = {
 
   clear() {
     stage.dropCover();
+    // 배경도 비움: 앞 이야기의 배경이 남아 다음 이야기가 배경을 부르기 전까지 비쳤음
+    state.bg = null;
+    state.variant = null;
+    bgA?.replaceChildren();
+    bgB?.replaceChildren();
     stageEl.replaceChildren();
     state.cast = { left: null, center: null, right: null };
     stage.setCg(null);

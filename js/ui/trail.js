@@ -84,7 +84,7 @@ export function attachTrail(host, { color = '255, 255, 255', glow = '255, 236, 1
       };
       side(L, true);
       const head = pts[n - 1];
-      path.arc(head.x, head.y, half[n - 1], Math.atan2(L[n - 1][1] - head.y, L[n - 1][0] - head.x), Math.atan2(R[n - 1][1] - head.y, R[n - 1][0] - head.x), false); // 머리는 둥글게
+      path.arc(head.x, head.y, half[n - 1], Math.atan2(L[n - 1][1] - head.y, L[n - 1][0] - head.x), Math.atan2(R[n - 1][1] - head.y, R[n - 1][0] - head.x), true); // 머리는 둥글게(L → 앞쪽 → R: 판 좌표는 y 가 아래라 반시계)
       side(R.slice().reverse(), false);
       path.closePath();
       const grad = (alpha, rgb) => {
@@ -116,8 +116,11 @@ export function attachTrail(host, { color = '255, 255, 255', glow = '255, 236, 1
   const up = (e) => { if (e.pointerId === pid) pid = null; };
   host.addEventListener('pointerdown', down, true);
   host.addEventListener('pointermove', move, true);
-  host.addEventListener('pointerup', up, true);
-  host.addEventListener('pointercancel', up, true);
+  // 손을 떼는 것은 창 전체에서 들음: host 밖에서 떼거나 포인터 잡기가 풀려도 pid 가 남지 않게
+  // (남으면 마우스는 누르지 않아도 선이 따라오고, 손가락은 그 뒤로 선이 그려지지 않았음).
+  // lostpointercapture 는 듣지 않음: 안쪽 단추가 손가락의 잡기를 넘겨받을 때도 생겨 누르는 도중 선이 끊김
+  window.addEventListener('pointerup', up, true);
+  window.addEventListener('pointercancel', up, true);
   return {
     el: canvas,
     stop() {
@@ -125,8 +128,8 @@ export function attachTrail(host, { color = '255, 255, 255', glow = '255, 236, 1
       cancelAnimationFrame(raf);
       host.removeEventListener('pointerdown', down, true);
       host.removeEventListener('pointermove', move, true);
-      host.removeEventListener('pointerup', up, true);
-      host.removeEventListener('pointercancel', up, true);
+      window.removeEventListener('pointerup', up, true);
+      window.removeEventListener('pointercancel', up, true);
       canvas.remove();
     },
   };

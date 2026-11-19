@@ -294,6 +294,42 @@
   "ep": "spring_1"
  },
  {
+  "key": "6dea6c8b",
+  "voice": "sys",
+  "text": "갈매기 팔",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f3225dad",
+  "voice": "sys",
+  "text": "갈매기 여덟 마리",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f6d372fb",
+  "voice": "sys",
+  "text": "갈매기 구",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3107d4cb",
+  "voice": "sys",
+  "text": "갈매기 아홉 마리",
+  "ep": "spring_1"
+ },
+ {
+  "key": "4a7c0b04",
+  "voice": "sys",
+  "text": "갈매기 십",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e9c7849c",
+  "voice": "sys",
+  "text": "갈매기 열 마리",
+  "ep": "spring_1"
+ },
+ {
   "key": "9f6248a5",
   "voice": "sys",
   "text": "고깃배 일",
@@ -327,6 +363,30 @@
   "key": "9141d309",
   "voice": "sys",
   "text": "고깃배 세 척",
+  "ep": "spring_1"
+ },
+ {
+  "key": "ad33007a",
+  "voice": "sys",
+  "text": "고깃배 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "85f449ec",
+  "voice": "sys",
+  "text": "고깃배 네 척",
+  "ep": "spring_1"
+ },
+ {
+  "key": "2169d110",
+  "voice": "sys",
+  "text": "고깃배 오",
+  "ep": "spring_1"
+ },
+ {
+  "key": "f90522f2",
+  "voice": "sys",
+  "text": "고깃배 다섯 척",
   "ep": "spring_1"
  },
  {
@@ -387,6 +447,18 @@
   "key": "21d102fb",
   "voice": "sys",
   "text": "물고기 세 마리",
+  "ep": "spring_1"
+ },
+ {
+  "key": "e28b7ce0",
+  "voice": "sys",
+  "text": "물고기 사",
+  "ep": "spring_1"
+ },
+ {
+  "key": "3f26fb98",
+  "voice": "sys",
+  "text": "물고기 네 마리",
   "ep": "spring_1"
  },
  {
@@ -2862,6 +2934,12 @@
   "ep": "spring_2"
  },
  {
+  "key": "12be72e1",
+  "voice": "sys",
+  "text": "창가로 가져가기. [한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
+  "ep": "spring_2"
+ },
+ {
   "key": "dae9b1ce",
   "voice": "sys",
   "text": "[한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
@@ -3807,6 +3885,12 @@
   "key": "a9f2921a",
   "voice": "owner",
   "text": "손님은 여기서 드시고 가신답니다.",
+  "ep": "spring_3"
+ },
+ {
+  "key": "57fbd220",
+  "voice": "owner",
+  "text": "이제 됐어요. [만들기 시작]을 눌러요.",
   "ep": "spring_3"
  },
  {
@@ -5046,8 +5130,8 @@
   "ep": "spring_5"
  },
  {
-  "key": "d648744d",
-  "voice": "sys",
+  "key": "711e2f5f",
+  "voice": "owner",
   "text": "이건 내가 할게요.",
   "ep": "spring_5"
  },
@@ -5271,6 +5355,12 @@
   "key": "29ff4633",
   "voice": "jieun",
   "text": "아이스 라테 한 잔, 가져가시는 거죠?",
+  "ep": "spring_5"
+ },
+ {
+  "key": "f16a5614",
+  "voice": "agent",
+  "text": "와, 하트네요! 고마워요.",
   "ep": "spring_5"
  },
  {
@@ -6840,6 +6930,12 @@
   "ep": "summer_1"
  },
  {
+  "key": "473f943d",
+  "voice": "yeonwoo",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "summer_1"
+ },
+ {
   "key": "841aaada",
   "voice": "yeonwoo",
   "text": "얼음이 조금 적네요.",
@@ -8121,6 +8217,18 @@
   "key": "2817df4e",
   "voice": "eunju",
   "text": "조금 넘쳤네요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "8729ec98",
+  "voice": "eunju",
+  "text": "거품이 조금 적네요.",
+  "ep": "summer_3"
+ },
+ {
+  "key": "ad559d11",
+  "voice": "eunju",
+  "text": "거품이 조금 많네요.",
   "ep": "summer_3"
  },
  {
@@ -9726,6 +9834,12 @@
   "ep": "summer_6"
  },
  {
+  "key": "f1e06a21",
+  "voice": "customer-sporty",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "summer_6"
+ },
+ {
   "key": "6ae2fb7c",
   "voice": "customer-sporty",
   "text": "딸기우유요. 가져갈게요.",
@@ -9765,6 +9879,18 @@
   "key": "32a61c3b",
   "voice": "customer-sporty",
   "text": "조금 뜨겁네요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "a920d67b",
+  "voice": "customer-sporty",
+  "text": "거품이 조금 적네요.",
+  "ep": "summer_6"
+ },
+ {
+  "key": "9fb379a6",
+  "voice": "customer-sporty",
+  "text": "거품이 조금 많네요.",
   "ep": "summer_6"
  },
  {
@@ -12168,6 +12294,12 @@
   "ep": "autumn_2"
  },
  {
+  "key": "8b4d50ca",
+  "voice": "customer-coffee",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "autumn_2"
+ },
+ {
   "key": "1246afe4",
   "voice": "customer-coffee",
   "text": "조금 미지근하네요.",
@@ -12189,6 +12321,18 @@
   "key": "6f325560",
   "voice": "customer-coffee",
   "text": "조금 넘쳤네요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "2e7a210e",
+  "voice": "customer-coffee",
+  "text": "거품이 조금 적네요.",
+  "ep": "autumn_2"
+ },
+ {
+  "key": "0b55d963",
+  "voice": "customer-coffee",
+  "text": "거품이 조금 많네요.",
   "ep": "autumn_2"
  },
  {
@@ -14718,6 +14862,12 @@
   "ep": "autumn_6"
  },
  {
+  "key": "7b31a6ff",
+  "voice": "customer-arms",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "autumn_6"
+ },
+ {
   "key": "7670e384",
   "voice": "customer-arms",
   "text": "조금 연하네요.",
@@ -14751,6 +14901,18 @@
   "key": "d6fb70d5",
   "voice": "customer-arms",
   "text": "조금 넘쳤네요.",
+  "ep": "autumn_6"
+ },
+ {
+  "key": "00987f55",
+  "voice": "customer-arms",
+  "text": "거품이 조금 적네요.",
+  "ep": "autumn_6"
+ },
+ {
+  "key": "1801aac4",
+  "voice": "customer-arms",
+  "text": "거품이 조금 많네요.",
   "ep": "autumn_6"
  },
  {
@@ -14793,6 +14955,12 @@
   "key": "8df8ab97",
   "voice": "sys",
   "text": "천천히 나르기. [누르고 걷기]를 누르는 동안 걸어요. 쟁반이 흔들리면 손을 떼고 멈춰요.",
+  "ep": "autumn_6"
+ },
+ {
+  "key": "6b7fdf48",
+  "voice": "sys",
+  "text": "천천히 나르기. [한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
   "ep": "autumn_6"
  },
  {
@@ -15735,6 +15903,24 @@
   "key": "7a95ec16",
   "voice": "customer",
   "text": "고마워요. 버스에서 두 손으로 감싸고 마실게요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "45cf7d1d",
+  "voice": "customer",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "66e6beff",
+  "voice": "customer",
+  "text": "거품이 조금 적네요.",
+  "ep": "winter_1"
+ },
+ {
+  "key": "85a1d5d2",
+  "voice": "customer",
+  "text": "거품이 조금 많네요.",
   "ep": "winter_1"
  },
  {
@@ -17556,6 +17742,12 @@
   "ep": "winter_4"
  },
  {
+  "key": "0b6f4eb4",
+  "voice": "sys",
+  "text": "촛불 사이로 나르기. [한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
+  "ep": "winter_4"
+ },
+ {
   "key": "c27c5414",
   "voice": "narr",
   "text": "해순 할머니가 담요를 한 아름 안고 왔다.",
@@ -18726,6 +18918,18 @@
   "ep": "winter_5"
  },
  {
+  "key": "0feff19c",
+  "voice": "mom2",
+  "text": "거품이 조금 적네요.",
+  "ep": "winter_5"
+ },
+ {
+  "key": "bd8b0f3d",
+  "voice": "mom2",
+  "text": "거품이 조금 많네요.",
+  "ep": "winter_5"
+ },
+ {
   "key": "15a4749e",
   "voice": "eunju",
   "text": "나는 늘 먹던 거요. 그 두꺼운 컵에요.",
@@ -19122,6 +19326,12 @@
   "ep": "winter_6"
  },
  {
+  "key": "cc3e46d7",
+  "voice": "sys",
+  "text": "창가로 세 잔. [한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
+  "ep": "winter_6"
+ },
+ {
   "key": "a22e1dc7",
   "voice": "narr",
   "text": "한 잔은 할머니 앞에, 한 잔은 손녀 앞에, 그리고 한 잔은 빈 의자 앞에 놓는다.",
@@ -19131,6 +19341,12 @@
   "key": "24a3a37e",
   "voice": "sys",
   "text": "창가로 두 잔. [누르고 걷기]를 누르는 동안 걸어요. 쟁반이 흔들리면 손을 떼고 멈춰요.",
+  "ep": "winter_6"
+ },
+ {
+  "key": "6722c6cb",
+  "voice": "sys",
+  "text": "창가로 두 잔. [한 걸음]으로 걸어요. 쟁반이 흔들리면 [멈춰서 숨 고르기]를 눌러요.",
   "ep": "winter_6"
  },
  {
@@ -20574,6 +20790,12 @@
   "ep": "free"
  },
  {
+  "key": "b489e4f3",
+  "voice": "customer-olive",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "free"
+ },
+ {
   "key": "7ff11d90",
   "voice": "customer-olive",
   "text": "얼음이 조금 적네요.",
@@ -20622,9 +20844,9 @@
   "ep": "free"
  },
  {
-  "key": "87a94d1f",
+  "key": "68df2de9",
   "voice": "customer-olive",
-  "text": "아이스로요. 겨울에도 아아죠.",
+  "text": "아이스로요.",
   "ep": "free"
  },
  {
@@ -20742,6 +20964,12 @@
   "ep": "free"
  },
  {
+  "key": "72db44a1",
+  "voice": "teacher",
+  "text": "와, 하트네요! 고마워요.",
+  "ep": "free"
+ },
+ {
   "key": "e8a3d872",
   "voice": "teacher",
   "text": "조금 연하네요.",
@@ -20775,6 +21003,18 @@
   "key": "0522ac2f",
   "voice": "teacher",
   "text": "조금 넘쳤네요.",
+  "ep": "free"
+ },
+ {
+  "key": "098a38fb",
+  "voice": "teacher",
+  "text": "거품이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "26363e26",
+  "voice": "teacher",
+  "text": "거품이 조금 많네요.",
   "ep": "free"
  },
  {
@@ -21066,6 +21306,18 @@
   "ep": "free"
  },
  {
+  "key": "e42d911b",
+  "voice": "customer-stripe",
+  "text": "거품이 조금 적네요.",
+  "ep": "free"
+ },
+ {
+  "key": "1812cbc6",
+  "voice": "customer-stripe",
+  "text": "거품이 조금 많네요.",
+  "ep": "free"
+ },
+ {
   "key": "e1e90b4a",
   "voice": "customer-stripe",
   "text": "유자차, 차갑게요.",
@@ -21093,6 +21345,12 @@
   "key": "5aca99f5",
   "voice": "customer-stripe",
   "text": "부드러워요. 고마워요.",
+  "ep": "free"
+ },
+ {
+  "key": "897bd401",
+  "voice": "customer-stripe",
+  "text": "와, 하트네요! 고마워요.",
   "ep": "free"
  },
  {
@@ -21198,9 +21456,9 @@
   "ep": "free"
  },
  {
-  "key": "d346387b",
+  "key": "57489b8d",
   "voice": "customer-arms",
-  "text": "아이스로요. 겨울에도 아아죠.",
+  "text": "아이스로요.",
   "ep": "free"
  },
  {
@@ -21282,9 +21540,9 @@
   "ep": "free"
  },
  {
-  "key": "29c07375",
+  "key": "50eabd17",
   "voice": "customer-sporty",
-  "text": "아이스로요. 겨울에도 아아죠.",
+  "text": "아이스로요.",
   "ep": "free"
  },
  {
@@ -21432,21 +21690,9 @@
   "ep": "free"
  },
  {
-  "key": "6cdd602f",
-  "voice": "sumin",
-  "text": "…늘 먹던 거요.",
-  "ep": "free"
- },
- {
   "key": "657561e3",
   "voice": "sumin",
   "text": "구수하네요. 고마워요.",
-  "ep": "free"
- },
- {
-  "key": "9fab829a",
-  "voice": "sumin",
-  "text": "이건 제가 늘 먹던 게 아니네요.",
   "ep": "free"
  },
  {
@@ -21678,12 +21924,6 @@
   "ep": "free"
  },
  {
-  "key": "2e7a210e",
-  "voice": "customer-coffee",
-  "text": "거품이 조금 적네요.",
-  "ep": "free"
- },
- {
   "key": "cafd7c38",
   "voice": "customer-coffee",
   "text": "따뜻한 라테 하나요. 가져갈게요.",
@@ -21798,12 +22038,6 @@
   "ep": "free"
  },
  {
-  "key": "1812cbc6",
-  "voice": "customer-stripe",
-  "text": "거품이 조금 많네요.",
-  "ep": "free"
- },
- {
   "key": "d915b090",
   "voice": "daeri",
   "text": "출장 왔다가 들렀어요. 회의 전에 한 잔 해야죠.",
@@ -21900,9 +22134,9 @@
   "ep": "free"
  },
  {
-  "key": "c7237d15",
+  "key": "1db27cf7",
   "voice": "customer-stripe",
-  "text": "아이스로요. 겨울에도 아아죠.",
+  "text": "아이스로요.",
   "ep": "free"
  },
  {
@@ -21933,12 +22167,6 @@
   "key": "0aa71d40",
   "voice": "customer-stripe",
   "text": "거품이 조금 거칠네요.",
-  "ep": "free"
- },
- {
-  "key": "e42d911b",
-  "voice": "customer-stripe",
-  "text": "거품이 조금 적네요.",
   "ep": "free"
  },
  {
@@ -22035,12 +22263,6 @@
   "key": "6eb041ca",
   "voice": "customer-arms",
   "text": "거품이 조금 거칠네요.",
-  "ep": "free"
- },
- {
-  "key": "00987f55",
-  "voice": "customer-arms",
-  "text": "거품이 조금 적네요.",
   "ep": "free"
  },
  {
@@ -22164,12 +22386,6 @@
   "ep": "free"
  },
  {
-  "key": "57489b8d",
-  "voice": "customer-arms",
-  "text": "아이스로요.",
-  "ep": "free"
- },
- {
   "key": "9c139d7b",
   "voice": "jieun",
   "text": "아이스 디카페인 라테 한 잔, 가져가시는 거죠?",
@@ -22275,12 +22491,6 @@
   "key": "26140e65",
   "voice": "customer-coffee",
   "text": "아래에 덜 녹은 게 조금 있네요.",
-  "ep": "free"
- },
- {
-  "key": "0b55d963",
-  "voice": "customer-coffee",
-  "text": "거품이 조금 많네요.",
   "ep": "free"
  },
  {
@@ -22398,15 +22608,21 @@
   "ep": "free"
  },
  {
-  "key": "1db27cf7",
-  "voice": "customer-stripe",
-  "text": "아이스로요.",
-  "ep": "free"
- },
- {
   "key": "e7d333d4",
   "voice": "sys",
   "text": "오늘의 칠판. 오늘의 추천 메뉴는 녹차라테예요. 추천 메뉴를 찾는 손님이 많을 거예요.",
+  "ep": "free"
+ },
+ {
+  "key": "6cdd602f",
+  "voice": "sumin",
+  "text": "…늘 먹던 거요.",
+  "ep": "free"
+ },
+ {
+  "key": "9fab829a",
+  "voice": "sumin",
+  "text": "이건 제가 늘 먹던 게 아니네요.",
   "ep": "free"
  },
  {
@@ -22443,12 +22659,6 @@
   "key": "3a238cfb",
   "voice": "customer-arms",
   "text": "쌉쌀하고 시원해요. 고마워요.",
-  "ep": "free"
- },
- {
-  "key": "1801aac4",
-  "voice": "customer-arms",
-  "text": "거품이 조금 많네요.",
   "ep": "free"
  },
  {
@@ -22674,12 +22884,6 @@
   "ep": "free"
  },
  {
-  "key": "9fb379a6",
-  "voice": "customer-sporty",
-  "text": "거품이 조금 많네요.",
-  "ep": "free"
- },
- {
   "key": "01a9f55b",
   "voice": "customer-sporty",
   "text": "코코아, 따뜻하게요.",
@@ -22713,12 +22917,6 @@
   "key": "6f6f01e0",
   "voice": "customer-sporty",
   "text": "거품이 조금 거칠네요.",
-  "ep": "free"
- },
- {
-  "key": "a920d67b",
-  "voice": "customer-sporty",
-  "text": "거품이 조금 적네요.",
   "ep": "free"
  },
  {
@@ -22944,6 +23142,12 @@
   "ep": "free"
  },
  {
+  "key": "29c07375",
+  "voice": "customer-sporty",
+  "text": "아이스로요. 겨울에도 아아죠.",
+  "ep": "free"
+ },
+ {
   "key": "aeaaacb1",
   "voice": "customer-sporty",
   "text": "따뜻한 우유 한 잔이요.",
@@ -22986,6 +23190,12 @@
   "ep": "free"
  },
  {
+  "key": "87a94d1f",
+  "voice": "customer-olive",
+  "text": "아이스로요. 겨울에도 아아죠.",
+  "ep": "free"
+ },
+ {
   "key": "43557400",
   "voice": "customer-coffee",
   "text": "아이가 마시기엔 조금 뜨겁네요.",
@@ -23013,6 +23223,12 @@
   "key": "0f46cf66",
   "voice": "customer-coffee",
   "text": "따뜻한 라테 하나요. 여기서 마실게요.",
+  "ep": "free"
+ },
+ {
+  "key": "c7237d15",
+  "voice": "customer-stripe",
+  "text": "아이스로요. 겨울에도 아아죠.",
   "ep": "free"
  },
  {
@@ -23169,12 +23385,6 @@
   "key": "29a15e7e",
   "voice": "customer-sporty",
   "text": "아래에 덜 녹은 게 조금 있네요.",
-  "ep": "free"
- },
- {
-  "key": "50eabd17",
-  "voice": "customer-sporty",
-  "text": "아이스로요.",
   "ep": "free"
  },
  {
@@ -23349,6 +23559,12 @@
   "key": "fb782c5b",
   "voice": "customer-arms",
   "text": "따뜻한 코코아요.",
+  "ep": "free"
+ },
+ {
+  "key": "d346387b",
+  "voice": "customer-arms",
+  "text": "아이스로요. 겨울에도 아아죠.",
   "ep": "free"
  },
  {
@@ -23589,12 +23805,6 @@
   "key": "27cfd111",
   "voice": "customer-stripe",
   "text": "따뜻한 우유 한 잔이요.",
-  "ep": "free"
- },
- {
-  "key": "68df2de9",
-  "voice": "customer-olive",
-  "text": "아이스로요.",
   "ep": "free"
  },
  {

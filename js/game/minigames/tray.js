@@ -35,7 +35,7 @@ const SAY = {
 const LABELS = { calm: '괜찮아요', warn: '조심', shake: '흔들려요' };
 
 export function trayLines(opts = {}) {
-  const out = [...line.intro(opts.title || '쟁반 나르기', HOWTO), line.sys(HOWTO_TURN)];
+  const out = [...line.intro(opts.title || '쟁반 나르기', HOWTO), ...line.intro(opts.title || '쟁반 나르기', HOWTO_TURN)]; // 턴 방식은 틀이 '제목. 턴 방식 할 일'로 읽음
   for (const t of [...Object.values(SAY), ...Object.values(LABELS)]) out.push(line.sys(t));
   if (opts.to) out.push(line.sys(`${opts.to}까지 날라요.`));
   return out;
@@ -217,7 +217,11 @@ export async function tray(opts = {}) {
       else if (!holding && wob <= 0.08) holding = true;
     }
     if (auto && turn) {
-      if (robot === 'bad' || wob <= 0.4) { d = Math.min(1, d + dt / (WALK_MS * 0.6)); wob = Math.min(1, wob + dt / (WOBBLE_UP * 1.4)); if (wob >= 1) spill(); } else wob = Math.max(0, wob - dt / WOBBLE_DOWN);
+      // 실시간 [보기]처럼 흔들리면 가라앉을 때까지 멈췄다가 다시 걸음(한 값에서 걷기 · 멈추기가 번갈아 떨지 않게, 걷는 모양 is-walking 도)
+      if (robot === 'bad') holding = true;
+      else if (holding && wob >= 0.5) holding = false;
+      else if (!holding && wob <= 0.08) holding = true;
+      if (holding) { d = Math.min(1, d + dt / (WALK_MS * 0.6)); wob = Math.min(1, wob + dt / (WOBBLE_UP * 1.4)); if (wob >= 1) spill(); } else wob = Math.max(0, wob - dt / WOBBLE_DOWN);
       draw();
       if (d >= 1) arrive();
       return;

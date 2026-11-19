@@ -38,7 +38,7 @@ export function warmthOf(touchMap) {
 
 /** flag(이름) → 그 선택 기억의 값 · opts.album: 열린 액자 목록(store.album) */
 export function checkCond(cond, flag, opts = {}) {
-  if (Array.isArray(cond)) return cond.some((c) => checkCond(c, flag));
+  if (Array.isArray(cond)) return cond.some((c) => checkCond(c, flag, opts)); // 묶음 안의 { album } 도 열린 액자를 봄
   for (const [k, v] of Object.entries(cond || {})) {
     if (k === 'flag' || k === 'notFlag') {
       const [name, want] = String(v).split('=');

@@ -72,7 +72,8 @@ function stayOn(el) {
   scanTimer = setInterval(scanStep, scanPeriod());
   const list = scanTargets();
   scanIndex = list.indexOf(el);
-  if (scanIndex >= 0) { clearScanMark(); el.classList.add('scan-on'); }
+  clearScanMark(); // 그 단추가 새 창 밖(가려진 아래 화면)이면 강조를 지움: 다음 스위치가 가려진 단추를 다시 누르지 않게
+  if (scanIndex >= 0) el.classList.add('scan-on');
 }
 
 function scanStep() {
@@ -91,11 +92,14 @@ export const input = {
   init() {
     document.addEventListener('keydown', (e) => {
       const tag = (document.activeElement?.tagName || '').toLowerCase();
-      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') {
+        if (e.key === 'Escape' && !e.isComposing) bus.emit('escape'); // 글자 입력 창(ov.prompt: 학생 추가 · 번호 바꾸기)도 Esc 로 닫힘
+        return;
+      }
 
-      // 스캔 모드: 스위치 = 현재 강조된 것 누르기 (강조가 없으면 대사 넘기기)
+      // 스캔 모드: 스위치 = 현재 강조된 것 누르기 (강조가 없으면 대사 넘기기). 맨 위 창 안의 강조만(가려진 아래 화면의 단추는 누르지 않음)
       if (store.settings().scan && (e.key === ' ' || e.key === 'Enter')) {
-        const on = document.querySelector('.scan-on');
+        const on = topScope().querySelector('.scan-on');
         e.preventDefault();
         if (on && document.contains(on) && visible(on)) { on.click(); setTimeout(() => { if (store.settings().scan) stayOn(on); }, 0); }
         else if (advanceHandler) advanceHandler('key');
@@ -113,7 +117,8 @@ export const input = {
         bus.emit('escape');
         return;
       }
-      if (/^[1-4]$/.test(e.key)) {
+      // 숫자키로 카드 고르기(카드는 자기 창이 맨 위일 때만: input.isTop). Ctrl+1 등 브라우저 단축키는 그대로
+      if (/^[1-4]$/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
         bus.emit('number-key', Number(e.key));
       }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
@@ -121,7 +126,9 @@ export const input = {
         const i = list.indexOf(document.activeElement);
         if (i >= 0 && list.length > 1) {
           const d = e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1;
-          list[(i + d + list.length) % list.length].focus();
+          const to = list[(i + d + list.length) % list.length];
+          to.focus({ preventScroll: true }); // 게임 판(#screen)이 밀리지 않게, 스크롤 상자만 굴림
+          reveal(to);
           e.preventDefault();
         }
       }
@@ -140,7 +147,10 @@ export const input = {
     for (let i = scopes.length - 1; i >= 0; i--) if (!scopes[i].isConnected) scopes.splice(i, 1); // 지워진 창의 범위는 버림
     scopes.push(el);
     scanIndex = -1;
+    clearScanMark(); // 새 창이 열리면 아래 화면의 강조는 지움(다음 박자 전에 스위치를 눌러도 가려진 단추를 누르지 않게)
   },
+  /** 이 창이 맨 위 범위인지(숫자키 카드 고르기: 멈춤 · 설정 · 수첩 · 말 사전 뒤의 카드는 고르지 않음) */
+  isTop(el) { return topScope() === el; },
   popScope(el) {
     const i = scopes.lastIndexOf(el);
     if (i >= 0) scopes.splice(i, 1);
@@ -167,7 +177,9 @@ export const input = {
 
   /** 새 버튼 묶음이 나타났을 때 첫 버튼에 초점 */
   focusFirst(container) {
-    const el = container?.querySelector('button:not([disabled])');
+    // 숨긴 단추(hidden · is-hidden · 화면에 없는 것)는 건너뜀. 나타나는 중이라 아직 투명한 단추(카드)는 셈
+    const el = [...(container?.querySelectorAll('button:not([disabled])') || [])]
+      .find((b) => !b.closest('[hidden], .is-hidden') && b.getClientRects().length > 0);
     scanIndex = -1;
     if (!el) return false;
     el.focus({ preventScroll: true });

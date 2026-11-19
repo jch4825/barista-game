@@ -9,10 +9,18 @@ import { bus } from './bus.js';
 
 const KEY = CONFIG.SAVE_KEY;
 let storageOK = true;
+let noStorage = false; // 처음부터 저장 공간을 쓸 수 없는 기기(메모리에서만): 저장 칸도 이번 실행 동안만 둠
 
 function readRaw() {
+  let raw;
   try {
-    const raw = localStorage.getItem(KEY);
+    raw = localStorage.getItem(KEY);
+  } catch (e) {
+    storageOK = false;
+    noStorage = true;
+    return null;
+  }
+  try {
     return raw ? JSON.parse(raw) : null;
   } catch (e) {
     storageOK = false;
@@ -90,12 +98,15 @@ if (!db.version || db.version < 2) db = freshDB();
 let saveTimer = null;
 function save() {
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => writeRaw(db), 120);
+  saveTimer = setTimeout(() => { saveTimer = null; writeRaw(db); }, 120);
 }
 function saveNow() {
   clearTimeout(saveTimer);
+  saveTimer = null;
   writeRaw(db);
 }
+// 창을 닫기 직전(0.12초 안)에 바뀐 것도 남김
+if (typeof window !== 'undefined') window.addEventListener('pagehide', () => { if (saveTimer) saveNow(); });
 
 function active() {
   return db.profiles[db.activeId] || null;
@@ -120,7 +131,8 @@ export const NO_PAY_DAYS = ['spring_1'];
  * 모르는 칸(새 판에서 생긴 칸)은 그대로 둡니다 — 이 기기의 기록을 합칠 때 잃지 않게
  */
 function normalizeProfile(raw) {
-  if (!isObj(raw) || typeof raw.id !== 'string' || !/^[\w-]{1,40}$/.test(raw.id)) return null;
+  // '__proto__' · 'constructor' 같은 id 는 받지 않음(db.profiles[id] 에 넣으면 목록 객체 자체가 바뀜)
+  if (!isObj(raw) || typeof raw.id !== 'string' || !/^[\w-]{1,40}$/.test(raw.id) || raw.id in Object.prototype) return null;
   const base = newProfile();
   const pr = obj(raw.progress);
   return {
@@ -144,7 +156,10 @@ function normalizeProfile(raw) {
       free: isObj(pr.free) ? pr.free : undefined,
     },
     flags: obj(raw.flags),
-    stamps: obj(raw.stamps),
+    // 도장 { best 0~3, count, last }: 파일의 이상한 값(best 7 등)이 선생님 화면의 별 · 단계 이름을 깨뜨리지 않게
+    stamps: Object.fromEntries(Object.entries(obj(raw.stamps)).filter(([, v]) => isObj(v)).map(([k, v]) => [k, {
+      ...v, best: Math.min(3, Math.max(0, Math.floor(num(v.best)))), count: Math.max(0, Math.floor(num(v.count))), last: num(v.last),
+    }])),
     log: list(raw.log).filter(isObj),
     diary: list(raw.diary).filter(isObj),
     terms: ids(raw.terms),
@@ -191,16 +206,24 @@ function normalizeGrow(raw) {
   };
 }
 
-/** 성장 합치기: 한 일은 큰 쪽, 모은 것은 모두, 돈 · 앞치마 · 맡기기는 최근 기록(cur) */
+/**
+ * 성장 합치기: 한 일은 큰 쪽, 모은 것(완벽한 잔 · 엉뚱한 잔 · 기억 카드)은 모두, 맡기기는 최근 기록(cur).
+ * 지갑(돈 · 번 돈 · 받은 날 · 산 것 · 입은 앞치마)은 섞지 않고 더 많이 번 쪽 하나를 통째로(같으면 cur):
+ * 받은 날만 합치면 그날 돈이 사라지고(다시 받을 수도 없음), 산 것을 합치면 물건과 그 돈이 함께 남아 두 배가 됨.
+ * 다른 쪽에서만 받은 날은 '받지 않은 날'로 남아, 그날을 다시 하면 받음
+ */
 function mergeGrow(old, cur) {
   const maxOf = (a, b) => { const o = { ...a }; for (const [k, n] of Object.entries(b)) o[k] = Math.max(num(o[k]), num(n)); return o; };
+  const wallet = num(old.earned) > num(cur.earned) ? old : cur;
   return {
     ...cur,
     counts: maxOf(cur.counts, old.counts),
     skills: maxOf(cur.skills, old.skills),
-    paid: { ...old.paid, ...cur.paid },
-    earned: Math.max(num(old.earned), num(cur.earned)),
-    owned: union(cur.owned, old.owned),
+    money: wallet.money,
+    earned: wallet.earned,
+    paid: { ...wallet.paid },
+    owned: [...wallet.owned],
+    apron: wallet.apron,
     perfect: union(cur.perfect, old.perfect),
     odd: union(cur.odd, old.odd),
     cards: union(cur.cards, old.cards),
@@ -218,17 +241,44 @@ function unionBy(a, b, key, cap = 0) {
   return cap && out.length > cap ? out.slice(out.length - cap) : out;
 }
 
+/** 해가 바뀌어도 남는 선택 기억(restartRun 이 남기는 것과 같음) */
+const YEAR_FLAGS = ['usuals', 'menuBook'];
+
+/**
+ * 선택 기억 합치기(cur 가 이김): 칸마다 나뉜 것(touch 신뢰 · picks · seen · usuals)은 칸마다 합치고, 목록(menuBook)은 모두 모음.
+ * 그 밖의 값은 cur, old 에만 있는 칸은 더함. keys 를 주면 old 의 그 칸만 봄
+ */
+function mergeFlags(old, cur, keys = null) {
+  const out = { ...obj(cur) };
+  for (const [k, v] of Object.entries(obj(old))) {
+    if (keys && !keys.includes(k)) continue;
+    const c = out[k];
+    if (c === undefined) out[k] = v;
+    else if (isObj(v) && isObj(c)) out[k] = { ...v, ...c };
+    else if (Array.isArray(v) && Array.isArray(c)) out[k] = union(c, v);
+  }
+  return out;
+}
+
 /**
  * 같은 학생의 두 기록 합치기. 지워지는 기록이 없게: 마친 이야기·도장·말 사전·사진·아차·기록은 모두 모으고,
- * 별명·설정·선택 기억(flags)은 더 최근에 한 쪽(cur)을 따릅니다. 늘 cur 의 것을 먼저 두고 old 에만 있는 것을 뒤에 더해서
+ * 별명·설정은 더 최근에 한 쪽(cur)을, 선택 기억(flags)은 칸마다 합치되 겹치면 cur 를 따릅니다(mergeFlags). 늘 cur 의 것을 먼저 두고 old 에만 있는 것을 뒤에 더해서
  * 같은 파일을 두 번 불러와도 그대로입니다.
+ * 두 기록의 해가 다르면 이번 해의 판(마친 이야기 · 이어 하기 · 선택 기억)은 더 나중 해의 것만 씁니다: 지난해에 마친 날이 새해에 되살아나지 않게
+ * (지난해의 것은 '마친 적이 있는 이야기' ever 에 남고, 해가 바뀌어도 남는 선택 기억 YEAR_FLAGS 는 합침). 엔딩 기록도 나중 해 → 많이 본 쪽. 돈은 mergeGrow
  */
 function mergeProfiles(a, b) {
   const [old, cur] = num(b.updatedAt) > num(a.updatedAt) ? [a, b] : [b, a];
-  const done = { ...cur.progress.done };
-  for (const [ep, v] of Object.entries(old.progress.done)) {
-    const c = done[ep];
-    done[ep] = c ? { ...v, ...c, at: Math.max(num(c.at), num(v.at)), times: Math.max(num(c.times), num(v.times)) } : v;
+  const yo = Math.max(1, num(old.progress.year, 1));
+  const yc = Math.max(1, num(cur.progress.year, 1));
+  const run = yo === yc ? null : yo > yc ? old : cur; // 해가 다르면 나중 해의 기록
+  const other = run === old ? cur : old;
+  const done = { ...(run || cur).progress.done };
+  if (!run) {
+    for (const [ep, v] of Object.entries(old.progress.done)) {
+      const c = done[ep];
+      done[ep] = c ? { ...v, ...c, at: Math.max(num(c.at), num(v.at)), times: Math.max(num(c.times), num(v.times)) } : v;
+    }
   }
   const stamps = { ...cur.stamps };
   for (const [k, v] of Object.entries(old.stamps)) {
@@ -239,11 +289,13 @@ function mergeProfiles(a, b) {
   for (const [k, t] of Object.entries(old.tut)) tut[k] = tut[k] ? Math.min(tut[k], t) : t;
   const saves = { ...cur.saves };
   for (const [n, s] of Object.entries(old.saves)) saves[n] = later(saves[n], s, 'savedAt');
-  // 자동 저장: 더 나중 것. 그 뒤에 그 이야기를 마쳤으면 버림(마친 이야기를 '이어하기'로 띄우지 않게)
-  let checkpoint = later(cur.progress.checkpoint, old.progress.checkpoint, 'savedAt');
+  // 자동 저장: 더 나중 것(해가 다르면 나중 해의 것). 그 뒤에 그 이야기를 마쳤으면 버림(마친 이야기를 '이어하기'로 띄우지 않게)
+  let checkpoint = run ? run.progress.checkpoint || null : later(cur.progress.checkpoint, old.progress.checkpoint, 'savedAt');
   if (checkpoint && num(done[checkpoint.ep]?.at) > num(checkpoint.savedAt)) checkpoint = null;
   const [e1, e2] = [old.progress.ending, cur.progress.ending];
-  const ending = e1 && e2 ? (num(e2.times) >= num(e1.times) ? e2 : e1) : e2 || e1;
+  const ey1 = num(e1?.year, 1);
+  const ey2 = num(e2?.year, 1);
+  const ending = e1 && e2 ? (ey1 !== ey2 ? (ey2 > ey1 ? e2 : e1) : num(e2.times) >= num(e1.times) ? e2 : e1) : e2 || e1;
   const [d1, d2] = [old.progress.daily, cur.progress.daily];
   const daily = d1 && d2 ? (num(d2.days) >= num(d1.days) ? d2 : d1) : d2 || d1;
   const [f1, f2] = [old.progress.free, cur.progress.free];
@@ -251,12 +303,15 @@ function mergeProfiles(a, b) {
   const album = { ...cur.album };
   for (const [k, y] of Object.entries(old.album || {})) album[k] = album[k] ? Math.min(num(album[k], 1), num(y, 1)) : y;
   const ever = { ...obj(old.progress.ever), ...obj(cur.progress.ever) };
+  if (run) for (const [ep, v] of Object.entries(other.progress.done)) if (!ever[ep]) ever[ep] = num(v?.at, Date.now()); // 지난해에 마친 날은 '마친 적이 있음'으로
+  const flags = run ? mergeFlags(other.flags, run.flags, YEAR_FLAGS) : mergeFlags(old.flags, cur.flags);
   return {
     ...cur,
     ...onlyIn(old, cur),
     createdAt: Math.min(num(old.createdAt, Date.now()), num(cur.createdAt, Date.now())),
     updatedAt: Math.max(num(old.updatedAt), num(cur.updatedAt)),
-    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, ever, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily, free, year: Math.max(num(old.progress.year, 1), num(cur.progress.year, 1)) },
+    progress: { ...cur.progress, ...onlyIn(old.progress, cur.progress), done, ever, checkpoint, unlockedAll: old.progress.unlockedAll || cur.progress.unlockedAll, ending, daily, free, year: Math.max(yo, yc) },
+    flags,
     album,
     book: union(cur.book || [], old.book || []),
     stamps,
@@ -326,6 +381,7 @@ export const store = {
   renameProfile(id, name) {
     if (!db.profiles[id]) return;
     db.profiles[id].name = name;
+    touch(db.profiles[id]); // 바꾼 시각: 기록 파일 합치기가 새 별명을 앎
     saveNow();
     bus.emit('profile', active());
   },
@@ -511,7 +567,7 @@ export const store = {
     return Array.from({ length: store.SLOT_COUNT }, (_, i) => p?.saves?.[i + 1] || null);
   },
   slot(n) { return active()?.saves?.[n] || null; },
-  /** 저장. 저장 공간이 막혀 있으면 false */
+  /** 저장. 저장 공간이 가득 찼으면 false. 처음부터 저장이 막힌 기기(메모리에서만)는 이번 실행 동안 둠(설정 화면이 알려 줌) */
   writeSlot(n, data) {
     const p = active();
     if (!p || n < 1 || n > store.SLOT_COUNT) return false;
@@ -520,7 +576,7 @@ export const store = {
     p.saves[n] = { ...data, savedAt: Date.now() };
     touch(p);
     saveNow();
-    if (!storageOK) { p.saves[n] = before || null; return false; }
+    if (!storageOK && !noStorage) { p.saves[n] = before || null; return false; }
     return true;
   },
   deleteSlot(n) {

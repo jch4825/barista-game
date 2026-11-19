@@ -562,7 +562,7 @@ export const REGULARS = {
   /* ---------- 새내기 엄마 은주: 묻기(따뜻한 말). 디카페인 라테. 커피가 늘 식고, 말 걸 사람이 없음 ---------- */
   eunju: {
     name: '은주', wants: 'ask',
-    usual: { menu: 'decaf_latte', temp: 'hot', togo: false, say: '은주: 디카페인 라테. 따뜻하게. 두꺼운 컵에 뚜껑을 덮으면 덜 식어요.' },
+    usual: { menu: 'decaf_latte', temp: 'hot', togo: false, cup: 'thick', say: '은주: 디카페인 라테. 따뜻하게. 두꺼운 컵에 뚜껑을 덮으면 덜 식어요.' }, // cup: 자유 영업의 늘 먹던 거(free.js)도 두꺼운 컵
     album: { title: '일주일의 말', line: '"일주일 동안 어른이랑 말한 게 여기가 처음이었어요."', cg: 'eunju_secret' },
     touches: {
       summer_cold: {
@@ -897,10 +897,14 @@ export function tierOf(trust) {
 /**
  * 선생님 화면용 요약: 단골마다 신뢰·단계·맞음/무난/어긋남 수·유형 수
  * logs: store.logs() 중 type 'respond' (같은 기회를 여러 번 했으면 마지막 것만 셈)
+ * 지금의 선택 기억(touchMap)에 있는 기회만 셈: 새 해 · 옛 저장 불러오기 뒤에 '신뢰 0/10'과 '해 본 기회 5/5'가 함께 보였음. 점수도 선택 기억의 것
  */
 export function regularReport(touchMap, logs) {
   const last = new Map();
-  for (const l of logs || []) if (l.type === 'respond') last.set(`${l.who}.${l.touch}`, l);
+  for (const l of logs || []) {
+    const k = `${l.who}.${l.touch}`;
+    if (l.type === 'respond' && (!touchMap || k in touchMap)) last.set(k, touchMap ? { ...l, score: Number(touchMap[k]) } : l);
+  }
   return Object.entries(REGULARS).map(([who, r]) => {
     const rows = [...last.values()].filter((l) => l.who === who);
     const count = (score) => rows.filter((l) => l.score === score).length;

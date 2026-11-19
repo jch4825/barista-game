@@ -323,7 +323,7 @@ export const RECIPES = {
     name: '디카페인 라테', icon: 'coffee',
     base: 'decaf', adds: ['milk'], temps: ['hot', 'iced'], steps: ['ice', 'tamp', 'extract', 'foam', 'steam', 'pour'],
     iced: ['ice', 'pour', 'tamp', 'extract', 'pourin:decaf'],
-    look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, // 겉보기는 라테와 같음
+    look: { mug: 'cup_mug_latte', thick: 'cup_thick_latte', glass: 'cup_glass_latte', plastic: 'cup_plastic_latte' }, art: { heart: 'cup_mug_heart' }, // 겉보기는 라테와 같음(라테아트도)
     color: '#C49A70', foam: '#F4E7D3',
     thanks: '이거면 마음 놓고 마셔요. 고마워요.',
     desc: '카페인을 뺀 원두로 만든 라테.',
@@ -564,10 +564,11 @@ export function todayTags(t) {
   ].filter(Boolean);
 }
 
-/** 메뉴가 바뀐 주문(손님이 권한 것을 받음): 늘 먹던 것 · 손님이 정한 말(고마움 · 메모 글)은 원래 메뉴의 것이라 뺌 */
+/** 메뉴가 바뀐 주문(손님이 권한 것을 받음): 늘 먹던 것 · 손님이 정한 말(고마움 · 메모 글)은 원래 메뉴의 것이라 뺌.
+ *  '한 잔 더'(more)도 앞 잔과 같은 메뉴일 때의 말이라 뺌(남으면 바뀐 잔에 [늘 드시던 거]가 떴음) */
 function swapOrder(o, menu, temp) {
   const same = menu === o.menu;
-  return { ...o, menu, temp, kid: o.kid && RECIPES[menu].steps.includes('steam') && temp === 'hot' ? true : undefined, usual: same && o.usual, ticket: same ? o.ticket : undefined, thanks: same ? o.thanks : undefined, miss: same ? o.miss : undefined, cup: same ? o.cup : undefined };
+  return { ...o, menu, temp, kid: o.kid && RECIPES[menu].steps.includes('steam') && temp === 'hot' ? true : undefined, usual: same && o.usual, more: same ? o.more : undefined, ticket: same ? o.ticket : undefined, thanks: same ? o.thanks : undefined, miss: same ? o.miss : undefined, cup: same ? o.cup : undefined };
 }
 
 /** 이 주문을 오늘 만들 수 있나. 못 만들면 { kind, notice(알림), say(지은), reply(손님), order(바뀐 주문) }, 만들 수 있으면 null */

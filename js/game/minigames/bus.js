@@ -14,7 +14,7 @@ import { ICON } from '../../data/icons.js';
 import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { josaOnly } from '../../core/text.js';
-import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf, WEEK_STEP, WEEK_MAX } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import { bus as evBus } from '../../core/bus.js';
 import { img } from '../../core/assets.js';
@@ -51,9 +51,11 @@ const totalSay = (id, n) => `${SIGHTS[id].name} ${n}${SIGHTS[id].unit}`; // 요�
 /**
  * 한 번 타는 동안 풍경마다 셀 수 있는 가장 많은 수: 세는 말 · 요약 조각의 음성 파일을 이만큼 만듦.
  * 풍경 수는 빠르기 k 와 상관없음(간격과 시간이 함께 k 배). 2026-11-06 사용자 '갈매기6' 음성이 다름: 5까지만 만들어 6 · 7 은 브라우저 음성이었음
+ * 주가 바뀔수록 풍경 사이가 짧아지므로(ws, 두 번째 해의 봄부터) 가장 빠른 주(frame.js weekSpeed 의 끝)로 셈
  */
 function maxSeen(opts = {}) {
-  const n = 1 + Math.floor(((opts.seconds || 38) * 1000 - FIRST_MS) / GAP_MS[0]);
+  const wsMax = 1 + WEEK_STEP * WEEK_MAX;
+  const n = 1 + Math.floor((((opts.seconds || 38) * 1000 - FIRST_MS) * wsMax) / GAP_MS[0]);
   const out = Object.fromEntries(Object.keys(SIGHTS).map((id) => [id, 0]));
   for (let i = 0; i < Math.max(n, ORDER.length); i++) out[ORDER[i % ORDER.length]] += 1;
   return out;
@@ -82,7 +84,9 @@ export async function bus(opts = {}) {
   // 버스 안 엔진 소리(환경음 bus). 끝나면 앞의 환경음으로 돌림
   const ambBefore = audio.state();
   audio.ambience('bus');
-  const ambBack = () => audio.ambience(ambBefore.ambience, ambBefore.ambLevel);
+  // 한 번만: 정리될 때는 곧바로(onAbort) 돌려서, 그 뒤 불러온 장면의 환경음(runner restore)을 늦게 덮어쓰지 않게(몰림의 musicBack 과 같음)
+  let ambDone = false;
+  const ambBack = () => { if (ambDone) return; ambDone = true; audio.ambience(ambBefore.ambience, ambBefore.ambLevel); };
   let held = 0;
   const seen = Object.fromEntries(Object.keys(SIGHTS).map((id) => [id, 0]));
   let doneRes;
@@ -149,7 +153,8 @@ export async function bus(opts = {}) {
       tts.speak(countSay(id, seen[id]), 'sys');
       b.classList.add('is-got');
       paint();
-      if (turn) setTimeout(() => nextB?.focus({ preventScroll: true }), 40);
+      // 턴 방식: 덜컹하는 중이면 [다음 풍경]은 꺼져 있어 손잡이의 원으로(꺼진 단추에 초점을 주면 초점이 사라짐)
+      if (turn) setTimeout(() => { if (!over) (bumpOn && !grip.hidden ? grip : nextB)?.focus({ preventScroll: true }); }, 40);
     });
     lane.append(b);
     flying.add(it);
@@ -265,7 +270,7 @@ export async function bus(opts = {}) {
   let curLoop = null;
   if (isDebug()) window.__mgAuto = async () => { auto = true; f.el.querySelector('.mg-gate .mg-go')?.click(); await doneP; };
   const offQuit = opts.quit ? evBus.on('mg:quit', () => { over = true; doneRes('quit'); abortMinigame(); }) : null;
-  f.onAbort(() => { over = true; curLoop?.stop(); doneRes('abort'); });
+  f.onAbort(() => { over = true; curLoop?.stop(); ambBack(); doneRes('abort'); });
 
   paint();
   // 처음 설명(틀이 읽는 '제목. 할 일')을 끊지 않게, 시작 말은 [시작!]을 누른 뒤에(검수 13.39 15번)

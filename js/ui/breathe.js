@@ -33,7 +33,7 @@ export async function breathe({ cycles = 3, title = '숨 고르기', note = '' }
   const stopP = new Promise((r) => stopBtn.addEventListener('click', () => { stopped = true; r(); }, { once: true }));
   const wordEl = circle.querySelector('.br-word');
   const countEl = circle.querySelector('.br-count');
-  const voiceOn = store.settings().voice !== 'off';
+  const voiceOn = store.settings().voice === 'auto'; // '버튼으로만'이면 저절로 읽지 않음(force 는 그 설정을 넘어서므로)
 
   const phase = async (word, cls, sfx, secs) => {
     if (stopped || gone()) return;

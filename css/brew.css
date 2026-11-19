@@ -266,6 +266,7 @@ html body .mg.mg-brew { left: 0; right: 0; top: 58px; bottom: 0; padding: 0; gap
 
 /* 물건 단추: 그림 + 늘 보이는 이름. 올리거나 초점이면 살짝 떠오르며 빛남 */
 .mg.mg-brew .bw-hot { position: absolute; z-index: 2; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; }
+.mg.mg-brew .bw-hot:disabled { color: inherit; cursor: default; } /* 주문을 받는 동안 쉬는 물건(brew.js renderHots): 모양은 그대로, 스캔 · Tab 만 건너뜀 */
 .mg.mg-brew .bw-hot .bw-art { display: block; width: 100%; height: auto; transition: transform .18s, filter .18s, opacity .18s; filter: drop-shadow(0 8px 8px rgba(30, 18, 8, .35)); }
 .mg.mg-brew .bw-hot .bw-art svg { display: block; width: 100%; height: auto; aspect-ratio: 1; }
 .mg.mg-brew .bw-hot .bw-art.is-img img { display: block; width: 100%; height: auto; }

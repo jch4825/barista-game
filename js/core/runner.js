@@ -83,6 +83,7 @@ function clearTask() {
 /** keepFlags: 선택 기억은 그대로(다른 해에 저장한 칸을 불러올 때) */
 function restore(s, snap, { keepFlags = false } = {}) {
   s.cgOff = false;
+  s.cgHold = null; // 되감기 전 묶음(quietBatch)이 맡던 CG: 되감은 뒤의 cg · bg 비트를 건너뛰지 않게
   tts.stop();
   ov.clearAll();
   clearTask();
@@ -110,7 +111,7 @@ function addPoint(s, index, title, snap) {
 }
 
 // 자유 영업은 날마다 id 가 'free' 로 같아서 몇 번째 날인지(free)도 적어 둠: 다른 날의 비트 번호로 이어 가지 않게(검수 13.39 4번 · 7번)
-const dayOf = (ep) => (ep.free ? { free: ep.free } : {});
+const dayOf = (ep) => (ep.free ? { free: ep.free, ...(ep.early ? { early: ep.early } : {}) } : {}); // early: 엔딩 전 자유 영업의 단골 · 계절(free.js)
 
 function save(s, index, name, snap) {
   // dayAt: 이 날을 처음부터 시작한 때(이어 하기로 마쳐도 하루 끝 화면이 아침의 기록까지 셈, 검수 13.39 27번)
@@ -226,10 +227,11 @@ async function quietBatch(s, seq, k, top, w) {
   const hold = moves && !stage.isCovered() && cg && cg !== now ? cg : null;
   if (hold) { s.cgOff = false; stage.setCg(cg); await w(stage.cgSettled()); } // CG 를 먼저 덮음(걷기로 한 앞 CG 위로)
   s.cgHold = hold;
+  const E = s.epoch;
   try {
     for (let i = k; i < j; i++) await w(exec(s, seq[i], top ? i : null));
   } finally {
-    s.cgHold = null;
+    if (s.epoch === E) s.cgHold = null; // 되감기 뒤 늦게 끝난 묶음은 새 묶음의 것을 지우지 않음
   }
   return { next: j };
 }
@@ -593,11 +595,13 @@ async function miniBeat(s, b, index, w) {
 /* ------------------------------------------------------------------ */
 async function loop(s) {
   while (s.index < s.ep.script.length) {
-    const b = s.ep.script[s.index];
-    s.current = b;
-    s.beatSnap = snapshot(s); // 수동 저장(세이브 슬롯)은 '지금 비트가 시작된 순간'을 저장
     let r;
     try {
+      // 되감기 연출(ov.rewindFx) 동안 온 나가기 · 다시 되감기는 아래 catch 가 받음: 연출이 끝난 뒤 그만둔 이야기의 비트를 처음 화면 위에서 시작하지 않게
+      if (s.fx) { const fx = s.fx; s.fx = null; await Promise.race([fx, s.interrupt.p]); }
+      const b = s.ep.script[s.index];
+      s.current = b;
+      s.beatSnap = snapshot(s); // 수동 저장(세이브 슬롯)은 '지금 비트가 시작된 순간'을 저장
       const p = QUIET.has(b.t) ? quietBatch(s, s.ep.script, s.index, true, guard(s)) : exec(s, b, s.index);
       p.catch(() => {});
       r = await Promise.race([p, s.interrupt.p]);
@@ -610,7 +614,8 @@ async function loop(s) {
         const pt = e.data;
         s.points = s.points.filter((p) => p.index < pt.index);
         restore(s, pt.snap);
-        await ov.rewindFx();
+        s.fx = ov.rewindFx(); // 연출은 다음 차례 맨 앞에서 기다림(그동안의 나가기 · 되감기를 받음)
+        s.fx.catch(() => {});
         s.index = pt.index;
         continue;
       }
@@ -663,8 +668,8 @@ export const runner = {
     const t0 = Date.now();
     const status = await loop(s);
     store.addPlayTime(Date.now() - t0);
-    if (session === s) { session = null; tutor.setEpisode(null); }
-    tts.stop();
+    // 끝까지 간 이야기만 목소리를 멈춤. 나가기(abort)는 이미 멈췄고, 그 뒤에 처음 화면이 읽기 시작한 말을 끊지 않게
+    if (session === s) { session = null; tutor.setEpisode(null); tts.stop(); }
     return { status, stamps: s.stamps, photos: s.photos, terms: s.terms, ms: Date.now() - t0, dayAt: s.dayAt };
   },
 
@@ -680,6 +685,7 @@ export const runner = {
       ...dayOf(s.ep),
       year: store.year(), // 다른 해에 불러오면 선택 기억을 되살리지 않음(검수 13.39 23번)
       index: s.index,
+      dayAt: s.dayAt, // 이 날을 시작한 때: 불러와 마쳐도 하루 끝 화면이 아침의 단골 · 잔까지 셈(자동 저장과 같음)
       snapshot: s.beatSnap,
       stamps: [...s.stamps], photos: [...s.photos], terms: [...s.terms],
       line: last ? { label: last.label || '', text: last.text } : null,
@@ -703,6 +709,7 @@ export const runner = {
     ov.clearAll();
     vfx.clear();
     clearTask();
+    dialogue.clear(); // 치고 있던 대사도 그만둠: 처음 화면에서 Space 가 지난 대사를 넘기며 처음 화면의 말을 끊지 않게
   },
 
   isRunning() { return Boolean(session); },

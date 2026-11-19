@@ -9,6 +9,7 @@ import { h } from '../core/dom.js';
 import { ICON } from '../data/icons.js';
 import { ov } from '../ui/overlays.js';
 import { openScreen } from './screen.js';
+import { CONFIG } from '../config.js';
 import {
   CREDITS_TABS, OVERVIEW, PRD_INTRO, REQUESTS_INTRO, WORKLOG_INTRO, IMAGES_INTRO, IMAGES_EXTRA, MUSIC_INTRO, TOOLS_TEXT, DATA_TEXT, COPYRIGHT_TEXT,
   PROMPT_FROM, REQUEST_HOW,
@@ -198,7 +199,7 @@ const TAB = {
 };
 
 function printPane(pane, title) {
-  const area = h('div', { class: 'print-area tp-print' }, h('h2', { text: `직업 마1스톤 · ${title}` }), pane.cloneNode(true));
+  const area = h('div', { class: 'print-area tp-print' }, h('h2', { text: `${CONFIG.TITLE} · ${title}` }), pane.cloneNode(true));
   for (const b of area.querySelectorAll('.tp-fold-body.hide')) b.classList.remove('hide');
   for (const b of area.querySelectorAll('button, input')) b.remove();
   document.body.append(area);

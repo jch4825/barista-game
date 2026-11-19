@@ -104,7 +104,8 @@ function guestOrder(season, r, board = {}) {
   if (x < 0.42) {
     if (r() < 0.35) {
       const hot = season === 'winter' && r() < 0.4;
-      return { who: 'customer', say: '아메리카노 하나요.', menu: 'americano', temp: hot ? 'hot' : 'iced', togo, ask: ['temp', 'togo'], reply: { temp: hot ? '오늘은 따뜻한 걸로요.' : '아이스로요. 겨울에도 아아죠.' } };
+      // '겨울에도 아아죠'는 겨울에만(봄 · 여름 · 가을 손님이 겨울 이야기를 했음)
+      return { who: 'customer', say: '아메리카노 하나요.', menu: 'americano', temp: hot ? 'hot' : 'iced', togo, ask: ['temp', 'togo'], reply: { temp: hot ? '오늘은 따뜻한 걸로요.' : season === 'winter' ? '아이스로요. 겨울에도 아아죠.' : '아이스로요.' } };
     }
     const say = ['아아 하나요.', '아이스 아메리카노 하나 주세요.', '아아 한 잔이요.'][Math.floor(r() * 3)];
     return { who: 'customer', say, menu: 'americano', temp: 'iced', togo, ask: ['togo'], reply: { togo: where } };
@@ -142,9 +143,15 @@ function regularOrders(who, season) {
     const color = { spring: ['strawberry_milk', 'iced', '분홍색'], summer: ['greentea_latte', 'iced', '초록색'], autumn: ['yuja_tea', 'hot', '노란색'], winter: ['cocoa', 'hot', '갈색'] }[season];
     return [{ who, say: `오늘은 ${color[2]}이요.`, menu: color[0], temp: tempOf(color[0], color[1]), togo: false, thanks: '오늘 색이다. 고마워요.' }];
   }
-  if (who === 'sumin') return [{ who, say: '…늘 먹던 거요.', menu: 'barley_tea', temp: season === 'summer' ? 'iced' : 'hot', togo: false, usual: true }];
+  // 수민의 늘 먹던 것은 차가운 보리차(regulars.js usual). 따뜻하게 마시는 날은 말로 알려 줌(가을 7일과 같은 말): 말없이 따뜻한 잔을 바랐음
+  if (who === 'sumin') {
+    return [season === 'summer'
+      ? { who, say: '…늘 먹던 거요.', menu: 'barley_tea', temp: u.temp, togo: false, usual: true }
+      : { who, say: '늘 먹던 거요. 오늘은 따뜻하게요.', menu: 'barley_tea', temp: 'hot', togo: false }];
+  }
   const one = { who, say: '늘 먹던 거요.', menu: u.menu, togo: Boolean(u.togo), usual: true };
   if (RECIPES[u.menu].temps.length > 1) one.temp = u.temp;
+  if (u.cup) one.cup = u.cup; // 은주의 두꺼운 컵(수첩의 단골 쪽에 적힌 그대로)
   if (who === 'haesun') return [one, { who, say: '한 잔 더, 똑같이.', menu: 'warm_milk', togo: false, more: true }];
   return [one];
 }
@@ -223,6 +230,8 @@ export function freeDay(n = 1, { album = {}, regs: metRegs = null, seasons = nul
     costume: { customer: COSTUMES[day % COSTUMES.length] },
     diary: `${sName}의 자유 영업 ${day}번째 날. 오늘도 손님마다 주문을 확인하고, 한 잔씩 천천히 만들었다.`,
     free: day,
+    // 엔딩 전에 연 날(만난 단골 · 마친 계절만): 저장에 남겨, 그 뒤 단골 · 계절이 늘어도 불러올 때 같은 하루를 다시 만듦(비트 번호가 어긋나지 않게)
+    ...(metRegs || seasons ? { early: { regs: metRegs || null, seasons: seasons || null } } : {}),
     script: [
       big('자유 영업', `${day}번째 날 · ${sName}`, `자유 영업. ${sName}의 하루.`), // 소리는 날 번호 없이(번호는 끝없이 늘어 음성 파일을 만들 수 없음, 검수 13.63)
       bg('hall', season),

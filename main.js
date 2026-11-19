@@ -14,6 +14,7 @@ protocol.registerSchemesAsPrivileged([
 
 if (!app.requestSingleInstanceLock()) {
   app.quit();
+  return; // 두 번째 실행: 창 · 프로토콜을 만들지 않고 끝냄(앞의 창이 second-instance 로 앞에 나옴)
 }
 
 let mainWindow;
@@ -46,14 +47,20 @@ function createWindow() {
   });
   // 외부 링크는 앱 안에서 열지 않음
   mainWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  // 닫힌 창을 붙들지 않음(macOS 는 창을 닫아도 앱이 남아, 닫힌 창의 함수를 부르면 오류)
+  mainWindow.on('closed', () => { mainWindow = null; });
 }
 
 app.whenReady().then(() => {
   const root = path.resolve(__dirname);
   protocol.handle('app', (request) => {
     const { pathname } = new URL(request.url);
-    const file = path.normalize(path.join(root, decodeURIComponent(pathname)));
-    if (!file.startsWith(root)) return new Response('forbidden', { status: 403 });
+    let name;
+    try { name = decodeURIComponent(pathname); } catch (e) { return new Response('bad request', { status: 400 }); } // 깨진 %xx
+    const file = path.normalize(path.join(root, name));
+    // 게임 폴더 안만: startsWith 는 이름이 같게 시작하는 옆 폴더(game3-old 등)도 통과시켰음
+    const rel = path.relative(root, file);
+    if (rel.startsWith('..') || path.isAbsolute(rel)) return new Response('forbidden', { status: 403 });
     return net.fetch(pathToFileURL(file).toString());
   });
   createWindow();

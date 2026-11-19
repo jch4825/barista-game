@@ -127,6 +127,7 @@ export async function routine(opts = {}) {
     btns.forEach((b, i) => {
       b.classList.toggle('is-now', i === next);
       b.classList.toggle('is-done', i < next);
+      b.disabled = i < next; // 끝낸 일은 다시 눌리지 않음(한 번 더 눌러도 실수로 세지 않고, 스캔도 건너뜀)
       b.setAttribute('aria-current', i === next ? 'step' : 'false');
     });
     [...list.children].forEach((li, i) => { li.classList.toggle('is-done', i < next); li.classList.toggle('is-now', i === next); });
@@ -139,7 +140,7 @@ export async function routine(opts = {}) {
   setTimeout(() => btns[0]?.focus({ preventScroll: true }), 80);
 
   async function press(i) {
-    if (over || stopped()) return;
+    if (over || stopped() || i < next) return; // 끝낸 일: 아무것도 하지 않음(감점 없음)
     if (i !== next) {
       mistakes += 1;
       audio.sfx('tap');
@@ -175,7 +176,7 @@ export async function routine(opts = {}) {
       pressed = true;
       fin.classList.add('is-pressed');
       audio.sfx('great');
-      await spoken;
+      await Promise.race([spoken, sleep(9000)]); // 말이 멈춰도 닫힘(쟁반 · 몰림과 같음)
       if (!stopped()) doneRes('done');
     });
     f.body.append(h('div', { class: 'rt-finish-row' }, fin));

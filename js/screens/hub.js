@@ -75,7 +75,8 @@ function epCard(ep, today = false) {
 
 /** 엔딩 칸: 마지막 이야기를 마치면 열림, 본 뒤에는 '다시 보기' */
 function endCard() {
-  const seen = Boolean(store.ending());
+  const end = store.ending();
+  const seen = Boolean(end && (end.year || 1) === store.year()); // 이번 해에 본 것만(둘째 해에 '다시 보기'와 잠김이 함께 보였음)
   const open = isUnlocked(ENDING.id);
   return h('button', {
     class: `hub-ep hub-end ${seen ? 'done' : ''} ${open ? '' : 'locked'}`,
@@ -167,6 +168,14 @@ export function showHub() {
     h('section', { class: `hub-act act-end ${seenThisYear ? 'is-clear' : ''}` },
       h('div', { class: 'cal-head' }, h('h2', { text: '이야기 뒤' }), h('p', { text: seenThisYear ? '엔딩은 언제든 다시 볼 수 있어요. 자유 영업으로 카페를 계속 열 수 있어요.' : '겨울 7일을 마치면 엔딩이 열려요.' })),
       h('div', { class: 'hub-eps cal-end' }, endCard(), freeCard(), seenThisYear ? yearCard() : null, seenThisYear ? clearNote() : null))));
-  scr.body.querySelector('.is-today')?.scrollIntoView({ block: 'center' });
+  // 오늘 칸을 가운데로: 목록 상자만 굴림(scrollIntoView 는 넘침을 숨긴 게임 판까지 밀어 버림, input.js reveal).
+  // 판이 줄어 그려져 있어 화면 좌표를 상자의 px 로 바꿈
+  const t = scr.body.querySelector('.is-today');
+  if (t) {
+    const r = t.getBoundingClientRect();
+    const br = scr.body.getBoundingClientRect();
+    const k = scr.body.offsetHeight ? br.height / scr.body.offsetHeight : 1;
+    scr.body.scrollTop += (r.top + r.height / 2 - (br.top + br.height / 2)) / k;
+  }
   return scr;
 }

@@ -36,12 +36,12 @@ function readLabel(text, force = false) {
  */
 function build(options, { tried = new Set(), glow = -1, variant = '', help = false, helpLabel = '도와주세요', timer = null, order = null }) {
   const seq = order && order.length === options.length ? order : options.map((_, i) => i);
-  const s = store.settings();
   return new Promise((resolve) => {
     const area = $('#layer-task');
     let selected = -1;
     let done = false;
     let offKey = () => {};
+    let focusT = null;
     let box = null; // 이 카드 묶음(모듈의 wrap 은 다음 카드로 바뀔 수 있어 따로 둠)
     const btns = [];
 
@@ -50,6 +50,7 @@ function build(options, { tried = new Set(), glow = -1, variant = '', help = fal
       if (done) return false;
       done = true;
       timer?.stop();
+      clearTimeout(focusT);
       offKey();
       input.popScope(box);
       clearTimeout(readTimer);
@@ -92,7 +93,7 @@ function build(options, { tried = new Set(), glow = -1, variant = '', help = fal
       b.addEventListener('click', (e) => {
         e.stopPropagation();
         if (e.target.closest('.card-say')) { audio.sfx('tap'); readLabel(label, true); return; } // 소리 아이콘: 고르지 않고 읽기만
-        if (s.selectMode === 'two' && selected !== k) { select(k); return; }
+        if (store.settings().selectMode === 'two' && selected !== k) { select(k); return; } // 카드 위에서 설정을 바꿔도 바로 따름
         pick(k);
       });
       b.addEventListener('focus', () => { if (autoFocus) { autoFocus = false; return; } readLabel(label); });
@@ -113,9 +114,10 @@ function build(options, { tried = new Set(), glow = -1, variant = '', help = fal
     document.body.classList.add('tasking');
     requestAnimationFrame(() => box.classList.add('is-in'));
     input.pushScope(box);
-    offKey = bus.on('number-key', (n) => { if (n >= 1 && n <= options.length) pick(n - 1); });
+    // 숫자키: 카드가 맨 위 창일 때만(멈춤 · 설정 · 수첩 · 말 사전 뒤에서 고르지 않게)
+    offKey = bus.on('number-key', (n) => { if (n >= 1 && n <= options.length && input.isTop(box)) pick(n - 1); });
     cancelOpen = cleanup;
-    setTimeout(() => input.focusFirst(list), 60);
+    focusT = setTimeout(() => input.focusFirst(list), 60);
     if (timer) {
       setTimeout(() => { if (!done) timer.start(); }, dur(450)); // 카드가 다 나타난 뒤부터
       timer.done.then(() => finish({ type: 'timeout' }));

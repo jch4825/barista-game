@@ -37,6 +37,7 @@ let autoOn = false;
 let voicing = false; // 지금 줄의 목소리가 아직 나오는 중
 let queued = false;  // 목소리가 나오는 동안 누름: 말이 끝나면 넘김(한 번 더 누르면 바로)
 let lineNo = 0;
+let replayP = null; // [다시 듣기]로 다시 읽는 목소리: 자동 넘김은 이 말이 끝난 뒤부터 다시 셈
 let hiddenEmote = null; // CG 에 가려 무대에서 못 보인 이모트 { who, kind }: 그 사람이 말하는 동안이면 바로, 아니면 바로 다음 대사의 얼굴에
 let lineStarting = false; // 새 대사의 표정을 바꾸는 중(그 이모트는 새 얼굴에 띄움)
 const history = [];
@@ -58,13 +59,15 @@ function fillAll(targets) {
   for (const t of targets) setPart(t, t.full);
 }
 
-async function typeOut(targets) {
+/** myLine: 이 줄의 번호. 되감기 · 불러오기로 줄이 지워지면(clear · 새 줄) 그만둠: 새 줄의 typing 을 건드리지 않게 */
+async function typeOut(targets, myLine) {
   const sp = SPEED[store.settings().textSpeed] ?? 30;
   typing = true;
   skipReq = false;
   if (sp === 0) { fillAll(targets); typing = false; return; }
   for (const t of targets) {
     for (let i = 1; i <= t.full.length; i++) {
+      if (lineNo !== myLine) return;
       if (skipReq) { fillAll(targets); typing = false; return; }
       setPart(t, t.full.slice(0, i));
       // 문장부호에서는 조금 쉬어 읽기 리듬을 만듦
@@ -86,14 +89,25 @@ function setQueued(on) {
   nextEl.firstChild.textContent = on ? '말이 끝나면 넘어가요' : nextLabel();
 }
 
+/** 대사 위에 창(멈춤 · 설정 · 수첩 · 말 사전 · 확인 창)이 열려 있음: 그동안은 넘기지 않음(advance 와 같은 기준) */
+const BLOCK_SEL = '#layer-screen .scr, #layer-modal .ov, #layer-overlay .ov';
+const blockedNow = () => Boolean(document.querySelector(BLOCK_SEL));
+
 function waitAdvance(voiceP, len) {
   const token = ++waitToken;
   voicing = true;
+  replayP = null;
   setQueued(false);
+  // 말이 끝나면 넘기기로 한 누름: 창을 열어 목소리가 끊겨도(openScreen 의 tts.stop) 창 뒤에서 넘어가지 않고, 창을 닫은 뒤에 넘김
+  const fire = () => {
+    if (token !== waitToken || !advanceResolve) return;
+    if (blockedNow()) { setTimeout(fire, 300); return; }
+    advanceResolve();
+  };
   voiceP.then(() => {
     if (token !== waitToken) return;
     voicing = false;
-    if (queued && advanceResolve) advanceResolve();
+    if (queued) fire();
   });
   return new Promise((resolve) => {
     advanceResolve = () => {
@@ -104,10 +118,15 @@ function waitAdvance(voiceP, len) {
     };
     if (autoOn) {
       const [base, per] = AUTO[store.settings().auto] || AUTO.normal;
-      // 쪽지(버튼 알려 주기)가 떠 있으면 학생이 눌러 닫을 때까지 넘기지 않음
+      // 쪽지(버튼 알려 주기)가 떠 있으면 학생이 눌러 닫을 때까지 넘기지 않음.
+      // 창이 열려 있으면 기다렸다가 닫힌 뒤 한 번 더 쉬고 넘김. 기다리는 사이 [자동]을 끄면 넘기지 않음
+      let held = false;
       const go = () => {
-        if (token !== waitToken || !advanceResolve) return;
+        if (token !== waitToken || !advanceResolve || !autoOn) return;
+        if (replayP) { const p = replayP; replayP = null; p.then(() => sleep(base + per * len)).then(go); return; }
         if (tutor.holding()) { setTimeout(go, 300); return; }
+        if (blockedNow()) { held = true; setTimeout(go, 300); return; }
+        if (held) { held = false; setTimeout(go, base); return; }
         advanceResolve();
       };
       voiceP.then(() => sleep(base + per * len)).then(go);
@@ -155,7 +174,7 @@ export const dialogue = {
 
   /** 넘기기 (처리했으면 true) */
   advance() {
-    if (document.querySelector('#layer-screen .scr, #layer-modal .ov, #layer-overlay .ov')) return false;
+    if (blockedNow()) return false;
     if (typing) { skipReq = true; bus.emit('dialogue:tap'); return true; }
     if (tutor.consumeTap()) return true; // 알려 주기만 하는 쪽지가 떠 있으면 이 누름은 쪽지를 닫음(읽기 전에 넘어가지 않게)
     if (advanceResolve) {
@@ -237,7 +256,8 @@ export const dialogue = {
       stage.talk(who, true);
       voiceP.then(() => { voiceDone = true; if (lineNo === myLine && !typing) stage.talk(who, false); });
     }
-    await typeOut(targets);
+    await typeOut(targets, myLine);
+    if (lineNo !== myLine) return; // 되감기 · 불러오기로 지워진 줄: 새 줄의 넘기기(advanceResolve)를 덮어쓰지 않게
     if (kind === 'say' && who && (voiceDone || store.settings().voice === 'off')) stage.talk(who, false);
     if (b.noWait) {
       if (b.waitVoice) await voiceP; // 바로 이어지는 말이 이 목소리를 끊지 않게 끝까지 기다림
@@ -260,7 +280,8 @@ export const dialogue = {
 
   replay() {
     if (!current) return;
-    tts.speak(current.text, voiceOf(current.who, current.kind), { force: true });
+    if (queued) setQueued(false); // 다시 듣는 말을 '말이 끝나면 넘기기'가 끊지 않게
+    replayP = tts.speak(current.text, voiceOf(current.who, current.kind), { force: true });
   },
 
   show() { box.classList.remove('is-hidden'); },
@@ -274,6 +295,7 @@ export const dialogue = {
     nameEl.hidden = true;
     current = null;
     typing = false;
+    lineNo += 1; // 치고 있던 줄(typeOut)은 그만둠
     advanceResolve = null;
     nextEl.classList.remove('on');
     voicing = false;

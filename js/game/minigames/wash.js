@@ -22,10 +22,11 @@ import { audio } from '../../av/audio.js';
 import { tts } from '../../av/tts.js';
 import { store } from '../../core/store.js';
 import { img } from '../../core/assets.js';
-import { frame, line, abortGeneration, timingOf } from './frame.js';
+import { frame, line, abortGeneration, abortMinigame, timingOf } from './frame.js';
 import { pace, loop, isDebug, startGate, popText } from './arcade.js';
 import * as grow from '../../core/grow.js';
 import { attachTrail } from '../../ui/trail.js';
+import { bus } from '../../core/bus.js';
 
 const TITLE = '마감 설거지';
 const HOWTO = '입이 닿는 곳과 안쪽 가운데를 꾹 누르고 있으면 수세미로 닦아요. 다 닦으면 수도꼭지를 눌러 헹궈요.';
@@ -67,12 +68,18 @@ export async function wash(opts = {}) {
   const stopped = () => abortGeneration() !== gen;
   const { turn, k } = pace();
   const drag = !turn && store.settings().control === 'drag';
-  const still = isReducedMotion();
+  const still = isReducedMotion() || document.body.classList.contains('theme-calm'); // 차분 모드도 수세미가 돌지 않음(머리 주석)
   const title = opts.title || TITLE;
   const howto = turn ? HOWTO_TURN : drag ? HOWTO_DRAG : HOWTO;
   const f = frame({ title, instruction: howto, icon: 'cup', cls: `mg-scene mg-wash${still ? ' is-still' : ''}`, quit: Boolean(opts.quit), kind: 'wash', opts });
+  // [그만하기](자유 영업의 마감): 남은 일은 지은이 알아서 함. 그림 자리를 읽는 동안에도 받음(몰림 · 순서대로와 같은 bus 'mg:quit')
+  let quitted = false;
+  let doneRes = () => {};
+  const offQuit = opts.quit ? bus.on('mg:quit', () => { quitted = true; doneRes('quit'); abortMinigame(); }) : null;
+  const endEarly = () => { offQuit?.(); f.close(); return quitted ? { ok: false, quit: true, attempts: 1, mistakes: 0, ms: performance.now() - t0 } : { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; };
   const ws = timingOf(opts).week; // 주가 바뀔수록 살짝 빨라짐: 수세미가 도는 빠르기 · 닦이는 빠르기
   const meta = (await Promise.race([metaP, sleep(1500)]))?.mug || null;
+  if (stopped()) return endEarly(); // 그림 자리를 읽는 사이 정리됨: 고리 · 흐르는 선을 붙이지 않고 끝냄
   const art = meta && img.has('shots', meta.plate) ? meta : null;
   const [W, H] = art ? art.size : [1920, 1080];
   const geo = art || FALLBACK;
@@ -89,7 +96,8 @@ export async function wash(opts = {}) {
   let early = 0;
   let robot = null;    // 'watch' · 'auto' · 'bad'
   let wipeAt = 0;
-  let doneRes;
+  let keyHold = false; // Space · Enter 로 누르고 있음(드래그 활용에서도 고리가 닦음)
+  let curLoop = null;  // 실시간 고리([시작!] 뒤에 만듦. cleanup 이 그 전에 불려도 되게 미리 둠)
   const doneP = new Promise((res) => { doneRes = res; });
 
   /* ---- 그림: 배경판(판 크기 W × H 를 칸에 꽉 차게) + 얼룩 · 거품 · 물줄기 · 수세미 ---- */
@@ -203,16 +211,22 @@ export async function wash(opts = {}) {
     if (dirt[z] <= 0) cleaned(z);
     draw();
   };
+  // 판 좌표(x, y)에 글자: 화면 좌표를 f.body 의 px 로(게임 판이 창에 맞춰 줄어 있어도, bus.js 와 같은 셈). dy 는 f.body 의 px
+  const popAt = (text, x, y, dy = 0) => {
+    const r = box.getBoundingClientRect();
+    const fb = f.body.getBoundingClientRect();
+    const kk = f.body.offsetWidth ? fb.width / f.body.offsetWidth : 1;
+    popText(f.body, text, ((x / W) * r.width + r.left - fb.left) / kk, ((y / H) * r.height + r.top - fb.top) / kk + dy, 'big');
+  };
   const cleaned = (z) => {
     holding = false;
     active = null;
     audio.sfx('great');
     const [x, y] = zoneCenter(z);
-    const r = box.getBoundingClientRect();
-    popText(f.body, '뽀득!', ((x / W) * r.width + r.left - f.body.getBoundingClientRect().left), ((y / H) * r.height + r.top - f.body.getBoundingClientRect().top) - 40, 'big');
+    popAt('뽀득!', x, y, -40);
     tts.speak(ZONES[z].done, 'sys');
     setTimeout(() => { if (!active) spongeAt(home, 0, false); }, dur(500));
-    if (dirt.rim <= 0 && dirt.in <= 0) setTimeout(() => { if (!over && !rinsed) { tts.speak(SAY.rinse, 'sys'); if (!robot) tapB.focus({ preventScroll: true }); } }, dur(900));
+    if (dirt.rim <= 0 && dirt.in <= 0) setTimeout(() => { if (!over && !rinsed && !rinsing) { tts.speak(SAY.rinse, 'sys'); if (!robot) tapB.focus({ preventScroll: true }); } }, dur(900));
     else { const next = dirt.rim > 0 ? 'rim' : 'in'; if (!robot) zb[next].focus({ preventScroll: true }); }
   };
   const press = (z) => {
@@ -222,7 +236,7 @@ export async function wash(opts = {}) {
     spongeOn(z, angle);
     draw();
   };
-  const release = () => { if (!holding) return; holding = false; draw(); };
+  const release = () => { keyHold = false; if (!holding) return; holding = false; draw(); };
 
   /* ---- 헹구기 ---- */
   const rinse = async () => {
@@ -243,10 +257,14 @@ export async function wash(opts = {}) {
     audio.sfx('water');
     box.classList.add('is-rinsing');
     let i = 0;
-    const flick = setInterval(() => { streams.forEach((el, j) => { if (el) el.hidden = j !== i % 2; }); i += 1; }, still ? 400 : 110);
+    const show = () => { streams.forEach((el, j) => { if (el) el.hidden = j !== i % 2; }); i += 1; };
+    show(); // 물줄기는 곧바로(움직임 줄이기의 400ms 간격 전에도 보이게)
+    const flick = setInterval(show, still ? 400 : 110);
     if (!art) box.classList.add('is-rinse-svg');
-    await sleep(dur(RINSE_MS * (robot ? 0.4 : 1)));
+    // 헹구는 시간은 놀이의 한 단계라 움직임 줄이기에서도 줄이지 않음(dur 이면 0.12초라 물줄기가 보이지 않았음). [보기]도 끝까지, 자동 플레이만 빠르게
+    await sleep(RINSE_MS * (robot === 'auto' || robot === 'bad' ? 0.4 : 1));
     clearInterval(flick);
+    if (over || stopped()) return; // 헹구는 사이 정리됨(되감기 · 나가기 · 그만하기): 다른 장면 위에 소리 · 말을 내지 않음
     streams.forEach((el) => { if (el) el.hidden = true; });
     foam.rim = 0;
     foam.in = 0;
@@ -256,9 +274,7 @@ export async function wash(opts = {}) {
     box.classList.add('is-shine');
     draw();
     audio.sfx('pang');
-    const r = box.getBoundingClientRect();
-    const fb = f.body.getBoundingClientRect();
-    popText(f.body, '반짝!', (geo.rim.cx / W) * r.width + r.left - fb.left, (geo.rim.cy / H) * r.height + r.top - fb.top - geo.rim.ry * (r.height / H), 'big');
+    popAt('반짝!', geo.rim.cx, geo.rim.cy - geo.rim.ry);
     over = true;
     await Promise.race([Promise.all([tts.speak(SAY.done, 'sys'), sleep(dur(1400))]), sleep(9000)]); // 말이 멈춰도 닫힘
     doneRes('done');
@@ -274,7 +290,7 @@ export async function wash(opts = {}) {
   let earlyAbort = false;
   f.onAbort(() => { earlyAbort = true; over = true; doneRes('abort'); });
   await Promise.race([startGate(f.body, { note: '천천히 닦아도 괜찮아요.', ready: f.told, quick: f.familiar }), doneP]);
-  if (earlyAbort || stopped()) { cleanup(); f.close(); return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms: 0 }; }
+  if (earlyAbort || stopped()) { cleanup(); return endEarly(); }
   [zb.rim, zb.in, tapB, watchB].forEach((b) => { b.disabled = false; });
   if (!robot) setTimeout(() => zb.rim.focus({ preventScroll: true }), 40);
 
@@ -302,7 +318,8 @@ export async function wash(opts = {}) {
       pid = e.pointerId;
       b.setPointerCapture?.(e.pointerId);
       press(z);
-      if (drag) { last = toPlate(e); spongeAt(last); }
+      keyHold = false;
+      if (drag && active === z && holding) { last = toPlate(e); spongeAt(last); } // 이미 깨끗한 곳 · 헹구는 중이면 수세미를 옮기지 않음
     });
     b.addEventListener('pointermove', (e) => {
       if (!drag || e.pointerId !== pid || !last || active !== z) return;
@@ -317,7 +334,7 @@ export async function wash(opts = {}) {
     b.addEventListener('pointerup', up);
     b.addEventListener('pointercancel', up);
     b.addEventListener('lostpointercapture', up);
-    b.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); e.stopPropagation(); press(z); } });
+    b.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); e.stopPropagation(); press(z); keyHold = active === z && holding; } });
     b.addEventListener('keyup', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); release(); } });
     b.addEventListener('blur', release);
     b.addEventListener('click', (e) => e.stopPropagation());
@@ -335,7 +352,7 @@ export async function wash(opts = {}) {
   });
 
   // 고리: 누르고 있는 동안 닦임 · 수세미가 돎 · 보기 · 자동 플레이
-  const curLoop = loop((dt) => {
+  curLoop = loop((dt) => {
     if (over || rinsing) return;
     if (robot) {
       const z = dirt.rim > 0 ? 'rim' : dirt.in > 0 ? 'in' : null;
@@ -345,7 +362,7 @@ export async function wash(opts = {}) {
     }
     if (!holding || !active) return;
     angle += ((dt * ws) / LAP_MS) * Math.PI * 2;
-    if (!drag || robot) {
+    if (!drag || robot || keyHold) { // 드래그 활용: 손가락은 문지른 만큼(pointermove), 키보드는 누르고 있는 동안
       spongeOn(active, angle);
       scrub(active, (dt * ws) / (SCRUB_MS * (robot === 'watch' ? 1.2 : k)));
     }
@@ -361,9 +378,11 @@ export async function wash(opts = {}) {
 
   const how = await doneP;
   cleanup();
+  offQuit?.();
   f.close();
   const ms = performance.now() - t0;
   if (how === 'abort') return { ok: false, aborted: true, attempts: 0, mistakes: 0, ms };
+  if (how === 'quit') return { ok: false, quit: true, attempts: 1, mistakes: 0, ms };
   await sleep(dur(150));
   grow.add('wash'); // 지은의 성장: 차분함(끝까지 한 마감 일)
   return { ok: true, attempts: 1, mistakes: 0, watched: watched ? 1 : 0, turn: turn ? 1 : 0, early, noCheer: true, ms };
@@ -373,7 +392,7 @@ export async function wash(opts = {}) {
 const FALLBACK = {
   rim: { cx: 1000, cy: 560, rx: 230, ry: 220 },
   inside: { cx: 990, cy: 650, rx: 110, ry: 105 },
-  lever: [1240, 120],
+  tap: [1240, 120], // 수도꼭지(아래 SVG 의 동그란 꼭지 · 물줄기 x 1228 ~ 1244): wash() 의 geo.tap
 };
 function fallbackSVG() {
   const { rim, inside } = FALLBACK;

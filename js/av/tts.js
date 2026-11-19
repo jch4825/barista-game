@@ -78,17 +78,22 @@ function finishPending() {
   }
 }
 
+/** 읽어 주기 음량: 전체 소리보다 조금 크게. 전체 소리를 끄면(0) 읽어 주기도 소리 없음 */
+const voiceVol = (s, plus) => (s.volMaster > 0 ? Math.min(1, s.volMaster + plus) : 0);
+
 function speakFile(path, s) {
   return new Promise((resolve) => {
     const a = new Audio(`./assets/voice/${path}`);
-    a.volume = Math.min(1, s.volMaster + 0.15);
+    a.volume = voiceVol(s, 0.15);
     a.playbackRate = RATE[s.voiceRate] || 1;
     a.preservesPitch = true;
     fileAudio = a;
     pendingResolve = resolve;
-    a.onended = finishPending;
-    a.onerror = finishPending;
-    a.play().catch(finishPending);
+    // 이 말의 끝만 이 말을 풂: 멈춘 앞 말의 늦은 끝 · 오류(pause 뒤 play() 의 AbortError)가 다음 말을 일찍 끝내지 않게
+    const end = () => { if (pendingResolve === resolve) finishPending(); };
+    a.onended = end;
+    a.onerror = end;
+    a.play().catch(end);
   });
 }
 
@@ -102,12 +107,14 @@ function speakSynth(line, who, s) {
     if (voice) u.voice = voice;
     u.pitch = prof.pitch;
     u.rate = prof.rate * (RATE[s.voiceRate] || 1);
-    u.volume = Math.min(1, s.volMaster + 0.2);
+    u.volume = voiceVol(s, 0.2);
     pendingResolve = resolve;
-    u.onend = finishPending;
-    u.onerror = finishPending;
-    setTimeout(() => { if (pendingResolve === resolve) finishPending(); }, 1500 + line.length * 260);
-    try { synth.speak(u); } catch (e) { finishPending(); }
+    // synth.cancel() 뒤 앞 말의 onerror('interrupted')는 늦게 옴: 이 말의 것일 때만 풂
+    const end = () => { if (pendingResolve === resolve) finishPending(); };
+    u.onend = end;
+    u.onerror = end;
+    setTimeout(end, 1500 + line.length * 260);
+    try { synth.speak(u); } catch (e) { end(); }
   });
 }
 
@@ -156,10 +163,11 @@ export const tts = {
 
 function play(text, who, { force = false } = {}) {
   const s = store.settings();
-  if (s.voice === 'off') return Promise.resolve();
+  // 읽지 않는 새 말(소리 끄기 · 빈 말)도 앞 말은 멈춤: 지난 말이 다음 장면 위로 이어지지 않게. '버튼으로만'의 저절로 읽기는 학생이 누른 다시 듣기를 끊지 않음
+  if (s.voice === 'off') { halt(); return Promise.resolve(); }
   if (!force && s.voice !== 'auto') return Promise.resolve();
   const line = speakable(text).trim();
-  if (!line) return Promise.resolve();
+  if (!line) { halt(); return Promise.resolve(); }
   halt();
   const path = voiceManifest[voiceKey(who, text)];
   if (path) return speakFile(path, s);
@@ -182,6 +190,8 @@ async function playParts(parts, who, s) {
 
 function halt() {
   if (fileAudio) {
+    fileAudio.onended = null;
+    fileAudio.onerror = null;
     try { fileAudio.pause(); } catch (e) { /* 무시 */ }
     fileAudio = null;
   }

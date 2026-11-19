@@ -61,7 +61,7 @@ import { frame, line, abortGeneration, abortMinigame, timingOf, tempoQuick, FAMI
 import { pace, loop, isDebug } from './arcade.js';
 import {
   LEVELS, CUPS, INGREDIENTS, TEMPS, HAND_SKILLS, RECIPES, LATTE_ART, STARTER_BOOK, PANTRY, STEP_NAMES, MAX_ADDS,
-  SERVICES, COLORS, ASK_SAY, CUP_RULE,
+  SERVICES, SERVICE_CUP, COLORS, ASK_SAY, CUP_RULE,
   orderTarget, findMenu, compareRecipe, prepSteps, recipeSpeech, orderProblems, skillInLevel, sameSet,
   orderTemp, orderService, orderAsk, cupFor, POURIN_SAY, replyOf, repeatBack, drinkName, skillFor,
   ODD_DRINKS, ODD_ANY, ODD_FIRST, findOdd,
@@ -195,6 +195,8 @@ const MOVE_MOVIES = {
   glass_plastic: { drink: 'americano', cues: [[1.1, 'pour'], [2.4, 'ice'], [4.15, 'clink'], [4.9, 'tap'], [5.4, 'tap']] }, // 봄 6일 아아
   mug_paper: { drink: 'latte', cues: [[0.95, 'pour'], [4.15, 'clink'], [4.9, 'tap']] }, // 겨울 1일 따뜻한 라테
 };
+/** 사장님이 일러 준 것을 다 고쳤을 때 할 일 줄의 사장님 말(maker: 'owner') */
+const OWNER_OK = '이제 됐어요. [만들기 시작]을 눌러요.';
 /** 손 기술에 처음 익숙해졌을 때 지은의 말(재미 개편 6.2) */
 const mastered = (sk) => `이제 ${josa(sk.name, '은/는')} 눈 감고도 할 수 있겠다.`;
 /** 박자 동작의 단추 이름 */
@@ -273,6 +275,8 @@ function pantryOf(opts) {
 export function brewLines(opts = {}) {
   const orders = ordersOf(opts);
   const level = levelOf(opts);
+  // 학생마다 길(brew 의 level): 깊은 길은 보통도 바리스타 단계로, 쉬운 길은 바리스타 단계도 보통으로 → 두 단계의 말을 모두(사장님 시연은 그대로)
+  const levels = opts.maker === 'owner' || level === 'easy' ? [level] : ['normal', 'barista'];
   const pantry = pantryOf(opts);
   const out = [line.sys(speechOf(opts)), line.sys(HOWTO)];
   for (const t of [...Object.values(PROMPT), ...Object.values(HINT), ...Object.values(SYS), ...Object.values(CUP_HINT), ...Object.values(TEMP_HINT), CUP_RULE]) out.push(line.sys(t));
@@ -308,7 +312,7 @@ export function brewLines(opts = {}) {
     out.push(line.sys(`${josa(name, '이/가')} 빠졌어요.`), line.sys(`${josa(name, '은/는')} 빼요.`));
   }
   if (opts.maker === 'owner') {
-    for (const t of ['재료가 조금 다르네요.', '재료가 조금 부족하네요.', '재료가 좀 많네요.', '차갑게 드신답니다.', '따뜻하게 드신답니다.', '손님은 가져가신답니다.', '손님은 여기서 드시고 가신답니다.']) out.push(line.say('owner', t));
+    for (const t of ['재료가 조금 다르네요.', '재료가 조금 부족하네요.', '재료가 좀 많네요.', '차갑게 드신답니다.', '따뜻하게 드신답니다.', '손님은 가져가신답니다.', '손님은 여기서 드시고 가신답니다.', OWNER_OK]) out.push(line.say('owner', t));
     for (const id of pantry.cups) out.push(line.say('owner', `이건 ${CUPS[id].name}에 내요.`));
   }
   for (const ing of Object.values(INGREDIENTS)) for (const t of Object.values(ing.auto || {})) out.push(line.sys(t));
@@ -331,8 +335,8 @@ export function brewLines(opts = {}) {
     if (o.miss) out.push(line.say(o.who, o.miss));
     if (o.change) out.push(line.say(o.who, o.change.say), line.say(o.who, o.change.thanks || thanksOf(o)), line.sys(cupHintOf({ ...o, togo: true })));
     if (!r) continue;
-    if (level === 'barista' && r.artThanks) out.push(line.say(o.who, r.artThanks));
-    for (const s of orderSkills(o, level)) for (const t of Object.values(HAND_SKILLS[s].react)) out.push(line.say(o.who, t));
+    if (levels.includes('barista') && r.artThanks) out.push(line.say(o.who, r.artThanks));
+    for (const s of new Set(levels.flatMap((lv) => orderSkills(o, lv)))) for (const t of Object.values(HAND_SKILLS[s].react)) out.push(line.say(o.who, t));
   }
   const seen = new Set();
   return out.filter((l) => {
@@ -1001,6 +1005,8 @@ function bookSheet(rows, close) {
 }
 
 let looseBook = null; // 작업대 밖에서 연 수첩 { el, off }
+/** 수첩 · 온도 창보다 위에 뜬 창(멈춤 · 되감기 같은 화면, 확인 창): Esc 는 그 창만 닫음(lookaround.js 와 같음) */
+const topOpen = () => Boolean(document.querySelector('#layer-modal .ov, #layer-screen .scr'));
 
 /**
  * 위쪽 띠·멈춤 메뉴의 [레시피](2026-10-28, '숨 고르기' 대신): 이야기 어디서나 여는 레시피 수첩(읽기만, 보통 단계의 손 기술).
@@ -1015,7 +1021,10 @@ export function showRecipeBook() {
   const close = h('button', { class: 'btn btn-big btn-main bk-close' }, h('i', { html: ICON('check') }), h('span', { text: '다 봤어요' }));
   const known = store.flag('menuBook') || STARTER_BOOK;
   const el = bookSheet(Object.keys(RECIPES).filter((id) => known.includes(id)).map((id) => bookRow(id, 'normal')), close);
+  let closed = false; // 사라지는 동안(0.2초) 한 번 더 닫지 않게
   const done = () => {
+    if (closed) return;
+    closed = true;
     off();
     if (looseBook?.el === el) looseBook = null;
     if (!el.isConnected) return; // 이미 지워짐: 소리·초점 없이
@@ -1027,7 +1036,7 @@ export function showRecipeBook() {
     audio.sfx('close');
     if (focusBack?.isConnected) setTimeout(() => focusBack.focus({ preventScroll: true }), 40);
   };
-  const off = bus.on('escape', done);
+  const off = bus.on('escape', () => { if (!topOpen()) done(); }); // 위에 뜬 창(멈춤 · 되감기 · 확인 창)이 먼저
   looseBook = { el, off };
   close.addEventListener('click', (e) => { e.stopPropagation(); done(); });
   document.getElementById('layer-overlay').append(el);
@@ -1106,9 +1115,11 @@ export async function brew(opts = {}) {
 
   /* ---- 화면: 손님 창 ---- */
   const btn = (icon, label, cls = '') => h('button', { class: `btn ${cls}`.trim() }, h('i', { html: icon.startsWith('<svg') ? icon : ICON(icon) }), h('span', { text: label }));
-  const onTap = (el, fn) => el?.addEventListener('click', (e) => { e.stopPropagation(); fn(e); });
+  // 기다리는 일이 있는 단추(묻기 · 손님에게 말하기)는 도중에 정리되면 STOP 으로 끝남: 잡히지 않은 오류로 남지 않게
+  const onTap = (el, fn) => el?.addEventListener('click', (e) => { e.stopPropagation(); fn(e)?.catch?.((x) => { if (x !== STOP) throw x; }); });
   const waitTap = (...els) => new Promise((resolve) => els.forEach((b, i) => b?.addEventListener('click', (e) => { e.stopPropagation(); resolve(i); }, { once: true })));
-  const focusLater = (el) => setTimeout(() => { if (el?.isConnected && !el.disabled) el.focus({ preventScroll: true }); }, 40);
+  // 레시피 수첩이 열려 있으면 그 뒤의 단추로 초점을 옮기지 않음(수첩을 닫으면 closeBook 이 돌려줌)
+  const focusLater = (el) => setTimeout(() => { if (el?.isConnected && !el.disabled && (!bookEl || bookEl.contains(el))) el.focus({ preventScroll: true }); }, 40);
 
   const faceEl = h('div', { class: 'bw-face', 'aria-hidden': 'true' });
   const nameEl = h('p', { class: 'bw-name' });
@@ -1175,7 +1186,7 @@ export async function brew(opts = {}) {
   let recipeDone = null;   // [만들기 시작] → 고른 레시피
   let fix = null;          // maker: 'owner' — 사장님이 만들기 전에 일러 준 것 { target, say }(고칠 때까지 손 띠에 표시)
   let armed = null;        // '두 번 눌러 고르기': 한 번 눌러 읽어 준 버튼
-  let safetySaid = false;
+  const safetySaid = new Set(); // 읽은 안전 안내(스팀 · 주전자는 말이 달라 따로)
   const ui = {};           // 자동 플레이가 누를 버튼
 
   /* ---- 읽어 주기: 여러 말을 차례로(새 말이 오면 앞의 차례는 그만) ---- */
@@ -1186,6 +1197,8 @@ export async function brew(opts = {}) {
     const my = (talkNo += 1);
     for (const p of parts) {
       if (!p || !p[0]) continue;
+      // 레시피 수첩을 보는 동안은 뒤의 말을 미룸: 수첩을 열면 읽던 말이 멈추고(수첩 말), 이어질 말이 수첩 말을 끊거나 수첩 뒤에서 다음 단계로 가지 않게
+      while (bookEl) await bookShut;
       if (my !== talkNo || stopped() || over) return;
       talking = tts.speak(p[0], p[1]);
       await talking;
@@ -1269,12 +1282,15 @@ export async function brew(opts = {}) {
 
   /* ---- 레시피 수첩(오픈북): 열려 있는 동안 띠가 멈춤 ---- */
   let bookEl = null;
+  let bookShut = null; // 수첩이 닫히면 풀림(talk 가 기다림)
+  let bookShutRes = null;
   let offEsc = null;
   let focusBack = null;
   function openBook() {
     if (bookEl || over) return;
     focusBack = document.activeElement;
     const close = btn('check', '다 봤어요', 'btn-big btn-main bk-close');
+    bookShut = new Promise((r) => { bookShutRes = r; });
     bookEl = bookSheet(book.map((id) => bookRow(id, level)), close);
     document.getElementById('layer-overlay').append(bookEl);
     input.pushScope(bookEl);
@@ -1283,13 +1299,15 @@ export async function brew(opts = {}) {
     audio.sfx('page');
     tts.speak(SYS.book, 'sys');
     onTap(close, () => closeBook());
-    offEsc = bus.on('escape', () => closeBook());
+    offEsc = bus.on('escape', () => { if (!topOpen()) closeBook(); }); // 위에 뜬 창(멈춤 · 되감기 · 확인 창)이 먼저
     focusLater(close);
   }
   function closeBook(silent = false) {
     if (!bookEl) return;
     const el = bookEl;
     bookEl = null;
+    bookShutRes?.();
+    bookShutRes = null;
     offEsc?.();
     offEsc = null;
     input.popScope(el);
@@ -1299,7 +1317,9 @@ export async function brew(opts = {}) {
     if (silent) return;
     tts.stop();
     audio.sfx('close');
-    focusLater(focusBack?.isConnected ? focusBack : bookBtn);
+    // 연 단추로. 위쪽 띠 · 멈춤에서 열었으면(작업대 밖) 확대 창의 수첩 단추 · 카운터의 수첩으로(방향키 · 스캔이 확대 창 안에서 이어지게)
+    const home = closeEl ? closeEl.querySelector('.bw-close-book') || closeEl.querySelector('button:not([disabled])') : bookBtn;
+    focusLater(focusBack?.isConnected && (closeEl || bench).contains(focusBack) ? focusBack : home);
   }
   onTap(bookBtn, openBook);
 
@@ -1516,6 +1536,8 @@ export async function brew(opts = {}) {
       map.set('temp:iced', b);
       kids.push(b);
     }
+    // 레시피를 고를 때만 누름. 주문을 받는 동안은 쉬게 해 자동 스캔 · Tab 이 카운터 물건을 하나하나 지나가지 않게(모양은 그대로, 수첩은 늘 열림)
+    if (phase !== 'recipe') kids.forEach((b) => { b.disabled = true; });
     hots.replaceChildren(...kids);
     ui.hot = map;
     // 가운데 받침: 고른 컵 + 넣을 재료(작게)
@@ -1613,7 +1635,7 @@ export async function brew(opts = {}) {
     foot.push(go);
     const fx = fixNow();
     // 사장님이 일러 준 뒤에는 할 일 줄 자리에 사장님의 말(띠 높이는 그대로). 다 고치면 "이제 됐어요."
-    setPanel(fx ? ownerAsk(fx.done ? '이제 됐어요. [만들기 시작]을 눌러요.' : fx.say) : askRow('', promptNow()), handRow(fx || {}), h('div', { class: 'bw-row' }, ...foot));
+    setPanel(fx ? ownerAsk(fx.done ? OWNER_OK : fx.say) : askRow('', promptNow()), handRow(fx || {}), h('div', { class: 'bw-row' }, ...foot));
     panel.dataset.kind = 'hand';
   }
 
@@ -1645,7 +1667,7 @@ export async function brew(opts = {}) {
     made.cup = back ? null : id;
     audio.sfx(back ? 'tap' : 'clink');
     keepFocus(`cup:${id}`);
-    if (!back) talk(sysV(CUPS[id].name), sysV(promptNow()));
+    if (!back) talk(sysV(CUPS[id].name), howV(promptNow())); // 하는 방법 말은 첫 주가 지나면 읽지 않음(quiet)
   }
 
   function pickIng(id) {
@@ -1706,7 +1728,7 @@ export async function brew(opts = {}) {
     ui.tempOpts = new Map(pantry.temps.map((t, i) => [t, opts[i]]));
     input.pushScope(el);
     requestAnimationFrame(() => el.classList.add('is-in'));
-    offTempEsc = bus.on('escape', () => closeTemp());
+    offTempEsc = bus.on('escape', () => { if (!topOpen()) closeTemp(); }); // 위에 뜬 창이 먼저
     audio.sfx('open');
     talk(sysV(SYS.temp));
     focusLater(opts[pantry.temps.indexOf(made.temp)] || opts[0]);
@@ -1800,6 +1822,7 @@ export async function brew(opts = {}) {
       : `시작하면 그림을 ${turn || act === 'wait' || act === 'beats' ? '톡' : '꾹'} 눌러도 돼요. 이 카드 밖을 누르면 바로 시작해요.`;
     // 쉬운 길(선생님이 정함): 아직 두 번도 안 해 본 손 기술은 [보기]를 앞에(먼저 보고 따라 하게). [시작!]도 그대로 있음
     const seeFirst = path === 'easy' && !turn && grow.skillCount(sk.id || '') < 2;
+    const turnNote = act === 'wait' ? SYS.turnWait : SYS.turn; // 턴 방식: 기다렸다 누르기의 단추는 [기다리기]
     const go = btn('play', '시작!', `btn-big ${seeFirst ? 'btn-soft' : 'btn-main'} mg-go`);
     const see = btn(EYE, '보기', `btn-big ${seeFirst ? 'btn-main' : 'btn-soft'} bw-gate-watch`);
     // 익숙해진 손 기술(10번 넘게 함): [손에 익은 대로]를 누르면(전에는 [맡기기]: 컴퓨터에게 맡기는 말이 아니라 내가 손에 익어 쉽게 하는 말로, 2026-11-08 사용자 · 검수 13.94) 손이 알아서 알맞게(재미 개편 6.2 · Q-41). 직접 할지는 학생이 고름
@@ -1809,7 +1832,7 @@ export async function brew(opts = {}) {
         h('h3', {}, h('i', { html: ICON(sk.icon) }), sk.name),
         h('p', { text: howtoOf(sk, turn, drag, cue) }),
         sk.safety ? h('p', { class: 'bw-safety' }, h('i', { html: ICON('caution') }), sk.safety) : null,
-        turn ? h('p', { class: 'bw-turn-note', text: SYS.turn }) : null,
+        turn ? h('p', { class: 'bw-turn-note', text: turnNote }) : null,
         seeFirst ? h('p', { class: 'bw-hand-note' }, h('i', { html: EYE }), SYS.seeFirst) : null,
         hand ? h('p', { class: 'bw-hand-note' }, h('i', { html: ICON('sparkle') }), `익숙해진 일이에요(${grow.skillCount(sk.id || '') || grow.MASTER_AT}번 했어요). [손에 익은 대로]를 누르면 손이 알아서 해요.`) : null,
         h('p', { class: 'bw-tap-note' }, h('i', { html: ICON('hand') }), tapLine),
@@ -1821,12 +1844,13 @@ export async function brew(opts = {}) {
     // 카드 밖을 눌러 시작하는 것은 설명을 다 들은 뒤부터(대사를 넘기듯 누르던 손에 설명이 끊기지 않게, 검수 13.39 17번). [시작!]은 늘 됨
     const shownAt = performance.now() - (quick ? 1200 : 0);
     let told = quick;
-    if (quick) { if (sk.safety && !safetySaid) talkAfter(sysV(sk.safety)); } // 익숙한 손 기술: 안전 한 줄만(처음이면)
+    const safeNow = sk.safety && !safetySaid.has(sk.safety);
+    if (quick) { if (safeNow) talkAfter(sysV(sk.safety)); } // 익숙한 손 기술: 안전 한 줄만(처음이면)
     else {
-      talkAfter(sysV(skillSpeech(sk, turn, drag, cue)), sk.safety && !safetySaid ? sysV(sk.safety) : null, turn ? sysV(SYS.turn) : seeFirst ? sysV(SYS.seeFirst) : null)
+      talkAfter(sysV(skillSpeech(sk, turn, drag, cue)), safeNow ? sysV(sk.safety) : null, turn ? sysV(turnNote) : seeFirst ? sysV(SYS.seeFirst) : null)
         .then(() => { told = true; });
     }
-    if (sk.safety) safetySaid = true;
+    if (sk.safety) safetySaid.add(sk.safety);
     focusLater(seeFirst ? see : go);
     return new Promise((resolve) => {
       let gone = false;
@@ -1976,7 +2000,7 @@ export async function brew(opts = {}) {
     card.classList.toggle('is-drag', Boolean(dk));
     if (dk) card.dataset.drag = dk;
     // 끌기 안내: 처음 끌 때까지 손이 아래로(붓기 · 누르기) · 얼음 통에서 컵으로(얼음) 움직임
-    const hint = dk && dk !== 'draw' ? h('div', { class: `bw-drag-hint k-${dk}`, 'aria-hidden': 'true' }, h('i', { html: ICON('hand') })) : null;
+    const hint = dk && dk !== 'draw' ? h('div', { class: `bw-drag-hint k-${dk} is-off`, 'aria-hidden': 'true' }, h('i', { html: ICON('hand') })) : null; // 직접 할 때만 켬(hintOn): [보기] · [손에 익은 대로]에는 없음
     if (hint) view.append(hint);
     const hintOff = () => hint?.classList.add('is-off');
     const hintOn = () => {
@@ -1986,14 +2010,15 @@ export async function brew(opts = {}) {
       // 얼음 통 가운데에서 컵 위로(장면 크기에 따라 그때그때 셈)
       requestAnimationFrame(() => {
         const vr = view.getBoundingClientRect();
+        const s = vr.width / (view.offsetWidth || vr.width) || 1; // 판(1920 × 1080)이 창에 맞춰 줄어 있음: 화면 px → 판 px
         const [bx, by, bw, bh] = shot.ice.bucket;
         const [ax, ay] = shot.toClient(bx + bw / 2, by + bh * 0.3);
         const [mx, my, mr] = shot.ice.mouth;
         const [cx, cy] = shot.toClient(mx, my - mr * 0.7);
-        hint.style.left = `${ax - vr.left}px`;
-        hint.style.top = `${ay - vr.top}px`;
-        hint.style.setProperty('--dx', `${cx - ax}px`);
-        hint.style.setProperty('--dy', `${cy - ay}px`);
+        hint.style.left = `${(ax - vr.left) / s}px`;
+        hint.style.top = `${(ay - vr.top) / s}px`;
+        hint.style.setProperty('--dx', `${(cx - ax) / s}px`);
+        hint.style.setProperty('--dy', `${(cy - ay) / s}px`);
       });
     };
     // 원 그리기: 바퀴 수 표시(지금 / 알맞은 바퀴)
@@ -2084,6 +2109,7 @@ export async function brew(opts = {}) {
       let holding = false; // hold · circle: 누르고 있는 동안만 차오름
       let dragging = null; // circle: 손가락으로 원 그리기 { a: 지난 각도 } · 끌어 붓기 · 끌어 누르기: { y0: 누른 높이, h: 장면 높이 }
       let pull = 0; // 끌어 붓기: 아래로 끈 만큼(0~1, POUR_AT 부터 부음)
+      let trail = null; // 원 그리기의 흐르는 선(한 번 해 볼 때마다 붙이고 끝나면 뗌)
       playing = mode === 'play';
       if (act === 'wait' && !turn && mode === 'play') flow = true; // 기다리는 동안 한 컷이 움직임(갈리는 가루 · 끓는 김 …), 정하면 멈춘 프레임
       const runMs = ((act === 'circle' ? lapsMax * LAP_MS : act === 'wait' ? sk.ms || WAIT_MS : sk.ms || RUN_MS) * k) / tm.speed;
@@ -2111,6 +2137,8 @@ export async function brew(opts = {}) {
           shot?.tilt(0); // 다 부으면 그릇을 다시 세움
         }
         hintOff();
+        trail?.stop(); // [다시 하기]마다 선 · 손잡이가 쌓이지 않게, 실패 도장 위에 선이 그려지지 않게
+        trail = null;
         draw();
         stopB.classList.remove('is-holding');
         curLoop?.stop();
@@ -2172,10 +2200,11 @@ export async function brew(opts = {}) {
         // 끌어 누르기(탬핑): 누른 채 아래로 끈 만큼 탬퍼가 내려가 가루가 눌림(눌린 가루는 다시 부풀지 않음). 손을 떼면 정함
         const again = dk === 'tilt' ? SYS.dragTilt : SYS.dragPress;
         view.onpointerdown = (e) => {
-          if (mode !== 'play' || finished || holding) return;
+          if (mode !== 'play' || finished || holding || dragging) return; // 끄는 동안 다른 손가락은 무시
           e.preventDefault();
           view.setPointerCapture?.(e.pointerId);
-          dragging = { y0: e.clientY, h: view.clientHeight || 1 };
+          // 장면 높이는 화면 px 로(판이 창에 맞춰 줄어 있어 clientHeight 로 나누면 작은 창에서 끝까지 끌 수 없었음)
+          dragging = { y0: e.clientY, h: view.getBoundingClientRect().height || 1, id: e.pointerId };
           hintOff();
           if (dk === 'press') {
             flow = true;
@@ -2185,14 +2214,14 @@ export async function brew(opts = {}) {
           }
         };
         view.onpointermove = (e) => {
-          if (!dragging || finished) return;
+          if (!dragging || finished || e.pointerId !== dragging.id) return;
           const d = Math.max(0, Math.min(1, (e.clientY - dragging.y0) / (dragging.h * (dk === 'tilt' ? TILT_PULL : PRESS_PULL))));
           if (dk === 'tilt') { setPull(d); return; }
           if (d > p) { p = d; draw(); }
           if (p >= 1) end('high', false);
         };
-        view.onpointerup = () => {
-          if (!dragging || finished) return;
+        view.onpointerup = (e) => {
+          if (!dragging || finished || e.pointerId !== dragging.id) return;
           dragging = null;
           if (dk === 'tilt') setPull(0);
           flow = false;
@@ -2200,15 +2229,16 @@ export async function brew(opts = {}) {
           if (p < HOLD_MIN) { p = 0; draw(); status.textContent = again; talk(sysV(again)); hintOn(); return; }
           end(zoneOf(p), false);
         };
-        view.onpointercancel = () => {
-          if (!dragging || finished) return;
+        // 끄는 손을 놓친 때(취소 · 멈춤 창 · 창 바꾸기로 잡기가 풀림): 그릇을 세우고 멈춤(저절로 붓거나 넘치지 않게)
+        view.onpointercancel = (e) => {
+          if (!dragging || finished || e.pointerId !== dragging.id) return;
           dragging = null;
           if (dk === 'tilt') setPull(0);
           flow = false;
           stopB.classList.remove('is-holding');
           draw();
         };
-        view.onlostpointercapture = null;
+        view.onlostpointercapture = view.onpointercancel;
       } else if (act === 'hold') {
         view.onpointerdown = (e) => {
           if (mode !== 'play' || finished) return;
@@ -2222,23 +2252,23 @@ export async function brew(opts = {}) {
       } else if (act === 'circle') {
         // 원 그리기: 장면 위에서 손가락 · 마우스로 원을 그리면 그만큼 돎. 손가락이 거의 그대로면 [누르고 있기]처럼 저절로 돎. 손을 떼면 정함
         // 저을 때 손가락 뒤를 따라오는 흐르는 선(2026-11-18 사용자, js/ui/trail.js): 흰 우유 · 짙은 커피 위 어디서나 보이게 금빛 선 + 갈색 번짐. 장면(view)이 닫히면 함께 사라짐
-        attachTrail(view, { color: '255, 206, 110', glow: '120, 70, 20' });
+        trail = attachTrail(view, { color: '255, 206, 110', glow: '120, 70, 20', when: () => mode === 'play' && !finished }); // [보기] 동안에는 그리지 않음
         const angleAt = (e) => {
           const r = view.getBoundingClientRect();
           return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2));
         };
         view.onpointerdown = (e) => {
-          if (mode !== 'play' || finished) return;
+          if (mode !== 'play' || finished || dragging) return; // 젓는 동안 다른 손가락은 무시
           e.preventDefault();
           view.setPointerCapture?.(e.pointerId);
-          dragging = { a: angleAt(e), moved: 0 };
+          dragging = { a: angleAt(e), moved: 0, id: e.pointerId };
           holding = true;
           flow = true;
           stopB.classList.add('is-holding');
           audio.sfx(sk.sfx);
         };
         view.onpointermove = (e) => {
-          if (!dragging || finished) return;
+          if (!dragging || finished || e.pointerId !== dragging.id) return;
           const a2 = angleAt(e);
           let d = a2 - dragging.a;
           if (d > Math.PI) d -= 2 * Math.PI;
@@ -2249,8 +2279,9 @@ export async function brew(opts = {}) {
           draw();
           if (p >= 1) end('high', false);
         };
-        view.onpointerup = () => { if (dragging) { dragging = null; release(); } };
-        view.onpointercancel = () => { if (dragging) { dragging = null; pauseHold(); } };
+        view.onpointerup = (e) => { if (dragging && e.pointerId === dragging.id) { dragging = null; release(); } };
+        view.onpointercancel = (e) => { if (dragging && e.pointerId === dragging.id) { dragging = null; pauseHold(); } };
+        view.onlostpointercapture = view.onpointercancel; // 잡기가 풀리면(멈춤 창 · 창 바꾸기) 멈춤: 손을 뗀 채 저절로 돌지 않게
       }
       onTap(stepB, () => {
         if (mode !== 'play' || p >= 1) return;
@@ -2271,6 +2302,7 @@ export async function brew(opts = {}) {
         dragging = null;
         flow = false;
         stopB.classList.remove('is-holding');
+        hintOff(); // 보는 동안 끌기 안내는 없음
         if (p > center) p = 0;
         talk(sysV(watchLine));
         setButtons();
@@ -2324,6 +2356,7 @@ export async function brew(opts = {}) {
       const N = sk.n || 2;
       const win = BEAT_WIN * tm.beatWin * (turn ? 1 : narrow);
       const hitStep = Math.round(BEAT_HIT * STEPS) / STEPS;
+      const aim = turn ? hitStep : BEAT_HIT; // 겹치는 때: 턴 방식은 그 눈금([보기]도 여기서 멈춰야 '좋아요')
       const marks = [];
       let beat = 0;
       let q = 0;
@@ -2331,6 +2364,8 @@ export async function brew(opts = {}) {
       let mode = how;
       let finished = false;
       let tick = 0;
+      beatWord.textContent = ''; // [다시 하기]: 앞 시도의 '빨라요' · '늦어요'가 남지 않게
+      beatWord.classList.remove('is-pop');
       const drawBeat = () => {
         // 동그라미 크기: q = BEAT_HIT 에서 가운데 원(1)과 겹침
         ringEl.style.transform = `translate(-50%, -50%) scale(${Math.max(0.3, 2.2 - (1.2 / BEAT_HIT) * q).toFixed(3)})`;
@@ -2406,8 +2441,17 @@ export async function brew(opts = {}) {
       onTap(watchB, () => {
         if (mode !== 'play') return;
         mode = 'watch';
+        // [보기]는 처음부터 보여 줌: 앞에서 놓친 박자가 남아 다 보고도 '다시 해 볼까요?'가 되지 않게
+        marks.length = 0;
+        beat = 0;
+        q = 0;
+        gap = 0;
+        got = 0;
+        clearTimeout(iceTimer);
+        shot?.set(0, false);
         talk(sysV(watchLine));
         setButtons();
+        drawBeat();
       });
       setButtons();
       focusLater(turn ? stepB : stopB);
@@ -2417,9 +2461,9 @@ export async function brew(opts = {}) {
         if (finished) return;
         if (gap > 0) { gap -= dt; return; }
         if (mode === 'watch') {
-          q = Math.min(BEAT_HIT, q + dt / (BEAT_MS * 0.8));
+          q = Math.min(aim, q + dt / (BEAT_MS * 0.8));
           drawBeat();
-          if (q >= BEAT_HIT - 1e-6) judge(BEAT_HIT);
+          if (q >= aim - 1e-6) judge(aim);
           return;
         }
         if (!turn) {
@@ -2459,6 +2503,8 @@ export async function brew(opts = {}) {
       const [mx, my, mr] = ice.mouth;
       const [tx, ty] = [mx, my - mr * 0.7]; // 놓으면 국자가 가는 곳: 컵 입구 바로 위
       view.querySelectorAll('.bw-scoop, .bw-bucket-ring').forEach((el) => el.remove());
+      beatWord.textContent = ''; // [다시 하기]: 앞 시도의 글자가 남지 않게
+      beatWord.classList.remove('is-pop');
       const scoop = h('img', { class: 'bw-scoop', alt: '', draggable: 'false', src: img.url('shots', `${shotId}_scoop`), hidden: true });
       scoop.style.transformOrigin = `${((gx - sx) / sw) * 100}% ${((gy - sy) / sh) * 100}%`; // 기울 때 얼음 가운데를 축으로
       const ring = h('i', { class: 'bw-bucket-ring', 'aria-hidden': 'true' });
@@ -2530,7 +2576,7 @@ export async function brew(opts = {}) {
         later(dur(560), () => { if (!finished) drop('good'); });
       };
       view.onpointerdown = (e) => {
-        if (mode !== 'play' || finished || busy) return;
+        if (mode !== 'play' || finished || busy || carry) return; // 옮기는 동안 다른 손가락은 무시
         e.preventDefault();
         const pt = shot.toPlate(e.clientX, e.clientY);
         if (!onBucket(pt)) {
@@ -2541,7 +2587,7 @@ export async function brew(opts = {}) {
           return;
         }
         view.setPointerCapture?.(e.pointerId);
-        carry = true;
+        carry = { id: e.pointerId };
         hideTok += 1;
         hintOff();
         audio.sfx('ice');
@@ -2549,9 +2595,9 @@ export async function brew(opts = {}) {
         scoop.classList.remove('is-gone', 'is-drop', 'is-auto');
         place(...pt);
       };
-      view.onpointermove = (e) => { if (carry && !finished) place(...shot.toPlate(e.clientX, e.clientY)); };
+      view.onpointermove = (e) => { if (carry && !finished && e.pointerId === carry.id) place(...shot.toPlate(e.clientX, e.clientY)); };
       view.onpointerup = (e) => {
-        if (!carry || finished) return;
+        if (!carry || finished || e.pointerId !== carry.id) return;
         carry = null;
         const m = judgeAt(shot.toPlate(e.clientX, e.clientY));
         if (m) { drop(m); return; }
@@ -2559,17 +2605,19 @@ export async function brew(opts = {}) {
         status.textContent = SYS.scoopDrop;
         talk(sysV(SYS.scoopDrop));
       };
-      view.onpointercancel = () => { if (carry) { carry = null; hide(); } };
+      view.onpointercancel = (e) => { if (carry && e.pointerId === carry.id) { carry = null; hide(); } };
+      view.onlostpointercapture = view.onpointercancel; // 잡기가 풀리면(멈춤 창 · 창 바꾸기) 국자를 내려놓음
       onTap(stopB, () => { if (mode === 'play') autoCarry(); });
       onTap(watchB, () => {
         if (mode !== 'play') return;
         mode = 'watch';
+        hintOff();
         talk(sysV(watchLine));
         stopB.disabled = true;
         watchB.disabled = true;
       });
-      stopB.disabled = false;
-      watchB.disabled = false;
+      stopB.disabled = mode !== 'play'; // [보기]로 시작하면 처음부터 쉼(스캔이 누를 수 없는 단추를 지나가지 않게)
+      watchB.disabled = mode !== 'play';
       focusLater(stopB);
       clearTimeout(iceTimer);
       shot.set(0, false); // 빈 컵부터
@@ -2600,10 +2648,13 @@ export async function brew(opts = {}) {
     };
 
     // 한 번 한 손 기술을 셈(지은의 성장: 손맛 · 익숙함). 처음 익숙해지면 지은의 한마디
-    const noteSkill = () => {
-      if (!grow.addSkill(id)) return;
+    //  speak: false 면 말은 돌려주기만(부르는 쪽이 앞의 말과 한 차례로 읽음)
+    const noteSkill = (speak = true) => {
+      if (!grow.addSkill(id)) return null;
       status.append(h('em', { class: 'bw-mastered' }, h('i', { html: ICON('sparkle') }), '익숙해졌어요!'));
-      talkAfter([mastered(sk), 'jieun']);
+      const said = [mastered(sk), 'jieun'];
+      if (speak) talkAfter(said);
+      return said;
     };
     let how = 'watch';
     if (level !== 'easy') how = await w(gate(sk, turn, act !== 'beats' && grow.isMastered(id), Boolean(dk), saysNow, act));
@@ -2626,6 +2677,7 @@ export async function brew(opts = {}) {
       }));
       flow = false;
       draw();
+      cue(null); // 알맞아요 칸에 들며 뜬 "지금!" 글자를 거둠
       phase = 'busy';
       st.good += 1;
       gauge.classList.add('is-done');
@@ -2642,7 +2694,7 @@ export async function brew(opts = {}) {
       st[zone] += 1;
       if (perfect) st.perfect = (st.perfect || 0) + 1;
       if (watched) { st.watched += 1; R.watched += 1; }
-      const artShape = id === 'pour' && zone === 'good' && level === 'barista' && sk.art && soFar.has('espresso') && made.temp === 'hot' ? sk.art : null;
+      const artShape = id === 'pour' && zone === 'good' && level === 'barista' && sk.art && (soFar.has('espresso') || soFar.has('decaf')) && made.temp === 'hot' ? sk.art : null; // 디카페인 라테도 라테(menu.js shotNames)
       if (artShape) shot?.set(p, false, true);
       gauge.classList.add('is-done');
       [stepB, stopB, watchB].forEach((b) => { if (b) b.disabled = true; });
@@ -2658,8 +2710,8 @@ export async function brew(opts = {}) {
         audio.sfx('pang');
         if (artShape || perfect) setTimeout(() => audio.sfx(artShape ? 'heart' : 'great'), 200);
         { const c = centerOf(view); vfx.burst('sparkle', c.x, c.y, { n: 12, dist: [80, 240], size: [22, 46], colors: ['#FFFFFF', '#FFE14D', '#7FD8A4'] }); }
-        talk(sysV(perfect ? SYS.perfect : sk.labels[zone]), artShape ? sysV(SYS.art) : null);
-        noteSkill();
+        // 처음 익숙해진 한마디도 같은 차례에 이어서(talkAfter 로 따로 부르면 '하트가 생겼어요!'가 잘렸음)
+        talk(sysV(perfect ? SYS.perfect : sk.labels[zone]), artShape ? sysV(SYS.art) : null, noteSkill(false));
         return { skill: id, zone, watched, art: artShape, perfect: Boolean(perfect) };
       }
       missShow(view, sk, zone);
@@ -2754,7 +2806,7 @@ export async function brew(opts = {}) {
       return;
     }
     setPanel(askRow('', text));
-    setScene({ center: drinkArt(made, res, soFar, 'big'), right: objArt(x === 'yuja' ? 'obj_pitcher_milk' : 'cup_shot', 'mid is-on'), mode: 'auto' });
+    setScene({ center: drinkArt(made, res, soFar, 'big'), right: objArt(['espresso', 'decaf'].includes(x) ? 'cup_shot' : 'obj_pitcher_milk', 'mid is-on'), mode: 'auto' }); // 샷잔은 에스프레소만, 청 · 말차 · 코코아는 피처에서
     audio.sfx('pour');
     talkAfter(sysV(text));
     await w(pauseMs(1300));
@@ -2825,6 +2877,7 @@ export async function brew(opts = {}) {
       toss.disabled = true;
       await ownerTaste();
       toss.disabled = false;
+      showGuest('normal'); // 맛본 사장님 얼굴 · 이름을 손님으로 되돌림
       setReact('');
       phase = 'wrong';
       focusLater(toss);
@@ -3203,7 +3256,7 @@ export async function brew(opts = {}) {
   /** 지은이 하는 말(아래 띠 위쪽 한 줄 + 지은 목소리) */
   const meLine = (text) => h('p', { class: 'bw-me' }, h('b', { text: CHARS.jieun?.name || '지은' }), h('span', { text }));
   /** 사장님이 하는 말(사장님이 내리는 장면에서 만들기 전에 일러 줌): 할 일 줄과 같은 자리 · 앞에 이름 */
-  const ownerAsk = (text) => h('div', { class: 'bw-ask is-owner' }, h('p', { class: 'bw-ask-t' }, h('b', { class: 'bw-ask-who', text: CHARS.owner?.name || '사장님' }), text), sayBtn(text));
+  const ownerAsk = (text) => h('div', { class: 'bw-ask is-owner' }, h('p', { class: 'bw-ask-t' }, h('b', { class: 'bw-ask-who', text: CHARS.owner?.name || '사장님' }), text), sayBtn(text, voiceOf('owner', 'say'))); // 다시 듣기도 사장님 목소리(음성 파일이 사장님 것)
 
   /** maker: 'owner' — 고른 것을 레시피와 견줌: 사장님의 말 + 손 띠 표시(컵 · 온도 · 빠진 재료 · 빼요). 같으면 null */
   function ownerCheck(target) {
@@ -3212,11 +3265,14 @@ export async function brew(opts = {}) {
     const extra = ings.filter((x) => !want.includes(x));
     const says = [];
     const fixedCup = cur.cup || RECIPES[cur.menu]?.cup; // 믹스커피처럼 컵이 정해진 메뉴
-    if (made.cup !== target.cup) says.push(fixedCup ? `이건 ${CUPS[target.cup]?.name || ''}에 내요.` : orderService(cur) === 'togo' ? '손님은 가져가신답니다.' : '손님은 여기서 드시고 가신답니다.');
+    const tempSay = target.temp === 'iced' ? '차갑게 드신답니다.' : '따뜻하게 드신답니다.';
+    // 매장/포장은 맞고 온도의 컵만 다르면(드시고 가는 따뜻한 잔에 유리컵) 온도를 일러 줌. 매장/포장을 말하면 맞게 고른 것을 틀렸다고 하게 됨
+    const rightRow = Object.values(SERVICE_CUP[orderService(cur)] || {}).includes(made.cup);
+    if (made.cup !== target.cup) says.push(fixedCup ? `이건 ${CUPS[target.cup]?.name || ''}에 내요.` : rightRow ? tempSay : orderService(cur) === 'togo' ? '손님은 가져가신답니다.' : '손님은 여기서 드시고 가신답니다.');
     if (missing.length && extra.length) says.push('재료가 조금 다르네요.');
     else if (missing.length) says.push('재료가 조금 부족하네요.');
     else if (extra.length) says.push('재료가 좀 많네요.');
-    if (made.temp !== target.temp) says.push(target.temp === 'iced' ? '차갑게 드신답니다.' : '따뜻하게 드신답니다.');
+    if (made.temp !== target.temp && !says.includes(tempSay)) says.push(tempSay);
     return says.length ? says.slice(0, 2).join(' ') : null;
   }
   /** 사장님이 일러 준 뒤: 지금 고른 것으로 남은 고칠 곳(고치면 표시가 사라짐) */
@@ -3234,36 +3290,43 @@ export async function brew(opts = {}) {
     const need = orderAsk(cur);
     const know = new Set(['temp', 'togo'].filter((k) => !need.includes(k)));
     let busy = false;
+    let batch = false; // [한 번에 묻기]로 묻는 동안: 하나를 묻고 난 사이에 단추가 다시 켜지지 않게
     let said = null;
     return new Promise((resolve) => {
       const render = () => {
         renderTicket(know);
         const left = need.filter((k) => !know.has(k));
+        const off = busy || batch;
         ui.asks = left.map((k) => {
           const b = btn(k === 'temp' ? 'ice' : 'bag', ASK_SAY[k], 'btn-big btn-soft bw-askq');
-          b.disabled = busy;
+          b.disabled = off;
           onTap(b, () => ask(k));
           return b;
         });
         const ok = btn('check', '주문 확인', 'btn-big btn-main bw-confirm');
-        ok.disabled = busy || left.length > 0;
+        ok.disabled = off || left.length > 0;
         onTap(ok, confirm);
         ui.confirm = ok;
         // 응대(지은의 성장)가 오르면 온도와 매장 · 포장을 한 번에(재미 개편 6.1)
         const all = left.length >= 2 && grow.level('service') >= grow.UNLOCK.serviceAsk ? btn('speech', '한 번에 묻기', 'btn-big btn-main bw-askall') : null;
         if (all) {
-          all.disabled = busy;
+          all.disabled = off;
           onTap(all, async () => {
-            for (const k of [...left]) {
-              if (know.has(k)) continue;
-              await ask(k);
-              await w(robot ? sleep(60) : talking);
-            }
+            if (busy || batch) return;
+            batch = true;
+            try {
+              for (const k of [...left]) {
+                if (know.has(k)) continue;
+                await ask(k);
+                await w(robot ? sleep(60) : talking);
+              }
+            } finally { batch = false; }
+            render();
           });
         }
         setPanel(said ? meLine(said) : null, askRow('', left.length ? PROMPT.order : PROMPT.orderDone), h('div', { class: 'bw-row bw-asks' }, all, ...ui.asks, ok));
         panel.dataset.kind = 'order';
-        if (!busy) focusLater(ui.asks[0] || ok);
+        if (!off) focusLater(ui.asks[0] || ok);
       };
       const speak = async (parts) => { // 자동 플레이는 기다리지 않음
         const t = talk(...parts);
@@ -3450,6 +3513,7 @@ export async function brew(opts = {}) {
     curShot = null;
     closeTemp(false);
     closeBook(true);
+    if (closeEl) input.popScope(closeEl); // 손 기술 확대 창의 입력 범위(그림은 틀과 함께 사라짐)
     offQuit?.();
     talkNo += 1;
     document.body.classList.remove('brew-open');

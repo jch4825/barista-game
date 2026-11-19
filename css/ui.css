@@ -643,6 +643,8 @@ body.reduce-motion .emote, body.reduce-motion .ov-place, body.reduce-motion .ov-
 
 /* ---------- VFX 층 ---------- */
 #layer-vfx { z-index: 26; pointer-events: none; overflow: hidden; }
+/* 전체 화면 창 · 확인 창(#layer-screen 30 · #layer-modal 35) 안에서 터지는 반짝이(수첩의 선물 · 말 사전): 그 위, 쪽지(#layer-tut 40) 아래 */
+#layer-vfx-top { z-index: 36; pointer-events: none; overflow: hidden; }
 .vfx-p { position: absolute; display: block; pointer-events: none; will-change: transform, opacity; }
 .vfx-p svg, .vfx-p img { width: 100%; height: 100%; display: block; }
 .vfx-glow { mix-blend-mode: screen; }

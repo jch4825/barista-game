@@ -3,7 +3,7 @@
  * → 사장님의 빗자루 "컵은 깨지라고 있어요."(숨은 장면 1) → 다시 천천히 → 닫는 때 둘러보기 → 마감 우유
  */
 
-import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, respond, act, guide, seen, motion, end, info } from '../../core/dsl.js';
+import { bg, bgm, amb, sfx, big, place, show, enter, leave, say, narr, think, cg, fx, mini, respond, act, guide, seen, motion, end, info, term } from '../../core/dsl.js';
 
 export default {
   id: 'spring_2',
@@ -57,6 +57,7 @@ export default {
         { who: 'haesun', say: '한 잔 더, 똑같이요.', menu: 'warm_milk', temp: 'hot', togo: false, more: true },
       ],
     }),
+    term('here'), // 말 사전: 처음으로 '드시고 가세요?'를 물어본 잔(매장)
     show({ left: 'jieun:normal', right: 'owner:normal' }),
     say('owner', 'normal', '할머니 자리는 창가예요. 쟁반에 담아서 가져다드려요.'),
     say('owner', 'normal', '천천히 걸어요. 우유가 출렁이면 넘쳐요.'),
@@ -95,6 +96,7 @@ export default {
         { who: 'geum', say: '아이스 아메리카노요. 가져갈 거예요.', menu: 'americano', temp: 'iced', togo: true, thanks: '…늦었지만, 맛은 괜찮네요.' },
       ],
     }),
+    term('togo'), // 말 사전: 처음 가져가는 잔(포장)
     show({ left: 'jieun:normal', right: 'geum:normal' }),
     say('geum', 'normal', '내일은 좀 빨리 해요. 나는 매일 아침 이 시간이에요.'),
     leave('geum'),
@@ -121,6 +123,7 @@ export default {
     }),
     narr('불을 하나만 남기고, 사장님이 따뜻한 우유를 데워 그 하얀 잔에 붓는다.'),
     say('jieun', 'normal', '사장님은 왜 마감 뒤에 우유를 드세요? 어제도 드시던데요.'),
+    term('closing'), // 말 사전: '마감'이 처음 말로 나온 곳
     say('owner', 'normal', '…하루를 닫는 잔이에요. 무슨 일이 있었든, 이걸 다 마시면 오늘은 끝난 거예요.'),
     cg(null),
     think('하루를 닫는 잔. 컵을 깬 오늘도, 이제 끝났다.'),

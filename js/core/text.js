@@ -47,7 +47,8 @@ export function fill(str) {
 
 /** 받침 유무 */
 export function hasBatchim(word) {
-  const s = String(word).trim();
+  const s = String(word ?? '').trim();
+  if (!s) return false; // 빈 낱말: 받침 없는 쪽(가 · 를 · 로)
   const ch = s.charCodeAt(s.length - 1);
   if (ch < 0xac00 || ch > 0xd7a3) {
     // 숫자·영문: 대략적 규칙
@@ -60,9 +61,10 @@ export function hasBatchim(word) {
 export function josaOnly(word, pair) {
   const [a, b] = pair.split('/');
   if (pair === '으로/로') {
-    const s = String(word).trim();
+    const s = String(word ?? '').trim();
     const ch = s.charCodeAt(s.length - 1);
-    const jong = ch >= 0xac00 && ch <= 0xd7a3 ? (ch - 0xac00) % 28 : 0;
+    if (!(ch >= 0xac00 && ch <= 0xd7a3)) return hasBatchim(s) && !/[178Ll]$/.test(s) ? '으로' : '로'; // 숫자 · 영문: 3(삼)으로 · 1(일)로
+    const jong = (ch - 0xac00) % 28;
     return jong === 0 || jong === 8 ? '로' : '으로';
   }
   return hasBatchim(word) ? a : b;
@@ -107,7 +109,8 @@ export function plain(str) {
  * tts 가 문장마다 나눠 그 문장의 파일로 읽음(검수 13.63). tools/export-lines.mjs 도 같은 나누기로 문장마다 줄을 만듦
  */
 export function sentencesOf(text) {
-  const parts = (String(text).match(/[^.!?…]+(?:[.!?…]+["'”’」)]*|$)/g) || []).map((p) => p.trim()).filter(Boolean);
+  // 숫자 사이의 점(1.5)은 문장 끝이 아님. 맨 앞의 말줄임표('…네. 제가 열게요.'의 '…')는 지금처럼 버림: 이미 만든 문장 음성 파일의 key 가 이것에 맞춰져 있음
+  const parts = (String(text).match(/(?:[^.!?…]|(?<=\d)\.(?=\d))+(?:[.!?…]+["'”’」)]*|$)/g) || []).map((p) => p.trim()).filter(Boolean);
   // 말줄임표만 남은 조각('웃었다. …그 녀석도'의 '…')은 읽을 말이 없어 다음 문장 앞에 붙임(검수 13.115)
   const out = [];
   let carry = '';

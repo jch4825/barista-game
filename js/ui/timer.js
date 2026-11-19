@@ -59,7 +59,8 @@ export function timerBar({ sec, label = '서둘러요' }) {
 
   const step = () => {
     const now = performance.now();
-    const dt = now - last;
+    // 한 번에 줄어드는 시간은 0.25초까지: 숨겨진 탭(타이머가 1분에 한 번까지 느려짐) · 절전에서 돌아온 첫 박자에 시간이 한꺼번에 다 빠졌음
+    const dt = Math.min(now - last, 250);
     last = now;
     // 막대가 화면에서 사라지면(되감기·나가기로 창이 지워짐) 멈춤: 다른 장면에서 '시간이 다 됐어요!'가 나오지 않게
     if (!el.isConnected) { api.stop(); return; }

@@ -26,6 +26,8 @@ import { CONFIG } from '../config.js';
 const layer = () => $('#layer-overlay');
 /** 확인 창·글자 입력 창은 전체 화면 창(#layer-screen)보다 위에 띄움 */
 const modalLayer = () => $('#layer-modal') || layer();
+/** 늦게 도는 효과음 · 반짝이: 창이 이미 닫혔거나(일찍 누름) 지워졌으면(되감기 · 나가기) 하지 않음 */
+const live = (el) => el.isConnected && !el.classList.contains('is-out');
 const ORDINAL = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째'];
 
 /** 장 제목 뒤의 이정표 엠블럼 (노란 기둥 + 메인 색 화살표 깃발) */
@@ -117,7 +119,7 @@ export const ov = {
     el.addEventListener('click', () => go.click());
     const close = mount(el);
     audio.sfx('snap');
-    setTimeout(() => audio.sfx('stamp'), dur(380));
+    setTimeout(() => { if (live(el)) audio.sfx('stamp'); }, dur(380));
     announce(`${title} ${caption}`);
     go.focus({ preventScroll: true });
     await waitButton(go, calm ? 1400 : 2200);
@@ -144,6 +146,7 @@ export const ov = {
     audio.sfx('jingle_complete');
     vfx.confetti();
     setTimeout(() => {
+      if (!live(el)) return;
       audio.sfx('stamp');
       const c = centerOf(seal);
       vfx.ink(c.x, c.y);
@@ -177,7 +180,8 @@ export const ov = {
   /* ---------- 토스트 ---------- */
   toast(text, icon = 'sparkle') {
     const el = h('div', { class: 'ov-toast', role: 'status' }, h('i', { html: ICON(icon) }), h('span', { text }));
-    const close = mount(el, { scope: false });
+    // 맨 위 층(#layer-modal): 설정 · 수첩 · 저장 · 선생님 화면(#layer-screen)에서 띄운 알림이 그 화면 뒤에 가려졌음. 누르지 않는 글이라 범위는 없음
+    const close = mount(el, { scope: false, host: modalLayer() });
     announce(text);
     setTimeout(close, 2600);
   },
@@ -233,16 +237,33 @@ export const ov = {
         h('p', { class: 'gloss-easy', text: fill(t.easy) }),
         h('p', { class: 'gloss-ex', text: fill(t.ex) }),
         h('div', { class: 'gloss-btns' }, say, close1)));
-    const close = mount(el);
+    // 수첩 같은 전체 화면 창(#layer-screen)에서 열면 그 위(#layer-modal)에: 아래 층이면 창 뒤에 가려진 채 초점 · 스캔만 가져갔음
+    const opener = document.activeElement;
+    const overScreen = Boolean(document.querySelector('#layer-screen .scr'));
+    const close = mount(el, { host: overScreen ? modalLayer() : layer() });
     if (isNew) audio.sfx('jingle_unlock'); else audio.sfx('open');
     requestAnimationFrame(() => vfx.sparkleAt(el.querySelector('.gloss-ico'), { n: isNew ? 14 : 6, colors: ['#FFFFFF', '#BDF2EA', '#16A99A'] }));
     const read = () => tts.speak(`${t.word}. ${fill(t.easy)} 예를 들어, ${fill(t.ex)}`, 'sys', { force: true });
     say.addEventListener('click', (e) => { e.stopPropagation(); read(); });
     read();
     close1.focus({ preventScroll: true });
-    await waitButton(close1);
+    let offEsc = null;
+    await new Promise((resolve) => {
+      waitButton(close1).then(resolve);
+      // Esc = 알겠어요(아래 수첩은 닫지 않음: screen.js 가 #layer-modal 의 창을 먼저 봄). 이야기 화면에서 연 것 위에 다른 창이 열렸으면 그 창의 Esc.
+      // 되감기 · 나가기로 지워졌으면 듣기만 그만둠
+      offEsc = bus.on('escape', () => {
+        if (!el.isConnected) { offEsc?.(); return; }
+        if (!overScreen && document.querySelector('#layer-screen .scr')) return;
+        resolve();
+      });
+    });
+    offEsc?.();
     tts.stop();
     close();
+    // 초점은 연 단추(수첩의 낱말)로. 이야기 화면에서 열었으면 그대로(Space 가 대사를 넘겨야 함)
+    if (overScreen && opener?.isConnected && opener !== document.body) opener.focus({ preventScroll: true });
+    else setTimeout(() => input.refocus(), 0);
   },
 
   /* ---------- 아차! 카드 (실패 결과) ---------- */
@@ -381,7 +402,8 @@ export const ov = {
       const close = mount(el, { host: modalLayer() });
       setTimeout(() => inp.focus(), 50);
       let offEsc = null;
-      const done = (v) => { offEsc?.(); close(); resolve(v); };
+      let fin = false; // 한 번만 닫음(Esc 뒤 사라지는 동안 [확인]을 눌러도 두 번 닫지 않게)
+      const done = (v) => { if (fin) return; fin = true; offEsc?.(); close(); resolve(v); };
       offEsc = bus.on('escape', () => done(null));
       inp.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); y.click(); } });
       y.addEventListener('click', () => done(inp.value.trim() || null), { once: true });
@@ -435,13 +457,15 @@ export const ov = {
     const close = mount(el);
     go.focus({ preventScroll: true });
     let stopped = false;
+    // 되감기 · 나가기로 창이 지워졌으면(ov.clearAll) 그만: 지운 뒤에도 처음 화면 위로 크레디트를 읽어 주었음
+    const gone = () => stopped || !el.isConnected;
     // 크레디트 노래(가사 있음)는 읽어 주는 동안만 낮춤(2026-11-01)
     const reading = store.settings().voice === 'auto';
     if (reading) audio.duck(true);
     (async () => {
       await sleep(dur(600));
       for (const [i, fig] of pols.entries()) {
-        if (stopped) return;
+        if (gone()) break;
         fig.classList.add('on');
         if (ids.length) {
           const title = PHOTOS[ids[i]].title;
@@ -449,11 +473,12 @@ export const ov = {
           await Promise.all([sleep(dur(1000)), tts.speak(title, 'sys')]);
         } else await sleep(dur(420));
       }
-      if (stopped) return;
-      await sleep(dur(700));
-      el.classList.add('roll-on');
-      announce(`${creditSpeech()} 그리고 함께 일한 바리스타, ${you}.`);
-      await tts.speak(creditSpeech(), 'sys');
+      if (!gone()) await sleep(dur(700));
+      if (!gone()) {
+        el.classList.add('roll-on');
+        announce(`${creditSpeech()} 그리고 함께 일한 바리스타, ${you}.`);
+        await tts.speak(creditSpeech(), 'sys');
+      }
       if (!stopped) audio.duck(false);
     })();
     await waitButton(go);
@@ -484,7 +509,7 @@ export const ov = {
     el.addEventListener('click', () => go.click());
     const close = mount(el);
     audio.sfx('page');
-    setTimeout(() => vfx.sparkleAt(memoEl, { n: 18, colors: ['#FFD43B', '#FFFFFF', '#FFE9A8'] }), dur(500));
+    setTimeout(() => { if (live(el)) vfx.sparkleAt(memoEl, { n: 18, colors: ['#FFD43B', '#FFFFFF', '#FFE9A8'] }); }, dur(500));
     announce(`${to} ${lines.join(' ')} ${ps} ${from}`);
     tts.speak(speech, 'jieun');
     go.focus({ preventScroll: true });
@@ -572,7 +597,7 @@ export const ov = {
     const close = mount(el, { scope: false });
     announce(`${kicker} ${name}${stars ? `, 별 ${level}개` : ''}`);
     audio.sfx('whoosh');
-    if (!still) setTimeout(() => audio.sfx(level === 3 ? 'great' : 'good'), dur(260));
+    if (!still) setTimeout(() => { if (live(el)) audio.sfx(level === 3 ? 'great' : 'good'); }, dur(260));
     else audio.sfx(level === 3 ? 'great' : 'good');
     await new Promise((resolve) => {
       const t = setTimeout(resolve, still ? 1100 : 1750);
@@ -633,6 +658,7 @@ export const ov = {
     announce(`${ord} 일정 끝. ${label}`);
     const voiceP = tts.speak(`${ord} 일정 끝! ${label}.`, 'sys');
     setTimeout(() => {
+      if (!live(el)) return;
       audio.sfx('stamp');
       const p = centerOf(stamp);
       vfx.ink(p.x, p.y);
@@ -652,5 +678,6 @@ export const ov = {
       input.popScope(el);
       el.remove();
     });
+    modalLayer().querySelectorAll('.ov-toast').forEach((el) => el.remove()); // 알림은 맨 위 층에 뜸(확인 창은 그대로)
   },
 };

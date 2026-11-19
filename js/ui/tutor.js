@@ -36,6 +36,7 @@ const SNOOZE_MS = 15000; // 안 눌러도 되는 쪽지가 다른 쪽지에 밀�
 const TEXT_SEL = [
   '#layer-dock .dlg:not(.is-hidden) :is(.dlg-text, .dlg-name)',
   '#layer-overlay .ov :is(p, h2, h3, li, figcaption)',
+  '#layer-modal .ov :is(p, h2, h3, li, figcaption)', // 전체 화면 창 위의 창(수첩에서 연 말 사전 · 선물 · 확인 창)
   '#layer-task .cards-wrap.is-in :is(.card-label, .card-q, p)',
   '#layer-task .mg .mg-head :is(h2, p)',
   '#layer-screen .scr :is(input, textarea)', // 글을 적는 칸(이름 정하기: 쪽지가 '예: 별빛, 민트, 연필'을 덮었음, 2026-11-18)
@@ -71,6 +72,7 @@ let lineCount = 0;
 let raf = 0;
 let groupIdx = 0;
 let groupTimer = null;
+let tapTimer = null;     // 여러 칸 고르기: 손가락이 누르는 시늉(내려간 뒤 다음 쪽지의 손가락에 붙지 않게 끔)
 const memSeen = new Set();     // 학생이 정해지기 전(처음 화면·이름 정하기)
 const shows = {};              // 안 눌러도 되는 것: 보여 준 횟수(MIN_SHOW 넘게 떠 있었던 번)
 const snooze = {};             // 누름으로 닫은 쪽지: 그 대사가 끝날 때까지 다시 띄우지 않음 { key: lineCount }
@@ -418,7 +420,13 @@ function hideAll() {
   handEl?.classList.remove('on', 'tap');
   tipEl?.classList.remove('on', 'hold');
   clearInterval(groupTimer);
+  clearTimeout(tapTimer);
   groupTimer = null;
+}
+
+/** 보여 준 횟수 · 쉬는 중을 비움(학생을 바꾸거나 '처음부터 다시 알려 주기') */
+function clearCounts() {
+  for (const o of [shows, snooze, snoozeUntil]) Object.keys(o).forEach((k) => delete o[k]);
 }
 
 /** 지금 것을 내림(안 눌러도 되는 것은 MIN_SHOW 넘게 떠 있었으면 한 번으로 세고, 횟수가 차면 배운 것으로) */
@@ -443,8 +451,9 @@ function begin(pick) {
   clearInterval(groupTimer);
   if (pick.k.hand === 'group') {
     const tap = () => { handEl.classList.remove('tap'); void handEl.offsetWidth; handEl.classList.add('tap'); };
-    setTimeout(tap, 380);
-    groupTimer = setInterval(() => { groupIdx += 1; setTimeout(tap, 380); }, GROUP_STEP);
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(tap, 380);
+    groupTimer = setInterval(() => { groupIdx += 1; tapTimer = setTimeout(tap, 380); }, GROUP_STEP);
   } else handEl.classList.remove('tap');
   const text = tipText(cur);
   if (text) announce(`처음 보는 버튼: ${text}`);
@@ -508,7 +517,11 @@ export const tutor = {
     bus.on('profile', (p) => {
       // 이름을 정하기 전에 배운 것(처음 화면)을 새 학생 기록으로 옮김
       if (p && memSeen.size && !Object.keys(p.tut || {}).length) memSeen.forEach((k) => store.markTut(k));
+      // 세는 것은 학생마다: 앞 학생이 본 횟수 · 쉬는 중 · 이름 정하기 전에 본 것이 다음 학생에게 넘어가지 않게(떠 있던 쪽지도 새 학생의 횟수로 세지 않음)
+      cur = null;
       drop();
+      if (p) memSeen.clear();
+      clearCounts();
     });
     setInterval(tick, TICK);
   },
@@ -546,8 +559,9 @@ export const tutor = {
   reset() {
     store.resetTut();
     memSeen.clear();
-    Object.keys(shows).forEach((k) => delete shows[k]);
+    cur = null; // 떠 있던 쪽지를 세지 않고 내림(세면 방금 비운 것이 곧바로 '배운 것'이 될 수 있음)
     drop();
+    clearCounts();
   },
 
   /** 디버그·자동 테스트용 */
